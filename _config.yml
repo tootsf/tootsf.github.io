@@ -1,8 +1,29 @@
-title: Just the Docs Template
-description: A starter template for a Jeykll site using the Just the Docs theme!
+title: Community Bridge Documentation
+description: Comprehensive documentation for the Community Bridge FiveM resource
 theme: just-the-docs
 
-url: https://just-the-docs.github.io
+url: https://tootsf.github.io
+
+# Enable search
+search_enabled: true
+search:
+  heading_level: 2
+  previews: 3
+  preview_words_before: 5
+  preview_words_after: 10
+  tokenizer_separator: /[\s/]+/
+  rel_url: true
+  button: false
+
+# Navigation structure
+nav_sort: case_insensitive
+
+# Footer content
+footer_content: "Copyright &copy; 2024 Community Bridge. Distributed under the <a href=\"https://github.com/just-the-docs/just-the-docs/tree/main/LICENSE.txt\">MIT license.</a>"
+
+# Color scheme
+color_scheme: dark
 
 aux_links:
-  Template Repository: https://github.com/just-the-docs/just-the-docs-template
+  "View on GitHub":
+    - "//github.com/tootsf/community_bridge"
