@@ -26,7 +26,8 @@ Retrieves account balance and information for a specified business or organizati
 ### Syntax
 
 ```lua
-Managment.GetAccountMoney(account)
+local Bridge = exports['community_bridge']:Bridge()
+Bridge.Managment.GetAccountMoney(account)
 ```
 
 ### Parameters
@@ -44,7 +45,8 @@ Managment.GetAccountMoney(account)
 ### Example
 
 ```lua
-local policeAccount = Managment.GetAccountMoney("police")
+local Bridge = exports['community_bridge']:Bridge()
+local policeAccount = Bridge.Managment.GetAccountMoney("police")
 
 if policeAccount and policeAccount.money then
     print("Police department balance: $" .. policeAccount.money)
@@ -83,7 +85,8 @@ Adds money to a specified business or organization account with transaction logg
 ### Syntax
 
 ```lua
-Managment.AddAccountMoney(account, amount, reason)
+local Bridge = exports['community_bridge']:Bridge()
+Bridge.Managment.AddAccountMoney(account, amount, reason)
 ```
 
 ### Parameters
@@ -103,8 +106,9 @@ Managment.AddAccountMoney(account, amount, reason)
 ### Example
 
 ```lua
+local Bridge = exports['community_bridge']:Bridge()
 -- Add money to police department
-local success = Managment.AddAccountMoney("police", 5000, "Evidence room funding")
+local success = Bridge.Managment.AddAccountMoney("police", 5000, "Evidence room funding")
 
 if success then
     print("Successfully added $5000 to police account")
@@ -113,23 +117,24 @@ else
 end
 
 -- Add money from government budget
-local govBudget = Managment.AddAccountMoney("ambulance", 10000, "Monthly government allocation")
+local govBudget = Bridge.Managment.AddAccountMoney("ambulance", 10000, "Monthly government allocation")
 ```
 
 ### Common Account Types
 
 ```lua
+local Bridge = exports['community_bridge']:Bridge()
 -- Job accounts
-Managment.AddAccountMoney("police", 5000, "Equipment purchase")
-Managment.AddAccountMoney("ambulance", 3000, "Medical supplies")
-Managment.AddAccountMoney("mechanic", 2500, "Tool upgrade")
+Bridge.Managment.AddAccountMoney("police", 5000, "Equipment purchase")
+Bridge.Managment.AddAccountMoney("ambulance", 3000, "Medical supplies")
+Bridge.Managment.AddAccountMoney("mechanic", 2500, "Tool upgrade")
 
 -- Business accounts
-Managment.AddAccountMoney("import_business", 15000, "Car sales profit")
-Managment.AddAccountMoney("vanilla_unicorn", 8000, "Daily revenue")
+Bridge.Managment.AddAccountMoney("import_business", 15000, "Car sales profit")
+Bridge.Managment.AddAccountMoney("vanilla_unicorn", 8000, "Daily revenue")
 
 -- Gang accounts (if supported)
-Managment.AddAccountMoney("ballas", 10000, "Territory earnings")
+Bridge.Managment.AddAccountMoney("ballas", 10000, "Territory earnings")
 ```
 
 ---
@@ -141,7 +146,8 @@ Removes money from a specified business or organization account with transaction
 ### Syntax
 
 ```lua
-Managment.RemoveAccountMoney(account, amount, reason)
+local Bridge = exports['community_bridge']:Bridge()
+Bridge.Managment.RemoveAccountMoney(account, amount, reason)
 ```
 
 ### Parameters
@@ -161,8 +167,9 @@ Managment.RemoveAccountMoney(account, amount, reason)
 ### Example
 
 ```lua
+local Bridge = exports['community_bridge']:Bridge()
 -- Remove money for expenses
-local success = Managment.RemoveAccountMoney("police", 1500, "Monthly vehicle maintenance")
+local success = Bridge.Managment.RemoveAccountMoney("police", 1500, "Monthly vehicle maintenance")
 
 if success then
     print("Successfully deducted $1500 from police account")
@@ -171,9 +178,9 @@ else
 end
 
 -- Check balance before large expense
-local accountData = Managment.GetAccountMoney("ambulance")
+local accountData = Bridge.Managment.GetAccountMoney("ambulance")
 if accountData.money >= 5000 then
-    local success = Managment.RemoveAccountMoney("ambulance", 5000, "New ambulance purchase")
+    local success = Bridge.Managment.RemoveAccountMoney("ambulance", 5000, "New ambulance purchase")
     if success then
         print("Ambulance purchased successfully")
     end

@@ -44,8 +44,10 @@ Phone.GetPlayerPhone(src)
 ### Example
 
 ```lua
+local Bridge = exports['community_bridge']:Bridge()
+
 local playerId = 1
-local phoneNumber = Phone.GetPlayerPhone(playerId)
+local phoneNumber = Bridge.Phone.GetPlayerPhone(playerId)
 
 if phoneNumber then
     print("Player " .. playerId .. " has phone: " .. phoneNumber)
@@ -89,8 +91,10 @@ Phone.SendEmail(src, email, title, message)
 ### Example
 
 ```lua
+local Bridge = exports['community_bridge']:Bridge()
+
 local playerId = 1
-local success = Phone.SendEmail(
+local success = Bridge.Phone.SendEmail(
     playerId,
     "admin@myserver.com",
     "Server Maintenance",
@@ -133,14 +137,16 @@ When no phone system is detected or bridged:
 ### Example Error Handling
 
 ```lua
-local phoneNumber = Phone.GetPlayerPhone(playerId)
+local Bridge = exports['community_bridge']:Bridge()
+
+local phoneNumber = Bridge.Phone.GetPlayerPhone(playerId)
 if not phoneNumber then
     -- Handle case where player has no phone
     Notify.SendNotify(playerId, "Phone system unavailable", "error", 5000)
     return
 end
 
-local emailSent = Phone.SendEmail(playerId, "server@game.com", "Welcome", "Welcome to the server!")
+local emailSent = Bridge.Phone.SendEmail(playerId, "server@game.com", "Welcome", "Welcome to the server!")
 if not emailSent then
     -- Handle email failure
     print("Could not send welcome email to player " .. playerId)

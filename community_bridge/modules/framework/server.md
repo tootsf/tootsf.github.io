@@ -28,7 +28,8 @@ Returns the name of the currently active framework.
 
 **Example:**
 ```lua
-local frameworkName = Framework.GetFrameworkName()
+local Bridge = exports['community_bridge']:Bridge()
+local frameworkName = Bridge.Framework.GetFrameworkName()
 print("Using framework: " .. frameworkName)
 ```
 
@@ -44,7 +45,8 @@ Gets the framework player object for a given source.
 
 **Example:**
 ```lua
-local player = Framework.GetPlayer(source)
+local Bridge = exports['community_bridge']:Bridge()
+local player = Bridge.Framework.GetPlayer(source)
 if player then
     print("Player found")
 end
@@ -59,7 +61,8 @@ Gets a list of all currently connected players.
 
 **Example:**
 ```lua
-local players = Framework.GetPlayers()
+local Bridge = exports['community_bridge']:Bridge()
+local players = Bridge.Framework.GetPlayers()
 print("Connected players: " .. #players)
 ```
 
@@ -77,7 +80,8 @@ Gets the unique identifier (citizenid) for a player.
 
 **Example:**
 ```lua
-local citizenId = Framework.GetPlayerIdentifier(source)
+local Bridge = exports['community_bridge']:Bridge()
+local citizenId = Bridge.Framework.GetPlayerIdentifier(source)
 print("Player ID: " .. citizenId)
 ```
 
@@ -94,7 +98,8 @@ Gets the player's first and last name.
 
 **Example:**
 ```lua
-local firstname, lastname = Framework.GetPlayerName(source)
+local Bridge = exports['community_bridge']:Bridge()
+local firstname, lastname = Bridge.Framework.GetPlayerName(source)
 print("Player: " .. firstname .. " " .. lastname)
 ```
 
@@ -110,7 +115,8 @@ Gets the player's date of birth.
 
 **Example:**
 ```lua
-local dob = Framework.GetPlayerDob(source)
+local Bridge = exports['community_bridge']:Bridge()
+local dob = Bridge.Framework.GetPlayerDob(source)
 print("DOB: " .. dob)
 ```
 
@@ -126,7 +132,8 @@ Gets the player's phone number.
 
 **Example:**
 ```lua
-local phone = Framework.GetPlayerPhone(source)
+local Bridge = exports['community_bridge']:Bridge()
+local phone = Bridge.Framework.GetPlayerPhone(source)
 print("Phone: " .. phone)
 ```
 
@@ -142,7 +149,8 @@ Gets the player's gang name.
 
 **Example:**
 ```lua
-local gang = Framework.GetPlayerGang(source)
+local Bridge = exports['community_bridge']:Bridge()
+local gang = Bridge.Framework.GetPlayerGang(source)
 print("Gang: " .. gang)
 ```
 
@@ -157,7 +165,8 @@ Gets all available jobs in the framework.
 
 **Example:**
 ```lua
-local jobs = Framework.GetFrameworkJobs()
+local Bridge = exports['community_bridge']:Bridge()
+local jobs = Bridge.Framework.GetFrameworkJobs()
 for _, job in pairs(jobs) do
     print("Job: " .. job.label)
 end
@@ -188,7 +197,8 @@ Gets comprehensive player job data.
 
 **Example:**
 ```lua
-local jobData = Framework.GetPlayerJobData(source)
+local Bridge = exports['community_bridge']:Bridge()
+local jobData = Bridge.Framework.GetPlayerJobData(source)
 print("Job: " .. jobData.jobLabel)
 print("Is boss: " .. tostring(jobData.boss))
 print("On duty: " .. tostring(jobData.onDuty))
@@ -206,7 +216,8 @@ Gets all players with a specific job.
 
 **Example:**
 ```lua
-local cops = Framework.GetPlayersByJob("police")
+local Bridge = exports['community_bridge']:Bridge()
+local cops = Bridge.Framework.GetPlayersByJob("police")
 print("Online cops: " .. #cops)
 ```
 
@@ -222,7 +233,8 @@ Gets the player's duty status.
 
 **Example:**
 ```lua
-local onDuty = Framework.GetPlayerDuty(source)
+local Bridge = exports['community_bridge']:Bridge()
+local onDuty = Bridge.Framework.GetPlayerDuty(source)
 print("On duty: " .. tostring(onDuty))
 ```
 
@@ -236,7 +248,8 @@ Sets the player's duty status.
 
 **Example:**
 ```lua
-Framework.SetPlayerDuty(source, true) -- Put on duty
+local Bridge = exports['community_bridge']:Bridge()
+Bridge.Framework.SetPlayerDuty(source, true) -- Put on duty
 ```
 
 ### SetPlayerJob(src, name, grade)
@@ -250,7 +263,8 @@ Sets the player's job and grade.
 
 **Example:**
 ```lua
-Framework.SetPlayerJob(source, "police", "0")
+local Bridge = exports['community_bridge']:Bridge()
+Bridge.Framework.SetPlayerJob(source, "police", "0")
 ```
 
 ## Economy
@@ -268,8 +282,9 @@ Gets the player's account balance.
 
 **Example:**
 ```lua
-local cash = Framework.GetAccountBalance(source, "money")
-local bank = Framework.GetAccountBalance(source, "bank")
+local Bridge = exports['community_bridge']:Bridge()
+local cash = Bridge.Framework.GetAccountBalance(source, "money")
+local bank = Bridge.Framework.GetAccountBalance(source, "bank")
 ```
 
 ### AddAccountBalance(src, type, amount)
@@ -286,7 +301,8 @@ Adds money to a player's account.
 
 **Example:**
 ```lua
-Framework.AddAccountBalance(source, "money", 1000)
+local Bridge = exports['community_bridge']:Bridge()
+Bridge.Framework.AddAccountBalance(source, "money", 1000)
 ```
 
 ### RemoveAccountBalance(src, type, amount)
@@ -303,7 +319,8 @@ Removes money from a player's account.
 
 **Example:**
 ```lua
-Framework.RemoveAccountBalance(source, "bank", 500)
+local Bridge = exports['community_bridge']:Bridge()
+Bridge.Framework.RemoveAccountBalance(source, "bank", 500)
 ```
 
 ## Inventory Management
@@ -322,7 +339,8 @@ Gets specific items from player inventory.
 
 **Example:**
 ```lua
-local items = Framework.GetItem(source, "bread")
+local Bridge = exports['community_bridge']:Bridge()
+local items = Bridge.Framework.GetItem(source, "bread")
 for _, item in pairs(items) do
     print("Found bread in slot: " .. item.slot)
 end
@@ -340,7 +358,8 @@ Gets information about an item.
 
 **Example:**
 ```lua
-local itemInfo = Framework.GetItemInfo("bread")
+local Bridge = exports['community_bridge']:Bridge()
+local itemInfo = Bridge.Framework.GetItemInfo("bread")
 print("Item: " .. itemInfo.label)
 ```
 
@@ -358,7 +377,8 @@ Gets the total count of an item in player inventory.
 
 **Example:**
 ```lua
-local breadCount = Framework.GetItemCount(source, "bread")
+local Bridge = exports['community_bridge']:Bridge()
+local breadCount = Bridge.Framework.GetItemCount(source, "bread")
 print("Player has " .. breadCount .. " bread")
 ```
 
@@ -375,7 +395,8 @@ Checks if player has an item.
 
 **Example:**
 ```lua
-if Framework.HasItem(source, "bread") then
+local Bridge = exports['community_bridge']:Bridge()
+if Bridge.Framework.HasItem(source, "bread") then
     print("Player has bread")
 end
 ```
@@ -392,7 +413,8 @@ Gets the player's complete inventory.
 
 **Example:**
 ```lua
-local inventory = Framework.GetPlayerInventory(source)
+local Bridge = exports['community_bridge']:Bridge()
+local inventory = Bridge.Framework.GetPlayerInventory(source)
 for _, item in pairs(inventory) do
     print("Item: " .. item.name .. " (Count: " .. item.count .. ")")
 end
@@ -411,7 +433,8 @@ Gets the item in a specific inventory slot.
 
 **Example:**
 ```lua
-local item = Framework.GetItemBySlot(source, 1)
+local Bridge = exports['community_bridge']:Bridge()
+local item = Bridge.Framework.GetItemBySlot(source, 1)
 if item.name then
     print("Slot 1 contains: " .. item.name)
 end
@@ -433,7 +456,8 @@ Adds an item to player inventory.
 
 **Example:**
 ```lua
-Framework.AddItem(source, "bread", 5, nil, {quality = 100})
+local Bridge = exports['community_bridge']:Bridge()
+Bridge.Framework.AddItem(source, "bread", 5, nil, {quality = 100})
 ```
 
 ### RemoveItem(src, item, amount, slot, metadata)
@@ -452,7 +476,8 @@ Removes an item from player inventory.
 
 **Example:**
 ```lua
-Framework.RemoveItem(source, "bread", 2)
+local Bridge = exports['community_bridge']:Bridge()
+Bridge.Framework.RemoveItem(source, "bread", 2)
 ```
 
 ### SetMetadata(src, item, slot, metadata)
@@ -470,7 +495,8 @@ Sets metadata for an item in inventory.
 
 **Example:**
 ```lua
-Framework.SetMetadata(source, "bread", 1, {quality = 50})
+local Bridge = exports['community_bridge']:Bridge()
+Bridge.Framework.SetMetadata(source, "bread", 1, {quality = 50})
 ```
 
 ## Player Status
@@ -488,7 +514,8 @@ Gets specific metadata for a player.
 
 **Example:**
 ```lua
-local hunger = Framework.GetPlayerMetadata(source, "hunger")
+local Bridge = exports['community_bridge']:Bridge()
+local hunger = Bridge.Framework.GetPlayerMetadata(source, "hunger")
 print("Hunger: " .. hunger)
 ```
 
@@ -506,7 +533,8 @@ Sets metadata for a player.
 
 **Example:**
 ```lua
-Framework.SetPlayerMetadata(source, "hunger", 50)
+local Bridge = exports['community_bridge']:Bridge()
+Bridge.Framework.SetPlayerMetadata(source, "hunger", 50)
 ```
 
 ### GetHunger(src)
@@ -521,7 +549,8 @@ Gets the player's hunger level.
 
 **Example:**
 ```lua
-local hunger = Framework.GetHunger(source)
+local Bridge = exports['community_bridge']:Bridge()
+local hunger = Bridge.Framework.GetHunger(source)
 print("Hunger: " .. hunger)
 ```
 
@@ -537,7 +566,8 @@ Gets the player's thirst level.
 
 **Example:**
 ```lua
-local thirst = Framework.GetThirst(source)
+local Bridge = exports['community_bridge']:Bridge()
+local thirst = Bridge.Framework.GetThirst(source)
 print("Thirst: " .. thirst)
 ```
 
@@ -554,7 +584,8 @@ Adds to the player's hunger level.
 
 **Example:**
 ```lua
-local newHunger = Framework.AddHunger(source, 25)
+local Bridge = exports['community_bridge']:Bridge()
+local newHunger = Bridge.Framework.AddHunger(source, 25)
 ```
 
 ### AddThirst(src, value)
@@ -570,7 +601,8 @@ Adds to the player's thirst level.
 
 **Example:**
 ```lua
-local newThirst = Framework.AddThirst(source, 25)
+local Bridge = exports['community_bridge']:Bridge()
+local newThirst = Bridge.Framework.AddThirst(source, 25)
 ```
 
 ### AddStress(src, value)
@@ -586,7 +618,8 @@ Adds to the player's stress level.
 
 **Example:**
 ```lua
-local newStress = Framework.AddStress(source, 10)
+local Bridge = exports['community_bridge']:Bridge()
+local newStress = Bridge.Framework.AddStress(source, 10)
 ```
 
 ### RemoveStress(src, value)
@@ -602,7 +635,8 @@ Removes from the player's stress level.
 
 **Example:**
 ```lua
-local newStress = Framework.RemoveStress(source, 15)
+local Bridge = exports['community_bridge']:Bridge()
+local newStress = Bridge.Framework.RemoveStress(source, 15)
 ```
 
 ### GetIsPlayerDead(src)
@@ -617,7 +651,8 @@ Checks if the player is dead or downed.
 
 **Example:**
 ```lua
-if Framework.GetIsPlayerDead(source) then
+local Bridge = exports['community_bridge']:Bridge()
+if Bridge.Framework.GetIsPlayerDead(source) then
     print("Player is dead")
 end
 ```
@@ -634,7 +669,8 @@ Revives a dead player.
 
 **Example:**
 ```lua
-Framework.RevivePlayer(source)
+local Bridge = exports['community_bridge']:Bridge()
+Bridge.Framework.RevivePlayer(source)
 ```
 
 ## Vehicle Management
@@ -651,7 +687,8 @@ Gets all vehicles owned by a player.
 
 **Example:**
 ```lua
-local vehicles = Framework.GetOwnedVehicles(source)
+local Bridge = exports['community_bridge']:Bridge()
+local vehicles = Bridge.Framework.GetOwnedVehicles(source)
 for _, vehicle in pairs(vehicles) do
     print("Vehicle: " .. vehicle.vehicle .. " (Plate: " .. vehicle.plate .. ")")
 end
@@ -669,10 +706,11 @@ Registers a usable item with a callback function.
 
 **Example:**
 ```lua
-Framework.RegisterUsableItem("bread", function(src, itemData)
+local Bridge = exports['community_bridge']:Bridge()
+Bridge.Framework.RegisterUsableItem("bread", function(src, itemData)
     print("Player " .. src .. " used bread")
-    Framework.AddHunger(src, 25)
-    Framework.RemoveItem(src, "bread", 1, itemData.slot)
+    Bridge.Framework.AddHunger(src, 25)
+    Bridge.Framework.RemoveItem(src, "bread", 1, itemData.slot)
 end)
 ```
 
@@ -693,9 +731,10 @@ Adds a command to the framework.
 
 **Example:**
 ```lua
-Framework.Commands.Add("heal", "Heal yourself", {}, false, function(source, args)
-    Framework.AddHunger(source, 100)
-    Framework.AddThirst(source, 100)
+local Bridge = exports['community_bridge']:Bridge()
+Bridge.Framework.Commands.Add("heal", "Heal yourself", {}, false, function(source, args)
+    Bridge.Framework.AddHunger(source, 100)
+    Bridge.Framework.AddThirst(source, 100)
 end, "admin")
 ```
 
@@ -973,6 +1012,7 @@ end
 Cache frequently accessed data to reduce database queries:
 
 ```lua
+local Bridge = exports['community_bridge']:Bridge()
 local playerData = {}
 playerData.identifier = Bridge.Framework.GetIdentifier(playerId)
 playerData.money = Bridge.Framework.GetMoney(playerId)

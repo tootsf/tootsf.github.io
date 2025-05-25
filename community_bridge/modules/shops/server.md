@@ -26,7 +26,7 @@ Creates and registers a new shop with specified inventory, location, and access 
 ### Syntax
 
 ```lua
-Shops.CreateShop(shopTitle, shopInventory, shopCoords, shopGroups)
+Bridge.Shops.CreateShop(shopTitle, shopInventory, shopCoords, shopGroups)
 ```
 
 ### Parameters
@@ -47,6 +47,9 @@ Shops.CreateShop(shopTitle, shopInventory, shopCoords, shopGroups)
 ### Example
 
 ```lua
+-- Initialize the bridge
+local Bridge = exports['community_bridge']:Bridge()
+
 local shopInventory = {
     {name = "bread", price = 15},
     {name = "water_bottle", price = 10},
@@ -56,7 +59,7 @@ local shopInventory = {
 local shopCoords = {x = 373.875, y = 325.896, z = 103.566}
 local allowedGroups = {"citizen", "police"}
 
-local success = Shops.CreateShop("Downtown Market", shopInventory, shopCoords, allowedGroups)
+local success = Bridge.Shops.CreateShop("Downtown Market", shopInventory, shopCoords, allowedGroups)
 if success then
     print("Shop created successfully!")
 end
@@ -71,7 +74,7 @@ Opens a registered shop for a specific player, displaying the shop interface.
 ### Syntax
 
 ```lua
-Shops.OpenShop(src, shopTitle)
+Bridge.Shops.OpenShop(src, shopTitle)
 ```
 
 ### Parameters
@@ -90,14 +93,17 @@ Shops.OpenShop(src, shopTitle)
 ### Example
 
 ```lua
+-- Initialize the bridge
+local Bridge = exports['community_bridge']:Bridge()
+
 -- Open shop for player when they interact with shop NPC
 RegisterNetEvent('openGeneralStore', function()
     local src = source
-    local opened = Shops.OpenShop(src, "Downtown Market")
+    local opened = Bridge.Shops.OpenShop(src, "Downtown Market")
     
     if not opened then
         -- Notify player that shop is unavailable
-        Notify.SendNotify(src, "Shop is currently unavailable", "error", 3000)
+        Bridge.Notify.SendNotify(src, "Shop is currently unavailable", "error", 3000)
     end
 end)
 ```
@@ -111,7 +117,7 @@ Processes a shop transaction with full validation and anti-cheat protection.
 ### Syntax
 
 ```lua
-Shops.CompleteCheckout(src, shopName, item, amount, paymentType)
+Bridge.Shops.CompleteCheckout(src, shopName, item, amount, paymentType)
 ```
 
 ### Parameters

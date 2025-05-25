@@ -45,13 +45,15 @@ VehicleKey.GiveKeys(vehicle, plate)
 ### Example
 
 ```lua
+local Bridge = exports['community_bridge']:Bridge()
+
 -- Give keys to the vehicle the player is currently in
 local playerPed = PlayerPedId()
 local vehicle = GetVehiclePedIsIn(playerPed, false)
 
 if vehicle ~= 0 then
     local plate = GetVehicleNumberPlateText(vehicle)
-    local success = VehicleKey.GiveKeys(vehicle, plate)
+    local success = Bridge.VehicleKey.GiveKeys(vehicle, plate)
     
     if success then
         print("Vehicle keys given successfully")
@@ -97,12 +99,14 @@ VehicleKey.RemoveKeys(vehicle, plate)
 ### Example
 
 ```lua
+local Bridge = exports['community_bridge']:Bridge()
+
 -- Remove keys from a specific vehicle
 local vehicle = GetClosestVehicle(GetEntityCoords(PlayerPedId()), 5.0, 0, 71)
 
 if vehicle ~= 0 then
     local plate = GetVehicleNumberPlateText(vehicle)
-    local success = VehicleKey.RemoveKeys(vehicle, plate)
+    local success = Bridge.VehicleKey.RemoveKeys(vehicle, plate)
     
     if success then
         print("Vehicle keys removed successfully")
@@ -125,12 +129,14 @@ end
 ### Vehicle Spawning Integration
 
 ```lua
+local Bridge = exports['community_bridge']:Bridge()
+
 -- When spawning a vehicle, automatically give keys
 local vehicle = CreateVehicle(modelHash, coords.x, coords.y, coords.z, heading, true, false)
 local plate = GetVehicleNumberPlateText(vehicle)
 
 -- Give keys to the spawned vehicle
-VehicleKey.GiveKeys(vehicle, plate)
+Bridge.VehicleKey.GiveKeys(vehicle, plate)
 
 -- Put player in vehicle
 TaskWarpPedIntoVehicle(PlayerPedId(), vehicle, -1)
@@ -139,16 +145,18 @@ TaskWarpPedIntoVehicle(PlayerPedId(), vehicle, -1)
 ### Vehicle Sale/Transfer System
 
 ```lua
+local Bridge = exports['community_bridge']:Bridge()
+
 -- Transfer vehicle ownership
 function TransferVehicleOwnership(oldOwner, newOwner, vehicle, plate)
     -- Remove keys from old owner (if they're the current player)
     if oldOwner == PlayerId() then
-        VehicleKey.RemoveKeys(vehicle, plate)
+        Bridge.VehicleKey.RemoveKeys(vehicle, plate)
     end
     
     -- Give keys to new owner (if they're the current player)
     if newOwner == PlayerId() then
-        VehicleKey.GiveKeys(vehicle, plate)
+        Bridge.VehicleKey.GiveKeys(vehicle, plate)
     end
 end
 ```
@@ -156,6 +164,8 @@ end
 ### Garage System Integration
 
 ```lua
+local Bridge = exports['community_bridge']:Bridge()
+
 -- When taking vehicle out of garage
 function TakeVehicleFromGarage(vehicleData)
     local vehicle = SpawnVehicle(vehicleData.model, vehicleData.coords)
@@ -165,7 +175,7 @@ function TakeVehicleFromGarage(vehicleData)
     SetVehicleNumberPlateText(vehicle, plate)
     
     -- Give keys to player
-    VehicleKey.GiveKeys(vehicle, plate)
+    Bridge.VehicleKey.GiveKeys(vehicle, plate)
     
     return vehicle
 end
@@ -182,7 +192,9 @@ When no vehicle key system is detected:
 ### Example Error Handling
 
 ```lua
-local success = VehicleKey.GiveKeys(vehicle, plate)
+local Bridge = exports['community_bridge']:Bridge()
+
+local success = Bridge.VehicleKey.GiveKeys(vehicle, plate)
 if not success then
     -- Handle failure case
     TriggerEvent('showNotification', 'Unable to give vehicle keys')

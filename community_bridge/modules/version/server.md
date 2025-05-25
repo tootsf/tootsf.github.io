@@ -45,14 +45,16 @@ Version.VersionChecker(repoPath, tebex)
 ### Example
 
 ```lua
+local Bridge = exports['community_bridge']:Bridge()
+
 -- Check for updates on a regular GitHub repository
-Version.VersionChecker("YourUsername/your-resource-name", false)
+Bridge.Version.VersionChecker("YourUsername/your-resource-name", false)
 
 -- Check for updates on a Tebex escrowed resource
-Version.VersionChecker("YourUsername/your-resource-name", true)
+Bridge.Version.VersionChecker("YourUsername/your-resource-name", true)
 
 -- Default usage (tebex parameter optional)
-Version.VersionChecker("The-Order-Of-The-Sacred-Framework/community_bridge")
+Bridge.Version.VersionChecker("The-Order-Of-The-Sacred-Framework/community_bridge")
 ```
 
 ### Function Behavior
@@ -108,11 +110,13 @@ The function handles various error conditions:
 ### Example Error Cases
 
 ```lua
+local Bridge = exports['community_bridge']:Bridge()
+
 -- Invalid format - will show error
-Version.VersionChecker("invalid-format")
+Bridge.Version.VersionChecker("invalid-format")
 
 -- Valid format - will check for updates
-Version.VersionChecker("username/repository-name")
+Bridge.Version.VersionChecker("username/repository-name")
 ```
 
 ## Automatic Integration

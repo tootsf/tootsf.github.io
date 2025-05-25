@@ -35,11 +35,11 @@ Shows help text to a specific player at the specified screen position.
 
 **Example:**
 ```lua
-local HelpText = exports['community_bridge']:HelpText()
+local Bridge = exports['community_bridge']:Bridge()
 
 -- Show help text to a player
 local playerId = source
-HelpText.ShowHelpText(playerId, "Press ~INPUT_CONTEXT~ to interact", "top")
+Bridge.HelpText.ShowHelpText(playerId, "Press ~INPUT_CONTEXT~ to interact", "top")
 ```
 
 ### HideHelpText(src)
@@ -54,9 +54,11 @@ Hides any currently displayed help text for a specific player.
 
 **Example:**
 ```lua
+local Bridge = exports['community_bridge']:Bridge()
+
 -- Hide help text for a player
 local playerId = source
-HelpText.HideHelpText(playerId)
+Bridge.HelpText.HideHelpText(playerId)
 ```
 
 ---
@@ -66,25 +68,29 @@ HelpText.HideHelpText(playerId)
 ### Context-Based Help
 
 ```lua
+local Bridge = exports['community_bridge']:Bridge()
+
 -- Show help when player enters a zone
 RegisterNetEvent('garage:enter', function()
     local src = source
-    HelpText.ShowHelpText(src, "Press ~INPUT_CONTEXT~ to access garage", "center")
+    Bridge.HelpText.ShowHelpText(src, "Press ~INPUT_CONTEXT~ to access garage", "center")
 end)
 
 -- Hide help when player exits zone
 RegisterNetEvent('garage:exit', function()
     local src = source
-    HelpText.HideHelpText(src)
+    Bridge.HelpText.HideHelpText(src)
 end)
 ```
 
 ### Interactive Prompts
 
 ```lua
+local Bridge = exports['community_bridge']:Bridge()
+
 -- Show interaction prompt
 RegisterNetEvent('shop:showPrompt', function()
     local src = source
-    HelpText.ShowHelpText(src, "Press ~INPUT_PICKUP~ to open shop", "bottom")
+    Bridge.HelpText.ShowHelpText(src, "Press ~INPUT_PICKUP~ to open shop", "bottom")
 end)
 ```
