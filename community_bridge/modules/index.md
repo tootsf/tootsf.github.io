@@ -25,7 +25,7 @@ Community Bridge is organized into specialized modules, each handling specific a
 These modules provide essential framework integration and player management functionality.
 
 - **[Framework](framework/)** - Player data, money, jobs, and core framework features
-- **[Management](management/)** - Administrative functions and server management tools
+- **[Managment](managment/)** - Business and organization account management
 
 ## User Interface
 
@@ -43,11 +43,10 @@ Modules for creating interactive user experiences and notifications.
 Specialized modules for specific game mechanics and systems.
 
 - **[Inventory](inventory/)** - Item management and inventory operations
-- **[Vehicle](vehicle/)** - Vehicle management, ownership, and operations
 - **[Target](target/)** - Targeting system integration
-- **[Shops](shops/)** - Commerce and trading systems
-- **[Housing](housing/)** - Property and housing management
-- **[Vehicle Key](vehiclekey/)** - Vehicle access and key management
+- **[Shops](shops/)** - Commerce and trading systems with payment processing
+- **[Housing](housing/)** - Property entry/exit detection and management
+- **[Vehicle Key](vehiclekey/)** - Vehicle access and key management across multiple systems
 - **[Door Lock](doorlock/)** - Building and area access control
 - **[Fuel](fuel/)** - Vehicle fuel management
 - **[Clothing](clothing/)** - Character appearance and clothing systems
@@ -56,8 +55,6 @@ Specialized modules for specific game mechanics and systems.
 
 Helper modules for common development tasks and system integration.
 
-- **[Callback](callback/)** - Client-server communication and promise-based callbacks
-- **[Blip](blip/)** - Map marker and navigation system
 - **[Locales](locales/)** - Internationalization and language support
 - **[Math](math/)** - Mathematical operations and calculations
 - **[Phone](phone/)** - Communication and phone system integration
@@ -93,6 +90,31 @@ Emergency dispatch and communication systems.
   - [Client Functions](dispatch/client.md) - Dispatch interface and call management
   - [Server Functions](dispatch/server.md) - Call coordination and automation
   - [Shared Functions](dispatch/shared.md) - Dispatch utilities and configurations
+
+---
+
+## Documented Modules
+
+The following modules have been fully documented with accurate function information:
+
+### Complete Documentation
+- **[Helptext](helptext/)** - Server-side help text display functions
+- **[Math](math/)** - Mathematical utility functions (Clamp, Round, Truncate, Wrap, Smooth, Map)
+- **[Shops](shops/)** - Complete shop system with checkout, payments, and transaction processing
+- **[Phone](phone/)** - Multi-system phone integration with email support
+- **[VehicleKey](vehiclekey/)** - Vehicle key management across 13+ key systems
+- **[Version](version/)** - Automatic GitHub version checking and update notifications
+- **[Housing](housing/)** - Property entry/exit event system for multiple housing resources
+- **[Locales](locales/)** - Advanced internationalization with nested keys and variable substitution
+- **[Managment](managment/)** - Business account management across multiple banking systems
+
+### Verified Function Lists
+- **[Menu](menu/)** - Verified to only contain client-side `Menu.Open()` function
+- **[Notify](notify/)** - Contains server-side notification functions
+
+### Modules with Limited/No Implementation
+Several modules exist as integration bridges but have minimal core functionality:
+- Framework, Inventory, Dispatch, etc. - Primarily contain integrations for specific resources
 
 ---
 
