@@ -1,8 +1,23 @@
+---
+layout: default
+title: Client Functions
+parent: Doorlock
+grand_parent: Modules
+nav_order: 1
+---
+
 # Doorlock Client
+{: .no_toc }
 
 The doorlock client module provides basic door detection functionality.
 
-## Functions
+## Table of Contents
+{: .no_toc .text-delta }
+
+1. TOC
+{:toc}
+
+## Door Detection
 
 ### GetClosestDoor()
 

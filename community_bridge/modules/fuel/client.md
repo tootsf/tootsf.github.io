@@ -1,8 +1,23 @@
+---
+layout: default
+title: Client Functions
+parent: Fuel
+grand_parent: Modules
+nav_order: 1
+---
+
 # Fuel Client
+{: .no_toc }
 
 The fuel client module provides vehicle fuel management functions.
 
-## Functions
+## Table of Contents
+{: .no_toc .text-delta }
+
+1. TOC
+{:toc}
+
+## System Information
 
 ### GetResourceName()
 

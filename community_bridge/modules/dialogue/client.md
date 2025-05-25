@@ -1,8 +1,23 @@
+---
+layout: default
+title: Client Functions
+parent: Dialogue
+grand_parent: Modules
+nav_order: 1
+---
+
 # Dialogue Client
+{: .no_toc }
 
 The dialogue client module provides an interactive dialogue system with automatic camera management and NUI interface.
 
-## Functions
+## Table of Contents
+{: .no_toc .text-delta }
+
+1. TOC
+{:toc}
+
+## Dialogue Functions
 
 ### Open(name, dialogue, characterOptions, dialogueOptions, onSelected)
 

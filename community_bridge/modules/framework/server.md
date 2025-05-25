@@ -1,6 +1,21 @@
+---
+layout: default
+title: Framework Server
+parent: Framework
+grand_parent: Modules
+nav_order: 2
+---
+
 # Framework Server
+{: .no_toc }
 
 The framework server module provides comprehensive player management, economy operations, and framework integration functions.
+
+## Table of Contents
+{: .no_toc .text-delta }
+
+1. TOC
+{:toc}
 
 ## Core Functions
 

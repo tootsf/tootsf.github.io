@@ -1,8 +1,23 @@
+---
+layout: default
+title: Server Functions
+parent: Doorlock
+grand_parent: Modules
+nav_order: 2
+---
+
 # Doorlock Server
+{: .no_toc }
 
 The doorlock server module provides basic door lock management functionality.
 
-## Functions
+## Table of Contents
+{: .no_toc .text-delta }
+
+1. TOC
+{:toc}
+
+## Door Management
 
 ### ToggleDoorLock(doorID, toggle)
 

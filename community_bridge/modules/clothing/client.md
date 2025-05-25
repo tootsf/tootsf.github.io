@@ -1,8 +1,23 @@
+---
+layout: default
+title: Client Functions
+parent: Clothing
+grand_parent: Modules
+nav_order: 1
+---
+
 # Clothing Client
+{: .no_toc }
 
 The clothing client module provides functions for managing player appearance and clothing on the client-side.
 
-## Functions
+## Table of Contents
+{: .no_toc .text-delta }
+
+1. TOC
+{:toc}
+
+## Character Model Functions
 
 ### IsMale()
 

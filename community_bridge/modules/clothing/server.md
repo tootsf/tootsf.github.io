@@ -1,8 +1,23 @@
+---
+layout: default
+title: Server Functions
+parent: Clothing
+grand_parent: Modules
+nav_order: 2
+---
+
 # Clothing Server
+{: .no_toc }
 
 The clothing server module provides functions for managing player appearance from the server-side.
 
-## Functions
+## Table of Contents
+{: .no_toc .text-delta }
+
+1. TOC
+{:toc}
+
+## Character Model Functions
 
 ### IsMale(src)
 

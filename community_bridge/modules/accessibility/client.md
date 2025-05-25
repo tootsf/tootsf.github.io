@@ -1,8 +1,23 @@
+---
+layout: default
+title: Client Functions
+parent: Accessibility
+grand_parent: Modules
+nav_order: 1
+---
+
 # Accessibility Client
+{: .no_toc }
 
 The accessibility client module provides colorblind accessibility features and color conversion utilities.
 
-## Functions
+## Table of Contents
+{: .no_toc .text-delta }
+
+1. TOC
+{:toc}
+
+## Colorblind Features
 
 ### updatecolourblindness()
 

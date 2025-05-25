@@ -13,6 +13,12 @@ permalink: /community_bridge/modules/menu/server/
 
 The menu module in community_bridge does not provide any server-side functions.
 
+## Table of Contents
+{: .no_toc .text-delta }
+
+1. TOC
+{:toc}
+
 ---
 
 ## Available Functions

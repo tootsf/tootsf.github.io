@@ -1,8 +1,23 @@
+---
+layout: default
+title: Framework Client
+parent: Framework
+grand_parent: Modules
+nav_order: 1
+---
+
 # Framework Client
+{: .no_toc }
 
 The framework client module provides functions for accessing player data and framework information on the client-side.
 
-## Functions
+## Table of Contents
+{: .no_toc .text-delta }
+
+1. TOC
+{:toc}
+
+## Player Data Functions
 
 ### GetFrameworkName()
 
@@ -30,6 +45,8 @@ local playerData = Framework.GetPlayerData()
 print("Player name: " .. playerData.charinfo.firstname)
 ```
 
+## Job Functions
+
 ### GetFrameworkJobs()
 
 Returns a table of all available jobs in the framework.
@@ -44,6 +61,8 @@ for _, job in pairs(jobs) do
     print("Job: " .. job.label .. " (" .. job.name .. ")")
 end
 ```
+
+## Player Information
 
 ### GetPlayerDob()
 
