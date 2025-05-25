@@ -29,7 +29,8 @@ Client
 {: .label .label-blue }
 
 ```lua
-Menu.Open(data, useQb)
+local Bridge = exports['community_bridge']:Bridge()
+Bridge.Menu.Open(data, useQb)
 ```
 
 Opens a menu based on the provided configuration. This function can handle both ox_lib and qb-menu formats.

@@ -148,7 +148,8 @@ Bridge.Shops.CompleteCheckout(src, shopName, item, amount, paymentType)
 ```lua
 -- This function is typically called automatically through the client interface
 -- Manual usage example:
-Shops.CompleteCheckout(playerId, "Downtown Market", "bread", 2, "bank")
+local Bridge = exports['community_bridge']:Bridge()
+Bridge.Shops.CompleteCheckout(playerId, "Downtown Market", "bread", 2, "bank")
 
 -- The function will:
 -- 1. Verify the shop exists
@@ -169,7 +170,8 @@ Internal event triggered by client-side checkout process.
 
 ```lua
 RegisterNetEvent("community_bridge:completeCheckout", function(shopName, item, amount, paymentType)
-    -- Validates payment type and calls Shops.CompleteCheckout
+    local Bridge = exports['community_bridge']:Bridge()
+    Bridge.Shops.CompleteCheckout(source, shopName, item, amount, paymentType)
 end)
 ```
 

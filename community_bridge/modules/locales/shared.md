@@ -45,8 +45,10 @@ Language.Locale(str, ...)
 ### Basic Usage
 
 ```lua
+local Bridge = exports['community_bridge']:Bridge()
+
 -- Simple key lookup
-local message = Language.Locale('welcome')
+local message = Bridge.Locales.Locale('welcome')
 -- Returns: "Welcome to our server!"
 
 -- Key not found - returns original key
@@ -143,8 +145,10 @@ The module uses Lua's `string.format()` for variable substitution:
 ### Current Language Access
 
 ```lua
+local Bridge = exports['community_bridge']:Bridge()
+
 -- Access the detected language
-print("Current language: " .. Lang)
+print("Current language: " .. Bridge.Locales.GetCurrentLanguage())
 -- Outputs: "Current language: en"
 ```
 

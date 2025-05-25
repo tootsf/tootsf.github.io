@@ -24,13 +24,15 @@ The accessibility client module provides colorblind accessibility features and c
 Opens a menu allowing the user to select their colorblindness type.
 
 ```lua
-Accessibility.updatecolourblindness()
+local Bridge = exports['community_bridge']:Bridge()
+Bridge.Accessibility.updatecolourblindness()
 ```
 
 **Example:**
 ```lua
 -- Open colorblind settings menu
-Accessibility.updatecolourblindness()
+local Bridge = exports['community_bridge']:Bridge()
+Bridge.Accessibility.updatecolourblindness()
 ```
 
 ### hexToRgb(hex)

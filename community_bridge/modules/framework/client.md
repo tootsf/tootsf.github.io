@@ -104,7 +104,8 @@ Shows a notification to the player.
 
 **Example:**
 ```lua
-Framework.Notify("Hello player!", "success", 5000)
+local Bridge = exports['community_bridge']:Bridge()
+Bridge.Framework.Notify("Hello player!", "success", 5000)
 ```
 
 ### ShowHelpText(message, position)
@@ -117,7 +118,8 @@ Displays help text on screen.
 
 **Example:**
 ```lua
-Framework.ShowHelpText("Press [E] to interact")
+local Bridge = exports['community_bridge']:Bridge()
+Bridge.Framework.ShowHelpText("Press [E] to interact")
 ```
 
 ### HideHelpText()
@@ -126,7 +128,8 @@ Hides the currently displayed help text.
 
 **Example:**
 ```lua
-Framework.HideHelpText()
+local Bridge = exports['community_bridge']:Bridge()
+Bridge.Framework.HideHelpText()
 ```
 
 ### GetItemInfo(item)

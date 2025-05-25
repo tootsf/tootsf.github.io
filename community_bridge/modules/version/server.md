@@ -126,7 +126,8 @@ The module automatically runs version checking on resource startup:
 ```lua
 AddEventHandler('onResourceStart', function(resourceName)
     if GetCurrentResourceName() ~= resourceName then return end
-    Version.VersionChecker("The-Order-Of-The-Sacred-Framework/community_bridge")
+    local Bridge = exports['community_bridge']:Bridge()
+    Bridge.Version.VersionChecker("The-Order-Of-The-Sacred-Framework/community_bridge")
 end)
 ```
 
