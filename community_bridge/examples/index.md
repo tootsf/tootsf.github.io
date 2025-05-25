@@ -30,33 +30,34 @@ Learn how to create a simple shop using multiple Community Bridge modules:
 RegisterNetEvent('shop:buyItem')
 AddEventHandler('shop:buyItem', function(itemName, quantity)
     local playerId = source
+    local Bridge = exports['community_bridge']:Bridge()
     
     -- Get item info and calculate cost
-    local itemInfo = Inventory.GetItemInfo(itemName)
+    local itemInfo = Bridge.Inventory.GetItemInfo(itemName)
     if not itemInfo then
-        Notify.SendNotify(playerId, "Item not found!", "error")
+        Bridge.Notify.SendNotify(playerId, "Item not found!", "error")
         return
     end
     
     local totalCost = itemInfo.price * quantity
-    local playerMoney = Framework.GetMoney(playerId)
+    local playerMoney = Bridge.Framework.GetMoney(playerId)
     
     -- Check if player has enough money
     if playerMoney >= totalCost then
         -- Remove money and add item
-        if Framework.RemoveMoney(playerId, totalCost) then
-            if Inventory.AddItem(playerId, itemName, quantity) then
-                Notify.SendNotify(playerId, 
+        if Bridge.Framework.RemoveMoney(playerId, totalCost) then
+            if Bridge.Inventory.AddItem(playerId, itemName, quantity) then
+                Bridge.Notify.SendNotify(playerId, 
                     string.format("Purchased %dx %s for $%d", 
                     quantity, itemInfo.label, totalCost), "success")
             else
                 -- Refund if inventory full
-                Framework.AddMoney(playerId, totalCost)
-                Notify.SendNotify(playerId, "Inventory full!", "error")
+                Bridge.Framework.AddMoney(playerId, totalCost)
+                Bridge.Notify.SendNotify(playerId, "Inventory full!", "error")
             end
         end
     else
-        Notify.SendNotify(playerId, "Insufficient funds!", "error")
+        Bridge.Notify.SendNotify(playerId, "Insufficient funds!", "error")
     end
 end)
 ```
@@ -67,8 +68,10 @@ Create rich targeting interactions:
 ```lua
 -- Client-side targeting setup
 Citizen.CreateThread(function()
+    local Bridge = exports['community_bridge']:Bridge()
+    
     -- Add targeting to all ATMs
-    Target.AddTargetModel({'prop_atm_01', 'prop_atm_02', 'prop_atm_03'}, {
+    Bridge.Target.AddTargetModel({'prop_atm_01', 'prop_atm_02', 'prop_atm_03'}, {
         options = {
             {
                 label = "Use ATM",
@@ -96,11 +99,13 @@ end)
 ```lua
 -- Works with any supported framework
 local function GetPlayerData(playerId)
+    local Bridge = exports['community_bridge']:Bridge()
+    
     return {
-        identifier = Framework.GetIdentifier(playerId),
-        name = Framework.GetName(playerId),
-        money = Framework.GetMoney(playerId),
-        job = Framework.GetJob(playerId)
+        identifier = Bridge.Framework.GetIdentifier(playerId),
+        name = Bridge.Framework.GetName(playerId),
+        money = Bridge.Framework.GetMoney(playerId),
+        job = Bridge.Framework.GetJob(playerId)
     }
 end
 
@@ -116,17 +121,19 @@ end)
 ```lua
 -- Always check return values
 local function GivePlayerItem(playerId, item, count)
-    local itemInfo = Inventory.GetItemInfo(item)
+    local Bridge = exports['community_bridge']:Bridge()
+    
+    local itemInfo = Bridge.Inventory.GetItemInfo(item)
     if not itemInfo then
         return false, "Invalid item"
     end
     
-    if Inventory.AddItem(playerId, item, count) then
-        Notify.SendNotify(playerId, 
+    if Bridge.Inventory.AddItem(playerId, item, count) then
+        Bridge.Notify.SendNotify(playerId, 
             string.format("Received %dx %s", count, itemInfo.label), "success")
         return true, "Success"
     else
-        Notify.SendNotify(playerId, "Inventory full!", "error")
+        Bridge.Notify.SendNotify(playerId, "Inventory full!", "error")
         return false, "Inventory full"
     end
 end
@@ -141,8 +148,10 @@ Using progress bars and notifications for complex operations:
 -- Client-side crafting example
 RegisterNetEvent('crafting:start')
 AddEventHandler('crafting:start', function(recipe)
+    local Bridge = exports['community_bridge']:Bridge()
+    
     -- Show crafting progress
-    ProgressBar.Show({
+    Bridge.ProgressBar.Show({
         label = "Crafting " .. recipe.result.label,
         duration = recipe.time * 1000,
         useWhileDead = false,
@@ -161,7 +170,7 @@ AddEventHandler('crafting:start', function(recipe)
         if not cancelled then
             TriggerServerEvent('crafting:complete', recipe.id)
         else
-            Notify.SendNotify("Crafting cancelled", "error")
+            Bridge.Notify.SendNotify("Crafting cancelled", "error")
         end
     end)
 end)
@@ -173,7 +182,8 @@ end)
 RegisterNetEvent('job:openMenu')
 AddEventHandler('job:openMenu', function()
     local playerId = source
-    local playerJob = Framework.GetJob(playerId)
+    local Bridge = exports['community_bridge']:Bridge()
+    local playerJob = Bridge.Framework.GetJob(playerId)
     
     local menuOptions = {}
     
@@ -216,11 +226,13 @@ local function SafeAddMoney(playerId, amount)
         return false, "Invalid parameters"
     end
     
-    if not Framework.GetIdentifier(playerId) then
+    local Bridge = exports['community_bridge']:Bridge()
+    
+    if not Bridge.Framework.GetIdentifier(playerId) then
         return false, "Player not found"
     end
     
-    return Framework.AddMoney(playerId, amount), "Success"
+    return Bridge.Framework.AddMoney(playerId, amount), "Success"
 end
 ```
 
@@ -253,6 +265,8 @@ Config.Inventory = "auto" -- Auto-detect inventory
 Config.Notifications = "auto" -- Auto-detect notification system
 
 -- main.lua
+local Bridge = exports['community_bridge']:Bridge()
+
 if not Bridge then
     print("^1Error: Community Bridge not found!")
     return

@@ -31,14 +31,16 @@ Community Bridge is a comprehensive abstraction layer that allows FiveM develope
 ```lua
 -- Server-side: Works the same regardless of framework
 local playerId = source
-local playerMoney = Framework.GetMoney(playerId)
+local Bridge = exports['community_bridge']:Bridge()
+
+local playerMoney = Bridge.Framework.GetMoney(playerId)
 
 if playerMoney >= 500 then
-    Framework.RemoveMoney(playerId, 500)
-    Inventory.AddItem(playerId, "water", 5)
-    Notify.SendNotify(playerId, "Purchased 5 water bottles!", "success")
+    Bridge.Framework.RemoveMoney(playerId, 500)
+    Bridge.Inventory.AddItem(playerId, "water", 5)
+    Bridge.Notify.SendNotify(playerId, "Purchased 5 water bottles!", "success")
 else
-    Notify.SendNotify(playerId, "Insufficient funds!", "error")
+    Bridge.Notify.SendNotify(playerId, "Insufficient funds!", "error")
 end
 ```
 
