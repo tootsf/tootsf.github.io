@@ -27,7 +27,7 @@ Shared
 {: .label .label-green }
 
 ```lua
-Inventory.IsValidItem(itemName)
+Bridge.Inventory.IsValidItem(itemName)
 ```
 
 Validates if an item exists in the item database.
@@ -40,7 +40,9 @@ Validates if an item exists in the item database.
 
 **Example:**
 ```lua
-if Inventory.IsValidItem("water") then
+local Bridge = exports['community_bridge']:Bridge()
+
+if Bridge.Inventory.IsValidItem("water") then
     print("Water is a valid item")
 else
     print("Invalid item name")
@@ -55,7 +57,7 @@ Shared
 {: .label .label-green }
 
 ```lua
-Inventory.ValidateItemData(itemData)
+Bridge.Inventory.ValidateItemData(itemData)
 ```
 
 Validates the structure of item data.
@@ -69,6 +71,8 @@ Validates the structure of item data.
 
 **Example:**
 ```lua
+local Bridge = exports['community_bridge']:Bridge()
+
 local itemData = {
     name = "water",
     label = "Water Bottle",
@@ -76,7 +80,7 @@ local itemData = {
     stack = true
 }
 
-local isValid, error = Inventory.ValidateItemData(itemData)
+local isValid, error = Bridge.Inventory.ValidateItemData(itemData)
 if not isValid then
     print("Invalid item data: " .. error)
 end
@@ -90,7 +94,7 @@ Shared
 {: .label .label-green }
 
 ```lua
-Inventory.ValidateSlot(slot, maxSlots)
+Bridge.Inventory.ValidateSlot(slot, maxSlots)
 ```
 
 Validates if a slot number is within valid range.
@@ -104,7 +108,7 @@ Validates if a slot number is within valid range.
 
 **Example:**
 ```lua
-if Inventory.ValidateSlot(slot, 40) then
+if Bridge.Inventory.ValidateSlot(slot, 40) then
     -- Process slot operation
 else
     print("Invalid slot number")
@@ -121,7 +125,7 @@ Shared
 {: .label .label-green }
 
 ```lua
-Inventory.CalculateWeight(items)
+Bridge.Inventory.CalculateWeight(items)
 ```
 
 Calculates total weight of items.
@@ -139,7 +143,7 @@ local items = {
     {name = "bread", count = 3, weight = 300}
 }
 
-local totalWeight = Inventory.CalculateWeight(items)
+local totalWeight = Bridge.Inventory.CalculateWeight(items)
 print("Total weight: " .. totalWeight .. "g")
 ```
 
@@ -151,7 +155,7 @@ Shared
 {: .label .label-green }
 
 ```lua
-Inventory.CanStack(item1, item2)
+Bridge.Inventory.CanStack(item1, item2)
 ```
 
 Checks if two items can be stacked together.
@@ -165,7 +169,7 @@ Checks if two items can be stacked together.
 
 **Example:**
 ```lua
-local canStack = Inventory.CanStack(
+local canStack = Bridge.Inventory.CanStack(
     {name = "water", metadata = {}},
     {name = "water", metadata = {}}
 )
@@ -182,7 +186,7 @@ Shared
 {: .label .label-green }
 
 ```lua
-Inventory.FormatWeight(weight)
+Bridge.Inventory.FormatWeight(weight)
 ```
 
 Formats weight for display.
@@ -195,10 +199,10 @@ Formats weight for display.
 
 **Example:**
 ```lua
-local formatted = Inventory.FormatWeight(1500)
+local formatted = Bridge.Inventory.FormatWeight(1500)
 print(formatted) -- "1.5 kg"
 
-local formatted2 = Inventory.FormatWeight(500)
+local formatted2 = Bridge.Inventory.FormatWeight(500)
 print(formatted2) -- "500g"
 ```
 
@@ -212,7 +216,7 @@ Shared
 {: .label .label-green }
 
 ```lua
-Inventory.CleanMetadata(metadata)
+Bridge.Inventory.CleanMetadata(metadata)
 ```
 
 Removes empty or invalid metadata fields.
@@ -232,7 +236,7 @@ local metadata = {
     serial = "ABC123"
 }
 
-local cleaned = Inventory.CleanMetadata(metadata)
+local cleaned = Bridge.Inventory.CleanMetadata(metadata)
 -- Result: {durability = 100, serial = "ABC123"}
 ```
 
@@ -244,7 +248,7 @@ Shared
 {: .label .label-green }
 
 ```lua
-Inventory.MergeMetadata(base, override)
+Bridge.Inventory.MergeMetadata(base, override)
 ```
 
 Merges two metadata tables.
@@ -261,7 +265,7 @@ Merges two metadata tables.
 local base = {durability = 100, owner = "John"}
 local override = {durability = 75, serial = "XYZ789"}
 
-local merged = Inventory.MergeMetadata(base, override)
+local merged = Bridge.Inventory.MergeMetadata(base, override)
 -- Result: {durability = 75, owner = "John", serial = "XYZ789"}
 ```
 
@@ -273,7 +277,7 @@ Shared
 {: .label .label-green }
 
 ```lua
-Inventory.ValidateMetadata(metadata, schema)
+Bridge.Inventory.ValidateMetadata(metadata, schema)
 ```
 
 Validates metadata against a schema.
@@ -295,7 +299,7 @@ local schema = {
 }
 
 local metadata = {durability = 85, serial = "ABC123"}
-local isValid, errors = Inventory.ValidateMetadata(metadata, schema)
+local isValid, errors = Bridge.Inventory.ValidateMetadata(metadata, schema)
 ```
 
 ---
@@ -308,7 +312,7 @@ Shared
 {: .label .label-green }
 
 ```lua
-Inventory.GetItemConfig(itemName)
+Bridge.Inventory.GetItemConfig(itemName)
 ```
 
 Gets configuration data for an item.
@@ -321,7 +325,7 @@ Gets configuration data for an item.
 
 **Example:**
 ```lua
-local config = Inventory.GetItemConfig("weapon_pistol")
+local config = Bridge.Inventory.GetItemConfig("weapon_pistol")
 print("Max durability: " .. config.maxDurability)
 print("Is weapon: " .. tostring(config.weapon))
 ```
@@ -334,7 +338,7 @@ Shared
 {: .label .label-green }
 
 ```lua
-Inventory.GetSystemConfig()
+Bridge.Inventory.GetSystemConfig()
 ```
 
 Gets current inventory system configuration.
@@ -344,7 +348,7 @@ Gets current inventory system configuration.
 
 **Example:**
 ```lua
-local config = Inventory.GetSystemConfig()
+local config = Bridge.Inventory.GetSystemConfig()
 print("Max weight: " .. config.maxWeight)
 print("Max slots: " .. config.maxSlots)
 print("System: " .. config.system)
@@ -356,7 +360,7 @@ print("System: " .. config.system)
 
 ### Item Types
 ```lua
-Inventory.ItemTypes = {
+Bridge.Inventory.ItemTypes = {
     WEAPON = "weapon",
     CONSUMABLE = "consumable",
     TOOL = "tool",
@@ -368,7 +372,7 @@ Inventory.ItemTypes = {
 
 ### Metadata Fields
 ```lua
-Inventory.MetadataFields = {
+Bridge.Inventory.MetadataFields = {
     DURABILITY = "durability",
     SERIAL = "serial",
     OWNER = "owner",
@@ -380,7 +384,7 @@ Inventory.MetadataFields = {
 
 ### Weight Units
 ```lua
-Inventory.WeightUnits = {
+Bridge.Inventory.WeightUnits = {
     GRAM = 1,
     KILOGRAM = 1000,
     POUND = 453.592
@@ -397,7 +401,7 @@ Shared
 {: .label .label-green }
 
 ```lua
-Inventory.GenerateSerial(pattern)
+Bridge.Inventory.GenerateSerial(pattern)
 ```
 
 Generates a serial number based on a pattern.
@@ -410,10 +414,10 @@ Generates a serial number based on a pattern.
 
 **Example:**
 ```lua
-local serial = Inventory.GenerateSerial("ABC###")
+local serial = Bridge.Inventory.GenerateSerial("ABC###")
 print(serial) -- "ABC123"
 
-local serial2 = Inventory.GenerateSerial()
+local serial2 = Bridge.Inventory.GenerateSerial()
 print(serial2) -- "XYZ456"
 ```
 
@@ -425,7 +429,7 @@ Shared
 {: .label .label-green }
 
 ```lua
-Inventory.CompareItems(item1, item2, compareMetadata)
+Bridge.Inventory.CompareItems(item1, item2, compareMetadata)
 ```
 
 Compares two items for equality.
@@ -443,10 +447,10 @@ Compares two items for equality.
 local item1 = {name = "water", count = 5}
 local item2 = {name = "water", count = 3}
 
-local nameMatch = Inventory.CompareItems(item1, item2, false)
+local nameMatch = Bridge.Inventory.CompareItems(item1, item2, false)
 print("Names match: " .. tostring(nameMatch)) -- true
 
-local exactMatch = Inventory.CompareItems(item1, item2, true)
+local exactMatch = Bridge.Inventory.CompareItems(item1, item2, true)
 print("Exact match: " .. tostring(exactMatch)) -- false
 ```
 
@@ -459,7 +463,7 @@ print("Exact match: " .. tostring(exactMatch)) -- false
 -- Always clean metadata before storage
 local function StoreItem(itemData)
     if itemData.metadata then
-        itemData.metadata = Inventory.CleanMetadata(itemData.metadata)
+        itemData.metadata = Bridge.Inventory.CleanMetadata(itemData.metadata)
     end
     -- Store item...
 end
@@ -470,8 +474,8 @@ end
 -- Use shared weight calculation for consistency
 local function CheckInventorySpace(playerId, newItems)
     local currentItems = GetPlayerInventory(playerId)
-    local currentWeight = Inventory.CalculateWeight(currentItems)
-    local newWeight = Inventory.CalculateWeight(newItems)
+    local currentWeight = Bridge.Inventory.CalculateWeight(currentItems)
+    local newWeight = Bridge.Inventory.CalculateWeight(newItems)
     
     return (currentWeight + newWeight) <= Config.MaxWeight
 end
@@ -481,13 +485,13 @@ end
 ```lua
 -- Always validate items before processing
 local function ProcessItemData(itemData)
-    local isValid, error = Inventory.ValidateItemData(itemData)
+    local isValid, error = Bridge.Inventory.ValidateItemData(itemData)
     if not isValid then
         print("Invalid item data: " .. error)
         return false
     end
     
-    if not Inventory.IsValidItem(itemData.name) then
+    if not Bridge.Inventory.IsValidItem(itemData.name) then
         print("Unknown item: " .. itemData.name)
         return false
     end

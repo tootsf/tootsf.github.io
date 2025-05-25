@@ -68,7 +68,7 @@ Input Module
 
 ```lua
 -- Client Side
-local result = exports.community_bridge:ShowInput({
+local result = Bridge.Input.ShowInput({
     header = "Enter Name",
     placeholder = "Your name here...",
     maxLength = 50,
@@ -84,7 +84,7 @@ end
 
 ```lua
 -- Client Side
-local formData = exports.community_bridge:ShowInputForm({
+local formData = Bridge.Input.ShowInputForm({
     title = "Player Registration",
     fields = {
         {name = "firstName", label = "First Name", type = "text", required = true},
@@ -107,7 +107,7 @@ AddEventHandler('myresource:registerPlayer', function(formData)
     local src = source
     
     -- Validate input
-    local validation = exports.community_bridge:ValidateInputData(formData, {
+    local validation = Bridge.Input.ValidateInputData(formData, {
         firstName = {required = true, minLength = 2},
         age = {required = true, type = "number", min = 18},
         city = {required = true, enum = {"Los Santos", "Sandy Shores", "Paleto Bay"}}
@@ -116,10 +116,10 @@ AddEventHandler('myresource:registerPlayer', function(formData)
     if validation.valid then
         -- Process valid data
         SavePlayerData(src, formData)
-        exports.community_bridge:SendNotify(src, "Registration successful!", "success")
+        Bridge.Input.SendNotify(src, "Registration successful!", "success")
     else
         -- Handle validation errors
-        exports.community_bridge:SendNotify(src, validation.error, "error")
+        Bridge.Input.SendNotify(src, validation.error, "error")
     end
 end)
 ```
@@ -167,7 +167,7 @@ local customStyle = {
     borderRadius = "8px"
 }
 
-exports.community_bridge:ShowInput({
+Bridge.Input.ShowInput({
     header = "Styled Input",
     style = customStyle
 })
@@ -203,7 +203,7 @@ end
 ### 3. Error Handling
 ```lua
 -- Handle user cancellation gracefully
-local result = exports.community_bridge:ShowInput(inputConfig)
+local result = Bridge.Input.ShowInput(inputConfig)
 if result == nil then
     -- User cancelled - don't show error
     return
@@ -227,7 +227,9 @@ end
 
 ### Character Creation Form
 ```lua
-local characterData = exports.community_bridge:ShowInputForm({
+local Bridge = exports['community_bridge']:Bridge()
+
+local characterData = Bridge.Input.ShowInputForm({
     title = "Create Character",
     subtitle = "Fill in your character details",
     fields = {
@@ -246,7 +248,9 @@ local characterData = exports.community_bridge:ShowInputForm({
 
 ### Business Application
 ```lua
-local businessApp = exports.community_bridge:ShowInputForm({
+local Bridge = exports['community_bridge']:Bridge()
+
+local businessApp = Bridge.Input.ShowInputForm({
     title = "Business License Application",
     fields = {
         {name = "businessName", label = "Business Name", type = "text", required = true},

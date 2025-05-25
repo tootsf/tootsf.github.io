@@ -46,7 +46,7 @@ This module standardizes targeting interactions across various targeting resourc
 
 ```lua
 -- Client-side example: Add targeting to all vehicles
-exports.community_bridge:AddTargetModel(GetHashKey('adder'), {
+Bridge.Target.AddTargetModel(GetHashKey('adder'), {
     name = "vehicle_interaction",
     icon = "fas fa-car",
     label = "Vehicle Options",
@@ -72,7 +72,7 @@ exports.community_bridge:AddTargetModel(GetHashKey('adder'), {
                 }
             }
         }
-        exports.community_bridge:OpenContextMenu(options)
+        Bridge.Target.OpenContextMenu(options)
     end,
     canInteract = function(entity)
         -- Only show if player is near driver door
@@ -89,17 +89,17 @@ RegisterNetEvent('vehicle:toggleLock', function(netId)
     local vehicle = NetworkGetEntityFromNetworkId(netId)
     local playerId = source
     
-    if exports.community_bridge:IsVehicleOwner(playerId, vehicle) then
+    if Bridge.Target.IsVehicleOwner(playerId, vehicle) then
         local currentState = GetVehicleDoorLockStatus(vehicle)
         local newState = currentState == 1 and 2 or 1
         
         SetVehicleDoorsLocked(vehicle, newState)
-        exports.community_bridge:SendNotify(playerId, 
+        Bridge.Target.SendNotify(playerId, 
             newState == 2 and "Vehicle locked" or "Vehicle unlocked", 
             "success"
         )
     else
-        exports.community_bridge:SendNotify(playerId, "You don't own this vehicle", "error")
+        Bridge.Target.SendNotify(playerId, "You don't own this vehicle", "error")
     end
 end)
 ```
@@ -149,7 +149,7 @@ local atmModels = {
     "prop_atm_03"
 }
 
-exports.community_bridge:AddTargetModel(atmModels, {
+Bridge.Target.AddTargetModel(atmModels, {
     name = "use_atm",
     icon = "fas fa-credit-card", 
     label = "Use ATM",
@@ -167,7 +167,7 @@ exports.community_bridge:AddTargetModel(atmModels, {
 -- Server: Handle ATM usage
 RegisterNetEvent('banking:useATM', function()
     local playerId = source
-    local playerData = exports.community_bridge:GetPlayerData(playerId)
+    local playerData = Bridge.Target.GetPlayerData(playerId)
     
     -- Send banking data to client
     TriggerClientEvent('banking:openInterface', playerId, {
@@ -185,7 +185,7 @@ RegisterNetEvent('business:created', function(businessData)
     local playerId = source
     
     -- Owner targets
-    exports.community_bridge:RegisterPlayerTarget(playerId, {
+    Bridge.Target.RegisterPlayerTarget(playerId, {
         name = "business_owner_" .. businessData.id,
         coords = businessData.coords,
         options = {
@@ -205,7 +205,7 @@ RegisterNetEvent('business:created', function(businessData)
     })
     
     -- Customer targets (everyone else)
-    exports.community_bridge:RegisterGlobalTarget({
+    Bridge.Target.RegisterGlobalTarget({
         name = "business_customer_" .. businessData.id,
         coords = businessData.coords,
         options = {
@@ -226,7 +226,7 @@ end)
 ```lua
 -- Police-only targets
 local function SetupPoliceTargets(playerId)
-    exports.community_bridge:RegisterPlayerTarget(playerId, {
+    Bridge.Target.RegisterPlayerTarget(playerId, {
         name = "police_station",
         coords = vector3(441.0, -982.0, 30.0),
         options = {
@@ -242,7 +242,7 @@ local function SetupPoliceTargets(playerId)
                 label = "Access Armory",
                 serverEvent = "police:openArmory",
                 canInteract = function()
-                    return exports.community_bridge:IsOnDuty(PlayerId())
+                    return Bridge.Target.IsOnDuty(PlayerId())
                 end
             },
             {
@@ -261,7 +261,7 @@ RegisterNetEvent('job:setJob', function(job)
     if job == "police" then
         SetupPoliceTargets(playerId)
     else
-        exports.community_bridge:RemovePlayerTargets(playerId, "police_station")
+        Bridge.Target.RemovePlayerTargets(playerId, "police_station")
     end
 end)
 ```
@@ -274,7 +274,7 @@ RegisterNetEvent('heist:start', function(heistId)
     local heistData = Config.Heists[heistId]
     
     for i, location in pairs(heistData.locations) do
-        exports.community_bridge:RegisterGlobalTarget({
+        Bridge.Target.RegisterGlobalTarget({
             name = "heist_" .. heistId .. "_" .. i,
             coords = location.coords,
             size = vector3(2.0, 2.0, 2.0),
@@ -289,7 +289,7 @@ RegisterNetEvent('heist:start', function(heistId)
             },
             duration = heistData.duration, -- Auto-remove after time
             canInteract = function()
-                return exports.community_bridge:IsHeistMember(PlayerId(), heistId)
+                return Bridge.Target.IsHeistMember(PlayerId(), heistId)
             end
         })
     end
@@ -297,7 +297,7 @@ end)
 
 RegisterNetEvent('heist:end', function(heistId)
     -- Clean up heist targets
-    exports.community_bridge:RemoveGlobalTargets("heist_" .. heistId .. "_*")
+    Bridge.Target.RemoveGlobalTargets("heist_" .. heistId .. "_*")
 end)
 ```
 
@@ -333,7 +333,7 @@ Config.Target = {
 
 ```lua
 -- Generic shop targeting
-exports.community_bridge:AddTargetCoords(vector3(25.0, -1347.0, 29.0), {
+Bridge.Target.AddTargetCoords(vector3(25.0, -1347.0, 29.0), {
     name = "general_store",
     icon = "fas fa-store",
     label = "General Store",
@@ -348,7 +348,7 @@ exports.community_bridge:AddTargetCoords(vector3(25.0, -1347.0, 29.0), {
 
 ```lua
 -- Fuel pump targeting
-exports.community_bridge:AddTargetModel("prop_gas_pump_1a", {
+Bridge.Target.AddTargetModel("prop_gas_pump_1a", {
     name = "fuel_pump",
     icon = "fas fa-gas-pump",
     label = "Refuel Vehicle",
@@ -368,7 +368,7 @@ exports.community_bridge:AddTargetModel("prop_gas_pump_1a", {
 
 ```lua
 -- Job NPC targeting
-exports.community_bridge:AddTargetEntity(npcPed, {
+Bridge.Target.AddTargetEntity(npcPed, {
     name = "job_npc",
     icon = "fas fa-briefcase", 
     label = "Apply for Job",
@@ -407,7 +407,7 @@ Target specific entities by model or type:
 
 ```lua
 -- Target specific vehicle models
-Target.AddTargetModel({'adder', 'zentorno'}, {
+Bridge.Target.AddTargetModel({'adder', 'zentorno'}, {
     options = {
         {
             label = "Steal Supercar",
@@ -426,7 +426,7 @@ Create invisible interaction zones:
 
 ```lua
 -- Create a zone for a shop
-Target.AddBoxZone("general_store", vector3(25.7, -1347.3, 29.49), 2.0, 2.0, {
+Bridge.Target.AddBoxZone("general_store", vector3(25.7, -1347.3, 29.49), 2.0, 2.0, {
     name = "general_store",
     heading = 0,
     debugPoly = false,
@@ -451,7 +451,7 @@ Add interactions to NPCs:
 
 ```lua
 -- Target all NPCs with job restrictions
-Target.AddTargetModel({'s_m_y_cop_01'}, {
+Bridge.Target.AddTargetModel({'s_m_y_cop_01'}, {
     options = {
         {
             label = "Show Badge",
@@ -477,7 +477,9 @@ Target.AddTargetModel({'s_m_y_cop_01'}, {
 
 ### Conditional Interactions
 ```lua
-Target.AddTargetEntity(entity, {
+local Bridge = exports['community_bridge']:Bridge()
+
+Bridge.Target.AddTargetEntity(entity, {
     options = {
         {
             label = "Repair Vehicle",
@@ -498,7 +500,9 @@ Target.AddTargetEntity(entity, {
 
 ### Dynamic Options
 ```lua
-Target.AddTargetModel({'vehicle'}, {
+local Bridge = exports['community_bridge']:Bridge()
+
+Bridge.Target.AddTargetModel({'vehicle'}, {
     options = function(entity)
         local options = {}
         
@@ -525,7 +529,9 @@ Target.AddTargetModel({'vehicle'}, {
 
 ### Global Settings
 ```lua
-Target.SetGlobalOptions({
+local Bridge = exports['community_bridge']:Bridge()
+
+Bridge.Target.SetGlobalOptions({
     defaultDistance = 2.0,
     debugMode = false,
     enableOutline = true,
@@ -536,5 +542,5 @@ Target.SetGlobalOptions({
 ### Performance Optimization
 ```lua
 -- Disable targeting in certain areas for performance
-Target.AddDisabledZone("airport", vector3(-1037.0, -2737.0, 20.0), 500.0)
+Bridge.Target.AddDisabledZone("airport", vector3(-1037.0, -2737.0, 20.0), 500.0)
 ```

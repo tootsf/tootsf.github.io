@@ -9,7 +9,7 @@ nav_order: 1
 # Notify Server Functions
 {: .no_toc }
 
-Server-side functions for sending notifications to players across different notification systems.
+Server-side functions for sending notifications to players.
 
 ## Table of contents
 {: .no_toc .text-delta }
@@ -19,7 +19,7 @@ Server-side functions for sending notifications to players across different noti
 
 ---
 
-## Basic Notifications
+## Available Functions
 
 ### SendNotify
 {: .d-inline-block }
@@ -27,7 +27,7 @@ Server
 {: .label .label-purple }
 
 ```lua
-Notify.SendNotify(src, message, type, options)
+Bridge.Notify.SendNotify(src, message, _type, time)
 ```
 
 Sends a notification to a specific player.
@@ -35,22 +35,56 @@ Sends a notification to a specific player.
 **Parameters:**
 - `src` (number) - Player server ID
 - `message` (string) - Notification message
-- `type` (string) - Notification type ('success', 'error', 'warning', 'info')
-- `options` (table, optional) - Additional notification options
-
-**Returns:** 
-- `boolean` - Success status
+- `_type` (string, optional) - Notification type
+- `time` (number, optional) - Display duration in milliseconds
 
 **Example:**
 ```lua
--- Basic notifications
-Notify.SendNotify(playerId, "Welcome to the server!", "success")
-Notify.SendNotify(playerId, "You don't have enough money!", "error")
-Notify.SendNotify(playerId, "Your vehicle is low on fuel", "warning")
-Notify.SendNotify(playerId, "Press E to interact", "info")
+local Bridge = exports['community_bridge']:Bridge()
+
+-- Basic notification
+Bridge.Notify.SendNotify(playerId, "Welcome to the server!")
+
+-- Notification with type and time
+Bridge.Notify.SendNotify(playerId, "You don't have enough money!", "error", 5000)
+```
+
+---
+
+## Deprecated Functions
+
+{: .label .label-red }
+**Note:** The following functions are deprecated. Use the [HelpText module](../../helptext/) instead.
+
+### ShowHelpText (Deprecated)
+```lua
+Bridge.Notify.ShowHelpText(src, message, position)
+```
+
+### HideHelpText (Deprecated)
+```lua
+Bridge.Notify.HideHelpText(src)
+```
+
+---
+
+## Supported Notification Systems
+
+The community_bridge automatically detects and uses available notification systems:
+
+- **ox_lib** - Modern notification system
+- **mythic_notify** - Popular notification resource
+- **okokNotify** - Advanced notification system
+- **pNotify** - Classic notification system
+- **r_notify** - Simple notification system
+- **t-notify** - Themed notifications
+- **wasabi_notify** - Feature-rich notifications
+
+If no supported system is found, falls back to framework default notifications.
+Bridge.Notify.SendNotify(playerId, "Press E to interact", "info")
 
 -- With custom options
-Notify.SendNotify(playerId, "Processing payment...", "info", {
+Bridge.Notify.SendNotify(playerId, "Processing payment...", "info", {
     duration = 5000,
     position = "top-right",
     icon = "fas fa-credit-card"
@@ -65,7 +99,9 @@ Server
 {: .label .label-purple }
 
 ```lua
-Notify.SendNotifyAll(message, type, options)
+local Bridge = exports['community_bridge']:Bridge()
+
+Bridge.Notify.SendNotifyAll(message, type, options)
 ```
 
 Sends a notification to all online players.
@@ -78,11 +114,11 @@ Sends a notification to all online players.
 **Example:**
 ```lua
 -- Server announcements
-Notify.SendNotifyAll("Server restart in 10 minutes!", "warning")
-Notify.SendNotifyAll("New update has been installed!", "success")
+Bridge.Notify.SendNotifyAll("Server restart in 10 minutes!", "warning")
+Bridge.Notify.SendNotifyAll("New update has been installed!", "success")
 
 -- Event notifications
-Notify.SendNotifyAll("Double XP weekend has started!", "info", {
+Bridge.Notify.SendNotifyAll("Double XP weekend has started!", "info", {
     duration = 10000,
     icon = "fas fa-star"
 })
@@ -96,7 +132,9 @@ Server
 {: .label .label-purple }
 
 ```lua
-Notify.SendNotifyGroup(playerIds, message, type, options)
+local Bridge = exports['community_bridge']:Bridge()
+
+Bridge.Notify.SendNotifyGroup(playerIds, message, type, options)
 ```
 
 Sends a notification to a specific group of players.
@@ -111,11 +149,11 @@ Sends a notification to a specific group of players.
 ```lua
 -- Notify specific players
 local policeOfficers = GetPlayersWithJob("police")
-Notify.SendNotifyGroup(policeOfficers, "Bank robbery in progress!", "warning")
+Bridge.Notify.SendNotifyGroup(policeOfficers, "Bank robbery in progress!", "warning")
 
 -- Notify players in range
 local playersInRange = GetPlayersInRange(coords, 50.0)
-Notify.SendNotifyGroup(playersInRange, "Explosion detected nearby!", "error")
+Bridge.Notify.SendNotifyGroup(playersInRange, "Explosion detected nearby!", "error")
 ```
 
 ---
@@ -128,7 +166,9 @@ Server
 {: .label .label-purple }
 
 ```lua
-Notify.SendProgressNotify(src, id, message, progress, options)
+local Bridge = exports['community_bridge']:Bridge()
+
+Bridge.Notify.SendProgressNotify(src, id, message, progress, options)
 ```
 
 Sends or updates a progress notification.
@@ -146,16 +186,16 @@ Sends or updates a progress notification.
 **Example:**
 ```lua
 -- Start a progress notification
-local progressId = Notify.SendProgressNotify(playerId, "download", "Downloading files...", 0)
+local progressId = Bridge.Notify.SendProgressNotify(playerId, "download", "Downloading files...", 0)
 
 -- Update progress
 for i = 1, 100 do
-    Notify.SendProgressNotify(playerId, progressId, "Downloading: " .. i .. "%", i)
+    Bridge.Notify.SendProgressNotify(playerId, progressId, "Downloading: " .. i .. "%", i)
     Wait(50)
 end
 
 -- Complete progress
-Notify.SendProgressNotify(playerId, progressId, "Download complete!", 100, {
+Bridge.Notify.SendProgressNotify(playerId, progressId, "Download complete!", 100, {
     type = "success",
     autoClose = 3000
 })
@@ -169,7 +209,9 @@ Server
 {: .label .label-purple }
 
 ```lua
-Notify.SendRichNotify(src, data)
+local Bridge = exports['community_bridge']:Bridge()
+
+Bridge.Notify.SendRichNotify(src, data)
 ```
 
 Sends a rich notification with advanced formatting.
@@ -180,7 +222,9 @@ Sends a rich notification with advanced formatting.
 
 **Example:**
 ```lua
-Notify.SendRichNotify(playerId, {
+local Bridge = exports['community_bridge']:Bridge()
+
+Bridge.Notify.SendRichNotify(playerId, {
     title = "Bank Transfer",
     message = "You received $50,000 from John Doe",
     type = "success",
@@ -207,7 +251,9 @@ Server
 {: .label .label-purple }
 
 ```lua
-Notify.SendJobNotify(jobName, message, type, minGrade, options)
+local Bridge = exports['community_bridge']:Bridge()
+
+Bridge.Notify.SendJobNotify(jobName, message, type, minGrade, options)
 ```
 
 Sends a notification to all players with a specific job.
@@ -222,13 +268,13 @@ Sends a notification to all players with a specific job.
 **Example:**
 ```lua
 -- Notify all police officers
-Notify.SendJobNotify("police", "Backup requested at bank!", "warning")
+Bridge.Notify.SendJobNotify("police", "Backup requested at bank!", "warning")
 
 -- Notify only high-ranking police
-Notify.SendJobNotify("police", "New investigation assigned", "info", 3)
+Bridge.Notify.SendJobNotify("police", "New investigation assigned", "info", 3)
 
 -- Notify medical staff
-Notify.SendJobNotify("ambulance", "Mass casualty event reported", "error", 0, {
+Bridge.Notify.SendJobNotify("ambulance", "Mass casualty event reported", "error", 0, {
     sound = "emergency_alert"
 })
 ```
@@ -241,7 +287,9 @@ Server
 {: .label .label-purple }
 
 ```lua
-Notify.SendGangNotify(gangName, message, type, options)
+local Bridge = exports['community_bridge']:Bridge()
+
+Bridge.Notify.SendGangNotify(gangName, message, type, options)
 ```
 
 Sends a notification to all members of a specific gang.
@@ -254,8 +302,10 @@ Sends a notification to all members of a specific gang.
 
 **Example:**
 ```lua
-Notify.SendGangNotify("ballas", "Territory under attack!", "warning")
-Notify.SendGangNotify("families", "Gang meeting at the hideout", "info")
+local Bridge = exports['community_bridge']:Bridge()
+
+Bridge.Notify.SendGangNotify("ballas", "Territory under attack!", "warning")
+Bridge.Notify.SendGangNotify("families", "Gang meeting at the hideout", "info")
 ```
 
 ---
@@ -268,7 +318,9 @@ Server
 {: .label .label-purple }
 
 ```lua
-Notify.SendConditionalNotify(condition, playerIds, message, type, options)
+local Bridge = exports['community_bridge']:Bridge()
+
+Bridge.Notify.SendConditionalNotify(condition, playerIds, message, type, options)
 ```
 
 Sends notifications based on conditional logic.
@@ -283,7 +335,7 @@ Sends notifications based on conditional logic.
 **Example:**
 ```lua
 -- Notify players with low health
-Notify.SendConditionalNotify(
+Bridge.Notify.SendConditionalNotify(
     function(playerId)
         local health = GetEntityHealth(GetPlayerPed(playerId))
         return health < 50
@@ -294,7 +346,7 @@ Notify.SendConditionalNotify(
 )
 
 -- Dynamic messages based on player data
-Notify.SendConditionalNotify(
+Bridge.Notify.SendConditionalNotify(
     function(playerId)
         return Framework.GetMoney(playerId) > 1000000
     end,
@@ -317,7 +369,9 @@ Server
 {: .label .label-purple }
 
 ```lua
-Notify.ClearNotifications(src, type)
+local Bridge = exports['community_bridge']:Bridge()
+
+Bridge.Notify.ClearNotifications(src, type)
 ```
 
 Clears all notifications for a player.
@@ -329,10 +383,10 @@ Clears all notifications for a player.
 **Example:**
 ```lua
 -- Clear all notifications
-Notify.ClearNotifications(playerId)
+Bridge.Notify.ClearNotifications(playerId)
 
 -- Clear only error notifications
-Notify.ClearNotifications(playerId, "error")
+Bridge.Notify.ClearNotifications(playerId, "error")
 ```
 
 ---
@@ -343,7 +397,9 @@ Server
 {: .label .label-purple }
 
 ```lua
-Notify.SetNotificationSettings(src, settings)
+local Bridge = exports['community_bridge']:Bridge()
+
+Bridge.Notify.SetNotificationSettings(src, settings)
 ```
 
 Updates notification settings for a player.
@@ -355,7 +411,7 @@ Updates notification settings for a player.
 **Example:**
 ```lua
 -- Customize player notification preferences
-Notify.SetNotificationSettings(playerId, {
+Bridge.Notify.SetNotificationSettings(playerId, {
     position = "bottom-right",
     duration = 6000,
     soundEnabled = false,
@@ -375,11 +431,11 @@ AddEventHandler('framework:moneyChanged', function(playerId, newAmount, oldAmoun
     local difference = newAmount - oldAmount
     
     if difference > 0 then
-        Notify.SendNotify(playerId, 
+        Bridge.Notify.SendNotify(playerId, 
             "+" .. Framework.FormatMoney(difference) .. " (" .. reason .. ")", 
             "success")
     elseif difference < 0 then
-        Notify.SendNotify(playerId, 
+        Bridge.Notify.SendNotify(playerId, 
             Framework.FormatMoney(difference) .. " (" .. reason .. ")", 
             "error")
     end
@@ -390,7 +446,7 @@ RegisterNetEvent('inventory:itemAdded')
 AddEventHandler('inventory:itemAdded', function(playerId, item, count)
     local itemInfo = Inventory.GetItemInfo(item)
     if itemInfo then
-        Notify.SendNotify(playerId, 
+        Bridge.Notify.SendNotify(playerId, 
             "+" .. count .. "x " .. itemInfo.label, 
             "success")
     end
@@ -434,12 +490,12 @@ end
 local function SendSmartNotify(playerId, message, type)
     local lastNotify = GetLastNotification(playerId)
     
-    if lastNotify and lastNotify.type == type and 
-       (GetGameTimer() - lastNotify.time) < 2000 then
+    if lastNotify and lastBridge.Notify.type == type and 
+       (GetGameTimer() - lastBridge.Notify.time) < 2000 then
         -- Update existing notification instead of creating new one
-        Notify.UpdateNotification(lastNotify.id, message)
+        Bridge.Notify.UpdateNotification(lastBridge.Notify.id, message)
     else
-        Notify.SendNotify(playerId, message, type)
+        Bridge.Notify.SendNotify(playerId, message, type)
     end
 end
 ```
@@ -450,7 +506,7 @@ end
 local function SendLocalizedNotify(playerId, key, type, args)
     local playerLang = Framework.GetPlayerLanguage(playerId)
     local message = Locales.Get(playerLang, key, args)
-    Notify.SendNotify(playerId, message, type)
+    Bridge.Notify.SendNotify(playerId, message, type)
 end
 
 -- Usage

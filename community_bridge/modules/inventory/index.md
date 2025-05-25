@@ -50,16 +50,16 @@ local itemName = "water"
 local itemCount = 5
 
 -- Add item to player inventory
-if Inventory.AddItem(playerId, itemName, itemCount) then
+if Bridge.Inventory.AddItem(playerId, itemName, itemCount) then
     TriggerClientEvent('notify', playerId, "Added " .. itemCount .. " " .. itemName)
 else
     TriggerClientEvent('notify', playerId, "Inventory full!", "error")
 end
 
 -- Check if player has enough items
-local currentCount = Inventory.GetItemCount(playerId, itemName)
+local currentCount = Bridge.Inventory.GetItemCount(playerId, itemName)
 if currentCount >= 3 then
-    Inventory.RemoveItem(playerId, itemName, 3)
+    Bridge.Inventory.RemoveItem(playerId, itemName, 3)
     -- Process action
 end
 ```
@@ -84,7 +84,7 @@ Register custom items that work across all inventory systems:
 
 ```lua
 -- In your resource startup
-Inventory.RegisterItem("custom_item", {
+Bridge.Inventory.RegisterItem("custom_item", {
     label = "Custom Item",
     weight = 100,
     stack = true,
@@ -107,5 +107,5 @@ local metadata = {
     }
 }
 
-Inventory.AddItem(playerId, "weapon_pistol", 1, nil, metadata)
+Bridge.Inventory.AddItem(playerId, "weapon_pistol", 1, nil, metadata)
 ```

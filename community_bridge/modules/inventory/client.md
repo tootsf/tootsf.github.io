@@ -9,7 +9,7 @@ nav_order: 2
 # Inventory Client Functions
 {: .no_toc }
 
-Client-side functions for inventory UI management and local inventory operations.
+Client-side functions for inventory data retrieval and item information.
 
 ## Table of contents
 {: .no_toc .text-delta }
@@ -19,98 +19,148 @@ Client-side functions for inventory UI management and local inventory operations
 
 ---
 
-## Inventory Management
+## Item Information
 
-### OpenInventory
+### GetItemInfo
 {: .d-inline-block }
 Client
 {: .label .label-blue }
 
 ```lua
-Inventory.OpenInventory()
+Bridge.Inventory.GetItemInfo(item)
 ```
 
-Opens the player's main inventory interface.
+Returns detailed information about an item.
 
-**Example:**
-```lua
-RegisterCommand('inventory', function()
-    Inventory.OpenInventory()
-end, false)
-
-RegisterKeyMapping('inventory', 'Open Inventory', 'keyboard', 'TAB')
-```
-
----
-
-### CloseInventory
-{: .d-inline-block }
-Client
-{: .label .label-blue }
-
-```lua
-Inventory.CloseInventory()
-```
-
-Closes any open inventory interface.
-
-**Example:**
-```lua
-RegisterNetEvent('inventory:forceClose')
-AddEventHandler('inventory:forceClose', function()
-    Inventory.CloseInventory()
-end)
-```
-
----
-
-### IsInventoryOpen
-{: .d-inline-block }
-Client
-{: .label .label-blue }
-
-```lua
-Inventory.IsInventoryOpen()
-```
-
-Checks if any inventory interface is currently open.
+**Parameters:**
+- `item` (string) - Name of the item
 
 **Returns:** 
-- `boolean` - True if inventory is open
+- `table` - Item data containing name, label, stack, weight, description, image
 
 **Example:**
 ```lua
-if Inventory.IsInventoryOpen() then
-    -- Disable certain controls or features
-    DisableControlAction(0, 24, true) -- Disable attack
+local Bridge = exports['community_bridge']:Bridge()
+
+local itemInfo = Bridge.Inventory.GetItemInfo("water")
+if itemInfo then
+    print("Item: " .. itemInfo.label .. " - Weight: " .. itemInfo.weight)
+    local imageUrl = itemInfo.image or "default_placeholder.png"
 end
 ```
 
 ---
 
-## Item Display
-
-### GetItemImage
+### GetItemCount
 {: .d-inline-block }
 Client
 {: .label .label-blue }
 
 ```lua
-Inventory.GetItemImage(itemName)
+Bridge.Inventory.GetItemCount(item)
+```
+
+Returns the count of a specific item in the player's inventory.
+
+**Parameters:**
+- `item` (string) - Name of the item
+
+**Returns:** 
+- `number` - Count of the item (0 if not found)
+
+**Example:**
+```lua
+local Bridge = exports['community_bridge']:Bridge()
+
+local waterCount = Bridge.Inventory.GetItemCount("water")
+print("Player has " .. waterCount .. " water bottles")
+```
+
+---
+
+### HasItem
+{: .d-inline-block }
+Client
+{: .label .label-blue }
+
+```lua
+Bridge.Inventory.HasItem(item)
+```
+
+Checks if the player has a specific item in their inventory.
+
+**Parameters:**
+- `item` (string) - Name of the item
+
+**Returns:** 
+- `boolean` - True if the player has the item
+
+**Example:**
+```lua
+local Bridge = exports['community_bridge']:Bridge()
+
+if Bridge.Inventory.HasItem("driver_license") then
+    -- Player can drive
+    print("Player has a valid driver's license")
+else
+    -- Player cannot drive
+    TriggerEvent('notify', "You need a driver's license to drive!")
+end
+```
+
+---
+
+### GetPlayerInventory
+{: .d-inline-block }
+Client
+{: .label .label-blue }
+
+```lua
+Bridge.Inventory.GetPlayerInventory()
+```
+
+Returns the complete player inventory.
+
+**Returns:** 
+- `table` - Array of inventory items with format {name, label, count, slot, metadata}
+
+**Example:**
+```lua
+local Bridge = exports['community_bridge']:Bridge()
+
+local inventory = Bridge.Inventory.GetPlayerInventory()
+for slot, item in pairs(inventory) do
+    if item then
+        print("Slot " .. slot .. ": " .. item.name .. " x" .. item.count)
+    end
+end
+```
+
+---
+
+### GetImagePath
+{: .d-inline-block }
+Client
+{: .label .label-blue }
+
+```lua
+Bridge.Inventory.GetImagePath(item)
 ```
 
 Gets the image path for an item.
 
 **Parameters:**
-- `itemName` (string) - Name of the item
+- `item` (string) - Name of the item
 
 **Returns:** 
 - `string` - Image path or URL
 
 **Example:**
 ```lua
-local imagePath = Inventory.GetItemImage("water")
--- Returns: "nui://ox_inventory/web/images/water.png"
+local Bridge = exports['community_bridge']:Bridge()
+
+local imagePath = Bridge.Inventory.GetImagePath("water")
+-- Returns system-specific path like "nui://ox_inventory/web/images/water.png"
 
 SendNUIMessage({
     action = "showItem",
@@ -121,297 +171,117 @@ SendNUIMessage({
 
 ---
 
-### DisplayItemInfo
+## Shop Integration (ox_inventory only)
+
+### OpenShop
 {: .d-inline-block }
 Client
 {: .label .label-blue }
 
 ```lua
-Inventory.DisplayItemInfo(itemData)
+Bridge.Inventory.OpenShop(shopTitle, shopInventory)
 ```
 
-Displays detailed item information in a tooltip or popup.
+Opens a shop interface for the player. This function is only available when using ox_inventory.
 
 **Parameters:**
-- `itemData` (table) - Item data including name, label, description, metadata
+- `shopTitle` (string) - Title of the shop
+- `shopInventory` (table) - Shop inventory data
 
 **Example:**
 ```lua
-RegisterNetEvent('inventory:showItemDetails')
-AddEventHandler('inventory:showItemDetails', function(itemData)
-    Inventory.DisplayItemInfo({
-        name = itemData.name,
-        label = itemData.label,
-        description = itemData.description,
-        metadata = itemData.metadata,
-        durability = itemData.metadata?.durability
-    })
-end)
+local Bridge = exports['community_bridge']:Bridge()
+
+-- This will only work with ox_inventory
+Bridge.Inventory.OpenShop("General Store", {
+    { name = "water", price = 10 },
+    { name = "bread", price = 5 }
+})
 ```
 
 ---
 
-## Inventory Events
+## Utility Functions
 
-### Item Used Event
-```lua
-RegisterNetEvent('inventory:itemUsed')
-AddEventHandler('inventory:itemUsed', function(itemName, metadata)
-    -- Handle item usage effects client-side
-    if itemName == "health_potion" then
-        -- Play healing animation
-        local playerPed = PlayerPedId()
-        TaskPlayAnim(playerPed, "mp_player_intdrink", "loop_bottle", 8.0, -8.0, 3000, 0, 0, false, false, false)
-        
-        -- Show visual effects
-        TriggerEvent('effects:showHeal')
-    end
-end)
-```
-
-### Inventory Updated Event
-```lua
-RegisterNetEvent('inventory:updated')
-AddEventHandler('inventory:updated', function(inventoryData)
-    -- Update UI when inventory changes
-    SendNUIMessage({
-        action = "updateInventory",
-        inventory = inventoryData
-    })
-end)
-```
-
----
-
-## Drag and Drop
-
-### StartDrag
+### StripPNG
 {: .d-inline-block }
 Client
 {: .label .label-blue }
 
 ```lua
-Inventory.StartDrag(fromSlot, itemData)
+Bridge.Inventory.StripPNG(item)
 ```
 
-Initiates drag operation for an inventory item.
+Utility function to remove .png extension from item names.
 
 **Parameters:**
-- `fromSlot` (number) - Source slot number
-- `itemData` (table) - Item being dragged
+- `item` (string) - Item name potentially with .png extension
+
+**Returns:** 
+- `string` - Item name without .png extension
 
 **Example:**
 ```lua
--- Called from NUI when starting to drag an item
-RegisterNUICallback('startDrag', function(data, cb)
-    Inventory.StartDrag(data.slot, data.item)
-    cb('ok')
-end)
-```
+local Bridge = exports['community_bridge']:Bridge()
 
----
-
-### CompleteDrop
-{: .d-inline-block }
-Client
-{: .label .label-blue }
-
-```lua
-Inventory.CompleteDrop(toSlot, fromSlot)
-```
-
-Completes a drag and drop operation.
-
-**Parameters:**
-- `toSlot` (number) - Destination slot
-- `fromSlot` (number) - Source slot
-
-**Example:**
-```lua
-RegisterNUICallback('dropItem', function(data, cb)
-    if Inventory.CompleteDrop(data.toSlot, data.fromSlot) then
-        cb('success')
-    else
-        cb('error')
-    end
-end)
-```
-
----
-
-## Hotbar Management
-
-### UpdateHotbar
-{: .d-inline-block }
-Client
-{: .label .label-blue }
-
-```lua
-Inventory.UpdateHotbar(hotbarData)
-```
-
-Updates the hotbar with new item data.
-
-**Parameters:**
-- `hotbarData` (table) - Array of hotbar items
-
-**Example:**
-```lua
-RegisterNetEvent('inventory:updateHotbar')
-AddEventHandler('inventory:updateHotbar', function(hotbarData)
-    Inventory.UpdateHotbar(hotbarData)
-    
-    -- Update HUD hotbar display
-    SendNUIMessage({
-        action = "updateHotbar",
-        items = hotbarData
-    })
-end)
-```
-
----
-
-### UseHotbarSlot
-{: .d-inline-block }
-Client
-{: .label .label-blue }
-
-```lua
-Inventory.UseHotbarSlot(slot)
-```
-
-Uses an item from a specific hotbar slot.
-
-**Parameters:**
-- `slot` (number) - Hotbar slot number (1-5)
-
-**Example:**
-```lua
--- Register hotbar keybinds
-for i = 1, 5 do
-    RegisterCommand('hotbar' .. i, function()
-        Inventory.UseHotbarSlot(i)
-    end, false)
-    
-    RegisterKeyMapping('hotbar' .. i, 'Use Hotbar Slot ' .. i, 'keyboard', i)
-end
-```
-
----
-
-## Animation Integration
-
-### PlayUseAnimation
-{: .d-inline-block }
-Client
-{: .label .label-blue }
-
-```lua
-Inventory.PlayUseAnimation(itemName, animationData)
-```
-
-Plays an animation when using an item.
-
-**Parameters:**
-- `itemName` (string) - Name of the item being used
-- `animationData` (table) - Animation dictionary and name
-
-**Example:**
-```lua
-RegisterNetEvent('inventory:playAnimation')
-AddEventHandler('inventory:playAnimation', function(itemName)
-    local animations = {
-        water = {dict = "mp_player_intdrink", anim = "loop_bottle"},
-        burger = {dict = "mp_player_inteat@burger", anim = "mp_player_int_eat_burger"},
-        cigarette = {dict = "mp_player_int_uppercut", anim = "mp_player_int_uppercut"}
-    }
-    
-    local anim = animations[itemName]
-    if anim then
-        Inventory.PlayUseAnimation(itemName, anim)
-    end
-end)
-```
-
----
-
-## NUI Callbacks
-
-### Inventory Actions
-```lua
--- Handle inventory UI actions
-RegisterNUICallback('useItem', function(data, cb)
-    TriggerServerEvent('inventory:useItem', data.slot, data.item)
-    cb('ok')
-end)
-
-RegisterNUICallback('dropItem', function(data, cb)
-    TriggerServerEvent('inventory:dropItem', data.slot, data.amount)
-    cb('ok')
-end)
-
-RegisterNUICallback('giveItem', function(data, cb)
-    local closestPlayer = GetClosestPlayer()
-    if closestPlayer then
-        TriggerServerEvent('inventory:giveItem', closestPlayer, data.slot, data.amount)
-        cb('ok')
-    else
-        cb('error')
-    end
-end)
+local cleanName = Bridge.Inventory.StripPNG("water.png")
+-- Returns: "water"
 ```
 
 ---
 
 ## Best Practices
 
-### Performance Optimization
-```lua
--- Debounce rapid inventory updates
-local lastUpdate = 0
-RegisterNetEvent('inventory:clientUpdate')
-AddEventHandler('inventory:clientUpdate', function(data)
-    local now = GetGameTimer()
-    if now - lastUpdate < 100 then return end -- Limit to 10 updates per second
-    lastUpdate = now
-    
-    -- Process update
-    Inventory.UpdateDisplay(data)
-end)
-```
-
 ### Error Handling
 ```lua
+local Bridge = exports['community_bridge']:Bridge()
+
 -- Always validate item data
-local function SafeUseItem(itemData)
-    if not itemData or not itemData.name then
-        Notify.SendNotify("Invalid item data", "error")
-        return false
+local function SafeGetItemInfo(itemName)
+    if not itemName or itemName == "" then
+        return nil
     end
     
-    if not itemData.useable then
-        Notify.SendNotify("This item cannot be used", "error")
-        return false
+    local itemInfo = Bridge.Inventory.GetItemInfo(itemName)
+    if not itemInfo or not itemInfo.name then
+        print("Invalid item: " .. itemName)
+        return nil
     end
     
-    return true
+    return itemInfo
 end
 ```
 
-### UI State Management
+### Performance Optimization
 ```lua
--- Track inventory state
-local inventoryState = {
-    isOpen = false,
-    currentTab = "main",
-    isDragging = false,
-    selectedSlot = nil
-}
+-- Cache inventory data when possible
+local inventoryCache = {}
+local lastUpdate = 0
 
-RegisterNetEvent('inventory:setState')
-AddEventHandler('inventory:setState', function(newState)
-    for key, value in pairs(newState) do
-        inventoryState[key] = value
+local function GetCachedInventory()
+    local now = GetGameTimer()
+    if now - lastUpdate > 1000 then -- Update every second
+        inventoryCache = Bridge.Inventory.GetPlayerInventory()
+        lastUpdate = now
+    end
+    return inventoryCache
+end
+```
+
+### Framework Compatibility
+```lua
+-- Check which inventory system is available
+local Bridge = exports['community_bridge']:Bridge()
+
+CreateThread(function()
+    Wait(1000) -- Wait for bridge to load
+    
+    local itemInfo = Bridge.Inventory.GetItemInfo("water")
+    if itemInfo and itemInfo.name then
+        print("Inventory bridge is working correctly")
+        print("Using system: " .. (itemInfo.image:match("nui://([^/]+)") or "default"))
+    else
+        print("Warning: Inventory bridge may not be configured correctly")
     end
 end)
 ```

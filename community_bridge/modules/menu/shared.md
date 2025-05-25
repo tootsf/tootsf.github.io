@@ -23,7 +23,7 @@ Shared utilities and configurations for the Menu module.
 
 ## Validation Functions
 
-### `exports.community_bridge:ValidateMenuOptions(options)`
+### `Bridge.Menu.ValidateMenuOptions(options)`
 
 Validates menu option structure and data types.
 
@@ -44,13 +44,13 @@ local menuOptions = {
     }
 }
 
-local isValid, errorMsg = exports.community_bridge:ValidateMenuOptions(menuOptions)
+local isValid, errorMsg = Bridge.Menu.ValidateMenuOptions(menuOptions)
 if not isValid then
     print("Menu validation failed:", errorMsg)
 end
 ```
 
-### `exports.community_bridge:ValidateInputFields(fields)`
+### `Bridge.Menu.ValidateInputFields(fields)`
 
 Validates input field configurations.
 
@@ -81,7 +81,7 @@ local inputFields = {
     }
 }
 
-local isValid, errors = exports.community_bridge:ValidateInputFields(inputFields)
+local isValid, errors = Bridge.Menu.ValidateInputFields(inputFields)
 if not isValid then
     for _, error in pairs(errors) do
         print("Validation error:", error)
@@ -91,7 +91,7 @@ end
 
 ## Formatting Functions
 
-### `exports.community_bridge:FormatMenuTitle(title, subtitle)`
+### `Bridge.Menu.FormatMenuTitle(title, subtitle)`
 
 Formats menu titles with consistent styling.
 
@@ -104,14 +104,16 @@ Formats menu titles with consistent styling.
 
 **Example:**
 ```lua
-local formattedTitle = exports.community_bridge:FormatMenuTitle(
+local Bridge = exports['community_bridge']:Bridge()
+
+local formattedTitle = Bridge.Menu.FormatMenuTitle(
     "Vehicle Dealership", 
     "Premium Cars & Motorcycles"
 )
 -- Returns: "Vehicle Dealership\n~s~Premium Cars & Motorcycles"
 ```
 
-### `exports.community_bridge:FormatPrice(amount, currency)`
+### `Bridge.Menu.FormatPrice(amount, currency)`
 
 Formats price displays in menus.
 
@@ -124,14 +126,16 @@ Formats price displays in menus.
 
 **Example:**
 ```lua
-local price = exports.community_bridge:FormatPrice(1500000, "$")
+local Bridge = exports['community_bridge']:Bridge()
+
+local price = Bridge.Menu.FormatPrice(1500000, "$")
 -- Returns: "$1,500,000"
 
-local euroPrice = exports.community_bridge:FormatPrice(50000, "€")
+local euroPrice = Bridge.Menu.FormatPrice(50000, "€")
 -- Returns: "€50,000"
 ```
 
-### `exports.community_bridge:FormatDescription(text, maxLength)`
+### `Bridge.Menu.FormatDescription(text, maxLength)`
 
 Formats and truncates description text.
 
@@ -144,7 +148,9 @@ Formats and truncates description text.
 
 **Example:**
 ```lua
-local desc = exports.community_bridge:FormatDescription(
+local Bridge = exports['community_bridge']:Bridge()
+
+local desc = Bridge.Menu.FormatDescription(
     "This is a very long description that should be truncated", 
     30
 )
@@ -153,7 +159,7 @@ local desc = exports.community_bridge:FormatDescription(
 
 ## Icon and Style Utilities
 
-### `exports.community_bridge:GetMenuIcon(iconType)`
+### `Bridge.Menu.GetMenuIcon(iconType)`
 
 Gets standardized icons for common menu elements.
 
@@ -165,13 +171,15 @@ Gets standardized icons for common menu elements.
 
 **Example:**
 ```lua
-local buyIcon = exports.community_bridge:GetMenuIcon("buy")        -- "fas fa-shopping-cart"
-local sellIcon = exports.community_bridge:GetMenuIcon("sell")      -- "fas fa-money-bill"
-local lockIcon = exports.community_bridge:GetMenuIcon("lock")      -- "fas fa-lock"
-local unlockIcon = exports.community_bridge:GetMenuIcon("unlock")  -- "fas fa-unlock"
+local Bridge = exports['community_bridge']:Bridge()
+
+local buyIcon = Bridge.Menu.GetMenuIcon("buy")        -- "fas fa-shopping-cart"
+local sellIcon = Bridge.Menu.GetMenuIcon("sell")      -- "fas fa-money-bill"
+local lockIcon = Bridge.Menu.GetMenuIcon("lock")      -- "fas fa-lock"
+local unlockIcon = Bridge.Menu.GetMenuIcon("unlock")  -- "fas fa-unlock"
 ```
 
-### `exports.community_bridge:GetMenuColor(colorType)`
+### `Bridge.Menu.GetMenuColor(colorType)`
 
 Gets standardized colors for menu elements.
 
@@ -183,15 +191,17 @@ Gets standardized colors for menu elements.
 
 **Example:**
 ```lua
-local successColor = exports.community_bridge:GetMenuColor("success")  -- "#4CAF50"
-local errorColor = exports.community_bridge:GetMenuColor("error")       -- "#F44336"
-local warningColor = exports.community_bridge:GetMenuColor("warning")   -- "#FF9800"
-local infoColor = exports.community_bridge:GetMenuColor("info")         -- "#2196F3"
+local Bridge = exports['community_bridge']:Bridge()
+
+local successColor = Bridge.Menu.GetMenuColor("success")  -- "#4CAF50"
+local errorColor = Bridge.Menu.GetMenuColor("error")       -- "#F44336"
+local warningColor = Bridge.Menu.GetMenuColor("warning")   -- "#FF9800"
+local infoColor = Bridge.Menu.GetMenuColor("info")         -- "#2196F3"
 ```
 
 ## Menu Templates
 
-### `exports.community_bridge:CreateShopTemplate(config)`
+### `Bridge.Menu.CreateShopTemplate(config)`
 
 Creates a standardized shop menu template.
 
@@ -206,7 +216,9 @@ Creates a standardized shop menu template.
 
 **Example:**
 ```lua
-local shopMenu = exports.community_bridge:CreateShopTemplate({
+local Bridge = exports['community_bridge']:Bridge()
+
+local shopMenu = Bridge.Menu.CreateShopTemplate({
     title = "24/7 Store",
     currency = "$",
     items = {
@@ -217,7 +229,7 @@ local shopMenu = exports.community_bridge:CreateShopTemplate({
 })
 ```
 
-### `exports.community_bridge:CreateVehicleTemplate(vehicles)`
+### `Bridge.Menu.CreateVehicleTemplate(vehicles)`
 
 Creates a vehicle selection menu template.
 
@@ -229,7 +241,9 @@ Creates a vehicle selection menu template.
 
 **Example:**
 ```lua
-local vehicleMenu = exports.community_bridge:CreateVehicleTemplate({
+local Bridge = exports['community_bridge']:Bridge()
+
+local vehicleMenu = Bridge.Menu.CreateVehicleTemplate({
     {
         model = "adder",
         name = "Truffade Adder",
@@ -249,7 +263,7 @@ local vehicleMenu = exports.community_bridge:CreateVehicleTemplate({
 })
 ```
 
-### `exports.community_bridge:CreateJobTemplate(jobActions)`
+### `Bridge.Menu.CreateJobTemplate(jobActions)`
 
 Creates a job-specific menu template.
 
@@ -261,7 +275,9 @@ Creates a job-specific menu template.
 
 **Example:**
 ```lua
-local policeMenu = exports.community_bridge:CreateJobTemplate({
+local Bridge = exports['community_bridge']:Bridge()
+
+local policeMenu = Bridge.Menu.CreateJobTemplate({
     {
         action = "cuff",
         label = "Handcuff Player",
@@ -285,7 +301,7 @@ local policeMenu = exports.community_bridge:CreateJobTemplate({
 
 ## Utility Functions
 
-### `exports.community_bridge:SortMenuOptions(options, sortBy)`
+### `Bridge.Menu.SortMenuOptions(options, sortBy)`
 
 Sorts menu options by specified criteria.
 
@@ -298,10 +314,12 @@ Sorts menu options by specified criteria.
 
 **Example:**
 ```lua
-local sortedOptions = exports.community_bridge:SortMenuOptions(menuOptions, "price")
+local Bridge = exports['community_bridge']:Bridge()
+
+local sortedOptions = Bridge.Menu.SortMenuOptions(menuOptions, "price")
 ```
 
-### `exports.community_bridge:FilterMenuOptions(options, filter)`
+### `Bridge.Menu.FilterMenuOptions(options, filter)`
 
 Filters menu options based on criteria.
 
@@ -314,12 +332,14 @@ Filters menu options based on criteria.
 
 **Example:**
 ```lua
-local affordableItems = exports.community_bridge:FilterMenuOptions(shopItems, function(item)
+local Bridge = exports['community_bridge']:Bridge()
+
+local affordableItems = Bridge.Menu.FilterMenuOptions(shopItems, function(item)
     return item.price <= playerMoney
 end)
 ```
 
-### `exports.community_bridge:MergeMenuOptions(option1, option2)`
+### `Bridge.Menu.MergeMenuOptions(option1, option2)`
 
 Merges two menu option sets.
 
@@ -332,7 +352,9 @@ Merges two menu option sets.
 
 **Example:**
 ```lua
-local allOptions = exports.community_bridge:MergeMenuOptions(basicItems, premiumItems)
+local Bridge = exports['community_bridge']:Bridge()
+
+local allOptions = Bridge.Menu.MergeMenuOptions(basicItems, premiumItems)
 ```
 
 ## Configuration Constants
@@ -412,7 +434,7 @@ MenuErrors = {
 
 ## Helper Functions
 
-### `exports.community_bridge:IsMenuDataValid(data)`
+### `Bridge.Menu.IsMenuDataValid(data)`
 
 Quick validation check for menu data.
 
@@ -422,14 +444,14 @@ Quick validation check for menu data.
 **Returns:**
 - `boolean`: True if data is valid
 
-### `exports.community_bridge:GetDefaultMenuStyle()`
+### `Bridge.Menu.GetDefaultMenuStyle()`
 
 Gets default styling configuration.
 
 **Returns:**
 - `table`: Default style settings
 
-### `exports.community_bridge:ConvertLegacyMenu(legacyData)`
+### `Bridge.Menu.ConvertLegacyMenu(legacyData)`
 
 Converts old menu format to new standard.
 
@@ -472,7 +494,7 @@ local function CreateSafeMenu(title, items)
     -- Format and validate each item
     local formattedItems = {}
     for _, item in pairs(items) do
-        local isValid, error = exports.community_bridge:ValidateMenuOptions({item})
+        local isValid, error = Bridge.Menu.ValidateMenuOptions({item})
         if isValid then
             table.insert(formattedItems, item)
         else
@@ -485,7 +507,7 @@ local function CreateSafeMenu(title, items)
     end
     
     return {
-        title = exports.community_bridge:FormatMenuTitle(title),
+        title = Bridge.Menu.FormatMenuTitle(title),
         options = formattedItems
     }
 end

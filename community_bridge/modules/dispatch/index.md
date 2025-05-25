@@ -225,7 +225,7 @@ Blip management for incidents, units, and facilities on the player map.
 
 ```lua
 -- Create a 911 call
-exports.community_bridge:Create911Call(source, {
+Bridge.Dispatch.Create911Call(source, {
     type = 'robbery',
     location = GetEntityCoords(PlayerPedId()),
     description = 'Armed robbery in progress at convenience store',
@@ -237,16 +237,16 @@ exports.community_bridge:Create911Call(source, {
 })
 
 -- Assign unit to incident
-exports.community_bridge:AssignUnit(incidentId, unitId, 'primary')
+Bridge.Dispatch.AssignUnit(incidentId, unitId, 'primary')
 
 -- Update unit status
-exports.community_bridge:SetUnitStatus(unitId, 'responding')
+Bridge.Dispatch.SetUnitStatus(unitId, 'responding')
 
 -- Send dispatch message
-exports.community_bridge:SendDispatchMessage(unitId, 'Respond to 123 Main St for armed robbery call')
+Bridge.Dispatch.SendDispatchMessage(unitId, 'Respond to 123 Main St for armed robbery call')
 
 -- Check available units
-local availableUnits = exports.community_bridge:GetAvailableUnits('police')
+local availableUnits = Bridge.Dispatch.GetAvailableUnits('police')
 ```
 
 ---

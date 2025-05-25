@@ -11,44 +11,36 @@ permalink: /community_bridge/modules/menu/server/
 # Menu Module - Server Functions
 {: .no_toc }
 
-Server-side functions for managing menu data and triggers.
-
-## Table of contents
-{: .no_toc .text-delta }
-
-1. TOC
-{:toc}
+The menu module in community_bridge does not provide any server-side functions.
 
 ---
 
-## Menu Trigger Functions
+## Available Functions
 
-### `exports.community_bridge:TriggerClientMenu(playerId, menuType, options)`
+**None** - The menu module only provides client-side functionality.
 
-Triggers a menu to open on a specific client.
+All menu operations are handled client-side using the `Menu.Open()` function. 
 
-**Parameters:**
-- `playerId` (number): Target player's server ID
-- `menuType` (string): Type of menu ("context", "list", "input", "confirm")
-- `options` (table): Menu configuration
+For server-to-client menu triggers, use standard FiveM events:
 
-**Returns:**
-- `boolean`: Success status
-
-**Example:**
 ```lua
--- Trigger a shop menu for a player
-local shopOptions = {
-    title = "General Store",
-    options = {
-        {
-            title = "Water Bottle",
-            description = "Refreshing water",
-            price = 50,
-            item = "water"
-        },
-        {
-            title = "Sandwich",
+-- Server-side: Trigger a menu on a specific client
+TriggerClientEvent('your_script:openMenu', playerId, menuData)
+```
+
+```lua
+-- Client-side: Handle the menu trigger
+RegisterNetEvent('your_script:openMenu', function(menuData)
+    Menu.Open(menuData)
+end)
+```
+
+---
+
+## Related Documentation
+
+- [Menu Client Functions](../client/) - Client-side menu functions
+- [Menu Examples](../../examples/) - Usage examples
             description = "Filling meal",
             price = 100,
             item = "sandwich"
@@ -56,10 +48,10 @@ local shopOptions = {
     }
 }
 
-exports.community_bridge:TriggerClientMenu(playerId, "list", shopOptions)
+Bridge.Menu.TriggerClientMenu(playerId, "list", shopOptions)
 ```
 
-### `exports.community_bridge:TriggerMenuForAll(menuType, options)`
+### `Bridge.Menu.TriggerMenuForAll(menuType, options)`
 
 Triggers a menu for all online players.
 
@@ -73,7 +65,7 @@ Triggers a menu for all online players.
 **Example:**
 ```lua
 -- Emergency notification menu for all players
-exports.community_bridge:TriggerMenuForAll("confirm", {
+Bridge.Menu.TriggerMenuForAll("confirm", {
     title = "Server Restart",
     description = "Server will restart in 5 minutes. Save your progress!",
     onConfirm = function()
@@ -84,7 +76,7 @@ exports.community_bridge:TriggerMenuForAll("confirm", {
 
 ## Data Management Functions
 
-### `exports.community_bridge:GetMenuData(menuId)`
+### `Bridge.Menu.GetMenuData(menuId)`
 
 Retrieves stored menu data by ID.
 
@@ -96,14 +88,16 @@ Retrieves stored menu data by ID.
 
 **Example:**
 ```lua
-local vehicleData = exports.community_bridge:GetMenuData("dealership_vehicles")
+local Bridge = exports['community_bridge']:Bridge()
+
+local vehicleData = Bridge.Menu.GetMenuData("dealership_vehicles")
 if vehicleData then
     -- Use cached menu data
     print("Found", #vehicleData.vehicles, "vehicles")
 end
 ```
 
-### `exports.community_bridge:SetMenuData(menuId, data)`
+### `Bridge.Menu.SetMenuData(menuId, data)`
 
 Stores menu data with a unique identifier.
 
@@ -119,13 +113,13 @@ Stores menu data with a unique identifier.
 -- Cache expensive database query results
 local vehicleData = MySQL.query.await('SELECT * FROM vehicles WHERE dealership = ?', {dealershipId})
 
-exports.community_bridge:SetMenuData("dealership_" .. dealershipId, {
+Bridge.Menu.SetMenuData("dealership_" .. dealershipId, {
     vehicles = vehicleData,
     lastUpdated = os.time()
 })
 ```
 
-### `exports.community_bridge:ClearMenuData(menuId)`
+### `Bridge.Menu.ClearMenuData(menuId)`
 
 Clears stored menu data.
 
@@ -138,12 +132,12 @@ Clears stored menu data.
 **Example:**
 ```lua
 -- Clear cached data when dealership inventory changes
-exports.community_bridge:ClearMenuData("dealership_" .. dealershipId)
+Bridge.Menu.ClearMenuData("dealership_" .. dealershipId)
 ```
 
 ## Permission Functions
 
-### `exports.community_bridge:CheckMenuPermission(playerId, menuId)`
+### `Bridge.Menu.CheckMenuPermission(playerId, menuId)`
 
 Checks if a player has permission to access a specific menu.
 
@@ -159,16 +153,16 @@ Checks if a player has permission to access a specific menu.
 RegisterNetEvent('openAdminMenu', function()
     local playerId = source
     
-    if exports.community_bridge:CheckMenuPermission(playerId, "admin_panel") then
+    if Bridge.Menu.CheckMenuPermission(playerId, "admin_panel") then
         -- Open admin menu
         TriggerClientEvent('community_bridge:openMenu', playerId, adminMenuData)
     else
-        exports.community_bridge:SendNotify(playerId, "Access denied", "error")
+        Bridge.Menu.SendNotify(playerId, "Access denied", "error")
     end
 end)
 ```
 
-### `exports.community_bridge:SetMenuPermission(playerId, menuId, hasPermission)`
+### `Bridge.Menu.SetMenuPermission(playerId, menuId, hasPermission)`
 
 Sets menu permission for a player.
 
@@ -183,15 +177,15 @@ Sets menu permission for a player.
 **Example:**
 ```lua
 -- Grant admin menu access
-exports.community_bridge:SetMenuPermission(playerId, "admin_panel", true)
+Bridge.Menu.SetMenuPermission(playerId, "admin_panel", true)
 
 -- Revoke access
-exports.community_bridge:SetMenuPermission(playerId, "admin_panel", false)
+Bridge.Menu.SetMenuPermission(playerId, "admin_panel", false)
 ```
 
 ## Dynamic Menu Generation
 
-### `exports.community_bridge:GenerateShopMenu(shopId, playerId)`
+### `Bridge.Menu.GenerateShopMenu(shopId, playerId)`
 
 Generates a shop menu based on current inventory and player data.
 
@@ -205,7 +199,7 @@ Generates a shop menu based on current inventory and player data.
 **Example:**
 ```lua
 local function GenerateWeaponShop(playerId)
-    local playerJob = exports.community_bridge:GetJob(playerId)
+    local playerJob = Bridge.Menu.GetJob(playerId)
     local weapons = {}
     
     -- Only show certain weapons to police
@@ -236,13 +230,13 @@ end
 RegisterNetEvent('weaponshop:open', function()
     local playerId = source
     local menuData = GenerateWeaponShop(playerId)
-    exports.community_bridge:TriggerClientMenu(playerId, "list", menuData)
+    Bridge.Menu.TriggerClientMenu(playerId, "list", menuData)
 end)
 ```
 
 ## Menu Analytics
 
-### `exports.community_bridge:LogMenuInteraction(playerId, menuId, action, data)`
+### `Bridge.Menu.LogMenuInteraction(playerId, menuId, action, data)`
 
 Logs menu interactions for analytics.
 
@@ -261,7 +255,7 @@ Logs menu interactions for analytics.
 RegisterNetEvent('shop:purchase', function(item, price)
     local playerId = source
     
-    exports.community_bridge:LogMenuInteraction(playerId, "general_store", "purchase", {
+    Bridge.Menu.LogMenuInteraction(playerId, "general_store", "purchase", {
         item = item,
         price = price,
         timestamp = os.time()
@@ -269,7 +263,7 @@ RegisterNetEvent('shop:purchase', function(item, price)
 end)
 ```
 
-### `exports.community_bridge:GetMenuStats(menuId, timeframe)`
+### `Bridge.Menu.GetMenuStats(menuId, timeframe)`
 
 Gets usage statistics for a menu.
 
@@ -282,7 +276,9 @@ Gets usage statistics for a menu.
 
 **Example:**
 ```lua
-local stats = exports.community_bridge:GetMenuStats("general_store", "week")
+local Bridge = exports['community_bridge']:Bridge()
+
+local stats = Bridge.Menu.GetMenuStats("general_store", "week")
 print("Store accessed", stats.opens, "times this week")
 print("Most popular item:", stats.topItem)
 ```
@@ -313,7 +309,7 @@ end)
 -- Menu validation
 RegisterNetEvent('community_bridge:validateMenuAccess', function(menuId)
     local playerId = source
-    local hasAccess = exports.community_bridge:CheckMenuPermission(playerId, menuId)
+    local hasAccess = Bridge.Menu.CheckMenuPermission(playerId, menuId)
     
     TriggerClientEvent('community_bridge:menuAccessResult', playerId, menuId, hasAccess)
 end)
@@ -321,7 +317,7 @@ end)
 
 ## Configuration Functions
 
-### `exports.community_bridge:SetMenuConfig(config)`
+### `Bridge.Menu.SetMenuConfig(config)`
 
 Updates menu system configuration.
 
@@ -330,7 +326,9 @@ Updates menu system configuration.
 
 **Example:**
 ```lua
-exports.community_bridge:SetMenuConfig({
+local Bridge = exports['community_bridge']:Bridge()
+
+Bridge.Menu.SetMenuConfig({
     defaultPosition = "center",
     animationSpeed = 250,
     closeOnSelect = true,
@@ -339,7 +337,7 @@ exports.community_bridge:SetMenuConfig({
 })
 ```
 
-### `exports.community_bridge:GetMenuConfig()`
+### `Bridge.Menu.GetMenuConfig()`
 
 Gets current menu configuration.
 
@@ -365,7 +363,9 @@ Gets current menu configuration.
 ### Error Handling
 
 ```lua
-local success = exports.community_bridge:TriggerClientMenu(playerId, "list", menuData)
+local Bridge = exports['community_bridge']:Bridge()
+
+local success = Bridge.Menu.TriggerClientMenu(playerId, "list", menuData)
 if not success then
     print("Failed to send menu to player:", playerId)
     -- Fallback or retry logic

@@ -1,158 +1,303 @@
----
-layout: default
-title: Client Functions
-parent: Framework
-grand_parent: Modules
-nav_order: 2
----
+# Framework Client
 
-# Framework Client Functions
-{: .no_toc }
+The framework client module provides functions for accessing player data and framework information on the client-side.
 
-Client-side functions for framework integration and player data management.
+## Functions
 
-## Table of contents
-{: .no_toc .text-delta }
+### GetFrameworkName()
 
-1. TOC
-{:toc}
+Returns the name of the currently active framework.
 
----
-
-## Overview
-
-Most framework operations are handled server-side for security and data integrity. However, the client-side provides some utility functions and event handlers for UI updates and local player data management.
-
-## Player Data
-
-### GetLocalPlayerData
-{: .d-inline-block }
-Client
-{: .label .label-blue }
-
-```lua
-Framework.GetLocalPlayerData()
-```
-
-Returns cached local player data (if available).
-
-**Returns:** 
-- `table|nil` - Player data or nil if not cached
+**Returns:**
+- `string`: The framework name ("qb-core", "es_extended", etc.)
 
 **Example:**
 ```lua
-local playerData = Framework.GetLocalPlayerData()
-if playerData then
-    print("Local player job: " .. playerData.job.name)
+local frameworkName = Framework.GetFrameworkName()
+print("Using framework: " .. frameworkName)
+```
+
+### GetPlayerData()
+
+Gets the complete player data from the framework.
+
+**Returns:**
+- `table`: Complete player data structure
+
+**Example:**
+```lua
+local playerData = Framework.GetPlayerData()
+print("Player name: " .. playerData.charinfo.firstname)
+```
+
+### GetFrameworkJobs()
+
+Returns a table of all available jobs in the framework.
+
+**Returns:**
+- `table`: Array of job objects with name, label, and grades
+
+**Example:**
+```lua
+local jobs = Framework.GetFrameworkJobs()
+for _, job in pairs(jobs) do
+    print("Job: " .. job.label .. " (" .. job.name .. ")")
 end
 ```
 
----
+### GetPlayerDob()
 
-### RefreshPlayerData
-{: .d-inline-block }
-Client
-{: .label .label-blue }
+Gets the player's date of birth.
 
-```lua
-Framework.RefreshPlayerData()
-```
-
-Requests updated player data from the server.
+**Returns:**
+- `string`: Date of birth string
 
 **Example:**
 ```lua
--- After a job change or other significant update
-Framework.RefreshPlayerData()
+local dob = Framework.GetPlayerDob()
+print("Player DOB: " .. dob)
 ```
 
----
+### GetPlayerMetaData(metadata)
+
+Gets specific metadata for the player.
+
+**Parameters:**
+- `metadata` (string): The metadata key to retrieve
+
+**Returns:**
+- `any`: The metadata value
+
+**Example:**
+```lua
+local hunger = Framework.GetPlayerMetaData("hunger")
+print("Player hunger: " .. hunger)
+```
+
+### Notify(message, type, time)
+
+Shows a notification to the player.
+
+**Parameters:**
+- `message` (string): The notification message
+- `type` (string): Notification type
+- `time` (number): Duration in milliseconds
+
+**Example:**
+```lua
+Framework.Notify("Hello player!", "success", 5000)
+```
+
+### ShowHelpText(message, position)
+
+Displays help text on screen.
+
+**Parameters:**
+- `message` (string): The help text message
+- `position` (any): Text position (implementation dependent)
+
+**Example:**
+```lua
+Framework.ShowHelpText("Press [E] to interact")
+```
+
+### HideHelpText()
+
+Hides the currently displayed help text.
+
+**Example:**
+```lua
+Framework.HideHelpText()
+```
+
+### GetItemInfo(item)
+
+Gets information about a specific item.
+
+**Parameters:**
+- `item` (string): Item name
+
+**Returns:**
+- `table`: Item information including name, label, weight, etc.
+
+**Example:**
+```lua
+local itemInfo = Framework.GetItemInfo("bread")
+print("Item label: " .. itemInfo.label)
+```
+
+### GetPlayerIdentifier()
+
+Gets the player's unique identifier (citizenid).
+
+**Returns:**
+- `string`: Player identifier
+
+**Example:**
+```lua
+local citizenId = Framework.GetPlayerIdentifier()
+print("Player ID: " .. citizenId)
+```
+
+### GetPlayerName()
+
+Gets the player's first and last name.
+
+**Returns:**
+- `string`: First name
+- `string`: Last name
+
+**Example:**
+```lua
+local firstname, lastname = Framework.GetPlayerName()
+print("Player: " .. firstname .. " " .. lastname)
+```
+
+### GetPlayerJob()
+
+**Deprecated** - Gets player job information.
+
+**Returns:**
+- `string`: Job name
+- `string`: Job label  
+- `string`: Grade name
+- `string`: Grade level
+
+**Example:**
+```lua
+local jobName, jobLabel, gradeName, gradeLevel = Framework.GetPlayerJob()
+print("Job: " .. jobLabel .. " (Grade: " .. gradeName .. ")")
+```
+
+### GetPlayerJobData()
+
+Gets comprehensive player job data.
+
+**Returns:**
+- `table`: Job data including name, label, grade, boss status, duty status
+
+**Example:**
+```lua
+local jobData = Framework.GetPlayerJobData()
+print("Job: " .. jobData.jobLabel)
+print("On duty: " .. tostring(jobData.onDuty))
+print("Is boss: " .. tostring(jobData.boss))
+```
+
+### HasItem(item)
+
+Checks if the player has a specific item.
+
+**Parameters:**
+- `item` (string): Item name to check
+
+**Returns:**
+- `boolean`: True if player has the item
+
+**Example:**
+```lua
+if Framework.HasItem("bread") then
+    print("Player has bread")
+end
+```
+
+### GetItemCount(item)
+
+Gets the total count of a specific item in player inventory.
+
+**Parameters:**
+- `item` (string): Item name
+
+**Returns:**
+- `number`: Total item count
+
+**Example:**
+```lua
+local breadCount = Framework.GetItemCount("bread")
+print("Player has " .. breadCount .. " bread")
+```
+
+### GetPlayerInventory()
+
+Gets the player's complete inventory.
+
+**Returns:**
+- `table`: Array of inventory items
+
+**Example:**
+```lua
+local inventory = Framework.GetPlayerInventory()
+for _, item in pairs(inventory) do
+    print("Item: " .. item.label .. " (Count: " .. item.count .. ")")
+end
+```
+
+### GetIsPlayerDead()
+
+Checks if the player is currently dead or in last stand.
+
+**Returns:**
+- `boolean`: True if player is dead/downed
+
+**Example:**
+```lua
+if Framework.GetIsPlayerDead() then
+    print("Player is dead or downed")
+end
+```
 
 ## Events
 
-### Framework Data Updates
+The framework module triggers several community_bridge events:
 
-The client automatically receives updates when player data changes on the server.
+### community_bridge:Client:OnPlayerLoaded
 
-**framework:updatePlayerData**
+Triggered when the player is loaded into the framework.
+
 ```lua
-RegisterNetEvent('framework:updatePlayerData')
-AddEventHandler('framework:updatePlayerData', function(playerData)
-    -- Handle updated player data
-    print("Player data updated:", json.encode(playerData))
+RegisterNetEvent('community_bridge:Client:OnPlayerLoaded')
+AddEventHandler('community_bridge:Client:OnPlayerLoaded', function()
+    print("Player loaded")
 end)
 ```
 
-**framework:updateMoney**
+### community_bridge:Client:OnPlayerUnload
+
+Triggered when the player is unloaded from the framework.
+
 ```lua
-RegisterNetEvent('framework:updateMoney')
-AddEventHandler('framework:updateMoney', function(money)
-    -- Handle money updates for UI
-    SendNUIMessage({
-        type = "updateMoney",
-        money = money
-    })
+RegisterNetEvent('community_bridge:Client:OnPlayerUnload')  
+AddEventHandler('community_bridge:Client:OnPlayerUnload', function()
+    print("Player unloaded")
 end)
 ```
 
-**framework:updateJob**
+### community_bridge:Client:OnPlayerJobUpdate
+
+Triggered when the player's job is updated.
+
 ```lua
-RegisterNetEvent('framework:updateJob')
-AddEventHandler('framework:updateJob', function(job)
-    -- Handle job updates
-    print("New job: " .. job.name .. " (Grade: " .. job.grade .. ")")
+RegisterNetEvent('community_bridge:Client:OnPlayerJobUpdate')
+AddEventHandler('community_bridge:Client:OnPlayerJobUpdate', function(name, label, gradeLabel, grade)
+    print("Job updated: " .. label .. " (Grade: " .. gradeLabel .. ")")
 end)
 ```
 
----
+## Framework Support
 
-## Integration Examples
+The module automatically detects and loads the appropriate framework:
+- QBCore (qb-core)
+- QBX Core (qbx_core)  
+- ESX (es_extended)
 
-### UI Integration
-```lua
--- Update HUD with player data
-RegisterNetEvent('framework:playerLoaded')
-AddEventHandler('framework:playerLoaded', function(playerData)
-    SendNUIMessage({
-        type = "playerLoaded",
-        data = {
-            name = playerData.name,
-            job = playerData.job,
-            money = playerData.money
-        }
-    })
-end)
-```
-
-### Framework-Specific Events
-```lua
--- ESX compatibility
-if GetResourceState('es_extended') == 'started' then
-    RegisterNetEvent('esx:playerLoaded')
-    AddEventHandler('esx:playerLoaded', function(playerData)
-        Framework.RefreshPlayerData()
-    end)
-end
-
--- QBCore compatibility
-if GetResourceState('qb-core') == 'started' then
-    RegisterNetEvent('QBCore:Client:OnPlayerLoaded')
-    AddEventHandler('QBCore:Client:OnPlayerLoaded', function()
-        Framework.RefreshPlayerData()
-    end)
-end
-```
-
----
-
-## Best Practices
+Functions will only work when a supported framework is running.
 
 ### Data Synchronization
 Always use server-side functions for authoritative data:
 
 ```lua
 -- ❌ Don't rely on cached client data for important operations
-local clientMoney = Framework.GetLocalPlayerData().money
+local clientMoney = Bridge.Framework.GetLocalPlayerData().money
 
 -- ✅ Request server verification for important operations
 TriggerServerEvent('framework:requestMoneyCheck', amount)
@@ -163,12 +308,12 @@ Set up event handlers early in your resource startup:
 
 ```lua
 Citizen.CreateThread(function()
-    while not Framework.IsPlayerLoaded() do
+    while not Bridge.Framework.IsPlayerLoaded() do
         Citizen.Wait(100)
     end
     
     -- Player is loaded, safe to use framework functions
-    local playerData = Framework.GetLocalPlayerData()
+    local playerData = Bridge.Framework.GetLocalPlayerData()
     -- Initialize UI or other systems
 end)
 ```

@@ -43,12 +43,12 @@ This module acts as an abstraction layer between your resource and the underlyin
 ```lua
 -- Server-side example
 local playerId = source
-local identifier = Framework.GetIdentifier(playerId)
-local playerMoney = Framework.GetMoney(playerId)
-local playerJob = Framework.GetJob(playerId)
+local identifier = Bridge.Framework.GetIdentifier(playerId)
+local playerMoney = Bridge.Framework.GetMoney(playerId)
+local playerJob = Bridge.Framework.GetJob(playerId)
 
 if playerMoney >= 1000 then
-    Framework.RemoveMoney(playerId, 1000)
+    Bridge.Framework.RemoveMoney(playerId, 1000)
     -- Give item or perform action
 end
 ```

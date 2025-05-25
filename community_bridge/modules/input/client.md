@@ -23,7 +23,7 @@ Client-side functions for creating and managing input dialogs and forms.
 
 ## Core Input Functions
 
-### `exports.community_bridge:ShowInput(config)`
+### `Bridge.Input.ShowInput(config)`
 
 Displays a single input dialog.
 
@@ -44,7 +44,7 @@ Displays a single input dialog.
 **Example:**
 ```lua
 -- Simple text input
-local playerName = exports.community_bridge:ShowInput({
+local playerName = Bridge.Input.ShowInput({
     title = "Character Creation",
     subtitle = "Enter your character name",
     placeholder = "John Doe",
@@ -63,7 +63,7 @@ if playerName then
 end
 ```
 
-### `exports.community_bridge:ShowInputForm(config)`
+### `Bridge.Input.ShowInputForm(config)`
 
 Displays a multi-field input form.
 
@@ -81,7 +81,7 @@ Displays a multi-field input form.
 **Example:**
 ```lua
 -- Character creation form
-local characterData = exports.community_bridge:ShowInputForm({
+local characterData = Bridge.Input.ShowInputForm({
     title = "Create Character",
     subtitle = "Fill in your character details",
     submitText = "Create Character",
@@ -132,7 +132,7 @@ if characterData then
 end
 ```
 
-### `exports.community_bridge:ShowNumberInput(config)`
+### `Bridge.Input.ShowNumberInput(config)`
 
 Specialized function for number inputs with validation.
 
@@ -152,7 +152,7 @@ Specialized function for number inputs with validation.
 **Example:**
 ```lua
 -- Money transfer input
-local amount = exports.community_bridge:ShowNumberInput({
+local amount = Bridge.Input.ShowNumberInput({
     title = "Transfer Money",
     subtitle = "Enter amount to transfer",
     min = 1,
@@ -169,7 +169,7 @@ end
 
 ## Advanced Input Functions
 
-### `exports.community_bridge:ShowSelectInput(config)`
+### `Bridge.Input.ShowSelectInput(config)`
 
 Displays a selection input with predefined options.
 
@@ -186,7 +186,7 @@ Displays a selection input with predefined options.
 **Example:**
 ```lua
 -- Job selection
-local selectedJob = exports.community_bridge:ShowSelectInput({
+local selectedJob = Bridge.Input.ShowSelectInput({
     title = "Choose Job",
     subtitle = "Select your profession",
     searchable = true,
@@ -203,7 +203,7 @@ if selectedJob then
 end
 ```
 
-### `exports.community_bridge:ShowDateInput(config)`
+### `Bridge.Input.ShowDateInput(config)`
 
 Displays a date picker input.
 
@@ -221,7 +221,7 @@ Displays a date picker input.
 **Example:**
 ```lua
 -- Appointment booking
-local appointmentDate = exports.community_bridge:ShowDateInput({
+local appointmentDate = Bridge.Input.ShowDateInput({
     title = "Book Appointment",
     subtitle = "Select appointment date",
     format = "MM/DD/YYYY",
@@ -234,7 +234,7 @@ if appointmentDate then
 end
 ```
 
-### `exports.community_bridge:ShowColorInput(config)`
+### `Bridge.Input.ShowColorInput(config)`
 
 Displays a color picker input.
 
@@ -250,7 +250,7 @@ Displays a color picker input.
 **Example:**
 ```lua
 -- Vehicle color selection
-local vehicleColor = exports.community_bridge:ShowColorInput({
+local vehicleColor = Bridge.Input.ShowColorInput({
     title = "Vehicle Color",
     subtitle = "Choose primary color",
     default = "#FF0000",
@@ -267,7 +267,7 @@ end
 
 ## Input Validation
 
-### `exports.community_bridge:SetValidationRule(name, rule)`
+### `Bridge.Input.SetValidationRule(name, rule)`
 
 Registers a custom validation rule.
 
@@ -278,7 +278,7 @@ Registers a custom validation rule.
 **Example:**
 ```lua
 -- Register email validation rule
-exports.community_bridge:SetValidationRule("email", function(value)
+Bridge.Input.SetValidationRule("email", function(value)
     local pattern = "^[%w%._%+%-]+@[%w%._%+%-]+%.%w+$"
     if string.match(value, pattern) then
         return true
@@ -288,7 +288,7 @@ exports.community_bridge:SetValidationRule("email", function(value)
 end)
 
 -- Use in input form
-local userData = exports.community_bridge:ShowInputForm({
+local userData = Bridge.Input.ShowInputForm({
     title = "Registration",
     fields = {
         {
@@ -301,7 +301,7 @@ local userData = exports.community_bridge:ShowInputForm({
 })
 ```
 
-### `exports.community_bridge:ValidateInput(value, rules)`
+### `Bridge.Input.ValidateInput(value, rules)`
 
 Manually validates input against rules.
 
@@ -315,7 +315,9 @@ Manually validates input against rules.
 
 **Example:**
 ```lua
-local isValid, error = exports.community_bridge:ValidateInput("test@email.com", {
+local Bridge = exports['community_bridge']:Bridge()
+
+local isValid, error = Bridge.Input.ValidateInput("test@email.com", {
     required = true,
     type = "email",
     maxLength = 50
@@ -328,7 +330,7 @@ end
 
 ## Input Templates
 
-### `exports.community_bridge:ShowPasswordChangeForm()`
+### `Bridge.Input.ShowPasswordChangeForm()`
 
 Predefined form for password changes.
 
@@ -337,13 +339,15 @@ Predefined form for password changes.
 
 **Example:**
 ```lua
-local passwordData = exports.community_bridge:ShowPasswordChangeForm()
+local Bridge = exports['community_bridge']:Bridge()
+
+local passwordData = Bridge.Input.ShowPasswordChangeForm()
 if passwordData then
     TriggerServerEvent('account:changePassword', passwordData.current, passwordData.new)
 end
 ```
 
-### `exports.community_bridge:ShowContactForm()`
+### `Bridge.Input.ShowContactForm()`
 
 Predefined contact information form.
 
@@ -352,13 +356,15 @@ Predefined contact information form.
 
 **Example:**
 ```lua
-local contactInfo = exports.community_bridge:ShowContactForm()
+local Bridge = exports['community_bridge']:Bridge()
+
+local contactInfo = Bridge.Input.ShowContactForm()
 if contactInfo then
     TriggerServerEvent('profile:updateContact', contactInfo)
 end
 ```
 
-### `exports.community_bridge:ShowPaymentForm(amount)`
+### `Bridge.Input.ShowPaymentForm(amount)`
 
 Predefined payment form with amount.
 
@@ -370,7 +376,9 @@ Predefined payment form with amount.
 
 **Example:**
 ```lua
-local paymentData = exports.community_bridge:ShowPaymentForm(500)
+local Bridge = exports['community_bridge']:Bridge()
+
+local paymentData = Bridge.Input.ShowPaymentForm(500)
 if paymentData then
     TriggerServerEvent('payment:process', paymentData)
 end
@@ -378,7 +386,7 @@ end
 
 ## Utility Functions
 
-### `exports.community_bridge:IsInputOpen()`
+### `Bridge.Input.IsInputOpen()`
 
 Checks if an input dialog is currently open.
 
@@ -387,13 +395,15 @@ Checks if an input dialog is currently open.
 
 **Example:**
 ```lua
-if not exports.community_bridge:IsInputOpen() then
+local Bridge = exports['community_bridge']:Bridge()
+
+if not Bridge.Input.IsInputOpen() then
     -- Safe to open new input
-    exports.community_bridge:ShowInput(config)
+    Bridge.Input.ShowInput(config)
 end
 ```
 
-### `exports.community_bridge:CloseInput()`
+### `Bridge.Input.CloseInput()`
 
 Programmatically closes the current input dialog.
 
@@ -401,11 +411,11 @@ Programmatically closes the current input dialog.
 ```lua
 -- Close input on specific event
 AddEventHandler('playerDied', function()
-    exports.community_bridge:CloseInput()
+    Bridge.Input.CloseInput()
 end)
 ```
 
-### `exports.community_bridge:SetInputStyle(style)`
+### `Bridge.Input.SetInputStyle(style)`
 
 Customizes input dialog appearance.
 
@@ -414,7 +424,9 @@ Customizes input dialog appearance.
 
 **Example:**
 ```lua
-exports.community_bridge:SetInputStyle({
+local Bridge = exports['community_bridge']:Bridge()
+
+Bridge.Input.SetInputStyle({
     backgroundColor = "#1a1a1a",
     textColor = "#ffffff",
     accentColor = "#007ACC",
@@ -479,7 +491,7 @@ end)
 -- Multi-step form with validation
 local function CreateCharacterWizard()
     -- Step 1: Basic info
-    local basicInfo = exports.community_bridge:ShowInputForm({
+    local basicInfo = Bridge.Input.ShowInputForm({
         title = "Character Creation - Step 1",
         subtitle = "Basic Information",
         fields = {
@@ -492,7 +504,7 @@ local function CreateCharacterWizard()
     if not basicInfo then return end
     
     -- Step 2: Appearance
-    local appearance = exports.community_bridge:ShowInputForm({
+    local appearance = Bridge.Input.ShowInputForm({
         title = "Character Creation - Step 2", 
         subtitle = "Appearance",
         fields = {
@@ -522,12 +534,12 @@ end
 -- Safe input with error handling
 local function SafeInput(config)
     local success, result = pcall(function()
-        return exports.community_bridge:ShowInput(config)
+        return Bridge.Input.ShowInput(config)
     end)
     
     if not success then
         print("Input error:", result)
-        exports.community_bridge:SendNotify("Input failed", "error")
+        Bridge.Input.SendNotify("Input failed", "error")
         return nil
     end
     

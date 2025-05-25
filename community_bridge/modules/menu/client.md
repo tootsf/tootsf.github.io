@@ -23,78 +23,235 @@ Client-side functions for creating and managing interactive menus.
 
 ## Core Menu Functions
 
-### `exports.community_bridge:OpenContextMenu(options)`
+### Open
+{: .d-inline-block }
+Client
+{: .label .label-blue }
 
-Opens a context menu with the specified options.
+```lua
+Menu.Open(data, useQb)
+```
+
+Opens a menu based on the provided configuration. This function can handle both ox_lib and qb-menu formats.
 
 **Parameters:**
-- `options` (table): Menu configuration
-  - `title` (string): Menu title
-  - `options` (table): Array of menu items
-  - `position` (string, optional): Menu position ("top-left", "top-right", etc.)
+- `data` (table) - Menu configuration data
+- `useQb` (boolean) - Whether to use QB menu syntax (true) or ox_lib syntax (false)
 
-**Returns:**
-- `boolean`: Success status
+**Returns:** 
+- `string` - Menu ID
 
-**Example:**
+**Example (ox_lib format):**
 ```lua
-local success = exports.community_bridge:OpenContextMenu({
-    title = "Vehicle Options",
+local Menu = exports['community_bridge']:Menu()
+
+local menuData = {
+    id = "test_menu",
+    title = "Test Menu",
     options = {
         {
-            title = "Lock/Unlock",
-            description = "Toggle vehicle lock",
-            icon = "fas fa-lock",
-            onSelect = function()
-                -- Toggle lock logic
-                print("Vehicle lock toggled")
+            title = "First Button",
+            description = "Open a secondary menu!",
+            icon = "fas fa-code-pull-request",
+            args = {
+                number = 1,
+            },
+            onSelect = function(selected, secondary, args)
+                print("Selected option 1")
             end
         },
         {
-            title = "Engine On/Off",
-            description = "Toggle engine state",
-            icon = "fas fa-power-off",
-            onSelect = function()
-                -- Engine toggle logic
-                print("Engine toggled")
+            title = "Second Button",
+            description = "Another option",
+            icon = "fas fa-code-pull-request",
+            args = {
+                number = 2,
+            },
+            onSelect = function(selected, secondary, args)
+                print("Selected option 2")
             end
         }
     }
-})
+}
+
+local menuId = Menu.Open(menuData, false) -- false for ox_lib format
 ```
 
-### `exports.community_bridge:OpenListMenu(options)`
-
-Opens a scrollable list menu.
-
-**Parameters:**
-- `options` (table): Menu configuration
-  - `title` (string): Menu title
-  - `subtitle` (string, optional): Menu subtitle
-  - `options` (table): Array of menu items
-  - `canClose` (boolean, optional): Whether menu can be closed with ESC
-
-**Returns:**
-- `boolean`: Success status
-
-**Example:**
+**Example (QB menu format):**
 ```lua
-exports.community_bridge:OpenListMenu({
-    title = "Vehicle Dealership",
-    subtitle = "Select a vehicle to purchase",
-    canClose = true,
+local Menu = exports['community_bridge']:Menu()
+
+local qbMenuData = {
+    {
+        header = 'QBCore Test Menu',
+        icon = 'fas fa-code',
+        isMenuHeader = true, -- Set to true to make a nonclickable title
+    },
+    {
+        header = 'First Button',
+        txt = 'Open a secondary menu!',
+        icon = 'fas fa-code-pull-request',
+        params = {
+            event = 'myResource:client:handleSelection',
+            args = {
+                number = 1,
+            }
+        }
+    },
+    {
+        header = 'Second Button',
+        txt = 'Another option',
+        icon = 'fas fa-code-pull-request',
+        params = {
+            event = 'myResource:client:handleSelection',
+            args = {
+                number = 2,
+            }
+        }
+    }
+}
+
+local menuId = Menu.Open(qbMenuData, true) -- true for QB menu format
+
+-- Handle the selection event
+RegisterNetEvent('myResource:client:handleSelection', function(args)
+    print("Selected option with number:", args.number)
+end)
+```
+
+---
+
+## Menu Data Formats
+
+### ox_lib Format
+```lua
+{
+    id = "unique_menu_id",        -- Optional, auto-generated if not provided
+    title = "Menu Title",
     options = {
         {
-            title = "Adder",
-            description = "High-end supercar",
-            price = 1000000,
-            rightLabel = "$1,000,000",
-            onSelect = function(data)
-                -- Purchase logic
-                TriggerServerEvent('dealership:buyVehicle', 'adder', data.price)
+            title = "Option Title",
+            description = "Option description",
+            icon = "fas fa-icon",     -- FontAwesome icon
+            args = {},                -- Custom data
+            onSelect = function(selected, secondary, args)
+                -- Handle selection
             end
-        },
-        {
+        }
+    }
+}
+```
+
+### QB Menu Format
+```lua
+{
+    {
+        header = 'Menu Title',
+        icon = 'fas fa-icon',
+        isMenuHeader = true,  -- Makes this a non-clickable header
+    },
+    {
+        header = 'Option Title',
+        txt = 'Option description',
+        icon = 'fas fa-icon',
+        disabled = false,     -- Optional, makes option non-clickable
+        hidden = false,       -- Optional, hides the option
+        params = {
+            isServer = false, -- Optional, specify if event is server-side
+            event = 'event:name',
+            args = {}         -- Custom data
+        }
+    }
+}
+```
+
+---
+
+## Events
+
+### MenuCallback Event
+```lua
+RegisterNetEvent('community_bridge:client:MenuCallback', function(args)
+    local id = args.id
+    local onSelect = args.onSelect
+    local args = args.args
+    -- Handle callback
+    onSelect(args)
+end)
+```
+
+---
+
+## Best Practices
+
+### Menu Creation
+```lua
+-- Always check if the menu system is available
+local Menu = exports['community_bridge']:Menu()
+if not Menu then
+    print("Community Bridge menu system not available")
+    return
+end
+
+-- Use meaningful IDs for menus you might need to reference later
+local menuData = {
+    id = "player_actions_menu",
+    title = "Player Actions",
+    options = {}
+}
+```
+
+### Error Handling
+```lua
+-- Validate menu data before opening
+local function ValidateMenuData(data, useQb)
+    if not data then
+        print("Menu data is required")
+        return false
+    end
+    
+    if useQb then
+        if not data[1] then
+            print("QB menu requires at least one option")
+            return false
+        end
+    else
+        if not data.options or #data.options == 0 then
+            print("ox_lib menu requires options array")
+            return false
+        end
+    end
+    
+    return true
+end
+
+local function SafeOpenMenu(data, useQb)
+    if ValidateMenuData(data, useQb) then
+        return Menu.Open(data, useQb)
+    end
+    return nil
+end
+```
+
+### Framework Detection
+```lua
+-- Automatically detect which menu format to use
+local function DetectMenuFormat()
+    if GetResourceState('ox_lib') == 'started' then
+        return false -- Use ox_lib format
+    elseif GetResourceState('qb-menu') == 'started' then
+        return true -- Use QB format
+    else
+        print("No supported menu system found")
+        return nil
+    end
+end
+
+local useQbFormat = DetectMenuFormat()
+if useQbFormat ~= nil then
+    Menu.Open(menuData, useQbFormat)
+end
+```
             title = "Zentorno",
             description = "Sports car",
             price = 725000,
@@ -109,7 +266,7 @@ exports.community_bridge:OpenListMenu({
 
 ## Input Functions
 
-### `exports.community_bridge:OpenInputDialog(options)`
+### `Bridge.Menu.OpenInputDialog(options)`
 
 Opens an input dialog for collecting user data.
 
@@ -124,7 +281,9 @@ Opens an input dialog for collecting user data.
 
 **Example:**
 ```lua
-exports.community_bridge:OpenInputDialog({
+local Bridge = exports['community_bridge']:Bridge()
+
+Bridge.Menu.OpenInputDialog({
     title = "Create Character",
     inputs = {
         {
@@ -158,7 +317,7 @@ exports.community_bridge:OpenInputDialog({
 })
 ```
 
-### `exports.community_bridge:OpenConfirmDialog(options)`
+### `Bridge.Menu.OpenConfirmDialog(options)`
 
 Opens a confirmation dialog.
 
@@ -174,7 +333,9 @@ Opens a confirmation dialog.
 
 **Example:**
 ```lua
-exports.community_bridge:OpenConfirmDialog({
+local Bridge = exports['community_bridge']:Bridge()
+
+Bridge.Menu.OpenConfirmDialog({
     title = "Delete Character",
     description = "Are you sure you want to delete this character? This action cannot be undone.",
     onConfirm = function()
@@ -188,7 +349,7 @@ exports.community_bridge:OpenConfirmDialog({
 
 ## Utility Functions
 
-### `exports.community_bridge:CloseMenu()`
+### `Bridge.Menu.CloseMenu()`
 
 Closes the currently open menu.
 
@@ -198,10 +359,10 @@ Closes the currently open menu.
 **Example:**
 ```lua
 -- Close menu programmatically
-exports.community_bridge:CloseMenu()
+Bridge.Menu.CloseMenu()
 ```
 
-### `exports.community_bridge:IsMenuOpen()`
+### `Bridge.Menu.IsMenuOpen()`
 
 Checks if a menu is currently open.
 
@@ -210,12 +371,14 @@ Checks if a menu is currently open.
 
 **Example:**
 ```lua
-if exports.community_bridge:IsMenuOpen() then
+local Bridge = exports['community_bridge']:Bridge()
+
+if Bridge.Menu.IsMenuOpen() then
     print("Menu is currently open")
 end
 ```
 
-### `exports.community_bridge:GetMenuType()`
+### `Bridge.Menu.GetMenuType()`
 
 Gets the current menu system being used.
 
@@ -224,7 +387,9 @@ Gets the current menu system being used.
 
 **Example:**
 ```lua
-local menuSystem = exports.community_bridge:GetMenuType()
+local Bridge = exports['community_bridge']:Bridge()
+
+local menuSystem = Bridge.Menu.GetMenuType()
 print("Using menu system:", menuSystem)
 ```
 
@@ -241,7 +406,7 @@ local mainMenu = {
         {
             title = "Settings",
             onSelect = function()
-                exports.community_bridge:OpenContextMenu({
+                Bridge.Menu.OpenContextMenu({
                     title = "Settings",
                     options = {
                         {
@@ -271,7 +436,7 @@ Update menu options dynamically:
 ```lua
 -- Example: Update inventory menu based on current items
 local function UpdateInventoryMenu()
-    local items = exports.community_bridge:GetPlayerItems()
+    local items = Bridge.Menu.GetPlayerItems()
     local menuOptions = {}
     
     for _, item in pairs(items) do
@@ -284,7 +449,7 @@ local function UpdateInventoryMenu()
         })
     end
     
-    exports.community_bridge:OpenListMenu({
+    Bridge.Menu.OpenListMenu({
         title = "Inventory",
         options = menuOptions
     })
@@ -332,8 +497,10 @@ end)
 ### Error Handling
 
 ```lua
-local success = exports.community_bridge:OpenContextMenu(menuOptions)
+local Bridge = exports['community_bridge']:Bridge()
+
+local success = Bridge.Menu.OpenContextMenu(menuOptions)
 if not success then
-    exports.community_bridge:SendNotify("Failed to open menu", "error")
+    Bridge.Menu.SendNotify("Failed to open menu", "error")
 end
 ```

@@ -23,7 +23,7 @@ Client-side functions for creating and managing target interactions.
 
 ## Core Target Functions
 
-### `exports.community_bridge:AddTargetEntity(entity, options)`
+### `Bridge.Target.AddTargetEntity(entity, options)`
 
 Adds targeting interaction to a specific entity.
 
@@ -45,7 +45,7 @@ Adds targeting interaction to a specific entity.
 -- Add target to a vehicle
 local vehicle = GetVehiclePedIsIn(PlayerPedId(), false)
 
-exports.community_bridge:AddTargetEntity(vehicle, {
+Bridge.Target.AddTargetEntity(vehicle, {
     name = "vehicle_options",
     icon = "fas fa-car",
     label = "Vehicle Options",
@@ -56,12 +56,12 @@ exports.community_bridge:AddTargetEntity(vehicle, {
     end,
     canInteract = function(entity)
         -- Only if player owns the vehicle
-        return exports.community_bridge:IsVehicleOwned(entity)
+        return Bridge.Target.IsVehicleOwned(entity)
     end
 })
 ```
 
-### `exports.community_bridge:AddTargetModel(models, options)`
+### `Bridge.Target.AddTargetModel(models, options)`
 
 Adds targeting interaction to specific entity models.
 
@@ -75,7 +75,7 @@ Adds targeting interaction to specific entity models.
 **Example:**
 ```lua
 -- Target ATM models
-exports.community_bridge:AddTargetModel({
+Bridge.Target.AddTargetModel({
     "prop_atm_01", 
     "prop_atm_02", 
     "prop_atm_03"
@@ -90,7 +90,7 @@ exports.community_bridge:AddTargetModel({
 })
 ```
 
-### `exports.community_bridge:AddTargetCoords(coords, options)`
+### `Bridge.Target.AddTargetCoords(coords, options)`
 
 Adds targeting interaction at specific coordinates.
 
@@ -107,7 +107,7 @@ Adds targeting interaction at specific coordinates.
 **Example:**
 ```lua
 -- Create target zone at coordinates
-exports.community_bridge:AddTargetCoords(vector3(195.0, -933.0, 30.0), {
+Bridge.Target.AddTargetCoords(vector3(195.0, -933.0, 30.0), {
     name = "clothing_store",
     icon = "fas fa-tshirt",
     label = "Browse Clothing",
@@ -119,7 +119,7 @@ exports.community_bridge:AddTargetCoords(vector3(195.0, -933.0, 30.0), {
 })
 ```
 
-### `exports.community_bridge:AddTargetZone(name, coords, width, length, options)`
+### `Bridge.Target.AddTargetZone(name, coords, width, length, options)`
 
 Adds a rectangular target zone.
 
@@ -139,7 +139,7 @@ Adds a rectangular target zone.
 **Example:**
 ```lua
 -- Create parking zone
-exports.community_bridge:AddTargetZone("parking_lot", vector3(200.0, -800.0, 31.0), 10.0, 15.0, {
+Bridge.Target.AddTargetZone("parking_lot", vector3(200.0, -800.0, 31.0), 10.0, 15.0, {
     name = "park_vehicle",
     icon = "fas fa-parking",
     label = "Park Vehicle",
@@ -160,7 +160,7 @@ exports.community_bridge:AddTargetZone("parking_lot", vector3(200.0, -800.0, 31.
 
 ## Management Functions
 
-### `exports.community_bridge:RemoveTargetEntity(entity, name)`
+### `Bridge.Target.RemoveTargetEntity(entity, name)`
 
 Removes targeting from a specific entity.
 
@@ -174,13 +174,13 @@ Removes targeting from a specific entity.
 **Example:**
 ```lua
 -- Remove specific target
-exports.community_bridge:RemoveTargetEntity(vehicle, "vehicle_options")
+Bridge.Target.RemoveTargetEntity(vehicle, "vehicle_options")
 
 -- Remove all targets from entity
-exports.community_bridge:RemoveTargetEntity(vehicle)
+Bridge.Target.RemoveTargetEntity(vehicle)
 ```
 
-### `exports.community_bridge:RemoveTargetModel(models, name)`
+### `Bridge.Target.RemoveTargetModel(models, name)`
 
 Removes targeting from entity models.
 
@@ -193,10 +193,12 @@ Removes targeting from entity models.
 
 **Example:**
 ```lua
-exports.community_bridge:RemoveTargetModel("prop_atm_01", "use_atm")
+local Bridge = exports['community_bridge']:Bridge()
+
+Bridge.Target.RemoveTargetModel("prop_atm_01", "use_atm")
 ```
 
-### `exports.community_bridge:RemoveTargetZone(name)`
+### `Bridge.Target.RemoveTargetZone(name)`
 
 Removes a target zone.
 
@@ -208,7 +210,9 @@ Removes a target zone.
 
 **Example:**
 ```lua
-exports.community_bridge:RemoveTargetZone("parking_lot")
+local Bridge = exports['community_bridge']:Bridge()
+
+Bridge.Target.RemoveTargetZone("parking_lot")
 ```
 
 ## Advanced Features
@@ -217,7 +221,7 @@ exports.community_bridge:RemoveTargetZone("parking_lot")
 
 ```lua
 -- Add multiple options to the same entity
-exports.community_bridge:AddTargetEntity(ped, {
+Bridge.Target.AddTargetEntity(ped, {
     {
         name = "talk",
         icon = "fas fa-comments",
@@ -234,7 +238,7 @@ exports.community_bridge:AddTargetEntity(ped, {
             TriggerEvent('npc:giveItem', entity)
         end,
         canInteract = function()
-            return exports.community_bridge:HasItems()
+            return Bridge.Target.HasItems()
         end
     }
 })
@@ -244,7 +248,7 @@ exports.community_bridge:AddTargetEntity(ped, {
 
 ```lua
 -- Job-restricted target
-exports.community_bridge:AddTargetModel("s_m_y_cop_01", {
+Bridge.Target.AddTargetModel("s_m_y_cop_01", {
     name = "police_interaction",
     icon = "fas fa-badge",
     label = "Police Menu",
@@ -252,7 +256,7 @@ exports.community_bridge:AddTargetModel("s_m_y_cop_01", {
         TriggerEvent('police:openMenu')
     end,
     canInteract = function()
-        local playerJob = exports.community_bridge:GetPlayerData().job.name
+        local playerJob = Bridge.Target.GetPlayerData().job.name
         return playerJob == "police"
     end
 })
@@ -262,7 +266,7 @@ exports.community_bridge:AddTargetModel("s_m_y_cop_01", {
 
 ```lua
 -- Different options based on distance
-exports.community_bridge:AddTargetEntity(vehicle, {
+Bridge.Target.AddTargetEntity(vehicle, {
     {
         name = "enter_vehicle",
         icon = "fas fa-door-open",
@@ -286,7 +290,7 @@ exports.community_bridge:AddTargetEntity(vehicle, {
 
 ## Utility Functions
 
-### `exports.community_bridge:IsTargetActive()`
+### `Bridge.Target.IsTargetActive()`
 
 Checks if targeting system is currently active.
 
@@ -295,12 +299,14 @@ Checks if targeting system is currently active.
 
 **Example:**
 ```lua
-if exports.community_bridge:IsTargetActive() then
+local Bridge = exports['community_bridge']:Bridge()
+
+if Bridge.Target.IsTargetActive() then
     print("Player is currently targeting")
 end
 ```
 
-### `exports.community_bridge:GetTargetEntity()`
+### `Bridge.Target.GetTargetEntity()`
 
 Gets the currently targeted entity.
 
@@ -309,13 +315,15 @@ Gets the currently targeted entity.
 
 **Example:**
 ```lua
-local target = exports.community_bridge:GetTargetEntity()
+local Bridge = exports['community_bridge']:Bridge()
+
+local target = Bridge.Target.GetTargetEntity()
 if target ~= 0 then
     print("Targeting entity:", target)
 end
 ```
 
-### `exports.community_bridge:SetTargetDistance(distance)`
+### `Bridge.Target.SetTargetDistance(distance)`
 
 Sets global targeting distance.
 
@@ -324,10 +332,12 @@ Sets global targeting distance.
 
 **Example:**
 ```lua
-exports.community_bridge:SetTargetDistance(5.0)
+local Bridge = exports['community_bridge']:Bridge()
+
+Bridge.Target.SetTargetDistance(5.0)
 ```
 
-### `exports.community_bridge:ToggleTargeting(enabled)`
+### `Bridge.Target.ToggleTargeting(enabled)`
 
 Enables or disables the targeting system.
 
@@ -337,10 +347,10 @@ Enables or disables the targeting system.
 **Example:**
 ```lua
 -- Disable targeting during cutscenes
-exports.community_bridge:ToggleTargeting(false)
+Bridge.Target.ToggleTargeting(false)
 
 -- Re-enable after cutscene
-exports.community_bridge:ToggleTargeting(true)
+Bridge.Target.ToggleTargeting(true)
 ```
 
 ## Event Handlers
@@ -379,7 +389,7 @@ AddEventHandler('community_bridge:canInteract', function(entity, option, callbac
     
     -- Check if player has required items
     if option.requiredItem then
-        canInteract = exports.community_bridge:HasItem(option.requiredItem)
+        canInteract = Bridge.Target.HasItem(option.requiredItem)
     end
     
     callback(canInteract)
@@ -392,7 +402,7 @@ end)
 
 ```lua
 -- Configure targeting behavior
-exports.community_bridge:SetTargetConfig({
+Bridge.Target.SetTargetConfig({
     defaultDistance = 2.0,
     enableOutline = true,
     outlineColor = {255, 255, 255, 255},
@@ -406,7 +416,7 @@ exports.community_bridge:SetTargetConfig({
 
 ```lua
 -- Customize target appearance
-exports.community_bridge:SetTargetStyle({
+Bridge.Target.SetTargetStyle({
     backgroundColor = "rgba(0, 0, 0, 0.8)",
     textColor = "#ffffff",
     iconColor = "#00ff00",
@@ -448,7 +458,7 @@ local function AddSafeTarget(entity, options)
         return false
     end
     
-    return exports.community_bridge:AddTargetEntity(entity, options)
+    return Bridge.Target.AddTargetEntity(entity, options)
 end
 ```
 
@@ -457,15 +467,15 @@ end
 ```lua
 -- Clean up targets when entity is deleted
 AddEventHandler('entityRemoved', function(entity)
-    exports.community_bridge:RemoveTargetEntity(entity)
+    Bridge.Target.RemoveTargetEntity(entity)
 end)
 
 -- Remove temporary targets after use
 local function AddTemporaryTarget(entity, options, duration)
-    exports.community_bridge:AddTargetEntity(entity, options)
+    Bridge.Target.AddTargetEntity(entity, options)
     
     SetTimeout(duration, function()
-        exports.community_bridge:RemoveTargetEntity(entity, options.name)
+        Bridge.Target.RemoveTargetEntity(entity, options.name)
     end)
 end
 ```

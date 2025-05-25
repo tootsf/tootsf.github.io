@@ -60,12 +60,39 @@ Helper modules for common development tasks and system integration.
 - **[Blip](blip/)** - Map marker and navigation system
 - **[Locales](locales/)** - Internationalization and language support
 - **[Math](math/)** - Mathematical operations and calculations
-- **[Weather](weather/)** - Weather system integration
-- **[Skills](skills/)** - Character skill and progression systems
-- **[Dispatch](dispatch/)** - Emergency services and dispatch systems
 - **[Phone](phone/)** - Communication and phone system integration
 - **[Version](version/)** - Version checking and update management
 - **[Accessibility](accessibility/)** - Accessibility features and compliance
+
+## Character & Progression
+{: .label .label-blue }
+
+Advanced character development and skill systems.
+
+- **[Skills](skills/)** - Character progression and skill systems
+  - [Client Functions](skills/client.md) - Skill interfaces and progression tracking
+  - [Server Functions](skills/server.md) - XP management and skill validation  
+  - [Shared Functions](skills/shared.md) - Skill calculations and utilities
+
+## Environmental Systems
+{: .label .label-purple }
+
+Weather and environmental control systems.
+
+- **[Weather](weather/)** - Dynamic weather and environmental effects
+  - [Client Functions](weather/client.md) - Weather effects and synchronization
+  - [Server Functions](weather/server.md) - Weather management and scheduling
+  - [Shared Functions](weather/shared.md) - Weather utilities and configurations
+
+## Emergency Services
+{: .label .label-red }
+
+Emergency dispatch and communication systems.
+
+- **[Dispatch](dispatch/)** - Emergency services dispatch and coordination
+  - [Client Functions](dispatch/client.md) - Dispatch interface and call management
+  - [Server Functions](dispatch/server.md) - Call coordination and automation
+  - [Shared Functions](dispatch/shared.md) - Dispatch utilities and configurations
 
 ---
 

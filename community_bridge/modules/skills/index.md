@@ -150,7 +150,7 @@ Works with all supported frameworks to access player data and save progression.
 
 ```lua
 -- Register a new skill
-exports.community_bridge:RegisterSkill('lockpicking', {
+Bridge.Skills.RegisterSkill('lockpicking', {
     name = 'Lockpicking',
     description = 'Ability to pick locks and bypass security',
     category = 'criminal',
@@ -160,16 +160,16 @@ exports.community_bridge:RegisterSkill('lockpicking', {
 })
 
 -- Add experience to a player's skill
-exports.community_bridge:AddSkillXP(source, 'lockpicking', 25)
+Bridge.Skills.AddSkillXP(source, 'lockpicking', 25)
 
 -- Check player's skill level
-local level = exports.community_bridge:GetSkillLevel(source, 'lockpicking')
+local level = Bridge.Skills.GetSkillLevel(source, 'lockpicking')
 if level >= 50 then
     -- Allow advanced lockpicking
 end
 
 -- Perform skill check
-local success = exports.community_bridge:SkillCheck(source, 'lockpicking', 'medium')
+local success = Bridge.Skills.SkillCheck(source, 'lockpicking', 'medium')
 if success then
     -- Successful skill check
 end

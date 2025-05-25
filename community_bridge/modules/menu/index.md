@@ -70,21 +70,21 @@ local menuOptions = {
     }
 }
 
-exports.community_bridge:OpenListMenu(menuOptions)
+Bridge.Menu.OpenListMenu(menuOptions)
 ```
 
 ```lua
 -- Server-side example
 RegisterNetEvent('shop:buyItem', function(item, price)
     local playerId = source
-    local playerMoney = exports.community_bridge:GetMoney(playerId, 'cash')
+    local playerMoney = Bridge.Menu.GetMoney(playerId, 'cash')
     
     if playerMoney >= price then
-        exports.community_bridge:RemoveMoney(playerId, 'cash', price)
-        exports.community_bridge:AddItem(playerId, item, 1)
-        exports.community_bridge:SendNotify(playerId, 'Purchase successful!', 'success')
+        Bridge.Menu.RemoveMoney(playerId, 'cash', price)
+        Bridge.Menu.AddItem(playerId, item, 1)
+        Bridge.Menu.SendNotify(playerId, 'Purchase successful!', 'success')
     else
-        exports.community_bridge:SendNotify(playerId, 'Not enough money!', 'error')
+        Bridge.Menu.SendNotify(playerId, 'Not enough money!', 'error')
     end
 end)
 ```
@@ -139,7 +139,7 @@ local function OpenShop(shopType)
         table.insert(menuOptions.options, {
             title = item.label,
             description = item.description,
-            rightLabel = exports.community_bridge:FormatPrice(item.price),
+            rightLabel = Bridge.Menu.FormatPrice(item.price),
             icon = item.icon,
             onSelect = function()
                 TriggerServerEvent('shop:purchase', shopType, item.name, item.price)
@@ -147,7 +147,7 @@ local function OpenShop(shopType)
         })
     end
     
-    exports.community_bridge:OpenListMenu(menuOptions)
+    Bridge.Menu.OpenListMenu(menuOptions)
 end
 
 -- Server: shops.lua
@@ -155,12 +155,12 @@ RegisterNetEvent('shop:purchase', function(shopType, itemName, price)
     local playerId = source
     
     -- Validate purchase
-    if exports.community_bridge:GetMoney(playerId, 'cash') >= price then
-        exports.community_bridge:RemoveMoney(playerId, 'cash', price)
-        exports.community_bridge:AddItem(playerId, itemName, 1)
-        exports.community_bridge:SendNotify(playerId, 'Item purchased!', 'success')
+    if Bridge.Menu.GetMoney(playerId, 'cash') >= price then
+        Bridge.Menu.RemoveMoney(playerId, 'cash', price)
+        Bridge.Menu.AddItem(playerId, itemName, 1)
+        Bridge.Menu.SendNotify(playerId, 'Item purchased!', 'success')
     else
-        exports.community_bridge:SendNotify(playerId, 'Insufficient funds!', 'error')
+        Bridge.Menu.SendNotify(playerId, 'Insufficient funds!', 'error')
     end
 end)
 ```
@@ -170,16 +170,16 @@ end)
 ```lua
 -- Generate job-specific menu based on player's role
 local function OpenJobMenu()
-    local playerJob = exports.community_bridge:GetJob(PlayerId())
+    local playerJob = Bridge.Menu.GetJob(PlayerId())
     local jobConfig = Config.JobMenus[playerJob]
     
     if not jobConfig then
-        exports.community_bridge:SendNotify('No job menu available', 'info')
+        Bridge.Menu.SendNotify('No job menu available', 'info')
         return
     end
     
-    local menuData = exports.community_bridge:CreateJobTemplate(jobConfig.actions)
-    exports.community_bridge:OpenContextMenu(menuData)
+    local menuData = Bridge.Menu.CreateJobTemplate(jobConfig.actions)
+    Bridge.Menu.OpenContextMenu(menuData)
 end
 ```
 
@@ -217,7 +217,7 @@ Config.MenuSettings = {
     }
 }
 
-Menu.Open('shop_menu', 'General Store', menuOptions)
+Bridge.Menu.Open('shop_menu', 'General Store', menuOptions)
 ```
 
 ## Menu Types
@@ -226,7 +226,9 @@ Menu.Open('shop_menu', 'General Store', menuOptions)
 Perfect for right-click interactions and quick actions:
 
 ```lua
-Menu.ShowContext({
+local Bridge = exports['community_bridge']:Bridge()
+
+Bridge.Menu.ShowContext({
     id = 'vehicle_menu',
     title = 'Vehicle Options',
     options = {
@@ -252,7 +254,9 @@ Menu.ShowContext({
 Great for longer lists with navigation:
 
 ```lua
-Menu.ShowList({
+local Bridge = exports['community_bridge']:Bridge()
+
+Bridge.Menu.ShowList({
     id = 'player_list',
     title = 'Online Players',
     options = playerOptions,

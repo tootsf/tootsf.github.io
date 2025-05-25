@@ -31,7 +31,9 @@ Shared
 {: .label .label-green }
 
 ```lua
-Framework.IsValidIdentifier(identifier)
+local Bridge = exports['community_bridge']:Bridge()
+
+Bridge.Framework.IsValidIdentifier(identifier)
 ```
 
 Validates if an identifier string is properly formatted.
@@ -45,7 +47,7 @@ Validates if an identifier string is properly formatted.
 **Example:**
 ```lua
 local identifier = "steam:110000103fa6de1"
-if Framework.IsValidIdentifier(identifier) then
+if Bridge.Framework.IsValidIdentifier(identifier) then
     print("Valid identifier format")
 end
 ```
@@ -58,7 +60,9 @@ Shared
 {: .label .label-green }
 
 ```lua
-Framework.FormatMoney(amount)
+local Bridge = exports['community_bridge']:Bridge()
+
+Bridge.Framework.FormatMoney(amount)
 ```
 
 Formats a money amount for display.
@@ -71,7 +75,9 @@ Formats a money amount for display.
 
 **Example:**
 ```lua
-local formatted = Framework.FormatMoney(1234567)
+local Bridge = exports['community_bridge']:Bridge()
+
+local formatted = Bridge.Framework.FormatMoney(1234567)
 print(formatted) -- Output: "$1,234,567"
 ```
 
@@ -83,7 +89,9 @@ Shared
 {: .label .label-green }
 
 ```lua
-Framework.ValidateJobData(jobData)
+local Bridge = exports['community_bridge']:Bridge()
+
+Bridge.Framework.ValidateJobData(jobData)
 ```
 
 Validates job data structure.
@@ -103,7 +111,7 @@ local jobData = {
     grade_label = "Officer"
 }
 
-if Framework.ValidateJobData(jobData) then
+if Bridge.Framework.ValidateJobData(jobData) then
     print("Job data is valid")
 end
 ```
@@ -118,7 +126,9 @@ Shared
 {: .label .label-green }
 
 ```lua
-Framework.GetFrameworkType()
+local Bridge = exports['community_bridge']:Bridge()
+
+Bridge.Framework.GetFrameworkType()
 ```
 
 Returns the detected framework type.
@@ -128,7 +138,9 @@ Returns the detected framework type.
 
 **Example:**
 ```lua
-local framework = Framework.GetFrameworkType()
+local Bridge = exports['community_bridge']:Bridge()
+
+local framework = Bridge.Framework.GetFrameworkType()
 print("Running on: " .. framework)
 ```
 
@@ -140,7 +152,9 @@ Shared
 {: .label .label-green }
 
 ```lua
-Framework.IsFrameworkLoaded()
+local Bridge = exports['community_bridge']:Bridge()
+
+Bridge.Framework.IsFrameworkLoaded()
 ```
 
 Checks if the framework is fully loaded and ready.
@@ -150,7 +164,9 @@ Checks if the framework is fully loaded and ready.
 
 **Example:**
 ```lua
-while not Framework.IsFrameworkLoaded() do
+local Bridge = exports['community_bridge']:Bridge()
+
+while not Bridge.Framework.IsFrameworkLoaded() do
     Citizen.Wait(100)
 end
 print("Framework is ready!")
@@ -162,7 +178,9 @@ print("Framework is ready!")
 
 ### Framework Types
 ```lua
-Framework.Types = {
+local Bridge = exports['community_bridge']:Bridge()
+
+Bridge.Framework.Types = {
     ESX = "esx",
     QBCORE = "qbcore",
     CUSTOM = "custom"
@@ -171,7 +189,9 @@ Framework.Types = {
 
 ### Money Types
 ```lua
-Framework.MoneyTypes = {
+local Bridge = exports['community_bridge']:Bridge()
+
+Bridge.Framework.MoneyTypes = {
     CASH = "money",
     BANK = "bank",
     CRYPTO = "crypto"
@@ -180,7 +200,9 @@ Framework.MoneyTypes = {
 
 ### Job Grades
 ```lua
-Framework.DefaultGrades = {
+local Bridge = exports['community_bridge']:Bridge()
+
+Bridge.Framework.DefaultGrades = {
     UNEMPLOYED = 0,
     EMPLOYEE = 1,
     SUPERVISOR = 2,
@@ -196,10 +218,10 @@ Framework.DefaultGrades = {
 ### Framework Detection
 ```lua
 -- Check framework type before using specific features
-local frameworkType = Framework.GetFrameworkType()
-if frameworkType == Framework.Types.ESX then
+local frameworkType = Bridge.Framework.GetFrameworkType()
+if frameworkType == Bridge.Framework.Types.ESX then
     -- ESX-specific logic
-elseif frameworkType == Framework.Types.QBCORE then
+elseif frameworkType == Bridge.Framework.Types.QBCORE then
     -- QBCore-specific logic
 end
 ```
@@ -212,7 +234,7 @@ local function processPlayerData(playerData)
         return false, "Invalid player data"
     end
     
-    if not Framework.IsValidIdentifier(playerData.identifier) then
+    if not Bridge.Framework.IsValidIdentifier(playerData.identifier) then
         return false, "Invalid identifier format"
     end
     

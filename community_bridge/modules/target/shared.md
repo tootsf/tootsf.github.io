@@ -23,7 +23,7 @@ Shared utilities and configurations for the Target module.
 
 ## Validation Functions
 
-### `exports.community_bridge:ValidateTargetConfig(config)`
+### `Bridge.Target.ValidateTargetConfig(config)`
 
 Validates target configuration structure and data types.
 
@@ -49,13 +49,13 @@ local targetConfig = {
     }
 }
 
-local isValid, error = exports.community_bridge:ValidateTargetConfig(targetConfig)
+local isValid, error = Bridge.Target.ValidateTargetConfig(targetConfig)
 if not isValid then
     print("Target validation failed:", error)
 end
 ```
 
-### `exports.community_bridge:ValidateTargetOptions(options)`
+### `Bridge.Target.ValidateTargetOptions(options)`
 
 Validates target option arrays.
 
@@ -80,7 +80,7 @@ local options = {
     }
 }
 
-local isValid, errors = exports.community_bridge:ValidateTargetOptions(options)
+local isValid, errors = Bridge.Target.ValidateTargetOptions(options)
 if not isValid then
     for _, error in pairs(errors) do
         print("Option error:", error)
@@ -90,7 +90,7 @@ end
 
 ## Utility Functions
 
-### `exports.community_bridge:GetDistance(coords1, coords2)`
+### `Bridge.Target.GetDistance(coords1, coords2)`
 
 Calculates distance between two coordinate points.
 
@@ -105,14 +105,14 @@ Calculates distance between two coordinate points.
 ```lua
 local playerPos = GetEntityCoords(PlayerPedId())
 local targetPos = vector3(100.0, -100.0, 30.0)
-local distance = exports.community_bridge:GetDistance(playerPos, targetPos)
+local distance = Bridge.Target.GetDistance(playerPos, targetPos)
 
 if distance <= 2.0 then
     print("Within interaction range")
 end
 ```
 
-### `exports.community_bridge:IsInTargetZone(coords, zone)`
+### `Bridge.Target.IsInTargetZone(coords, zone)`
 
 Checks if coordinates are within a target zone.
 
@@ -135,12 +135,12 @@ local zone = {
 }
 
 local playerPos = GetEntityCoords(PlayerPedId())
-if exports.community_bridge:IsInTargetZone(playerPos, zone) then
+if Bridge.Target.IsInTargetZone(playerPos, zone) then
     print("Player is in target zone")
 end
 ```
 
-### `exports.community_bridge:GetEntityModel(entity)`
+### `Bridge.Target.GetEntityModel(entity)`
 
 Gets the model hash or name for an entity.
 
@@ -153,13 +153,13 @@ Gets the model hash or name for an entity.
 **Example:**
 ```lua
 local vehicle = GetVehiclePedIsIn(PlayerPedId(), false)
-local model = exports.community_bridge:GetEntityModel(vehicle)
+local model = Bridge.Target.GetEntityModel(vehicle)
 print("Vehicle model:", model)
 ```
 
 ## Configuration Functions
 
-### `exports.community_bridge:CreateTargetOption(config)`
+### `Bridge.Target.CreateTargetOption(config)`
 
 Creates a standardized target option structure.
 
@@ -177,7 +177,9 @@ Creates a standardized target option structure.
 
 **Example:**
 ```lua
-local option = exports.community_bridge:CreateTargetOption({
+local Bridge = exports['community_bridge']:Bridge()
+
+local option = Bridge.Target.CreateTargetOption({
     name = "use_atm",
     label = "Use ATM",
     icon = "fas fa-credit-card",
@@ -188,7 +190,7 @@ local option = exports.community_bridge:CreateTargetOption({
 })
 ```
 
-### `exports.community_bridge:CreateTargetZone(config)`
+### `Bridge.Target.CreateTargetZone(config)`
 
 Creates a standardized target zone structure.
 
@@ -205,7 +207,9 @@ Creates a standardized target zone structure.
 
 **Example:**
 ```lua
-local zone = exports.community_bridge:CreateTargetZone({
+local Bridge = exports['community_bridge']:Bridge()
+
+local zone = Bridge.Target.CreateTargetZone({
     name = "parking_area",
     coords = vector3(200.0, -800.0, 31.0),
     size = {width = 10.0, length = 15.0, height = 3.0},
@@ -216,7 +220,7 @@ local zone = exports.community_bridge:CreateTargetZone({
 
 ## Template Functions
 
-### `exports.community_bridge:CreateShopTargets(shopConfig)`
+### `Bridge.Target.CreateShopTargets(shopConfig)`
 
 Creates standardized shop interaction targets.
 
@@ -232,7 +236,9 @@ Creates standardized shop interaction targets.
 
 **Example:**
 ```lua
-local shopTargets = exports.community_bridge:CreateShopTargets({
+local Bridge = exports['community_bridge']:Bridge()
+
+local shopTargets = Bridge.Target.CreateShopTargets({
     name = "general_store",
     coords = vector3(25.0, -1347.0, 29.0),
     items = {
@@ -247,7 +253,7 @@ local shopTargets = exports.community_bridge:CreateShopTargets({
 })
 ```
 
-### `exports.community_bridge:CreateVehicleTargets(vehicle, options)`
+### `Bridge.Target.CreateVehicleTargets(vehicle, options)`
 
 Creates vehicle-specific target options.
 
@@ -260,7 +266,9 @@ Creates vehicle-specific target options.
 
 **Example:**
 ```lua
-local vehicleTargets = exports.community_bridge:CreateVehicleTargets("adder", {
+local Bridge = exports['community_bridge']:Bridge()
+
+local vehicleTargets = Bridge.Target.CreateVehicleTargets("adder", {
     includeDefault = true,
     customOptions = {
         {
@@ -273,7 +281,7 @@ local vehicleTargets = exports.community_bridge:CreateVehicleTargets("adder", {
 })
 ```
 
-### `exports.community_bridge:CreateJobTargets(jobName, config)`
+### `Bridge.Target.CreateJobTargets(jobName, config)`
 
 Creates job-specific target configurations.
 
@@ -286,7 +294,9 @@ Creates job-specific target configurations.
 
 **Example:**
 ```lua
-local policeTargets = exports.community_bridge:CreateJobTargets("police", {
+local Bridge = exports['community_bridge']:Bridge()
+
+local policeTargets = Bridge.Target.CreateJobTargets("police", {
     locations = {
         {
             coords = vector3(441.0, -982.0, 30.0),
@@ -301,7 +311,7 @@ local policeTargets = exports.community_bridge:CreateJobTargets("police", {
 
 ## Icon and Label Utilities
 
-### `exports.community_bridge:GetStandardIcon(actionType)`
+### `Bridge.Target.GetStandardIcon(actionType)`
 
 Gets standardized icons for common actions.
 
@@ -314,17 +324,17 @@ Gets standardized icons for common actions.
 **Example:**
 ```lua
 local icons = {
-    buy = exports.community_bridge:GetStandardIcon("buy"),         -- "fas fa-shopping-cart"
-    sell = exports.community_bridge:GetStandardIcon("sell"),       -- "fas fa-money-bill"
-    use = exports.community_bridge:GetStandardIcon("use"),         -- "fas fa-hand"
-    enter = exports.community_bridge:GetStandardIcon("enter"),     -- "fas fa-door-open"
-    exit = exports.community_bridge:GetStandardIcon("exit"),       -- "fas fa-door-closed"
-    repair = exports.community_bridge:GetStandardIcon("repair"),   -- "fas fa-wrench"
-    fuel = exports.community_bridge:GetStandardIcon("fuel"),       -- "fas fa-gas-pump"
+    buy = Bridge.Target.GetStandardIcon("buy"),         -- "fas fa-shopping-cart"
+    sell = Bridge.Target.GetStandardIcon("sell"),       -- "fas fa-money-bill"
+    use = Bridge.Target.GetStandardIcon("use"),         -- "fas fa-hand"
+    enter = Bridge.Target.GetStandardIcon("enter"),     -- "fas fa-door-open"
+    exit = Bridge.Target.GetStandardIcon("exit"),       -- "fas fa-door-closed"
+    repair = Bridge.Target.GetStandardIcon("repair"),   -- "fas fa-wrench"
+    fuel = Bridge.Target.GetStandardIcon("fuel"),       -- "fas fa-gas-pump"
 }
 ```
 
-### `exports.community_bridge:FormatTargetLabel(text, data)`
+### `Bridge.Target.FormatTargetLabel(text, data)`
 
 Formats target labels with dynamic data.
 
@@ -337,7 +347,9 @@ Formats target labels with dynamic data.
 
 **Example:**
 ```lua
-local label = exports.community_bridge:FormatTargetLabel(
+local Bridge = exports['community_bridge']:Bridge()
+
+local label = Bridge.Target.FormatTargetLabel(
     "Buy {item} - ${price}",
     {item = "Water Bottle", price = 50}
 )
@@ -346,7 +358,7 @@ local label = exports.community_bridge:FormatTargetLabel(
 
 ## Condition Functions
 
-### `exports.community_bridge:CreateJobCondition(jobName, minGrade)`
+### `Bridge.Target.CreateJobCondition(jobName, minGrade)`
 
 Creates a job-based interaction condition.
 
@@ -359,7 +371,9 @@ Creates a job-based interaction condition.
 
 **Example:**
 ```lua
-local policeCondition = exports.community_bridge:CreateJobCondition("police", 2)
+local Bridge = exports['community_bridge']:Bridge()
+
+local policeCondition = Bridge.Target.CreateJobCondition("police", 2)
 
 local targetOption = {
     name = "arrest",
@@ -369,7 +383,7 @@ local targetOption = {
 }
 ```
 
-### `exports.community_bridge:CreateItemCondition(itemName, minCount)`
+### `Bridge.Target.CreateItemCondition(itemName, minCount)`
 
 Creates an item-based interaction condition.
 
@@ -382,7 +396,9 @@ Creates an item-based interaction condition.
 
 **Example:**
 ```lua
-local keyCondition = exports.community_bridge:CreateItemCondition("house_key", 1)
+local Bridge = exports['community_bridge']:Bridge()
+
+local keyCondition = Bridge.Target.CreateItemCondition("house_key", 1)
 
 local houseOption = {
     name = "unlock",
@@ -392,7 +408,7 @@ local houseOption = {
 }
 ```
 
-### `exports.community_bridge:CreateMoneyCondition(amount, account)`
+### `Bridge.Target.CreateMoneyCondition(amount, account)`
 
 Creates a money-based interaction condition.
 
@@ -405,7 +421,9 @@ Creates a money-based interaction condition.
 
 **Example:**
 ```lua
-local expensiveItemCondition = exports.community_bridge:CreateMoneyCondition(10000, "bank")
+local Bridge = exports['community_bridge']:Bridge()
+
+local expensiveItemCondition = Bridge.Target.CreateMoneyCondition(10000, "bank")
 
 local luxuryOption = {
     name = "buy_luxury",
@@ -417,7 +435,7 @@ local luxuryOption = {
 
 ## Data Processing
 
-### `exports.community_bridge:ProcessTargetData(rawData)`
+### `Bridge.Target.ProcessTargetData(rawData)`
 
 Processes and standardizes raw target data.
 
@@ -435,11 +453,11 @@ local rawConfig = {
     actions = {"buy", "sell"}
 }
 
-local processedData = exports.community_bridge:ProcessTargetData(rawConfig)
+local processedData = Bridge.Target.ProcessTargetData(rawConfig)
 -- Converts to standard format with vector3 coords and proper options
 ```
 
-### `exports.community_bridge:MergeTargetConfigs(config1, config2)`
+### `Bridge.Target.MergeTargetConfigs(config1, config2)`
 
 Merges two target configurations.
 
@@ -465,7 +483,7 @@ local mechanicConfig = {
     }
 }
 
-local mergedConfig = exports.community_bridge:MergeTargetConfigs(baseConfig, mechanicConfig)
+local mergedConfig = Bridge.Target.MergeTargetConfigs(baseConfig, mechanicConfig)
 -- Results in config with both lock and repair options
 ```
 
@@ -535,11 +553,11 @@ StandardLabels = {
 
 ## Helper Functions
 
-### `exports.community_bridge:GetTargetDistance(coords1, coords2)`
+### `Bridge.Target.GetTargetDistance(coords1, coords2)`
 
 Alias for GetDistance with target-specific context.
 
-### `exports.community_bridge:IsValidEntity(entity)`
+### `Bridge.Target.IsValidEntity(entity)`
 
 Checks if an entity handle is valid for targeting.
 
@@ -549,7 +567,7 @@ Checks if an entity handle is valid for targeting.
 **Returns:**
 - `boolean`: True if entity is valid
 
-### `exports.community_bridge:GetTargetCenter(target)`
+### `Bridge.Target.GetTargetCenter(target)`
 
 Gets the center point of a target configuration.
 
@@ -587,17 +605,17 @@ local function SetupShopTargets()
     }
     
     -- Validate configuration
-    local isValid, error = exports.community_bridge:ValidateTargetConfig(shopConfig)
+    local isValid, error = Bridge.Target.ValidateTargetConfig(shopConfig)
     if not isValid then
         print("Shop config error:", error)
         return
     end
     
     -- Create standardized shop targets
-    local targets = exports.community_bridge:CreateShopTargets(shopConfig)
+    local targets = Bridge.Target.CreateShopTargets(shopConfig)
     
     -- Register targets
-    exports.community_bridge:RegisterGlobalTarget(targets)
+    Bridge.Target.RegisterGlobalTarget(targets)
     
     print("Shop targets registered successfully")
 end

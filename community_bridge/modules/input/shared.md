@@ -23,7 +23,7 @@ Shared utilities and configurations for the Input module.
 
 ## Validation Functions
 
-### `exports.community_bridge:ValidateInputData(data, schema)`
+### `Bridge.Input.ValidateInputData(data, schema)`
 
 Validates input data against a schema definition.
 
@@ -64,7 +64,7 @@ local inputData = {
     email = "john@example.com"
 }
 
-local isValid, errors = exports.community_bridge:ValidateInputData(inputData, schema)
+local isValid, errors = Bridge.Input.ValidateInputData(inputData, schema)
 if not isValid then
     for _, error in pairs(errors) do
         print("Validation error:", error.field, error.message)
@@ -72,7 +72,7 @@ if not isValid then
 end
 ```
 
-### `exports.community_bridge:CreateValidationSchema(fields)`
+### `Bridge.Input.CreateValidationSchema(fields)`
 
 Creates a validation schema from field definitions.
 
@@ -103,10 +103,10 @@ local fields = {
     }
 }
 
-local schema = exports.community_bridge:CreateValidationSchema(fields)
+local schema = Bridge.Input.CreateValidationSchema(fields)
 ```
 
-### `exports.community_bridge:RegisterValidator(name, validator)`
+### `Bridge.Input.RegisterValidator(name, validator)`
 
 Registers a custom validation function.
 
@@ -117,7 +117,7 @@ Registers a custom validation function.
 **Example:**
 ```lua
 -- Register credit card validator
-exports.community_bridge:RegisterValidator("creditCard", function(value)
+Bridge.Input.RegisterValidator("creditCard", function(value)
     -- Luhn algorithm implementation
     local sum = 0
     local alternate = false
@@ -144,7 +144,7 @@ end)
 
 ## Input Type Definitions
 
-### `exports.community_bridge:GetInputType(typeName)`
+### `Bridge.Input.GetInputType(typeName)`
 
 Gets input type configuration by name.
 
@@ -156,7 +156,9 @@ Gets input type configuration by name.
 
 **Example:**
 ```lua
-local emailType = exports.community_bridge:GetInputType("email")
+local Bridge = exports['community_bridge']:Bridge()
+
+local emailType = Bridge.Input.GetInputType("email")
 -- Returns: {
 --     pattern = "^[%w%._%+%-]+@[%w%._%+%-]+%.%w+$",
 --     placeholder = "example@domain.com",
@@ -164,7 +166,7 @@ local emailType = exports.community_bridge:GetInputType("email")
 -- }
 ```
 
-### `exports.community_bridge:RegisterInputType(name, definition)`
+### `Bridge.Input.RegisterInputType(name, definition)`
 
 Registers a custom input type.
 
@@ -174,7 +176,9 @@ Registers a custom input type.
 
 **Example:**
 ```lua
-exports.community_bridge:RegisterInputType("phone", {
+local Bridge = exports['community_bridge']:Bridge()
+
+Bridge.Input.RegisterInputType("phone", {
     pattern = "^%+?[1-9]%d{1,14}$",
     placeholder = "+1234567890",
     maxLength = 15,
@@ -205,7 +209,7 @@ exports.community_bridge:RegisterInputType("phone", {
 
 ## Field Templates
 
-### `exports.community_bridge:CreateTextField(config)`
+### `Bridge.Input.CreateTextField(config)`
 
 Creates a standardized text field definition.
 
@@ -217,7 +221,9 @@ Creates a standardized text field definition.
 
 **Example:**
 ```lua
-local nameField = exports.community_bridge:CreateTextField({
+local Bridge = exports['community_bridge']:Bridge()
+
+local nameField = Bridge.Input.CreateTextField({
     name = "fullName",
     label = "Full Name",
     placeholder = "Enter your full name",
@@ -226,7 +232,7 @@ local nameField = exports.community_bridge:CreateTextField({
 })
 ```
 
-### `exports.community_bridge:CreateNumberField(config)`
+### `Bridge.Input.CreateNumberField(config)`
 
 Creates a standardized number field definition.
 
@@ -238,7 +244,9 @@ Creates a standardized number field definition.
 
 **Example:**
 ```lua
-local ageField = exports.community_bridge:CreateNumberField({
+local Bridge = exports['community_bridge']:Bridge()
+
+local ageField = Bridge.Input.CreateNumberField({
     name = "age",
     label = "Age",
     min = 18,
@@ -248,7 +256,7 @@ local ageField = exports.community_bridge:CreateNumberField({
 })
 ```
 
-### `exports.community_bridge:CreateSelectField(config)`
+### `Bridge.Input.CreateSelectField(config)`
 
 Creates a standardized select field definition.
 
@@ -260,7 +268,9 @@ Creates a standardized select field definition.
 
 **Example:**
 ```lua
-local countryField = exports.community_bridge:CreateSelectField({
+local Bridge = exports['community_bridge']:Bridge()
+
+local countryField = Bridge.Input.CreateSelectField({
     name = "country",
     label = "Country",
     required = true,
@@ -275,7 +285,7 @@ local countryField = exports.community_bridge:CreateSelectField({
 
 ## Form Templates
 
-### `exports.community_bridge:CreateLoginForm()`
+### `Bridge.Input.CreateLoginForm()`
 
 Creates a standardized login form template.
 
@@ -284,11 +294,13 @@ Creates a standardized login form template.
 
 **Example:**
 ```lua
-local loginForm = exports.community_bridge:CreateLoginForm()
+local Bridge = exports['community_bridge']:Bridge()
+
+local loginForm = Bridge.Input.CreateLoginForm()
 -- Returns form with username/email and password fields
 ```
 
-### `exports.community_bridge:CreateRegistrationForm()`
+### `Bridge.Input.CreateRegistrationForm()`
 
 Creates a standardized registration form template.
 
@@ -297,11 +309,13 @@ Creates a standardized registration form template.
 
 **Example:**
 ```lua
-local regForm = exports.community_bridge:CreateRegistrationForm()
+local Bridge = exports['community_bridge']:Bridge()
+
+local regForm = Bridge.Input.CreateRegistrationForm()
 -- Returns form with username, email, password, confirm password fields
 ```
 
-### `exports.community_bridge:CreateContactForm()`
+### `Bridge.Input.CreateContactForm()`
 
 Creates a standardized contact information form.
 
@@ -310,11 +324,13 @@ Creates a standardized contact information form.
 
 **Example:**
 ```lua
-local contactForm = exports.community_bridge:CreateContactForm()
+local Bridge = exports['community_bridge']:Bridge()
+
+local contactForm = Bridge.Input.CreateContactForm()
 -- Returns form with name, email, phone, message fields
 ```
 
-### `exports.community_bridge:CreateAddressForm()`
+### `Bridge.Input.CreateAddressForm()`
 
 Creates a standardized address form template.
 
@@ -323,13 +339,15 @@ Creates a standardized address form template.
 
 **Example:**
 ```lua
-local addressForm = exports.community_bridge:CreateAddressForm()
+local Bridge = exports['community_bridge']:Bridge()
+
+local addressForm = Bridge.Input.CreateAddressForm()
 -- Returns form with street, city, state, zip, country fields
 ```
 
 ## Data Formatting
 
-### `exports.community_bridge:FormatInputValue(value, type)`
+### `Bridge.Input.FormatInputValue(value, type)`
 
 Formats input value based on type.
 
@@ -342,14 +360,16 @@ Formats input value based on type.
 
 **Example:**
 ```lua
-local formatted = exports.community_bridge:FormatInputValue("1234567890", "phone")
+local Bridge = exports['community_bridge']:Bridge()
+
+local formatted = Bridge.Input.FormatInputValue("1234567890", "phone")
 -- Returns: "(123) 456-7890"
 
-local formatted = exports.community_bridge:FormatInputValue("john doe", "name")
+local formatted = Bridge.Input.FormatInputValue("john doe", "name")
 -- Returns: "John Doe"
 ```
 
-### `exports.community_bridge:SanitizeInput(value, options)`
+### `Bridge.Input.SanitizeInput(value, options)`
 
 Sanitizes input value for security.
 
@@ -362,7 +382,9 @@ Sanitizes input value for security.
 
 **Example:**
 ```lua
-local clean = exports.community_bridge:SanitizeInput("<script>alert('xss')</script>", {
+local Bridge = exports['community_bridge']:Bridge()
+
+local clean = Bridge.Input.SanitizeInput("<script>alert('xss')</script>", {
     stripHtml = true,
     trimWhitespace = true,
     maxLength = 100
@@ -370,7 +392,7 @@ local clean = exports.community_bridge:SanitizeInput("<script>alert('xss')</scri
 -- Returns: "alert('xss')"
 ```
 
-### `exports.community_bridge:NormalizeInput(value, type)`
+### `Bridge.Input.NormalizeInput(value, type)`
 
 Normalizes input value to standard format.
 
@@ -383,7 +405,9 @@ Normalizes input value to standard format.
 
 **Example:**
 ```lua
-local normalized = exports.community_bridge:NormalizeInput("JOHN@EXAMPLE.COM", "email")
+local Bridge = exports['community_bridge']:Bridge()
+
+local normalized = Bridge.Input.NormalizeInput("JOHN@EXAMPLE.COM", "email")
 -- Returns: "john@example.com"
 ```
 
@@ -560,14 +584,14 @@ ValidationType = {
 
 ## Utility Functions
 
-### `exports.community_bridge:CreateInputId()`
+### `Bridge.Input.CreateInputId()`
 
 Generates a unique input identifier.
 
 **Returns:**
 - `string`: Unique input ID
 
-### `exports.community_bridge:IsValidInputType(type)`
+### `Bridge.Input.IsValidInputType(type)`
 
 Checks if an input type is valid.
 
@@ -577,7 +601,7 @@ Checks if an input type is valid.
 **Returns:**
 - `boolean`: True if valid
 
-### `exports.community_bridge:GetDefaultValue(field)`
+### `Bridge.Input.GetDefaultValue(field)`
 
 Gets default value for a field based on type.
 
@@ -587,7 +611,7 @@ Gets default value for a field based on type.
 **Returns:**
 - `any`: Default value
 
-### `exports.community_bridge:MergeFormConfigs(config1, config2)`
+### `Bridge.Input.MergeFormConfigs(config1, config2)`
 
 Merges two form configurations.
 
@@ -617,12 +641,12 @@ function ProcessFormData(formData, schema)
         end
         
         -- Validate
-        local isValid, error = exports.community_bridge:ValidateInputData({[fieldName] = value}, {[fieldName] = fieldSchema})
+        local isValid, error = Bridge.Input.ValidateInputData({[fieldName] = value}, {[fieldName] = fieldSchema})
         if not isValid then
             table.insert(errors, {field = fieldName, message = error[1].message})
         else
             -- Format/normalize value
-            local processedValue = exports.community_bridge:NormalizeInput(value, fieldSchema.type)
+            local processedValue = Bridge.Input.NormalizeInput(value, fieldSchema.type)
             processedData[fieldName] = processedValue
         end
     end
@@ -653,7 +677,7 @@ end
 ```lua
 -- Complete form processing example
 local function CreateCharacterForm()
-    local schema = exports.community_bridge:CreateValidationSchema({
+    local schema = Bridge.Input.CreateValidationSchema({
         {
             name = "firstName",
             type = "text",
@@ -683,19 +707,19 @@ local function CreateCharacterForm()
         title = "Character Creation",
         schema = schema,
         fields = {
-            exports.community_bridge:CreateTextField({
+            Bridge.Input.CreateTextField({
                 name = "firstName",
                 label = "First Name",
                 placeholder = "Enter first name",
                 required = true
             }),
-            exports.community_bridge:CreateTextField({
+            Bridge.Input.CreateTextField({
                 name = "lastName",
                 label = "Last Name", 
                 placeholder = "Enter last name",
                 required = true
             }),
-            exports.community_bridge:CreateNumberField({
+            Bridge.Input.CreateNumberField({
                 name = "age",
                 label = "Age",
                 min = 18,

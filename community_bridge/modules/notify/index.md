@@ -48,13 +48,13 @@ This module standardizes notification delivery across various notification resou
 local playerId = source
 
 -- Basic notification
-Notify.SendNotify(playerId, "Welcome to the server!", "success")
+Bridge.Notify.SendNotify(playerId, "Welcome to the server!", "success")
 
 -- Error notification
-Notify.SendNotify(playerId, "You don't have enough money!", "error")
+Bridge.Notify.SendNotify(playerId, "You don't have enough money!", "error")
 
 -- Custom notification with options
-Notify.SendNotify(playerId, "Processing request...", "info", {
+Bridge.Notify.SendNotify(playerId, "Processing request...", "info", {
     duration = 5000,
     position = "top",
     icon = "fas fa-spinner fa-spin"
@@ -72,7 +72,9 @@ Notify.SendNotify(playerId, "Processing request...", "info", {
 
 ### Custom Styling
 ```lua
-Notify.SendNotify(playerId, "Custom message", "custom", {
+local Bridge = exports['community_bridge']:Bridge()
+
+Bridge.Notify.SendNotify(playerId, "Custom message", "custom", {
     color = "#FF6B6B",
     backgroundColor = "#2C3E50",
     icon = "fas fa-crown"
@@ -95,7 +97,7 @@ Configure default notification behavior:
 
 ```lua
 -- In your resource config
-Notify.SetDefaults({
+Bridge.Notify.SetDefaults({
     duration = 4000,
     position = "top-right",
     showIcon = true,
@@ -108,22 +110,22 @@ Notify.SetDefaults({
 ### Progress Notifications
 ```lua
 -- Start a progress notification
-local notifyId = Notify.ShowProgress(playerId, "Downloading files...", 0)
+local notifyId = Bridge.Notify.ShowProgress(playerId, "Downloading files...", 0)
 
 -- Update progress
 for i = 1, 100 do
-    Notify.UpdateProgress(notifyId, i, "Downloading: " .. i .. "%")
+    Bridge.Notify.UpdateProgress(notifyId, i, "Downloading: " .. i .. "%")
     Wait(50)
 end
 
 -- Complete the progress
-Notify.CompleteProgress(notifyId, "Download complete!", "success")
+Bridge.Notify.CompleteProgress(notifyId, "Download complete!", "success")
 ```
 
 ### Grouped Notifications
 ```lua
 -- Group related notifications
-Notify.SendGrouped(playerId, "inventory", {
+Bridge.Notify.SendGrouped(playerId, "inventory", {
     {message = "Added 5x Water", type = "success"},
     {message = "Added 3x Bread", type = "success"},
     {message = "Inventory limit reached", type = "warning"}

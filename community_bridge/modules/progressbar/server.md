@@ -30,7 +30,9 @@ Server
 Triggers a progress bar on a specific client from the server.
 
 ```lua
-exports.community_bridge:TriggerClientProgress(source, config, callback)
+local Bridge = exports['community_bridge']:Bridge()
+
+Bridge.Progressbar.TriggerClientProgress(source, config, callback)
 ```
 
 #### Parameters
@@ -40,7 +42,9 @@ exports.community_bridge:TriggerClientProgress(source, config, callback)
 
 #### Example
 ```lua
-exports.community_bridge:TriggerClientProgress(source, {
+local Bridge = exports['community_bridge']:Bridge()
+
+Bridge.Progressbar.TriggerClientProgress(source, {
     name = 'server_task',
     duration = 10000,
     label = 'Processing server request...',
@@ -48,8 +52,8 @@ exports.community_bridge:TriggerClientProgress(source, {
 }, function(cancelled)
     if not cancelled then
         -- Give reward or complete server-side action
-        exports.community_bridge:AddPlayerMoney(source, 500)
-        exports.community_bridge:ShowNotification(source, 'Task completed! +$500', 'success')
+        Bridge.Progressbar.AddPlayerMoney(source, 500)
+        Bridge.Progressbar.ShowNotification(source, 'Task completed! +$500', 'success')
     end
 end)
 ```
@@ -62,7 +66,9 @@ Server
 Broadcasts a progress bar to all connected players.
 
 ```lua
-exports.community_bridge:BroadcastProgress(config, callback)
+local Bridge = exports['community_bridge']:Bridge()
+
+Bridge.Progressbar.BroadcastProgress(config, callback)
 ```
 
 #### Parameters
@@ -71,7 +77,9 @@ exports.community_bridge:BroadcastProgress(config, callback)
 
 #### Example
 ```lua
-exports.community_bridge:BroadcastProgress({
+local Bridge = exports['community_bridge']:Bridge()
+
+Bridge.Progressbar.BroadcastProgress({
     name = 'server_event',
     duration = 30000,
     label = 'Server event starting...',
@@ -97,7 +105,9 @@ Server
 Stops a progress bar on a specific client.
 
 ```lua
-exports.community_bridge:StopClientProgress(source, name)
+local Bridge = exports['community_bridge']:Bridge()
+
+Bridge.Progressbar.StopClientProgress(source, name)
 ```
 
 #### Parameters
@@ -107,10 +117,10 @@ exports.community_bridge:StopClientProgress(source, name)
 #### Example
 ```lua
 -- Stop specific progress
-exports.community_bridge:StopClientProgress(source, 'server_task')
+Bridge.Progressbar.StopClientProgress(source, 'server_task')
 
 -- Stop all progress for player
-exports.community_bridge:StopClientProgress(source)
+Bridge.Progressbar.StopClientProgress(source)
 ```
 
 ### IsClientProgressActive
@@ -121,7 +131,9 @@ Server
 Checks if a client has an active progress bar.
 
 ```lua
-exports.community_bridge:IsClientProgressActive(source, name)
+local Bridge = exports['community_bridge']:Bridge()
+
+Bridge.Progressbar.IsClientProgressActive(source, name)
 ```
 
 #### Parameters
@@ -133,8 +145,10 @@ exports.community_bridge:IsClientProgressActive(source, name)
 
 #### Example
 ```lua
-if exports.community_bridge:IsClientProgressActive(source, 'repair_task') then
-    exports.community_bridge:ShowNotification(source, 'Already repairing!', 'error')
+local Bridge = exports['community_bridge']:Bridge()
+
+if Bridge.Progressbar.IsClientProgressActive(source, 'repair_task') then
+    Bridge.Progressbar.ShowNotification(source, 'Already repairing!', 'error')
     return
 end
 ```
@@ -151,7 +165,9 @@ Server
 Starts synchronized progress bars for multiple players.
 
 ```lua
-exports.community_bridge:StartSynchronizedProgress(players, config, callback)
+local Bridge = exports['community_bridge']:Bridge()
+
+Bridge.Progressbar.StartSynchronizedProgress(players, config, callback)
 ```
 
 #### Parameters
@@ -164,7 +180,7 @@ exports.community_bridge:StartSynchronizedProgress(players, config, callback)
 -- Synchronized bank heist progress
 local heistMembers = {1, 2, 3, 4}
 
-exports.community_bridge:StartSynchronizedProgress(heistMembers, {
+Bridge.Progressbar.StartSynchronizedProgress(heistMembers, {
     name = 'bank_heist',
     duration = 45000,
     label = 'Hacking bank systems...',
@@ -197,7 +213,9 @@ Server
 Creates a progress group for team-based activities.
 
 ```lua
-exports.community_bridge:CreateProgressGroup(groupId, members, config)
+local Bridge = exports['community_bridge']:Bridge()
+
+Bridge.Progressbar.CreateProgressGroup(groupId, members, config)
 ```
 
 #### Parameters
@@ -210,7 +228,9 @@ exports.community_bridge:CreateProgressGroup(groupId, members, config)
 
 #### Example
 ```lua
-local group = exports.community_bridge:CreateProgressGroup('raid_team', {1, 2, 3}, {
+local Bridge = exports['community_bridge']:Bridge()
+
+local group = Bridge.Progressbar.CreateProgressGroup('raid_team', {1, 2, 3}, {
     name = 'raid_preparation',
     duration = 60000,
     label = 'Preparing for raid...',
@@ -238,7 +258,9 @@ Server
 Saves progress state to database for persistence.
 
 ```lua
-exports.community_bridge:SaveProgressState(source, progressData)
+local Bridge = exports['community_bridge']:Bridge()
+
+Bridge.Progressbar.SaveProgressState(source, progressData)
 ```
 
 #### Parameters
@@ -250,7 +272,7 @@ exports.community_bridge:SaveProgressState(source, progressData)
 RegisterNetEvent('progress:save')
 AddEventHandler('progress:save', function(progressData)
     local source = source
-    exports.community_bridge:SaveProgressState(source, {
+    Bridge.Progressbar.SaveProgressState(source, {
         progressName = progressData.name,
         remainingTime = progressData.remainingTime,
         startedAt = progressData.startedAt,
@@ -267,7 +289,9 @@ Server
 Loads saved progress state from database.
 
 ```lua
-exports.community_bridge:LoadProgressState(source)
+local Bridge = exports['community_bridge']:Bridge()
+
+Bridge.Progressbar.LoadProgressState(source)
 ```
 
 #### Parameters
@@ -281,7 +305,7 @@ exports.community_bridge:LoadProgressState(source)
 RegisterNetEvent('playerJoined')
 AddEventHandler('playerJoined', function()
     local source = source
-    local savedProgress = exports.community_bridge:LoadProgressState(source)
+    local savedProgress = Bridge.Progressbar.LoadProgressState(source)
     
     if savedProgress and savedProgress.remainingTime > 0 then
         -- Resume saved progress
@@ -298,7 +322,9 @@ Server
 Clears saved progress state.
 
 ```lua
-exports.community_bridge:ClearProgressState(source, progressName)
+local Bridge = exports['community_bridge']:Bridge()
+
+Bridge.Progressbar.ClearProgressState(source, progressName)
 ```
 
 #### Example
@@ -306,7 +332,7 @@ exports.community_bridge:ClearProgressState(source, progressName)
 RegisterNetEvent('progress:completed')
 AddEventHandler('progress:completed', function(progressName)
     local source = source
-    exports.community_bridge:ClearProgressState(source, progressName)
+    Bridge.Progressbar.ClearProgressState(source, progressName)
 end)
 ```
 
@@ -322,7 +348,9 @@ Server
 Sets permission requirements for progress actions.
 
 ```lua
-exports.community_bridge:SetProgressPermission(progressName, permission)
+local Bridge = exports['community_bridge']:Bridge()
+
+Bridge.Progressbar.SetProgressPermission(progressName, permission)
 ```
 
 #### Parameters
@@ -332,10 +360,10 @@ exports.community_bridge:SetProgressPermission(progressName, permission)
 #### Example
 ```lua
 -- Require admin permission for admin tasks
-exports.community_bridge:SetProgressPermission('admin_maintenance', 'admin.maintenance')
+Bridge.Progressbar.SetProgressPermission('admin_maintenance', 'admin.maintenance')
 
 -- Require job permission for police actions
-exports.community_bridge:SetProgressPermission('police_investigate', 'job.police')
+Bridge.Progressbar.SetProgressPermission('police_investigate', 'job.police')
 ```
 
 ### ValidateProgressAccess
@@ -346,7 +374,9 @@ Server
 Validates if a player can start a specific progress.
 
 ```lua
-exports.community_bridge:ValidateProgressAccess(source, progressName)
+local Bridge = exports['community_bridge']:Bridge()
+
+Bridge.Progressbar.ValidateProgressAccess(source, progressName)
 ```
 
 #### Parameters
@@ -362,12 +392,12 @@ RegisterNetEvent('progress:requestStart')
 AddEventHandler('progress:requestStart', function(progressName, config)
     local source = source
     
-    if not exports.community_bridge:ValidateProgressAccess(source, progressName) then
-        exports.community_bridge:ShowNotification(source, 'No permission for this action', 'error')
+    if not Bridge.Progressbar.ValidateProgressAccess(source, progressName) then
+        Bridge.Progressbar.ShowNotification(source, 'No permission for this action', 'error')
         return
     end
     
-    exports.community_bridge:TriggerClientProgress(source, config)
+    Bridge.Progressbar.TriggerClientProgress(source, config)
 end)
 ```
 
@@ -383,7 +413,9 @@ Server
 Logs progress events for analytics.
 
 ```lua
-exports.community_bridge:LogProgressEvent(source, eventType, progressName, data)
+local Bridge = exports['community_bridge']:Bridge()
+
+Bridge.Progressbar.LogProgressEvent(source, eventType, progressName, data)
 ```
 
 #### Parameters
@@ -397,7 +429,7 @@ exports.community_bridge:LogProgressEvent(source, eventType, progressName, data)
 RegisterNetEvent('progress:analytics')
 AddEventHandler('progress:analytics', function(eventType, progressName, data)
     local source = source
-    exports.community_bridge:LogProgressEvent(source, eventType, progressName, {
+    Bridge.Progressbar.LogProgressEvent(source, eventType, progressName, {
         duration = data.duration,
         success = data.success,
         timestamp = os.time()
@@ -413,7 +445,9 @@ Server
 Gets progress statistics for analysis.
 
 ```lua
-exports.community_bridge:GetProgressStatistics(timeframe, progressName)
+local Bridge = exports['community_bridge']:Bridge()
+
+Bridge.Progressbar.GetProgressStatistics(timeframe, progressName)
 ```
 
 #### Parameters
@@ -425,7 +459,9 @@ exports.community_bridge:GetProgressStatistics(timeframe, progressName)
 
 #### Example
 ```lua
-local stats = exports.community_bridge:GetProgressStatistics('week', 'vehicle_repair')
+local Bridge = exports['community_bridge']:Bridge()
+
+local stats = Bridge.Progressbar.GetProgressStatistics('week', 'vehicle_repair')
 print('Repairs completed this week: ' .. stats.completions)
 print('Average completion time: ' .. stats.averageTime .. 'ms')
 print('Cancellation rate: ' .. stats.cancellationRate .. '%')
@@ -443,16 +479,20 @@ Server
 Sets a handler for progress start events.
 
 ```lua
-exports.community_bridge:OnProgressStart(handler)
+local Bridge = exports['community_bridge']:Bridge()
+
+Bridge.Progressbar.OnProgressStart(handler)
 ```
 
 #### Example
 ```lua
-exports.community_bridge:OnProgressStart(function(source, progressName, config)
+local Bridge = exports['community_bridge']:Bridge()
+
+Bridge.Progressbar.OnProgressStart(function(source, progressName, config)
     print('Player ' .. source .. ' started progress: ' .. progressName)
     
     -- Log to database
-    exports.community_bridge:LogProgressEvent(source, 'start', progressName, config)
+    Bridge.Progressbar.LogProgressEvent(source, 'start', progressName, config)
     
     -- Disable certain server events during progress
     if config.disableEvents then
@@ -469,17 +509,21 @@ Server
 Sets a handler for progress completion events.
 
 ```lua
-exports.community_bridge:OnProgressComplete(handler)
+local Bridge = exports['community_bridge']:Bridge()
+
+Bridge.Progressbar.OnProgressComplete(handler)
 ```
 
 #### Example
 ```lua
-exports.community_bridge:OnProgressComplete(function(source, progressName, cancelled, duration)
+local Bridge = exports['community_bridge']:Bridge()
+
+Bridge.Progressbar.OnProgressComplete(function(source, progressName, cancelled, duration)
     if not cancelled then
         -- Award completion rewards
         local rewards = GetProgressRewards(progressName)
         if rewards then
-            exports.community_bridge:GiveRewards(source, rewards)
+            Bridge.Progressbar.GiveRewards(source, rewards)
         end
     end
     
@@ -496,18 +540,22 @@ Server
 Sets a handler for progress failure events.
 
 ```lua
-exports.community_bridge:OnProgressFailed(handler)
+local Bridge = exports['community_bridge']:Bridge()
+
+Bridge.Progressbar.OnProgressFailed(handler)
 ```
 
 #### Example
 ```lua
-exports.community_bridge:OnProgressFailed(function(source, progressName, reason)
+local Bridge = exports['community_bridge']:Bridge()
+
+Bridge.Progressbar.OnProgressFailed(function(source, progressName, reason)
     print('Progress failed for player ' .. source .. ': ' .. reason)
     
     -- Apply failure consequences
     local penalties = GetProgressPenalties(progressName)
     if penalties then
-        exports.community_bridge:ApplyPenalties(source, penalties)
+        Bridge.Progressbar.ApplyPenalties(source, penalties)
     end
 end)
 ```
@@ -524,7 +572,9 @@ Server
 Creates a scheduler for managing multiple timed progress operations.
 
 ```lua
-exports.community_bridge:CreateProgressScheduler(config)
+local Bridge = exports['community_bridge']:Bridge()
+
+Bridge.Progressbar.CreateProgressScheduler(config)
 ```
 
 #### Parameters
@@ -535,7 +585,9 @@ exports.community_bridge:CreateProgressScheduler(config)
 
 #### Example
 ```lua
-local scheduler = exports.community_bridge:CreateProgressScheduler({
+local Bridge = exports['community_bridge']:Bridge()
+
+local scheduler = Bridge.Progressbar.CreateProgressScheduler({
     maxConcurrent = 10,
     queueTimeout = 30000,
     priorityLevels = {'high', 'normal', 'low'}
@@ -557,7 +609,9 @@ Server
 Sets up progress replication for spectators or team members.
 
 ```lua
-exports.community_bridge:SetupProgressReplication(source, spectators, config)
+local Bridge = exports['community_bridge']:Bridge()
+
+Bridge.Progressbar.SetupProgressReplication(source, spectators, config)
 ```
 
 #### Parameters
@@ -568,7 +622,7 @@ exports.community_bridge:SetupProgressReplication(source, spectators, config)
 #### Example
 ```lua
 -- Show progress to team members
-exports.community_bridge:SetupProgressReplication(source, teamMembers, {
+Bridge.Progressbar.SetupProgressReplication(source, teamMembers, {
     showProgress = true,
     showLabel = true,
     position = 'top-right',
@@ -586,13 +640,13 @@ Properly clean up progress data:
 ```lua
 AddEventHandler('playerDropped', function(reason)
     local source = source
-    exports.community_bridge:StopClientProgress(source)
-    exports.community_bridge:ClearProgressState(source)
+    Bridge.Progressbar.StopClientProgress(source)
+    Bridge.Progressbar.ClearProgressState(source)
 end)
 
 AddEventHandler('onResourceStop', function(resourceName)
     if resourceName == GetCurrentResourceName() then
-        exports.community_bridge:BroadcastProgress({
+        Bridge.Progressbar.BroadcastProgress({
             name = 'resource_stopping',
             duration = 0,
             label = 'Resource stopping...'
@@ -611,13 +665,13 @@ AddEventHandler('progress:error', function(progressName, error)
     print('Progress error for player ' .. source .. ': ' .. error)
     
     -- Log error
-    exports.community_bridge:LogProgressEvent(source, 'error', progressName, {
+    Bridge.Progressbar.LogProgressEvent(source, 'error', progressName, {
         error = error,
         timestamp = os.time()
     })
     
     -- Clean up progress state
-    exports.community_bridge:StopClientProgress(source, progressName)
+    Bridge.Progressbar.StopClientProgress(source, progressName)
 end)
 ```
 
@@ -660,16 +714,16 @@ AddEventHandler('crafting:start', function(recipe)
     local source = source
     
     -- Validate player has materials
-    if not exports.community_bridge:HasCraftingMaterials(source, recipe) then
-        exports.community_bridge:ShowNotification(source, 'Missing materials', 'error')
+    if not Bridge.Progressbar.HasCraftingMaterials(source, recipe) then
+        Bridge.Progressbar.ShowNotification(source, 'Missing materials', 'error')
         return
     end
     
     -- Remove materials
-    exports.community_bridge:RemoveCraftingMaterials(source, recipe)
+    Bridge.Progressbar.RemoveCraftingMaterials(source, recipe)
     
     -- Start crafting progress
-    exports.community_bridge:TriggerClientProgress(source, {
+    Bridge.Progressbar.TriggerClientProgress(source, {
         name = 'crafting_' .. recipe.name,
         duration = recipe.time,
         label = 'Crafting ' .. recipe.label .. '...',
@@ -677,11 +731,11 @@ AddEventHandler('crafting:start', function(recipe)
     }, function(cancelled)
         if not cancelled then
             -- Give crafted item
-            exports.community_bridge:GiveItem(source, recipe.result, recipe.quantity)
-            exports.community_bridge:ShowNotification(source, 'Crafted ' .. recipe.label, 'success')
+            Bridge.Progressbar.GiveItem(source, recipe.result, recipe.quantity)
+            Bridge.Progressbar.ShowNotification(source, 'Crafted ' .. recipe.label, 'success')
         else
             -- Return materials on cancel
-            exports.community_bridge:GiveCraftingMaterials(source, recipe, 0.5) -- 50% return
+            Bridge.Progressbar.GiveCraftingMaterials(source, recipe, 0.5) -- 50% return
         end
     end)
 end)
@@ -692,14 +746,14 @@ end)
 RegisterNetEvent('job:startTask')
 AddEventHandler('job:startTask', function(taskId)
     local source = source
-    local player = exports.community_bridge:GetPlayer(source)
+    local player = Bridge.Progressbar.GetPlayer(source)
     
     if not player then return end
     
     local task = GetJobTask(player.job, taskId)
     if not task then return end
     
-    exports.community_bridge:TriggerClientProgress(source, {
+    Bridge.Progressbar.TriggerClientProgress(source, {
         name = 'job_task_' .. taskId,
         duration = task.duration,
         label = task.description,
@@ -707,9 +761,9 @@ AddEventHandler('job:startTask', function(taskId)
     }, function(cancelled)
         if not cancelled then
             -- Complete task and give rewards
-            exports.community_bridge:CompleteJobTask(source, taskId)
-            exports.community_bridge:AddPlayerMoney(source, task.payment)
-            exports.community_bridge:AddJobExperience(source, task.experience)
+            Bridge.Progressbar.CompleteJobTask(source, taskId)
+            Bridge.Progressbar.AddPlayerMoney(source, task.payment)
+            Bridge.Progressbar.AddJobExperience(source, task.experience)
         end
     end)
 end)

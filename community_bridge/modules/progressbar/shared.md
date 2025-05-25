@@ -30,7 +30,9 @@ Shared
 Gets the current progress bar configuration.
 
 ```lua
-exports.community_bridge:GetProgressConfig()
+local Bridge = exports['community_bridge']:Bridge()
+
+Bridge.Progressbar.GetProgressConfig()
 ```
 
 #### Returns
@@ -38,7 +40,9 @@ exports.community_bridge:GetProgressConfig()
 
 #### Example
 ```lua
-local config = exports.community_bridge:GetProgressConfig()
+local Bridge = exports['community_bridge']:Bridge()
+
+local config = Bridge.Progressbar.GetProgressConfig()
 print('Default timeout: ' .. config.defaultTimeout)
 print('Animation enabled: ' .. tostring(config.enableAnimations))
 ```
@@ -51,7 +55,9 @@ Shared
 Sets global progress bar configuration.
 
 ```lua
-exports.community_bridge:SetProgressConfig(config)
+local Bridge = exports['community_bridge']:Bridge()
+
+Bridge.Progressbar.SetProgressConfig(config)
 ```
 
 #### Parameters
@@ -59,7 +65,9 @@ exports.community_bridge:SetProgressConfig(config)
 
 #### Example
 ```lua
-exports.community_bridge:SetProgressConfig({
+local Bridge = exports['community_bridge']:Bridge()
+
+Bridge.Progressbar.SetProgressConfig({
     defaultTimeout = 30000,
     enableAnimations = true,
     enableSounds = true,
@@ -78,7 +86,9 @@ Shared
 Gets available progress bar themes.
 
 ```lua
-exports.community_bridge:GetProgressThemes()
+local Bridge = exports['community_bridge']:Bridge()
+
+Bridge.Progressbar.GetProgressThemes()
 ```
 
 #### Returns
@@ -86,7 +96,9 @@ exports.community_bridge:GetProgressThemes()
 
 #### Example
 ```lua
-local themes = exports.community_bridge:GetProgressThemes()
+local Bridge = exports['community_bridge']:Bridge()
+
+local themes = Bridge.Progressbar.GetProgressThemes()
 for name, theme in pairs(themes) do
     print('Theme: ' .. name)
     print('Primary color: ' .. theme.primaryColor)
@@ -101,7 +113,9 @@ Shared
 Registers a new progress bar theme.
 
 ```lua
-exports.community_bridge:RegisterProgressTheme(name, theme)
+local Bridge = exports['community_bridge']:Bridge()
+
+Bridge.Progressbar.RegisterProgressTheme(name, theme)
 ```
 
 #### Parameters
@@ -110,7 +124,9 @@ exports.community_bridge:RegisterProgressTheme(name, theme)
 
 #### Example
 ```lua
-exports.community_bridge:RegisterProgressTheme('cyberpunk', {
+local Bridge = exports['community_bridge']:Bridge()
+
+Bridge.Progressbar.RegisterProgressTheme('cyberpunk', {
     primaryColor = '#00ff88',
     secondaryColor = '#ff0088',
     backgroundColor = '#0a0a0a',
@@ -133,7 +149,9 @@ Shared
 Validates progress bar configuration.
 
 ```lua
-exports.community_bridge:ValidateProgressConfig(config)
+local Bridge = exports['community_bridge']:Bridge()
+
+Bridge.Progressbar.ValidateProgressConfig(config)
 ```
 
 #### Parameters
@@ -145,7 +163,9 @@ exports.community_bridge:ValidateProgressConfig(config)
 
 #### Example
 ```lua
-local valid, error = exports.community_bridge:ValidateProgressConfig({
+local Bridge = exports['community_bridge']:Bridge()
+
+local valid, error = Bridge.Progressbar.ValidateProgressConfig({
     name = 'test_progress',
     duration = 5000,
     label = 'Testing...'
@@ -164,7 +184,9 @@ Shared
 Validates progress bar name format.
 
 ```lua
-exports.community_bridge:ValidateProgressName(name)
+local Bridge = exports['community_bridge']:Bridge()
+
+Bridge.Progressbar.ValidateProgressName(name)
 ```
 
 #### Parameters
@@ -175,7 +197,9 @@ exports.community_bridge:ValidateProgressName(name)
 
 #### Example
 ```lua
-local valid = exports.community_bridge:ValidateProgressName('my_progress_123')
+local Bridge = exports['community_bridge']:Bridge()
+
+local valid = Bridge.Progressbar.ValidateProgressName('my_progress_123')
 print('Name valid: ' .. tostring(valid))
 ```
 
@@ -187,7 +211,9 @@ Shared
 Validates progress duration value.
 
 ```lua
-exports.community_bridge:ValidateProgressDuration(duration)
+local Bridge = exports['community_bridge']:Bridge()
+
+Bridge.Progressbar.ValidateProgressDuration(duration)
 ```
 
 #### Parameters
@@ -199,7 +225,9 @@ exports.community_bridge:ValidateProgressDuration(duration)
 
 #### Example
 ```lua
-local valid, error = exports.community_bridge:ValidateProgressDuration(5000)
+local Bridge = exports['community_bridge']:Bridge()
+
+local valid, error = Bridge.Progressbar.ValidateProgressDuration(5000)
 if not valid then
     print('Invalid duration: ' .. error)
 end
@@ -217,7 +245,9 @@ Shared
 Calculates progress percentage based on elapsed time.
 
 ```lua
-exports.community_bridge:CalculateProgressPercentage(startTime, duration)
+local Bridge = exports['community_bridge']:Bridge()
+
+Bridge.Progressbar.CalculateProgressPercentage(startTime, duration)
 ```
 
 #### Parameters
@@ -231,7 +261,7 @@ exports.community_bridge:CalculateProgressPercentage(startTime, duration)
 ```lua
 local startTime = GetGameTimer()
 Wait(2500) -- Wait 2.5 seconds
-local percentage = exports.community_bridge:CalculateProgressPercentage(startTime, 5000)
+local percentage = Bridge.Progressbar.CalculateProgressPercentage(startTime, 5000)
 print('Progress: ' .. percentage .. '%') -- Should be around 50%
 ```
 
@@ -243,7 +273,9 @@ Shared
 Formats time remaining for display.
 
 ```lua
-exports.community_bridge:FormatProgressTime(milliseconds, format)
+local Bridge = exports['community_bridge']:Bridge()
+
+Bridge.Progressbar.FormatProgressTime(milliseconds, format)
 ```
 
 #### Parameters
@@ -255,10 +287,12 @@ exports.community_bridge:FormatProgressTime(milliseconds, format)
 
 #### Example
 ```lua
-local formatted = exports.community_bridge:FormatProgressTime(65000, 'short')
+local Bridge = exports['community_bridge']:Bridge()
+
+local formatted = Bridge.Progressbar.FormatProgressTime(65000, 'short')
 print(formatted) -- "1m 5s"
 
-local exact = exports.community_bridge:FormatProgressTime(65000, 'exact')
+local exact = Bridge.Progressbar.FormatProgressTime(65000, 'exact')
 print(exact) -- "01:05"
 ```
 
@@ -270,7 +304,9 @@ Shared
 Interpolates progress value with easing functions.
 
 ```lua
-exports.community_bridge:InterpolateProgress(progress, easingType)
+local Bridge = exports['community_bridge']:Bridge()
+
+Bridge.Progressbar.InterpolateProgress(progress, easingType)
 ```
 
 #### Parameters
@@ -283,7 +319,7 @@ exports.community_bridge:InterpolateProgress(progress, easingType)
 #### Example
 ```lua
 local linearProgress = 0.5
-local easedProgress = exports.community_bridge:InterpolateProgress(linearProgress, 'ease-out')
+local easedProgress = Bridge.Progressbar.InterpolateProgress(linearProgress, 'ease-out')
 print('Eased progress: ' .. easedProgress)
 ```
 
@@ -299,7 +335,9 @@ Shared
 Gets available progress bar positions.
 
 ```lua
-exports.community_bridge:ProgressPositions()
+local Bridge = exports['community_bridge']:Bridge()
+
+Bridge.Progressbar.ProgressPositions()
 ```
 
 #### Returns
@@ -307,7 +345,9 @@ exports.community_bridge:ProgressPositions()
 
 #### Example
 ```lua
-local positions = exports.community_bridge:ProgressPositions()
+local Bridge = exports['community_bridge']:Bridge()
+
+local positions = Bridge.Progressbar.ProgressPositions()
 -- positions.TOP = 'top'
 -- positions.CENTER = 'center'
 -- positions.BOTTOM = 'bottom'
@@ -323,7 +363,9 @@ Shared
 Gets progress state constants.
 
 ```lua
-exports.community_bridge:ProgressStates()
+local Bridge = exports['community_bridge']:Bridge()
+
+Bridge.Progressbar.ProgressStates()
 ```
 
 #### Returns
@@ -331,7 +373,9 @@ exports.community_bridge:ProgressStates()
 
 #### Example
 ```lua
-local states = exports.community_bridge:ProgressStates()
+local Bridge = exports['community_bridge']:Bridge()
+
+local states = Bridge.Progressbar.ProgressStates()
 -- states.PENDING = 'pending'
 -- states.ACTIVE = 'active'
 -- states.PAUSED = 'paused'
@@ -348,7 +392,9 @@ Shared
 Gets progress event type constants.
 
 ```lua
-exports.community_bridge:ProgressEvents()
+local Bridge = exports['community_bridge']:Bridge()
+
+Bridge.Progressbar.ProgressEvents()
 ```
 
 #### Returns
@@ -356,7 +402,9 @@ exports.community_bridge:ProgressEvents()
 
 #### Example
 ```lua
-local events = exports.community_bridge:ProgressEvents()
+local Bridge = exports['community_bridge']:Bridge()
+
+local events = Bridge.Progressbar.ProgressEvents()
 -- events.START = 'progress:start'
 -- events.UPDATE = 'progress:update'
 -- events.COMPLETE = 'progress:complete'
@@ -377,7 +425,9 @@ Shared
 Converts colors between different formats.
 
 ```lua
-exports.community_bridge:ConvertColorFormat(color, fromFormat, toFormat)
+local Bridge = exports['community_bridge']:Bridge()
+
+Bridge.Progressbar.ConvertColorFormat(color, fromFormat, toFormat)
 ```
 
 #### Parameters
@@ -390,10 +440,12 @@ exports.community_bridge:ConvertColorFormat(color, fromFormat, toFormat)
 
 #### Example
 ```lua
-local hexColor = exports.community_bridge:ConvertColorFormat({255, 0, 0}, 'rgb', 'hex')
+local Bridge = exports['community_bridge']:Bridge()
+
+local hexColor = Bridge.Progressbar.ConvertColorFormat({255, 0, 0}, 'rgb', 'hex')
 print(hexColor) -- "#ff0000"
 
-local rgbaColor = exports.community_bridge:ConvertColorFormat('#ff0000', 'hex', 'rgba')
+local rgbaColor = Bridge.Progressbar.ConvertColorFormat('#ff0000', 'hex', 'rgba')
 print(json.encode(rgbaColor)) -- {255, 0, 0, 255}
 ```
 
@@ -405,7 +457,9 @@ Shared
 Blends two colors together.
 
 ```lua
-exports.community_bridge:BlendColors(color1, color2, ratio)
+local Bridge = exports['community_bridge']:Bridge()
+
+Bridge.Progressbar.BlendColors(color1, color2, ratio)
 ```
 
 #### Parameters
@@ -418,7 +472,9 @@ exports.community_bridge:BlendColors(color1, color2, ratio)
 
 #### Example
 ```lua
-local blended = exports.community_bridge:BlendColors('#ff0000', '#0000ff', 0.5)
+local Bridge = exports['community_bridge']:Bridge()
+
+local blended = Bridge.Progressbar.BlendColors('#ff0000', '#0000ff', 0.5)
 print(blended) -- "#7f007f" (purple)
 ```
 
@@ -430,7 +486,9 @@ Shared
 Generates a color gradient.
 
 ```lua
-exports.community_bridge:GenerateGradient(startColor, endColor, steps)
+local Bridge = exports['community_bridge']:Bridge()
+
+Bridge.Progressbar.GenerateGradient(startColor, endColor, steps)
 ```
 
 #### Parameters
@@ -443,7 +501,9 @@ exports.community_bridge:GenerateGradient(startColor, endColor, steps)
 
 #### Example
 ```lua
-local gradient = exports.community_bridge:GenerateGradient('#ff0000', '#00ff00', 10)
+local Bridge = exports['community_bridge']:Bridge()
+
+local gradient = Bridge.Progressbar.GenerateGradient('#ff0000', '#00ff00', 10)
 for i, color in ipairs(gradient) do
     print('Step ' .. i .. ': ' .. color)
 end
@@ -461,7 +521,9 @@ Shared
 Applies ease-in-out interpolation.
 
 ```lua
-exports.community_bridge:EaseInOut(t)
+local Bridge = exports['community_bridge']:Bridge()
+
+Bridge.Progressbar.EaseInOut(t)
 ```
 
 #### Parameters
@@ -472,7 +534,9 @@ exports.community_bridge:EaseInOut(t)
 
 #### Example
 ```lua
-local eased = exports.community_bridge:EaseInOut(0.5)
+local Bridge = exports['community_bridge']:Bridge()
+
+local eased = Bridge.Progressbar.EaseInOut(0.5)
 print('Eased value: ' .. eased)
 ```
 
@@ -484,7 +548,9 @@ Shared
 Calculates bezier curve interpolation.
 
 ```lua
-exports.community_bridge:BezierCurve(t, p0, p1, p2, p3)
+local Bridge = exports['community_bridge']:Bridge()
+
+Bridge.Progressbar.BezierCurve(t, p0, p1, p2, p3)
 ```
 
 #### Parameters
@@ -499,7 +565,9 @@ exports.community_bridge:BezierCurve(t, p0, p1, p2, p3)
 
 #### Example
 ```lua
-local value = exports.community_bridge:BezierCurve(0.5, 0, 0.5, 0.5, 1)
+local Bridge = exports['community_bridge']:Bridge()
+
+local value = Bridge.Progressbar.BezierCurve(0.5, 0, 0.5, 0.5, 1)
 ```
 
 ### ClampValue
@@ -510,7 +578,9 @@ Shared
 Clamps a value between minimum and maximum bounds.
 
 ```lua
-exports.community_bridge:ClampValue(value, min, max)
+local Bridge = exports['community_bridge']:Bridge()
+
+Bridge.Progressbar.ClampValue(value, min, max)
 ```
 
 #### Parameters
@@ -523,7 +593,9 @@ exports.community_bridge:ClampValue(value, min, max)
 
 #### Example
 ```lua
-local clamped = exports.community_bridge:ClampValue(150, 0, 100)
+local Bridge = exports['community_bridge']:Bridge()
+
+local clamped = Bridge.Progressbar.ClampValue(150, 0, 100)
 print(clamped) -- 100
 ```
 
@@ -539,7 +611,9 @@ Shared
 Creates an animation configuration for progress bars.
 
 ```lua
-exports.community_bridge:CreateProgressAnimation(type, options)
+local Bridge = exports['community_bridge']:Bridge()
+
+Bridge.Progressbar.CreateProgressAnimation(type, options)
 ```
 
 #### Parameters
@@ -551,7 +625,9 @@ exports.community_bridge:CreateProgressAnimation(type, options)
 
 #### Example
 ```lua
-local animation = exports.community_bridge:CreateProgressAnimation('pulse', {
+local Bridge = exports['community_bridge']:Bridge()
+
+local animation = Bridge.Progressbar.CreateProgressAnimation('pulse', {
     duration = 1000,
     intensity = 0.2,
     repeat = true
@@ -566,7 +642,9 @@ Shared
 Gets predefined animation presets.
 
 ```lua
-exports.community_bridge:GetAnimationPresets()
+local Bridge = exports['community_bridge']:Bridge()
+
+Bridge.Progressbar.GetAnimationPresets()
 ```
 
 #### Returns
@@ -574,7 +652,9 @@ exports.community_bridge:GetAnimationPresets()
 
 #### Example
 ```lua
-local presets = exports.community_bridge:GetAnimationPresets()
+local Bridge = exports['community_bridge']:Bridge()
+
+local presets = Bridge.Progressbar.GetAnimationPresets()
 local smoothFade = presets.smoothFade
 local bouncySlide = presets.bouncySlide
 ```
@@ -591,7 +671,9 @@ Shared
 Creates a standardized progress event object.
 
 ```lua
-exports.community_bridge:CreateProgressEvent(type, progressName, data)
+local Bridge = exports['community_bridge']:Bridge()
+
+Bridge.Progressbar.CreateProgressEvent(type, progressName, data)
 ```
 
 #### Parameters
@@ -604,7 +686,9 @@ exports.community_bridge:CreateProgressEvent(type, progressName, data)
 
 #### Example
 ```lua
-local event = exports.community_bridge:CreateProgressEvent('complete', 'repair_task', {
+local Bridge = exports['community_bridge']:Bridge()
+
+local event = Bridge.Progressbar.CreateProgressEvent('complete', 'repair_task', {
     duration = 10000,
     success = true,
     playerId = 1
@@ -619,7 +703,9 @@ Shared
 Validates progress event structure.
 
 ```lua
-exports.community_bridge:ValidateProgressEvent(event)
+local Bridge = exports['community_bridge']:Bridge()
+
+Bridge.Progressbar.ValidateProgressEvent(event)
 ```
 
 #### Parameters
@@ -630,7 +716,9 @@ exports.community_bridge:ValidateProgressEvent(event)
 
 #### Example
 ```lua
-local valid = exports.community_bridge:ValidateProgressEvent(event)
+local Bridge = exports['community_bridge']:Bridge()
+
+local valid = Bridge.Progressbar.ValidateProgressEvent(event)
 if not valid then
     print('Invalid event structure')
 end
@@ -739,7 +827,7 @@ Provide sensible defaults:
 
 ```lua
 local function ApplyProgressDefaults(config)
-    local defaults = exports.community_bridge:GetProgressConfig()
+    local defaults = Bridge.Progressbar.GetProgressConfig()
     
     return {
         name = config.name,

@@ -23,7 +23,7 @@ Server-side functions for managing input requests and validation.
 
 ## Input Request Functions
 
-### `exports.community_bridge:RequestInput(playerId, config, callback)`
+### `Bridge.Input.RequestInput(playerId, config, callback)`
 
 Requests input from a specific player.
 
@@ -38,7 +38,7 @@ Requests input from a specific player.
 **Example:**
 ```lua
 -- Request player name from client
-exports.community_bridge:RequestInput(playerId, {
+Bridge.Input.RequestInput(playerId, {
     title = "Character Name",
     subtitle = "Enter your character name",
     placeholder = "John Doe",
@@ -48,14 +48,14 @@ exports.community_bridge:RequestInput(playerId, {
     if input then
         -- Process the name
         SetPlayerName(playerId, input)
-        exports.community_bridge:SendNotify(playerId, "Name updated!", "success")
+        Bridge.Input.SendNotify(playerId, "Name updated!", "success")
     else
-        exports.community_bridge:SendNotify(playerId, "Name change cancelled", "info")
+        Bridge.Input.SendNotify(playerId, "Name change cancelled", "info")
     end
 end)
 ```
 
-### `exports.community_bridge:RequestInputForm(playerId, config, callback)`
+### `Bridge.Input.RequestInputForm(playerId, config, callback)`
 
 Requests form input from a specific player.
 
@@ -73,7 +73,7 @@ Requests form input from a specific player.
 RegisterNetEvent('business:requestRegistration', function()
     local playerId = source
     
-    exports.community_bridge:RequestInputForm(playerId, {
+    Bridge.Input.RequestInputForm(playerId, {
         title = "Business Registration",
         subtitle = "Register your new business",
         fields = {
@@ -114,27 +114,27 @@ end)
 function CreateBusiness(playerId, data)
     -- Validate player has required money
     local cost = Config.BusinessRegistrationCost
-    if exports.community_bridge:GetMoney(playerId, 'bank') >= cost then
-        exports.community_bridge:RemoveMoney(playerId, 'bank', cost)
+    if Bridge.Input.GetMoney(playerId, 'bank') >= cost then
+        Bridge.Input.RemoveMoney(playerId, 'bank', cost)
         
         -- Insert business into database
         local businessId = MySQL.insert.await('INSERT INTO businesses (owner, name, type, description) VALUES (?, ?, ?, ?)', {
-            exports.community_bridge:GetIdentifier(playerId),
+            Bridge.Input.GetIdentifier(playerId),
             data.name,
             data.type,
             data.description or ''
         })
         
-        exports.community_bridge:SendNotify(playerId, "Business registered successfully!", "success")
+        Bridge.Input.SendNotify(playerId, "Business registered successfully!", "success")
     else
-        exports.community_bridge:SendNotify(playerId, "Insufficient funds for registration", "error")
+        Bridge.Input.SendNotify(playerId, "Insufficient funds for registration", "error")
     end
 end
 ```
 
 ## Input Validation Functions
 
-### `exports.community_bridge:ValidateServerInput(input, rules)`
+### `Bridge.Input.ValidateServerInput(input, rules)`
 
 Server-side input validation with comprehensive rules.
 
@@ -153,7 +153,7 @@ RegisterNetEvent('character:create', function(characterData)
     local playerId = source
     
     -- Validate first name
-    local valid, error = exports.community_bridge:ValidateServerInput(characterData.firstname, {
+    local valid, error = Bridge.Input.ValidateServerInput(characterData.firstname, {
         required = true,
         type = "string",
         minLength = 2,
@@ -162,12 +162,12 @@ RegisterNetEvent('character:create', function(characterData)
     })
     
     if not valid then
-        exports.community_bridge:SendNotify(playerId, "Invalid first name: " .. error, "error")
+        Bridge.Input.SendNotify(playerId, "Invalid first name: " .. error, "error")
         return
     end
     
     -- Validate age
-    valid, error = exports.community_bridge:ValidateServerInput(characterData.age, {
+    valid, error = Bridge.Input.ValidateServerInput(characterData.age, {
         required = true,
         type = "number",
         min = 18,
@@ -175,7 +175,7 @@ RegisterNetEvent('character:create', function(characterData)
     })
     
     if not valid then
-        exports.community_bridge:SendNotify(playerId, "Invalid age: " .. error, "error")
+        Bridge.Input.SendNotify(playerId, "Invalid age: " .. error, "error")
         return
     end
     
@@ -184,7 +184,7 @@ RegisterNetEvent('character:create', function(characterData)
 end)
 ```
 
-### `exports.community_bridge:SetServerValidationRule(name, rule)`
+### `Bridge.Input.SetServerValidationRule(name, rule)`
 
 Registers custom server-side validation rules.
 
@@ -195,7 +195,7 @@ Registers custom server-side validation rules.
 **Example:**
 ```lua
 -- Custom validation for unique usernames
-exports.community_bridge:SetServerValidationRule("uniqueUsername", function(username)
+Bridge.Input.SetServerValidationRule("uniqueUsername", function(username)
     local result = MySQL.scalar.await('SELECT COUNT(*) FROM users WHERE username = ?', {username})
     if result > 0 then
         return false, "Username already exists"
@@ -204,7 +204,7 @@ exports.community_bridge:SetServerValidationRule("uniqueUsername", function(user
 end)
 
 -- Usage in validation
-local valid, error = exports.community_bridge:ValidateServerInput(username, {
+local valid, error = Bridge.Input.ValidateServerInput(username, {
     required = true,
     custom = "uniqueUsername"
 })
@@ -212,7 +212,7 @@ local valid, error = exports.community_bridge:ValidateServerInput(username, {
 
 ## Input Form Templates
 
-### `exports.community_bridge:RequestPasswordChange(playerId, callback)`
+### `Bridge.Input.RequestPasswordChange(playerId, callback)`
 
 Requests password change form from player.
 
@@ -225,7 +225,7 @@ Requests password change form from player.
 RegisterNetEvent('account:requestPasswordChange', function()
     local playerId = source
     
-    exports.community_bridge:RequestPasswordChange(playerId, function(passwordData)
+    Bridge.Input.RequestPasswordChange(playerId, function(passwordData)
         if passwordData then
             -- Verify current password
             local currentHash = GetPlayerPassword(playerId)
@@ -233,16 +233,16 @@ RegisterNetEvent('account:requestPasswordChange', function()
                 -- Update password
                 local newHash = HashPassword(passwordData.new)
                 SetPlayerPassword(playerId, newHash)
-                exports.community_bridge:SendNotify(playerId, "Password updated successfully", "success")
+                Bridge.Input.SendNotify(playerId, "Password updated successfully", "success")
             else
-                exports.community_bridge:SendNotify(playerId, "Current password is incorrect", "error")
+                Bridge.Input.SendNotify(playerId, "Current password is incorrect", "error")
             end
         end
     end)
 end)
 ```
 
-### `exports.community_bridge:RequestContactForm(playerId, currentData, callback)`
+### `Bridge.Input.RequestContactForm(playerId, currentData, callback)`
 
 Requests contact information form.
 
@@ -257,10 +257,10 @@ RegisterNetEvent('profile:editContact', function()
     local playerId = source
     local currentContact = GetPlayerContact(playerId)
     
-    exports.community_bridge:RequestContactForm(playerId, currentContact, function(newContact)
+    Bridge.Input.RequestContactForm(playerId, currentContact, function(newContact)
         if newContact then
             UpdatePlayerContact(playerId, newContact)
-            exports.community_bridge:SendNotify(playerId, "Contact information updated", "success")
+            Bridge.Input.SendNotify(playerId, "Contact information updated", "success")
         end
     end)
 end)
@@ -268,7 +268,7 @@ end)
 
 ## Admin Input Functions
 
-### `exports.community_bridge:RequestAdminInput(playerId, config, callback)`
+### `Bridge.Input.RequestAdminInput(playerId, config, callback)`
 
 Special admin input with elevated permissions and logging.
 
@@ -283,12 +283,12 @@ Special admin input with elevated permissions and logging.
 RegisterCommand('setmoney', function(source, args)
     local playerId = source
     
-    if not exports.community_bridge:HasPermission(playerId, 'admin.money') then
-        exports.community_bridge:SendNotify(playerId, "Access denied", "error")
+    if not Bridge.Input.HasPermission(playerId, 'admin.money') then
+        Bridge.Input.SendNotify(playerId, "Access denied", "error")
         return
     end
     
-    exports.community_bridge:RequestAdminInput(playerId, {
+    Bridge.Input.RequestAdminInput(playerId, {
         title = "Set Player Money",
         subtitle = "Admin Command",
         fields = {
@@ -329,7 +329,7 @@ RegisterCommand('setmoney', function(source, args)
             -- Validate target player exists
             if GetPlayerName(adminData.targetId) then
                 -- Set money
-                exports.community_bridge:SetMoney(adminData.targetId, adminData.account, adminData.amount)
+                Bridge.Input.SetMoney(adminData.targetId, adminData.account, adminData.amount)
                 
                 -- Log admin action
                 LogAdminAction(playerId, 'setmoney', {
@@ -339,10 +339,10 @@ RegisterCommand('setmoney', function(source, args)
                     reason = adminData.reason
                 })
                 
-                exports.community_bridge:SendNotify(playerId, "Money set successfully", "success")
-                exports.community_bridge:SendNotify(adminData.targetId, "Your " .. adminData.account .. " has been updated", "info")
+                Bridge.Input.SendNotify(playerId, "Money set successfully", "success")
+                Bridge.Input.SendNotify(adminData.targetId, "Your " .. adminData.account .. " has been updated", "info")
             else
-                exports.community_bridge:SendNotify(playerId, "Invalid player ID", "error")
+                Bridge.Input.SendNotify(playerId, "Invalid player ID", "error")
             end
         end
     end)
@@ -351,7 +351,7 @@ end)
 
 ## Input Session Management
 
-### `exports.community_bridge:CreateInputSession(playerId, sessionData)`
+### `Bridge.Input.CreateInputSession(playerId, sessionData)`
 
 Creates a persistent input session for multi-step processes.
 
@@ -369,7 +369,7 @@ RegisterNetEvent('dealership:startPurchase', function(vehicleModel)
     local playerId = source
     
     -- Create input session
-    local sessionId = exports.community_bridge:CreateInputSession(playerId, {
+    local sessionId = Bridge.Input.CreateInputSession(playerId, {
         type = "vehicle_purchase",
         data = {model = vehicleModel},
         steps = {"financing", "customization", "confirmation"},
@@ -383,7 +383,7 @@ end)
 function StartFinancingStep(playerId, sessionId, vehicleModel)
     local vehiclePrice = GetVehiclePrice(vehicleModel)
     
-    exports.community_bridge:RequestInputForm(playerId, {
+    Bridge.Input.RequestInputForm(playerId, {
         title = "Vehicle Financing",
         subtitle = "Choose payment method",
         fields = {
@@ -410,18 +410,18 @@ function StartFinancingStep(playerId, sessionId, vehicleModel)
     }, function(financingData)
         if financingData then
             -- Update session and continue to next step
-            exports.community_bridge:UpdateInputSession(sessionId, {
+            Bridge.Input.UpdateInputSession(sessionId, {
                 financing = financingData
             })
             StartCustomizationStep(playerId, sessionId, vehicleModel)
         else
-            exports.community_bridge:CancelInputSession(sessionId)
+            Bridge.Input.CancelInputSession(sessionId)
         end
     end)
 end
 ```
 
-### `exports.community_bridge:UpdateInputSession(sessionId, data)`
+### `Bridge.Input.UpdateInputSession(sessionId, data)`
 
 Updates session data.
 
@@ -429,7 +429,7 @@ Updates session data.
 - `sessionId` (string): Session identifier
 - `data` (table): Data to add to session
 
-### `exports.community_bridge:GetInputSession(sessionId)`
+### `Bridge.Input.GetInputSession(sessionId)`
 
 Retrieves session data.
 
@@ -439,7 +439,7 @@ Retrieves session data.
 **Returns:**
 - `table|nil`: Session data or nil if not found
 
-### `exports.community_bridge:CancelInputSession(sessionId)`
+### `Bridge.Input.CancelInputSession(sessionId)`
 
 Cancels an input session.
 
@@ -472,7 +472,7 @@ end)
 
 ## Utility Functions
 
-### `exports.community_bridge:GetActiveInputs(playerId)`
+### `Bridge.Input.GetActiveInputs(playerId)`
 
 Gets list of active inputs for a player.
 
@@ -482,7 +482,7 @@ Gets list of active inputs for a player.
 **Returns:**
 - `table`: Array of active input IDs
 
-### `exports.community_bridge:CancelPlayerInputs(playerId)`
+### `Bridge.Input.CancelPlayerInputs(playerId)`
 
 Cancels all active inputs for a player.
 
@@ -494,7 +494,7 @@ Cancels all active inputs for a player.
 -- Cancel inputs when player disconnects
 AddEventHandler('playerDropped', function()
     local playerId = source
-    exports.community_bridge:CancelPlayerInputs(playerId)
+    Bridge.Input.CancelPlayerInputs(playerId)
 end)
 ```
 
@@ -521,12 +521,12 @@ end)
 -- Safe input request with error handling
 local function SafeRequestInput(playerId, config, callback)
     local success, result = pcall(function()
-        return exports.community_bridge:RequestInput(playerId, config, callback)
+        return Bridge.Input.RequestInput(playerId, config, callback)
     end)
     
     if not success then
         print("Input request error:", result)
-        exports.community_bridge:SendNotify(playerId, "Input system error", "error")
+        Bridge.Input.SendNotify(playerId, "Input system error", "error")
         return false
     end
     

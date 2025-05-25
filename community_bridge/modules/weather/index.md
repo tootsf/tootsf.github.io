@@ -177,17 +177,17 @@ Weather impacts various job activities:
 
 ```lua
 -- Set current weather
-exports.community_bridge:SetWeather('RAIN', true) -- true for gradual transition
+Bridge.Weather.SetWeather('RAIN', true) -- true for gradual transition
 
 -- Get current weather
-local weather = exports.community_bridge:GetCurrentWeather()
-print('Current weather: ' .. weather.type)
+local weather = Bridge.Weather.GetCurrentWeather()
+print('Current weather: ' .. Bridge.Weather.type)
 
 -- Set weather for specific region
-exports.community_bridge:SetRegionalWeather('downtown', 'FOGGY')
+Bridge.Weather.SetRegionalWeather('downtown', 'FOGGY')
 
 -- Enable automatic weather cycles
-exports.community_bridge:EnableWeatherCycle(true)
+Bridge.Weather.EnableWeatherCycle(true)
 
 -- Register weather change event
 RegisterNetEvent('weather:changed')
@@ -196,7 +196,7 @@ AddEventHandler('weather:changed', function(newWeather, oldWeather)
 end)
 
 -- Check if weather allows activity
-if exports.community_bridge:IsWeatherSuitable('CLEAR', 'CLOUDY') then
+if Bridge.Weather.IsWeatherSuitable('CLEAR', 'CLOUDY') then
     -- Start outdoor activity
 end
 ```

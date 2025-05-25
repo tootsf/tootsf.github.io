@@ -30,7 +30,9 @@ Client
 Creates and starts a progress bar with customizable options.
 
 ```lua
-exports.community_bridge:StartProgress(config, callback)
+local Bridge = exports['community_bridge']:Bridge()
+
+Bridge.Progressbar.StartProgress(config, callback)
 ```
 
 #### Parameters
@@ -49,7 +51,9 @@ exports.community_bridge:StartProgress(config, callback)
 
 #### Example
 ```lua
-exports.community_bridge:StartProgress({
+local Bridge = exports['community_bridge']:Bridge()
+
+Bridge.Progressbar.StartProgress({
     name = 'repair_vehicle',
     duration = 10000,
     label = 'Repairing vehicle...',
@@ -67,9 +71,9 @@ exports.community_bridge:StartProgress({
     }
 }, function(cancelled)
     if not cancelled then
-        exports.community_bridge:ShowNotification('Vehicle repaired!', 'success')
+        Bridge.Progressbar.ShowNotification('Vehicle repaired!', 'success')
     else
-        exports.community_bridge:ShowNotification('Repair cancelled', 'error')
+        Bridge.Progressbar.ShowNotification('Repair cancelled', 'error')
     end
 end)
 ```
@@ -82,7 +86,9 @@ Client
 Creates a circular progress indicator.
 
 ```lua
-exports.community_bridge:StartCircularProgress(config, callback)
+local Bridge = exports['community_bridge']:Bridge()
+
+Bridge.Progressbar.StartCircularProgress(config, callback)
 ```
 
 #### Parameters
@@ -91,7 +97,9 @@ exports.community_bridge:StartCircularProgress(config, callback)
 
 #### Example
 ```lua
-exports.community_bridge:StartCircularProgress({
+local Bridge = exports['community_bridge']:Bridge()
+
+Bridge.Progressbar.StartCircularProgress({
     name = 'lockpicking',
     duration = 8000,
     label = 'Picking lock...',
@@ -115,7 +123,9 @@ Client
 Stops an active progress bar.
 
 ```lua
-exports.community_bridge:StopProgress(name)
+local Bridge = exports['community_bridge']:Bridge()
+
+Bridge.Progressbar.StopProgress(name)
 ```
 
 #### Parameters
@@ -124,10 +134,10 @@ exports.community_bridge:StopProgress(name)
 #### Example
 ```lua
 -- Stop specific progress
-exports.community_bridge:StopProgress('repair_vehicle')
+Bridge.Progressbar.StopProgress('repair_vehicle')
 
 -- Stop all progress bars
-exports.community_bridge:StopProgress()
+Bridge.Progressbar.StopProgress()
 ```
 
 ### IsProgressActive
@@ -138,7 +148,9 @@ Client
 Checks if a progress bar is currently active.
 
 ```lua
-exports.community_bridge:IsProgressActive(name)
+local Bridge = exports['community_bridge']:Bridge()
+
+Bridge.Progressbar.IsProgressActive(name)
 ```
 
 #### Parameters
@@ -149,11 +161,13 @@ exports.community_bridge:IsProgressActive(name)
 
 #### Example
 ```lua
-if exports.community_bridge:IsProgressActive('repair_vehicle') then
+local Bridge = exports['community_bridge']:Bridge()
+
+if Bridge.Progressbar.IsProgressActive('repair_vehicle') then
     print('Vehicle repair in progress')
 end
 
-if exports.community_bridge:IsProgressActive() then
+if Bridge.Progressbar.IsProgressActive() then
     print('Some progress is active')
 end
 ```
@@ -170,7 +184,9 @@ Client
 Creates a progress bar with skill check integration.
 
 ```lua
-exports.community_bridge:StartSkillProgress(config, callback)
+local Bridge = exports['community_bridge']:Bridge()
+
+Bridge.Progressbar.StartSkillProgress(config, callback)
 ```
 
 #### Parameters
@@ -179,7 +195,9 @@ exports.community_bridge:StartSkillProgress(config, callback)
 
 #### Example
 ```lua
-exports.community_bridge:StartSkillProgress({
+local Bridge = exports['community_bridge']:Bridge()
+
+Bridge.Progressbar.StartSkillProgress({
     name = 'hacking',
     duration = 15000,
     label = 'Hacking system...',
@@ -197,9 +215,9 @@ exports.community_bridge:StartSkillProgress({
     }
 }, function(success, cancelled)
     if success and not cancelled then
-        exports.community_bridge:ShowNotification('System hacked!', 'success')
+        Bridge.Progressbar.ShowNotification('System hacked!', 'success')
     else
-        exports.community_bridge:ShowNotification('Hack failed', 'error')
+        Bridge.Progressbar.ShowNotification('Hack failed', 'error')
     end
 end)
 ```
@@ -212,7 +230,9 @@ Client
 Creates a progress bar with mini-game integration.
 
 ```lua
-exports.community_bridge:StartMinigameProgress(config, callback)
+local Bridge = exports['community_bridge']:Bridge()
+
+Bridge.Progressbar.StartMinigameProgress(config, callback)
 ```
 
 #### Parameters
@@ -221,7 +241,9 @@ exports.community_bridge:StartMinigameProgress(config, callback)
 
 #### Example
 ```lua
-exports.community_bridge:StartMinigameProgress({
+local Bridge = exports['community_bridge']:Bridge()
+
+Bridge.Progressbar.StartMinigameProgress({
     name = 'lockpicking_advanced',
     duration = 12000,
     label = 'Advanced lockpicking...',
@@ -233,7 +255,7 @@ exports.community_bridge:StartMinigameProgress({
     }
 }, function(success, score, cancelled)
     if success and not cancelled then
-        exports.community_bridge:ShowNotification('Lock picked! Score: ' .. score, 'success')
+        Bridge.Progressbar.ShowNotification('Lock picked! Score: ' .. score, 'success')
     end
 end)
 ```
@@ -250,7 +272,9 @@ Client
 Sets the visual theme for progress bars.
 
 ```lua
-exports.community_bridge:SetProgressTheme(theme)
+local Bridge = exports['community_bridge']:Bridge()
+
+Bridge.Progressbar.SetProgressTheme(theme)
 ```
 
 #### Parameters
@@ -258,7 +282,9 @@ exports.community_bridge:SetProgressTheme(theme)
 
 #### Example
 ```lua
-exports.community_bridge:SetProgressTheme({
+local Bridge = exports['community_bridge']:Bridge()
+
+Bridge.Progressbar.SetProgressTheme({
     background = '#1a1a1a',
     foreground = '#00ff88',
     text = '#ffffff',
@@ -276,7 +302,9 @@ Client
 Creates a progress bar with custom styling.
 
 ```lua
-exports.community_bridge:CreateCustomProgress(config, callback)
+local Bridge = exports['community_bridge']:Bridge()
+
+Bridge.Progressbar.CreateCustomProgress(config, callback)
 ```
 
 #### Parameters
@@ -285,7 +313,9 @@ exports.community_bridge:CreateCustomProgress(config, callback)
 
 #### Example
 ```lua
-exports.community_bridge:CreateCustomProgress({
+local Bridge = exports['community_bridge']:Bridge()
+
+Bridge.Progressbar.CreateCustomProgress({
     name = 'custom_craft',
     duration = 20000,
     label = 'Crafting item...',
@@ -305,7 +335,7 @@ exports.community_bridge:CreateCustomProgress({
     }
 }, function(cancelled)
     if not cancelled then
-        exports.community_bridge:ShowNotification('Item crafted!', 'success')
+        Bridge.Progressbar.ShowNotification('Item crafted!', 'success')
     end
 end)
 ```
@@ -322,7 +352,9 @@ Client
 Creates multiple progress bars simultaneously.
 
 ```lua
-exports.community_bridge:StartMultiProgress(progressBars, callback)
+local Bridge = exports['community_bridge']:Bridge()
+
+Bridge.Progressbar.StartMultiProgress(progressBars, callback)
 ```
 
 #### Parameters
@@ -352,7 +384,7 @@ local progressBars = {
     }
 }
 
-exports.community_bridge:StartMultiProgress(progressBars, function(results)
+Bridge.Progressbar.StartMultiProgress(progressBars, function(results)
     local allCompleted = true
     for _, result in ipairs(results) do
         if result.cancelled then
@@ -362,7 +394,7 @@ exports.community_bridge:StartMultiProgress(progressBars, function(results)
     end
     
     if allCompleted then
-        exports.community_bridge:ShowNotification('All tasks completed!', 'success')
+        Bridge.Progressbar.ShowNotification('All tasks completed!', 'success')
     end
 end)
 ```
@@ -375,7 +407,9 @@ Client
 Gets information about all active progress bars.
 
 ```lua
-exports.community_bridge:GetActiveProgressBars()
+local Bridge = exports['community_bridge']:Bridge()
+
+Bridge.Progressbar.GetActiveProgressBars()
 ```
 
 #### Returns
@@ -383,7 +417,9 @@ exports.community_bridge:GetActiveProgressBars()
 
 #### Example
 ```lua
-local activeBars = exports.community_bridge:GetActiveProgressBars()
+local Bridge = exports['community_bridge']:Bridge()
+
+local activeBars = Bridge.Progressbar.GetActiveProgressBars()
 for _, bar in ipairs(activeBars) do
     print('Active: ' .. bar.name .. ' - ' .. bar.progress .. '%')
 end
@@ -401,7 +437,9 @@ Client
 Creates a progress bar with synchronized player animation.
 
 ```lua
-exports.community_bridge:StartProgressWithAnimation(config, callback)
+local Bridge = exports['community_bridge']:Bridge()
+
+Bridge.Progressbar.StartProgressWithAnimation(config, callback)
 ```
 
 #### Parameters
@@ -410,7 +448,9 @@ exports.community_bridge:StartProgressWithAnimation(config, callback)
 
 #### Example
 ```lua
-exports.community_bridge:StartProgressWithAnimation({
+local Bridge = exports['community_bridge']:Bridge()
+
+Bridge.Progressbar.StartProgressWithAnimation({
     name = 'mechanic_work',
     duration = 15000,
     label = 'Working on engine...',
@@ -432,7 +472,7 @@ exports.community_bridge:StartProgressWithAnimation({
 }, function(cancelled)
     ClearPedTasks(PlayerPedId())
     if not cancelled then
-        exports.community_bridge:ShowNotification('Engine repaired!', 'success')
+        Bridge.Progressbar.ShowNotification('Engine repaired!', 'success')
     end
 end)
 ```
@@ -445,12 +485,16 @@ Client
 Creates a progress bar with a scenario animation.
 
 ```lua
-exports.community_bridge:StartProgressWithScenario(config, callback)
+local Bridge = exports['community_bridge']:Bridge()
+
+Bridge.Progressbar.StartProgressWithScenario(config, callback)
 ```
 
 #### Example
 ```lua
-exports.community_bridge:StartProgressWithScenario({
+local Bridge = exports['community_bridge']:Bridge()
+
+Bridge.Progressbar.StartProgressWithScenario({
     name = 'smoking',
     duration = 30000,
     label = 'Smoking...',
@@ -477,7 +521,9 @@ Client
 Sets a handler for progress start events.
 
 ```lua
-exports.community_bridge:OnProgressStart(handler)
+local Bridge = exports['community_bridge']:Bridge()
+
+Bridge.Progressbar.OnProgressStart(handler)
 ```
 
 #### Parameters
@@ -485,7 +531,9 @@ exports.community_bridge:OnProgressStart(handler)
 
 #### Example
 ```lua
-exports.community_bridge:OnProgressStart(function(progressName, config)
+local Bridge = exports['community_bridge']:Bridge()
+
+Bridge.Progressbar.OnProgressStart(function(progressName, config)
     print('Progress started: ' .. progressName)
     
     -- Disable certain UI elements
@@ -503,12 +551,16 @@ Client
 Sets a handler for progress update events.
 
 ```lua
-exports.community_bridge:OnProgressUpdate(handler)
+local Bridge = exports['community_bridge']:Bridge()
+
+Bridge.Progressbar.OnProgressUpdate(handler)
 ```
 
 #### Example
 ```lua
-exports.community_bridge:OnProgressUpdate(function(progressName, percentage)
+local Bridge = exports['community_bridge']:Bridge()
+
+Bridge.Progressbar.OnProgressUpdate(function(progressName, percentage)
     if progressName == 'important_task' then
         TriggerEvent('hud:updateProgressDisplay', percentage)
     end
@@ -523,12 +575,16 @@ Client
 Sets a handler for progress completion events.
 
 ```lua
-exports.community_bridge:OnProgressComplete(handler)
+local Bridge = exports['community_bridge']:Bridge()
+
+Bridge.Progressbar.OnProgressComplete(handler)
 ```
 
 #### Example
 ```lua
-exports.community_bridge:OnProgressComplete(function(progressName, cancelled)
+local Bridge = exports['community_bridge']:Bridge()
+
+Bridge.Progressbar.OnProgressComplete(function(progressName, cancelled)
     print('Progress "' .. progressName .. '" completed. Cancelled: ' .. tostring(cancelled))
     
     -- Re-enable UI elements
@@ -548,7 +604,9 @@ Client
 Updates the position of an active progress bar.
 
 ```lua
-exports.community_bridge:SetProgressPosition(name, position)
+local Bridge = exports['community_bridge']:Bridge()
+
+Bridge.Progressbar.SetProgressPosition(name, position)
 ```
 
 #### Parameters
@@ -557,10 +615,12 @@ exports.community_bridge:SetProgressPosition(name, position)
 
 #### Example
 ```lua
-exports.community_bridge:SetProgressPosition('repair_vehicle', 'top')
+local Bridge = exports['community_bridge']:Bridge()
+
+Bridge.Progressbar.SetProgressPosition('repair_vehicle', 'top')
 
 -- Custom position
-exports.community_bridge:SetProgressPosition('repair_vehicle', {
+Bridge.Progressbar.SetProgressPosition('repair_vehicle', {
     x = '25%',
     y = '80%'
 })
@@ -574,7 +634,9 @@ Client
 Updates the label of an active progress bar.
 
 ```lua
-exports.community_bridge:UpdateProgressLabel(name, label)
+local Bridge = exports['community_bridge']:Bridge()
+
+Bridge.Progressbar.UpdateProgressLabel(name, label)
 ```
 
 #### Parameters
@@ -583,7 +645,9 @@ exports.community_bridge:UpdateProgressLabel(name, label)
 
 #### Example
 ```lua
-exports.community_bridge:UpdateProgressLabel('download', 'Downloading... 50%')
+local Bridge = exports['community_bridge']:Bridge()
+
+Bridge.Progressbar.UpdateProgressLabel('download', 'Downloading... 50%')
 ```
 
 ### PauseProgress
@@ -594,12 +658,16 @@ Client
 Pauses an active progress bar.
 
 ```lua
-exports.community_bridge:PauseProgress(name)
+local Bridge = exports['community_bridge']:Bridge()
+
+Bridge.Progressbar.PauseProgress(name)
 ```
 
 #### Example
 ```lua
-exports.community_bridge:PauseProgress('repair_vehicle')
+local Bridge = exports['community_bridge']:Bridge()
+
+Bridge.Progressbar.PauseProgress('repair_vehicle')
 ```
 
 ### ResumeProgress
@@ -610,12 +678,16 @@ Client
 Resumes a paused progress bar.
 
 ```lua
-exports.community_bridge:ResumeProgress(name)
+local Bridge = exports['community_bridge']:Bridge()
+
+Bridge.Progressbar.ResumeProgress(name)
 ```
 
 #### Example
 ```lua
-exports.community_bridge:ResumeProgress('repair_vehicle')
+local Bridge = exports['community_bridge']:Bridge()
+
+Bridge.Progressbar.ResumeProgress('repair_vehicle')
 ```
 
 ---
@@ -628,7 +700,7 @@ Always clean up progress bars when resource stops:
 ```lua
 AddEventHandler('onResourceStop', function(resourceName)
     if resourceName == GetCurrentResourceName() then
-        exports.community_bridge:StopProgress()
+        Bridge.Progressbar.StopProgress()
     end
 end)
 ```
@@ -638,12 +710,12 @@ Handle progress errors gracefully:
 
 ```lua
 local success, error = pcall(function()
-    exports.community_bridge:StartProgress(config, callback)
+    Bridge.Progressbar.StartProgress(config, callback)
 end)
 
 if not success then
     print('Progress error: ' .. error)
-    exports.community_bridge:ShowNotification('Progress failed to start', 'error')
+    Bridge.Progressbar.ShowNotification('Progress failed to start', 'error')
 end
 ```
 
@@ -651,7 +723,9 @@ end
 Use appropriate update intervals:
 
 ```lua
-exports.community_bridge:StartProgress({
+local Bridge = exports['community_bridge']:Bridge()
+
+Bridge.Progressbar.StartProgress({
     name = 'long_task',
     duration = 60000,
     updateInterval = 500, -- Update every 500ms instead of default 100ms
@@ -666,7 +740,7 @@ exports.community_bridge:StartProgress({
 ### Crafting System
 ```lua
 local function StartCrafting(item, duration)
-    exports.community_bridge:StartProgressWithAnimation({
+    Bridge.Progressbar.StartProgressWithAnimation({
         name = 'crafting_' .. item,
         duration = duration,
         label = 'Crafting ' .. item .. '...',
@@ -679,7 +753,7 @@ local function StartCrafting(item, duration)
         ClearPedTasks(PlayerPedId())
         if not cancelled then
             TriggerServerEvent('inventory:addItem', item, 1)
-            exports.community_bridge:ShowNotification('Crafted ' .. item, 'success')
+            Bridge.Progressbar.ShowNotification('Crafted ' .. item, 'success')
         end
     end)
 end
@@ -693,7 +767,7 @@ local function ShowLoadingProgress(stages)
     local function nextStage()
         if currentStage <= #stages then
             local stage = stages[currentStage]
-            exports.community_bridge:StartProgress({
+            Bridge.Progressbar.StartProgress({
                 name = 'loading_stage_' .. currentStage,
                 duration = stage.duration,
                 label = stage.label,
@@ -703,7 +777,7 @@ local function ShowLoadingProgress(stages)
                 nextStage()
             end)
         else
-            exports.community_bridge:ShowNotification('Loading complete!', 'success')
+            Bridge.Progressbar.ShowNotification('Loading complete!', 'success')
         end
     end
     

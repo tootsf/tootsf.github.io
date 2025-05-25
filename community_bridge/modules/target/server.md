@@ -23,7 +23,7 @@ Server-side functions for managing target configurations and synchronization.
 
 ## Target Management Functions
 
-### `exports.community_bridge:RegisterGlobalTarget(config)`
+### `Bridge.Target.RegisterGlobalTarget(config)`
 
 Registers a target configuration that applies to all players.
 
@@ -41,7 +41,7 @@ Registers a target configuration that applies to all players.
 **Example:**
 ```lua
 -- Register ATM targets for all players
-exports.community_bridge:RegisterGlobalTarget({
+Bridge.Target.RegisterGlobalTarget({
     name = "atm_targets",
     models = {"prop_atm_01", "prop_atm_02", "prop_atm_03"},
     options = {
@@ -55,7 +55,7 @@ exports.community_bridge:RegisterGlobalTarget({
 })
 ```
 
-### `exports.community_bridge:RegisterPlayerTarget(playerId, config)`
+### `Bridge.Target.RegisterPlayerTarget(playerId, config)`
 
 Registers a target configuration for a specific player.
 
@@ -70,7 +70,7 @@ Registers a target configuration for a specific player.
 ```lua
 -- Job-specific targets for police officers
 local function SetupPoliceTargets(playerId)
-    exports.community_bridge:RegisterPlayerTarget(playerId, {
+    Bridge.Target.RegisterPlayerTarget(playerId, {
         name = "police_targets",
         models = {"s_m_y_cop_01", "s_f_y_cop_01"},
         options = {
@@ -96,12 +96,12 @@ RegisterNetEvent('job:setJob', function(job)
     if job == "police" then
         SetupPoliceTargets(playerId)
     else
-        exports.community_bridge:RemovePlayerTargets(playerId, "police_targets")
+        Bridge.Target.RemovePlayerTargets(playerId, "police_targets")
     end
 end)
 ```
 
-### `exports.community_bridge:UpdateTargetConfig(name, config)`
+### `Bridge.Target.UpdateTargetConfig(name, config)`
 
 Updates an existing target configuration.
 
@@ -115,7 +115,7 @@ Updates an existing target configuration.
 **Example:**
 ```lua
 -- Update shop hours
-exports.community_bridge:UpdateTargetConfig("general_store", {
+Bridge.Target.UpdateTargetConfig("general_store", {
     options = {
         {
             name = "shop",
@@ -140,7 +140,7 @@ exports.community_bridge:UpdateTargetConfig("general_store", {
 
 ## Synchronization Functions
 
-### `exports.community_bridge:SyncTargetToPlayer(playerId, name)`
+### `Bridge.Target.SyncTargetToPlayer(playerId, name)`
 
 Synchronizes a target configuration to a specific player.
 
@@ -156,11 +156,11 @@ Synchronizes a target configuration to a specific player.
 -- Sync new business targets when player becomes owner
 RegisterNetEvent('business:setOwner', function(businessId)
     local playerId = source
-    exports.community_bridge:SyncTargetToPlayer(playerId, "business_" .. businessId)
+    Bridge.Target.SyncTargetToPlayer(playerId, "business_" .. businessId)
 end)
 ```
 
-### `exports.community_bridge:SyncTargetToAll(name)`
+### `Bridge.Target.SyncTargetToAll(name)`
 
 Synchronizes a target configuration to all online players.
 
@@ -176,13 +176,13 @@ Synchronizes a target configuration to all online players.
 RegisterNetEvent('event:start', function(eventType)
     local eventTargets = Config.EventTargets[eventType]
     if eventTargets then
-        exports.community_bridge:RegisterGlobalTarget(eventTargets)
-        exports.community_bridge:SyncTargetToAll("event_" .. eventType)
+        Bridge.Target.RegisterGlobalTarget(eventTargets)
+        Bridge.Target.SyncTargetToAll("event_" .. eventType)
     end
 end)
 ```
 
-### `exports.community_bridge:RemovePlayerTargets(playerId, name)`
+### `Bridge.Target.RemovePlayerTargets(playerId, name)`
 
 Removes target configuration from a specific player.
 
@@ -198,13 +198,13 @@ Removes target configuration from a specific player.
 -- Remove job targets when player quits job
 RegisterNetEvent('job:quitJob', function(oldJob)
     local playerId = source
-    exports.community_bridge:RemovePlayerTargets(playerId, oldJob .. "_targets")
+    Bridge.Target.RemovePlayerTargets(playerId, oldJob .. "_targets")
 end)
 ```
 
 ## Dynamic Target Creation
 
-### `exports.community_bridge:CreateDynamicTarget(config)`
+### `Bridge.Target.CreateDynamicTarget(config)`
 
 Creates a target that can be dynamically modified.
 
@@ -240,7 +240,7 @@ local function GenerateShopTarget()
     end
 end
 
-exports.community_bridge:CreateDynamicTarget({
+Bridge.Target.CreateDynamicTarget({
     name = "dynamic_shop",
     updateInterval = 30000, -- 30 seconds
     coords = vector3(25.0, -1347.0, 29.0),
@@ -250,7 +250,7 @@ exports.community_bridge:CreateDynamicTarget({
 
 ## Event-Driven Targets
 
-### `exports.community_bridge:CreateEventTarget(eventName, config)`
+### `Bridge.Target.CreateEventTarget(eventName, config)`
 
 Creates targets that respond to specific events.
 
@@ -264,7 +264,7 @@ Creates targets that respond to specific events.
 **Example:**
 ```lua
 -- Target that appears during robberies
-exports.community_bridge:CreateEventTarget("robbery:start", {
+Bridge.Target.CreateEventTarget("robbery:start", {
     name = "robbery_escape",
     coords = vector3(150.0, -1040.0, 29.0),
     options = {
@@ -277,14 +277,14 @@ exports.community_bridge:CreateEventTarget("robbery:start", {
     },
     duration = 300000, -- 5 minutes
     onExpire = function()
-        exports.community_bridge:RemoveGlobalTarget("robbery_escape")
+        Bridge.Target.RemoveGlobalTarget("robbery_escape")
     end
 })
 ```
 
 ## Permission Management
 
-### `exports.community_bridge:SetTargetPermission(name, permission)`
+### `Bridge.Target.SetTargetPermission(name, permission)`
 
 Sets permission requirements for a target.
 
@@ -298,15 +298,15 @@ Sets permission requirements for a target.
 **Example:**
 ```lua
 -- Require admin permission for admin targets
-exports.community_bridge:SetTargetPermission("admin_panel", function(playerId)
-    return exports.community_bridge:HasPermission(playerId, "admin.panel")
+Bridge.Target.SetTargetPermission("admin_panel", function(playerId)
+    return Bridge.Target.HasPermission(playerId, "admin.panel")
 end)
 
 -- Simple job requirement
-exports.community_bridge:SetTargetPermission("mechanic_tools", "job.mechanic")
+Bridge.Target.SetTargetPermission("mechanic_tools", "job.mechanic")
 ```
 
-### `exports.community_bridge:CheckTargetPermission(playerId, targetName)`
+### `Bridge.Target.CheckTargetPermission(playerId, targetName)`
 
 Checks if a player has permission for a target.
 
@@ -322,8 +322,8 @@ Checks if a player has permission for a target.
 RegisterNetEvent('target:interact', function(targetName, optionName)
     local playerId = source
     
-    if not exports.community_bridge:CheckTargetPermission(playerId, targetName) then
-        exports.community_bridge:SendNotify(playerId, "Access denied", "error")
+    if not Bridge.Target.CheckTargetPermission(playerId, targetName) then
+        Bridge.Target.SendNotify(playerId, "Access denied", "error")
         return
     end
     
@@ -334,7 +334,7 @@ end)
 
 ## Configuration Functions
 
-### `exports.community_bridge:SetGlobalTargetConfig(config)`
+### `Bridge.Target.SetGlobalTargetConfig(config)`
 
 Sets global configuration for the target system.
 
@@ -343,7 +343,9 @@ Sets global configuration for the target system.
 
 **Example:**
 ```lua
-exports.community_bridge:SetGlobalTargetConfig({
+local Bridge = exports['community_bridge']:Bridge()
+
+Bridge.Target.SetGlobalTargetConfig({
     defaultDistance = 3.0,
     enableOutlines = true,
     maxTargetsPerEntity = 5,
@@ -352,7 +354,7 @@ exports.community_bridge:SetGlobalTargetConfig({
 })
 ```
 
-### `exports.community_bridge:GetTargetConfig(name)`
+### `Bridge.Target.GetTargetConfig(name)`
 
 Gets configuration for a specific target.
 
@@ -364,7 +366,9 @@ Gets configuration for a specific target.
 
 **Example:**
 ```lua
-local config = exports.community_bridge:GetTargetConfig("atm_targets")
+local Bridge = exports['community_bridge']:Bridge()
+
+local config = Bridge.Target.GetTargetConfig("atm_targets")
 if config then
     print("ATM targets found with", #config.options, "options")
 end
@@ -372,7 +376,7 @@ end
 
 ## Analytics and Monitoring
 
-### `exports.community_bridge:LogTargetInteraction(playerId, targetName, option)`
+### `Bridge.Target.LogTargetInteraction(playerId, targetName, option)`
 
 Logs target interactions for analytics.
 
@@ -385,11 +389,11 @@ Logs target interactions for analytics.
 ```lua
 RegisterNetEvent('target:used', function(targetName, optionName)
     local playerId = source
-    exports.community_bridge:LogTargetInteraction(playerId, targetName, optionName)
+    Bridge.Target.LogTargetInteraction(playerId, targetName, optionName)
 end)
 ```
 
-### `exports.community_bridge:GetTargetStats(targetName, timeframe)`
+### `Bridge.Target.GetTargetStats(targetName, timeframe)`
 
 Gets usage statistics for a target.
 
@@ -402,7 +406,9 @@ Gets usage statistics for a target.
 
 **Example:**
 ```lua
-local stats = exports.community_bridge:GetTargetStats("atm_targets", "day")
+local Bridge = exports['community_bridge']:Bridge()
+
+local stats = Bridge.Target.GetTargetStats("atm_targets", "day")
 print("ATM used", stats.totalInteractions, "times today")
 print("Most popular ATM:", stats.mostUsedLocation)
 ```
@@ -415,13 +421,13 @@ print("Most popular ATM:", stats.mostUsedLocation)
 -- Player connected - sync all global targets
 AddEventHandler('playerConnecting', function()
     local playerId = source
-    exports.community_bridge:SyncAllGlobalTargets(playerId)
+    Bridge.Target.SyncAllGlobalTargets(playerId)
 end)
 
 -- Clean up player-specific targets on disconnect
 AddEventHandler('playerDropped', function()
     local playerId = source
-    exports.community_bridge:CleanupPlayerTargets(playerId)
+    Bridge.Target.CleanupPlayerTargets(playerId)
 end)
 
 -- Target system events
@@ -429,7 +435,7 @@ RegisterNetEvent('community_bridge:targetInteraction', function(targetName, opti
     local playerId = source
     
     -- Log interaction
-    exports.community_bridge:LogTargetInteraction(playerId, targetName, optionName)
+    Bridge.Target.LogTargetInteraction(playerId, targetName, optionName)
     
     -- Handle specific targets
     if targetName == "vehicle_dealership" then
@@ -450,7 +456,7 @@ RegisterNetEvent('business:purchased', function(businessData)
     local playerId = source
     
     -- Create management targets for owner
-    exports.community_bridge:RegisterPlayerTarget(playerId, {
+    Bridge.Target.RegisterPlayerTarget(playerId, {
         name = "business_" .. businessData.id,
         coords = {businessData.coords},
         options = {
@@ -472,7 +478,7 @@ RegisterNetEvent('business:purchased', function(businessData)
     })
     
     -- Create customer targets for everyone else
-    exports.community_bridge:RegisterGlobalTarget({
+    Bridge.Target.RegisterGlobalTarget({
         name = "business_customer_" .. businessData.id,
         coords = {businessData.coords},
         options = {
@@ -498,7 +504,7 @@ local function UpdateHeistTargets()
     if activeHeist then
         -- Add heist-specific targets
         for _, location in pairs(activeHeist.locations) do
-            exports.community_bridge:RegisterGlobalTarget({
+            Bridge.Target.RegisterGlobalTarget({
                 name = "heist_" .. location.id,
                 coords = {location.coords},
                 options = {
@@ -514,7 +520,7 @@ local function UpdateHeistTargets()
         end
     else
         -- Remove heist targets
-        exports.community_bridge:RemoveGlobalTargets("heist_*")
+        Bridge.Target.RemoveGlobalTargets("heist_*")
     end
 end
 
@@ -551,12 +557,12 @@ local TargetManager = {
 
 function TargetManager:RegisterJobTargets(job, targets)
     self.jobs[job] = targets
-    exports.community_bridge:RegisterGlobalTarget(targets)
+    Bridge.Target.RegisterGlobalTarget(targets)
 end
 
 function TargetManager:CleanupJobTargets(job)
     if self.jobs[job] then
-        exports.community_bridge:RemoveGlobalTarget(self.jobs[job].name)
+        Bridge.Target.RemoveGlobalTarget(self.jobs[job].name)
         self.jobs[job] = nil
     end
 end

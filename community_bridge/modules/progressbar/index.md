@@ -116,7 +116,7 @@ Progress bars can be embedded in menus and UI components.
 
 ```lua
 -- Basic progress bar
-exports.community_bridge:StartProgress({
+Bridge.Progressbar.StartProgress({
     name = 'loading_data',
     duration = 5000,
     label = 'Loading player data...',
