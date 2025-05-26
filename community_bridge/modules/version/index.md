@@ -17,7 +17,8 @@ The Version module provides automatic version checking functionality for FiveM r
 1. TOC
 {:toc}
 
-## Overview
+## 📚 Overview
+---
 
 The Version module offers:
 
@@ -28,12 +29,14 @@ The Version module offers:
 - **Tebex Support**: Special handling for escrowed resources
 - **Startup Integration**: Automatic version check on resource start
 
-## Available Functions
+## 📚 Available Functions
+---
 
 ### Server Functions
 - `Bridge.Version.VersionChecker()` - Check for updates against GitHub repository
 
-## Module Structure
+## 📚 Module Structure
+---
 
 ```
 version/

@@ -7,33 +7,30 @@ permalink: /community_bridge/
 ---
 
 # Community Bridge
-{: .no_toc }
-
-Community Bridge is a comprehensive FiveM resource that provides a unified API for interacting with various frameworks and systems. It acts as an abstraction layer that allows developers to write framework-agnostic code while supporting multiple popular frameworks like ESX, QBCore, and others.
-
-## Table of contents
-{: .no_toc .text-delta }
-
-1. TOC
-{:toc}
 
 ---
 
-## Overview
+## 📚 Overview
 
 The Community Bridge resource consists of multiple modules, each designed to handle specific aspects of FiveM server functionality. Whether you're working with inventory systems, player frameworks, notifications, or complex UI interactions, Community Bridge provides consistent APIs across different server configurations.
 
-## Key Features
+---
 
-- **Framework Agnostic**: Works seamlessly with ESX, QBCore, and other popular frameworks
-- **Modular Design**: Use only the modules you need for your specific project
-- **Consistent API**: Same function calls work across different underlying systems
-- **Extensive Documentation**: Comprehensive guides and examples for all functions
-- **Active Development**: Regular updates and community-driven improvements
+## 📚 Key Features
 
-## Getting Started
+- **🔧 Framework Agnostic**: Works seamlessly with ESX, QBCore, and other popular frameworks
+- **📦 Modular Design**: Use only the modules you need
+- **🎯 Consistent API**: Same function calls work across different underlying systems
+- **📚 Extensive Documentation**: Comprehensive guides and examples for all functions
+- **🚀 Active Development**: Regular updates and community-driven improvements
+
+---
+
+## 📚 Getting Started
 
 To begin using Community Bridge, explore the available modules in the sections below. Each module is fully documented with function signatures, examples, and best practices.
+
+---
 
 ## Module Categories
 

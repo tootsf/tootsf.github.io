@@ -20,7 +20,7 @@ Server-side weather management and synchronization in Community Bridge.
 
 ---
 
-## Overview
+## 📚 Overview
 
 The Weather server module provides centralized weather management, synchronization across clients, weather scheduling, and administrative controls for weather systems in FiveM servers.
 

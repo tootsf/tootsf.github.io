@@ -20,7 +20,7 @@ Shared weather utilities and configurations for Community Bridge weather systems
 
 ---
 
-## Overview
+## 📚 Overview
 
 The Weather shared module provides common utilities, weather type definitions, and configuration functions used by both client and server-side weather systems.
 

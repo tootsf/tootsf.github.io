@@ -7,16 +7,25 @@ nav_order: 1
 ---
 
 # Weather - Client Functions
-{: .no_toc }
-
-Client-side weather management and environmental effects in Community Bridge.
-{: .fs-6 .fw-300 }
 
 ## Table of contents
 {: .no_toc .text-delta }
 
 1. TOC
 {:toc}
+
+---
+
+## 📚 Weather Functions
+
+---
+
+## 🔹 SetWeatherType
+
+```lua
+local Bridge = exports['community_bridge']:Bridge()
+Bridge.Weather.SetWeatherType('EXTRASUNNY')
+```
 
 ---
 

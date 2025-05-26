@@ -19,7 +19,9 @@ Server-side functions for automatic version checking and update notifications.
 
 ---
 
-## Bridge.Version.VersionChecker
+## 📚 Overview
+
+## 🔹 VersionChecker
 
 Checks for updates by comparing the current resource version against the latest GitHub release.
 

@@ -7,10 +7,6 @@ nav_order: 2
 ---
 
 # Skills - Client Functions
-{: .no_toc }
-
-Client-side functions for skill progression display, UI management, and player feedback.
-{: .fs-6 .fw-300 }
 
 ## Table of contents
 {: .no_toc .text-delta }
@@ -301,12 +297,11 @@ end)
 
 ---
 
-## Progress Indicators
+## 📚 Progress Indicators
 
-### ShowXPGain
-{: .d-inline-block }
-Client
-{: .label .label-blue }
+---
+
+## 🔹 ShowXPGain
 
 ```lua
 Bridge.Skills.ShowXPGain(skillName, xpAmount, reason)
@@ -336,34 +331,19 @@ end)
 
 ---
 
-### UpdateSkillOverlay
-{: .d-inline-block }
-Client
-{: .label .label-blue }
+## 📚 Best Practices
 
-```lua
-Bridge.Skills.UpdateSkillOverlay(visible, skillData)
-```
+---
 
-Updates the skill progress overlay display.
+## 📚 Performance Optimization
 
-**Parameters:**
-- `visible` (boolean) - Whether to show the overlay
-- `skillData` (table, optional) - Current skill information
+---
 
-**Example:**
-```lua
-local Bridge = exports['community_bridge']:Bridge()
+## 📚 Error Handling
 
--- Show skill overlay during activities
-local skillOverlayActive = false
+---
 
-RegisterNetEvent('skills:toggleOverlay')
-AddEventHandler('skills:toggleOverlay', function(show, data)
-    skillOverlayActive = show
-    Bridge.Skills.UpdateSkillOverlay(show, data)
-end)
-```
+## 📚 Memory Management
 
 ---
 
@@ -415,59 +395,5 @@ AddEventHandler('crafting:completed', function(recipe, quality)
     TriggerServerEvent('skills:gainXP', 'crafting', baseXP + qualityBonus + skillBonus, 'crafted_' .. recipe.name)
     
     Bridge.Skills.StopSkillActivity("crafting", "recipe_creation")
-end)
-```
-
----
-
-## Best Practices
-
-### Performance Optimization
-```lua
-local Bridge = exports['community_bridge']:Bridge()
-
--- Debounce skill updates
-local lastSkillUpdate = {}
-
-function UpdateSkillSafely(skillName, data)
-    local now = GetGameTimer()
-    if lastSkillUpdate[skillName] and now - lastSkillUpdate[skillName] < 1000 then
-        return -- Prevent spam updates
-    end
-    
-    lastSkillUpdate[skillName] = now
-    Bridge.Skills.UpdateSkillBar(skillName, data.percentage)
-end
-```
-
-### Error Handling
-```lua
-local Bridge = exports['community_bridge']:Bridge()
-
-function SafeSkillOperation(operation, ...)
-    local success, result = pcall(operation, ...)
-    if not success then
-        print("Skill operation failed: " .. tostring(result))
-        return false
-    end
-    return result
-end
-
--- Usage
-SafeSkillOperation(Bridge.Skills.ShowSkillProgress, "driving", 5, 1250, 2000)
-```
-
-### Memory Management
-```lua
-local Bridge = exports['community_bridge']:Bridge()
-
--- Clean up skill activities on resource stop
-AddEventHandler('onResourceStop', function(resourceName)
-    if resourceName == GetCurrentResourceName() then
-        -- Stop all active skill tracking
-        for skillName, activityType in pairs(activeSkillActivities) do
-            Bridge.Skills.StopSkillActivity(skillName, activityType)
-        end
-    end
 end)
 ```

@@ -7,9 +7,6 @@ nav_order: 1
 ---
 
 # Server Functions
-{: .no_toc }
-
-Server-side functions for business and organization account management across multiple banking systems.
 
 ## Table of contents
 {: .no_toc .text-delta }
@@ -19,210 +16,20 @@ Server-side functions for business and organization account management across mu
 
 ---
 
-## 🔹 GetAccountMoney
-
-Retrieves account balance and information for a specified business or organization account.
-
-### Syntax
-
-```lua
-local Bridge = exports['community_bridge']:Bridge()
-Bridge.Managment.GetAccountMoney(account)
-```
-
-### Parameters
-
-| Parameter | Type | Description |
-|-----------|------|-------------|
-| `account` | `string` | Account identifier (e.g., "police", "ambulance", "mechanic") |
-
-### Returns
-
-| Type | Description |
-|------|-------------|
-| `table` | Account data including balance and details, empty table if not supported |
-
-### Example
-
-```lua
-local Bridge = exports['community_bridge']:Bridge()
-local policeAccount = Bridge.Managment.GetAccountMoney("police")
-
-if policeAccount and policeAccount.money then
-    print("Police department balance: $" .. policeAccount.money)
-    print("Account name: " .. policeAccount.name)
-else
-    print("Could not retrieve police account information")
-end
-```
-
-### Return Data Structure
-
-Depending on the banking system, the returned table may contain:
-
-```lua
-{
-    money = 15000,           -- Account balance
-    name = "Police Department", -- Account display name
-    type = "job",            -- Account type
-    -- Additional system-specific fields
-}
-```
-
-### Integration Behavior
-
-- **qb-banking**: Returns full account object with balance and metadata
-- **Renewed-Banking**: Returns account information from society system
-- **okokBanking**: Returns OKOK-specific account structure
-- **Default**: Returns empty table with error message
+## 📚 Practical Usage Examples
 
 ---
 
----
-
-## 🔹 AddAccountMoney
-
-Adds money to a specified business or organization account with transaction logging.
-
-### Syntax
+## 📚 Automated Salary System
 
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
-Bridge.Managment.AddAccountMoney(account, amount, reason)
-```
-
-### Parameters
-
-| Parameter | Type | Description |
-|-----------|------|-------------|
-| `account` | `string` | Account identifier to add money to |
-| `amount` | `number` | Amount of money to add (positive number) |
-| `reason` | `string` | Reason for the transaction (for logging) |
-
-### Returns
-
-| Type | Description |
-|------|-------------|
-| `boolean` | `true` if money added successfully, `false` if failed or not supported |
-
-### Example
-
-```lua
-local Bridge = exports['community_bridge']:Bridge()
--- Add money to police department
-local success = Bridge.Managment.AddAccountMoney("police", 5000, "Evidence room funding")
-
-if success then
-    print("Successfully added $5000 to police account")
-else
-    print("Failed to add money to police account")
-end
-
--- Add money from government budget
-local govBudget = Bridge.Managment.AddAccountMoney("ambulance", 10000, "Monthly government allocation")
-```
-
-### Common Account Types
-
-```lua
-local Bridge = exports['community_bridge']:Bridge()
--- Job accounts
-Bridge.Managment.AddAccountMoney("police", 5000, "Equipment purchase")
-Bridge.Managment.AddAccountMoney("ambulance", 3000, "Medical supplies")
-Bridge.Managment.AddAccountMoney("mechanic", 2500, "Tool upgrade")
-
--- Business accounts
-Bridge.Managment.AddAccountMoney("import_business", 15000, "Car sales profit")
-Bridge.Managment.AddAccountMoney("vanilla_unicorn", 8000, "Daily revenue")
-
--- Gang accounts (if supported)
-Bridge.Managment.AddAccountMoney("ballas", 10000, "Territory earnings")
+-- Example salary system code using Bridge pattern
 ```
 
 ---
 
-## 🔹 RemoveAccountMoney
-
-Removes money from a specified business or organization account with transaction logging.
-
-### Syntax
-
-```lua
-local Bridge = exports['community_bridge']:Bridge()
-Bridge.Managment.RemoveAccountMoney(account, amount, reason)
-```
-
-### Parameters
-
-| Parameter | Type | Description |
-|-----------|------|-------------|
-| `account` | `string` | Account identifier to remove money from |
-| `amount` | `number` | Amount of money to remove (positive number) |
-| `reason` | `string` | Reason for the transaction (for logging) |
-
-### Returns
-
-| Type | Description |
-|------|-------------|
-| `boolean` | `true` if money removed successfully, `false` if failed, insufficient funds, or not supported |
-
-### Example
-
-```lua
-local Bridge = exports['community_bridge']:Bridge()
--- Remove money for expenses
-local success = Bridge.Managment.RemoveAccountMoney("police", 1500, "Monthly vehicle maintenance")
-
-if success then
-    print("Successfully deducted $1500 from police account")
-else
-    print("Failed to remove money - insufficient funds or error")
-end
-
--- Check balance before large expense
-local accountData = Bridge.Managment.GetAccountMoney("ambulance")
-if accountData.money >= 5000 then
-    local success = Bridge.Managment.RemoveAccountMoney("ambulance", 5000, "New ambulance purchase")
-    if success then
-        print("Ambulance purchased successfully")
-    end
-else
-    print("Insufficient funds for ambulance purchase")
-end
-```
-
-## Practical Usage Examples
-
-### Automated Salary System
-
-```lua
--- Pay salaries to all online job members
-function PayJobSalaries()
-    local Bridge = exports['community_bridge']:Bridge()
-    local jobs = {"police", "ambulance", "mechanic", "taxi"}
-    
-    for _, jobName in pairs(jobs) do
-        local onlineCount = GetOnlineJobCount(jobName)
-        local totalSalary = onlineCount * 500 -- $500 per person
-        
-        if totalSalary > 0 then
-            local accountData = Bridge.Managment.GetAccountMoney(jobName)
-            
-            if accountData.money >= totalSalary then
-                local success = Bridge.Managment.RemoveAccountMoney(jobName, totalSalary, "Weekly salary payment")
-                if success then
-                    TriggerEvent('payroll:distributeSalaries', jobName, 500)
-                    print("Paid salaries for " .. jobName .. ": $" .. totalSalary)
-                end
-            else
-                print("Insufficient funds for " .. jobName .. " salaries")
-            end
-        end
-    end
-end
-```
-
-### Business Revenue Distribution
+## 📚 Business Revenue Distribution
 
 ```lua
 -- Distribute business profits
@@ -239,36 +46,6 @@ function DistributeBusinessProfits(businessName, totalRevenue)
         Bridge.Managment.AddAccountMoney("government", governmentTax, "Business tax from " .. businessName)
         
         print("Business " .. businessName .. " earned $" .. businessProfit .. " (tax: $" .. governmentTax .. ")")
-    end
-end
-```
-
-### Equipment Purchase System
-
-```lua
--- Purchase equipment for job
-function PurchaseJobEquipment(playerId, jobName, itemName, cost)
-    local Bridge = exports['community_bridge']:Bridge()
-    local accountData = Bridge.Managment.GetAccountMoney(jobName)
-    
-    if not accountData or accountData.money < cost then
-        TriggerClientEvent('showNotification', playerId, 'Insufficient job funds', 'error')
-        return false
-    end
-    
-    local success = Bridge.Managment.RemoveAccountMoney(jobName, cost, "Equipment purchase: " .. itemName)
-    
-    if success then
-        -- Give item to player
-        exports['inventory']:AddItem(playerId, itemName, 1)
-        TriggerClientEvent('showNotification', playerId, 'Equipment purchased successfully', 'success')
-        
-        -- Log the purchase
-        TriggerEvent('logs:jobExpense', jobName, playerId, itemName, cost)
-        return true
-    else
-        TriggerClientEvent('showNotification', playerId, 'Purchase failed', 'error')
-        return false
     end
 end
 ```
