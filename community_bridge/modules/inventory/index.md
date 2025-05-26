@@ -3,7 +3,7 @@ layout: default
 title: Inventory
 parent: Modules
 grand_parent: Community Bridge
-nav_order: 2
+nav_order: 11
 has_children: true
 permalink: /community_bridge/modules/inventory/
 ---

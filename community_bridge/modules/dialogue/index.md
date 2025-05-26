@@ -3,7 +3,7 @@ layout: default
 title: Dialogue
 parent: Modules
 grand_parent: Community Bridge
-nav_order: 6
+nav_order: 3
 has_children: true
 permalink: /community_bridge/modules/dialogue/
 ---

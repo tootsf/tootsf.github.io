@@ -3,7 +3,7 @@ layout: default
 title: Fuel
 parent: Modules
 grand_parent: Community Bridge
-nav_order: 8
+nav_order: 7
 has_children: true
 permalink: /community_bridge/modules/fuel/
 ---

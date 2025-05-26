@@ -3,7 +3,7 @@ layout: default
 title: Input
 parent: Modules
 grand_parent: Community Bridge
-nav_order: 11
+nav_order: 10
 has_children: true
 permalink: /community_bridge/modules/input/
 ---

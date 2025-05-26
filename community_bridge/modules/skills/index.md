@@ -3,7 +3,7 @@ layout: default
 title: Skills
 parent: Modules
 grand_parent: Community Bridge
-nav_order: 19
+nav_order: 20
 has_children: true
 permalink: /community_bridge/modules/skills/
 ---

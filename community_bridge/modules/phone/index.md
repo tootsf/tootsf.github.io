@@ -3,7 +3,7 @@ layout: default
 title: Phone
 parent: Modules
 grand_parent: Community Bridge
-nav_order: 15
+nav_order: 17
 has_children: true
 permalink: /community_bridge/modules/phone/
 ---

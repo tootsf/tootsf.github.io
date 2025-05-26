@@ -3,7 +3,7 @@ layout: default
 title: Framework
 parent: Modules
 grand_parent: Community Bridge
-nav_order: 1
+nav_order: 6
 has_children: true
 permalink: /community_bridge/modules/framework/
 ---

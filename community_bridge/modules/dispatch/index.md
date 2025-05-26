@@ -3,7 +3,7 @@ layout: default
 title: Dispatch
 parent: Modules
 grand_parent: Community Bridge
-nav_order: 16
+nav_order: 4
 has_children: true
 permalink: /community_bridge/modules/dispatch/
 ---

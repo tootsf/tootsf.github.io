@@ -3,7 +3,7 @@ layout: default
 title: Shops
 parent: Modules
 grand_parent: Community Bridge
-nav_order: 18
+nav_order: 19
 has_children: true
 permalink: /community_bridge/modules/shops/
 ---

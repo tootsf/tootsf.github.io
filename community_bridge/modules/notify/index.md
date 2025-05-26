@@ -3,7 +3,7 @@ layout: default
 title: Notify
 parent: Modules
 grand_parent: Community Bridge
-nav_order: 3
+nav_order: 16
 has_children: true
 permalink: /community_bridge/modules/notify/
 ---

@@ -3,7 +3,7 @@ layout: default
 title: Target
 parent: Modules
 grand_parent: Community Bridge
-nav_order: 5
+nav_order: 21
 has_children: true
 permalink: /community_bridge/modules/target/
 ---

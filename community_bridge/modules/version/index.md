@@ -3,7 +3,7 @@ layout: default
 title: Version
 parent: Modules
 grand_parent: Community Bridge
-nav_order: 22
+nav_order: 23
 has_children: true
 permalink: /community_bridge/modules/version/
 ---

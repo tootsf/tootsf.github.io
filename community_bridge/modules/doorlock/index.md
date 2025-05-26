@@ -3,7 +3,7 @@ layout: default
 title: Doorlock
 parent: Modules
 grand_parent: Community Bridge
-nav_order: 7
+nav_order: 5
 has_children: true
 permalink: /community_bridge/modules/doorlock/
 ---

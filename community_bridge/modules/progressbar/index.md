@@ -3,7 +3,7 @@ layout: default
 title: Progressbar
 parent: Modules
 grand_parent: Community Bridge
-nav_order: 17
+nav_order: 18
 has_children: true
 permalink: /community_bridge/modules/progressbar/
 ---
