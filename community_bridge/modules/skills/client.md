@@ -22,6 +22,10 @@ Client-side functions for skill progression display, UI management, and player f
 
 ## Skill Display
 
+---
+
+## 🔹 ShowSkillProgress
+
 ### ShowSkillProgress
 {: .d-inline-block }
 Client
@@ -55,6 +59,8 @@ end)
 ```
 
 ---
+
+## 🔹 UpdateSkillBar
 
 ### UpdateSkillBar
 {: .d-inline-block }

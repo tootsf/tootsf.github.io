@@ -19,7 +19,7 @@ Client-side functions for vehicle key management across multiple key systems.
 
 ---
 
-## Bridge.VehicleKey.GiveKeys
+## 🔹 GiveKeys
 
 Gives vehicle keys to the current player for the specified vehicle.
 
@@ -74,7 +74,9 @@ end
 
 ---
 
-## Bridge.VehicleKey.RemoveKeys
+---
+
+## 🔹 RemoveKeys
 
 Removes vehicle keys from the current player for the specified vehicle.
 

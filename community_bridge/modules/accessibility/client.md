@@ -19,6 +19,10 @@ The accessibility client module provides colorblind accessibility features and c
 
 ## Colorblind Features
 
+---
+
+## 🔹 updatecolourblindness
+
 ### updatecolourblindness()
 
 Opens a menu allowing the user to select their colorblindness type.
@@ -34,6 +38,10 @@ Bridge.Accessibility.updatecolourblindness()
 local Bridge = exports['community_bridge']:Bridge()
 Bridge.Accessibility.updatecolourblindness()
 ```
+
+---
+
+## 🔹 hexToRgb
 
 ### hexToRgb(hex)
 
@@ -54,6 +62,10 @@ local r, g, b = Bridge.Accessibility.hexToRgb("#FF0000")
 print(r, g, b) -- 255, 0, 0
 ```
 
+---
+
+## 🔹 rgbToHex
+
 ### rgbToHex(r, g, b)
 
 Converts RGB values to a hex color string.
@@ -72,6 +84,10 @@ local Bridge = exports['community_bridge']:Bridge()
 local hex = Bridge.Accessibility.rgbToHex(255, 0, 0)
 print(hex) -- "#ff0000"
 ```
+
+---
+
+## 🔹 rgbToHsl
 
 ### rgbToHsl(r, g, b)
 
@@ -94,6 +110,10 @@ local h, s, l = Bridge.Accessibility.rgbToHsl(255, 0, 0)
 print(h, s, l) -- Hue, saturation, lightness values
 ```
 
+---
+
+## 🔹 hslToRgb
+
 ### hslToRgb(h, s, l)
 
 Converts HSL values to RGB values.
@@ -115,6 +135,10 @@ local r, g, b = Bridge.Accessibility.hslToRgb(0, 1, 0.5)
 print(r, g, b) -- RGB values
 ```
 
+---
+
+## 🔹 adjustColourForColourblindness
+
 ### adjustColourForColourblindness(color, returnAsRGB)
 
 Adjusts a color based on the user's colorblindness setting.
@@ -135,6 +159,10 @@ local adjustedHex = Bridge.Accessibility.adjustColourForColourblindness("#FF0000
 -- Adjust RGB color
 local adjustedRGB = Bridge.Accessibility.adjustColourForColourblindness({r = 255, g = 0, b = 0}, true)
 ```
+
+---
+
+## 🔹 getAdjustedColour
 
 ### getAdjustedColour(colorName, returnAsRGB)
 

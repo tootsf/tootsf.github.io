@@ -21,6 +21,10 @@ Shared mathematical utility functions available on both client and server sides.
 
 ## Range Functions
 
+---
+
+## 🔹 Clamp
+
 ### Clamp(value, min, max)
 {: .d-inline-block }
 Shared
@@ -46,6 +50,10 @@ local health = Bridge.Math.Clamp(playerHealth, 0, 100)
 -- If playerHealth is 75, returns 75
 ```
 
+---
+
+## 🔹 Wrap
+
 ### Wrap(value, min, max)
 {: .d-inline-block }
 Shared
@@ -70,7 +78,13 @@ local angle = Bridge.Math.Wrap(370, 0, 360)  -- Returns 10
 local angle2 = Bridge.Math.Wrap(-30, 0, 360)  -- Returns 330
 ```
 
-## Precision Functions
+---
+
+## 📚 Precision Functions
+
+---
+
+## 🔹 Round
 
 ### Round(value)
 {: .d-inline-block }
@@ -92,6 +106,10 @@ local Bridge = exports['community_bridge']:Bridge()
 local rounded = Bridge.Math.Round(4.7)  -- Returns 5
 local rounded2 = Bridge.Math.Round(4.3)  -- Returns 4
 ```
+
+---
+
+## 🔹 Truncate
 
 ### Truncate(value, decimals)
 {: .d-inline-block }
@@ -115,7 +133,13 @@ local truncated = Bridge.Math.Truncate(3.14159, 2)  -- Returns 3.14
 local price = Bridge.Math.Truncate(15.999, 2)  -- Returns 15.99
 ```
 
-## Interpolation Functions
+---
+
+## 📚 Interpolation Functions
+
+---
+
+## 🔹 Smooth
 
 ### Smooth(value, min, max)
 {: .d-inline-block }
@@ -139,6 +163,10 @@ local Bridge = exports['community_bridge']:Bridge()
 -- Smooth fade transition
 local fade = Bridge.Math.Smooth(time, 0, 1)  -- Creates smooth S-curve
 ```
+
+---
+
+## 🔹 Map
 
 ### Map(value, inMin, inMax, outMin, outMax)
 {: .d-inline-block }
@@ -170,7 +198,7 @@ local fahrenheit = Bridge.Math.Map(celsius, 0, 100, 32, 212)
 
 ---
 
-## Common Use Cases
+## 📚 Common Use Cases
 
 ### Game Development
 

@@ -38,7 +38,10 @@ local isValid = Bridge.Weather.IsValidWeatherType('RAIN')
 
 ## Weather Type Management
 
-### GetWeatherTypes
+---
+
+## 🔹 GetWeatherTypes
+
 Retrieves all available weather types.
 
 ```lua
@@ -56,7 +59,10 @@ for _, weather in ipairs(weatherTypes) do
 end
 ```
 
-### IsValidWeatherType
+---
+
+## 🔹 IsValidWeatherType
+
 Validates if a weather type exists.
 
 ```lua
@@ -76,7 +82,10 @@ if Bridge.Weather.IsValidWeatherType('RAIN') then
 end
 ```
 
-### GetWeatherInfo
+---
+
+## 🔹 GetWeatherInfo
+
 Gets detailed information about a weather type.
 
 ```lua
@@ -99,7 +108,10 @@ print('Visibility modifier:', rainInfo.visibilityModifier)
 
 ## Weather Configuration
 
-### GetWeatherConfig
+---
+
+## 🔹 GetWeatherConfig
+
 Retrieves the weather system configuration.
 
 ```lua
@@ -117,7 +129,10 @@ print('Transition time:', config.defaultTransition)
 print('Auto weather enabled:', config.autoWeatherEnabled)
 ```
 
-### GetWeatherTimings
+---
+
+## 🔹 GetWeatherTimings
+
 Gets timing configurations for weather systems.
 
 ```lua
@@ -135,7 +150,10 @@ print('Max duration:', timings.maxDuration)
 print('Cycle length:', timings.cycleLength)
 ```
 
-### GetWeatherEffects
+---
+
+## 🔹 GetWeatherEffects
+
 Retrieves weather effect configurations.
 
 ```lua
@@ -160,7 +178,10 @@ print('Rain particle density:', rainEffects.particleDensity)
 
 ## Weather Utilities
 
-### FormatWeatherName
+---
+
+## 🔹 FormatWeatherName
+
 Formats weather type name for display.
 
 ```lua
@@ -182,7 +203,10 @@ local formatted2 = Bridge.Weather.FormatWeatherName('EXTRASUNNY')
 print(formatted2) -- "Extra Sunny"
 ```
 
-### GetWeatherIcon
+---
+
+## 🔹 GetWeatherIcon
+
 Gets the icon identifier for a weather type.
 
 ```lua
@@ -204,7 +228,10 @@ local sunIcon = Bridge.Weather.GetWeatherIcon('CLEAR')
 print('Clear icon:', sunIcon) -- "fas fa-sun"
 ```
 
-### GetWeatherColor
+---
+
+## 🔹 GetWeatherColor
+
 Gets the color associated with a weather type.
 
 ```lua
@@ -228,7 +255,10 @@ print('Clear color:', sunColor) -- "#F39C12"
 
 ## Weather Calculations
 
-### CalculateTransitionTime
+---
+
+## 🔹 CalculateTransitionTime
+
 Calculates optimal transition time between weather types.
 
 ```lua
@@ -248,7 +278,10 @@ local transitionTime = Bridge.Weather.CalculateTransitionTime('CLEAR', 'THUNDER'
 print('Recommended transition:', transitionTime .. ' seconds')
 ```
 
-### GetWeatherIntensity
+---
+
+## 🔹 GetWeatherIntensity
+
 Calculates the intensity rating of a weather type.
 
 ```lua
@@ -270,7 +303,10 @@ local clearIntensity = Bridge.Weather.GetWeatherIntensity('CLEAR')
 print('Clear intensity:', clearIntensity) -- 0.1
 ```
 
-### IsExtremeWeatherType
+---
+
+## 🔹 IsExtremeWeatherType
+
 Checks if a weather type is considered extreme.
 
 ```lua
@@ -296,7 +332,10 @@ end
 
 ## Weather Categories
 
-### GetWeatherCategory
+---
+
+## 🔹 GetWeatherCategory
+
 Gets the category of a weather type.
 
 ```lua
@@ -318,7 +357,10 @@ local clearCategory = Bridge.Weather.GetWeatherCategory('CLEAR')
 print('Clear category:', clearCategory) -- "clear"
 ```
 
-### GetWeathersByCategory
+---
+
+## 🔹 GetWeathersByCategory
+
 Gets all weather types in a specific category.
 
 ```lua
@@ -339,7 +381,10 @@ for _, weather in ipairs(precipitationWeathers) do
 end
 ```
 
-### GetWeatherCategories
+---
+
+## 🔹 GetWeatherCategories
+
 Gets all available weather categories.
 
 ```lua
@@ -359,7 +404,10 @@ end
 
 ## Random Weather Functions
 
-### GetRandomWeather
+---
+
+## 🔹 GetRandomWeather
+
 Gets a random weather type.
 
 ```lua
@@ -385,7 +433,10 @@ local mildWeather = Bridge.Weather.GetRandomWeather(nil, true)
 local rainWeather = Bridge.Weather.GetRandomWeather('precipitation')
 ```
 
-### GetWeightedRandomWeather
+---
+
+## 🔹 GetWeightedRandomWeather
+
 Gets a random weather type based on weights.
 
 ```lua
@@ -411,7 +462,10 @@ local weatherType = Bridge.Weather.GetWeightedRandomWeather(weights)
 
 ## Validation Functions
 
-### ValidateWeatherData
+---
+
+## 🔹 ValidateWeatherData
+
 Validates weather data structure.
 
 ```lua
@@ -439,7 +493,10 @@ if not isValid then
 end
 ```
 
-### SanitizeWeatherType
+---
+
+## 🔹 SanitizeWeatherType
+
 Sanitizes and normalizes weather type input.
 
 ```lua
@@ -463,7 +520,9 @@ print(sanitized2) -- "THUNDER"
 
 ## Data Structures
 
-### Weather Type Definition
+---
+
+## 📚 Weather Type Definition
 ```lua
 {
     name = 'RAIN',
@@ -485,7 +544,9 @@ print(sanitized2) -- "THUNDER"
 }
 ```
 
-### Weather Configuration
+---
+
+## 📚 Weather Configuration
 ```lua
 {
     defaultWeather = 'CLEAR',
@@ -501,7 +562,9 @@ print(sanitized2) -- "THUNDER"
 
 ## Best Practices
 
-### Weather Type Validation
+---
+
+## 📚 Weather Type Validation
 ```lua
 -- Always validate weather types before use
 local function setWeatherSafely(weatherType)

@@ -21,6 +21,10 @@ Server-side functions for sending help text to specific players.
 
 ## Display Functions
 
+---
+
+## 🔹 ShowHelpText
+
 ### ShowHelpText(src, message, position)
 {: .d-inline-block }
 Server
@@ -41,6 +45,10 @@ local Bridge = exports['community_bridge']:Bridge()
 local playerId = source
 Bridge.HelpText.ShowHelpText(playerId, "Press ~INPUT_CONTEXT~ to interact", "top")
 ```
+
+---
+
+## 🔹 HideHelpText
 
 ### HideHelpText(src)
 {: .d-inline-block }
@@ -63,7 +71,7 @@ Bridge.HelpText.HideHelpText(playerId)
 
 ---
 
-## Usage Examples
+## 📚 Usage Examples
 
 ### Context-Based Help
 

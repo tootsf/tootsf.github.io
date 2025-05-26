@@ -19,6 +19,10 @@ The clothing server module provides functions for managing player appearance fro
 
 ## Character Model Functions
 
+---
+
+## 🔹 IsMale
+
 ### IsMale(src)
 
 Checks if a player's ped is using the male freemode model.
@@ -39,6 +43,10 @@ if isMale then
 end
 ```
 
+---
+
+## 🔹 GetAppearance
+
 ### GetAppearance(src)
 
 Gets the complete appearance data for a player.
@@ -57,6 +65,10 @@ if appearance then
     print("Got appearance for player " .. src)
 end
 ```
+
+---
+
+## 🔹 SetAppearance
 
 ### SetAppearance(src, data)
 
@@ -80,6 +92,10 @@ local newAppearance = {
 }
 Bridge.Clothing.SetAppearance(src, newAppearance)
 ```
+
+---
+
+## 🔹 SetAppearanceExt
 
 ### SetAppearanceExt(src, data)
 
@@ -112,6 +128,10 @@ local genderSpecificAppearance = {
 Bridge.Clothing.SetAppearanceExt(src, genderSpecificAppearance)
 ```
 
+---
+
+## 🔹 RestoreAppearance
+
 ### RestoreAppearance(src)
 
 Restores a player's previously stored appearance.
@@ -125,7 +145,9 @@ local src = source
 Bridge.Clothing.RestoreAppearance(src)
 ```
 
-## Usage Examples
+---
+
+## 📚 Usage Examples
 
 ### Basic Appearance Management
 

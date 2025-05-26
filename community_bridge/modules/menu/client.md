@@ -21,9 +21,11 @@ Client-side functions for creating and managing interactive menus.
 
 ---
 
-## Core Menu Functions
+## 📚 Core Menu Functions
 
-### Open
+---
+
+## 🔹 Open
 {: .d-inline-block }
 Client
 {: .label .label-blue }
@@ -123,9 +125,11 @@ end)
 
 ---
 
-## Menu Data Formats
+## 📚 Menu Data Formats
 
-### ox_lib Format
+---
+
+## 🔹 ox_lib Format
 ```lua
 {
     id = "unique_menu_id",        -- Optional, auto-generated if not provided
@@ -144,7 +148,9 @@ end)
 }
 ```
 
-### QB Menu Format
+---
+
+## 🔹 QB Menu Format
 ```lua
 {
     {

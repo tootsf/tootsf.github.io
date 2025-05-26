@@ -19,7 +19,9 @@ The framework client module provides functions for accessing player data and fra
 
 ## Player Data Functions
 
-### GetFrameworkName()
+---
+
+## 🔹 GetFrameworkName
 
 Returns the name of the currently active framework.
 
@@ -34,7 +36,9 @@ local frameworkName = Bridge.Framework.GetFrameworkName()
 print("Using framework: " .. frameworkName)
 ```
 
-### GetPlayerData()
+---
+
+## 🔹 GetPlayerData
 
 Gets the complete player data from the framework.
 
@@ -51,7 +55,9 @@ print("Player name: " .. playerData.charinfo.firstname)
 
 ## Job Functions
 
-### GetFrameworkJobs()
+---
+
+## 🔹 GetFrameworkJobs
 
 Returns a table of all available jobs in the framework.
 
@@ -68,9 +74,13 @@ for _, job in pairs(jobs) do
 end
 ```
 
+---
+
 ## Player Information
 
-### GetPlayerDob()
+---
+
+## 🔹 GetPlayerDob
 
 Gets the player's date of birth.
 
@@ -85,7 +95,9 @@ local dob = Bridge.Framework.GetPlayerDob()
 print("Player DOB: " .. dob)
 ```
 
-### GetPlayerMetaData(metadata)
+---
+
+## 🔹 GetPlayerMetaData
 
 Gets specific metadata for the player.
 
@@ -103,7 +115,9 @@ local hunger = Bridge.Framework.GetPlayerMetaData("hunger")
 print("Player hunger: " .. hunger)
 ```
 
-### Notify(message, type, time)
+---
+
+## 🔹 Notify
 
 Shows a notification to the player.
 
@@ -118,7 +132,9 @@ local Bridge = exports['community_bridge']:Bridge()
 Bridge.Framework.Notify("Hello player!", "success", 5000)
 ```
 
-### ShowHelpText(message, position)
+---
+
+## 🔹 ShowHelpText
 
 Displays help text on screen.
 
@@ -132,7 +148,9 @@ local Bridge = exports['community_bridge']:Bridge()
 Bridge.Framework.ShowHelpText("Press [E] to interact")
 ```
 
-### HideHelpText()
+---
+
+## 🔹 HideHelpText
 
 Hides the currently displayed help text.
 
@@ -142,7 +160,9 @@ local Bridge = exports['community_bridge']:Bridge()
 Bridge.Framework.HideHelpText()
 ```
 
-### GetItemInfo(item)
+---
+
+## 🔹 GetItemInfo
 
 Gets information about a specific item.
 
@@ -160,7 +180,9 @@ local itemInfo = Bridge.Framework.GetItemInfo("bread")
 print("Item label: " .. itemInfo.label)
 ```
 
-### GetPlayerIdentifier()
+---
+
+## 🔹 GetPlayerIdentifier
 
 Gets the player's unique identifier (citizenid).
 
@@ -175,7 +197,9 @@ local citizenId = Bridge.Framework.GetPlayerIdentifier()
 print("Player ID: " .. citizenId)
 ```
 
-### GetPlayerName()
+---
+
+## 🔹 GetPlayerName
 
 Gets the player's first and last name.
 
@@ -191,7 +215,9 @@ local firstname, lastname = Bridge.Framework.GetPlayerName()
 print("Player: " .. firstname .. " " .. lastname)
 ```
 
-### GetPlayerJob()
+---
+
+## 🔹 GetPlayerJob
 
 **Deprecated** - Gets player job information.
 
@@ -209,7 +235,9 @@ local jobName, jobLabel, gradeName, gradeLevel = Bridge.Framework.GetPlayerJob()
 print("Job: " .. jobLabel .. " (Grade: " .. gradeName .. ")")
 ```
 
-### GetPlayerJobData()
+---
+
+## 🔹 GetPlayerJobData
 
 Gets comprehensive player job data.
 
@@ -226,7 +254,9 @@ print("On duty: " .. tostring(jobData.onDuty))
 print("Is boss: " .. tostring(jobData.boss))
 ```
 
-### HasItem(item)
+---
+
+## 🔹 HasItem
 
 Checks if the player has a specific item.
 
@@ -245,7 +275,9 @@ if Bridge.Framework.HasItem("bread") then
 end
 ```
 
-### GetItemCount(item)
+---
+
+## 🔹 GetItemCount
 
 Gets the total count of a specific item in player inventory.
 
@@ -263,7 +295,9 @@ local breadCount = Bridge.Framework.GetItemCount("bread")
 print("Player has " .. breadCount .. " bread")
 ```
 
-### GetPlayerInventory()
+---
+
+## 🔹 GetPlayerInventory
 
 Gets the player's complete inventory.
 
@@ -280,7 +314,9 @@ for _, item in pairs(inventory) do
 end
 ```
 
-### GetIsPlayerDead()
+---
+
+## 🔹 GetIsPlayerDead
 
 Checks if the player is currently dead or in last stand.
 
@@ -296,11 +332,15 @@ if Bridge.Framework.GetIsPlayerDead() then
 end
 ```
 
+---
+
 ## Events
 
 The framework module triggers several community_bridge events:
 
-### community_bridge:Client:OnPlayerLoaded
+---
+
+## 🔹 community_bridge:Client:OnPlayerLoaded
 
 Triggered when the player is loaded into the framework.
 

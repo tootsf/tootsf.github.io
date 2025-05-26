@@ -21,7 +21,9 @@ Server-side functions for sending notifications to players.
 
 ## Available Functions
 
-### SendNotify
+---
+
+## 🔹 SendNotify
 {: .d-inline-block }
 Server
 {: .label .label-purple }
@@ -51,17 +53,21 @@ Bridge.Notify.SendNotify(playerId, "You don't have enough money!", "error", 5000
 
 ---
 
-## Deprecated Functions
+## 📚 Deprecated Functions
 
 {: .label .label-red }
 **Note:** The following functions are deprecated. Use the [HelpText module](../../helptext/) instead.
 
-### ShowHelpText (Deprecated)
+---
+
+## 🔹 ShowHelpText (Deprecated)
 ```lua
 Bridge.Notify.ShowHelpText(src, message, position)
 ```
 
-### HideHelpText (Deprecated)
+---
+
+## 🔹 HideHelpText (Deprecated)
 ```lua
 Bridge.Notify.HideHelpText(src)
 ```
@@ -93,7 +99,7 @@ Bridge.Notify.SendNotify(playerId, "Processing payment...", "info", {
 
 ---
 
-### SendNotifyAll
+## 🔹 SendNotifyAll
 {: .d-inline-block }
 Server
 {: .label .label-purple }
@@ -126,7 +132,7 @@ Bridge.Notify.SendNotifyAll("Double XP weekend has started!", "info", {
 
 ---
 
-### SendNotifyGroup
+## 🔹 SendNotifyGroup
 {: .d-inline-block }
 Server
 {: .label .label-purple }
@@ -158,9 +164,11 @@ Bridge.Notify.SendNotifyGroup(playersInRange, "Explosion detected nearby!", "err
 
 ---
 
-## Advanced Notifications
+## 📚 Advanced Notifications
 
-### SendProgressNotify
+---
+
+## 🔹 SendProgressNotify
 {: .d-inline-block }
 Server
 {: .label .label-purple }
@@ -203,7 +211,7 @@ Bridge.Notify.SendProgressNotify(playerId, progressId, "Download complete!", 100
 
 ---
 
-### SendRichNotify
+## 🔹 SendRichNotify
 {: .d-inline-block }
 Server
 {: .label .label-purple }
@@ -245,7 +253,9 @@ Bridge.Notify.SendRichNotify(playerId, {
 
 ## Job-Based Notifications
 
-### SendJobNotify
+---
+
+## 🔹 SendJobNotify
 {: .d-inline-block }
 Server
 {: .label .label-purple }
@@ -281,7 +291,9 @@ Bridge.Notify.SendJobNotify("ambulance", "Mass casualty event reported", "error"
 
 ---
 
-### SendGangNotify
+---
+
+## 🔹 SendGangNotify
 {: .d-inline-block }
 Server
 {: .label .label-purple }
@@ -312,7 +324,9 @@ Bridge.Notify.SendGangNotify("families", "Gang meeting at the hideout", "info")
 
 ## Conditional Notifications
 
-### SendConditionalNotify
+---
+
+## 🔹 SendConditionalNotify
 {: .d-inline-block }
 Server
 {: .label .label-purple }
@@ -363,7 +377,9 @@ Bridge.Notify.SendConditionalNotify(
 
 ## Notification Management
 
-### ClearNotifications
+---
+
+## 🔹 ClearNotifications
 {: .d-inline-block }
 Server
 {: .label .label-purple }
@@ -391,7 +407,9 @@ Bridge.Notify.ClearNotifications(playerId, "error")
 
 ---
 
-### SetNotificationSettings
+---
+
+## 🔹 SetNotificationSettings
 {: .d-inline-block }
 Server
 {: .label .label-purple }
@@ -423,7 +441,9 @@ Bridge.Notify.SetNotificationSettings(playerId, {
 
 ## Event Integration
 
-### Event Handlers
+---
+
+## 📚 Event Handlers
 ```lua
 -- Handle framework money changes
 RegisterNetEvent('framework:moneyChanged')
@@ -456,7 +476,9 @@ end)
 
 ## Best Practices
 
-### Rate Limiting
+---
+
+## 📚 Rate Limiting
 ```lua
 local notificationLimits = {}
 
@@ -483,7 +505,9 @@ local function CanSendNotification(playerId)
 end
 ```
 
-### Smart Grouping
+---
+
+## 📚 Smart Grouping
 ```lua
 -- Group similar notifications to avoid spam
 local function SendSmartNotify(playerId, message, type)
@@ -499,7 +523,9 @@ local function SendSmartNotify(playerId, message, type)
 end
 ```
 
-### Localization Support
+---
+
+## 📚 Localization Support
 ```lua
 -- Use localized messages
 local function SendLocalizedNotify(playerId, key, type, args)    local playerLang = Bridge.Framework.GetPlayerLanguage(playerId)

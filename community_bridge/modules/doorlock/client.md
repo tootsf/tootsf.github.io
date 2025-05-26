@@ -19,6 +19,10 @@ The doorlock client module provides basic door detection functionality.
 
 ## Door Detection
 
+---
+
+## 🔹 GetClosestDoor
+
 ### GetClosestDoor()
 
 Gets the closest door to the current player's position.
@@ -37,7 +41,9 @@ else
 end
 ```
 
-## Note
+---
+
+## 📚 Note
 
 In the default implementation, this function currently returns `nil`. The actual door detection logic depends on the specific doorlock system being used (ox_doorlock, qb-doorlock, etc.).
 
@@ -47,6 +53,8 @@ For full functionality, ensure you have one of the supported doorlock systems in
 - rcore_doorlock
 - doors_creator
 
-## Integration
+---
+
+## 📚 Integration
 
 This module serves as a bridge to various doorlock systems. The actual implementation will be loaded based on which doorlock system is detected on the server.

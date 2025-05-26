@@ -19,7 +19,7 @@ Server-side functions for business and organization account management across mu
 
 ---
 
-## Bridge.Managment.GetAccountMoney
+## 🔹 GetAccountMoney
 
 Retrieves account balance and information for a specified business or organization account.
 
@@ -78,7 +78,9 @@ Depending on the banking system, the returned table may contain:
 
 ---
 
-## Bridge.Managment.AddAccountMoney
+---
+
+## 🔹 AddAccountMoney
 
 Adds money to a specified business or organization account with transaction logging.
 
@@ -139,7 +141,7 @@ Bridge.Managment.AddAccountMoney("ballas", 10000, "Territory earnings")
 
 ---
 
-## Bridge.Managment.RemoveAccountMoney
+## 🔹 RemoveAccountMoney
 
 Removes money from a specified business or organization account with transaction logging.
 

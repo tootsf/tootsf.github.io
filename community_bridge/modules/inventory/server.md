@@ -21,7 +21,9 @@ Server-side functions for inventory management, item operations, and storage sys
 
 ## Item Management
 
-### AddItem
+---
+
+## 🔹 AddItem
 {: .d-inline-block }
 Server
 {: .label .label-purple }
@@ -57,7 +59,7 @@ end
 
 ---
 
-### RemoveItem
+## 🔹 RemoveItem
 {: .d-inline-block }
 Server
 {: .label .label-purple }
@@ -93,7 +95,7 @@ end
 
 ---
 
-### GetItemInfo
+## 🔹 GetItemInfo
 {: .d-inline-block }
 Server
 {: .label .label-purple }
@@ -121,7 +123,7 @@ end
 
 ---
 
-### GetItemCount
+## 🔹 GetItemCount
 {: .d-inline-block }
 Server
 {: .label .label-purple }
@@ -155,7 +157,9 @@ end
 
 ## Inventory Operations
 
-### GetPlayerInventory
+---
+
+## 🔹 GetPlayerInventory
 {: .d-inline-block }
 Server
 {: .label .label-purple }
@@ -185,7 +189,7 @@ end
 
 ---
 
-### GetItemBySlot
+## 🔹 GetItemBySlot
 {: .d-inline-block }
 Server
 {: .label .label-purple }
@@ -214,7 +218,7 @@ end
 
 ---
 
-### SetMetadata
+## 🔹 SetMetadata
 {: .d-inline-block }
 Server
 {: .label .label-purple }
@@ -248,7 +252,9 @@ Bridge.Inventory.SetMetadata(playerId, 5, newMetadata)
 
 ## Storage Systems
 
-### OpenStash
+---
+
+## 🔹 OpenStash
 {: .d-inline-block }
 Server
 {: .label .label-purple }
@@ -277,7 +283,7 @@ Bridge.Inventory.OpenStash(playerId, stashId)
 
 ---
 
-### RegisterStash
+## 🔹 RegisterStash
 {: .d-inline-block }
 Server
 {: .label .label-purple }
@@ -310,7 +316,7 @@ Bridge.Inventory.RegisterStash(stashId, gangName .. " Gang Stash", 100, 500000)
 
 ---
 
-### HasItem
+## 🔹 HasItem
 {: .d-inline-block }
 Server
 {: .label .label-purple }
@@ -341,7 +347,7 @@ end
 
 ---
 
-### CanCarryItem
+## 🔹 CanCarryItem
 {: .d-inline-block }
 Server
 {: .label .label-purple }
@@ -373,7 +379,7 @@ end
 
 ---
 
-### UpdatePlate
+## 🔹 UpdatePlate
 {: .d-inline-block }
 Server
 {: .label .label-purple }
@@ -401,7 +407,7 @@ Bridge.Inventory.UpdatePlate(oldPlate, newPlate)
 
 ---
 
-### GetImagePath
+## 🔹 GetImagePath
 {: .d-inline-block }
 Server
 {: .label .label-purple }
@@ -426,7 +432,7 @@ local itemImage = Bridge.Inventory.GetImagePath("water")
 
 ---
 
-### OpenShop
+## 🔹 OpenShop
 {: .d-inline-block }
 Server
 {: .label .label-purple }
@@ -449,7 +455,7 @@ Bridge.Inventory.OpenShop(playerId, "general_store")
 
 ---
 
-### RegisterShop
+## 🔹 RegisterShop
 {: .d-inline-block }
 Server
 {: .label .label-purple }
@@ -480,7 +486,7 @@ Bridge.Inventory.RegisterShop("general_store", shopItems)
 
 ---
 
-### StripPNG
+## 🔹 StripPNG
 {: .d-inline-block }
 Server
 {: .label .label-purple }
@@ -507,7 +513,10 @@ local cleanName = Bridge.Inventory.StripPNG("water.png")
 
 ## Best Practices
 
-### Error Handling
+---
+
+## 📚 Error Handling
+
 Always check return values and handle inventory full scenarios:
 
 ```lua
@@ -524,7 +533,10 @@ local function giveReward(playerId, item, count)
 end
 ```
 
-### Metadata Usage
+---
+
+## 📚 Metadata Usage
+
 Use metadata for complex item properties:
 
 ```lua
@@ -538,7 +550,10 @@ local weaponMetadata = {
 Bridge.Inventory.AddItem(playerId, "weapon_pistol", 1, nil, weaponMetadata)
 ```
 
-### Stash Management
+---
+
+## 📚 Stash Management
+
 Always register stashes before opening them:
 
 ```lua

@@ -22,6 +22,10 @@ Client-side functions for creating and managing progress bars and timed actions.
 
 ## Core Functions
 
+---
+
+## 🔹 StartProgress
+
 ### StartProgress
 {: .d-inline-block }
 Client
@@ -77,6 +81,10 @@ Bridge.Progressbar.StartProgress({
     end
 end)
 ```
+
+---
+
+## 🔹 StartCircularProgress
 
 ### StartCircularProgress
 {: .d-inline-block }

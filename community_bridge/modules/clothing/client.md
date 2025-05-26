@@ -17,9 +17,13 @@ The clothing client module provides functions for managing player appearance and
 1. TOC
 {:toc}
 
-## Character Model Functions
+---
 
-### IsMale()
+## 📚 Character Model Functions
+
+---
+
+## 🔹 IsMale
 
 Checks if the current player ped is using the male freemode model.
 
@@ -35,7 +39,9 @@ if isMale then
 end
 ```
 
-### GetAppearance(entity)
+---
+
+## 🔹 GetAppearance
 
 Gets the complete appearance data for a ped entity.
 
@@ -67,6 +73,10 @@ print(json.encode(appearance))
 }
 ```
 
+---
+
+## 🔹 SetAppearance
+
 ### SetAppearance(entity, skinData)
 
 Applies appearance data to a ped entity.
@@ -97,6 +107,10 @@ local appearance = {
 Bridge.Clothing.SetAppearance(ped, appearance)
 ```
 
+---
+
+## 🔹 RestoreAppearance
+
 ### RestoreAppearance(entity)
 
 Restores the previously stored appearance for a ped entity.
@@ -113,6 +127,10 @@ local ped = PlayerPedId()
 Bridge.Clothing.RestoreAppearance(ped)
 ```
 
+---
+
+## 🔹 UpdateAppearanceBackup
+
 ### UpdateAppearanceBackup(data)
 
 Updates the stored appearance backup data.
@@ -126,6 +144,10 @@ local currentAppearance = Bridge.Clothing.GetAppearance(PlayerPedId())
 Bridge.Clothing.UpdateAppearanceBackup(currentAppearance)
 ```
 
+---
+
+## 🔹 CopyAppearanceToClipboard
+
 ### CopyAppearanceToClipboard()
 
 Copies the current player's appearance data to the clipboard.
@@ -135,6 +157,10 @@ Copies the current player's appearance data to the clipboard.
 local Bridge = exports['community_bridge']:Bridge()
 Bridge.Clothing.CopyAppearanceToClipboard()
 ```
+
+---
+
+## 🔹 ToggleDebugging
 
 ### ToggleDebugging()
 

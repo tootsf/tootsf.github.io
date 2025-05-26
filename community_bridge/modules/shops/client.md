@@ -19,7 +19,7 @@ Client-side functions for shop interface and user interaction.
 
 ---
 
-## Bridge.Shops.OpenShop
+## 🔹 OpenShop
 
 Displays the shop interface to the player with interactive item browsing.
 
@@ -67,7 +67,7 @@ Bridge.Shops.OpenShop("Downtown Market", shopInventory)
 
 ---
 
-## Bridge.Shops.AmountSelect
+## 🔹 AmountSelect
 
 Opens a quantity selection interface for purchasing items.
 
@@ -110,7 +110,7 @@ Bridge.Shops.AmountSelect("Downtown Market", "bread", "Fresh Bread", 15)
 
 ---
 
-## Bridge.Shops.FinalizeCheckOut
+## 🔹 FinalizeCheckOut
 
 Presents payment method options and processes the final transaction.
 

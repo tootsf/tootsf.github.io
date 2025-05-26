@@ -21,6 +21,10 @@ Client-side functions for displaying contextual help and instruction text.
 
 ## Display Functions
 
+---
+
+## 🔹 ShowHelpText
+
 ### ShowHelpText(message, position)
 {: .d-inline-block }
 Client
@@ -40,6 +44,10 @@ local Bridge = exports['community_bridge']:Bridge()
 Bridge.HelpText.ShowHelpText("Press ~INPUT_CONTEXT~ to interact", "top")
 ```
 
+---
+
+## 🔹 HideHelpText
+
 ### HideHelpText()
 {: .d-inline-block }
 Client
@@ -55,7 +63,7 @@ Bridge.HelpText.HideHelpText()
 
 ---
 
-## Events
+## 📚 Events
 
 The module also responds to server events for remote help text control:
 

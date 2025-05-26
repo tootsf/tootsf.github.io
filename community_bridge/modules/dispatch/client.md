@@ -45,7 +45,13 @@ Bridge.Dispatch.SendAlert({
 
 ## Alert Management
 
-### SendAlert
+---
+
+## 🔹 SendAlert
+
+---
+
+## 🔹 SendAlert
 {: .d-inline-block }
 Client
 {: .label .label-blue }
@@ -142,7 +148,9 @@ If no supported dispatch system is found, alerts will be sent to default notific
 
 ## Best Practices
 
-### Alert Timing
+---
+
+## 📚 Alert Timing
 Don't spam alerts - use appropriate delays between calls:
 
 ```lua
@@ -164,7 +172,9 @@ local function SendRobberyAlert()
 end
 ```
 
-### Location Accuracy
+---
+
+## 📚 Location Accuracy
 Always provide accurate coordinates for better response:
 
 ```lua
@@ -178,7 +188,9 @@ Bridge.Dispatch.SendAlert({
 })
 ```
 
-### Job Targeting
+---
+
+## 📚 Job Targeting
 Target appropriate emergency services:
 
 ```lua
@@ -212,7 +224,9 @@ local callId = Bridge.Dispatch.CreateCall(
 )
 ```
 
-### GetActiveCalls
+---
+
+## 🔹 GetActiveCalls
 Retrieves all active emergency calls.
 
 ```lua
@@ -238,7 +252,9 @@ for _, call in ipairs(allCalls) do
 end
 ```
 
-### RespondToCall
+---
+
+## 🔹 RespondToCall
 Responds to an emergency call.
 
 ```lua
@@ -258,7 +274,9 @@ Bridge.Dispatch.RespondToCall('call_12345', 'enroute')
 Bridge.Dispatch.RespondToCall('call_12345', 'onscene')
 ```
 
-### CloseCall
+---
+
+## 🔹 CloseCall
 Closes an emergency call.
 
 ```lua
@@ -281,7 +299,9 @@ Bridge.Dispatch.CloseCall(
 
 ## Call Information and Updates
 
-### GetCallDetails
+---
+
+## 🔹 GetCallDetails
 Gets detailed information about a specific call.
 
 ```lua
@@ -302,7 +322,9 @@ print('Priority:', callDetails.priority)
 print('Responders:', #callDetails.responders)
 ```
 
-### UpdateCallStatus
+---
+
+## 🔹 UpdateCallStatus
 Updates the status of a call.
 
 ```lua
@@ -323,7 +345,9 @@ Bridge.Dispatch.UpdateCallStatus(
 )
 ```
 
-### AddCallNote
+---
+
+## 🔹 AddCallNote
 Adds a note to an existing call.
 
 ```lua
@@ -345,7 +369,9 @@ Bridge.Dispatch.AddCallNote(
 
 ## GPS and Location Services
 
-### SetGPSWaypoint
+---
+
+## 🔹 SetGPSWaypoint
 Sets GPS waypoint to a call location.
 
 ```lua
@@ -361,7 +387,9 @@ Bridge.Dispatch.SetGPSWaypoint(callId)
 Bridge.Dispatch.SetGPSWaypoint('call_12345')
 ```
 
-### GetNearestCalls
+---
+
+## 🔹 GetNearestCalls
 Gets emergency calls near the player's location.
 
 ```lua
@@ -383,7 +411,9 @@ for _, call in ipairs(nearbyCalls) do
 end
 ```
 
-### TrackUnit
+---
+
+## 🔹 TrackUnit
 Enables GPS tracking for a unit.
 
 ```lua
@@ -405,7 +435,9 @@ Bridge.Dispatch.TrackUnit(false)
 
 ## Radio and Communications
 
-### SendRadioMessage
+---
+
+## 🔹 SendRadioMessage
 Sends a radio message to dispatch or units.
 
 ```lua
@@ -427,7 +459,9 @@ Bridge.Dispatch.SendRadioMessage(
 )
 ```
 
-### GetRadioHistory
+---
+
+## 🔹 GetRadioHistory
 Retrieves radio communication history.
 
 ```lua
@@ -449,7 +483,9 @@ for _, message in ipairs(radioHistory) do
 end
 ```
 
-### SetRadioChannel
+---
+
+## 🔹 SetRadioChannel
 Sets the active radio channel.
 
 ```lua
@@ -470,7 +506,9 @@ Bridge.Dispatch.SetRadioChannel('fire')
 
 ## Unit Management
 
-### SetUnitStatus
+---
+
+## 🔹 SetUnitStatus
 Sets the status of the current unit.
 
 ```lua
@@ -490,7 +528,9 @@ Bridge.Dispatch.SetUnitStatus('available')
 Bridge.Dispatch.SetUnitStatus('busy', GetEntityCoords(PlayerPedId()))
 ```
 
-### GetUnitStatus
+---
+
+## 🔹 GetUnitStatus
 Gets the current unit status.
 
 ```lua
@@ -507,7 +547,9 @@ print('Unit status:', status.status)
 print('Last update:', status.lastUpdate)
 ```
 
-### GetNearbyUnits
+---
+
+## 🔹 GetNearbyUnits
 Gets units near the player's location.
 
 ```lua
@@ -531,7 +573,9 @@ end
 
 ## Panic and Emergency Features
 
-### TriggerPanicButton
+---
+
+## 🔹 TriggerPanicButton
 Triggers an emergency panic button.
 
 ```lua

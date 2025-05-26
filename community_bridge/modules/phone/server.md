@@ -19,7 +19,7 @@ Server-side functions for phone integration and email management.
 
 ---
 
-## Bridge.Phone.GetPlayerPhone
+## 🔹 GetPlayerPhone
 
 Retrieves the phone number or phone information for a specific player.
 
@@ -64,7 +64,9 @@ end
 
 ---
 
-## Bridge.Phone.SendEmail
+---
+
+## 🔹 SendEmail
 
 Sends an email to a player through the integrated phone system.
 

@@ -38,7 +38,9 @@ Bridge.Weather.ScheduleWeatherChange('CLEAR', 1800) -- 30 minutes
 
 ## Global Weather Management
 
-### SetGlobalWeather
+---
+
+## 🔹 SetGlobalWeather
 Sets weather for all connected players.
 
 ```lua
@@ -58,7 +60,9 @@ Bridge.Weather.SetGlobalWeather('THUNDER')
 Bridge.Weather.SetGlobalWeather('RAIN', 300)
 ```
 
-### GetGlobalWeather
+---
+
+## 🔹 GetGlobalWeather
 Retrieves the current global weather state.
 
 ```lua
@@ -76,7 +80,9 @@ print('Started at:', globalWeather.startTime)
 print('Duration:', globalWeather.duration)
 ```
 
-### SyncWeatherToPlayer
+---
+
+## 🔹 SyncWeatherToPlayer
 Synchronizes current weather to a specific player.
 
 ```lua
@@ -92,7 +98,9 @@ Bridge.Weather.SyncWeatherToPlayer(playerId)
 Bridge.Weather.SyncWeatherToPlayer(source)
 ```
 
-### SyncWeatherToAll
+---
+
+## 🔹 SyncWeatherToAll
 Synchronizes weather to all connected players.
 
 ```lua
@@ -107,7 +115,9 @@ Bridge.Weather.SyncWeatherToAll()
 
 ## Weather Scheduling
 
-### ScheduleWeatherChange
+---
+
+## 🔹 ScheduleWeatherChange
 Schedules a weather change for the future.
 
 ```lua
@@ -128,7 +138,9 @@ Bridge.Weather.ScheduleWeatherChange('RAIN', 600, 3600)
 Bridge.Weather.ScheduleWeatherChange('THUNDER', 300)
 ```
 
-### GetWeatherSchedule
+---
+
+## 🔹 GetWeatherSchedule
 Retrieves the current weather schedule.
 
 ```lua
@@ -146,7 +158,9 @@ for _, event in ipairs(schedule) do
 end
 ```
 
-### CancelScheduledWeather
+---
+
+## 🔹 CancelScheduledWeather
 Cancels a scheduled weather event.
 
 ```lua
@@ -162,7 +176,9 @@ Bridge.Weather.CancelScheduledWeather(scheduleId)
 Bridge.Weather.CancelScheduledWeather('storm_event_001')
 ```
 
-### ClearWeatherSchedule
+---
+
+## 🔹 ClearWeatherSchedule
 Clears all scheduled weather events.
 
 ```lua
@@ -177,7 +193,9 @@ Bridge.Weather.ClearWeatherSchedule()
 
 ## Automatic Weather Systems
 
-### EnableAutoWeather
+---
+
+## 🔹 EnableAutoWeather
 Enables or disables automatic weather changes.
 
 ```lua
@@ -197,7 +215,9 @@ Bridge.Weather.EnableAutoWeather(true, 45)
 Bridge.Weather.EnableAutoWeather(false)
 ```
 
-### SetWeatherCycle
+---
+
+## 🔹 SetWeatherCycle
 Configures a custom weather cycle.
 
 ```lua

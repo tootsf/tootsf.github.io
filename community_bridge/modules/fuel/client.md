@@ -19,6 +19,10 @@ The fuel client module provides vehicle fuel management functions.
 
 ## System Information
 
+---
+
+## 🔹 GetResourceName
+
 ### GetResourceName()
 
 Gets the name of the fuel system currently being used.
@@ -32,6 +36,10 @@ local Bridge = exports['community_bridge']:Bridge()
 local fuelSystem = Bridge.Fuel.GetResourceName()
 print("Using fuel system: " .. fuelSystem)
 ```
+
+---
+
+## 🔹 GetFuel
 
 ### GetFuel(vehicle)
 
@@ -52,6 +60,10 @@ if vehicle ~= 0 then
 end
 ```
 
+---
+
+## 🔹 SetFuel
+
 ### SetFuel(vehicle, fuel)
 
 Sets the fuel level of a vehicle.
@@ -69,7 +81,9 @@ if vehicle ~= 0 then
 end
 ```
 
-## Usage Examples
+---
+
+## 📚 Usage Examples
 
 ### Check Fuel Before Long Trip
 ```lua

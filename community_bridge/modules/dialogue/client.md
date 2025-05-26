@@ -19,6 +19,10 @@ The dialogue client module provides an interactive dialogue system with automati
 
 ## Dialogue Functions
 
+---
+
+## 🔹 Open
+
 ### Open(name, dialogue, characterOptions, dialogueOptions, onSelected)
 
 Opens a dialogue with the player, showing text and interactive options.
@@ -97,6 +101,10 @@ Bridge.Dialogue.Open(
 )
 ```
 
+---
+
+## 🔹 Close
+
 ### Close(name)
 
 Closes an active dialogue and manages camera cleanup.
@@ -110,7 +118,9 @@ local Bridge = exports['community_bridge']:Bridge()
 Bridge.Dialogue.Close("shopkeeper")
 ```
 
-## Camera Management
+---
+
+## 📚 Camera Management
 
 The dialogue system automatically manages camera positioning:
 
@@ -119,7 +129,9 @@ The dialogue system automatically manages camera positioning:
 - **Smart Cleanup**: Cameras are only destroyed when no new dialogue opens immediately
 - **Heading-Based Offset**: Camera position calculated based on entity's heading
 
-## NUI Callbacks
+---
+
+## 📚 NUI Callbacks
 
 The module automatically handles NUI callbacks for option selection:
 

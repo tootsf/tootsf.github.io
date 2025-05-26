@@ -38,6 +38,10 @@ local currentWeather = Bridge.Weather.GetCurrentWeather()
 
 ## Core Weather Functions
 
+---
+
+## 🔹 SetWeather
+
 ### SetWeather
 Sets the current weather type with optional transition.
 

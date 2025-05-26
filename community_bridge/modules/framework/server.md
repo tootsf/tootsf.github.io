@@ -19,7 +19,9 @@ The framework server module provides comprehensive player management, economy op
 
 ## Core Functions
 
-### GetFrameworkName()
+---
+
+## 🔹 GetFrameworkName
 
 Returns the name of the currently active framework.
 
@@ -33,7 +35,9 @@ local frameworkName = Bridge.Framework.GetFrameworkName()
 print("Using framework: " .. frameworkName)
 ```
 
-### GetPlayer(src)
+---
+
+## 🔹 GetPlayer
 
 Gets the framework player object for a given source.
 
@@ -52,7 +56,9 @@ if player then
 end
 ```
 
-### GetPlayers()
+---
+
+## 🔹 GetPlayers
 
 Gets a list of all currently connected players.
 
@@ -66,44 +72,9 @@ local players = Bridge.Framework.GetPlayers()
 print("Connected players: " .. #players)
 ```
 
-## Player Information
+---
 
-### GetPlayerIdentifier(src)
-
-Gets the unique identifier (citizenid) for a player.
-
-**Parameters:**
-- `src` (number): Player server ID
-
-**Returns:**
-- `string`: Player's unique identifier
-
-**Example:**
-```lua
-local Bridge = exports['community_bridge']:Bridge()
-local citizenId = Bridge.Framework.GetPlayerIdentifier(source)
-print("Player ID: " .. citizenId)
-```
-
-### GetPlayerName(src)
-
-Gets the player's first and last name.
-
-**Parameters:**
-- `src` (number): Player server ID
-
-**Returns:**
-- `string`: First name
-- `string`: Last name
-
-**Example:**
-```lua
-local Bridge = exports['community_bridge']:Bridge()
-local firstname, lastname = Bridge.Framework.GetPlayerName(source)
-print("Player: " .. firstname .. " " .. lastname)
-```
-
-### GetPlayerDob(src)
+## 🔹 GetPlayerDob
 
 Gets the player's date of birth.
 
@@ -120,7 +91,9 @@ local dob = Bridge.Framework.GetPlayerDob(source)
 print("DOB: " .. dob)
 ```
 
-### GetPlayerPhone(src)
+---
+
+## 🔹 GetPlayerPhone
 
 Gets the player's phone number.
 
@@ -137,7 +110,9 @@ local phone = Bridge.Framework.GetPlayerPhone(source)
 print("Phone: " .. phone)
 ```
 
-### GetPlayerGang(src)
+---
+
+## 🔹 GetPlayerGang
 
 Gets the player's gang name.
 
@@ -154,9 +129,13 @@ local gang = Bridge.Framework.GetPlayerGang(source)
 print("Gang: " .. gang)
 ```
 
-## Job Management
+---
 
-### GetFrameworkJobs()
+## 📚 Job Management
+
+---
+
+## 🔹 GetFrameworkJobs
 
 Gets all available jobs in the framework.
 
@@ -172,7 +151,11 @@ for _, job in pairs(jobs) do
 end
 ```
 
-### GetPlayerJob(src) - Deprecated
+---
+
+---
+
+## 🔹 GetPlayerJob (Deprecated)
 
 Gets player job information (deprecated - use GetPlayerJobData instead).
 
@@ -185,7 +168,9 @@ Gets player job information (deprecated - use GetPlayerJobData instead).
 - `string`: Grade name
 - `number`: Grade level
 
-### GetPlayerJobData(src)
+---
+
+## 🔹 GetPlayerJobData
 
 Gets comprehensive player job data.
 
@@ -204,7 +189,9 @@ print("Is boss: " .. tostring(jobData.boss))
 print("On duty: " .. tostring(jobData.onDuty))
 ```
 
-### GetPlayersByJob(job)
+---
+
+## 🔹 GetPlayersByJob
 
 Gets all players with a specific job.
 
@@ -221,7 +208,9 @@ local cops = Bridge.Framework.GetPlayersByJob("police")
 print("Online cops: " .. #cops)
 ```
 
-### GetPlayerDuty(src)
+---
+
+## 🔹 GetPlayerDuty
 
 Gets the player's duty status.
 
@@ -238,7 +227,9 @@ local onDuty = Bridge.Framework.GetPlayerDuty(source)
 print("On duty: " .. tostring(onDuty))
 ```
 
-### SetPlayerDuty(src, status)
+---
+
+## 🔹 SetPlayerDuty
 
 Sets the player's duty status.
 
@@ -252,7 +243,9 @@ local Bridge = exports['community_bridge']:Bridge()
 Bridge.Framework.SetPlayerDuty(source, true) -- Put on duty
 ```
 
-### SetPlayerJob(src, name, grade)
+---
+
+## 🔹 SetPlayerJob
 
 Sets the player's job and grade.
 
@@ -267,9 +260,13 @@ local Bridge = exports['community_bridge']:Bridge()
 Bridge.Framework.SetPlayerJob(source, "police", "0")
 ```
 
-## Economy
+---
 
-### GetAccountBalance(src, type)
+## 📚 Economy
+
+---
+
+## 🔹 GetAccountBalance
 
 Gets the player's account balance.
 
@@ -287,7 +284,9 @@ local cash = Bridge.Framework.GetAccountBalance(source, "money")
 local bank = Bridge.Framework.GetAccountBalance(source, "bank")
 ```
 
-### AddAccountBalance(src, type, amount)
+---
+
+## 🔹 AddAccountBalance
 
 Adds money to a player's account.
 
@@ -305,7 +304,9 @@ local Bridge = exports['community_bridge']:Bridge()
 Bridge.Framework.AddAccountBalance(source, "money", 1000)
 ```
 
-### RemoveAccountBalance(src, type, amount)
+---
+
+## 🔹 RemoveAccountBalance
 
 Removes money from a player's account.
 
@@ -325,7 +326,9 @@ Bridge.Framework.RemoveAccountBalance(source, "bank", 500)
 
 ## Inventory Management
 
-### GetItem(src, item, metadata)
+---
+
+## 🔹 GetItem
 
 Gets specific items from player inventory.
 
@@ -346,7 +349,9 @@ for _, item in pairs(items) do
 end
 ```
 
-### GetItemInfo(item)
+---
+
+## 🔹 GetItemInfo
 
 Gets information about an item.
 
@@ -363,7 +368,9 @@ local itemInfo = Bridge.Framework.GetItemInfo("bread")
 print("Item: " .. itemInfo.label)
 ```
 
-### GetItemCount(src, item, metadata)
+---
+
+## 🔹 GetItemCount
 
 Gets the total count of an item in player inventory.
 
@@ -382,7 +389,9 @@ local breadCount = Bridge.Framework.GetItemCount(source, "bread")
 print("Player has " .. breadCount .. " bread")
 ```
 
-### HasItem(src, item)
+---
+
+## 🔹 HasItem
 
 Checks if player has an item.
 
@@ -401,7 +410,9 @@ if Bridge.Framework.HasItem(source, "bread") then
 end
 ```
 
-### GetPlayerInventory(src)
+---
+
+## 🔹 GetPlayerInventory
 
 Gets the player's complete inventory.
 
@@ -420,7 +431,9 @@ for _, item in pairs(inventory) do
 end
 ```
 
-### GetItemBySlot(src, slot)
+---
+
+## 🔹 GetItemBySlot
 
 Gets the item in a specific inventory slot.
 
@@ -440,7 +453,9 @@ if item.name then
 end
 ```
 
-### AddItem(src, item, amount, slot, metadata)
+---
+
+## 🔹 AddItem
 
 Adds an item to player inventory.
 
@@ -460,7 +475,9 @@ local Bridge = exports['community_bridge']:Bridge()
 Bridge.Framework.AddItem(source, "bread", 5, nil, {quality = 100})
 ```
 
-### RemoveItem(src, item, amount, slot, metadata)
+---
+
+## 🔹 RemoveItem
 
 Removes an item from player inventory.
 
@@ -480,7 +497,9 @@ local Bridge = exports['community_bridge']:Bridge()
 Bridge.Framework.RemoveItem(source, "bread", 2)
 ```
 
-### SetMetadata(src, item, slot, metadata)
+---
+
+## 🔹 SetMetadata
 
 Sets metadata for an item in inventory.
 
@@ -501,7 +520,9 @@ Bridge.Framework.SetMetadata(source, "bread", 1, {quality = 50})
 
 ## Player Status
 
-### GetPlayerMetadata(src, metadata)
+---
+
+## 🔹 GetPlayerMetadata
 
 Gets specific metadata for a player.
 
@@ -519,7 +540,9 @@ local hunger = Bridge.Framework.GetPlayerMetadata(source, "hunger")
 print("Hunger: " .. hunger)
 ```
 
-### SetPlayerMetadata(src, metadata, value)
+---
+
+## 🔹 SetPlayerMetadata
 
 Sets metadata for a player.
 
@@ -537,7 +560,9 @@ local Bridge = exports['community_bridge']:Bridge()
 Bridge.Framework.SetPlayerMetadata(source, "hunger", 50)
 ```
 
-### GetHunger(src)
+---
+
+## 🔹 GetHunger
 
 Gets the player's hunger level.
 
@@ -554,7 +579,9 @@ local hunger = Bridge.Framework.GetHunger(source)
 print("Hunger: " .. hunger)
 ```
 
-### GetThirst(src)
+---
+
+## 🔹 GetThirst
 
 Gets the player's thirst level.
 
@@ -571,7 +598,9 @@ local thirst = Bridge.Framework.GetThirst(source)
 print("Thirst: " .. thirst)
 ```
 
-### AddHunger(src, value)
+---
+
+## 🔹 AddHunger
 
 Adds to the player's hunger level.
 
@@ -588,7 +617,9 @@ local Bridge = exports['community_bridge']:Bridge()
 local newHunger = Bridge.Framework.AddHunger(source, 25)
 ```
 
-### AddThirst(src, value)
+---
+
+## 🔹 AddThirst
 
 Adds to the player's thirst level.
 
@@ -605,7 +636,9 @@ local Bridge = exports['community_bridge']:Bridge()
 local newThirst = Bridge.Framework.AddThirst(source, 25)
 ```
 
-### AddStress(src, value)
+---
+
+## 🔹 AddStress
 
 Adds to the player's stress level.
 
@@ -622,7 +655,9 @@ local Bridge = exports['community_bridge']:Bridge()
 local newStress = Bridge.Framework.AddStress(source, 10)
 ```
 
-### RemoveStress(src, value)
+---
+
+## 🔹 RemoveStress
 
 Removes from the player's stress level.
 
@@ -639,7 +674,9 @@ local Bridge = exports['community_bridge']:Bridge()
 local newStress = Bridge.Framework.RemoveStress(source, 15)
 ```
 
-### GetIsPlayerDead(src)
+---
+
+## 🔹 GetIsPlayerDead
 
 Checks if the player is dead or downed.
 
@@ -657,7 +694,9 @@ if Bridge.Framework.GetIsPlayerDead(source) then
 end
 ```
 
-### RevivePlayer(src)
+---
+
+## 🔹 RevivePlayer
 
 Revives a dead player.
 

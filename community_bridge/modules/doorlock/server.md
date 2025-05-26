@@ -19,6 +19,10 @@ The doorlock server module provides basic door lock management functionality.
 
 ## Door Management
 
+---
+
+## 🔹 ToggleDoorLock
+
 ### ToggleDoorLock(doorID, toggle)
 
 Toggles the lock status of a specified door.
@@ -44,7 +48,9 @@ end
 Bridge.Doorlock.ToggleDoorLock("police_station_main", false)
 ```
 
-## Note
+---
+
+## 📚 Note
 
 In the default implementation, this function always returns `true` but doesn't perform actual door locking logic. The real functionality depends on the specific doorlock system being used.
 
@@ -54,11 +60,15 @@ For full functionality, ensure you have one of the supported doorlock systems in
 - rcore_doorlock  
 - doors_creator
 
-## Integration
+---
+
+## 📚 Integration
 
 This module serves as a bridge to various doorlock systems. The actual implementation will be loaded based on which doorlock system is detected on the server.
 
-## Usage in Scripts
+---
+
+## 📚 Usage in Scripts
 
 ```lua
 -- Example usage in a police script
