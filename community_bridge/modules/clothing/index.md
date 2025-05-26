@@ -1,3 +1,14 @@
+
+---
+layout: default
+title: Clothing
+parent: Modules
+grand_parent: Community Bridge
+nav_order: 5
+has_children: true
+permalink: /community_bridge/modules/clothing/
+---
+
 # Clothing Module
 
 The clothing module provides functions for managing player appearance and clothing.

@@ -2,8 +2,10 @@
 layout: default
 title: Helptext
 parent: Modules
-nav_order: 8
+grand_parent: Community Bridge
+nav_order: 9
 has_children: true
+permalink: /community_bridge/modules/helptext/
 ---
 
 # Helptext Module

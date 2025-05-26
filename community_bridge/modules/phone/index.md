@@ -2,8 +2,10 @@
 layout: default
 title: Phone
 parent: Modules
-nav_order: 16
+grand_parent: Community Bridge
+nav_order: 15
 has_children: true
+permalink: /community_bridge/modules/phone/
 ---
 
 # Phone Module

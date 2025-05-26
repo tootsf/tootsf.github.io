@@ -2,8 +2,10 @@
 layout: default
 title: Managment
 parent: Modules
-nav_order: 12
+grand_parent: Community Bridge
+nav_order: 13
 has_children: true
+permalink: /community_bridge/modules/managment/
 ---
 
 # Managment Module

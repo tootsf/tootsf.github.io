@@ -3,11 +3,11 @@ layout: default
 title: Input
 parent: Modules
 grand_parent: Community Bridge
-nav_order: 6
+nav_order: 11
 has_children: true
+permalink: /community_bridge/modules/input/
 ---
 
-# Input Module
 # Input Module
 {: .no_toc }
 

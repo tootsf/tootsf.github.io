@@ -1,3 +1,13 @@
+---
+layout: default
+title: Fuel
+parent: Modules
+grand_parent: Community Bridge
+nav_order: 8
+has_children: true
+permalink: /community_bridge/modules/fuel/
+---
+
 # Fuel Module
 {: .no_toc }
 

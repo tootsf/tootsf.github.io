@@ -2,8 +2,10 @@
 layout: default
 title: Locales
 parent: Modules
-nav_order: 11
+grand_parent: Community Bridge
+nav_order: 12
 has_children: true
+permalink: /community_bridge/modules/locales/
 ---
 
 # Locales Module
