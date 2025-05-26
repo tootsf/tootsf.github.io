@@ -8,6 +8,7 @@ has_children: true
 ---
 
 # Input Module
+# Input Module
 {: .no_toc }
 
 The Input module provides a comprehensive system for collecting user input through various UI components including text inputs, forms, number inputs, and selection dialogs.
@@ -21,11 +22,13 @@ The Input module provides a comprehensive system for collecting user input throu
 
 ---
 
-## Overview
+## 📚 Overview
 
 The Input module bridges client-side input collection with server-side validation and processing. It supports multiple input types, real-time validation, custom styling, and session management for complex workflows.
 
-### Key Features
+---
+
+## 📚 Key Features
 
 - **Multiple Input Types**: Text, number, password, textarea, select dropdowns
 - **Form Management**: Multi-field forms with validation and conditional logic
@@ -34,7 +37,9 @@ The Input module bridges client-side input collection with server-side validatio
 - **Custom Styling**: Themed inputs with custom CSS and animations
 - **Admin Controls**: Special admin inputs with enhanced permissions
 
-## Architecture
+---
+
+## 📚 Architecture
 
 ```
 Input Module
@@ -43,7 +48,9 @@ Input Module
 └── Shared Functions    → Validation schemas, templates, formatting
 ```
 
-## Input Types
+---
+
+## 📚 Input Types
 
 ### Basic Inputs
 - **Text Input**: Single-line text collection

@@ -19,7 +19,13 @@ Shared functions for internationalization and localized text management.
 
 ---
 
-## Bridge.Locales.Locale
+## 📚 Overview
+
+This module provides shared functions for managing localized text across different languages and frameworks. It supports dynamic loading of locale files and variable substitution for personalized messages.
+
+---
+
+## 🔹 Bridge.Locales.Locale
 
 Loads and formats localized text from JSON locale files with support for nested keys and variable substitution.
 

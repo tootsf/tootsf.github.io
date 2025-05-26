@@ -21,9 +21,15 @@ Server-side functions for managing input requests and validation.
 
 ---
 
-## Input Request Functions
+## 📚 Overview
 
-### `Bridge.Input.RequestInput(playerId, config, callback)`
+This module provides server-side functionality for requesting input from players and managing input validation across different client interfaces.
+
+---
+
+## 📚 Input Request Functions
+
+### 🔹 Bridge.Input.RequestInput
 
 Requests input from a specific player.
 

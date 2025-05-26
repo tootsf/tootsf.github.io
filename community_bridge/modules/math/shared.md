@@ -19,7 +19,13 @@ Shared mathematical utility functions available on both client and server sides.
 
 ---
 
-## Range Functions
+## 📚 Overview
+
+This module provides essential mathematical utility functions that are commonly needed in game development. All functions are available on both client and server sides as shared utilities.
+
+---
+
+## 📚 Range Functions
 
 ---
 

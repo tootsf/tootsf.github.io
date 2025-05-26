@@ -21,9 +21,13 @@ Server-side functions for managing target configurations and synchronization.
 
 ---
 
-## Target Management Functions
+## 📚 Overview
 
-### `Bridge.Target.RegisterGlobalTarget(config)`
+Server-side target management allows for global target configurations and player-specific targeting systems.
+
+---
+
+## 🔹 RegisterGlobalTarget
 
 Registers a target configuration that applies to all players.
 
@@ -40,6 +44,8 @@ Registers a target configuration that applies to all players.
 
 **Example:**
 ```lua
+local Bridge = exports['community_bridge']:Bridge()
+
 -- Register ATM targets for all players
 Bridge.Target.RegisterGlobalTarget({
     name = "atm_targets",
@@ -55,7 +61,9 @@ Bridge.Target.RegisterGlobalTarget({
 })
 ```
 
-### `Bridge.Target.RegisterPlayerTarget(playerId, config)`
+---
+
+## 🔹 RegisterPlayerTarget
 
 Registers a target configuration for a specific player.
 
@@ -68,6 +76,8 @@ Registers a target configuration for a specific player.
 
 **Example:**
 ```lua
+local Bridge = exports['community_bridge']:Bridge()
+
 -- Job-specific targets for police officers
 local function SetupPoliceTargets(playerId)
     Bridge.Target.RegisterPlayerTarget(playerId, {
@@ -101,7 +111,9 @@ RegisterNetEvent('job:setJob', function(job)
 end)
 ```
 
-### `Bridge.Target.UpdateTargetConfig(name, config)`
+---
+
+## 🔹 UpdateTargetConfig
 
 Updates an existing target configuration.
 
@@ -114,6 +126,8 @@ Updates an existing target configuration.
 
 **Example:**
 ```lua
+local Bridge = exports['community_bridge']:Bridge()
+
 -- Update shop hours
 Bridge.Target.UpdateTargetConfig("general_store", {
     options = {
@@ -138,7 +152,9 @@ Bridge.Target.UpdateTargetConfig("general_store", {
 })
 ```
 
-## Synchronization Functions
+---
+
+## 📚 Synchronization Functions
 
 ### `Bridge.Target.SyncTargetToPlayer(playerId, name)`
 

@@ -19,7 +19,13 @@ Server-side functions for inventory management, item operations, and storage sys
 
 ---
 
-## Item Management
+## 📚 Overview
+
+This module provides server-side functionality for managing player inventories, including adding/removing items, checking quantities, and handling item metadata across different inventory systems.
+
+---
+
+## 📚 Item Management
 
 ---
 

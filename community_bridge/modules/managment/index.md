@@ -17,7 +17,7 @@ The Managment module provides a unified interface for managing business and orga
 1. TOC
 {:toc}
 
-## Overview
+## 📚 Overview
 
 The Managment module offers:
 
@@ -27,7 +27,9 @@ The Managment module offers:
 - **Transaction Logging**: Support for transaction reasons and logging
 - **Fallback Handling**: Graceful fallback when no banking system is detected
 
-## Supported Banking Resources
+---
+
+## 📚 Supported Banking Resources
 
 - **qb-banking**: QBCore banking system
 - **Renewed-Banking**: Renewed Scripts banking
@@ -35,14 +37,18 @@ The Managment module offers:
 - **fd_banking**: FD Banking system
 - **Default**: Fallback implementation when no banking system is detected
 
-## Available Functions
+---
+
+## 📚 Available Functions
 
 ### Server Functions
 - `Managment.GetAccountMoney()` - Retrieve account balance information
 - `Managment.AddAccountMoney()` - Add money to a business account
 - `Managment.RemoveAccountMoney()` - Remove money from a business account
 
-## Module Structure
+---
+
+## 📚 Module Structure
 
 ```
 managment/
@@ -53,7 +59,9 @@ managment/
 └── fd_banking/        # FD Banking integration
 ```
 
-## Bridge System
+---
+
+## 📚 Bridge System
 
 The module uses a bridge system that:
 1. Checks for installed banking resources using `GetResourceState()`
@@ -61,20 +69,26 @@ The module uses a bridge system that:
 3. Falls back to default implementation if no system is found
 4. Provides consistent API calls regardless of underlying banking system
 
-## Usage Example
+---
+
+## 📚 Usage Example
 
 ```lua
+local Bridge = exports['community_bridge']:Bridge()
+
 -- Get account information
-local accountData = Managment.GetAccountMoney("police_department")
+local accountData = Bridge.Managment.GetAccountMoney("police_department")
 
 -- Add money to account
-local success = Managment.AddAccountMoney("police_department", 5000, "Equipment purchase")
+local success = Bridge.Managment.AddAccountMoney("police_department", 5000, "Equipment purchase")
 
 -- Remove money from account
-local success = Managment.RemoveAccountMoney("police_department", 1500, "Monthly expenses")
+local success = Bridge.Managment.RemoveAccountMoney("police_department", 1500, "Monthly expenses")
 ```
 
-## Account Types
+---
+
+## 📚 Account Types
 
 Different banking systems may support various account types:
 - **Job Accounts**: Police, EMS, Government departments
@@ -82,7 +96,9 @@ Different banking systems may support various account types:
 - **Business Accounts**: Player-owned business accounts
 - **Society Accounts**: General organization accounts
 
-## Integration Benefits
+---
+
+## 📚 Integration Benefits
 
 - **Code Portability**: Same code works across different servers with different banking systems
 - **Easy Migration**: Switch between banking systems without changing management scripts

@@ -21,9 +21,13 @@ Shared utilities and configurations for the Input module.
 
 ---
 
-## Validation Functions
+## 📚 Overview
 
-### `Bridge.Input.ValidateInputData(data, schema)`
+Shared functions provide validation, formatting, and utility functions that work on both client and server sides.
+
+---
+
+## 🔹 ValidateInputData
 
 Validates input data against a schema definition.
 

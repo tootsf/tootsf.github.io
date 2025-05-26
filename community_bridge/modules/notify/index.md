@@ -21,11 +21,13 @@ The Notify module provides a unified API for sending notifications to players ac
 
 ---
 
-## Overview
+## 📚 Overview
 
 This module standardizes notification delivery across various notification resources, ensuring consistent user experience regardless of which notification system your server uses.
 
-## Supported Notification Systems
+---
+
+## 📚 Supported Notification Systems
 
 - **ox_lib** - Modern notification system with rich formatting
 - **qb-core** - QBCore's built-in notification system
@@ -33,7 +35,9 @@ This module standardizes notification delivery across various notification resou
 - **mythic_notify** - Mythic notification compatibility
 - **Custom Systems** - Extensible for custom notification implementations
 
-## Key Features
+---
+
+## 📚 Key Features
 
 - **Multiple Types** - Success, error, warning, info, and custom types
 - **Rich Formatting** - Support for colors, icons, and positioning
@@ -41,9 +45,13 @@ This module standardizes notification delivery across various notification resou
 - **Progress Notifications** - Long-running operation updates
 - **Sound Integration** - Optional sound effects
 
-## Quick Start
+---
+
+## 📚 Quick Start
 
 ```lua
+local Bridge = exports['community_bridge']:Bridge()
+
 -- Server-side example
 local playerId = source
 

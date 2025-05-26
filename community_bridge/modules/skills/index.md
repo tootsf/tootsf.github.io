@@ -20,11 +20,11 @@ Comprehensive character skill and progression system for FiveM servers.
 
 ---
 
-## Overview
+## 📚 Overview
 
 The Skills module provides a complete character progression system with customizable skills, experience tracking, level progression, and reward systems. It's designed to enhance gameplay by adding RPG-like character development to your FiveM server.
 
-### Key Features
+### 📚 Key Features
 
 - **Skill Management**: Create and manage multiple character skills
 - **Experience System**: Track experience points and level progression
@@ -37,16 +37,16 @@ The Skills module provides a complete character progression system with customiz
 
 ---
 
-## Skill Types
+## 📚 Skill Types
 
-### Primary Skills
+### 📚 Primary Skills
 Core skills that define character capabilities in major areas:
 - Combat skills (melee, firearms, defensive)
 - Technical skills (hacking, electronics, mechanics)
 - Social skills (persuasion, intimidation, leadership)
 - Physical skills (strength, endurance, agility)
 
-### Secondary Skills
+### 📚 Secondary Skills
 Specialized skills for specific activities:
 - Crafting and production skills
 - Professional job skills

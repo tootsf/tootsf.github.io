@@ -21,9 +21,13 @@ Client-side functions for creating and managing input dialogs and forms.
 
 ---
 
-## Core Input Functions
+## 📚 Overview
 
-### `Bridge.Input.ShowInput(config)`
+Client-side input functions provide UI components for collecting user data through various input dialogs and forms.
+
+---
+
+## 🔹 ShowInput
 
 Displays a single input dialog.
 
@@ -43,6 +47,8 @@ Displays a single input dialog.
 
 **Example:**
 ```lua
+local Bridge = exports['community_bridge']:Bridge()
+
 -- Simple text input
 local playerName = Bridge.Input.ShowInput({
     title = "Character Creation",

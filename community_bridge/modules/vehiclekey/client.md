@@ -19,6 +19,12 @@ Client-side functions for vehicle key management across multiple key systems.
 
 ---
 
+## 📚 Overview
+
+This module provides client-side functionality for managing vehicle keys across different vehicle key systems, allowing for consistent key operations regardless of the underlying system.
+
+---
+
 ## 🔹 GiveKeys
 
 Gives vehicle keys to the current player for the specified vehicle.

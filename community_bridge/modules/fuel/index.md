@@ -1,8 +1,17 @@
-# Fuel
+# Fuel Module
+{: .no_toc }
 
 The fuel module provides vehicle fuel management functionality with support for multiple fuel systems.
 
-## Available Functions
+## Table of contents
+{: .no_toc .text-delta }
+
+1. TOC
+{:toc}
+
+---
+
+## 📚 Available Functions
 
 ### Client-side
 - [`GetResourceName()`](client.md#getresourcename) - Get the name of the fuel system being used
@@ -12,7 +21,9 @@ The fuel module provides vehicle fuel management functionality with support for 
 ### Server-side
 No server-side functions available.
 
-## Supported Systems
+---
+
+## 📚 Supported Systems
 
 The module supports multiple fuel systems:
 - bigDaddy-Fuel
@@ -28,6 +39,8 @@ The module supports multiple fuel systems:
 - ti_fuel
 - x-fuel
 
-## Integration
+---
+
+## 📚 Integration
 
 The module automatically detects which fuel system is installed and provides a unified interface for fuel management across different systems.

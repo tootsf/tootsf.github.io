@@ -19,6 +19,12 @@ Client-side functions for shop interface and user interaction.
 
 ---
 
+## 📚 Overview
+
+This module provides client-side functionality for displaying shop interfaces and handling user interactions with shop systems.
+
+---
+
 ## 🔹 OpenShop
 
 Displays the shop interface to the player with interactive item browsing.

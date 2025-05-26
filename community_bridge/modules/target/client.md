@@ -21,9 +21,16 @@ Client-side functions for creating and managing target interactions.
 
 ---
 
-## Core Target Functions
+## 📚 Core Target Functions
 
-### `Bridge.Target.AddTargetEntity(entity, options)`
+---
+
+## 🔹 AddTargetEntity
+
+```lua
+local Bridge = exports['community_bridge']:Bridge()
+Bridge.Target.AddTargetEntity(entity, options)
+```
 
 Adds targeting interaction to a specific entity.
 
@@ -42,6 +49,8 @@ Adds targeting interaction to a specific entity.
 
 **Example:**
 ```lua
+local Bridge = exports['community_bridge']:Bridge()
+
 -- Add target to a vehicle
 local vehicle = GetVehiclePedIsIn(PlayerPedId(), false)
 
@@ -61,7 +70,14 @@ Bridge.Target.AddTargetEntity(vehicle, {
 })
 ```
 
-### `Bridge.Target.AddTargetModel(models, options)`
+---
+
+## 🔹 AddTargetModel
+
+```lua
+local Bridge = exports['community_bridge']:Bridge()
+Bridge.Target.AddTargetModel(models, options)
+```
 
 Adds targeting interaction to specific entity models.
 
@@ -74,6 +90,8 @@ Adds targeting interaction to specific entity models.
 
 **Example:**
 ```lua
+local Bridge = exports['community_bridge']:Bridge()
+
 -- Target ATM models
 Bridge.Target.AddTargetModel({
     "prop_atm_01", 
@@ -90,7 +108,14 @@ Bridge.Target.AddTargetModel({
 })
 ```
 
-### `Bridge.Target.AddTargetCoords(coords, options)`
+---
+
+## 🔹 AddTargetCoords
+
+```lua
+local Bridge = exports['community_bridge']:Bridge()
+Bridge.Target.AddTargetCoords(coords, options)
+```
 
 Adds targeting interaction at specific coordinates.
 
@@ -106,6 +131,8 @@ Adds targeting interaction at specific coordinates.
 
 **Example:**
 ```lua
+local Bridge = exports['community_bridge']:Bridge()
+
 -- Create target zone at coordinates
 Bridge.Target.AddTargetCoords(vector3(195.0, -933.0, 30.0), {
     name = "clothing_store",
@@ -119,7 +146,14 @@ Bridge.Target.AddTargetCoords(vector3(195.0, -933.0, 30.0), {
 })
 ```
 
-### `Bridge.Target.AddTargetZone(name, coords, width, length, options)`
+---
+
+## 🔹 AddTargetZone
+
+```lua
+local Bridge = exports['community_bridge']:Bridge()
+Bridge.Target.AddTargetZone(name, coords, width, length, options)
+```
 
 Adds a rectangular target zone.
 
@@ -173,6 +207,8 @@ Removes targeting from a specific entity.
 
 **Example:**
 ```lua
+local Bridge = exports['community_bridge']:Bridge()
+
 -- Remove specific target
 Bridge.Target.RemoveTargetEntity(vehicle, "vehicle_options")
 
@@ -180,7 +216,14 @@ Bridge.Target.RemoveTargetEntity(vehicle, "vehicle_options")
 Bridge.Target.RemoveTargetEntity(vehicle)
 ```
 
-### `Bridge.Target.RemoveTargetModel(models, name)`
+---
+
+## 🔹 RemoveTargetModel
+
+```lua
+local Bridge = exports['community_bridge']:Bridge()
+Bridge.Target.RemoveTargetModel(models, name)
+```
 
 Removes targeting from entity models.
 
@@ -198,7 +241,14 @@ local Bridge = exports['community_bridge']:Bridge()
 Bridge.Target.RemoveTargetModel("prop_atm_01", "use_atm")
 ```
 
-### `Bridge.Target.RemoveTargetZone(name)`
+---
+
+## 🔹 RemoveTargetZone
+
+```lua
+local Bridge = exports['community_bridge']:Bridge()
+Bridge.Target.RemoveTargetZone(name)
+```
 
 Removes a target zone.
 
@@ -427,25 +477,33 @@ Bridge.Target.SetTargetStyle({
 })
 ```
 
-## Best Practices
+## 📚 Best Practices
 
-### Performance Guidelines
+---
+
+## 📚 Performance Guidelines
 
 1. **Limit target count** - Don't add too many targets simultaneously
 2. **Use appropriate distances** - Smaller distances reduce processing overhead
 3. **Efficient callbacks** - Keep action functions lightweight
 4. **Clean up targets** - Remove targets when no longer needed
 
-### User Experience Tips
+---
+
+## 📚 User Experience Tips
 
 1. **Clear labels** - Use descriptive, concise labels
 2. **Consistent icons** - Use standardized Font Awesome icons
 3. **Logical grouping** - Group related options together
 4. **Visual feedback** - Provide clear interaction feedback
 
-### Error Handling
+---
+
+## 📚 Error Handling
 
 ```lua
+local Bridge = exports['community_bridge']:Bridge()
+
 -- Safe target addition with error checking
 local function AddSafeTarget(entity, options)
     if not DoesEntityExist(entity) then
@@ -462,9 +520,13 @@ local function AddSafeTarget(entity, options)
 end
 ```
 
-### Memory Management
+---
+
+## 📚 Memory Management
 
 ```lua
+local Bridge = exports['community_bridge']:Bridge()
+
 -- Clean up targets when entity is deleted
 AddEventHandler('entityRemoved', function(entity)
     Bridge.Target.RemoveTargetEntity(entity)

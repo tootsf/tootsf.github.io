@@ -17,7 +17,9 @@ The Phone module provides a unified interface for interacting with various phone
 1. TOC
 {:toc}
 
-## Overview
+---
+
+## 📚 Overview
 
 The Phone module offers:
 
@@ -27,7 +29,9 @@ The Phone module offers:
 - **Player Phone Access**: Retrieve player phone information
 - **Fallback Handling**: Graceful fallback when no phone system is detected
 
-## Supported Phone Resources
+---
+
+## 📚 Supported Phone Resources
 
 - **qs-smartphone**: Full integration with email and phone access
 - **gksphone**: Integration support
@@ -35,7 +39,9 @@ The Phone module offers:
 - **okokPhone**: Integration support
 - **Default**: Fallback implementation when no phone system is detected
 
-## Available Functions
+---
+
+## 📚 Available Functions
 
 ### Server Functions
 - `Bridge.Phone.GetPlayerPhone()` - Retrieve player's phone information
@@ -44,7 +50,9 @@ The Phone module offers:
 ### Client Functions
 - `Bridge.Phone.SendEmail()` - Client-side email sending functionality
 
-## Module Structure
+---
+
+## 📚 Module Structure
 
 ```
 phone/
@@ -55,7 +63,9 @@ phone/
 └── okokPhone/         # OKOK Phone integration
 ```
 
-## Bridge System
+---
+
+## 📚 Bridge System
 
 The module uses a bridge system that:
 1. Checks for installed phone resources
@@ -63,7 +73,9 @@ The module uses a bridge system that:
 3. Falls back to default implementation if no phone system is found
 4. Provides consistent API regardless of underlying phone system
 
-## Usage Example
+---
+
+## 📚 Usage Example
 
 ```lua
 local Bridge = exports['community_bridge']:Bridge()

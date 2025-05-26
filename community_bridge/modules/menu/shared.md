@@ -21,9 +21,13 @@ Shared utilities and configurations for the Menu module.
 
 ---
 
-## Validation Functions
+## 📚 Overview
 
-### `Bridge.Menu.ValidateMenuOptions(options)`
+Shared menu functions provide validation, formatting, and utility functions for menu systems.
+
+---
+
+## 🔹 ValidateMenuOptions
 
 Validates menu option structure and data types.
 

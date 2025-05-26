@@ -7,10 +7,19 @@ has_children: true
 ---
 
 # Helptext Module
+{: .no_toc }
 
 The helptext module provides contextual help and instruction display functionality for players.
 
-## Available Functions
+## Table of contents
+{: .no_toc .text-delta }
+
+1. TOC
+{:toc}
+
+---
+
+## 📚 Available Functions
 
 ### Client-side
 - [`ShowHelpText(message, position)`](client.md#showhelptext) - Display help text on screen
@@ -20,7 +29,9 @@ The helptext module provides contextual help and instruction display functionali
 - [`ShowHelpText(src, message, position)`](server.md#showhelptext) - Show help text to specific player
 - [`HideHelpText(src)`](server.md#hidehelptext) - Hide help text for specific player
 
-## Supported Systems
+---
+
+## 📚 Supported Systems
 
 This module integrates with various helptext/textui systems:
 - Default framework implementation

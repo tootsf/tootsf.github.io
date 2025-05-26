@@ -17,7 +17,9 @@ The Shops module provides a comprehensive system for creating and managing in-ga
 1. TOC
 {:toc}
 
-## Overview
+---
+
+## 📚 Overview
 
 The Shops module offers:
 
@@ -27,7 +29,9 @@ The Shops module offers:
 - **Interactive Menus**: User-friendly shop browsing interface
 - **Anti-Cheat Protection**: Validation of items and prices server-side
 
-## Available Functions
+---
+
+## 📚 Available Functions
 
 ### Server Functions
 - `Bridge.Shops.CreateShop()` - Register a new shop with inventory and location
@@ -39,7 +43,9 @@ The Shops module offers:
 - `Bridge.Shops.AmountSelect()` - Handle quantity selection for purchases
 - `Bridge.Shops.FinalizeCheckOut()` - Present payment method options
 
-## Module Structure
+---
+
+## 📚 Module Structure
 
 ```
 shops/
@@ -48,7 +54,9 @@ shops/
 │   └── server.lua    # Server-side shop registration and transactions
 ```
 
-## Usage Example
+---
+
+## 📚 Usage Example
 
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
@@ -63,7 +71,9 @@ Bridge.Shops.CreateShop("General Store", {
 Bridge.Shops.OpenShop(playerId, "General Store")
 ```
 
-## Security Features
+---
+
+## 📚 Security Features
 
 - All shop transactions are validated server-side
 - Item existence and pricing verification

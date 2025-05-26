@@ -21,11 +21,13 @@ The Inventory module provides a unified API for interacting with player inventor
 
 ---
 
-## Overview
+## 📚 Overview
 
 This module abstracts inventory operations to work seamlessly across different inventory systems, allowing you to write code that works regardless of which inventory resource your server uses.
 
-## Supported Inventory Systems
+---
+
+## 📚 Supported Inventory Systems
 
 - **ox_inventory** - Full support for all ox_inventory features
 - **qb-inventory** - Complete QBCore inventory integration
@@ -33,7 +35,9 @@ This module abstracts inventory operations to work seamlessly across different i
 - **lj-inventory** - LJ inventory compatibility
 - **Custom Systems** - Extensible for custom inventory implementations
 
-## Key Features
+---
+
+## 📚 Key Features
 
 - **Item Management** - Add, remove, and modify items with metadata support
 - **Inventory Queries** - Get item counts, inventory contents, and item information
@@ -41,9 +45,13 @@ This module abstracts inventory operations to work seamlessly across different i
 - **Metadata Support** - Handle complex item data and custom properties
 - **Real-time Updates** - Automatic inventory synchronization
 
-## Quick Start
+---
+
+## 📚 Quick Start
 
 ```lua
+local Bridge = exports['community_bridge']:Bridge()
+
 -- Server-side example
 local playerId = source
 local itemName = "water"

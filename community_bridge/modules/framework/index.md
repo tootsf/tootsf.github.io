@@ -21,26 +21,34 @@ The Framework module provides a unified API for interacting with player data, mo
 
 ---
 
-## Overview
+## 📚 Overview
 
 This module acts as an abstraction layer between your resource and the underlying framework, allowing you to write framework-agnostic code that works seamlessly across different server configurations.
 
-## Supported Frameworks
+---
+
+## 📚 Supported Frameworks
 
 - **ESX** - Full support for all ESX versions
 - **QBCore** - Complete QBCore integration
 - **Custom Frameworks** - Extensible architecture for custom implementations
 
-## Key Features
+---
+
+## 📚 Key Features
 
 - **Player Management** - Get player data, identifiers, and online status
 - **Economy Integration** - Money handling across different currency systems
 - **Job System** - Unified job management and grade handling
 - **Event Integration** - Framework-specific event handling and callbacks
 
-## Quick Start
+---
+
+## 📚 Quick Start
 
 ```lua
+local Bridge = exports['community_bridge']:Bridge()
+
 -- Server-side example
 local playerId = source
 local identifier = Bridge.Framework.GetIdentifier(playerId)

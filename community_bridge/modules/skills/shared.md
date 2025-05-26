@@ -20,11 +20,13 @@ Shared utilities and configurations for the Skills module that work across both 
 
 ---
 
-## Overview
+## 📚 Overview
 
 The Skills shared module provides common utilities, configurations, and data structures used by both client and server-side Skills functionality. This includes skill definitions, configuration management, and utility functions.
 
-## Getting Started
+---
+
+## 📚 Getting Started
 
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
@@ -34,9 +36,11 @@ local skillConfig = Bridge.Skills.GetSkillConfig()
 local skillData = Bridge.Skills.GetSkillData('driving')
 ```
 
-## Configuration Functions
+---
 
-### GetSkillConfig
+## 📚 Configuration Functions
+
+### 🔹 GetSkillConfig
 Retrieves the complete skills configuration.
 
 ```lua

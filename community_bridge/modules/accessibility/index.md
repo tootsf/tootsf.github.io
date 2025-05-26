@@ -1,8 +1,10 @@
-# Accessibility
+# Accessibility Module
 
 The accessibility module provides colorblind accessibility features and color utility functions.
 
-## Available Functions
+---
+
+## 📚 Available Functions
 
 ### Client-side
 - [`updatecolourblindness()`](client.md#updatecolourblindness) - Opens color blindness settings menu
@@ -17,7 +19,9 @@ The accessibility module provides colorblind accessibility features and color ut
 ### Server-side
 No server-side functions available.
 
-## Supported Colorblind Types
+---
+
+## 📚 Supported Colorblind Types
 
 - Default (no adjustment)
 - Protanomaly (red-blind)
@@ -26,6 +30,8 @@ No server-side functions available.
 - Tritanopia (blue-blind)
 - Tritanomaly (blue-weak)
 
-## Commands
+---
+
+## 📚 Commands
 
 - `/colourblind` - Opens the colorblind settings menu

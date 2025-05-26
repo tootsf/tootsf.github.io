@@ -19,9 +19,15 @@ Client-side functions for inventory data retrieval and item information.
 
 ---
 
-## Item Information
+## 📚 Overview
 
-### GetItemInfo
+This module provides client-side functionality for retrieving inventory data and item information across different inventory systems.
+
+---
+
+## 📚 Item Information
+
+### 🔹 GetItemInfo
 {: .d-inline-block }
 Client
 {: .label .label-blue }

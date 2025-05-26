@@ -20,9 +20,13 @@ Shared utility functions for progress bar configuration, validation, and common 
 
 ---
 
-## Configuration Functions
+## 📚 Overview
 
-### GetProgressConfig
+Shared functions provide utilities for progress bar configuration, validation, and common operations.
+
+---
+
+## 🔹 GetProgressConfig
 {: .d-inline-block }
 Shared
 {: .label .label-purple }

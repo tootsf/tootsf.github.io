@@ -1,8 +1,17 @@
-# Doorlock
+# Doorlock Module
+{: .no_toc }
 
 The doorlock module provides basic door locking functionality with support for multiple doorlock systems.
 
-## Available Functions
+## Table of contents
+{: .no_toc .text-delta }
+
+1. TOC
+{:toc}
+
+---
+
+## 📚 Available Functions
 
 ### Client-side
 - [`GetClosestDoor()`](client.md#getclosestdoor) - Get the closest door to the player
@@ -10,7 +19,9 @@ The doorlock module provides basic door locking functionality with support for m
 ### Server-side
 - [`ToggleDoorLock(doorID, toggle)`](server.md#toggledoorlock) - Toggle a door's lock status
 
-## Supported Systems
+---
+
+## 📚 Supported Systems
 
 The module supports multiple doorlock systems:
 - ox_doorlock
@@ -18,6 +29,8 @@ The module supports multiple doorlock systems:
 - rcore_doorlock
 - doors_creator
 
-## Note
+---
+
+## 📚 Note
 
 This module appears to be incomplete with minimal functionality. The default implementation provides basic structure but limited actual door interaction capabilities.

@@ -21,9 +21,7 @@ Shared utilities and configurations for the Target module.
 
 ---
 
-## Validation Functions
-
-### `Bridge.Target.ValidateTargetConfig(config)`
+## 🔹 ValidateTargetConfig
 
 Validates target configuration structure and data types.
 
@@ -36,6 +34,8 @@ Validates target configuration structure and data types.
 
 **Example:**
 ```lua
+local Bridge = exports['community_bridge']:Bridge()
+
 local targetConfig = {
     name = "test_target",
     models = {"prop_atm_01"},

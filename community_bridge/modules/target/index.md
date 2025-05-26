@@ -21,11 +21,13 @@ The Target module provides a unified API for targeting systems, allowing players
 
 ---
 
-## Overview
+## 📚 Overview
 
 This module standardizes targeting interactions across various targeting resources, providing consistent functionality for player-entity interactions regardless of which targeting system your server uses.
 
-## Supported Targeting Systems
+---
+
+## 📚 Supported Targeting Systems
 
 - **ox_target** - Modern targeting with raycast precision
 - **qb-target** - QBCore's targeting system
@@ -33,7 +35,9 @@ This module standardizes targeting interactions across various targeting resourc
 - **qtarget** - qTarget integration
 - **Custom Systems** - Extensible for custom targeting implementations
 
-## Key Features
+---
+
+## 📚 Key Features
 
 - **Entity Targeting** - Target vehicles, NPCs, and objects
 - **Zone Targeting** - Create invisible interaction zones
@@ -42,9 +46,13 @@ This module standardizes targeting interactions across various targeting resourc
 - **Performance Optimized** - Efficient targeting detection
 - **Multi-framework** - Works across different frameworks
 
-## Quick Start
+---
+
+## 📚 Quick Start
 
 ```lua
+local Bridge = exports['community_bridge']:Bridge()
+
 -- Client-side example: Add targeting to all vehicles
 Bridge.Target.AddTargetModel(GetHashKey('adder'), {
     name = "vehicle_interaction",

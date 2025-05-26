@@ -17,7 +17,9 @@ The VehicleKey module provides a unified interface for managing vehicle keys acr
 1. TOC
 {:toc}
 
-## Overview
+---
+
+## 📚 Overview
 
 The VehicleKey module offers:
 
@@ -27,7 +29,9 @@ The VehicleKey module offers:
 - **Consistent API**: Same function calls work across all supported systems
 - **Fallback Handling**: Graceful fallback when no key system is detected
 
-## Supported Vehicle Key Resources
+---
+
+## 📚 Supported Vehicle Key Resources
 
 - **qb-vehiclekeys**: QBCore vehicle keys
 - **qbx_vehiclekeys**: QBX vehicle keys  
@@ -44,13 +48,17 @@ The VehicleKey module offers:
 - **okokGarage**: OKOK Garage integration
 - **Default**: Fallback when no system is detected
 
-## Available Functions
+---
+
+## 📚 Available Functions
 
 ### Client Functions
 - `Bridge.VehicleKey.GiveKeys()` - Give vehicle keys to player
 - `Bridge.VehicleKey.RemoveKeys()` - Remove vehicle keys from player
 
-## Module Structure
+---
+
+## 📚 Module Structure
 
 ```
 vehicleKey/
@@ -70,7 +78,9 @@ vehicleKey/
 └── okokGarage/            # OKOK Garage integration
 ```
 
-## Bridge System
+---
+
+## 📚 Bridge System
 
 The module uses a bridge system that:
 1. Checks for installed vehicle key resources using `GetResourceState()`
@@ -78,7 +88,9 @@ The module uses a bridge system that:
 3. Falls back to default implementation if no system is found
 4. Provides consistent API calls regardless of underlying system
 
-## Usage Example
+---
+
+## 📚 Usage Example
 
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
@@ -92,7 +104,9 @@ Bridge.VehicleKey.GiveKeys(vehicle, plate)
 Bridge.VehicleKey.RemoveKeys(vehicle, plate)
 ```
 
-## Integration Benefits
+---
+
+## 📚 Integration Benefits
 
 - **Code Portability**: Same code works across different servers with different key systems
 - **Easy Migration**: Switch between key systems without changing your scripts

@@ -19,9 +19,15 @@ Shared utilities and validation functions available on both client and server si
 
 ---
 
-## Item Validation
+## 📚 Overview
 
-### IsValidItem
+This module provides shared functionality for inventory validation and utility functions that work across both client and server environments.
+
+---
+
+## 📚 Item Validation
+
+### 🔹 IsValidItem
 {: .d-inline-block }
 Shared
 {: .label .label-green }

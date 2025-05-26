@@ -17,7 +17,9 @@ The Locales module provides a comprehensive internationalization system for Five
 1. TOC
 {:toc}
 
-## Overview
+---
+
+## 📚 Overview
 
 The Locales module offers:
 
@@ -28,7 +30,9 @@ The Locales module offers:
 - **Fallback System**: Graceful fallback to keys when translations are missing
 - **Resource-Specific**: Loads locales specific to each resource
 
-## Language Detection Priority
+---
+
+## 📚 Language Detection Priority
 
 The module checks language settings in the following order:
 

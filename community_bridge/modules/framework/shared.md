@@ -19,13 +19,13 @@ Shared utilities and functions available on both client and server sides.
 
 ---
 
-## Overview
+## 📚 Overview
 
 Shared functions provide utilities that can be used on both client and server sides, typically for data validation, formatting, and common operations.
 
-## Utility Functions
+---
 
-### IsValidIdentifier
+## 🔹 IsValidIdentifier
 {: .d-inline-block }
 Shared
 {: .label .label-green }

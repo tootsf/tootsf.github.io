@@ -17,7 +17,9 @@ The Housing module provides a unified interface for detecting when players enter
 1. TOC
 {:toc}
 
-## Overview
+---
+
+## 📚 Overview
 
 The Housing module offers:
 
@@ -27,7 +29,9 @@ The Housing module offers:
 - **Routing Bucket Integration**: Provides routing bucket information for properties
 - **Location Data**: Access to player coordinates and property information
 
-## Supported Housing Resources
+---
+
+## 📚 Supported Housing Resources
 
 - **qb-houses**: QBCore housing system
 - **qb-appartments**: QBCore apartments

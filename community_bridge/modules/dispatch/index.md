@@ -20,11 +20,11 @@ Emergency services dispatch system for coordinating police, medical, and fire re
 
 ---
 
-## Overview
+## 📚 Overview
 
 The Dispatch module provides a comprehensive emergency services coordination system. It handles 911 calls, automatic incident detection, unit assignment, communication systems, and response tracking for realistic emergency services roleplay.
 
-### Key Features
+### 📚 Key Features
 
 - **911 Call System**: Player-initiated emergency calls
 - **Automatic Detection**: AI-driven incident recognition
@@ -37,9 +37,9 @@ The Dispatch module provides a comprehensive emergency services coordination sys
 
 ---
 
-## Emergency Services
+## 📚 Emergency Services
 
-### Police Department
+### 📚 Police Department
 - **Patrol Units**: Regular police patrols and traffic enforcement
 - **Detective Units**: Investigation and evidence collection
 - **SWAT Teams**: High-risk response units
@@ -47,7 +47,7 @@ The Dispatch module provides a comprehensive emergency services coordination sys
 - **K9 Units**: Specialized units with police dogs
 - **Motorcycle Units**: Traffic enforcement and pursuit
 
-### Medical Services
+### 📚 Medical Services
 - **Ambulance Units**: Emergency medical response
 - **Paramedic Teams**: Advanced life support
 - **Medical Helicopters**: Air rescue and transport
