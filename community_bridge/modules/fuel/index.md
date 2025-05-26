@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Fuel
+title: "⛽ Fuel"
 parent: Modules
 grand_parent: Community Bridge
 nav_order: 7

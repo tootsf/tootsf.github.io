@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Progressbar
+title: "⏳ Progressbar"
 parent: Modules
 grand_parent: Community Bridge
 nav_order: 18

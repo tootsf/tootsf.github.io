@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Target
+title: "🎯 Target"
 parent: Modules
 grand_parent: Community Bridge
 nav_order: 21

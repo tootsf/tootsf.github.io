@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Skills
+title: "🎯 Skills"
 parent: Modules
 grand_parent: Community Bridge
 nav_order: 20

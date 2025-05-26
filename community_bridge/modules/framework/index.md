@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Framework
+title: "🧩 Framework"
 parent: Modules
 grand_parent: Community Bridge
 nav_order: 6

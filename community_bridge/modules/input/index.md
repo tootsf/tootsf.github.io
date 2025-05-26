@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Input
+title: "⌨️ Input"
 parent: Modules
 grand_parent: Community Bridge
 nav_order: 10
@@ -273,25 +273,3 @@ local businessApp = Bridge.Input.ShowInputForm({
 ---
 
 The Input module provides powerful and flexible input collection capabilities for your FiveM server, with comprehensive validation, styling options, and seamless client-server integration.
-
-## 📚 Available Functions
-
-### Client-side Functions
-- [`ShowInput(config)`](client/ShowInput.md) - Display a simple input dialog
-- [`ShowInputForm(config)`](client/ShowInputForm.md) - Display a multi-input form dialog
-- [`ShowNumberInput(config)`](client/ShowNumberInput.md) - Display a number input dialog
-- [`ShowSelectInput(config)`](client/ShowSelectInput.md) - Display a selection dialog with options
-- [`ShowDateInput(config)`](client/ShowDateInput.md) - Display a date selection dialog
-- [`ShowColorInput(config)`](client/ShowColorInput.md) - Display a color picker dialog
-- [`SetValidationRule(name, rule)`](client/SetValidationRule.md) - Define a custom validation rule
-- [`ValidateInput(value, rules)`](client/ValidateInput.md) - Validate an input value against specified rules
-- [`ShowPasswordChangeForm()`](client/ShowPasswordChangeForm.md) - Display a password change form
-- [`ShowContactForm()`](client/ShowContactForm.md) - Display a contact information form
-- [`ShowPaymentForm(amount)`](client/ShowPaymentForm.md) - Display a payment form
-- [`IsInputOpen()`](client/IsInputOpen.md) - Check if an input dialog is currently open
-- [`CloseInput()`](client/CloseInput.md) - Forcibly close any open input dialog
-
----
-
-## 📚 Architecture
-```

@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Menu
+title: "📋 Menu"
 parent: Modules
 grand_parent: Community Bridge
 nav_order: 15

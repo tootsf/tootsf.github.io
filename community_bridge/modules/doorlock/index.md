@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Doorlock
+title: "🔒 Doorlock"
 parent: Modules
 grand_parent: Community Bridge
 nav_order: 5
