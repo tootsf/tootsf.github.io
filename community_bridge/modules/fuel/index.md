@@ -24,9 +24,9 @@ The fuel module provides vehicle fuel management functionality with support for 
 ## 📚 Available Functions
 
 ### Client-side
-- [`GetResourceName()`](client.md#getresourcename) - Get the name of the fuel system being used
-- [`GetFuel(vehicle)`](client.md#getfuel) - Get the fuel level of a vehicle
-- [`SetFuel(vehicle, fuel)`](client.md#setfuel) - Set the fuel level of a vehicle
+- [`GetResourceName()`](client/GetResourceName.md) - Get the name of the fuel system being used
+- [`GetFuel(vehicle)`](client/GetFuel.md) - Get the fuel level of a vehicle
+- [`SetFuel(vehicle, fuel)`](client/SetFuel.md) - Set the fuel level of a vehicle
 
 ### Server-side
 No server-side functions available.

@@ -20,6 +20,11 @@ Complete progressbar system for displaying progress indicators, loading bars, an
 1. TOC
 {:toc}
 
+## Function References
+
+- [Client Functions](client/)
+- [Server Functions](server/)
+
 ---
 
 ## Overview

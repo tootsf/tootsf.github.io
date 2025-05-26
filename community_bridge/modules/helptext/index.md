@@ -24,12 +24,12 @@ The helptext module provides contextual help and instruction display functionali
 ## 📚 Available Functions
 
 ### Client-side
-- [`ShowHelpText(message, position)`](client.md#showhelptext) - Display help text on screen
-- [`HideHelpText()`](client.md#hidehelptext) - Hide currently displayed help text
+- [`ShowHelpText(message, position)`](client/ShowHelpText.md) - Display help text on screen
+- [`HideHelpText()`](client/HideHelpText.md) - Hide currently displayed help text
 
 ### Server-side
-- [`ShowHelpText(src, message, position)`](server.md#showhelptext) - Show help text to specific player
-- [`HideHelpText(src)`](server.md#hidehelptext) - Hide help text for specific player
+- [`ShowHelpText(src, message, position)`](server/ShowHelpText.md) - Show help text to specific player
+- [`HideHelpText(src)`](server/HideHelpText.md) - Hide help text for specific player
 
 ---
 
