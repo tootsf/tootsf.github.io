@@ -2,7 +2,7 @@
 layout: default
 title: GetPlayerJobData
 parent: Client Functions
-grand_parent: Framework
+grand_parent: "🧩 Framework"
 nav_order: 13
 ---
 
