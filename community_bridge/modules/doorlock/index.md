@@ -21,13 +21,13 @@ The doorlock module provides basic door locking functionality with support for m
 
 ---
 
-## 📚 Available Functions
+## 📚 Client Functions
 
-### Client-side
-- [`GetClosestDoor()`](client.md#getclosestdoor) - Get the closest door to the player
+- [GetClosestDoor](client/GetClosestDoor.md) - Get the closest door to the player
 
-### Server-side
-- [`ToggleDoorLock(doorID, toggle)`](server.md#toggledoorlock) - Toggle a door's lock status
+## 📚 Server Functions
+
+- [ToggleDoorLock](server/ToggleDoorLock.md) - Toggle a door's lock status
 
 ---
 

@@ -14,20 +14,16 @@ The accessibility module provides colorblind accessibility features and color ut
 
 ---
 
-## 📚 Available Functions
+## 📚 Client Functions
 
-### Client-side
-- [`updatecolourblindness()`](client.md#updatecolourblindness) - Opens color blindness settings menu
-- [`hexToRgb(hex)`](client.md#hextorgb) - Convert hex color to RGB
-- [`rgbToHex(r, g, b)`](client.md#rgbtohex) - Convert RGB color to hex
-- [`rgbToHsl(r, g, b)`](client.md#rgbtohsl) - Convert RGB color to HSL
-- [`hslToRgb(h, s, l)`](client.md#hsltorgb) - Convert HSL color to RGB
-- [`adjustColourForColourblindness(color, returnAsRGB)`](client.md#adjustcolourforcolourblindness) - Adjust color for colorblindness
-- [`getAdjustedColour(colorName, returnAsRGB)`](client.md#getadjustedcolour) - Get color adjusted for user's colorblindness setting
-- [`IsMale()`](client.md#ismale) - Check if current player is male model
-
-### Server-side
-No server-side functions available.
+- [updatecolourblindness](client/updatecolourblindness.md) - Opens color blindness settings menu
+- [hexToRgb](client/hexToRgb.md) - Convert hex color to RGB
+- [rgbToHex](client/rgbToHex.md) - Convert RGB color to hex
+- [rgbToHsl](client/rgbToHsl.md) - Convert RGB color to HSL
+- [hslToRgb](client/hslToRgb.md) - Convert HSL color to RGB
+- [adjustColourForColourblindness](client/adjustColourForColourblindness.md) - Adjust color for colorblindness
+- [getAdjustedColour](client/getAdjustedColour.md) - Get color adjusted for user's colorblindness setting
+- [IsMale](client/IsMale.md) - Check if current player is male model
 
 ---
 
