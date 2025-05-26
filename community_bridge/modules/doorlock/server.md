@@ -4,6 +4,8 @@ title: Server Functions
 parent: Doorlock
 grand_parent: Modules
 nav_order: 2
+has_children: true
+permalink: /community_bridge/modules/doorlock/server/
 ---
 
 # Doorlock Server
