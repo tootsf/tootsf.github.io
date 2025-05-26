@@ -269,7 +269,7 @@ Opens a registered stash for the player.
 **Example:**
 ```lua
 local playerId = source
-local stashId = "police_armory_" .. Framework.GetJob(playerId).name
+local stashId = "police_armory_" .. Bridge.Framework.GetJob(playerId).name
 -- First register the stash, then open it
 Bridge.Inventory.RegisterStash(stashId, "Police Armory", 50, 100000)
 Bridge.Inventory.OpenStash(playerId, stashId)
@@ -533,7 +533,7 @@ local weaponMetadata = {
     serial = GenerateSerial(),
     attachments = {"scope", "suppressor"},
     registered = true,
-    owner = Framework.GetIdentifier(playerId)
+    owner = Bridge.Framework.GetIdentifier(playerId)
 }
 Bridge.Inventory.AddItem(playerId, "weapon_pistol", 1, nil, weaponMetadata)
 ```

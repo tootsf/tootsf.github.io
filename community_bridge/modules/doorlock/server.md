@@ -32,14 +32,16 @@ Toggles the lock status of a specified door.
 
 **Example:**
 ```lua
+local Bridge = exports['community_bridge']:Bridge()
+
 -- Lock a door
-local success = Doorlock.ToggleDoorLock("police_station_main", true)
+local success = Bridge.Doorlock.ToggleDoorLock("police_station_main", true)
 if success then
     print("Door locked")
 end
 
 -- Unlock a door
-Doorlock.ToggleDoorLock("police_station_main", false)
+Bridge.Doorlock.ToggleDoorLock("police_station_main", false)
 ```
 
 ## Note
@@ -63,11 +65,12 @@ This module serves as a bridge to various doorlock systems. The actual implement
 RegisterNetEvent('police:lockNearestDoor')
 AddEventHandler('police:lockNearestDoor', function()
     local src = source
+    local Bridge = exports['community_bridge']:Bridge()
     -- Get the closest door somehow (implementation dependent)
     local doorId = "some_door_id"
     
     -- Toggle the lock
-    Doorlock.ToggleDoorLock(doorId, true)
+    Bridge.Doorlock.ToggleDoorLock(doorId, true)
     
     -- Notify the player
     TriggerClientEvent('QBCore:Notify', src, 'Door locked', 'success')

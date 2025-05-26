@@ -55,8 +55,10 @@ Opens a dialogue with the player, showing text and interactive options.
 
 **Example:**
 ```lua
+local Bridge = exports['community_bridge']:Bridge()
+
 -- Simple dialogue with entity ID
-local selectedOption = Dialogue.Open(
+local selectedOption = Bridge.Dialogue.Open(
     "shopkeeper",
     "Welcome to my shop! What can I do for you?",
     npcEntity,
@@ -74,7 +76,7 @@ local characterData = {
     rotationOffset = vector3(-5, 0, 15)
 }
 
-Dialogue.Open(
+Bridge.Dialogue.Open(
     "merchant",
     "Ah, a customer! I have rare items for sale.",
     characterData,
@@ -104,7 +106,8 @@ Closes an active dialogue and manages camera cleanup.
 
 **Example:**
 ```lua
-Dialogue.Close("shopkeeper")
+local Bridge = exports['community_bridge']:Bridge()
+Bridge.Dialogue.Close("shopkeeper")
 ```
 
 ## Camera Management
@@ -134,13 +137,13 @@ Dialogues can be used with promises for sequential dialogue chains:
 
 ```lua
 CreateThread(function()
-    local choice1 = Dialogue.Open("npc1", "Hello there!", npcEntity, {
+    local choice1 = Bridge.Dialogue.Open("npc1", "Hello there!", npcEntity, {
         {id = "greet", label = "Hello!"},
         {id = "ignore", label = "..."}
     })
     
     if choice1 == "greet" then
-        local choice2 = Dialogue.Open("npc1", "Nice to meet you!", npcEntity, {
+        local choice2 = Bridge.Dialogue.Open("npc1", "Nice to meet you!", npcEntity, {
             {id = "likewise", label = "Likewise!"},
             {id = "bye", label = "Goodbye"}
         })

@@ -38,11 +38,11 @@ The Phone module offers:
 ## Available Functions
 
 ### Server Functions
-- `Phone.GetPlayerPhone()` - Retrieve player's phone information
-- `Phone.SendEmail()` - Send email to player through phone system
+- `Bridge.Phone.GetPlayerPhone()` - Retrieve player's phone information
+- `Bridge.Phone.SendEmail()` - Send email to player through phone system
 
 ### Client Functions
-- `Phone.SendEmail()` - Client-side email sending functionality
+- `Bridge.Phone.SendEmail()` - Client-side email sending functionality
 
 ## Module Structure
 
@@ -66,11 +66,13 @@ The module uses a bridge system that:
 ## Usage Example
 
 ```lua
+local Bridge = exports['community_bridge']:Bridge()
+
 -- Server: Send email to player
-local success = Phone.SendEmail(playerId, "noreply@server.com", "Welcome!", "Welcome to our server!")
+local success = Bridge.Phone.SendEmail(playerId, "noreply@server.com", "Welcome!", "Welcome to our server!")
 
 -- Server: Get player phone
-local phoneNumber = Phone.GetPlayerPhone(playerId)
+local phoneNumber = Bridge.Phone.GetPlayerPhone(playerId)
 if phoneNumber then
     print("Player phone: " .. phoneNumber)
 end

@@ -30,14 +30,14 @@ The Shops module offers:
 ## Available Functions
 
 ### Server Functions
-- `Shops.CreateShop()` - Register a new shop with inventory and location
-- `Shops.OpenShop()` - Open a shop for a specific player
-- `Shops.CompleteCheckout()` - Process and validate shop transactions
+- `Bridge.Shops.CreateShop()` - Register a new shop with inventory and location
+- `Bridge.Shops.OpenShop()` - Open a shop for a specific player
+- `Bridge.Shops.CompleteCheckout()` - Process and validate shop transactions
 
 ### Client Functions
-- `Shops.OpenShop()` - Display shop interface to player
-- `Shops.AmountSelect()` - Handle quantity selection for purchases
-- `Shops.FinalizeCheckOut()` - Present payment method options
+- `Bridge.Shops.OpenShop()` - Display shop interface to player
+- `Bridge.Shops.AmountSelect()` - Handle quantity selection for purchases
+- `Bridge.Shops.FinalizeCheckOut()` - Present payment method options
 
 ## Module Structure
 
@@ -51,14 +51,16 @@ shops/
 ## Usage Example
 
 ```lua
+local Bridge = exports['community_bridge']:Bridge()
+
 -- Server: Create a shop
-Shops.CreateShop("General Store", {
+Bridge.Shops.CreateShop("General Store", {
     {name = "bread", price = 5},
     {name = "water", price = 3}
 }, {x = 100.0, y = 200.0, z = 30.0}, {"citizen"})
 
 -- Server: Open shop for player
-Shops.OpenShop(playerId, "General Store")
+Bridge.Shops.OpenShop(playerId, "General Store")
 ```
 
 ## Security Features

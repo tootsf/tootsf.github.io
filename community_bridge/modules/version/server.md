@@ -19,14 +19,15 @@ Server-side functions for automatic version checking and update notifications.
 
 ---
 
-## Version.VersionChecker
+## Bridge.Version.VersionChecker
 
 Checks for updates by comparing the current resource version against the latest GitHub release.
 
 ### Syntax
 
 ```lua
-Version.VersionChecker(repoPath, tebex)
+local Bridge = exports['community_bridge']:Bridge()
+Bridge.Version.VersionChecker(repoPath, tebex)
 ```
 
 ### Parameters
@@ -145,7 +146,8 @@ To use automatic version checking in your own resource:
 -- In your resource's version checking file
 AddEventHandler('onResourceStart', function(resourceName)
     if GetCurrentResourceName() ~= resourceName then return end
-    Version.VersionChecker("YourUsername/YourResourceName", false)
+    local Bridge = exports['community_bridge']:Bridge()
+    Bridge.Version.VersionChecker("YourUsername/YourResourceName", false)
 end)
 ```
 

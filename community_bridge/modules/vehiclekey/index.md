@@ -47,8 +47,8 @@ The VehicleKey module offers:
 ## Available Functions
 
 ### Client Functions
-- `VehicleKey.GiveKeys()` - Give vehicle keys to player
-- `VehicleKey.RemoveKeys()` - Remove vehicle keys from player
+- `Bridge.VehicleKey.GiveKeys()` - Give vehicle keys to player
+- `Bridge.VehicleKey.RemoveKeys()` - Remove vehicle keys from player
 
 ## Module Structure
 
@@ -81,13 +81,15 @@ The module uses a bridge system that:
 ## Usage Example
 
 ```lua
+local Bridge = exports['community_bridge']:Bridge()
+
 -- Give keys to a vehicle
 local vehicle = GetVehiclePedIsIn(PlayerPedId(), false)
 local plate = GetVehicleNumberPlateText(vehicle)
-VehicleKey.GiveKeys(vehicle, plate)
+Bridge.VehicleKey.GiveKeys(vehicle, plate)
 
 -- Remove keys from a vehicle
-VehicleKey.RemoveKeys(vehicle, plate)
+Bridge.VehicleKey.RemoveKeys(vehicle, plate)
 ```
 
 ## Integration Benefits

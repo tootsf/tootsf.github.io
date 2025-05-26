@@ -19,14 +19,15 @@ Client-side functions for shop interface and user interaction.
 
 ---
 
-## Shops.OpenShop
+## Bridge.Shops.OpenShop
 
 Displays the shop interface to the player with interactive item browsing.
 
 ### Syntax
 
 ```lua
-Shops.OpenShop(title, shopData)
+local Bridge = exports['community_bridge']:Bridge()
+Bridge.Shops.OpenShop(title, shopData)
 ```
 
 ### Parameters
@@ -45,6 +46,8 @@ Shops.OpenShop(title, shopData)
 ### Example
 
 ```lua
+local Bridge = exports['community_bridge']:Bridge()
+
 -- This function is typically called automatically via server event
 -- Manual usage example:
 local shopInventory = {
@@ -52,7 +55,7 @@ local shopInventory = {
     {name = "water_bottle", price = 10}
 }
 
-Shops.OpenShop("Downtown Market", shopInventory)
+Bridge.Shops.OpenShop("Downtown Market", shopInventory)
 ```
 
 ### Menu Features
@@ -64,14 +67,15 @@ Shops.OpenShop("Downtown Market", shopInventory)
 
 ---
 
-## Shops.AmountSelect
+## Bridge.Shops.AmountSelect
 
 Opens a quantity selection interface for purchasing items.
 
 ### Syntax
 
 ```lua
-Shops.AmountSelect(shopName, item, itemLabel, price)
+local Bridge = exports['community_bridge']:Bridge()
+Bridge.Shops.AmountSelect(shopName, item, itemLabel, price)
 ```
 
 ### Parameters
@@ -98,20 +102,23 @@ Shops.AmountSelect(shopName, item, itemLabel, price)
 ### Example
 
 ```lua
+local Bridge = exports['community_bridge']:Bridge()
+
 -- Called automatically when player selects an item from shop
-Shops.AmountSelect("Downtown Market", "bread", "Fresh Bread", 15)
+Bridge.Shops.AmountSelect("Downtown Market", "bread", "Fresh Bread", 15)
 ```
 
 ---
 
-## Shops.FinalizeCheckOut
+## Bridge.Shops.FinalizeCheckOut
 
 Presents payment method options and processes the final transaction.
 
 ### Syntax
 
 ```lua
-Shops.FinalizeCheckOut(shopName, item, itemLabel, price, amount)
+local Bridge = exports['community_bridge']:Bridge()
+Bridge.Shops.FinalizeCheckOut(shopName, item, itemLabel, price, amount)
 ```
 
 ### Parameters
@@ -138,8 +145,10 @@ Shops.FinalizeCheckOut(shopName, item, itemLabel, price, amount)
 ### Example
 
 ```lua
+local Bridge = exports['community_bridge']:Bridge()
+
 -- Called automatically after quantity selection
-Shops.FinalizeCheckOut("Downtown Market", "bread", "Fresh Bread", 15, "3")
+Bridge.Shops.FinalizeCheckOut("Downtown Market", "bread", "Fresh Bread", 15, "3")
 
 -- Creates menu with options:
 -- "Pay by Cash $45" - Uses cash/money account
@@ -165,7 +174,7 @@ Receives shop data from server and opens the shop interface.
 ```lua
 RegisterNetEvent('community_bridge:openShop', function(_type, _title, shopData)
     -- Validates event source and parameters
-    -- Calls Shops.OpenShop with received data
+    -- Calls Bridge.Shops.OpenShop with received data
 end)
 ```
 

@@ -34,10 +34,10 @@ Displays help text on the screen at the specified position.
 
 **Example:**
 ```lua
-local HelpText = exports['community_bridge']:HelpText()
+local Bridge = exports['community_bridge']:Bridge()
 
 -- Show help text
-HelpText.ShowHelpText("Press ~INPUT_CONTEXT~ to interact", "top")
+Bridge.HelpText.ShowHelpText("Press ~INPUT_CONTEXT~ to interact", "top")
 ```
 
 ### HideHelpText()
@@ -50,7 +50,7 @@ Hides any currently displayed help text.
 **Example:**
 ```lua
 -- Hide help text
-HelpText.HideHelpText()
+Bridge.HelpText.HideHelpText()
 ```
 
 ---

@@ -19,14 +19,15 @@ Server-side functions for phone integration and email management.
 
 ---
 
-## Phone.GetPlayerPhone
+## Bridge.Phone.GetPlayerPhone
 
 Retrieves the phone number or phone information for a specific player.
 
 ### Syntax
 
 ```lua
-Phone.GetPlayerPhone(src)
+local Bridge = exports['community_bridge']:Bridge()
+Bridge.Phone.GetPlayerPhone(src)
 ```
 
 ### Parameters
@@ -63,14 +64,15 @@ end
 
 ---
 
-## Phone.SendEmail
+## Bridge.Phone.SendEmail
 
 Sends an email to a player through the integrated phone system.
 
 ### Syntax
 
 ```lua
-Phone.SendEmail(src, email, title, message)
+local Bridge = exports['community_bridge']:Bridge()
+Bridge.Phone.SendEmail(src, email, title, message)
 ```
 
 ### Parameters
@@ -142,7 +144,7 @@ local Bridge = exports['community_bridge']:Bridge()
 local phoneNumber = Bridge.Phone.GetPlayerPhone(playerId)
 if not phoneNumber then
     -- Handle case where player has no phone
-    Notify.SendNotify(playerId, "Phone system unavailable", "error", 5000)
+    Bridge.Notify.SendNotify(playerId, "Phone system unavailable", "error", 5000)
     return
 end
 

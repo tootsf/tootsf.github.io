@@ -28,7 +28,9 @@ Returns the name of the currently active framework.
 
 **Example:**
 ```lua
-local frameworkName = Framework.GetFrameworkName()
+local Bridge = exports['community_bridge']:Bridge()
+
+local frameworkName = Bridge.Framework.GetFrameworkName()
 print("Using framework: " .. frameworkName)
 ```
 
@@ -41,7 +43,9 @@ Gets the complete player data from the framework.
 
 **Example:**
 ```lua
-local playerData = Framework.GetPlayerData()
+local Bridge = exports['community_bridge']:Bridge()
+
+local playerData = Bridge.Framework.GetPlayerData()
 print("Player name: " .. playerData.charinfo.firstname)
 ```
 
@@ -56,7 +60,9 @@ Returns a table of all available jobs in the framework.
 
 **Example:**
 ```lua
-local jobs = Framework.GetFrameworkJobs()
+local Bridge = exports['community_bridge']:Bridge()
+
+local jobs = Bridge.Framework.GetFrameworkJobs()
 for _, job in pairs(jobs) do
     print("Job: " .. job.label .. " (" .. job.name .. ")")
 end
@@ -73,7 +79,9 @@ Gets the player's date of birth.
 
 **Example:**
 ```lua
-local dob = Framework.GetPlayerDob()
+local Bridge = exports['community_bridge']:Bridge()
+
+local dob = Bridge.Framework.GetPlayerDob()
 print("Player DOB: " .. dob)
 ```
 
@@ -89,7 +97,9 @@ Gets specific metadata for the player.
 
 **Example:**
 ```lua
-local hunger = Framework.GetPlayerMetaData("hunger")
+local Bridge = exports['community_bridge']:Bridge()
+
+local hunger = Bridge.Framework.GetPlayerMetaData("hunger")
 print("Player hunger: " .. hunger)
 ```
 
@@ -144,7 +154,9 @@ Gets information about a specific item.
 
 **Example:**
 ```lua
-local itemInfo = Framework.GetItemInfo("bread")
+local Bridge = exports['community_bridge']:Bridge()
+
+local itemInfo = Bridge.Framework.GetItemInfo("bread")
 print("Item label: " .. itemInfo.label)
 ```
 
@@ -157,7 +169,9 @@ Gets the player's unique identifier (citizenid).
 
 **Example:**
 ```lua
-local citizenId = Framework.GetPlayerIdentifier()
+local Bridge = exports['community_bridge']:Bridge()
+
+local citizenId = Bridge.Framework.GetPlayerIdentifier()
 print("Player ID: " .. citizenId)
 ```
 
@@ -171,7 +185,9 @@ Gets the player's first and last name.
 
 **Example:**
 ```lua
-local firstname, lastname = Framework.GetPlayerName()
+local Bridge = exports['community_bridge']:Bridge()
+
+local firstname, lastname = Bridge.Framework.GetPlayerName()
 print("Player: " .. firstname .. " " .. lastname)
 ```
 
@@ -187,7 +203,9 @@ print("Player: " .. firstname .. " " .. lastname)
 
 **Example:**
 ```lua
-local jobName, jobLabel, gradeName, gradeLevel = Framework.GetPlayerJob()
+local Bridge = exports['community_bridge']:Bridge()
+
+local jobName, jobLabel, gradeName, gradeLevel = Bridge.Framework.GetPlayerJob()
 print("Job: " .. jobLabel .. " (Grade: " .. gradeName .. ")")
 ```
 
@@ -200,7 +218,9 @@ Gets comprehensive player job data.
 
 **Example:**
 ```lua
-local jobData = Framework.GetPlayerJobData()
+local Bridge = exports['community_bridge']:Bridge()
+
+local jobData = Bridge.Framework.GetPlayerJobData()
 print("Job: " .. jobData.jobLabel)
 print("On duty: " .. tostring(jobData.onDuty))
 print("Is boss: " .. tostring(jobData.boss))
@@ -218,7 +238,9 @@ Checks if the player has a specific item.
 
 **Example:**
 ```lua
-if Framework.HasItem("bread") then
+local Bridge = exports['community_bridge']:Bridge()
+
+if Bridge.Framework.HasItem("bread") then
     print("Player has bread")
 end
 ```
@@ -235,7 +257,9 @@ Gets the total count of a specific item in player inventory.
 
 **Example:**
 ```lua
-local breadCount = Framework.GetItemCount("bread")
+local Bridge = exports['community_bridge']:Bridge()
+
+local breadCount = Bridge.Framework.GetItemCount("bread")
 print("Player has " .. breadCount .. " bread")
 ```
 
@@ -248,7 +272,9 @@ Gets the player's complete inventory.
 
 **Example:**
 ```lua
-local inventory = Framework.GetPlayerInventory()
+local Bridge = exports['community_bridge']:Bridge()
+
+local inventory = Bridge.Framework.GetPlayerInventory()
 for _, item in pairs(inventory) do
     print("Item: " .. item.label .. " (Count: " .. item.count .. ")")
 end
@@ -263,7 +289,9 @@ Checks if the player is currently dead or in last stand.
 
 **Example:**
 ```lua
-if Framework.GetIsPlayerDead() then
+local Bridge = exports['community_bridge']:Bridge()
+
+if Bridge.Framework.GetIsPlayerDead() then
     print("Player is dead or downed")
 end
 ```

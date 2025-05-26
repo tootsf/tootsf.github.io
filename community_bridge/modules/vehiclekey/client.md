@@ -19,14 +19,15 @@ Client-side functions for vehicle key management across multiple key systems.
 
 ---
 
-## VehicleKey.GiveKeys
+## Bridge.VehicleKey.GiveKeys
 
 Gives vehicle keys to the current player for the specified vehicle.
 
 ### Syntax
 
 ```lua
-VehicleKey.GiveKeys(vehicle, plate)
+local Bridge = exports['community_bridge']:Bridge()
+Bridge.VehicleKey.GiveKeys(vehicle, plate)
 ```
 
 ### Parameters
@@ -73,14 +74,15 @@ end
 
 ---
 
-## VehicleKey.RemoveKeys
+## Bridge.VehicleKey.RemoveKeys
 
 Removes vehicle keys from the current player for the specified vehicle.
 
 ### Syntax
 
 ```lua
-VehicleKey.RemoveKeys(vehicle, plate)
+local Bridge = exports['community_bridge']:Bridge()
+Bridge.VehicleKey.RemoveKeys(vehicle, plate)
 ```
 
 ### Parameters

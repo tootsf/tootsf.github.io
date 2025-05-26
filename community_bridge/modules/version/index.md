@@ -31,7 +31,7 @@ The Version module offers:
 ## Available Functions
 
 ### Server Functions
-- `Version.VersionChecker()` - Check for updates against GitHub repository
+- `Bridge.Version.VersionChecker()` - Check for updates against GitHub repository
 
 ## Module Structure
 
@@ -52,12 +52,14 @@ The module automatically:
 ## Usage Example
 
 ```lua
+local Bridge = exports['community_bridge']:Bridge()
+
 -- Check for updates on resource start (automatic)
 -- Manual version check
-Version.VersionChecker("YourUsername/your-resource-name", false)
+Bridge.Version.VersionChecker("YourUsername/your-resource-name", false)
 
 -- For Tebex resources
-Version.VersionChecker("YourUsername/your-resource-name", true)
+Bridge.Version.VersionChecker("YourUsername/your-resource-name", true)
 ```
 
 ## Version Format

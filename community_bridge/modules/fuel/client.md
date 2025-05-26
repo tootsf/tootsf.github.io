@@ -28,7 +28,8 @@ Gets the name of the fuel system currently being used.
 
 **Example:**
 ```lua
-local fuelSystem = Fuel.GetResourceName()
+local Bridge = exports['community_bridge']:Bridge()
+local fuelSystem = Bridge.Fuel.GetResourceName()
 print("Using fuel system: " .. fuelSystem)
 ```
 
@@ -46,7 +47,7 @@ Gets the current fuel level of a vehicle.
 ```lua
 local vehicle = GetVehiclePedIsIn(PlayerPedId(), false)
 if vehicle ~= 0 then
-    local fuelLevel = Fuel.GetFuel(vehicle)
+    local fuelLevel = Bridge.Fuel.GetFuel(vehicle)
     print("Fuel level: " .. fuelLevel .. "%")
 end
 ```
@@ -63,7 +64,7 @@ Sets the fuel level of a vehicle.
 ```lua
 local vehicle = GetVehiclePedIsIn(PlayerPedId(), false)
 if vehicle ~= 0 then
-    Fuel.SetFuel(vehicle, 75.0) -- Set fuel to 75%
+    Bridge.Fuel.SetFuel(vehicle, 75.0) -- Set fuel to 75%
     print("Fuel set to 75%")
 end
 ```
@@ -74,7 +75,7 @@ end
 ```lua
 local vehicle = GetVehiclePedIsIn(PlayerPedId(), false)
 if vehicle ~= 0 then
-    local fuel = Fuel.GetFuel(vehicle)
+    local fuel = Bridge.Fuel.GetFuel(vehicle)
     if fuel < 25.0 then
         print("Warning: Low fuel! Current level: " .. fuel .. "%")
     else
@@ -91,16 +92,15 @@ CreateThread(function()
         
         local ped = PlayerPedId()
         local vehicle = GetVehiclePedIsIn(ped, false)
-        
-        if vehicle ~= 0 and GetPedInVehicleSeat(vehicle, -1) == ped then
-            local currentFuel = Fuel.GetFuel(vehicle)
+          if vehicle ~= 0 and GetPedInVehicleSeat(vehicle, -1) == ped then
+            local currentFuel = Bridge.Fuel.GetFuel(vehicle)
             local speed = GetEntitySpeed(vehicle)
             
             if speed > 0 then
                 -- Consume fuel based on speed
                 local consumption = (speed * 0.01) -- Simple consumption calculation
                 local newFuel = math.max(0, currentFuel - consumption)
-                Fuel.SetFuel(vehicle, newFuel)
+                Bridge.Fuel.SetFuel(vehicle, newFuel)
                 
                 if newFuel == 0 then
                     print("Out of fuel!")
@@ -117,10 +117,10 @@ end)
 function RefuelVehicle(vehicle, amount)
     if not DoesEntityExist(vehicle) then return false end
     
-    local currentFuel = Fuel.GetFuel(vehicle)
+    local currentFuel = Bridge.Fuel.GetFuel(vehicle)
     local newFuel = math.min(100.0, currentFuel + amount)
     
-    Fuel.SetFuel(vehicle, newFuel)
+    Bridge.Fuel.SetFuel(vehicle, newFuel)
     
     return true
 end

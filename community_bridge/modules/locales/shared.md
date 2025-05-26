@@ -19,14 +19,15 @@ Shared functions for internationalization and localized text management.
 
 ---
 
-## Language.Locale
+## Bridge.Locales.Locale
 
 Loads and formats localized text from JSON locale files with support for nested keys and variable substitution.
 
 ### Syntax
 
 ```lua
-Language.Locale(str, ...)
+local Bridge = exports['community_bridge']:Bridge()
+Bridge.Locales.Locale(str, ...)
 ```
 
 ### Parameters
@@ -52,30 +53,34 @@ local message = Bridge.Locales.Locale('welcome')
 -- Returns: "Welcome to our server!"
 
 -- Key not found - returns original key
-local missing = Language.Locale('nonexistent.key')
+local missing = Bridge.Locales.Locale('nonexistent.key')
 -- Returns: "nonexistent.key"
 ```
 
 ### Nested Key Access
 
 ```lua
+local Bridge = exports['community_bridge']:Bridge()
+
 -- Access nested objects using dot notation
-local joinMessage = Language.Locale('player.joined')
+local joinMessage = Bridge.Locales.Locale('player.joined')
 -- Returns: "Player has joined the server"
 
-local purchaseSuccess = Language.Locale('shop.purchase.success')
+local purchaseSuccess = Bridge.Locales.Locale('shop.purchase.success')
 -- Returns: "Successfully purchased item"
 ```
 
 ### Variable Substitution
 
 ```lua
+local Bridge = exports['community_bridge']:Bridge()
+
 -- Single variable
-local greeting = Language.Locale('player.welcome', playerName)
+local greeting = Bridge.Locales.Locale('player.welcome', playerName)
 -- With locale: "Welcome %s!" -> "Welcome John!"
 
 -- Multiple variables
-local transaction = Language.Locale('shop.purchase.success', itemName, price)
+local transaction = Bridge.Locales.Locale('shop.purchase.success', itemName, price)
 -- With locale: "Purchased %s for $%d" -> "Purchased Bread for $15"
 
 -- Mixed variable types

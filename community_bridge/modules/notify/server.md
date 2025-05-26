@@ -348,12 +348,12 @@ Bridge.Notify.SendConditionalNotify(
 -- Dynamic messages based on player data
 Bridge.Notify.SendConditionalNotify(
     function(playerId)
-        return Framework.GetMoney(playerId) > 1000000
+        return Bridge.Framework.GetMoney(playerId) > 1000000
     end,
     GetPlayers(),
     function(playerId)
-        local money = Framework.GetMoney(playerId)
-        return "You have " .. Framework.FormatMoney(money) .. "!"
+        local money = Bridge.Framework.GetMoney(playerId)
+        return "You have " .. Bridge.Framework.FormatMoney(money) .. "!"
     end,
     "success"
 )
@@ -429,14 +429,13 @@ Bridge.Notify.SetNotificationSettings(playerId, {
 RegisterNetEvent('framework:moneyChanged')
 AddEventHandler('framework:moneyChanged', function(playerId, newAmount, oldAmount, reason)
     local difference = newAmount - oldAmount
-    
-    if difference > 0 then
+      if difference > 0 then
         Bridge.Notify.SendNotify(playerId, 
-            "+" .. Framework.FormatMoney(difference) .. " (" .. reason .. ")", 
+            "+" .. Bridge.Framework.FormatMoney(difference) .. " (" .. reason .. ")", 
             "success")
     elseif difference < 0 then
         Bridge.Notify.SendNotify(playerId, 
-            Framework.FormatMoney(difference) .. " (" .. reason .. ")", 
+            Bridge.Framework.FormatMoney(difference) .. " (" .. reason .. ")", 
             "error")
     end
 end)
@@ -444,7 +443,7 @@ end)
 -- Handle inventory changes
 RegisterNetEvent('inventory:itemAdded')
 AddEventHandler('inventory:itemAdded', function(playerId, item, count)
-    local itemInfo = Inventory.GetItemInfo(item)
+    local itemInfo = Bridge.Inventory.GetItemInfo(item)
     if itemInfo then
         Bridge.Notify.SendNotify(playerId, 
             "+" .. count .. "x " .. itemInfo.label, 
@@ -503,9 +502,8 @@ end
 ### Localization Support
 ```lua
 -- Use localized messages
-local function SendLocalizedNotify(playerId, key, type, args)
-    local playerLang = Framework.GetPlayerLanguage(playerId)
-    local message = Locales.Get(playerLang, key, args)
+local function SendLocalizedNotify(playerId, key, type, args)    local playerLang = Bridge.Framework.GetPlayerLanguage(playerId)
+    local message = Bridge.Locales.Get(playerLang, key, args)
     Bridge.Notify.SendNotify(playerId, message, type)
 end
 

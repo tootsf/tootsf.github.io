@@ -31,8 +31,9 @@ Checks if a player's ped is using the male freemode model.
 
 **Example:**
 ```lua
+local Bridge = exports['community_bridge']:Bridge()
 local src = source
-local isMale = Clothing.IsMale(src)
+local isMale = Bridge.Clothing.IsMale(src)
 if isMale then
     print("Player " .. src .. " is using male model")
 end
@@ -51,7 +52,7 @@ Gets the complete appearance data for a player.
 **Example:**
 ```lua
 local src = source
-local appearance = Clothing.GetAppearance(src)
+local appearance = Bridge.Clothing.GetAppearance(src)
 if appearance then
     print("Got appearance for player " .. src)
 end
@@ -74,11 +75,10 @@ local newAppearance = {
         {component_id = 4, drawable = 10, texture = 0}, -- Legs
         {component_id = 6, drawable = 1, texture = 0}, -- Shoes
     },
-    props = {
-        {prop_id = 0, drawable = 8, texture = 0}, -- Hat
+    props = {        {prop_id = 0, drawable = 8, texture = 0}, -- Hat
     }
 }
-Clothing.SetAppearance(src, newAppearance)
+Bridge.Clothing.SetAppearance(src, newAppearance)
 ```
 
 ### SetAppearanceExt(src, data)
@@ -109,7 +109,7 @@ local genderSpecificAppearance = {
         }
     }
 }
-Clothing.SetAppearanceExt(src, genderSpecificAppearance)
+Bridge.Clothing.SetAppearanceExt(src, genderSpecificAppearance)
 ```
 
 ### RestoreAppearance(src)
@@ -122,7 +122,7 @@ Restores a player's previously stored appearance.
 **Example:**
 ```lua
 local src = source
-Clothing.RestoreAppearance(src)
+Bridge.Clothing.RestoreAppearance(src)
 ```
 
 ## Usage Examples
@@ -131,8 +131,9 @@ Clothing.RestoreAppearance(src)
 
 ```lua
 -- Get player's current appearance
+local Bridge = exports['community_bridge']:Bridge()
 local src = source
-local currentAppearance = Clothing.GetAppearance(src)
+local currentAppearance = Bridge.Clothing.GetAppearance(src)
 
 -- Modify and apply new appearance
 local newAppearance = {
@@ -140,10 +141,10 @@ local newAppearance = {
         {component_id = 1, drawable = 12, texture = 0}, -- Different mask
     }
 }
-Clothing.SetAppearance(src, newAppearance)
+Bridge.Clothing.SetAppearance(src, newAppearance)
 
 -- Later restore original appearance
-Clothing.RestoreAppearance(src)
+Bridge.Clothing.RestoreAppearance(src)
 ```
 
 ### Gender-Specific Outfits
@@ -168,7 +169,7 @@ local uniformOutfit = {
 }
 
 -- Apply appropriate outfit based on player's gender
-Clothing.SetAppearanceExt(source, uniformOutfit)
+Bridge.Clothing.SetAppearanceExt(source, uniformOutfit)
 ```
 
 ## Note

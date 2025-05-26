@@ -75,12 +75,13 @@ local menuData = {
     }
 }
 
-local menuId = Menu.Open(menuData, false) -- false for ox_lib format
+local Bridge = exports['community_bridge']:Bridge()
+local menuId = Bridge.Menu.Open(menuData, false) -- false for ox_lib format
 ```
 
 **Example (QB menu format):**
 ```lua
-local Menu = exports['community_bridge']:Menu()
+local Bridge = exports['community_bridge']:Bridge()
 
 local qbMenuData = {
     {
@@ -112,7 +113,7 @@ local qbMenuData = {
     }
 }
 
-local menuId = Menu.Open(qbMenuData, true) -- true for QB menu format
+local menuId = Bridge.Menu.Open(qbMenuData, true) -- true for QB menu format
 
 -- Handle the selection event
 RegisterNetEvent('myResource:client:handleSelection', function(args)
@@ -228,7 +229,7 @@ end
 
 local function SafeOpenMenu(data, useQb)
     if ValidateMenuData(data, useQb) then
-        return Menu.Open(data, useQb)
+        return Bridge.Menu.Open(data, useQb)
     end
     return nil
 end
@@ -250,7 +251,7 @@ end
 
 local useQbFormat = DetectMenuFormat()
 if useQbFormat ~= nil then
-    Menu.Open(menuData, useQbFormat)
+    Bridge.Menu.Open(menuData, useQbFormat)
 end
 ```
             title = "Zentorno",

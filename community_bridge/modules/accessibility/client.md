@@ -49,7 +49,8 @@ Converts a hex color string to RGB values.
 
 **Example:**
 ```lua
-local r, g, b = Accessibility.hexToRgb("#FF0000")
+local Bridge = exports['community_bridge']:Bridge()
+local r, g, b = Bridge.Accessibility.hexToRgb("#FF0000")
 print(r, g, b) -- 255, 0, 0
 ```
 
@@ -67,7 +68,8 @@ Converts RGB values to a hex color string.
 
 **Example:**
 ```lua
-local hex = Accessibility.rgbToHex(255, 0, 0)
+local Bridge = exports['community_bridge']:Bridge()
+local hex = Bridge.Accessibility.rgbToHex(255, 0, 0)
 print(hex) -- "#ff0000"
 ```
 
@@ -87,7 +89,8 @@ Converts RGB values to HSL (Hue, Saturation, Lightness) values.
 
 **Example:**
 ```lua
-local h, s, l = Accessibility.rgbToHsl(255, 0, 0)
+local Bridge = exports['community_bridge']:Bridge()
+local h, s, l = Bridge.Accessibility.rgbToHsl(255, 0, 0)
 print(h, s, l) -- Hue, saturation, lightness values
 ```
 
@@ -107,7 +110,8 @@ Converts HSL values to RGB values.
 
 **Example:**
 ```lua
-local r, g, b = Accessibility.hslToRgb(0, 1, 0.5)
+local Bridge = exports['community_bridge']:Bridge()
+local r, g, b = Bridge.Accessibility.hslToRgb(0, 1, 0.5)
 print(r, g, b) -- RGB values
 ```
 
@@ -124,11 +128,12 @@ Adjusts a color based on the user's colorblindness setting.
 
 **Example:**
 ```lua
+local Bridge = exports['community_bridge']:Bridge()
 -- Adjust hex color
-local adjustedHex = Accessibility.adjustColourForColourblindness("#FF0000", false)
+local adjustedHex = Bridge.Accessibility.adjustColourForColourblindness("#FF0000", false)
 
 -- Adjust RGB color
-local adjustedRGB = Accessibility.adjustColourForColourblindness({r = 255, g = 0, b = 0}, true)
+local adjustedRGB = Bridge.Accessibility.adjustColourForColourblindness({r = 255, g = 0, b = 0}, true)
 ```
 
 ### getAdjustedColour(colorName, returnAsRGB)
@@ -144,11 +149,12 @@ Gets a color adjusted for the user's current colorblindness setting.
 
 **Example:**
 ```lua
+local Bridge = exports['community_bridge']:Bridge()
 -- Get adjusted color for current colorblind setting
-local color = Accessibility.getAdjustedColour("#FF0000")
+local color = Bridge.Accessibility.getAdjustedColour("#FF0000")
 
 -- Get as RGB table
-local rgbColor = Accessibility.getAdjustedColour("#FF0000", true)
+local rgbColor = Bridge.Accessibility.getAdjustedColour("#FF0000", true)
 ```
 
 ## Commands

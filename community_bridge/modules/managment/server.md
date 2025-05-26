@@ -19,7 +19,7 @@ Server-side functions for business and organization account management across mu
 
 ---
 
-## Managment.GetAccountMoney
+## Bridge.Managment.GetAccountMoney
 
 Retrieves account balance and information for a specified business or organization account.
 
@@ -78,7 +78,7 @@ Depending on the banking system, the returned table may contain:
 
 ---
 
-## Managment.AddAccountMoney
+## Bridge.Managment.AddAccountMoney
 
 Adds money to a specified business or organization account with transaction logging.
 
@@ -139,7 +139,7 @@ Bridge.Managment.AddAccountMoney("ballas", 10000, "Territory earnings")
 
 ---
 
-## Managment.RemoveAccountMoney
+## Bridge.Managment.RemoveAccountMoney
 
 Removes money from a specified business or organization account with transaction logging.
 
@@ -196,6 +196,7 @@ end
 ```lua
 -- Pay salaries to all online job members
 function PayJobSalaries()
+    local Bridge = exports['community_bridge']:Bridge()
     local jobs = {"police", "ambulance", "mechanic", "taxi"}
     
     for _, jobName in pairs(jobs) do
@@ -203,10 +204,10 @@ function PayJobSalaries()
         local totalSalary = onlineCount * 500 -- $500 per person
         
         if totalSalary > 0 then
-            local accountData = Managment.GetAccountMoney(jobName)
+            local accountData = Bridge.Managment.GetAccountMoney(jobName)
             
             if accountData.money >= totalSalary then
-                local success = Managment.RemoveAccountMoney(jobName, totalSalary, "Weekly salary payment")
+                local success = Bridge.Managment.RemoveAccountMoney(jobName, totalSalary, "Weekly salary payment")
                 if success then
                     TriggerEvent('payroll:distributeSalaries', jobName, 500)
                     print("Paid salaries for " .. jobName .. ": $" .. totalSalary)
@@ -224,15 +225,16 @@ end
 ```lua
 -- Distribute business profits
 function DistributeBusinessProfits(businessName, totalRevenue)
+    local Bridge = exports['community_bridge']:Bridge()
     local governmentTax = math.floor(totalRevenue * 0.15) -- 15% tax
     local businessProfit = totalRevenue - governmentTax
     
     -- Add profit to business account
-    local success = Managment.AddAccountMoney(businessName, businessProfit, "Daily revenue")
+    local success = Bridge.Managment.AddAccountMoney(businessName, businessProfit, "Daily revenue")
     
     if success then
         -- Add tax to government account
-        Managment.AddAccountMoney("government", governmentTax, "Business tax from " .. businessName)
+        Bridge.Managment.AddAccountMoney("government", governmentTax, "Business tax from " .. businessName)
         
         print("Business " .. businessName .. " earned $" .. businessProfit .. " (tax: $" .. governmentTax .. ")")
     end
@@ -244,14 +246,15 @@ end
 ```lua
 -- Purchase equipment for job
 function PurchaseJobEquipment(playerId, jobName, itemName, cost)
-    local accountData = Managment.GetAccountMoney(jobName)
+    local Bridge = exports['community_bridge']:Bridge()
+    local accountData = Bridge.Managment.GetAccountMoney(jobName)
     
     if not accountData or accountData.money < cost then
         TriggerClientEvent('showNotification', playerId, 'Insufficient job funds', 'error')
         return false
     end
     
-    local success = Managment.RemoveAccountMoney(jobName, cost, "Equipment purchase: " .. itemName)
+    local success = Bridge.Managment.RemoveAccountMoney(jobName, cost, "Equipment purchase: " .. itemName)
     
     if success then
         -- Give item to player
@@ -279,13 +282,15 @@ When no banking system is detected or operations fail:
 ### Example Error Handling
 
 ```lua
-local accountData = Managment.GetAccountMoney("police")
+local Bridge = exports['community_bridge']:Bridge()
+
+local accountData = Bridge.Managment.GetAccountMoney("police")
 if not accountData or not accountData.money then
     print("Banking system not available or account not found")
     return
 end
 
-local success = Managment.AddAccountMoney("police", 1000, "Test transaction")
+local success = Bridge.Managment.AddAccountMoney("police", 1000, "Test transaction")
 if not success then
     print("Failed to add money - banking system may not be available")
     -- Handle fallback logic

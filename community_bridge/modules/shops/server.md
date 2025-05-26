@@ -19,13 +19,14 @@ Server-side functions for shop management and transaction processing.
 
 ---
 
-## Shops.CreateShop
+## Bridge.Shops.CreateShop
 
 Creates and registers a new shop with specified inventory, location, and access groups.
 
 ### Syntax
 
 ```lua
+local Bridge = exports['community_bridge']:Bridge()
 Bridge.Shops.CreateShop(shopTitle, shopInventory, shopCoords, shopGroups)
 ```
 
@@ -67,13 +68,14 @@ end
 
 ---
 
-## Shops.OpenShop
+## Bridge.Shops.OpenShop
 
 Opens a registered shop for a specific player, displaying the shop interface.
 
 ### Syntax
 
 ```lua
+local Bridge = exports['community_bridge']:Bridge()
 Bridge.Shops.OpenShop(src, shopTitle)
 ```
 
@@ -110,13 +112,14 @@ end)
 
 ---
 
-## Shops.CompleteCheckout
+## Bridge.Shops.CompleteCheckout
 
 Processes a shop transaction with full validation and anti-cheat protection.
 
 ### Syntax
 
 ```lua
+local Bridge = exports['community_bridge']:Bridge()
 Bridge.Shops.CompleteCheckout(src, shopName, item, amount, paymentType)
 ```
 

@@ -109,7 +109,7 @@ The following modules have been fully documented with accurate function informat
 - **[Managment](managment/)** - Business account management across multiple banking systems
 
 ### Verified Function Lists
-- **[Menu](menu/)** - Verified to only contain client-side `Menu.Open()` function
+- **[Menu](menu/)** - Verified to only contain client-side `Bridge.Menu.Open()` function
 - **[Notify](notify/)** - Contains server-side notification functions
 
 ### Modules with Limited/No Implementation

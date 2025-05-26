@@ -23,7 +23,7 @@ The menu module in community_bridge does not provide any server-side functions.
 
 **None** - The menu module only provides client-side functionality.
 
-All menu operations are handled client-side using the `Menu.Open()` function. 
+All menu operations are handled client-side using the `Bridge.Menu.Open()` function. 
 
 ## Manual Event Triggering
 
@@ -37,7 +37,8 @@ TriggerClientEvent('your_script:openMenu', playerId, menuData)
 ```lua
 -- Client-side: Handle the menu trigger
 RegisterNetEvent('your_script:openMenu', function(menuData)
-    Menu.Open(menuData)
+    local Bridge = exports['community_bridge']:Bridge()
+    Bridge.Menu.Open(menuData)
 end)
 ```
 

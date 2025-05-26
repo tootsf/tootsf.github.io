@@ -28,7 +28,8 @@ Checks if the current player ped is using the male freemode model.
 
 **Example:**
 ```lua
-local isMale = Clothing.IsMale()
+local Bridge = exports['community_bridge']:Bridge()
+local isMale = Bridge.Clothing.IsMale()
 if isMale then
     print("Player is using male model")
 end
@@ -47,7 +48,7 @@ Gets the complete appearance data for a ped entity.
 **Example:**
 ```lua
 local ped = PlayerPedId()
-local appearance = Clothing.GetAppearance(ped)
+local appearance = Bridge.Clothing.GetAppearance(ped)
 print(json.encode(appearance))
 ```
 
@@ -93,7 +94,7 @@ local appearance = {
         {prop_id = 0, drawable = 8, texture = 0}, -- Hat
     }
 }
-Clothing.SetAppearance(ped, appearance)
+Bridge.Clothing.SetAppearance(ped, appearance)
 ```
 
 ### RestoreAppearance(entity)
@@ -109,7 +110,7 @@ Restores the previously stored appearance for a ped entity.
 **Example:**
 ```lua
 local ped = PlayerPedId()
-Clothing.RestoreAppearance(ped)
+Bridge.Clothing.RestoreAppearance(ped)
 ```
 
 ### UpdateAppearanceBackup(data)
@@ -121,8 +122,8 @@ Updates the stored appearance backup data.
 
 **Example:**
 ```lua
-local currentAppearance = Clothing.GetAppearance(PlayerPedId())
-Clothing.UpdateAppearanceBackup(currentAppearance)
+local currentAppearance = Bridge.Clothing.GetAppearance(PlayerPedId())
+Bridge.Clothing.UpdateAppearanceBackup(currentAppearance)
 ```
 
 ### CopyAppearanceToClipboard()
@@ -131,7 +132,8 @@ Copies the current player's appearance data to the clipboard.
 
 **Example:**
 ```lua
-Clothing.CopyAppearanceToClipboard()
+local Bridge = exports['community_bridge']:Bridge()
+Bridge.Clothing.CopyAppearanceToClipboard()
 ```
 
 ### ToggleDebugging()
@@ -140,7 +142,8 @@ Toggles clothing debugging mode which monitors and logs appearance changes.
 
 **Example:**
 ```lua
-Clothing.ToggleDebugging()
+local Bridge = exports['community_bridge']:Bridge()
+Bridge.Clothing.ToggleDebugging()
 ```
 
 ## Events

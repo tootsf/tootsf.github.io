@@ -28,7 +28,8 @@ Gets the closest door to the current player's position.
 
 **Example:**
 ```lua
-local closestDoor = Doorlock.GetClosestDoor()
+local Bridge = exports['community_bridge']:Bridge()
+local closestDoor = Bridge.Doorlock.GetClosestDoor()
 if closestDoor then
     print("Closest door: " .. closestDoor)
 else
