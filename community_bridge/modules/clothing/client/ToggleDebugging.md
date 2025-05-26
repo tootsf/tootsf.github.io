@@ -2,15 +2,12 @@
 title: ToggleDebugging
 parent: Client Functions
 grand_parent: Clothing
-nav_order: 7
+nav_order: 6
 ---
 
 ## 🔹 ToggleDebugging
 
-Toggle clothing debugging mode.
-
-**Returns:**
-- `boolean`: Success
+Toggles clothing debugging mode which monitors and logs appearance changes.
 
 **Example:**
 ```lua

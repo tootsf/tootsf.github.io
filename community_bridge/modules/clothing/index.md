@@ -9,28 +9,35 @@ permalink: /community_bridge/modules/clothing/
 ---
 
 # Clothing Module
+{: .no_toc }
 
 The clothing module provides functions for managing player appearance and clothing.
+
+## Table of contents
+{: .no_toc .text-delta }
+
+1. TOC
+{:toc}
 
 ---
 
 ## 📚 Available Functions
 
-### Client-side
-- [`IsMale()`](client.md#ismale) - Check if current player ped is male
-- [`GetAppearance(entity)`](client.md#getappearance) - Get appearance data for a ped
-- [`SetAppearance(entity, skinData)`](client.md#setappearance) - Apply appearance data to a ped
-- [`RestoreAppearance(entity)`](client.md#restoreappearance) - Restore previously stored appearance
-- [`UpdateAppearanceBackup(data)`](client.md#updateappearancebackup) - Update the appearance backup
-- [`CopyAppearanceToClipboard()`](client.md#copyappearancetoclipboard) - Copy current appearance to clipboard
-- [`ToggleDebugging()`](client.md#toggledebugging) - Toggle clothing debugging mode
+### Client Functions
+- [`CopyAppearanceToClipboard()`](client/CopyAppearanceToClipboard.md) - Copy current appearance to clipboard
+- [`GetAppearance(entity)`](client/GetAppearance.md) - Get appearance data for a ped entity
+- [`IsMale()`](client/IsMale.md) - Check if current player ped is male
+- [`RestoreAppearance(entity)`](client/RestoreAppearance.md) - Restore previously stored appearance
+- [`SetAppearance(entity, skinData)`](client/SetAppearance.md) - Apply appearance data to a ped
+- [`ToggleDebugging()`](client/ToggleDebugging.md) - Toggle clothing debugging mode
+- [`UpdateAppearanceBackup(data)`](client/UpdateAppearanceBackup.md) - Update the appearance backup
 
-### Server-side
-- [`IsMale(src)`](server.md#ismale) - Check if a player's ped is male
-- [`GetAppearance(src)`](server.md#getappearance) - Get appearance data for a player
-- [`SetAppearance(src, data)`](server.md#setappearance) - Set appearance for a player
-- [`SetAppearanceExt(src, data)`](server.md#setappearanceext) - Set appearance with gender-specific data
-- [`RestoreAppearance(src)`](server.md#restoreappearance) - Restore a player's previous appearance
+### Server Functions
+- [`GetAppearance(src)`](server/GetAppearance.md) - Get appearance data for a player
+- [`IsMale(src)`](server/IsMale.md) - Check if a player's ped is male
+- [`RestoreAppearance(src)`](server/RestoreAppearance.md) - Restore a player's previous appearance
+- [`SetAppearance(src, data)`](server/SetAppearance.md) - Set appearance for a player
+- [`SetAppearanceExt(src, data)`](server/SetAppearanceExt.md) - Set appearance with gender-specific data
 
 ---
 
@@ -43,4 +50,9 @@ The clothing module provides functions for managing player appearance and clothi
 
 ## 📚 Note
 
-This module is marked as incomplete in the source code. It provides basic appearance management functionality but may not include all advanced features found in dedicated clothing systems.
+This module provides comprehensive appearance management functionality including:
+- Basic appearance management (components and props)
+- Gender-specific outfit support
+- Appearance backup and restoration
+- Debug mode for troubleshooting
+- Clipboard support for sharing appearances

@@ -26,15 +26,7 @@ Shared functions provide utilities that can be used on both client and server si
 ---
 
 ## 🔹 IsValidIdentifier
-{: .d-inline-block }
-Shared
-{: .label .label-green }
-
-```lua
-local Bridge = exports['community_bridge']:Bridge()
-
-Bridge.Framework.IsValidIdentifier(identifier)
-```
+{: .no_toc }
 
 Validates if an identifier string is properly formatted.
 
@@ -46,6 +38,7 @@ Validates if an identifier string is properly formatted.
 
 **Example:**
 ```lua
+local Bridge = exports['community_bridge']:Bridge()
 local identifier = "steam:110000103fa6de1"
 if Bridge.Framework.IsValidIdentifier(identifier) then
     print("Valid identifier format")
@@ -54,16 +47,8 @@ end
 
 ---
 
-### FormatMoney
-{: .d-inline-block }
-Shared
-{: .label .label-green }
-
-```lua
-local Bridge = exports['community_bridge']:Bridge()
-
-Bridge.Framework.FormatMoney(amount)
-```
+## 🔹 FormatMoney
+{: .no_toc }
 
 Formats a money amount for display.
 
@@ -76,23 +61,14 @@ Formats a money amount for display.
 **Example:**
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
-
 local formatted = Bridge.Framework.FormatMoney(1234567)
 print(formatted) -- Output: "$1,234,567"
 ```
 
 ---
 
-### ValidateJobData
-{: .d-inline-block }
-Shared
-{: .label .label-green }
-
-```lua
-local Bridge = exports['community_bridge']:Bridge()
-
-Bridge.Framework.ValidateJobData(jobData)
-```
+## 🔹 ValidateJobData
+{: .no_toc }
 
 Validates job data structure.
 
@@ -104,6 +80,7 @@ Validates job data structure.
 
 **Example:**
 ```lua
+local Bridge = exports['community_bridge']:Bridge()
 local jobData = {
     name = "police",
     label = "Police",
@@ -118,18 +95,8 @@ end
 
 ---
 
-## Configuration
-
-### GetFrameworkType
-{: .d-inline-block }
-Shared
-{: .label .label-green }
-
-```lua
-local Bridge = exports['community_bridge']:Bridge()
-
-Bridge.Framework.GetFrameworkType()
-```
+## 🔹 GetFrameworkType
+{: .no_toc }
 
 Returns the detected framework type.
 
@@ -139,23 +106,14 @@ Returns the detected framework type.
 **Example:**
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
-
 local framework = Bridge.Framework.GetFrameworkType()
 print("Running on: " .. framework)
 ```
 
 ---
 
-### IsFrameworkLoaded
-{: .d-inline-block }
-Shared
-{: .label .label-green }
-
-```lua
-local Bridge = exports['community_bridge']:Bridge()
-
-Bridge.Framework.IsFrameworkLoaded()
-```
+## 🔹 IsFrameworkLoaded
+{: .no_toc }
 
 Checks if the framework is fully loaded and ready.
 
@@ -165,7 +123,6 @@ Checks if the framework is fully loaded and ready.
 **Example:**
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
-
 while not Bridge.Framework.IsFrameworkLoaded() do
     Citizen.Wait(100)
 end
@@ -174,12 +131,11 @@ print("Framework is ready!")
 
 ---
 
-## Constants
+## 📚 Constants
 
 ### Framework Types
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
-
 Bridge.Framework.Types = {
     ESX = "esx",
     QBCORE = "qbcore",
@@ -190,7 +146,6 @@ Bridge.Framework.Types = {
 ### Money Types
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
-
 Bridge.Framework.MoneyTypes = {
     CASH = "money",
     BANK = "bank",
@@ -201,7 +156,6 @@ Bridge.Framework.MoneyTypes = {
 ### Job Grades
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
-
 Bridge.Framework.DefaultGrades = {
     UNEMPLOYED = 0,
     EMPLOYEE = 1,
@@ -213,7 +167,7 @@ Bridge.Framework.DefaultGrades = {
 
 ---
 
-## Best Practices
+## 📚 Best Practices
 
 ### Framework Detection
 ```lua

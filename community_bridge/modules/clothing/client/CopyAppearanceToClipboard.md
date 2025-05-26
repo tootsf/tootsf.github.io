@@ -2,15 +2,12 @@
 title: CopyAppearanceToClipboard
 parent: Client Functions
 grand_parent: Clothing
-nav_order: 6
+nav_order: 1
 ---
 
 ## 🔹 CopyAppearanceToClipboard
 
-Copy current appearance to clipboard.
-
-**Returns:**
-- `boolean`: Success
+Copies the current player's appearance data to the clipboard.
 
 **Example:**
 ```lua

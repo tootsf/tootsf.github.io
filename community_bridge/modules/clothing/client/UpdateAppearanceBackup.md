@@ -2,21 +2,19 @@
 title: UpdateAppearanceBackup
 parent: Client Functions
 grand_parent: Clothing
-nav_order: 5
+nav_order: 7
 ---
 
 ## 🔹 UpdateAppearanceBackup
 
-Update the appearance backup.
+Updates the stored appearance backup data.
 
 **Parameters:**
-- `data` (table): Appearance data
-
-**Returns:**
-- `boolean`: Success
+- `data` (table): Appearance data to store as backup
 
 **Example:**
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
-Bridge.Clothing.UpdateAppearanceBackup(skinData)
+local currentAppearance = Bridge.Clothing.GetAppearance(PlayerPedId())
+Bridge.Clothing.UpdateAppearanceBackup(currentAppearance)
 ```

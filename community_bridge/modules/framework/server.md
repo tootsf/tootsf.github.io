@@ -17,11 +17,12 @@ The framework server module provides comprehensive player management, economy op
 1. TOC
 {:toc}
 
-## Core Functions
-
 ---
 
+## 📚 Core Functions
+
 ## 🔹 GetFrameworkName
+{: .no_toc }
 
 Returns the name of the currently active framework.
 
@@ -38,6 +39,7 @@ print("Using framework: " .. frameworkName)
 ---
 
 ## 🔹 GetPlayer
+{: .no_toc }
 
 Gets the framework player object for a given source.
 
@@ -59,6 +61,7 @@ end
 ---
 
 ## 🔹 GetPlayers
+{: .no_toc }
 
 Gets a list of all currently connected players.
 
@@ -74,7 +77,10 @@ print("Connected players: " .. #players)
 
 ---
 
+## 📚 Player Information
+
 ## 🔹 GetPlayerDob
+{: .no_toc }
 
 Gets the player's date of birth.
 
@@ -94,6 +100,7 @@ print("DOB: " .. dob)
 ---
 
 ## 🔹 GetPlayerPhone
+{: .no_toc }
 
 Gets the player's phone number.
 
@@ -113,6 +120,7 @@ print("Phone: " .. phone)
 ---
 
 ## 🔹 GetPlayerGang
+{: .no_toc }
 
 Gets the player's gang name.
 
@@ -133,9 +141,8 @@ print("Gang: " .. gang)
 
 ## 📚 Job Management
 
----
-
 ## 🔹 GetFrameworkJobs
+{: .no_toc }
 
 Gets all available jobs in the framework.
 
@@ -153,11 +160,10 @@ end
 
 ---
 
----
+## 🔹 GetPlayerJob
+{: .no_toc }
 
-## 🔹 GetPlayerJob (Deprecated)
-
-Gets player job information (deprecated - use GetPlayerJobData instead).
+**Deprecated** - Gets player job information (use GetPlayerJobData instead).
 
 **Parameters:**
 - `src` (number): Player server ID
@@ -171,6 +177,7 @@ Gets player job information (deprecated - use GetPlayerJobData instead).
 ---
 
 ## 🔹 GetPlayerJobData
+{: .no_toc }
 
 Gets comprehensive player job data.
 
@@ -192,6 +199,7 @@ print("On duty: " .. tostring(jobData.onDuty))
 ---
 
 ## 🔹 GetPlayersByJob
+{: .no_toc }
 
 Gets all players with a specific job.
 
@@ -211,6 +219,7 @@ print("Online cops: " .. #cops)
 ---
 
 ## 🔹 GetPlayerDuty
+{: .no_toc }
 
 Gets the player's duty status.
 
@@ -230,6 +239,7 @@ print("On duty: " .. tostring(onDuty))
 ---
 
 ## 🔹 SetPlayerDuty
+{: .no_toc }
 
 Sets the player's duty status.
 
@@ -246,6 +256,7 @@ Bridge.Framework.SetPlayerDuty(source, true) -- Put on duty
 ---
 
 ## 🔹 SetPlayerJob
+{: .no_toc }
 
 Sets the player's job and grade.
 
@@ -262,11 +273,10 @@ Bridge.Framework.SetPlayerJob(source, "police", "0")
 
 ---
 
-## 📚 Economy
-
----
+## 📚 Economy Functions
 
 ## 🔹 GetAccountBalance
+{: .no_toc }
 
 Gets the player's account balance.
 
@@ -287,6 +297,7 @@ local bank = Bridge.Framework.GetAccountBalance(source, "bank")
 ---
 
 ## 🔹 AddAccountBalance
+{: .no_toc }
 
 Adds money to a player's account.
 
@@ -307,6 +318,7 @@ Bridge.Framework.AddAccountBalance(source, "money", 1000)
 ---
 
 ## 🔹 RemoveAccountBalance
+{: .no_toc }
 
 Removes money from a player's account.
 
@@ -324,11 +336,12 @@ local Bridge = exports['community_bridge']:Bridge()
 Bridge.Framework.RemoveAccountBalance(source, "bank", 500)
 ```
 
-## Inventory Management
-
 ---
 
+## 📚 Inventory Management
+
 ## 🔹 GetItem
+{: .no_toc }
 
 Gets specific items from player inventory.
 
@@ -352,6 +365,7 @@ end
 ---
 
 ## 🔹 GetItemInfo
+{: .no_toc }
 
 Gets information about an item.
 
@@ -371,6 +385,7 @@ print("Item: " .. itemInfo.label)
 ---
 
 ## 🔹 GetItemCount
+{: .no_toc }
 
 Gets the total count of an item in player inventory.
 
@@ -392,6 +407,7 @@ print("Player has " .. breadCount .. " bread")
 ---
 
 ## 🔹 HasItem
+{: .no_toc }
 
 Checks if player has an item.
 
@@ -413,6 +429,7 @@ end
 ---
 
 ## 🔹 GetPlayerInventory
+{: .no_toc }
 
 Gets the player's complete inventory.
 
@@ -434,6 +451,7 @@ end
 ---
 
 ## 🔹 GetItemBySlot
+{: .no_toc }
 
 Gets the item in a specific inventory slot.
 
@@ -456,6 +474,7 @@ end
 ---
 
 ## 🔹 AddItem
+{: .no_toc }
 
 Adds an item to player inventory.
 
@@ -478,6 +497,7 @@ Bridge.Framework.AddItem(source, "bread", 5, nil, {quality = 100})
 ---
 
 ## 🔹 RemoveItem
+{: .no_toc }
 
 Removes an item from player inventory.
 
@@ -500,6 +520,7 @@ Bridge.Framework.RemoveItem(source, "bread", 2)
 ---
 
 ## 🔹 SetMetadata
+{: .no_toc }
 
 Sets metadata for an item in inventory.
 
@@ -518,11 +539,12 @@ local Bridge = exports['community_bridge']:Bridge()
 Bridge.Framework.SetMetadata(source, "bread", 1, {quality = 50})
 ```
 
-## Player Status
-
 ---
 
+## 📚 Player Status
+
 ## 🔹 GetPlayerMetadata
+{: .no_toc }
 
 Gets specific metadata for a player.
 
@@ -543,6 +565,7 @@ print("Hunger: " .. hunger)
 ---
 
 ## 🔹 SetPlayerMetadata
+{: .no_toc }
 
 Sets metadata for a player.
 
@@ -563,6 +586,7 @@ Bridge.Framework.SetPlayerMetadata(source, "hunger", 50)
 ---
 
 ## 🔹 GetHunger
+{: .no_toc }
 
 Gets the player's hunger level.
 
@@ -582,6 +606,7 @@ print("Hunger: " .. hunger)
 ---
 
 ## 🔹 GetThirst
+{: .no_toc }
 
 Gets the player's thirst level.
 
@@ -601,6 +626,7 @@ print("Thirst: " .. thirst)
 ---
 
 ## 🔹 AddHunger
+{: .no_toc }
 
 Adds to the player's hunger level.
 
@@ -620,6 +646,7 @@ local newHunger = Bridge.Framework.AddHunger(source, 25)
 ---
 
 ## 🔹 AddThirst
+{: .no_toc }
 
 Adds to the player's thirst level.
 
@@ -639,6 +666,7 @@ local newThirst = Bridge.Framework.AddThirst(source, 25)
 ---
 
 ## 🔹 AddStress
+{: .no_toc }
 
 Adds to the player's stress level.
 
@@ -658,6 +686,7 @@ local newStress = Bridge.Framework.AddStress(source, 10)
 ---
 
 ## 🔹 RemoveStress
+{: .no_toc }
 
 Removes from the player's stress level.
 
@@ -677,6 +706,7 @@ local newStress = Bridge.Framework.RemoveStress(source, 15)
 ---
 
 ## 🔹 GetIsPlayerDead
+{: .no_toc }
 
 Checks if the player is dead or downed.
 
@@ -697,6 +727,7 @@ end
 ---
 
 ## 🔹 RevivePlayer
+{: .no_toc }
 
 Revives a dead player.
 
@@ -712,9 +743,12 @@ local Bridge = exports['community_bridge']:Bridge()
 Bridge.Framework.RevivePlayer(source)
 ```
 
-## Vehicle Management
+---
 
-### GetOwnedVehicles(src)
+## 📚 Vehicle Management
+
+## 🔹 GetOwnedVehicles
+{: .no_toc }
 
 Gets all vehicles owned by a player.
 
@@ -733,9 +767,12 @@ for _, vehicle in pairs(vehicles) do
 end
 ```
 
-## Item Registration
+---
 
-### RegisterUsableItem(itemName, cb)
+## 📚 Item Registration
+
+## 🔹 RegisterUsableItem
+{: .no_toc }
 
 Registers a usable item with a callback function.
 
@@ -753,9 +790,12 @@ Bridge.Framework.RegisterUsableItem("bread", function(src, itemData)
 end)
 ```
 
-## Commands
+---
 
-### Framework.Commands.Add(name, help, arguments, argsrequired, callback, permission, ...)
+## 📚 Commands
+
+## 🔹 Commands.Add
+{: .no_toc }
 
 Adds a command to the framework.
 
@@ -777,7 +817,9 @@ Bridge.Framework.Commands.Add("heal", "Heal yourself", {}, false, function(sourc
 end, "admin")
 ```
 
-## Events
+---
+
+## 📚 Events
 
 The framework module triggers several community_bridge events:
 
@@ -803,7 +845,7 @@ AddEventHandler('community_bridge:Server:OnPlayerUnload', function(src)
 end)
 ```
 
-## Framework Support
+## 📚 Framework Support
 
 The module automatically detects and loads the appropriate framework:
 - QBCore (qb-core)
@@ -812,27 +854,20 @@ The module automatically detects and loads the appropriate framework:
 
 All functions are only available when a supported framework is running.
 
-### GetName
-{: .d-inline-block }
-Server
-{: .label .label-purple }
-
-```lua
-local Bridge = exports['community_bridge']:Bridge()
-
-Bridge.Framework.GetName(src)
-```
+## 🔹 GetName
+{: .no_toc }
 
 Returns the player's display name.
 
 **Parameters:**
-- `src` (number) - Player server ID
+- `src` (number): Player server ID
 
 **Returns:** 
-- `string` - Player's display name
+- `string`: Player's display name
 
 **Example:**
 ```lua
+local Bridge = exports['community_bridge']:Bridge()
 local playerId = source
 local playerName = Bridge.Framework.GetName(playerId)
 TriggerClientEvent('chat:addMessage', playerId, {
@@ -842,27 +877,20 @@ TriggerClientEvent('chat:addMessage', playerId, {
 
 ---
 
-### GetSourceFromIdentifier
-{: .d-inline-block }
-Server
-{: .label .label-purple }
-
-```lua
-local Bridge = exports['community_bridge']:Bridge()
-
-Bridge.Framework.GetSourceFromIdentifier(identifier)
-```
+## 🔹 GetSourceFromIdentifier
+{: .no_toc }
 
 Returns the player source from an identifier.
 
 **Parameters:**
-- `identifier` (string) - Player's unique identifier
+- `identifier` (string): Player's unique identifier
 
 **Returns:** 
-- `number|nil` - Player server ID or nil if not found
+- `number|nil`: Player server ID or nil if not found
 
 **Example:**
 ```lua
+local Bridge = exports['community_bridge']:Bridge()
 local identifier = "steam:110000103fa6de1"
 local playerId = Bridge.Framework.GetSourceFromIdentifier(identifier)
 if playerId then
@@ -872,29 +900,22 @@ end
 
 ---
 
-## Economy Functions
+## 📚 Additional Economy Functions
 
-### GetMoney
-{: .d-inline-block }
-Server
-{: .label .label-purple }
-
-```lua
-local Bridge = exports['community_bridge']:Bridge()
-
-Bridge.Framework.GetMoney(src)
-```
+## 🔹 GetMoney
+{: .no_toc }
 
 Returns the player's current money amount.
 
 **Parameters:**
-- `src` (number) - Player server ID
+- `src` (number): Player server ID
 
 **Returns:** 
-- `number` - Player's current money
+- `number`: Player's current money
 
 **Example:**
 ```lua
+local Bridge = exports['community_bridge']:Bridge()
 local playerId = source
 local money = Bridge.Framework.GetMoney(playerId)
 if money >= 500 then
@@ -904,28 +925,21 @@ end
 
 ---
 
-### AddMoney
-{: .d-inline-block }
-Server
-{: .label .label-purple }
-
-```lua
-local Bridge = exports['community_bridge']:Bridge()
-
-Bridge.Framework.AddMoney(src, amount)
-```
+## 🔹 AddMoney
+{: .no_toc }
 
 Adds money to a player's account.
 
 **Parameters:**
-- `src` (number) - Player server ID
-- `amount` (number) - Amount to add
+- `src` (number): Player server ID
+- `amount` (number): Amount to add
 
 **Returns:** 
-- `boolean` - Success status
+- `boolean`: Success status
 
 **Example:**
 ```lua
+local Bridge = exports['community_bridge']:Bridge()
 local playerId = source
 local success = Bridge.Framework.AddMoney(playerId, 1000)
 if success then
@@ -935,28 +949,21 @@ end
 
 ---
 
-### RemoveMoney
-{: .d-inline-block }
-Server
-{: .label .label-purple }
-
-```lua
-local Bridge = exports['community_bridge']:Bridge()
-
-Bridge.Framework.RemoveMoney(src, amount)
-```
+## 🔹 RemoveMoney
+{: .no_toc }
 
 Removes money from a player's account.
 
 **Parameters:**
-- `src` (number) - Player server ID
-- `amount` (number) - Amount to remove
+- `src` (number): Player server ID
+- `amount` (number): Amount to remove
 
 **Returns:** 
-- `boolean` - Success status (false if insufficient funds)
+- `boolean`: Success status (false if insufficient funds)
 
 **Example:**
 ```lua
+local Bridge = exports['community_bridge']:Bridge()
 local playerId = source
 local cost = 500
 if Bridge.Framework.RemoveMoney(playerId, cost) then
@@ -969,29 +976,22 @@ end
 
 ---
 
-## Job Management
+## 📚 Additional Job Management
 
-### GetJob
-{: .d-inline-block }
-Server
-{: .label .label-purple }
-
-```lua
-local Bridge = exports['community_bridge']:Bridge()
-
-Bridge.Framework.GetJob(src)
-```
+## 🔹 GetJob
+{: .no_toc }
 
 Returns the player's current job information.
 
 **Parameters:**
-- `src` (number) - Player server ID
+- `src` (number): Player server ID
 
 **Returns:** 
-- `table` - Job data containing name, label, grade, and grade_label
+- `table`: Job data containing name, label, grade, and grade_label
 
 **Example:**
 ```lua
+local Bridge = exports['community_bridge']:Bridge()
 local playerId = source
 local job = Bridge.Framework.GetJob(playerId)
 print("Player job: " .. job.name .. " (Grade: " .. job.grade .. ")")
@@ -999,29 +999,22 @@ print("Player job: " .. job.name .. " (Grade: " .. job.grade .. ")")
 
 ---
 
-### SetJob
-{: .d-inline-block }
-Server
-{: .label .label-purple }
-
-```lua
-local Bridge = exports['community_bridge']:Bridge()
-
-Bridge.Framework.SetJob(src, job, grade)
-```
+## 🔹 SetJob
+{: .no_toc }
 
 Sets the player's job and grade.
 
 **Parameters:**
-- `src` (number) - Player server ID
-- `job` (string) - Job name
-- `grade` (number) - Job grade/rank
+- `src` (number): Player server ID
+- `job` (string): Job name
+- `grade` (number): Job grade/rank
 
 **Returns:** 
-- `boolean` - Success status
+- `boolean`: Success status
 
 **Example:**
 ```lua
+local Bridge = exports['community_bridge']:Bridge()
 local playerId = source
 local success = Bridge.Framework.SetJob(playerId, "police", 2)
 if success then
@@ -1031,14 +1024,14 @@ end
 
 ---
 
-## Best Practices
+## 📚 Best Practices
 
 ### Error Handling
+
 Always check return values for nil or false to handle cases where operations fail:
 
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
-
 local money = Bridge.Framework.GetMoney(playerId)
 if money then
     -- Safe to use money value
@@ -1048,6 +1041,7 @@ end
 ```
 
 ### Performance Considerations
+
 Cache frequently accessed data to reduce database queries:
 
 ```lua

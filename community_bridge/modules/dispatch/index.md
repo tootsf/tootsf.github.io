@@ -3,7 +3,7 @@ layout: default
 title: Dispatch
 parent: Modules
 grand_parent: Community Bridge
-nav_order: 4
+nav_order: 3
 has_children: true
 permalink: /community_bridge/modules/dispatch/
 ---
@@ -11,14 +11,87 @@ permalink: /community_bridge/modules/dispatch/
 # Dispatch Module
 {: .no_toc }
 
-Emergency services dispatch system for coordinating police, medical, and fire responses.
-{: .fs-6 .fw-300 }
+The dispatch module provides emergency services dispatch functionality with support for multiple dispatch systems.
 
 ## Table of contents
 {: .no_toc .text-delta }
 
 1. TOC
 {:toc}
+
+---
+
+## 📚 Available Functions
+
+### Client Functions
+- [`Send911Call(location, message)`](client/Send911Call.md) - Send a 911 call to dispatch
+- [`SendAlert(data)`](client/SendAlert.md) - Send an emergency alert to the dispatch system
+
+### Shared Functions
+- [`GetCallTypes(department)`](shared/GetCallTypes.md) - Get all available emergency call types
+- [`GetCallTypeInfo(callType)`](shared/GetCallTypeInfo.md) - Get detailed information about a call type
+- [`GetPriorityLevels()`](shared/GetPriorityLevels.md) - Get all priority level definitions
+- [`GetStatusCodes(category)`](shared/GetStatusCodes.md) - Get all available status codes
+- [`GetStatusCodeInfo(statusCode)`](shared/GetStatusCodeInfo.md) - Get information about a status code
+- [`IsValidCallType(callType)`](shared/IsValidCallType.md) - Check if a call type exists
+- [`IsValidPriority(priority)`](shared/IsValidPriority.md) - Check if a priority level is valid
+- [`IsValidStatusCode(statusCode)`](shared/IsValidStatusCode.md) - Check if a status code exists
+
+---
+
+## 📚 Supported Dispatch Systems
+
+The module automatically detects and integrates with the following dispatch systems:
+- ps-dispatch
+- cd_dispatch
+- bub-mdt
+- qs_dispatch
+- linden_outlawalert
+- tk_dispatch
+- lb-tablet
+- redutzu-mdt
+
+If no supported dispatch system is found, alerts will be sent to the default notification system.
+
+---
+
+## 📚 Best Practices
+
+### Alert Timing
+Don't spam alerts - use appropriate delays between calls:
+
+```lua
+local lastAlert = 0
+
+local function SendRobberyAlert()
+    local currentTime = GetGameTimer()
+    if currentTime - lastAlert < 30000 then -- 30 second cooldown
+        return false, "Please wait before sending another alert"
+    end
+    
+    lastAlert = currentTime
+    Bridge.Dispatch.SendAlert({
+        message = "Store robbery in progress",
+        code = "10-90",
+        jobs = {"police"}
+    })
+    return true
+end
+```
+
+### Location Accuracy
+Always provide accurate coordinates for better response:
+
+```lua
+-- Get precise player location
+local coords = GetEntityCoords(PlayerPedId())
+
+Bridge.Dispatch.SendAlert({
+    message = "Suspicious activity reported",
+    coords = coords,
+    jobs = {"police"}
+})
+```
 
 ---
 

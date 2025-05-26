@@ -2,23 +2,25 @@
 title: IsMale
 parent: Server Functions
 grand_parent: Clothing
-nav_order: 1
+nav_order: 2
 ---
 
 ## 🔹 IsMale
 
-Check if a player's ped is male.
+Checks if a player's ped is using the male freemode model.
 
 **Parameters:**
 - `src` (number): Player server ID
 
 **Returns:**
-- `boolean`: True if male, false if female
+- `boolean`: True if male model, false otherwise
 
 **Example:**
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
-if Bridge.Clothing.IsMale(src) then
-    print("Player is male")
+local src = source
+local isMale = Bridge.Clothing.IsMale(src)
+if isMale then
+    print("Player " .. src .. " is using male model")
 end
 ```
