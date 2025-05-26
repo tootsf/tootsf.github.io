@@ -2,7 +2,7 @@
 layout: default
 title: StripPNG
 parent: Client Functions
-grand_parent: Inventory
+grand_parent: "📦 Inventory"
 nav_order: 7
 ---
 

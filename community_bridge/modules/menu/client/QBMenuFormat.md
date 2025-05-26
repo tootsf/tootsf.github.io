@@ -2,7 +2,7 @@
 layout: default
 title: QB Menu Format
 parent: Client Functions
-grand_parent: Menu
+grand_parent: "📋 Menu"
 nav_order: 3
 ---
 

@@ -2,7 +2,7 @@
 layout: default
 title: SetFuel
 parent: Client Functions
-grand_parent: Fuel
+grand_parent: "⛽ Fuel"
 nav_order: 3
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: ToggleDoorLock
 parent: Server Functions
-grand_parent: Doorlock
+grand_parent: "🔒 Doorlock"
 nav_order: 1
 ---
 

@@ -1,10 +1,11 @@
 ---
 layout: default
-title: "⛽ Fuel"
-parent: Modules
-grand_parent: Community Bridge
+title: "Client Functions"
+parent: "⛽ Fuel"
+grand_parent: Modules
+great_grand_parent: Community Bridge
 nav_order: 1
-has_children: false
+has_children: true
 permalink: /community_bridge/modules/fuel/client/
 ---
 

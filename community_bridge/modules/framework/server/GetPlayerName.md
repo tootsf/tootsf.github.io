@@ -2,7 +2,7 @@
 layout: default
 title: GetPlayerName
 parent: Server Functions
-grand_parent: Framework
+grand_parent: "🧩 Framework"
 nav_order: 7
 ---
 

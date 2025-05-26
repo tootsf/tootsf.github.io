@@ -2,7 +2,7 @@
 layout: default
 title: OpenShop
 parent: Client Functions
-grand_parent: Inventory
+grand_parent: "📦 Inventory"
 nav_order: 6
 ---
 

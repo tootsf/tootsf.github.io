@@ -2,7 +2,7 @@
 layout: default
 title: GiveKeys
 parent: Client Functions
-grand_parent: VehicleKey
+grand_parent: "🔑 VehicleKey"
 nav_order: 1
 ---
 

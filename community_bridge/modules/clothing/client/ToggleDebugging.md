@@ -1,7 +1,7 @@
 ---
 title: ToggleDebugging
 parent: Client Functions
-grand_parent: Clothing
+grand_parent: "👔 Clothing"
 nav_order: 6
 ---
 

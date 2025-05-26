@@ -2,7 +2,7 @@
 layout: default
 title: ValidateInput
 parent: Client Functions
-grand_parent: Input
+grand_parent: "⌨️ Input"
 nav_order: 8
 ---
 

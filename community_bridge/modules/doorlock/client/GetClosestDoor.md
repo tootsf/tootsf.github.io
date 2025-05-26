@@ -2,7 +2,7 @@
 layout: default
 title: GetClosestDoor
 parent: Client Functions
-grand_parent: Doorlock
+grand_parent: "🔒 Doorlock"
 nav_order: 1
 ---
 

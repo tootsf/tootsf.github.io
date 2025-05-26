@@ -2,7 +2,7 @@
 layout: default
 title: RemoveTargetEntity
 parent: Client Functions
-grand_parent: Target
+grand_parent: "🎯 Target"
 nav_order: 5
 ---
 

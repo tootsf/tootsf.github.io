@@ -2,7 +2,7 @@
 layout: default
 title: HideHelpText
 parent: Server Functions
-grand_parent: Helptext
+grand_parent: "💬 Helptext"
 nav_order: 2
 ---
 

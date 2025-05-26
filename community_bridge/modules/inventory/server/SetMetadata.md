@@ -2,7 +2,7 @@
 layout: default
 title: SetMetadata
 parent: Server Functions
-grand_parent: Inventory
+grand_parent: "📦 Inventory"
 great_grand_parent: Modules
 nav_order: 7
 permalink: /community_bridge/modules/inventory/server/SetMetadata/

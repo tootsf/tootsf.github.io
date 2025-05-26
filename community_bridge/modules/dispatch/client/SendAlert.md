@@ -1,7 +1,7 @@
 ---
 title: SendAlert
 parent: Client Functions
-grand_parent: Dispatch
+grand_parent: "🚨 Dispatch"
 nav_order: 2
 ---
 

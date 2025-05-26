@@ -1,7 +1,7 @@
 ---
 title: SetAppearanceExt
 parent: Server Functions
-grand_parent: Clothing
+grand_parent: "👔 Clothing"
 nav_order: 5
 ---
 

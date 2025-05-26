@@ -2,7 +2,7 @@
 layout: default
 title: StartProgress
 parent: Client Functions
-grand_parent: Progressbar
+grand_parent: "⏳ Progressbar"
 nav_order: 1
 ---
 

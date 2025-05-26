@@ -2,7 +2,7 @@
 layout: default
 title: ShowHelpText
 parent: Client Functions
-grand_parent: Helptext
+grand_parent: "💬 Helptext"
 nav_order: 1
 ---
 

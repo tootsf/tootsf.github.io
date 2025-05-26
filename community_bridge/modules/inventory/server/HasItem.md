@@ -2,7 +2,7 @@
 layout: default
 title: HasItem
 parent: Server Functions
-grand_parent: Inventory
+grand_parent: "📦 Inventory"
 nav_order: 4
 ---
 

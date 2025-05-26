@@ -2,7 +2,7 @@
 layout: default
 title: OpenShop
 parent: Client Functions
-grand_parent: Shops
+grand_parent: "🏪 Shops"
 nav_order: 1
 ---
 
