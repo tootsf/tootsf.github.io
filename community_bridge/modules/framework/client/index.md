@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Client Functions
-parent: Framework
+parent: "🧩 Framework"
 grand_parent: Modules
 nav_order: 1
 has_children: true
