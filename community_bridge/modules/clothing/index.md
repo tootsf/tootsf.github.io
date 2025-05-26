@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Clothing
+title: "👔 Clothing"
 parent: Modules
 grand_parent: Community Bridge
 nav_order: 2

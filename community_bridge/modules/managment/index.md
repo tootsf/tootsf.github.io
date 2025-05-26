@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Managment
+title: "⚙️ Managment"
 parent: Modules
 grand_parent: Community Bridge
 nav_order: 13

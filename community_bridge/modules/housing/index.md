@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Housing
+title: "🏠 Housing"
 parent: Modules
 grand_parent: Community Bridge
 nav_order: 9

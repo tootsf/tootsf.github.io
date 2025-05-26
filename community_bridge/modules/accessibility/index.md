@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Accessibility
+title: "♿ Accessibility"
 parent: Modules
 grand_parent: Community Bridge
 nav_order: 1

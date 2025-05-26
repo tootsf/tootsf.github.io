@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Server Functions
-parent: Notify
+parent: "🔔 Notify"
 grand_parent: Modules
 nav_order: 1
 ---

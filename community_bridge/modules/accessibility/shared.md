@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Shared Functions
-parent: Accessibility
+parent: "♿ Accessibility"
 grand_parent: Modules
 nav_order: 3
 has_children: true

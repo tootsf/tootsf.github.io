@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Server
-parent: Managment
+parent: "⚙️ Managment"
 grand_parent: Modules
 nav_order: 1
 ---

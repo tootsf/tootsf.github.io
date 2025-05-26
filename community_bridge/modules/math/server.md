@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Server Functions
-parent: Math
+parent: "🧮 Math"
 grand_parent: Modules
 nav_order: 2
 has_children: true

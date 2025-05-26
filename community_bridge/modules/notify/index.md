@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Notify
+title: "🔔 Notify"
 parent: Modules
 grand_parent: Community Bridge
 nav_order: 16

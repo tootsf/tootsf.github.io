@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Server
-parent: Phone
+parent: "📱 Phone"
 grand_parent: Modules
 nav_order: 1
 ---

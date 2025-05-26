@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Server
-parent: Version
+parent: "🔢 Version"
 grand_parent: Modules
 nav_order: 1
 ---

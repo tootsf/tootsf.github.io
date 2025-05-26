@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Dialogue
+title: "💬 Dialogue"
 parent: Modules
 grand_parent: Community Bridge
 nav_order: 3

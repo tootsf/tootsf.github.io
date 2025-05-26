@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Phone
+title: "📱 Phone"
 parent: Modules
 grand_parent: Community Bridge
 nav_order: 17
