@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Shared Functions
-parent: Fuel
+parent: "⛽ Fuel"
 grand_parent: Modules
 nav_order: 3
 has_children: true
