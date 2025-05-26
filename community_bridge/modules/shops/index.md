@@ -2,8 +2,10 @@
 layout: default
 title: Shops
 parent: Modules
-nav_order: 17
+grand_parent: Community Bridge
+nav_order: 18
 has_children: true
+permalink: /community_bridge/modules/shops/
 ---
 
 # Shops Module

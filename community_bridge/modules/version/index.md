@@ -2,8 +2,10 @@
 layout: default
 title: Version
 parent: Modules
-nav_order: 19
+grand_parent: Community Bridge
+nav_order: 22
 has_children: true
+permalink: /community_bridge/modules/version/
 ---
 
 # Version Module

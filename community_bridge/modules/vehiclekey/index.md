@@ -2,8 +2,10 @@
 layout: default
 title: VehicleKey
 parent: Modules
-nav_order: 18
+grand_parent: Community Bridge
+nav_order: 23
 has_children: true
+permalink: /community_bridge/modules/vehiclekey/
 ---
 
 # VehicleKey Module

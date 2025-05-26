@@ -1,9 +1,11 @@
 ---
-title: "Skills"
-parent: "Modules"
-grand_parent: "Community Bridge"
-nav_order: 15
+layout: default
+title: Skills
+parent: Modules
+grand_parent: Community Bridge
+nav_order: 19
 has_children: true
+permalink: /community_bridge/modules/skills/
 ---
 
 # Skills Module

@@ -1,9 +1,11 @@
 ---
-title: "Dispatch"
-parent: "Modules"
-grand_parent: "Community Bridge"
-nav_order: 17
+layout: default
+title: Dispatch
+parent: Modules
+grand_parent: Community Bridge
+nav_order: 16
 has_children: true
+permalink: /community_bridge/modules/dispatch/
 ---
 
 # Dispatch Module

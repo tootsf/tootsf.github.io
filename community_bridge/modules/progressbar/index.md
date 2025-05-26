@@ -1,9 +1,11 @@
 ---
-title: "Progressbar"
-parent: "Modules"
-grand_parent: "Community Bridge"
-nav_order: 10
+layout: default
+title: Progressbar
+parent: Modules
+grand_parent: Community Bridge
+nav_order: 17
 has_children: true
+permalink: /community_bridge/modules/progressbar/
 ---
 
 # Progressbar Module
