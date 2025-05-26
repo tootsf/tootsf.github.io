@@ -1,21 +1,37 @@
 ---
+layout: default
 title: Close
 parent: Client Functions
 grand_parent: Dialogue
 nav_order: 2
 ---
 
-## 🔹 Close
+# Close
+{: .no_toc }
+{: .d-inline-block }
+Client
+{: .label .label-blue }
 
-Close an active dialogue.
+Closes an active dialogue.
 
-**Parameters:**
-- `name` (string): Dialogue name
+## Syntax
 
-**Returns:**
-- `boolean`: Success
+```lua
+function Dialogue.Close(name)
+```
 
-**Example:**
+## Parameters
+
+**name:** `string`  
+Dialogue name
+
+## Returns
+
+**boolean**  
+Success
+
+## Example
+
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 Bridge.Dialogue.Close("npc_greeting")
