@@ -1,15 +1,15 @@
 ---
 layout: default
-title: Server Functions
-parent: Inventory
-grand_parent: Modules
+title: "📦 Inventory"
+parent: Modules
+grand_parent: Community Bridge
 nav_order: 1
-has_children: true
+has_children: false
 permalink: /community_bridge/modules/inventory/server/
 ---
 
 
-# Inventory Module – Server Functions
+# 📦 Inventory – Server Functions
 {: .no_toc }
 
 This page provides a table of contents for all server-side inventory functions. Each function is documented in its own file.

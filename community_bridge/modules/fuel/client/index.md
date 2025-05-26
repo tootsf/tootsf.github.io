@@ -1,14 +1,14 @@
 ---
 layout: default
-title: Client Functions
-parent: Fuel
-grand_parent: Modules
+title: "⛽ Fuel"
+parent: Modules
+grand_parent: Community Bridge
 nav_order: 1
-has_children: true
+has_children: false
 permalink: /community_bridge/modules/fuel/client/
 ---
 
-# Fuel Client Functions
+# ⛽ Fuel – Client Functions
 {: .no_toc }
 
 The fuel client module provides vehicle fuel management functions.

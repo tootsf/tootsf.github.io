@@ -1,17 +1,17 @@
 ---
 layout: default
-title: Client Functions
-parent: Menu
-grand_parent: Modules
+title: "📋 Menu"
+parent: Modules
+grand_parent: Community Bridge
 nav_order: 1
-has_children: true
+has_children: false
 permalink: /community_bridge/modules/menu/client/
 ---
 
-# Menu Client Functions
+# 📋 Menu – Client Functions
 {: .no_toc }
 
-Client-side functions for creating and displaying menus.
+This page provides a table of contents for all client-side menu functions. Each function is documented in its own file.
 
 ## Functions
 

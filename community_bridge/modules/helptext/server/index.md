@@ -1,17 +1,17 @@
 ---
 layout: default
-title: Server Functions
-parent: Helptext
-grand_parent: Modules
+title: "💬 Helptext"
+parent: Modules
+grand_parent: Community Bridge
 nav_order: 2
-has_children: true
+has_children: false
 permalink: /community_bridge/modules/helptext/server/
 ---
 
-# Helptext Server Functions
+# 💬 Helptext – Server Functions
 {: .no_toc }
 
-Server-side functions for sending help text to specific players.
+This page provides a table of contents for all server-side helptext functions. Each function is documented in its own file.
 
 ## Functions
 

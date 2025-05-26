@@ -1,17 +1,17 @@
 ---
 layout: default
-title: Client Functions
-parent: Helptext
-grand_parent: Modules
+title: "💬 Helptext"
+parent: Modules
+grand_parent: Community Bridge
 nav_order: 1
-has_children: true
+has_children: false
 permalink: /community_bridge/modules/helptext/client/
 ---
 
-# Helptext Client Functions
+# 💬 Helptext – Client Functions
 {: .no_toc }
 
-Client-side functions for displaying contextual help and instruction text.
+This page provides a table of contents for all client-side helptext functions. Each function is documented in its own file.
 
 ## Functions
 
