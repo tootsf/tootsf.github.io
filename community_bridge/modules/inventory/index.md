@@ -74,11 +74,10 @@ end
 
 ## Module Structure
 
-This module is organized into three main categories:
+This module is organized into two main categories:
 
 - **[Server Functions](server/)** - Server-side inventory management and operations
 - **[Client Functions](client/)** - Client-side inventory integration and UI
-- **[Shared Functions](shared/)** - Utilities and validation functions
 
 ---
 

@@ -7,31 +7,16 @@ nav_order: 5
 ---
 
 # GetImagePath
-{: .no_toc }
-{: .d-inline-block }
-Client
-{: .label .label-blue }
 
 Gets the image path for an item.
 
-## Syntax
+**Parameters:**
+- `item` (string) – Name of the item
 
-```lua
-function Inventory.GetImagePath(item)
-```
+**Returns:**
+- `string` – Image path or URL
 
-## Parameters
-
-**item:** `string`  
-Name of the item
-
-## Returns
-
-**string**  
-Image path or URL
-
-## Example
-
+**Example:**
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 

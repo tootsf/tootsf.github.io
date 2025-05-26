@@ -7,51 +7,22 @@ nav_order: 1
 ---
 
 # GetItemInfo
-{: .no_toc }
-{: .d-inline-block }
-Client
-{: .label .label-blue }
 
-Retrieves detailed information about a specific item.
+Returns detailed information about an item.
 
-## Syntax
+**Parameters:**
+- `item` (string) – Name of the item
 
-```lua
-function Inventory.GetItemInfo(itemName)
-```
+**Returns:**
+- `table` – Item data containing name, label, stack, weight, description, image
 
-## Parameters
-
-**itemName:** `string`  
-The name/ID of the item to get information for.
-
-## Returns
-
-**Type:** `table` or `nil`  
-A table containing item information or nil if the item doesn't exist:
-- **name:** Item name/ID
-- **label:** Display name
-- **description:** Item description
-- **weight:** Item weight
-- **type:** Item type
-- **image:** Image name
-- **unique:** Whether the item is unique
-- **useable:** Whether the item can be used
-- **shouldClose:** Whether to close inventory on use
-- **slot:** Default slot (if applicable)
-- **combinable:** Combinable properties (if applicable)
-
-## Example
-
+**Example:**
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 
-local itemInfo = Bridge.Inventory.GetItemInfo("phone")
+local itemInfo = Bridge.Inventory.GetItemInfo("water")
 if itemInfo then
-    print("Item: " .. itemInfo.label)
-    print("Description: " .. itemInfo.description)
-    print("Weight: " .. itemInfo.weight)
-else
-    print("Item not found")
+    print("Item: " .. itemInfo.label .. " - Weight: " .. itemInfo.weight)
+    local imageUrl = itemInfo.image or "default_placeholder.png"
 end
 ```

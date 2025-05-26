@@ -7,31 +7,16 @@ nav_order: 3
 ---
 
 # HasItem
-{: .no_toc }
-{: .d-inline-block }
-Client
-{: .label .label-blue }
 
 Checks if the player has a specific item in their inventory.
 
-## Syntax
+**Parameters:**
+- `item` (string) – Name of the item
 
-```lua
-function Inventory.HasItem(item)
-```
+**Returns:**
+- `boolean` – True if the player has the item
 
-## Parameters
-
-**item:** `string`  
-Name of the item
-
-## Returns
-
-**boolean**  
-True if the player has the item, false otherwise
-
-## Example
-
+**Example:**
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 

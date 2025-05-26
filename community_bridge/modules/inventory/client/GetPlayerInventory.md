@@ -7,26 +7,13 @@ nav_order: 4
 ---
 
 # GetPlayerInventory
-{: .no_toc }
-{: .d-inline-block }
-Client
-{: .label .label-blue }
 
 Returns the complete player inventory.
 
-## Syntax
+**Returns:**
+- `table` – Array of inventory items with format {name, label, count, slot, metadata}
 
-```lua
-function Inventory.GetPlayerInventory()
-```
-
-## Returns
-
-**table**  
-Array of inventory items with format {name, label, count, slot, metadata}
-
-## Example
-
+**Example:**
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 
