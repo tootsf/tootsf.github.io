@@ -1,7 +1,7 @@
 ---
 title: Shared Functions
 parent: Shared Functions
-grand_parent: Accessibility
+grand_parent: "♿ Accessibility"
 nav_order: 1
 ---
 

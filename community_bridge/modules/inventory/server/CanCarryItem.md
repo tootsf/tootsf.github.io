@@ -3,7 +3,6 @@ layout: default
 title: CanCarryItem
 parent: Server Functions
 grand_parent: "📦 Inventory"
-great_grand_parent: Modules
 nav_order: 10
 permalink: /community_bridge/modules/inventory/server/CanCarryItem/
 ---

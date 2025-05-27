@@ -3,7 +3,6 @@ layout: default
 title: RegisterShop
 parent: Server Functions
 grand_parent: "📦 Inventory"
-great_grand_parent: Modules
 nav_order: 13
 permalink: /community_bridge/modules/inventory/server/RegisterShop/
 ---

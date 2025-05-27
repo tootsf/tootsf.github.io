@@ -1,7 +1,7 @@
 ---
 title: adjustColourForColourblindness
 parent: Client Functions
-grand_parent: Accessibility
+grand_parent: "♿ Accessibility"
 nav_order: 6
 ---
 

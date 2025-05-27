@@ -2,7 +2,7 @@
 layout: default
 title: GetFrameworkJobs
 parent: Server Functions
-grand_parent: Framework
+grand_parent: "🧩 Framework"
 nav_order: 6
 ---
 

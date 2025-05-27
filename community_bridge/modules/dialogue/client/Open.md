@@ -2,7 +2,7 @@
 layout: default
 title: Open
 parent: Client Functions
-grand_parent: Dialogue
+grand_parent: "💬 Dialogue"
 nav_order: 1
 ---
 
