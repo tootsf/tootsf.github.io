@@ -15,5 +15,5 @@ Server-side functionality for inventory management.
 
 ## Pages
 
-- [Functions](server/functions.md) - All server-side functions
-- [Events](server/events.md) - Server-side events
+- [Functions](/community_bridge/modules/inventory/server/functions/) - All server-side functions
+- [Events](/community_bridge/modules/inventory/server/events/) - Server-side events

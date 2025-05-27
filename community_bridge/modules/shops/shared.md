@@ -15,4 +15,4 @@ Shared-side functionality for shop and store management.
 
 ## Pages
 
-- [Functions](shared/functions.md) - All shared-side functions
+- [Functions](/community_bridge/modules/shops/shared/functions/) - All shared-side functions

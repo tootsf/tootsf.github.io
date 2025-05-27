@@ -3,6 +3,7 @@ layout: default
 title: Events
 parent: Server
 grand_parent: "🏠 Housing"
+great_grand_parent: Modules
 nav_order: 2
 permalink: /community_bridge/modules/housing/server/events/
 ---

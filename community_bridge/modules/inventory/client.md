@@ -15,4 +15,4 @@ Client-side functionality for inventory management.
 
 ## Pages
 
-- [Functions](client/functions.md) - All client-side functions
+- [Functions](/community_bridge/modules/inventory/client/functions/) - All client-side functions

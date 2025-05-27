@@ -15,4 +15,4 @@ Client-side functionality for targeting and interaction systems.
 
 ## Pages
 
-- [Functions](client/functions.md) - All client-side functions
+- [Functions](/community_bridge/modules/target/client/functions/) - All client-side functions

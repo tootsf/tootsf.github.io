@@ -15,4 +15,4 @@ Server-side functionality for progress bar displays.
 
 ## Pages
 
-- [Functions](server/functions.md) - All server-side functions
+- [Functions](/community_bridge/modules/progressbar/server/functions/) - All server-side functions

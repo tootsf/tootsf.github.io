@@ -15,4 +15,4 @@ Client-side functionality for accessibility and color adjustments.
 
 ## Pages
 
-- [Functions](client/functions.md) - All client-side functions
+- [Functions](/community_bridge/modules/accessibility/client/functions/) - All client-side functions

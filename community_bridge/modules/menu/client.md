@@ -15,4 +15,4 @@ Client-side functionality for menu creation and management.
 
 ## Pages
 
-- [Functions](client/functions.md) - All client-side functions
+- [Functions](/community_bridge/modules/menu/client/functions/) - All client-side functions

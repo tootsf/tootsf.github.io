@@ -15,4 +15,4 @@ Shared-side functionality for management functions.
 
 ## Pages
 
-- [Functions](shared/functions.md) - All shared-side functions
+- [Functions](/community_bridge/modules/managment/shared/functions/) - All shared-side functions

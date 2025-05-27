@@ -15,4 +15,4 @@ Client-side functionality for housing and property management.
 
 ## Pages
 
-- [Functions](client/functions.md) - All client-side functions
+- [Functions](/community_bridge/modules/housing/client/functions/) - All client-side functions

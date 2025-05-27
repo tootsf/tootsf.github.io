@@ -15,4 +15,4 @@ Server-side functionality for skill and progression systems.
 
 ## Pages
 
-- [Functions](server/functions.md) - All server-side functions
+- [Functions](/community_bridge/modules/skills/server/functions/) - All server-side functions

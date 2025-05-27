@@ -15,4 +15,4 @@ Client-side functionality for managing door locks and access.
 
 ## Pages
 
-- [Functions](client/functions.md) - All client-side functions
+- [Functions](/community_bridge/modules/doorlock/client/functions/) - All client-side functions

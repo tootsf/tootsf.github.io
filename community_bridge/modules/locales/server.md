@@ -15,4 +15,4 @@ Server-side functionality for localization and translations.
 
 ## Pages
 
-- [Functions](server/functions.md) - All server-side functions
+- [Functions](/community_bridge/modules/locales/server/functions/) - All server-side functions

@@ -15,4 +15,4 @@ Client-side functionality for vehicle key management.
 
 ## Pages
 
-- [Functions](client/functions.md) - All client-side functions
+- [Functions](/community_bridge/modules/vehiclekey/client/functions/) - All client-side functions

@@ -15,4 +15,4 @@ Client-side functionality for sending alerts and emergency calls.
 
 ## Pages
 
-- [Functions](client/functions.md) - All client-side functions
+- [Functions](/community_bridge/modules/dispatch/client/functions/) - All client-side functions

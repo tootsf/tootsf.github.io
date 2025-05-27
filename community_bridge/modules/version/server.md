@@ -15,4 +15,4 @@ Server-side functionality for version checking and updates.
 
 ## Pages
 
-- [Functions](server/functions.md) - All server-side functions
+- [Functions](/community_bridge/modules/version/server/functions/) - All server-side functions

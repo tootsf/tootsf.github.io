@@ -15,4 +15,4 @@ Server-side functionality for managing door locks and access.
 
 ## Pages
 
-- [Functions](server/functions.md) - All server-side functions
+- [Functions](/community_bridge/modules/doorlock/server/functions/) - All server-side functions

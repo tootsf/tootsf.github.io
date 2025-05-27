@@ -15,4 +15,4 @@ Client-side functionality for notifications and alerts.
 
 ## Pages
 
-- [Functions](client/functions.md) - All client-side functions
+- [Functions](/community_bridge/modules/notify/client/functions/) - All client-side functions

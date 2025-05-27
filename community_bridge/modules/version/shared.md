@@ -15,4 +15,4 @@ Shared-side functionality for version checking and updates.
 
 ## Pages
 
-- [Functions](shared/functions.md) - All shared-side functions
+- [Functions](/community_bridge/modules/version/shared/functions/) - All shared-side functions

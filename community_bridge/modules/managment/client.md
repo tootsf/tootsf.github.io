@@ -15,4 +15,4 @@ Client-side functionality for management functions.
 
 ## Pages
 
-- [Functions](client/functions.md) - All client-side functions
+- [Functions](/community_bridge/modules/managment/client/functions/) - All client-side functions

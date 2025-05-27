@@ -15,4 +15,4 @@ Server-side functionality for weather system control.
 
 ## Pages
 
-- [Functions](server/functions.md) - All server-side functions
+- [Functions](/community_bridge/modules/weather/server/functions/) - All server-side functions

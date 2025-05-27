@@ -15,4 +15,4 @@ Server-side functionality for management functions.
 
 ## Pages
 
-- [Functions](server/functions.md) - All server-side functions
+- [Functions](/community_bridge/modules/managment/server/functions/) - All server-side functions

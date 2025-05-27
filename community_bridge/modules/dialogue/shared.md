@@ -15,4 +15,4 @@ Shared-side functionality for opening and closing dialogues.
 
 ## Pages
 
-- [Functions](shared/functions.md) - All shared-side functions
+- [Functions](/community_bridge/modules/dialogue/shared/functions/) - All shared-side functions

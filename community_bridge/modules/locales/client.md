@@ -15,4 +15,4 @@ Client-side functionality for localization and translations.
 
 ## Pages
 
-- [Functions](client/functions.md) - All client-side functions
+- [Functions](/community_bridge/modules/locales/client/functions/) - All client-side functions

@@ -15,4 +15,4 @@ Shared-side functionality for displaying help text and instructions.
 
 ## Pages
 
-- [Functions](shared/functions.md) - All shared-side functions
+- [Functions](/community_bridge/modules/helptext/shared/functions/) - All shared-side functions

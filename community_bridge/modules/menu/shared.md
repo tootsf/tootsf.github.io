@@ -15,4 +15,4 @@ Shared-side functionality for menu creation and management.
 
 ## Pages
 
-- [Functions](shared/functions.md) - All shared-side functions
+- [Functions](/community_bridge/modules/menu/shared/functions/) - All shared-side functions

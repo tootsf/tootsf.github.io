@@ -15,4 +15,4 @@ Server-side functionality for menu creation and management.
 
 ## Pages
 
-- [Functions](server/functions.md) - All server-side functions
+- [Functions](/community_bridge/modules/menu/server/functions/) - All server-side functions

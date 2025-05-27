@@ -15,4 +15,4 @@ Shared-side functionality for managing door locks and access.
 
 ## Pages
 
-- [Functions](shared/functions.md) - All shared-side functions
+- [Functions](/community_bridge/modules/doorlock/shared/functions/) - All shared-side functions

@@ -15,4 +15,4 @@ Client-side functionality for weather system control.
 
 ## Pages
 
-- [Functions](client/functions.md) - All client-side functions
+- [Functions](/community_bridge/modules/weather/client/functions/) - All client-side functions

@@ -15,4 +15,4 @@ Client-side functionality for managing player appearance and clothing.
 
 ## Pages
 
-- [Functions](client/functions.md) - All client-side functions
+- [Functions](/community_bridge/modules/clothing/client/functions/) - All client-side functions

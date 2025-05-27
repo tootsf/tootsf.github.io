@@ -15,4 +15,4 @@ Shared-side functionality for housing and property management.
 
 ## Pages
 
-- [Functions](shared/functions.md) - All shared-side functions
+- [Functions](/community_bridge/modules/housing/shared/functions/) - All shared-side functions

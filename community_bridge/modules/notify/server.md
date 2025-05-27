@@ -15,4 +15,4 @@ Server-side functionality for notifications and alerts.
 
 ## Pages
 
-- [Functions](server/functions.md) - All server-side functions
+- [Functions](/community_bridge/modules/notify/server/functions/) - All server-side functions

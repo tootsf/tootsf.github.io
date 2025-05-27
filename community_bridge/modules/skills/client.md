@@ -15,4 +15,4 @@ Client-side functionality for skill and progression systems.
 
 ## Pages
 
-- [Functions](client/functions.md) - All client-side functions
+- [Functions](/community_bridge/modules/skills/client/functions/) - All client-side functions

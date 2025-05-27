@@ -15,4 +15,4 @@ Shared-side functionality for targeting and interaction systems.
 
 ## Pages
 
-- [Functions](shared/functions.md) - All shared-side functions
+- [Functions](/community_bridge/modules/target/shared/functions/) - All shared-side functions

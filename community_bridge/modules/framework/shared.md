@@ -15,4 +15,4 @@ Shared-side functionality for framework integration and player data management.
 
 ## Pages
 
-- [Functions](shared/functions.md) - All shared-side functions
+- [Functions](/community_bridge/modules/framework/shared/functions/) - All shared-side functions

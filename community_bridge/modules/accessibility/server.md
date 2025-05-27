@@ -15,4 +15,4 @@ Server-side functionality for accessibility and color adjustments.
 
 ## Pages
 
-- [Functions](server/functions.md) - All server-side functions
+- [Functions](/community_bridge/modules/accessibility/server/functions/) - All server-side functions

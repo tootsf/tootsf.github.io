@@ -15,4 +15,4 @@ Client-side functionality for displaying help text and instructions.
 
 ## Pages
 
-- [Functions](client/functions.md) - All client-side functions
+- [Functions](/community_bridge/modules/helptext/client/functions/) - All client-side functions

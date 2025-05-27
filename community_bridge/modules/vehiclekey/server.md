@@ -15,4 +15,4 @@ Server-side functionality for vehicle key management.
 
 ## Pages
 
-- [Functions](server/functions.md) - All server-side functions
+- [Functions](/community_bridge/modules/vehiclekey/server/functions/) - All server-side functions

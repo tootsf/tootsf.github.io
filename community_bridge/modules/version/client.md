@@ -15,4 +15,4 @@ Client-side functionality for version checking and updates.
 
 ## Pages
 
-- [Functions](client/functions.md) - All client-side functions
+- [Functions](/community_bridge/modules/version/client/functions/) - All client-side functions

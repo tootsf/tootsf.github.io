@@ -15,4 +15,4 @@ Shared-side functionality for weather system control.
 
 ## Pages
 
-- [Functions](shared/functions.md) - All shared-side functions
+- [Functions](/community_bridge/modules/weather/shared/functions/) - All shared-side functions

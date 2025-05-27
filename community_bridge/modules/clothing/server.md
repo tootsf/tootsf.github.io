@@ -15,4 +15,4 @@ Server-side functionality for managing player appearance and clothing.
 
 ## Pages
 
-- [Functions](server/functions.md) - All server-side functions
+- [Functions](/community_bridge/modules/clothing/server/functions/) - All server-side functions

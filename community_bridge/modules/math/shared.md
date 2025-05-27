@@ -15,4 +15,4 @@ Shared-side functionality for mathematical calculations.
 
 ## Pages
 
-- [Functions](shared/functions.md) - All shared-side functions
+- [Functions](/community_bridge/modules/math/shared/functions/) - All shared-side functions

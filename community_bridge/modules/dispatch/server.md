@@ -15,5 +15,5 @@ Server-side functionality for sending alerts and emergency calls.
 
 ## Pages
 
-- [Functions](server/functions.md) - All server-side functions
-- [Events](server/events.md) - Server-side events
+- [Functions](/community_bridge/modules/dispatch/server/functions/) - All server-side functions
+- [Events](/community_bridge/modules/dispatch/server/events/) - Server-side events

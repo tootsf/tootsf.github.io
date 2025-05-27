@@ -15,4 +15,4 @@ Client-side functionality for phone system integration.
 
 ## Pages
 
-- [Functions](client/functions.md) - All client-side functions
+- [Functions](/community_bridge/modules/phone/client/functions/) - All client-side functions

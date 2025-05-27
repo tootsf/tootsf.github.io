@@ -15,4 +15,4 @@ Server-side functionality for targeting and interaction systems.
 
 ## Pages
 
-- [Functions](server/functions.md) - All server-side functions
+- [Functions](/community_bridge/modules/target/server/functions/) - All server-side functions

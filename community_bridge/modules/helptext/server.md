@@ -15,4 +15,4 @@ Server-side functionality for displaying help text and instructions.
 
 ## Pages
 
-- [Functions](server/functions.md) - All server-side functions
+- [Functions](/community_bridge/modules/helptext/server/functions/) - All server-side functions

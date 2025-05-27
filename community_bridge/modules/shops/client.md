@@ -15,4 +15,4 @@ Client-side functionality for shop and store management.
 
 ## Pages
 
-- [Functions](client/functions.md) - All client-side functions
+- [Functions](/community_bridge/modules/shops/client/functions/) - All client-side functions

@@ -15,4 +15,4 @@ Shared-side functionality for skill and progression systems.
 
 ## Pages
 
-- [Functions](shared/functions.md) - All shared-side functions
+- [Functions](/community_bridge/modules/skills/shared/functions/) - All shared-side functions

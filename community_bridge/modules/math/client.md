@@ -15,4 +15,4 @@ Client-side functionality for mathematical calculations.
 
 ## Pages
 
-- [Functions](client/functions.md) - All client-side functions
+- [Functions](/community_bridge/modules/math/client/functions/) - All client-side functions

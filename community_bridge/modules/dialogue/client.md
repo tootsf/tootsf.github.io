@@ -15,4 +15,4 @@ Client-side functionality for opening and closing dialogues.
 
 ## Pages
 
-- [Functions](client/functions.md) - All client-side functions
+- [Functions](/community_bridge/modules/dialogue/client/functions/) - All client-side functions

@@ -15,4 +15,4 @@ Client-side functionality for progress bar displays.
 
 ## Pages
 
-- [Functions](client/functions.md) - All client-side functions
+- [Functions](/community_bridge/modules/progressbar/client/functions/) - All client-side functions

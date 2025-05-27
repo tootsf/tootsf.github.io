@@ -15,4 +15,4 @@ Server-side functionality for input handling and validation.
 
 ## Pages
 
-- [Functions](server/functions.md) - All server-side functions
+- [Functions](/community_bridge/modules/input/server/functions/) - All server-side functions

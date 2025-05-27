@@ -15,4 +15,4 @@ Client-side functionality for input handling and validation.
 
 ## Pages
 
-- [Functions](client/functions.md) - All client-side functions
+- [Functions](/community_bridge/modules/input/client/functions/) - All client-side functions

@@ -15,4 +15,4 @@ Server-side functionality for vehicle fuel management.
 
 ## Pages
 
-- [Functions](server/functions.md) - All server-side functions
+- [Functions](/community_bridge/modules/fuel/server/functions/) - All server-side functions

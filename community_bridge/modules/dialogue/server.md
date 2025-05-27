@@ -15,4 +15,4 @@ Server-side functionality for opening and closing dialogues.
 
 ## Pages
 
-- [Functions](server/functions.md) - All server-side functions
+- [Functions](/community_bridge/modules/dialogue/server/functions/) - All server-side functions

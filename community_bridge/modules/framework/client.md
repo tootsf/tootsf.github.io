@@ -15,4 +15,4 @@ Client-side functionality for framework integration and player data management.
 
 ## Pages
 
-- [Functions](client/functions.md) - All client-side functions
+- [Functions](/community_bridge/modules/framework/client/functions/) - All client-side functions

@@ -15,5 +15,5 @@ Server-side functionality for shop and store management.
 
 ## Pages
 
-- [Functions](server/functions.md) - All server-side functions
-- [Events](server/events.md) - Server-side events
+- [Functions](/community_bridge/modules/shops/server/functions/) - All server-side functions
+- [Events](/community_bridge/modules/shops/server/events/) - Server-side events

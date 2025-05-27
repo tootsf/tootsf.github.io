@@ -15,4 +15,4 @@ Client-side functionality for vehicle fuel management.
 
 ## Pages
 
-- [Functions](client/functions.md) - All client-side functions
+- [Functions](/community_bridge/modules/fuel/client/functions/) - All client-side functions

@@ -15,4 +15,4 @@ Shared-side functionality for progress bar displays.
 
 ## Pages
 
-- [Functions](shared/functions.md) - All shared-side functions
+- [Functions](/community_bridge/modules/progressbar/shared/functions/) - All shared-side functions
