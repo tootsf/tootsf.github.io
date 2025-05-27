@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "🌍 Locales"
+title: "🌐 Locales"
 parent: Modules
 grand_parent: Community Bridge
 nav_order: 12

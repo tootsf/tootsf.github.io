@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "💬 Helptext"
+title: "❓ Helptext"
 parent: Modules
 grand_parent: Community Bridge
 nav_order: 8

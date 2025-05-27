@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "🔢 Version"
+title: "📦 Version"
 parent: Modules
 grand_parent: Community Bridge
 nav_order: 23

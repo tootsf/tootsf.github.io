@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "🔑 VehicleKey"
+title: "🔑 Vehiclekey"
 parent: Modules
 grand_parent: Community Bridge
 nav_order: 22

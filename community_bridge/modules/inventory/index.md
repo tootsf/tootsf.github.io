@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "📦 Inventory"
+title: "🎒 Inventory"
 parent: Modules
 grand_parent: Community Bridge
 nav_order: 11

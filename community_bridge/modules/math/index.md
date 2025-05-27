@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "🧮 Math"
+title: "🔢 Math"
 parent: Modules
 grand_parent: Community Bridge
 nav_order: 14
