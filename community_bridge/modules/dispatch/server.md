@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Server Functions
+title: Server
 parent: "🚨 Dispatch"
 grand_parent: Modules
 nav_order: 2

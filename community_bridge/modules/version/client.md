@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Client Functions
+title: Client
 parent: "📦 Version"
 grand_parent: Modules
 nav_order: 1

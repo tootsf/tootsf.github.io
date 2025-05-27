@@ -1,9 +1,10 @@
 ---
 layout: default
 title: Events
-parent: Housing
-grand_parent: Modules
-nav_order: 1
+parent: Server
+grand_parent: "🏠 Housing"
+nav_order: 2
+permalink: /community_bridge/modules/housing/server/events/
 ---
 
 # Housing Events

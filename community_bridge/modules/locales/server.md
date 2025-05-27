@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Server Functions
+title: Server
 parent: "🌐 Locales"
 grand_parent: Modules
 nav_order: 2

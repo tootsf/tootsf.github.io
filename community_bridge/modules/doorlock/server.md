@@ -1,32 +1,18 @@
 ---
 layout: default
-title: Server Functions
+title: Server
 parent: "🚪 Doorlock"
 grand_parent: Modules
 nav_order: 2
+has_children: true
 permalink: /community_bridge/modules/doorlock/server/
 ---
 
-# Doorlock Server Functions
+# Doorlock Server
 {: .no_toc }
 
-Server-side functions for managing door locks and access.
+Server-side functionality for managing door locks and access.
 
----
+## Pages
 
-## 🔹 ToggleDoorLock
-
-Toggle a door's lock status.
-
-**Parameters:**
-- `doorID` (number): Door ID
-- `toggle` (boolean): Lock (true) or unlock (false)
-
-**Returns:**
-- `boolean`: Success
-
-**Example:**
-```lua
-local Bridge = exports['community_bridge']:Bridge()
-Bridge.Doorlock.ToggleDoorLock(doorID, true)
-```
+- [Functions](server/functions.md) - All server-side functions

@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Shared Functions
+title: Shared
 parent: "👔 Clothing"
 grand_parent: Modules
 nav_order: 3

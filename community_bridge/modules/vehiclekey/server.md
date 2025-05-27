@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Server Functions
+title: Server
 parent: "🔑 Vehiclekey"
 grand_parent: Modules
 nav_order: 2
