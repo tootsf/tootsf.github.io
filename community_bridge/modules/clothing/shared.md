@@ -4,10 +4,15 @@ title: Shared
 parent: "👔 Clothing"
 grand_parent: Modules
 nav_order: 3
+has_children: true
 permalink: /community_bridge/modules/clothing/shared/
 ---
 
-# Clothing Shared Functions
+# Clothing Shared
 {: .no_toc }
 
-No shared-side functions available for the Clothing module.
+Shared-side functionality for managing player appearance and clothing.
+
+## Pages
+
+- [Functions](shared/functions.md) - All shared-side functions

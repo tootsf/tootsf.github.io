@@ -21,6 +21,7 @@ Client-side functions for menu creation and management.
 
 ## 🔹 MenuCallbackEvent
 
+# MenuCallback Event
 {: .no_toc }
 {: .d-inline-block }
 Client
@@ -28,11 +29,13 @@ Client
 
 Event triggered when a menu option is selected.
 
+## Event Name
 
 ```lua
 "community_bridge:menuCallback"
 ```
 
+## Event Data
 
 **menuId:** `string`  
 The ID of the menu where the selection was made.
@@ -43,6 +46,7 @@ The selected menu option with all its properties.
 **args:** `table` (optional)  
 Any arguments provided with the menu option.
 
+## Usage
 
 You can register a listener for this event to handle menu selections globally:
 
@@ -66,6 +70,7 @@ AddEventHandler('community_bridge:menuCallback', function(menuId, option, args)
 end)
 ```
 
+## Example
 
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
@@ -114,6 +119,7 @@ end)
 
 ## 🔹 Open
 
+# Open
 {: .no_toc }
 {: .d-inline-block }
 Client
@@ -121,11 +127,13 @@ Client
 
 Opens a menu based on the provided configuration. This function can handle both ox_lib and qb-menu formats.
 
+## Syntax
 
 ```lua
 function Menu.Open(data, useQb)
 ```
 
+## Parameters
 
 **data:** `table`  
 Menu configuration data with options to display.
@@ -133,10 +141,12 @@ Menu configuration data with options to display.
 **useQb:** `boolean` (optional)  
 Whether to use QB menu syntax (true) or ox_lib syntax (false).
 
+## Returns
 
 **Type:** `string`  
 Menu ID.
 
+## Example (ox_lib format)
 
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
@@ -170,6 +180,7 @@ local menuData = {
 Bridge.Menu.Open(menuData)
 ```
 
+## Example (QB menu format)
 
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
@@ -204,6 +215,7 @@ Bridge.Menu.Open(menuData, true) -- Set useQb to true
 
 ## 🔹 OxLibFormat
 
+# ox_lib Format
 {: .no_toc }
 {: .d-inline-block }
 Client
@@ -211,6 +223,7 @@ Client
 
 Format specification for creating menus using the ox_lib style.
 
+## Syntax
 
 ```lua
 {
@@ -230,6 +243,7 @@ Format specification for creating menus using the ox_lib style.
 }
 ```
 
+## Menu Properties
 
 **id:** `string` (optional)  
 Unique identifier for the menu. If not provided, an ID will be auto-generated.
@@ -240,6 +254,7 @@ The title displayed at the top of the menu.
 **options:** `table[]`  
 Array of menu options to display.
 
+## Option Properties
 
 **title:** `string`  
 Text displayed for the menu item.
@@ -259,6 +274,7 @@ Function called when the option is selected.
 - **secondary:** Secondary action indicator (used with key modifiers)
 - **args:** Arguments passed to the option
 
+## Example
 
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
@@ -294,6 +310,7 @@ Bridge.Menu.Open(menu)
 
 ## 🔹 QBMenuFormat
 
+# QB Menu Format
 {: .no_toc }
 {: .d-inline-block }
 Client
@@ -301,6 +318,7 @@ Client
 
 Format specification for creating menus using the QB-menu style.
 
+## Syntax
 
 ```lua
 {
@@ -319,6 +337,7 @@ Format specification for creating menus using the QB-menu style.
 }
 ```
 
+## Menu Properties
 
 **id:** `string` (optional)  
 Unique identifier for the menu.
@@ -329,6 +348,7 @@ The header text displayed at the top of the menu.
 **options:** `table[]`  
 Array of menu options to display.
 
+## Option Properties
 
 **title:** `string`  
 Text displayed for the menu item.
@@ -345,6 +365,7 @@ Function called when the option is selected.
 **disabled:** `boolean` (optional)  
 Whether the option is disabled (cannot be selected).
 
+## Example
 
 ```lua
 local Bridge = exports['community_bridge']:Bridge()

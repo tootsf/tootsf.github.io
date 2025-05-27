@@ -21,6 +21,7 @@ Client-side functions for displaying help text and instructions.
 
 ## 🔹 HideHelpText
 
+# HideHelpText
 {: .no_toc }
 {: .d-inline-block }
 Client
@@ -28,11 +29,13 @@ Client
 
 Hides the currently displayed help text from the screen.
 
+## Syntax
 
 ```lua
 function HelpText.HideHelpText()
 ```
 
+## Example
 
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
@@ -48,6 +51,7 @@ Bridge.HelpText.HideHelpText()
 
 ## 🔹 ShowHelpText
 
+# ShowHelpText
 {: .no_toc }
 {: .d-inline-block }
 Client
@@ -55,11 +59,13 @@ Client
 
 Displays help text on the screen at the specified position.
 
+## Syntax
 
 ```lua
 function HelpText.ShowHelpText(message, position)
 ```
 
+## Parameters
 
 **message:** `string`  
 The help text message to display.
@@ -67,6 +73,7 @@ The help text message to display.
 **position:** `string`  
 Position on screen (implementation dependent).
 
+## Example
 
 ```lua
 local Bridge = exports['community_bridge']:Bridge()

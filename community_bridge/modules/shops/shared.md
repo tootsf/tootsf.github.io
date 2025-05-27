@@ -4,10 +4,15 @@ title: Shared
 parent: "🛒 Shops"
 grand_parent: Modules
 nav_order: 3
+has_children: true
 permalink: /community_bridge/modules/shops/shared/
 ---
 
-# Shops Shared Functions
+# Shops Shared
 {: .no_toc }
 
-No shared-side functions available for the Shops module.
+Shared-side functionality for shop and store management.
+
+## Pages
+
+- [Functions](shared/functions.md) - All shared-side functions

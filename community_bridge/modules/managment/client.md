@@ -4,10 +4,15 @@ title: Client
 parent: "📊 Managment"
 grand_parent: Modules
 nav_order: 1
+has_children: true
 permalink: /community_bridge/modules/managment/client/
 ---
 
-# Managment Client Functions
+# Managment Client
 {: .no_toc }
 
-No client-side functions available for the Managment module.
+Client-side functionality for management functions.
+
+## Pages
+
+- [Functions](client/functions.md) - All client-side functions

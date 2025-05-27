@@ -21,6 +21,7 @@ Client-side functions for opening and closing dialogues.
 
 ## 🔹 Close
 
+# Close
 {: .no_toc }
 {: .d-inline-block }
 Client
@@ -28,19 +29,23 @@ Client
 
 Closes an active dialogue.
 
+## Syntax
 
 ```lua
 function Dialogue.Close(name)
 ```
 
+## Parameters
 
 **name:** `string`  
 Dialogue name
 
+## Returns
 
 **boolean**  
 Success
 
+## Example
 
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
@@ -51,6 +56,7 @@ Bridge.Dialogue.Close("npc_greeting")
 
 ## 🔹 Open
 
+# Open
 {: .no_toc }
 {: .d-inline-block }
 Client
@@ -58,11 +64,13 @@ Client
 
 Opens a dialogue with options.
 
+## Syntax
 
 ```lua
 function Dialogue.Open(name, dialogue, characterOptions, dialogueOptions, onSelected)
 ```
 
+## Parameters
 
 **name:** `string`  
 Dialogue name
@@ -79,10 +87,12 @@ Dialogue options
 **onSelected:** `function`  
 Callback when an option is selected
 
+## Returns
 
 **boolean**  
 Success
 
+## Example
 
 ```lua
 local Bridge = exports['community_bridge']:Bridge()

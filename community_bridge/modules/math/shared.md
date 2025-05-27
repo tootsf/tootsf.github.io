@@ -4,10 +4,15 @@ title: Shared
 parent: "🔢 Math"
 grand_parent: Modules
 nav_order: 3
+has_children: true
 permalink: /community_bridge/modules/math/shared/
 ---
 
-# Math Shared Functions
+# Math Shared
 {: .no_toc }
 
-No shared-side functions available for the Math module.
+Shared-side functionality for mathematical calculations.
+
+## Pages
+
+- [Functions](shared/functions.md) - All shared-side functions

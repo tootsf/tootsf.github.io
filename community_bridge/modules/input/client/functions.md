@@ -21,6 +21,7 @@ Client-side functions for input handling and validation.
 
 ## 🔹 SetValidationRule
 
+# SetValidationRule
 {: .no_toc }
 {: .d-inline-block }
 Client
@@ -28,11 +29,13 @@ Client
 
 Defines a custom validation rule for input fields.
 
+## Syntax
 
 ```lua
 function Input.SetValidationRule(name, rule)
 ```
 
+## Parameters
 
 **name:** `string`  
 Unique name for the validation rule.
@@ -50,6 +53,7 @@ Validation rule configuration with the following properties:
   Error message to display if validation fails.
   Can be a string or a function that returns a string.
 
+## Example
 
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
@@ -87,6 +91,7 @@ end
 
 ## 🔹 ShowColorInput
 
+# ShowColorInput
 {: .no_toc }
 {: .d-inline-block }
 Client
@@ -94,11 +99,13 @@ Client
 
 Displays a color picker dialog.
 
+## Syntax
 
 ```lua
 function Input.ShowColorInput(config)
 ```
 
+## Parameters
 
 **config:** `table`  
 Color input configuration with the following properties:
@@ -115,6 +122,7 @@ Color input configuration with the following properties:
 - **format:** `string` (optional)  
   Output format: "hex" (default), "rgb", or "rgba".
 
+## Returns
 
 **Type:** `string` or `table` or `nil`  
 The selected color in the specified format, or nil if canceled.
@@ -122,6 +130,7 @@ The selected color in the specified format, or nil if canceled.
 - For rgb format: Table like {r=255, g=87, b=51}  
 - For rgba format: Table like {r=255, g=87, b=51, a=1.0}
 
+## Example
 
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
@@ -144,6 +153,7 @@ end
 
 ## 🔹 ShowDateInput
 
+# ShowDateInput
 {: .no_toc }
 {: .d-inline-block }
 Client
@@ -151,11 +161,13 @@ Client
 
 Displays a date selection dialog.
 
+## Syntax
 
 ```lua
 function Input.ShowDateInput(config)
 ```
 
+## Parameters
 
 **config:** `table`  
 Date input configuration with the following properties:
@@ -175,10 +187,12 @@ Date input configuration with the following properties:
 - **defaultDate:** `string` (optional)  
   Default selected date in "YYYY-MM-DD" format.
 
+## Returns
 
 **Type:** `string` or `nil`  
 The selected date in "YYYY-MM-DD" format or nil if canceled.
 
+## Example
 
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
@@ -202,6 +216,7 @@ end
 
 ## 🔹 ShowInput
 
+# ShowInput
 {: .no_toc }
 {: .d-inline-block }
 Client
@@ -209,11 +224,13 @@ Client
 
 Displays a single input dialog.
 
+## Syntax
 
 ```lua
 function Input.ShowInput(config)
 ```
 
+## Parameters
 
 **config:** `table`  
 Input configuration with the following properties:
@@ -236,10 +253,12 @@ Input configuration with the following properties:
 - **maxLength:** `number` (optional)  
   Maximum character length.
 
+## Returns
 
 **Type:** `string` or `nil`  
 The input value or nil if canceled.
 
+## Example
 
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
@@ -262,6 +281,7 @@ end
 
 ## 🔹 ShowInputForm
 
+# ShowInputForm
 {: .no_toc }
 {: .d-inline-block }
 Client
@@ -269,11 +289,13 @@ Client
 
 Displays a multi-input form dialog.
 
+## Syntax
 
 ```lua
 function Input.ShowInputForm(config)
 ```
 
+## Parameters
 
 **config:** `table`  
 Form configuration with the following properties:
@@ -295,10 +317,12 @@ Form configuration with the following properties:
   - **max:** `number` (optional) - Maximum value for number inputs
   - **required:** `boolean` (optional) - Whether field is required
 
+## Returns
 
 **Type:** `table` or `nil`  
 A table containing input values keyed by input names, or nil if canceled.
 
+## Example
 
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
@@ -344,6 +368,7 @@ end
 
 ## 🔹 ShowNumberInput
 
+# ShowNumberInput
 {: .no_toc }
 {: .d-inline-block }
 Client
@@ -351,11 +376,13 @@ Client
 
 Displays a number input dialog.
 
+## Syntax
 
 ```lua
 function Input.ShowNumberInput(config)
 ```
 
+## Parameters
 
 **config:** `table`  
 Number input configuration with the following properties:
@@ -378,10 +405,12 @@ Number input configuration with the following properties:
 - **max:** `number` (optional)  
   Maximum allowed value.
 
+## Returns
 
 **Type:** `number` or `nil`  
 The input number value or nil if canceled.
 
+## Example
 
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
@@ -405,6 +434,7 @@ end
 
 ## 🔹 ShowSelectInput
 
+# ShowSelectInput
 {: .no_toc }
 {: .d-inline-block }
 Client
@@ -412,11 +442,13 @@ Client
 
 Displays a selection dialog with options.
 
+## Syntax
 
 ```lua
 function Input.ShowSelectInput(config)
 ```
 
+## Parameters
 
 **config:** `table`  
 Select input configuration with the following properties:
@@ -437,10 +469,12 @@ Select input configuration with the following properties:
 - **multiselect:** `boolean` (optional)  
   Whether multiple options can be selected.
 
+## Returns
 
 **Type:** `any` or `table` or `nil`  
 The selected value, array of values (if multiselect=true), or nil if canceled.
 
+## Example
 
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
@@ -467,6 +501,7 @@ end
 
 ## 🔹 ValidateInput
 
+# ValidateInput
 {: .no_toc }
 {: .d-inline-block }
 Client
@@ -474,11 +509,13 @@ Client
 
 Validates an input value against specified rules.
 
+## Syntax
 
 ```lua
 function Input.ValidateInput(value, rules)
 ```
 
+## Parameters
 
 **value:** `any`  
 The value to validate.
@@ -488,11 +525,13 @@ Validation rule(s) to apply. Can be:
 - A string with rule names separated by pipe "|" (e.g., "required|email")
 - A table of rule objects with name and params
 
+## Returns
 
 **Type:** `boolean, string`  
 - Boolean indicating if validation passed
 - Error message if validation failed, nil otherwise
 
+## Example
 
 ```lua
 local Bridge = exports['community_bridge']:Bridge()

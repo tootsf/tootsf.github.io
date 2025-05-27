@@ -4,10 +4,15 @@ title: Client
 parent: "📱 Phone"
 grand_parent: Modules
 nav_order: 1
+has_children: true
 permalink: /community_bridge/modules/phone/client/
 ---
 
-# Phone Client Functions
+# Phone Client
 {: .no_toc }
 
-No client-side functions available for the Phone module.
+Client-side functionality for phone system integration.
+
+## Pages
+
+- [Functions](client/functions.md) - All client-side functions

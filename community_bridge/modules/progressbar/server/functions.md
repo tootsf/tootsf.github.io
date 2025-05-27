@@ -21,6 +21,7 @@ Server-side functions for progress bar displays.
 
 ## 🔹 BroadcastProgress
 
+# BroadcastProgress
 {: .no_toc }
 {: .d-inline-block }
 Server
@@ -28,11 +29,13 @@ Server
 
 Broadcasts a progress bar to all connected players.
 
+## Syntax
 
 ```lua
 function Progressbar.BroadcastProgress(config, callback)
 ```
 
+## Parameters
 
 **config:** `table`  
 Progress bar configuration with the following properties:
@@ -45,10 +48,12 @@ Progress bar configuration with the following properties:
 **callback:** `function` (optional)  
 Callback when all players complete
 
+## Returns
 
 **table**  
 A table with results from each player, indexed by player ID
 
+## Example
 
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
@@ -75,6 +80,7 @@ end)
 
 ## 🔹 IsClientProgressActive
 
+# IsClientProgressActive
 {: .no_toc }
 {: .d-inline-block }
 Server
@@ -82,11 +88,13 @@ Server
 
 Checks if a client has an active progress bar.
 
+## Syntax
 
 ```lua
 function Progressbar.IsClientProgressActive(source, name)
 ```
 
+## Parameters
 
 **source:** `number`  
 Player server ID
@@ -94,10 +102,12 @@ Player server ID
 **name:** `string` (optional)  
 Progress name to check. If not provided, checks for any active progress bar for the player.
 
+## Returns
 
 **boolean**  
 `true` if progress is active, `false` otherwise
 
+## Example
 
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
@@ -112,6 +122,7 @@ end
 
 ## 🔹 StartSynchronizedProgress
 
+# StartSynchronizedProgress
 {: .no_toc }
 {: .d-inline-block }
 Server
@@ -119,11 +130,13 @@ Server
 
 Starts synchronized progress bars for multiple players.
 
+## Syntax
 
 ```lua
 function Progressbar.StartSynchronizedProgress(players, config, callback)
 ```
 
+## Parameters
 
 **players:** `table`  
 Array of player server IDs
@@ -139,10 +152,12 @@ Progress configuration with the following properties:
 **callback:** `function`  
 Callback when synchronization completes
 
+## Returns
 
 **table**  
 A table with results from each player, indexed by player ID
 
+## Example
 
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
@@ -179,6 +194,7 @@ end)
 
 ## 🔹 StopClientProgress
 
+# StopClientProgress
 {: .no_toc }
 {: .d-inline-block }
 Server
@@ -186,11 +202,13 @@ Server
 
 Stops a progress bar on a specific client.
 
+## Syntax
 
 ```lua
 function Progressbar.StopClientProgress(source, name)
 ```
 
+## Parameters
 
 **source:** `number`  
 Player server ID
@@ -198,6 +216,7 @@ Player server ID
 **name:** `string` (optional)  
 Progress name to stop. If not provided, stops all progress bars for the specified player.
 
+## Example
 
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
@@ -213,6 +232,7 @@ Bridge.Progressbar.StopClientProgress(source)
 
 ## 🔹 TriggerClientProgress
 
+# TriggerClientProgress
 {: .no_toc }
 {: .d-inline-block }
 Server
@@ -220,11 +240,13 @@ Server
 
 Triggers a progress bar on a specific client from the server.
 
+## Syntax
 
 ```lua
 function Progressbar.TriggerClientProgress(source, config, callback)
 ```
 
+## Parameters
 
 **source:** `number`  
 Player server ID
@@ -243,6 +265,7 @@ Progress bar configuration with the following properties:
 **callback:** `function` (optional)  
 Server-side callback when progress completes
 
+## Example
 
 ```lua
 local Bridge = exports['community_bridge']:Bridge()

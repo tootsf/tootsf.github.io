@@ -21,6 +21,7 @@ Server-side functions for inventory management.
 
 ## 🔹 AddItem
 
+# AddItem
 {: .no_toc }
 {: .d-inline-block }
 Server
@@ -28,11 +29,13 @@ Server
 
 Adds an item to a player's inventory.
 
+## Syntax
 
 ```lua
 function Inventory.AddItem(src, item, count, slot, metadata)
 ```
 
+## Parameters
 
 **src:** `number`  
 Player server ID
@@ -49,10 +52,12 @@ Specific inventory slot
 **metadata:** `table` (optional)  
 Item metadata
 
+## Returns
 
 **boolean**  
 Success status
 
+## Example
 
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
@@ -70,8 +75,10 @@ end
 
 ## 🔹 CanCarryItem
 
+# CanCarryItem
 {: .no_toc }
 
+## Table of contents
 {: .no_toc .text-delta }
 
 1. TOC
@@ -79,14 +86,17 @@ end
 
 ---
 
+## Description
 
 Checks if there is available space in the inventory for the specified item and count.
 
+## Syntax
 
 ```lua
 Inventory.CanCarryItem(src, item, count)
 ```
 
+## Parameters
 
 | Parameter | Type | Description |
 |-----------|------|-------------|
@@ -94,11 +104,13 @@ Inventory.CanCarryItem(src, item, count)
 | `item` | string | The item name to check |
 | `count` | number | The quantity to check |
 
+## Returns
 
 | Type | Description |
 |------|-------------|
 | boolean | True if the player can carry the item, false otherwise |
 
+## Example
 
 ```lua
 -- Check if player can carry 5 water bottles
@@ -113,6 +125,7 @@ end
 
 ---
 
+## Notes
 
 - With ox_inventory: Uses the native CanCarryItem function
 - With default inventory: Returns false and an error message as this feature is not bridged
@@ -122,8 +135,10 @@ end
 
 ## 🔹 GetImagePath
 
+# GetImagePath
 {: .no_toc }
 
+## Table of contents
 {: .no_toc .text-delta }
 
 1. TOC
@@ -131,24 +146,29 @@ end
 
 ---
 
+## Description
 
 Gets the image path for an item. This is an alternate option to GetItemInfo for getting item images. If an image isn't found, reverts to the community_bridge logo (useful for menus).
 
+## Syntax
 
 ```lua
 Inventory.GetImagePath(item)
 ```
 
+## Parameters
 
 | Parameter | Type | Description |
 |-----------|------|-------------|
 | `item` | string | The item name |
 
+## Returns
 
 | Type | Description |
 |------|-------------|
 | string | The image path/URL for the item |
 
+## Example
 
 ```lua
 -- Get image path for a weapon
@@ -166,6 +186,7 @@ local menuItems = {
 
 ---
 
+## Notes
 
 - With ox_inventory: Attempts to find the image in ox_inventory's web/images folder
 - With default inventory: Returns the community_bridge placeholder logo
@@ -176,8 +197,10 @@ local menuItems = {
 
 ## 🔹 GetItemBySlot
 
+# GetItemBySlot
 {: .no_toc }
 
+## Table of contents
 {: .no_toc .text-delta }
 
 1. TOC
@@ -185,25 +208,30 @@ local menuItems = {
 
 ---
 
+## Description
 
 Returns the specified slot data as a table. This function is only available when using ox_inventory.
 
+## Syntax
 
 ```lua
 Inventory.GetItemBySlot(src, slot)
 ```
 
+## Parameters
 
 | Parameter | Type | Description |
 |-----------|------|-------------|
 | `src` | number | The source (player server id) |
 | `slot` | number | The inventory slot number |
 
+## Returns
 
 | Type | Description |
 |------|-------------|
 | table | Slot data in format {weight, name, metadata, slot, label, count} |
 
+## Example
 
 ```lua
 -- Get item data from slot 1 for player with source 1
@@ -215,6 +243,7 @@ end
 
 ---
 
+## Notes
 
 - This function is only available when using ox_inventory
 - Returns nil if the slot is empty or invalid
@@ -224,6 +253,7 @@ end
 
 ## 🔹 GetItemCount
 
+# GetItemCount
 {: .no_toc }
 {: .d-inline-block }
 Server
@@ -231,11 +261,13 @@ Server
 
 Gets the count of an item in a player's inventory.
 
+## Syntax
 
 ```lua
 function Inventory.GetItemCount(src, item)
 ```
 
+## Parameters
 
 **src:** `number`  
 Player server ID
@@ -243,10 +275,12 @@ Player server ID
 **item:** `string`  
 Item name
 
+## Returns
 
 **number**  
 Count of the item (0 if not found)
 
+## Example
 
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
@@ -265,6 +299,7 @@ end
 
 ## 🔹 GetPlayerInventory
 
+# GetPlayerInventory
 {: .no_toc }
 {: .d-inline-block }
 Server
@@ -272,19 +307,23 @@ Server
 
 Gets a player's complete inventory.
 
+## Syntax
 
 ```lua
 function Inventory.GetPlayerInventory(src)
 ```
 
+## Parameters
 
 **src:** `number`  
 Player server ID
 
+## Returns
 
 **table**  
 Array of inventory items with format {name, label, count, slot, metadata}
 
+## Example
 
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
@@ -303,6 +342,7 @@ end
 
 ## 🔹 HasItem
 
+# HasItem
 {: .no_toc }
 {: .d-inline-block }
 Server
@@ -310,11 +350,13 @@ Server
 
 Checks if a player has an item.
 
+## Syntax
 
 ```lua
 function Inventory.HasItem(src, item, count)
 ```
 
+## Parameters
 
 **src:** `number`  
 Player server ID
@@ -325,10 +367,12 @@ Item name
 **count:** `number` (optional)  
 Minimum amount required (defaults to 1)
 
+## Returns
 
 **boolean**  
 True if player has the required amount of the item
 
+## Example
 
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
@@ -346,8 +390,10 @@ end
 
 ## 🔹 OpenStash
 
+# OpenStash
 {: .no_toc }
 
+## Table of contents
 {: .no_toc .text-delta }
 
 1. TOC
@@ -355,14 +401,17 @@ end
 
 ---
 
+## Description
 
 Opens the specified stash for the player. Implementation varies depending on the inventory system being used.
 
+## Syntax
 
 ```lua
 Inventory.OpenStash(src, id, label, slots, weight, owner, groups, coords)
 ```
 
+## Parameters
 
 | Parameter | Type | Description |
 |-----------|------|-------------|
@@ -375,11 +424,13 @@ Inventory.OpenStash(src, id, label, slots, weight, owner, groups, coords)
 | `groups` | table | Allowed groups/jobs (optional) |
 | `coords` | table | Stash coordinates (optional) |
 
+## Returns
 
 | Type | Description |
 |------|-------------|
 | nil | This function does not return a value |
 
+## Example
 
 ```lua
 -- Open a personal stash for player
@@ -391,6 +442,7 @@ Inventory.OpenStash(1, "police_evidence", "Evidence Locker", 100, 500000, nil, {
 
 ---
 
+## Notes
 
 - With ox_inventory: Stash must be registered first using RegisterStash
 - With default inventory: Returns an error message as stashes are not supported
@@ -400,8 +452,10 @@ Inventory.OpenStash(1, "police_evidence", "Evidence Locker", 100, 500000, nil, {
 
 ## 🔹 RegisterShop
 
+# RegisterShop
 {: .no_toc }
 
+## Table of contents
 {: .no_toc .text-delta }
 
 1. TOC
@@ -409,14 +463,17 @@ Inventory.OpenStash(1, "police_evidence", "Evidence Locker", 100, 500000, nil, {
 
 ---
 
+## Description
 
 Registers a shop with the inventory system. If the shop already exists, returns true without creating a duplicate.
 
+## Syntax
 
 ```lua
 Inventory.RegisterShop(shopTitle, shopInventory, shopCoords, shopGroups)
 ```
 
+## Parameters
 
 | Parameter | Type | Description |
 |-----------|------|-------------|
@@ -425,11 +482,13 @@ Inventory.RegisterShop(shopTitle, shopInventory, shopCoords, shopGroups)
 | `shopCoords` | table | The coordinates where the shop is located (optional) |
 | `shopGroups` | table | Groups/jobs that can access the shop (optional) |
 
+## Returns
 
 | Type | Description |
 |------|-------------|
 | boolean | True if successful, false otherwise |
 
+## Example
 
 ```lua
 -- Register a general store
@@ -449,6 +508,7 @@ Inventory.RegisterShop("police_shop", policeShop, nil, {"police"})
 
 ---
 
+## Notes
 
 - With ox_inventory: Creates a persistent shop that players can access
 - With default inventory: Returns false and an error message as this feature is not bridged
@@ -459,8 +519,10 @@ Inventory.RegisterShop("police_shop", policeShop, nil, {"police"})
 
 ## 🔹 RegisterStash
 
+# RegisterStash
 {: .no_toc }
 
+## Table of contents
 {: .no_toc .text-delta }
 
 1. TOC
@@ -468,14 +530,17 @@ Inventory.RegisterShop("police_shop", policeShop, nil, {"police"})
 
 ---
 
+## Description
 
 Registers a stash with the inventory system. Must be called before using OpenStash.
 
+## Syntax
 
 ```lua
 Inventory.RegisterStash(id, label, slots, weight, owner, groups, coords)
 ```
 
+## Parameters
 
 | Parameter | Type | Description |
 |-----------|------|-------------|
@@ -487,11 +552,13 @@ Inventory.RegisterStash(id, label, slots, weight, owner, groups, coords)
 | `groups` | table | Allowed groups/jobs (optional) |
 | `coords` | table | Stash coordinates (optional) |
 
+## Returns
 
 | Type | Description |
 |------|-------------|
 | boolean | True if successful, false otherwise |
 
+## Example
 
 ```lua
 -- Register a personal stash
@@ -510,6 +577,7 @@ local jobStash = Inventory.RegisterStash(
 
 ---
 
+## Notes
 
 - With ox_inventory: Creates a persistent stash that can be accessed across server restarts
 - With default inventory: Returns false and an error message as stashes are not supported
@@ -519,6 +587,7 @@ local jobStash = Inventory.RegisterStash(
 
 ## 🔹 RemoveItem
 
+# RemoveItem
 {: .no_toc }
 {: .d-inline-block }
 Server
@@ -526,11 +595,13 @@ Server
 
 Removes an item from a player's inventory.
 
+## Syntax
 
 ```lua
 function Inventory.RemoveItem(src, item, count, slot, metadata)
 ```
 
+## Parameters
 
 **src:** `number`  
 Player server ID
@@ -547,10 +618,12 @@ Specific inventory slot
 **metadata:** `table` (optional)  
 Item metadata for matching
 
+## Returns
 
 **boolean**  
 Success status
 
+## Example
 
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
@@ -568,8 +641,10 @@ end
 
 ## 🔹 SetMetadata
 
+# SetMetadata
 {: .no_toc }
 
+## Table of contents
 {: .no_toc .text-delta }
 
 1. TOC
@@ -577,14 +652,17 @@ end
 
 ---
 
+## Description
 
 Sets the metadata of an item in the inventory at a specific slot. This function is only available when using ox_inventory.
 
+## Syntax
 
 ```lua
 Inventory.SetMetadata(src, item, slot, metadata)
 ```
 
+## Parameters
 
 | Parameter | Type | Description |
 |-----------|------|-------------|
@@ -593,11 +671,13 @@ Inventory.SetMetadata(src, item, slot, metadata)
 | `slot` | number | The inventory slot number |
 | `metadata` | table | The metadata to set for the item |
 
+## Returns
 
 | Type | Description |
 |------|-------------|
 | nil | This function does not return a value |
 
+## Example
 
 ```lua
 -- Set metadata for an item in slot 5
@@ -611,6 +691,7 @@ Inventory.SetMetadata(1, "weapon_pistol", 5, metadata)
 
 ---
 
+## Notes
 
 - This function is only available when using ox_inventory
 - The slot must contain the specified item for the operation to work
@@ -620,8 +701,10 @@ Inventory.SetMetadata(1, "weapon_pistol", 5, metadata)
 
 ## 🔹 StripPNG
 
+# StripPNG
 {: .no_toc }
 
+## Table of contents
 {: .no_toc .text-delta }
 
 1. TOC
@@ -629,24 +712,29 @@ Inventory.SetMetadata(1, "weapon_pistol", 5, metadata)
 
 ---
 
+## Description
 
 Removes the ".png" extension from an item name string if present. This is a utility function used internally by other inventory functions.
 
+## Syntax
 
 ```lua
 Inventory.StripPNG(item)
 ```
 
+## Parameters
 
 | Parameter | Type | Description |
 |-----------|------|-------------|
 | `item` | string | The item name that may contain .png extension |
 
+## Returns
 
 | Type | Description |
 |------|-------------|
 | string | The item name without .png extension |
 
+## Example
 
 ```lua
 -- Strip .png from item name
@@ -660,6 +748,7 @@ print(cleanName) -- Output: "water"
 
 ---
 
+## Notes
 
 - This function is used internally by GetImagePath and other functions
 - Safe to use on strings that don't contain .png extension
@@ -670,8 +759,10 @@ print(cleanName) -- Output: "water"
 
 ## 🔹 UpdatePlate
 
+# UpdatePlate
 {: .no_toc }
 
+## Table of contents
 {: .no_toc .text-delta }
 
 1. TOC
@@ -679,25 +770,30 @@ print(cleanName) -- Output: "water"
 
 ---
 
+## Description
 
 Updates the plate of a vehicle inside the inventory system. Also integrates with jg-mechanic if available.
 
+## Syntax
 
 ```lua
 Inventory.UpdatePlate(oldplate, newplate)
 ```
 
+## Parameters
 
 | Parameter | Type | Description |
 |-----------|------|-------------|
 | `oldplate` | string | The current vehicle plate |
 | `newplate` | string | The new vehicle plate |
 
+## Returns
 
 | Type | Description |
 |------|-------------|
 | boolean | True if successful, false otherwise |
 
+## Example
 
 ```lua
 -- Update a vehicle plate from old to new
@@ -711,6 +807,7 @@ end
 
 ---
 
+## Notes
 
 - With ox_inventory: Updates the vehicle in the inventory system and integrates with jg-mechanic if present
 - With default inventory: Returns false and an error message as this feature is not bridged

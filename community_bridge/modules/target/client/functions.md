@@ -21,6 +21,7 @@ Client-side functions for targeting and interaction systems.
 
 ## 🔹 AddTargetCoords
 
+# AddTargetCoords
 {: .no_toc }
 {: .d-inline-block }
 Client
@@ -28,11 +29,13 @@ Client
 
 Adds targeting interaction at specific coordinates.
 
+## Syntax
 
 ```lua
 function Target.AddTargetCoords(coords, options)
 ```
 
+## Parameters
 
 **coords:** `vector3`  
 Target coordinates.
@@ -67,10 +70,12 @@ Target configuration with the following properties:
 - **canInteract:** `function` (optional)  
   Conditional function that returns whether interaction is allowed.
 
+## Returns
 
 **Type:** `boolean`  
 Success status.
 
+## Example
 
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
@@ -92,6 +97,7 @@ Bridge.Target.AddTargetCoords(vector3(195.0, -933.0, 30.0), {
 
 ## 🔹 AddTargetEntity
 
+# AddTargetEntity
 {: .no_toc }
 {: .d-inline-block }
 Client
@@ -99,11 +105,13 @@ Client
 
 Adds targeting interaction to a specific entity.
 
+## Syntax
 
 ```lua
 function Target.AddTargetEntity(entity, options)
 ```
 
+## Parameters
 
 **entity:** `number`  
 Entity handle.
@@ -129,10 +137,12 @@ Target configuration with the following properties:
 - **canInteract:** `function` (optional)  
   Conditional function that returns whether interaction is allowed.
 
+## Returns
 
 **Type:** `boolean`  
 Success status.
 
+## Example
 
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
@@ -160,6 +170,7 @@ Bridge.Target.AddTargetEntity(vehicle, {
 
 ## 🔹 AddTargetModel
 
+# AddTargetModel
 {: .no_toc }
 {: .d-inline-block }
 Client
@@ -167,11 +178,13 @@ Client
 
 Adds targeting interaction to specific entity models.
 
+## Syntax
 
 ```lua
 function Target.AddTargetModel(models, options)
 ```
 
+## Parameters
 
 **models:** `table` or `string`  
 Model name(s) or hash(es). Can be a single string or an array of strings.
@@ -197,10 +210,12 @@ Target configuration with the following properties:
 - **canInteract:** `function` (optional)  
   Conditional function that returns whether interaction is allowed.
 
+## Returns
 
 **Type:** `boolean`  
 Success status.
 
+## Example
 
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
@@ -225,6 +240,7 @@ Bridge.Target.AddTargetModel({
 
 ## 🔹 AddTargetZone
 
+# AddTargetZone
 {: .no_toc }
 {: .d-inline-block }
 Client
@@ -232,11 +248,13 @@ Client
 
 Adds a rectangular target zone.
 
+## Syntax
 
 ```lua
 function Target.AddTargetZone(name, coords, width, length, options)
 ```
 
+## Parameters
 
 **name:** `string`  
 Unique zone identifier.
@@ -280,10 +298,12 @@ Target configuration with the following properties:
 - **canInteract:** `function` (optional)  
   Conditional function that returns whether interaction is allowed.
 
+## Returns
 
 **Type:** `boolean`  
 Success status.
 
+## Example
 
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
@@ -312,6 +332,7 @@ Bridge.Target.AddTargetZone("parking_lot", vector3(200.0, -800.0, 31.0), 10.0, 1
 
 ## 🔹 RemoveTargetEntity
 
+# RemoveTargetEntity
 {: .no_toc }
 {: .d-inline-block }
 Client
@@ -319,11 +340,13 @@ Client
 
 Removes targeting from a specific entity.
 
+## Syntax
 
 ```lua
 function Target.RemoveTargetEntity(entity, name)
 ```
 
+## Parameters
 
 **entity:** `number`  
 Entity handle.
@@ -331,10 +354,12 @@ Entity handle.
 **name:** `string` (optional)  
 Specific target name to remove. If not provided, all targets from the entity will be removed.
 
+## Returns
 
 **Type:** `boolean`  
 Success status.
 
+## Example
 
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
@@ -351,6 +376,7 @@ Bridge.Target.RemoveTargetEntity(vehicle)
 
 ## 🔹 RemoveTargetModel
 
+# RemoveTargetModel
 {: .no_toc }
 {: .d-inline-block }
 Client
@@ -358,11 +384,13 @@ Client
 
 Removes targeting from entity models.
 
+## Syntax
 
 ```lua
 function Target.RemoveTargetModel(models, name)
 ```
 
+## Parameters
 
 **models:** `table` or `string`  
 Model name(s) or hash(es). Can be a single string or an array of strings.
@@ -370,10 +398,12 @@ Model name(s) or hash(es). Can be a single string or an array of strings.
 **name:** `string` (optional)  
 Specific target name to remove. If not provided, all targets from the specified models will be removed.
 
+## Returns
 
 **Type:** `boolean`  
 Success status.
 
+## Example
 
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
@@ -393,6 +423,7 @@ Bridge.Target.RemoveTargetModel({
 
 ## 🔹 RemoveTargetZone
 
+# RemoveTargetZone
 {: .no_toc }
 {: .d-inline-block }
 Client
@@ -400,19 +431,23 @@ Client
 
 Removes a target zone.
 
+## Syntax
 
 ```lua
 function Target.RemoveTargetZone(name)
 ```
 
+## Parameters
 
 **name:** `string`  
 Zone identifier.
 
+## Returns
 
 **Type:** `boolean`  
 Success status.
 
+## Example
 
 ```lua
 local Bridge = exports['community_bridge']:Bridge()

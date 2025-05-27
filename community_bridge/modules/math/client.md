@@ -4,10 +4,15 @@ title: Client
 parent: "🔢 Math"
 grand_parent: Modules
 nav_order: 1
+has_children: true
 permalink: /community_bridge/modules/math/client/
 ---
 
-# Math Client Functions
+# Math Client
 {: .no_toc }
 
-No client-side functions available for the Math module.
+Client-side functionality for mathematical calculations.
+
+## Pages
+
+- [Functions](client/functions.md) - All client-side functions

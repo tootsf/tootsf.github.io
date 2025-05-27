@@ -4,10 +4,15 @@ title: Server
 parent: "🌤️ Weather"
 grand_parent: Modules
 nav_order: 2
+has_children: true
 permalink: /community_bridge/modules/weather/server/
 ---
 
-# Weather Server Functions
+# Weather Server
 {: .no_toc }
 
-No server-side functions available for the Weather module.
+Server-side functionality for weather system control.
+
+## Pages
+
+- [Functions](server/functions.md) - All server-side functions

@@ -4,10 +4,15 @@ title: Shared
 parent: "🧩 Framework"
 grand_parent: Modules
 nav_order: 3
+has_children: true
 permalink: /community_bridge/modules/framework/shared/
 ---
 
-# Framework Shared Functions
+# Framework Shared
 {: .no_toc }
 
-No shared-side functions available for the Framework module.
+Shared-side functionality for framework integration and player data management.
+
+## Pages
+
+- [Functions](shared/functions.md) - All shared-side functions

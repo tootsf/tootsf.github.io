@@ -4,10 +4,15 @@ title: Shared
 parent: "❓ Helptext"
 grand_parent: Modules
 nav_order: 3
+has_children: true
 permalink: /community_bridge/modules/helptext/shared/
 ---
 
-# Helptext Shared Functions
+# Helptext Shared
 {: .no_toc }
 
-No shared-side functions available for the Helptext module.
+Shared-side functionality for displaying help text and instructions.
+
+## Pages
+
+- [Functions](shared/functions.md) - All shared-side functions

@@ -21,6 +21,7 @@ Server-side functions for displaying help text and instructions.
 
 ## 🔹 HideHelpText
 
+# HideHelpText
 {: .no_toc }
 {: .d-inline-block }
 Server
@@ -28,15 +29,18 @@ Server
 
 Hides the currently displayed help text for a specific player.
 
+## Syntax
 
 ```lua
 function HelpText.HideHelpText(src)
 ```
 
+## Parameters
 
 **src:** `number`  
 The player server ID to hide the help text for.
 
+## Example
 
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
@@ -52,6 +56,7 @@ Bridge.HelpText.HideHelpText(1)
 
 ## 🔹 ShowHelpText
 
+# ShowHelpText
 {: .no_toc }
 {: .d-inline-block }
 Server
@@ -59,11 +64,13 @@ Server
 
 Displays help text on the screen for a specific player.
 
+## Syntax
 
 ```lua
 function HelpText.ShowHelpText(src, message, position)
 ```
 
+## Parameters
 
 **src:** `number`  
 The player server ID to show the help text to.
@@ -74,6 +81,7 @@ The help text message to display.
 **position:** `string`  
 Position on screen (implementation dependent).
 
+## Example
 
 ```lua
 local Bridge = exports['community_bridge']:Bridge()

@@ -21,6 +21,8 @@ Client-side functions for inventory management.
 
 ## 🔹 GetImagePath
 
+# GetImagePath
+
 Gets the image path for an item.
 
 **Parameters:**
@@ -47,6 +49,8 @@ SendNUIMessage({
 
 ## 🔹 GetItemCount
 
+# GetItemCount
+
 Returns the count of a specific item in the player's inventory.
 
 **Parameters:**
@@ -66,6 +70,8 @@ print("Player has " .. waterCount .. " water bottles")
 ---
 
 ## 🔹 GetItemInfo
+
+# GetItemInfo
 
 Returns detailed information about an item.
 
@@ -90,6 +96,8 @@ end
 
 ## 🔹 GetPlayerInventory
 
+# GetPlayerInventory
+
 Returns the complete player inventory.
 
 **Returns:**
@@ -110,6 +118,8 @@ end
 ---
 
 ## 🔹 HasItem
+
+# HasItem
 
 Checks if the player has a specific item in their inventory.
 
@@ -136,6 +146,7 @@ end
 
 ## 🔹 OpenShop
 
+# OpenShop
 {: .no_toc }
 {: .d-inline-block }
 Client
@@ -143,11 +154,13 @@ Client
 
 Opens a shop interface for the player. This function is only available when using ox_inventory.
 
+## Syntax
 
 ```lua
 function Inventory.OpenShop(shopTitle, shopInventory)
 ```
 
+## Parameters
 
 **shopTitle:** `string`  
 Title of the shop
@@ -155,6 +168,7 @@ Title of the shop
 **shopInventory:** `table`  
 Shop inventory data
 
+## Example
 
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
@@ -170,6 +184,7 @@ Bridge.Inventory.OpenShop("General Store", {
 
 ## 🔹 StripPNG
 
+# StripPNG
 {: .no_toc }
 {: .d-inline-block }
 Client
@@ -177,19 +192,23 @@ Client
 
 Utility function to remove .png extension from item names.
 
+## Syntax
 
 ```lua
 function Inventory.StripPNG(item)
 ```
 
+## Parameters
 
 **item:** `string`  
 Item name potentially with .png extension
 
+## Returns
 
 **string**  
 Item name without .png extension
 
+## Example
 
 ```lua
 local Bridge = exports['community_bridge']:Bridge()

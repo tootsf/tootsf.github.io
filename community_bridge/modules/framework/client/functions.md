@@ -21,6 +21,7 @@ Client-side functions for framework integration and player data management.
 
 ## 🔹 GetFrameworkJobs
 
+# GetFrameworkJobs
 {: .no_toc }
 {: .d-inline-block }
 Client
@@ -28,15 +29,18 @@ Client
 
 Returns a table of all available jobs in the framework.
 
+## Syntax
 
 ```lua
 function Framework.GetFrameworkJobs()
 ```
 
+## Returns
 
 **table**  
 Array of job objects with name, label, and grades
 
+## Example
 
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
@@ -51,24 +55,29 @@ end
 
 ## 🔹 GetFrameworkName
 
+# GetFrameworkName
 {: .no_toc }
 
 Returns the name of the currently active framework.
 
+## Description
 
 This function returns a string identifying which framework is currently running on the server (e.g., "qb-core", "es_extended", etc.).
 
+## Usage
 
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 local frameworkName = Bridge.Framework.GetFrameworkName()
 ```
 
+## Returns
 
 | Type | Description |
 |------|-------------|
 | `string` | The framework name ("qb-core", "es_extended", etc.) |
 
+## Example
 
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
@@ -76,6 +85,7 @@ local frameworkName = Bridge.Framework.GetFrameworkName()
 print("Using framework: " .. frameworkName)
 ```
 
+## Related Functions
 
 - [IsFrameworkLoaded](../shared/IsFrameworkLoaded.md)
 - [GetFrameworkType](../shared/GetFrameworkType.md)
@@ -84,6 +94,7 @@ print("Using framework: " .. frameworkName)
 
 ## 🔹 GetIsPlayerDead
 
+# GetIsPlayerDead
 {: .no_toc }
 {: .d-inline-block }
 Client
@@ -91,15 +102,18 @@ Client
 
 Checks if the player is currently dead or in last stand.
 
+## Syntax
 
 ```lua
 function Framework.GetIsPlayerDead()
 ```
 
+## Returns
 
 **boolean**  
 True if player is dead/downed
 
+## Example
 
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
@@ -113,6 +127,7 @@ end
 
 ## 🔹 GetItemCount
 
+# GetItemCount
 {: .no_toc }
 {: .d-inline-block }
 Client
@@ -120,19 +135,23 @@ Client
 
 Gets the total count of a specific item in player inventory.
 
+## Syntax
 
 ```lua
 function Framework.GetItemCount(item)
 ```
 
+## Parameters
 
 **item:** `string`  
 Item name
 
+## Returns
 
 **number**  
 Total item count
 
+## Example
 
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
@@ -145,6 +164,7 @@ print("Player has " .. breadCount .. " bread")
 
 ## 🔹 GetItemInfo
 
+# GetItemInfo
 {: .no_toc }
 {: .d-inline-block }
 Client
@@ -152,19 +172,23 @@ Client
 
 Gets information about a specific item.
 
+## Syntax
 
 ```lua
 function Framework.GetItemInfo(item)
 ```
 
+## Parameters
 
 **item:** `string`  
 Item name
 
+## Returns
 
 **table**  
 Item information including name, label, weight, etc.
 
+## Example
 
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
@@ -177,6 +201,7 @@ print("Item label: " .. itemInfo.label)
 
 ## 🔹 GetPlayerData
 
+# GetPlayerData
 {: .no_toc }
 {: .d-inline-block }
 Client
@@ -184,15 +209,18 @@ Client
 
 Gets the complete player data from the framework.
 
+## Syntax
 
 ```lua
 function Framework.GetPlayerData()
 ```
 
+## Returns
 
 **table**  
 Complete player data structure
 
+## Example
 
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
@@ -205,6 +233,7 @@ print("Player name: " .. playerData.charinfo.firstname)
 
 ## 🔹 GetPlayerDob
 
+# GetPlayerDob
 {: .no_toc }
 {: .d-inline-block }
 Client
@@ -212,15 +241,18 @@ Client
 
 Gets the player's date of birth.
 
+## Syntax
 
 ```lua
 function Framework.GetPlayerDob()
 ```
 
+## Returns
 
 **string**  
 Date of birth string
 
+## Example
 
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
@@ -233,6 +265,7 @@ print("Player DOB: " .. dob)
 
 ## 🔹 GetPlayerIdentifier
 
+# GetPlayerIdentifier
 {: .no_toc }
 {: .d-inline-block }
 Client
@@ -240,15 +273,18 @@ Client
 
 Gets the player's unique identifier (citizenid).
 
+## Syntax
 
 ```lua
 function Framework.GetPlayerIdentifier()
 ```
 
+## Returns
 
 **string**  
 Player identifier
 
+## Example
 
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
@@ -261,6 +297,7 @@ print("Player ID: " .. citizenId)
 
 ## 🔹 GetPlayerInventory
 
+# GetPlayerInventory
 {: .no_toc }
 {: .d-inline-block }
 Client
@@ -268,15 +305,18 @@ Client
 
 Gets the player's complete inventory.
 
+## Syntax
 
 ```lua
 function Framework.GetPlayerInventory()
 ```
 
+## Returns
 
 **table**  
 Array of inventory items
 
+## Example
 
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
@@ -291,6 +331,7 @@ end
 
 ## 🔹 GetPlayerJob
 
+# GetPlayerJob
 {: .no_toc }
 {: .d-inline-block }
 Client
@@ -298,11 +339,13 @@ Client
 
 **Deprecated** - Gets player job information.
 
+## Syntax
 
 ```lua
 function Framework.GetPlayerJob()
 ```
 
+## Returns
 
 **string**  
 Job name
@@ -316,6 +359,7 @@ Grade name
 **string**  
 Grade level
 
+## Example
 
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
@@ -328,6 +372,7 @@ print("Job: " .. jobLabel .. " (Grade: " .. gradeName .. ")")
 
 ## 🔹 GetPlayerJobData
 
+# GetPlayerJobData
 {: .no_toc }
 {: .d-inline-block }
 Client
@@ -335,15 +380,18 @@ Client
 
 Gets comprehensive player job data.
 
+## Syntax
 
 ```lua
 function Framework.GetPlayerJobData()
 ```
 
+## Returns
 
 **table**  
 Job data including name, label, grade, boss status, duty status
 
+## Example
 
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
@@ -358,6 +406,7 @@ print("Is boss: " .. tostring(jobData.boss))
 
 ## 🔹 GetPlayerMetaData
 
+# GetPlayerMetaData
 {: .no_toc }
 {: .d-inline-block }
 Client
@@ -365,19 +414,23 @@ Client
 
 Gets specific metadata for the player.
 
+## Syntax
 
 ```lua
 function Framework.GetPlayerMetaData(metadata)
 ```
 
+## Parameters
 
 **metadata:** `string`  
 The metadata key to retrieve
 
+## Returns
 
 **any**  
 The metadata value
 
+## Example
 
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
@@ -390,6 +443,7 @@ print("Player hunger: " .. hunger)
 
 ## 🔹 GetPlayerName
 
+# GetPlayerName
 {: .no_toc }
 {: .d-inline-block }
 Client
@@ -397,11 +451,13 @@ Client
 
 Gets the player's first and last name.
 
+## Syntax
 
 ```lua
 function Framework.GetPlayerName()
 ```
 
+## Returns
 
 **string**  
 First name
@@ -409,6 +465,7 @@ First name
 **string**  
 Last name
 
+## Example
 
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
@@ -421,6 +478,7 @@ print("Player: " .. firstname .. " " .. lastname)
 
 ## 🔹 HasItem
 
+# HasItem
 {: .no_toc }
 {: .d-inline-block }
 Client
@@ -428,19 +486,23 @@ Client
 
 Checks if the player has a specific item.
 
+## Syntax
 
 ```lua
 function Framework.HasItem(item)
 ```
 
+## Parameters
 
 **item:** `string`  
 Item name to check
 
+## Returns
 
 **boolean**  
 True if player has the item
 
+## Example
 
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
@@ -454,6 +516,7 @@ end
 
 ## 🔹 HideHelpText
 
+# HideHelpText
 {: .no_toc }
 {: .d-inline-block }
 Client
@@ -461,11 +524,13 @@ Client
 
 Hides the currently displayed help text.
 
+## Syntax
 
 ```lua
 function Framework.HideHelpText()
 ```
 
+## Example
 
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
@@ -476,6 +541,7 @@ Bridge.Framework.HideHelpText()
 
 ## 🔹 Notify
 
+# Notify
 {: .no_toc }
 {: .d-inline-block }
 Client
@@ -483,11 +549,13 @@ Client
 
 Shows a notification to the player.
 
+## Syntax
 
 ```lua
 function Framework.Notify(message, type, time)
 ```
 
+## Parameters
 
 **message:** `string`  
 The notification message
@@ -498,6 +566,7 @@ Notification type
 **time:** `number`  
 Duration in milliseconds
 
+## Example
 
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
@@ -508,6 +577,7 @@ Bridge.Framework.Notify("Hello player!", "success", 5000)
 
 ## 🔹 ShowHelpText
 
+# ShowHelpText
 {: .no_toc }
 {: .d-inline-block }
 Client
@@ -515,11 +585,13 @@ Client
 
 Displays help text on screen.
 
+## Syntax
 
 ```lua
 function Framework.ShowHelpText(message, position)
 ```
 
+## Parameters
 
 **message:** `string`  
 The help text message
@@ -527,6 +599,7 @@ The help text message
 **position:** `any`  
 Text position (implementation dependent)
 
+## Example
 
 ```lua
 local Bridge = exports['community_bridge']:Bridge()

@@ -4,10 +4,15 @@ title: Shared
 parent: "♿ Accessibility"
 grand_parent: Modules
 nav_order: 3
+has_children: true
 permalink: /community_bridge/modules/accessibility/shared/
 ---
 
-# Accessibility Shared Functions
+# Accessibility Shared
 {: .no_toc }
 
-No shared-side functions available for the Accessibility module.
+Shared-side functionality for accessibility and color adjustments.
+
+## Pages
+
+- [Functions](shared/functions.md) - All shared-side functions

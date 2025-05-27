@@ -4,10 +4,15 @@ title: Shared
 parent: "📱 Phone"
 grand_parent: Modules
 nav_order: 3
+has_children: true
 permalink: /community_bridge/modules/phone/shared/
 ---
 
-# Phone Shared Functions
+# Phone Shared
 {: .no_toc }
 
-No shared-side functions available for the Phone module.
+Shared-side functionality for phone system integration.
+
+## Pages
+
+- [Functions](shared/functions.md) - All shared-side functions

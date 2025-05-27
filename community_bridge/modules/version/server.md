@@ -4,10 +4,15 @@ title: Server
 parent: "📦 Version"
 grand_parent: Modules
 nav_order: 2
+has_children: true
 permalink: /community_bridge/modules/version/server/
 ---
 
-# Version Server Functions
+# Version Server
 {: .no_toc }
 
-No server-side functions available for the Version module.
+Server-side functionality for version checking and updates.
+
+## Pages
+
+- [Functions](server/functions.md) - All server-side functions

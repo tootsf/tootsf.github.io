@@ -21,6 +21,7 @@ Client-side functions for progress bar displays.
 
 ## 🔹 IsProgressActive
 
+# IsProgressActive
 {: .no_toc }
 {: .d-inline-block }
 Client
@@ -28,19 +29,23 @@ Client
 
 Checks if a progress bar is currently active.
 
+## Syntax
 
 ```lua
 function Progressbar.IsProgressActive(name)
 ```
 
+## Parameters
 
 **name:** `string` (optional)  
 Progress name to check. If not provided, checks for any active progress bar.
 
+## Returns
 
 **boolean**  
 `true` if progress is active, `false` otherwise
 
+## Example
 
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
@@ -58,6 +63,7 @@ end
 
 ## 🔹 StartCircularProgress
 
+# StartCircularProgress
 {: .no_toc }
 {: .d-inline-block }
 Client
@@ -65,11 +71,13 @@ Client
 
 Creates a circular progress indicator.
 
+## Syntax
 
 ```lua
 function Progressbar.StartCircularProgress(config, callback)
 ```
 
+## Parameters
 
 **config:** `table`  
 Circular progress configuration with the following properties:
@@ -84,6 +92,7 @@ Circular progress configuration with the following properties:
 **callback:** `function`  
 Completion callback function called when progress completes or is cancelled
 
+## Example
 
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
@@ -108,6 +117,7 @@ end)
 
 ## 🔹 StartProgress
 
+# StartProgress
 {: .no_toc }
 {: .d-inline-block }
 Client
@@ -115,11 +125,13 @@ Client
 
 Creates and starts a progress bar with customizable options.
 
+## Syntax
 
 ```lua
 function Progressbar.StartProgress(config, callback)
 ```
 
+## Parameters
 
 **config:** `table`  
 Progress bar configuration with the following properties:
@@ -135,6 +147,7 @@ Progress bar configuration with the following properties:
 **callback:** `function`  
 Function called when progress completes or is cancelled
 
+## Example
 
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
@@ -168,6 +181,7 @@ end)
 
 ## 🔹 StopProgress
 
+# StopProgress
 {: .no_toc }
 {: .d-inline-block }
 Client
@@ -175,15 +189,18 @@ Client
 
 Stops an active progress bar.
 
+## Syntax
 
 ```lua
 function Progressbar.StopProgress(name)
 ```
 
+## Parameters
 
 **name:** `string` (optional)  
 Progress name to stop. If not provided, stops all progress bars.
 
+## Example
 
 ```lua
 local Bridge = exports['community_bridge']:Bridge()

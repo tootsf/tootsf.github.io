@@ -4,10 +4,15 @@ title: Shared
 parent: "🌤️ Weather"
 grand_parent: Modules
 nav_order: 3
+has_children: true
 permalink: /community_bridge/modules/weather/shared/
 ---
 
-# Weather Shared Functions
+# Weather Shared
 {: .no_toc }
 
-No shared-side functions available for the Weather module.
+Shared-side functionality for weather system control.
+
+## Pages
+
+- [Functions](shared/functions.md) - All shared-side functions

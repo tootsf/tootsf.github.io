@@ -21,6 +21,7 @@ Client-side functions for vehicle key management.
 
 ## 🔹 GiveKeys
 
+# GiveKeys
 {: .no_toc }
 {: .d-inline-block }
 Client
@@ -28,11 +29,13 @@ Client
 
 Gives vehicle keys to the current player for the specified vehicle.
 
+## Syntax
 
 ```lua
 function VehicleKey.GiveKeys(vehicle, plate)
 ```
 
+## Parameters
 
 **vehicle:** `number`  
 The vehicle entity ID.
@@ -40,10 +43,12 @@ The vehicle entity ID.
 **plate:** `string`  
 The license plate of the vehicle.
 
+## Returns
 
 **Type:** `boolean`  
 `true` if keys given successfully, `false` if failed or no system.
 
+## Example
 
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
@@ -64,6 +69,7 @@ if vehicle ~= 0 then
 end
 ```
 
+## System-Specific Behavior
 
 - **qb-vehiclekeys**: Triggers `qb-vehiclekeys:server:AcquireVehicleKeys` server event
 - **qbx_vehiclekeys**: Uses QBX key acquisition system
@@ -75,6 +81,7 @@ end
 
 ## 🔹 RemoveKeys
 
+# RemoveKeys
 {: .no_toc }
 {: .d-inline-block }
 Client
@@ -82,11 +89,13 @@ Client
 
 Removes vehicle keys from the current player for the specified vehicle.
 
+## Syntax
 
 ```lua
 function VehicleKey.RemoveKeys(vehicle, plate)
 ```
 
+## Parameters
 
 **vehicle:** `number`  
 The vehicle entity ID.
@@ -94,10 +103,12 @@ The vehicle entity ID.
 **plate:** `string`  
 The license plate of the vehicle.
 
+## Returns
 
 **Type:** `boolean`  
 `true` if keys removed successfully, `false` if failed or no system.
 
+## Example
 
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
@@ -117,6 +128,7 @@ if vehicle ~= 0 then
 end
 ```
 
+## System-Specific Behavior
 
 - **qb-vehiclekeys**: Triggers `qb-vehiclekeys:client:RemoveKeys` client event
 - **qbx_vehiclekeys**: Uses QBX key removal system

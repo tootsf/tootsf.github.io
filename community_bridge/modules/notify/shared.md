@@ -4,10 +4,15 @@ title: Shared
 parent: "🔔 Notify"
 grand_parent: Modules
 nav_order: 3
+has_children: true
 permalink: /community_bridge/modules/notify/shared/
 ---
 
-# Notify Shared Functions
+# Notify Shared
 {: .no_toc }
 
-No shared-side functions available for the Notify module.
+Shared-side functionality for notifications and alerts.
+
+## Pages
+
+- [Functions](shared/functions.md) - All shared-side functions

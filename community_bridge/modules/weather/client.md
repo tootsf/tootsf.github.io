@@ -4,10 +4,15 @@ title: Client
 parent: "🌤️ Weather"
 grand_parent: Modules
 nav_order: 1
+has_children: true
 permalink: /community_bridge/modules/weather/client/
 ---
 
-# Weather Client Functions
+# Weather Client
 {: .no_toc }
 
-Client-side functions for weather system control.
+Client-side functionality for weather system control.
+
+## Pages
+
+- [Functions](client/functions.md) - All client-side functions

@@ -4,10 +4,15 @@ title: Server
 parent: "♿ Accessibility"
 grand_parent: Modules
 nav_order: 2
+has_children: true
 permalink: /community_bridge/modules/accessibility/server/
 ---
 
-# Accessibility Server Functions
+# Accessibility Server
 {: .no_toc }
 
-No server-side functions available for the Accessibility module.
+Server-side functionality for accessibility and color adjustments.
+
+## Pages
+
+- [Functions](server/functions.md) - All server-side functions
