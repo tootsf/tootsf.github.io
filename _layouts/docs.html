@@ -101,13 +101,39 @@ layout: default
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
+  console.log('TOC: DOM Content Loaded');
+  
   // Try multiple times to ensure the content is loaded
   setTimeout(createTOC, 100);
   setTimeout(createTOC, 500);
   setTimeout(createTOC, 1000);
+  setTimeout(createTOC, 2000);
   
   // Also try when the window loads completely
-  window.addEventListener('load', createTOC);
+  window.addEventListener('load', function() {
+    console.log('TOC: Window Load Event');
+    setTimeout(createTOC, 100);
+  });
+  
+  // Try again on mutation (content changes)
+  const observer = new MutationObserver(function(mutations) {
+    let shouldUpdate = false;
+    mutations.forEach(function(mutation) {
+      if (mutation.type === 'childList' && mutation.addedNodes.length > 0) {
+        shouldUpdate = true;
+      }
+    });
+    
+    if (shouldUpdate) {
+      console.log('TOC: Content mutation detected');
+      setTimeout(createTOC, 100);
+    }
+  });
+  
+  observer.observe(document.body, {
+    childList: true,
+    subtree: true
+  });
 });
 
 function createTOC() {
@@ -119,17 +145,37 @@ function createTOC() {
                  document.querySelector('#main-content') ||
                  document.querySelector('main') || 
                  document.querySelector('[role="main"]') ||
+                 document.querySelector('.site-main') ||
+                 document.querySelector('article') ||
                  document.body;
   
   console.log('TOC: Found content container:', content);
+  console.log('TOC: Container classes:', content ? content.className : 'none');
   
   if (!content || !container) {
     console.log('TOC: Missing container or content');
     return;
   }
   
-  const headings = content.querySelectorAll('h1, h2, h3, h4, h5, h6');
-  console.log('TOC: Found headings:', headings.length, headings);
+  // Get all headings, excluding those marked with no_toc
+  const allHeadings = content.querySelectorAll('h1, h2, h3, h4, h5, h6');
+  const headings = Array.from(allHeadings).filter(heading => {
+    // Skip if has no_toc class
+    if (heading.classList.contains('no_toc')) return false;
+    
+    // Skip if next sibling contains {: .no_toc }
+    const nextNode = heading.nextSibling;
+    if (nextNode && nextNode.textContent && nextNode.textContent.includes('.no_toc')) return false;
+    
+    // Skip if heading text is empty
+    const text = heading.textContent.trim();
+    if (!text || text.length === 0) return false;
+    
+    return true;
+  });
+  
+  console.log('TOC: Found total headings:', allHeadings.length);
+  console.log('TOC: Filtered headings:', headings.length, headings);
   
   if (headings.length < 2) {
     container.style.display = 'none';
@@ -138,15 +184,17 @@ function createTOC() {
   }
   
   let tocHTML = '<h3>Table of Contents</h3><ul>';
-    headings.forEach((heading, index) => {
-    // Skip headings with no_toc class or that contain {: .no_toc }
-    if (heading.classList.contains('no_toc')) {
-      console.log('TOC: Skipping heading with no_toc class:', heading.textContent);
-      return;
-    }
-    
+  headings.forEach((heading, index) => {
     if (!heading.id) {
-      heading.id = 'heading-' + index;
+      // Create a more meaningful ID from the heading text
+      const cleanText = heading.textContent.trim()
+        .replace('🔹', '')
+        .replace(/\{:.*?\}/g, '')
+        .trim()
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, '-')
+        .replace(/^-+|-+$/g, '');
+      heading.id = cleanText || 'heading-' + index;
     }
     
     const level = heading.tagName.toLowerCase();
@@ -154,18 +202,24 @@ function createTOC() {
     
     // Clean up function indicators and Jekyll annotations
     text = text.replace('🔹', '').trim();
-    text = text.replace(/\{:.*?\}/g, '').trim(); // Remove Jekyll annotations like {: .no_toc }
+    text = text.replace(/\{:.*?\}/g, '').trim();
+    
+    // Add special styling for function headings
+    const isFunction = heading.textContent.includes('🔹');
+    const cssClass = isFunction ? `${level} toc-function` : level;
     
     if (text && text.length > 0) {
-      console.log('TOC: Adding heading:', text, 'level:', level);
-      tocHTML += `<li><a href="#${heading.id}" class="${level}" onclick="scrollToHeading('${heading.id}')">${text}</a></li>`;
+      console.log('TOC: Adding heading:', text, 'level:', level, 'id:', heading.id);
+      tocHTML += `<li><a href="#${heading.id}" class="${cssClass}" onclick="scrollToHeading('${heading.id}')">${text}</a></li>`;
     }
   });
   
   tocHTML += '</ul>';
   container.innerHTML = tocHTML;
+  container.style.display = 'block';
   
   // Update active on scroll
+  window.removeEventListener('scroll', updateActiveTOC); // Remove existing listener
   window.addEventListener('scroll', updateActiveTOC);
 }
 
@@ -178,6 +232,7 @@ function scrollToHeading(id) {
 
 function updateActiveTOC() {
   const links = document.querySelectorAll('#toc-container a');
+  if (links.length === 0) return;
   
   // Use the same content selector as createTOC
   const content = document.querySelector('.main-content') || 
@@ -185,6 +240,8 @@ function updateActiveTOC() {
                  document.querySelector('#main-content') ||
                  document.querySelector('main') || 
                  document.querySelector('[role="main"]') ||
+                 document.querySelector('.site-main') ||
+                 document.querySelector('article') ||
                  document.body;
                  
   const headings = content.querySelectorAll('h1, h2, h3, h4, h5, h6');
