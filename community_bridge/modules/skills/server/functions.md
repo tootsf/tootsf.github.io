@@ -12,4 +12,16 @@ has_children: false
 # Skills Server Functions
 {: .no_toc }
 
-No server-side functions available for the Skills module.
+## Available Functions
+
+### 🔹 [GetResourceName](GetResourceName/)
+Get the name of the currently configured skill system resource.
+
+### 🔹 [GetSkillLevel](GetSkillLevel/)
+Retrieve the current level of a specific skill for a player.
+
+### 🔹 [AddXp](AddXp/)
+Add experience points to a player's skill.
+
+### 🔹 [RemoveXp](RemoveXp/)
+Remove experience points from a player's skill.

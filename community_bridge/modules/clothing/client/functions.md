@@ -33,6 +33,54 @@ Bridge.Clothing.CopyAppearanceToClipboard()
 
 ---
 
+## 🔹 ConvertFromDefault
+
+Converts appearance data from the default Bridge format to the specific clothing system format.
+
+**Parameters:**
+- `defaultClothing` (table): Appearance data in default Bridge format
+
+**Returns:**
+- `table`: Converted appearance data in system-specific format
+
+**Example:**
+```lua
+local Bridge = exports['community_bridge']:Bridge()
+local defaultAppearance = {
+    components = {
+        {component_id = 1, drawable = 5, texture = 0},
+        {component_id = 4, drawable = 10, texture = 0}
+    },
+    props = {
+        {prop_id = 0, drawable = 8, texture = 0}
+    }
+}
+local convertedAppearance = Bridge.Clothing.ConvertFromDefault(defaultAppearance)
+```
+
+---
+
+## 🔹 ConvertToDefault
+
+Converts appearance data from the specific clothing system format to the default Bridge format.
+
+**Parameters:**
+- `systemClothing` (table): Appearance data in system-specific format
+
+**Returns:**
+- `table`: Converted appearance data in default Bridge format
+
+**Example:**
+```lua
+local Bridge = exports['community_bridge']:Bridge()
+local systemAppearance = {
+    -- System-specific format (varies by clothing system)
+}
+local defaultAppearance = Bridge.Clothing.ConvertToDefault(systemAppearance)
+```
+
+---
+
 ## 🔹 GetAppearance
 
 Gets the complete appearance data for a ped entity.
@@ -82,6 +130,18 @@ local isMale = Bridge.Clothing.IsMale()
 if isMale then
     print("Player is using male model")
 end
+```
+
+---
+
+## 🔹 OpenMenu
+
+Opens the clothing menu interface for the player.
+
+**Example:**
+```lua
+local Bridge = exports['community_bridge']:Bridge()
+Bridge.Clothing.OpenMenu()
 ```
 
 ---

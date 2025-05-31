@@ -139,3 +139,57 @@ local genderSpecificAppearance = {
 }
 Bridge.Clothing.SetAppearanceExt(src, genderSpecificAppearance)
 ```
+
+---
+
+## 🔹 Save
+
+Saves a player's current appearance to the database.
+
+**Parameters:**
+- `src` (number): Player server ID
+
+**Returns:**
+- `boolean`: True if successful
+
+**Example:**
+```lua
+local Bridge = exports['community_bridge']:Bridge()
+local src = source
+Bridge.Clothing.Save(src)
+```
+
+---
+
+## 🔹 Revert
+
+Reverts a player's appearance to their backup appearance.
+
+**Parameters:**
+- `src` (number): Player server ID
+
+**Returns:**
+- `boolean|nil`: Returns true if successful or nil if failed
+
+**Example:**
+```lua
+local Bridge = exports['community_bridge']:Bridge()
+local src = source
+Bridge.Clothing.Revert(src)
+```
+
+---
+
+## 🔹 OpenMenu
+
+Opens the clothing menu interface for a player.
+
+**Parameters:**
+- `src` (number): Player server ID
+
+**Example:**
+```lua
+local Bridge = exports['community_bridge']:Bridge()
+local src = source
+Bridge.Clothing.OpenMenu(src)
+```

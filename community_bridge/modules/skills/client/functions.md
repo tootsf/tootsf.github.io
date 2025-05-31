@@ -12,4 +12,10 @@ has_children: false
 # Skills Client Functions
 {: .no_toc }
 
-No client-side functions available for the Skills module.
+## Available Functions
+
+### 🔹 [GetResourceName](GetResourceName/) 
+Get the name of the currently configured skill system resource.
+
+### 🔹 [GetSkillLevel](GetSkillLevel/)
+Retrieve the current level of a specific skill for the local player.
