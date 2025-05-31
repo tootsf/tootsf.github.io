@@ -240,10 +240,16 @@ function createTOC() {
   
   console.log('TOC: Found total headings:', allHeadings.length);
   console.log('TOC: Filtered headings:', headings.length, headings);
-  
-  if (headings.length < 2) {
-    container.style.display = 'none';
-    console.log('TOC: Not enough headings, hiding TOC');
+    if (headings.length < 2) {
+    // Show debugging info if no headings found
+    if (allHeadings.length === 0) {
+      container.innerHTML = '<h3>TOC Debug</h3><p style="color: red; font-size: 12px;">No headings found on page.<br>Check console for details.</p>';
+      container.style.display = 'block';
+    } else {
+      container.innerHTML = '<h3>TOC Debug</h3><p style="color: orange; font-size: 12px;">Found ' + allHeadings.length + ' headings but ' + headings.length + ' after filtering.<br>Check console for details.</p>';
+      container.style.display = 'block';
+    }
+    console.log('TOC: Not enough valid headings for TOC, showing debug info');
     return;
   }
   
