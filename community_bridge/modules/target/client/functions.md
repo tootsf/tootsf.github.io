@@ -14,10 +14,7 @@ has_children: true
 
 Client-side functions for targeting and interaction systems.
 
-# Target Client Functions
-{: .no_toc }
-
-Client-side functions for targeting and interaction systems.
+---
 
 ---
 

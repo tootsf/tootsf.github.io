@@ -14,11 +14,6 @@ has_children: true
 
 Client-side functions for shop and store management.
 
-# Shops Client Functions
-{: .no_toc }
-
-Client-side functions for shop and store management.
-
 ---
 
 ## 🔹 AmountSelect
