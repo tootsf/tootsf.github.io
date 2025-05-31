@@ -14,11 +14,6 @@ has_children: true
 
 Client-side functions for shop and store management.
 
-# Shops Client Functions
-{: .no_toc }
-
-Client-side functions for shop and store management.
-
 ---
 
 ## 🔹 AmountSelect
@@ -34,7 +29,7 @@ Opens a quantity selection interface for purchasing items.
 ## Syntax
 
 ```lua
-function Shops.AmountSelect(shopName, item, itemLabel, price)
+Bridge.Shops.AmountSelect(shopName, item, itemLabel, price)
 ```
 
 ## Parameters
@@ -86,7 +81,7 @@ Presents payment method options and processes the final transaction.
 ## Syntax
 
 ```lua
-function Shops.FinalizeCheckOut(shopName, item, itemLabel, price, amount)
+Bridge.Shops.FinalizeCheckOut(shopName, item, itemLabel, price, amount)
 ```
 
 ## Parameters
@@ -144,7 +139,7 @@ Displays the shop interface to the player with interactive item browsing.
 ## Syntax
 
 ```lua
-function Shops.OpenShop(title, shopData)
+Bridge.Shops.OpenShop(title, shopData)
 ```
 
 ## Parameters

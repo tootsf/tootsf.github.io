@@ -26,7 +26,7 @@ Adds targeting interaction to specific entity models.
 ## Syntax
 
 ```lua
-function Target.AddTargetModel(models, options)
+Bridge.Target.AddTargetModel(models, options)
 ```
 
 ## Parameters

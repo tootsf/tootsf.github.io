@@ -26,7 +26,7 @@ Gives vehicle keys to the current player for the specified vehicle.
 ## Syntax
 
 ```lua
-function VehicleKey.GiveKeys(vehicle, plate)
+Bridge.VehicleKey.GiveKeys(vehicle, plate)
 ```
 
 ## Parameters

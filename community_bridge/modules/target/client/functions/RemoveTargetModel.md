@@ -26,7 +26,7 @@ Removes targeting from entity models.
 ## Syntax
 
 ```lua
-function Target.RemoveTargetModel(models, name)
+Bridge.Target.RemoveTargetModel(models, name)
 ```
 
 ## Parameters

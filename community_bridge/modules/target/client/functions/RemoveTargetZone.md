@@ -26,7 +26,7 @@ Removes a target zone.
 ## Syntax
 
 ```lua
-function Target.RemoveTargetZone(name)
+Bridge.Target.RemoveTargetZone(name)
 ```
 
 ## Parameters

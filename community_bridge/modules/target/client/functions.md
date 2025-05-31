@@ -34,7 +34,7 @@ Adds targeting interaction at specific coordinates.
 ## Syntax
 
 ```lua
-function Target.AddTargetCoords(coords, options)
+Bridge.Target.AddTargetCoords(coords, options)
 ```
 
 ## Parameters
@@ -110,7 +110,7 @@ Adds targeting interaction to a specific entity.
 ## Syntax
 
 ```lua
-function Target.AddTargetEntity(entity, options)
+Bridge.Target.AddTargetEntity(entity, options)
 ```
 
 ## Parameters
@@ -183,7 +183,7 @@ Adds targeting interaction to specific entity models.
 ## Syntax
 
 ```lua
-function Target.AddTargetModel(models, options)
+Bridge.Target.AddTargetModel(models, options)
 ```
 
 ## Parameters
@@ -253,7 +253,7 @@ Adds a rectangular target zone.
 ## Syntax
 
 ```lua
-function Target.AddTargetZone(name, coords, width, length, options)
+Bridge.Target.AddTargetZone(name, coords, width, length, options)
 ```
 
 ## Parameters
@@ -345,7 +345,7 @@ Removes targeting from a specific entity.
 ## Syntax
 
 ```lua
-function Target.RemoveTargetEntity(entity, name)
+Bridge.Target.RemoveTargetEntity(entity, name)
 ```
 
 ## Parameters
@@ -389,7 +389,7 @@ Removes targeting from entity models.
 ## Syntax
 
 ```lua
-function Target.RemoveTargetModel(models, name)
+Bridge.Target.RemoveTargetModel(models, name)
 ```
 
 ## Parameters
@@ -436,7 +436,7 @@ Removes a target zone.
 ## Syntax
 
 ```lua
-function Target.RemoveTargetZone(name)
+Bridge.Target.RemoveTargetZone(name)
 ```
 
 ## Parameters

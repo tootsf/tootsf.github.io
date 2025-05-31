@@ -26,7 +26,7 @@ Presents payment method options and processes the final transaction.
 ## Syntax
 
 ```lua
-function Shops.FinalizeCheckOut(shopName, item, itemLabel, price, amount)
+Bridge.Shops.FinalizeCheckOut(shopName, item, itemLabel, price, amount)
 ```
 
 ## Parameters

@@ -26,7 +26,7 @@ Adds a rectangular target zone.
 ## Syntax
 
 ```lua
-function Target.AddTargetZone(name, coords, width, length, options)
+Bridge.Target.AddTargetZone(name, coords, width, length, options)
 ```
 
 ## Parameters

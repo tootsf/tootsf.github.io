@@ -26,7 +26,7 @@ Displays the shop interface to the player with interactive item browsing.
 ## Syntax
 
 ```lua
-function Shops.OpenShop(title, shopData)
+Bridge.Shops.OpenShop(title, shopData)
 ```
 
 ## Parameters

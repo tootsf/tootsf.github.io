@@ -26,7 +26,7 @@ Removes targeting from a specific entity.
 ## Syntax
 
 ```lua
-function Target.RemoveTargetEntity(entity, name)
+Bridge.Target.RemoveTargetEntity(entity, name)
 ```
 
 ## Parameters

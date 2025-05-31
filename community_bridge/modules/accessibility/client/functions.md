@@ -14,11 +14,6 @@ has_children: true
 
 Client-side functions for accessibility and color adjustments.
 
-# Accessibility Client Functions
-{: .no_toc }
-
-Client-side functions for accessibility and color adjustments.
-
 ---
 
 ## 🔹 IsMale
@@ -40,122 +35,284 @@ end
 
 ## 🔹 adjustColourForColourblindness
 
-Adjust color for colorblindness.
+# adjustColourForColourblindness
+{: .no_toc }
+{: .d-inline-block }
+Client
+{: .label .label-blue }
 
-**Parameters:**
-- `color` (string or table): Color to adjust (hex or RGB)
-- `returnAsRGB` (boolean): Return as RGB table if true, else hex
+Adjusts colors based on colorblindness type.
 
-**Returns:**
-- `string` or `table`: Adjusted color
+## Syntax
 
-**Example:**
+```lua
+Bridge.Accessibility.adjustColourForColourblindness(r, g, b, type)
+```
+
+## Parameters
+
+**r:** `number`  
+Red color component (0-255)
+
+**g:** `number`  
+Green color component (0-255)
+
+**b:** `number`  
+Blue color component (0-255)
+
+**type:** `string`  
+Colorblindness type ('protanopia', 'deuteranopia', 'tritanopia')
+
+## Returns
+
+**table**  
+Adjusted RGB color values
+
+## Example
+
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
-local adjusted = Bridge.Accessibility.adjustColourForColourblindness("#FF0000", true)
--- adjusted = {r = ..., g = ..., b = ...}
+local adjustedColor = Bridge.Accessibility.adjustColourForColourblindness(255, 100, 50, 'protanopia')
 ```
 
 ---
 
 ## 🔹 getAdjustedColour
 
-Get color adjusted for user's colorblindness setting.
+# getAdjustedColour
+{: .no_toc }
+{: .d-inline-block }
+Client
+{: .label .label-blue }
 
-**Parameters:**
-- `colorName` (string): Name of the color
-- `returnAsRGB` (boolean): Return as RGB table if true, else hex
+Gets color adjusted for current accessibility settings.
 
-**Returns:**
-- `string` or `table`: Adjusted color
+## Syntax
 
-**Example:**
+```lua
+Bridge.Accessibility.getAdjustedColour(r, g, b)
+```
+
+## Parameters
+
+**r:** `number`  
+Red color component (0-255)
+
+**g:** `number`  
+Green color component (0-255)
+
+**b:** `number`  
+Blue color component (0-255)
+
+## Returns
+
+**table**  
+Adjusted RGB color values
+
+## Example
+
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
-local adjusted = Bridge.Accessibility.getAdjustedColour("red", false)
--- adjusted = "#..."
+local color = Bridge.Accessibility.getAdjustedColour(255, 0, 0)
 ```
 
 ---
 
 ## 🔹 hexToRgb
 
-Convert hex color to RGB.
+# hexToRgb
+{: .no_toc }
+{: .d-inline-block }
+Client
+{: .label .label-blue }
 
-**Parameters:**
-- `hex` (string): Hex color string (e.g., "#FF0000")
+Converts hex color to RGB values.
 
-**Returns:**
-- `table`: RGB values {r, g, b}
+## Syntax
 
-**Example:**
+```lua
+Bridge.Accessibility.hexToRgb(hex)
+```
+
+## Parameters
+
+**hex:** `string`  
+Hex color code (e.g., "#FF0000")
+
+## Returns
+
+**table**  
+RGB color values
+
+## Example
+
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 local rgb = Bridge.Accessibility.hexToRgb("#FF0000")
--- rgb = {r = 255, g = 0, b = 0}
 ```
 
 ---
 
 ## 🔹 hslToRgb
 
-Convert HSL color to RGB.
+# hslToRgb
+{: .no_toc }
+{: .d-inline-block }
+Client
+{: .label .label-blue }
 
-**Parameters:**
-- `h` (number): Hue (0-1)
-- `s` (number): Saturation (0-1)
-- `l` (number): Lightness (0-1)
+Converts HSL color to RGB values.
 
-**Returns:**
-- `table`: RGB values {r, g, b}
+## Syntax
 
-**Example:**
+```lua
+Bridge.Accessibility.hslToRgb(h, s, l)
+```
+
+## Parameters
+
+**h:** `number`  
+Hue (0-360)
+
+**s:** `number`  
+Saturation (0-1)
+
+**l:** `number`  
+Lightness (0-1)
+
+## Returns
+
+**table**  
+RGB color values
+
+## Example
+
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
-local rgb = Bridge.Accessibility.hslToRgb(0, 1, 0.5)
--- rgb = {r = 255, g = 0, b = 0}
+local rgb = Bridge.Accessibility.hslToRgb(120, 1, 0.5)
+```
+
+---
+
+## 🔹 hue2rgb
+
+# hue2rgb
+{: .no_toc }
+{: .d-inline-block }
+Client
+{: .label .label-blue }
+
+Helper function for HSL to RGB conversion.
+
+## Syntax
+
+```lua
+Bridge.Accessibility.hue2rgb(p, q, t)
+```
+
+## Parameters
+
+**p:** `number`  
+First parameter for conversion
+
+**q:** `number`  
+Second parameter for conversion  
+
+**t:** `number`  
+Third parameter for conversion
+
+## Returns
+
+**number**  
+RGB component value
+
+## Example
+
+```lua
+local Bridge = exports['community_bridge']:Bridge()
+local component = Bridge.Accessibility.hue2rgb(p, q, t)
 ```
 
 ---
 
 ## 🔹 rgbToHex
 
-Convert RGB color to hex.
+# rgbToHex
+{: .no_toc }
+{: .d-inline-block }
+Client
+{: .label .label-blue }
 
-**Parameters:**
-- `r` (number): Red value (0-255)
-- `g` (number): Green value (0-255)
-- `b` (number): Blue value (0-255)
+Converts RGB values to hex color code.
 
-**Returns:**
-- `string`: Hex color string (e.g., "#FF0000")
+## Syntax
 
-**Example:**
+```lua
+Bridge.Accessibility.rgbToHex(r, g, b)
+```
+
+## Parameters
+
+**r:** `number`  
+Red color component (0-255)
+
+**g:** `number`  
+Green color component (0-255)
+
+**b:** `number`  
+Blue color component (0-255)
+
+## Returns
+
+**string**  
+Hex color code
+
+## Example
+
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 local hex = Bridge.Accessibility.rgbToHex(255, 0, 0)
--- hex = "#FF0000"
 ```
 
 ---
 
 ## 🔹 rgbToHsl
 
-Convert RGB color to HSL.
+# rgbToHsl
+{: .no_toc }
+{: .d-inline-block }
+Client
+{: .label .label-blue }
 
-**Parameters:**
-- `r` (number): Red value (0-255)
-- `g` (number): Green value (0-255)
-- `b` (number): Blue value (0-255)
+Converts RGB values to HSL color space.
 
-**Returns:**
-- `table`: HSL values {h, s, l}
+## Syntax
 
-**Example:**
+```lua
+Bridge.Accessibility.rgbToHsl(r, g, b)
+```
+
+## Parameters
+
+**r:** `number`  
+Red color component (0-255)
+
+**g:** `number`  
+Green color component (0-255)
+
+**b:** `number`  
+Blue color component (0-255)
+
+## Returns
+
+**table**  
+HSL color values
+
+## Example
+
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 local hsl = Bridge.Accessibility.rgbToHsl(255, 0, 0)
--- hsl = {h = 0, s = 1, l = 0.5}
 ```
 
 ---

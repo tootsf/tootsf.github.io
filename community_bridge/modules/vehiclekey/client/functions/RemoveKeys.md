@@ -26,7 +26,7 @@ Removes vehicle keys from the current player for the specified vehicle.
 ## Syntax
 
 ```lua
-function VehicleKey.RemoveKeys(vehicle, plate)
+Bridge.VehicleKey.RemoveKeys(vehicle, plate)
 ```
 
 ## Parameters

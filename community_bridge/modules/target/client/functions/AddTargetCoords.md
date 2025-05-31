@@ -26,7 +26,7 @@ Adds targeting interaction at specific coordinates.
 ## Syntax
 
 ```lua
-function Target.AddTargetCoords(coords, options)
+Bridge.Target.AddTargetCoords(coords, options)
 ```
 
 ## Parameters
