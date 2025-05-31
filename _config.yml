@@ -34,6 +34,10 @@ defaults:
       path: "community_bridge"
     values:
       layout: "docs"
+  - scope:
+      path: "community_bridge/modules"
+    values:
+      layout: "docs"
 
 # Navigation structure
 nav_sort: case_insensitive

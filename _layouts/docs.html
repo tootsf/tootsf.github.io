@@ -4,5 +4,172 @@ layout: default
 
 {{ content }}
 
-<!-- Custom TOC Script -->
-<script src="{{ '/assets/js/toc.js' | relative_url }}" defer></script>
+<div id="toc-container"></div>
+
+<style>
+#toc-container {
+  position: fixed;
+  top: 100px;
+  right: 20px;
+  width: 250px;
+  max-height: 70vh;
+  overflow-y: auto;
+  background: #f8f9fa;
+  border: 1px solid #e1e4e8;
+  border-radius: 6px;
+  padding: 16px;
+  font-size: 14px;
+  z-index: 1000;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.dark-scheme #toc-container {
+  background: #2d333b;
+  border-color: #444c56;
+  color: #adbac7;
+}
+
+#toc-container h3 {
+  margin: 0 0 12px 0;
+  font-size: 16px;
+  font-weight: 600;
+  border-bottom: 1px solid #e1e4e8;
+  padding-bottom: 8px;
+}
+
+.dark-scheme #toc-container h3 {
+  border-bottom-color: #444c56;
+}
+
+#toc-container ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+#toc-container li {
+  margin: 4px 0;
+}
+
+#toc-container a {
+  display: block;
+  padding: 4px 8px;
+  text-decoration: none;
+  color: #586069;
+  border-radius: 3px;
+  transition: all 0.2s;
+}
+
+.dark-scheme #toc-container a {
+  color: #adbac7;
+}
+
+#toc-container a:hover {
+  background-color: #f1f8ff;
+  color: #0366d6;
+}
+
+.dark-scheme #toc-container a:hover {
+  background-color: #373e47;
+  color: #539bf5;
+}
+
+#toc-container a.active {
+  background-color: #0366d6;
+  color: white;
+  font-weight: 600;
+}
+
+.dark-scheme #toc-container a.active {
+  background-color: #539bf5;
+  color: #1c2128;
+}
+
+#toc-container .h3 { padding-left: 16px; }
+#toc-container .h4 { padding-left: 32px; font-size: 13px; }
+#toc-container .h5 { padding-left: 48px; font-size: 12px; }
+#toc-container .h6 { padding-left: 48px; font-size: 12px; }
+
+@media (max-width: 1300px) {
+  #toc-container { display: none; }
+}
+
+@media (min-width: 1300px) {
+  .main-content-wrap { margin-right: 280px; }
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  setTimeout(createTOC, 100);
+});
+
+function createTOC() {
+  const container = document.getElementById('toc-container');
+  const content = document.querySelector('.main-content, main, [role="main"]');
+  
+  if (!content || !container) return;
+  
+  const headings = content.querySelectorAll('h1, h2, h3, h4, h5, h6');
+  if (headings.length < 2) {
+    container.style.display = 'none';
+    return;
+  }
+  
+  let tocHTML = '<h3>Table of Contents</h3><ul>';
+  
+  headings.forEach((heading, index) => {
+    if (heading.classList.contains('no_toc')) return;
+    
+    if (!heading.id) {
+      heading.id = 'heading-' + index;
+    }
+    
+    const level = heading.tagName.toLowerCase();
+    let text = heading.textContent.trim();
+    
+    // Clean up function indicators
+    text = text.replace('🔹', '').trim();
+    
+    if (text) {
+      tocHTML += `<li><a href="#${heading.id}" class="${level}" onclick="scrollToHeading('${heading.id}')">${text}</a></li>`;
+    }
+  });
+  
+  tocHTML += '</ul>';
+  container.innerHTML = tocHTML;
+  
+  // Update active on scroll
+  window.addEventListener('scroll', updateActiveTOC);
+}
+
+function scrollToHeading(id) {
+  const element = document.getElementById(id);
+  if (element) {
+    element.scrollIntoView({ behavior: 'smooth' });
+  }
+}
+
+function updateActiveTOC() {
+  const links = document.querySelectorAll('#toc-container a');
+  const headings = document.querySelectorAll('.main-content h1, .main-content h2, .main-content h3, .main-content h4, .main-content h5, .main-content h6');
+  
+  let activeHeading = null;
+  const scrollPos = window.scrollY + 100;
+  
+  headings.forEach(heading => {
+    if (heading.offsetTop <= scrollPos) {
+      activeHeading = heading;
+    }
+  });
+  
+  links.forEach(link => link.classList.remove('active'));
+  
+  if (activeHeading) {
+    const activeLink = document.querySelector(`#toc-container a[href="#${activeHeading.id}"]`);
+    if (activeLink) {
+      activeLink.classList.add('active');
+    }
+  }
+}
+</script>
