@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: docs
 title: Functions
 parent: Client
 grand_parent: "❓ Helptext"
@@ -14,17 +14,11 @@ has_children: true
 
 Client-side functions for displaying help text and instructions.
 
-# Helptext Client Functions
-{: .no_toc }
-
-Client-side functions for displaying help text and instructions.
-
 ---
 
 ## 🔹 HideHelpText
 
-# HideHelpText
-{: .no_toc }
+## HideHelpText
 {: .d-inline-block }
 Client
 {: .label .label-blue }
@@ -53,8 +47,7 @@ Bridge.HelpText.HideHelpText()
 
 ## 🔹 ShowHelpText
 
-# ShowHelpText
-{: .no_toc }
+## ShowHelpText
 {: .d-inline-block }
 Client
 {: .label .label-blue }

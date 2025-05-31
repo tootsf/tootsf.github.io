@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: docs
 title: Functions
 parent: Shared
 grand_parent: "📋 Menu"

@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: docs
 title: Functions
 parent: Client
 grand_parent: "🎯 Target"
@@ -23,8 +23,7 @@ Client-side functions for targeting and interaction systems.
 
 ## 🔹 AddTargetCoords
 
-# AddTargetCoords
-{: .no_toc }
+## AddTargetCoords
 {: .d-inline-block }
 Client
 {: .label .label-blue }
@@ -99,8 +98,7 @@ Bridge.Target.AddTargetCoords(vector3(195.0, -933.0, 30.0), {
 
 ## 🔹 AddTargetEntity
 
-# AddTargetEntity
-{: .no_toc }
+## AddTargetEntity
 {: .d-inline-block }
 Client
 {: .label .label-blue }
@@ -172,8 +170,7 @@ Bridge.Target.AddTargetEntity(vehicle, {
 
 ## 🔹 AddTargetModel
 
-# AddTargetModel
-{: .no_toc }
+## AddTargetModel
 {: .d-inline-block }
 Client
 {: .label .label-blue }
@@ -242,8 +239,7 @@ Bridge.Target.AddTargetModel({
 
 ## 🔹 AddTargetZone
 
-# AddTargetZone
-{: .no_toc }
+## AddTargetZone
 {: .d-inline-block }
 Client
 {: .label .label-blue }
@@ -334,8 +330,7 @@ Bridge.Target.AddTargetZone("parking_lot", vector3(200.0, -800.0, 31.0), 10.0, 1
 
 ## 🔹 RemoveTargetEntity
 
-# RemoveTargetEntity
-{: .no_toc }
+## RemoveTargetEntity
 {: .d-inline-block }
 Client
 {: .label .label-blue }
@@ -378,8 +373,7 @@ Bridge.Target.RemoveTargetEntity(vehicle)
 
 ## 🔹 RemoveTargetModel
 
-# RemoveTargetModel
-{: .no_toc }
+## RemoveTargetModel
 {: .d-inline-block }
 Client
 {: .label .label-blue }
@@ -425,8 +419,7 @@ Bridge.Target.RemoveTargetModel({
 
 ## 🔹 RemoveTargetZone
 
-# RemoveTargetZone
-{: .no_toc }
+## RemoveTargetZone
 {: .d-inline-block }
 Client
 {: .label .label-blue }

@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: docs
 title: Functions
 parent: Server
 grand_parent: "❓ Helptext"
@@ -23,8 +23,7 @@ Server-side functions for displaying help text and instructions.
 
 ## 🔹 HideHelpText
 
-# HideHelpText
-{: .no_toc }
+## HideHelpText
 {: .d-inline-block }
 Server
 {: .label .label-green }
@@ -58,8 +57,7 @@ Bridge.HelpText.HideHelpText(1)
 
 ## 🔹 ShowHelpText
 
-# ShowHelpText
-{: .no_toc }
+## ShowHelpText
 {: .d-inline-block }
 Server
 {: .label .label-green }

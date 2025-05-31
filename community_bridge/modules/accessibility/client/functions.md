@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: docs
 title: Functions
 parent: Client
 grand_parent: "♿ Accessibility"

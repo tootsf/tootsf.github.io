@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: docs
 title: Functions
 parent: Client
 grand_parent: "📋 Menu"
@@ -8,11 +8,6 @@ nav_order: 1
 permalink: /community_bridge/modules/menu/client/functions/
 has_children: true
 ---
-
-# Menu Client Functions
-{: .no_toc }
-
-Client-side functions for menu creation and management.
 
 # Menu Client Functions
 {: .no_toc }
@@ -121,8 +116,7 @@ end)
 
 ## 🔹 Open
 
-# Open
-{: .no_toc }
+## Open
 {: .d-inline-block }
 Client
 {: .label .label-blue }

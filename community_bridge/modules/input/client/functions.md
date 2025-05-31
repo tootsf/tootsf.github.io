@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: docs
 title: Functions
 parent: Client
 grand_parent: "⌨️ Input"
@@ -23,8 +23,7 @@ Client-side functions for input handling and validation.
 
 ## 🔹 SetValidationRule
 
-# SetValidationRule
-{: .no_toc }
+## SetValidationRule
 {: .d-inline-block }
 Client
 {: .label .label-blue }
@@ -93,8 +92,7 @@ end
 
 ## 🔹 ShowColorInput
 
-# ShowColorInput
-{: .no_toc }
+## ShowColorInput
 {: .d-inline-block }
 Client
 {: .label .label-blue }
@@ -155,8 +153,7 @@ end
 
 ## 🔹 ShowDateInput
 
-# ShowDateInput
-{: .no_toc }
+## ShowDateInput
 {: .d-inline-block }
 Client
 {: .label .label-blue }
@@ -218,8 +215,7 @@ end
 
 ## 🔹 ShowInput
 
-# ShowInput
-{: .no_toc }
+## ShowInput
 {: .d-inline-block }
 Client
 {: .label .label-blue }
@@ -283,8 +279,7 @@ end
 
 ## 🔹 ShowInputForm
 
-# ShowInputForm
-{: .no_toc }
+## ShowInputForm
 {: .d-inline-block }
 Client
 {: .label .label-blue }
@@ -370,8 +365,7 @@ end
 
 ## 🔹 ShowNumberInput
 
-# ShowNumberInput
-{: .no_toc }
+## ShowNumberInput
 {: .d-inline-block }
 Client
 {: .label .label-blue }
@@ -436,8 +430,7 @@ end
 
 ## 🔹 ShowSelectInput
 
-# ShowSelectInput
-{: .no_toc }
+## ShowSelectInput
 {: .d-inline-block }
 Client
 {: .label .label-blue }
@@ -503,8 +496,7 @@ end
 
 ## 🔹 ValidateInput
 
-# ValidateInput
-{: .no_toc }
+## ValidateInput
 {: .d-inline-block }
 Client
 {: .label .label-blue }

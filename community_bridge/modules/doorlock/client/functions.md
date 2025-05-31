@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: docs
 title: Functions
 parent: Client
 grand_parent: "🚪 Doorlock"
@@ -23,8 +23,7 @@ Client-side functions for managing door locks and access.
 
 ## 🔹 GetClosestDoor
 
-# GetClosestDoor
-{: .no_toc }
+## GetClosestDoor
 {: .d-inline-block }
 Client
 {: .label .label-blue }

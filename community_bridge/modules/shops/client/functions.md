@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: docs
 title: Functions
 parent: Client
 grand_parent: "🛒 Shops"
@@ -23,8 +23,7 @@ Client-side functions for shop and store management.
 
 ## 🔹 AmountSelect
 
-# AmountSelect
-{: .no_toc }
+## AmountSelect
 {: .d-inline-block }
 Client
 {: .label .label-blue }
@@ -75,8 +74,7 @@ Bridge.Shops.AmountSelect("Downtown Market", "bread", "Fresh Bread", 15)
 
 ## 🔹 FinalizeCheckOut
 
-# FinalizeCheckOut
-{: .no_toc }
+## FinalizeCheckOut
 {: .d-inline-block }
 Client
 {: .label .label-blue }
@@ -133,8 +131,7 @@ Bridge.Shops.FinalizeCheckOut("Downtown Market", "bread", "Fresh Bread", 15, "3"
 
 ## 🔹 OpenShop
 
-# OpenShop
-{: .no_toc }
+## OpenShop
 {: .d-inline-block }
 Client
 {: .label .label-blue }
