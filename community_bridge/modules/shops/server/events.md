@@ -6,6 +6,7 @@ grand_parent: "🛒 Shops"
 great_grand_parent: Modules
 nav_order: 2
 permalink: /community_bridge/modules/shops/server/events/
+has_children: false
 ---
 
 # Shops Server Events
@@ -14,3 +15,4 @@ permalink: /community_bridge/modules/shops/server/events/
 Server-side events for shop and store management.
 
 *Events documentation coming soon.*
+

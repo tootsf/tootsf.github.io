@@ -6,6 +6,7 @@ grand_parent: "🧩 Framework"
 great_grand_parent: Modules
 nav_order: 2
 permalink: /community_bridge/modules/framework/server/events/
+has_children: false
 ---
 
 # Framework Server Events
@@ -14,3 +15,4 @@ permalink: /community_bridge/modules/framework/server/events/
 Server-side events for framework integration and player data management.
 
 *Events documentation coming soon.*
+

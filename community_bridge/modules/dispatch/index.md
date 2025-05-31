@@ -24,8 +24,8 @@ The dispatch module provides emergency services dispatch functionality with supp
 ## 📚 Available Functions
 
 ### Client Functions
-- [`Send911Call(location, message)`](client/Send911Call.md) - Send a 911 call to dispatch
-- [`SendAlert(data)`](client/SendAlert.md) - Send an emergency alert to the dispatch system
+- [`Send911Call(location, message)`](client/functions/Send911Call.md) - Send a 911 call to dispatch
+- [`SendAlert(data)`](client/functions/SendAlert.md) - Send an emergency alert to the dispatch system
 ---
 
 ## 📚 Supported Dispatch Systems

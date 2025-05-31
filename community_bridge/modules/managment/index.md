@@ -44,9 +44,9 @@ The Managment module offers:
 ## 📚 Available Functions
 
 ### Server Functions
-- `Managment.GetAccountMoney()` - Retrieve account balance information
-- `Managment.AddAccountMoney()` - Add money to a business account
-- `Managment.RemoveAccountMoney()` - Remove money from a business account
+- [Managment.GetAccountMoney()](server/functions/GetAccountMoney.md) - Retrieve account balance information
+- [Managment.AddAccountMoney()](server/functions/AddAccountMoney.md) - Add money to a business account
+- [Managment.RemoveAccountMoney()](server/functions/RemoveAccountMoney.md) - Remove money from a business account
 
 ---
 

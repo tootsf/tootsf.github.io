@@ -6,6 +6,7 @@ grand_parent: "🚨 Dispatch"
 great_grand_parent: Modules
 nav_order: 2
 permalink: /community_bridge/modules/dispatch/server/events/
+has_children: false
 ---
 
 # Dispatch Server Events
@@ -14,3 +15,4 @@ permalink: /community_bridge/modules/dispatch/server/events/
 Server-side events for sending alerts and emergency calls.
 
 *Events documentation coming soon.*
+

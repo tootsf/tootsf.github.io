@@ -45,7 +45,7 @@ The Housing module offers:
 ## Available Events
 
 ### Server Events
-- `community_bridge:Client:OnPlayerInside` - Triggered when player enters/exits property
+- [community_bridge:Client:OnPlayerInside](server/events/OnPlayerInside.md) - Triggered when player enters/exits property
 
 ## Module Structure
 

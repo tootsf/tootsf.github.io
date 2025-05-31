@@ -6,6 +6,7 @@ grand_parent: "🎯 Target"
 great_grand_parent: Modules
 nav_order: 1
 permalink: /community_bridge/modules/target/client/functions/
+has_children: true
 ---
 
 # Target Client Functions

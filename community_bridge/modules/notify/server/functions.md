@@ -6,6 +6,7 @@ grand_parent: "🔔 Notify"
 great_grand_parent: Modules
 nav_order: 1
 permalink: /community_bridge/modules/notify/server/functions/
+has_children: false
 ---
 
 # Notify Server Functions

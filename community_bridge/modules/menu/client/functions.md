@@ -6,6 +6,7 @@ grand_parent: "📋 Menu"
 great_grand_parent: Modules
 nav_order: 1
 permalink: /community_bridge/modules/menu/client/functions/
+has_children: true
 ---
 
 # Menu Client Functions

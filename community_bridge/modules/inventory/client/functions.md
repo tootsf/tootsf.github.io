@@ -6,6 +6,7 @@ grand_parent: "🎒 Inventory"
 great_grand_parent: Modules
 nav_order: 1
 permalink: /community_bridge/modules/inventory/client/functions/
+has_children: true
 ---
 
 # Inventory Client Functions

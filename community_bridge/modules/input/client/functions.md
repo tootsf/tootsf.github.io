@@ -6,6 +6,7 @@ grand_parent: "⌨️ Input"
 great_grand_parent: Modules
 nav_order: 1
 permalink: /community_bridge/modules/input/client/functions/
+has_children: true
 ---
 
 # Input Client Functions

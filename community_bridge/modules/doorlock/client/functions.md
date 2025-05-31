@@ -5,6 +5,7 @@ parent: Client
 grand_parent: "🚪 Doorlock"
 great_grand_parent: Modules
 nav_order: 1
+has_children: true
 permalink: /community_bridge/modules/doorlock/client/functions/
 ---
 

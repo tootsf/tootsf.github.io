@@ -6,6 +6,7 @@ grand_parent: "📦 Version"
 great_grand_parent: Modules
 nav_order: 1
 permalink: /community_bridge/modules/version/server/functions/
+has_children: false
 ---
 
 # Version Server Functions

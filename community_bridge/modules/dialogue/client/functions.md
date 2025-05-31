@@ -6,6 +6,7 @@ grand_parent: "💬 Dialogue"
 great_grand_parent: Modules
 nav_order: 1
 permalink: /community_bridge/modules/dialogue/client/functions/
+has_children: true
 ---
 
 # Dialogue Client Functions
