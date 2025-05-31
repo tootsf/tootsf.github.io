@@ -139,19 +139,44 @@ document.addEventListener('DOMContentLoaded', function() {
 function createTOC() {
   const container = document.getElementById('toc-container');
   
-  // Try multiple selectors for just-the-docs theme
-  const content = document.querySelector('.main-content') || 
-                 document.querySelector('.main-content-wrap') ||
-                 document.querySelector('#main-content') ||
-                 document.querySelector('main') || 
-                 document.querySelector('[role="main"]') ||
-                 document.querySelector('.site-main') ||
-                 document.querySelector('article') ||
-                 document.body;
+  // Debug: Check all possible content containers
+  const contentSelectors = [
+    '.main-content',
+    '.main-content-wrap', 
+    '#main-content',
+    'main',
+    '[role="main"]',
+    '.site-main',
+    'article',
+    '.page-content',
+    '.site-content',
+    '.content',
+    '#content'
+  ];
   
-  console.log('TOC: Found content container:', content);
-  console.log('TOC: Container classes:', content ? content.className : 'none');
+  console.log('TOC: Searching for content containers...');
+  let content = null;
   
+  for (const selector of contentSelectors) {
+    const element = document.querySelector(selector);
+    if (element) {
+      console.log(`TOC: Found ${selector}:`, element, 'classes:', element.className);
+      const headings = element.querySelectorAll('h1, h2, h3, h4, h5, h6');
+      console.log(`TOC: ${selector} has ${headings.length} headings:`, headings);
+      if (!content || headings.length > 0) {
+        content = element;
+      }
+    }
+  }
+  
+  // Fallback: search document body if no specific container found
+  if (!content) {
+    console.log('TOC: Using document.body as fallback');
+    content = document.body;
+  }
+  
+  console.log('TOC: Selected content container:', content);
+  console.log('TOC: Container classes:', content ? content.className : 'none');  
   if (!content || !container) {
     console.log('TOC: Missing container or content');
     return;
@@ -159,18 +184,30 @@ function createTOC() {
   
   // Get all headings, excluding those marked with no_toc
   const allHeadings = content.querySelectorAll('h1, h2, h3, h4, h5, h6');
+  console.log('TOC: Raw headings found:', allHeadings.length, Array.from(allHeadings).map(h => h.textContent.trim()));
+  
   const headings = Array.from(allHeadings).filter(heading => {
     // Skip if has no_toc class
-    if (heading.classList.contains('no_toc')) return false;
+    if (heading.classList.contains('no_toc')) {
+      console.log('TOC: Skipping (no_toc class):', heading.textContent.trim());
+      return false;
+    }
     
     // Skip if next sibling contains {: .no_toc }
     const nextNode = heading.nextSibling;
-    if (nextNode && nextNode.textContent && nextNode.textContent.includes('.no_toc')) return false;
+    if (nextNode && nextNode.textContent && nextNode.textContent.includes('.no_toc')) {
+      console.log('TOC: Skipping (Jekyll no_toc):', heading.textContent.trim());
+      return false;
+    }
     
     // Skip if heading text is empty
     const text = heading.textContent.trim();
-    if (!text || text.length === 0) return false;
+    if (!text || text.length === 0) {
+      console.log('TOC: Skipping (empty text):', heading);
+      return false;
+    }
     
+    console.log('TOC: Including heading:', text);
     return true;
   });
   
