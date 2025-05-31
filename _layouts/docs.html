@@ -151,40 +151,67 @@ function createTOC() {
     '.page-content',
     '.site-content',
     '.content',
-    '#content'
+    '#content',
+    '.page-header + *', // Content after page header
+    '.page-title + *',  // Content after page title
+    '.site-header + *', // Content after site header
+    '.main',            // Simple main class
+    '[id*="content"]',  // Any element with "content" in the ID
+    '[class*="content"]' // Any element with "content" in the class
   ];
   
   console.log('TOC: Searching for content containers...');
+  console.log('TOC: Available elements on page:', document.querySelectorAll('*').length);
+  
   let content = null;
+  let bestHeadingCount = 0;
   
   for (const selector of contentSelectors) {
     const element = document.querySelector(selector);
     if (element) {
-      console.log(`TOC: Found ${selector}:`, element, 'classes:', element.className);
       const headings = element.querySelectorAll('h1, h2, h3, h4, h5, h6');
-      console.log(`TOC: ${selector} has ${headings.length} headings:`, headings);
-      if (!content || headings.length > 0) {
+      console.log(`TOC: Found ${selector}:`, element, 'classes:', element.className, 'headings:', headings.length);
+      
+      if (headings.length > bestHeadingCount) {
         content = element;
+        bestHeadingCount = headings.length;
+        console.log(`TOC: New best container: ${selector} with ${headings.length} headings`);
       }
     }
   }
   
-  // Fallback: search document body if no specific container found
+  // Ultimate fallback: search document body
   if (!content) {
-    console.log('TOC: Using document.body as fallback');
+    console.log('TOC: No specific container found, using document.body');
     content = document.body;
+    const headings = content.querySelectorAll('h1, h2, h3, h4, h5, h6');
+    console.log('TOC: Body has', headings.length, 'headings');
   }
   
-  console.log('TOC: Selected content container:', content);
-  console.log('TOC: Container classes:', content ? content.className : 'none');  
+  console.log('TOC: Final selected container:', content);
+  console.log('TOC: Container classes:', content ? content.className : 'none');
+  console.log('TOC: Container tag:', content ? content.tagName : 'none');
   if (!content || !container) {
     console.log('TOC: Missing container or content');
     return;
   }
+    // Get all headings, excluding those marked with no_toc
+  let allHeadings = content.querySelectorAll('h1, h2, h3, h4, h5, h6');
   
-  // Get all headings, excluding those marked with no_toc
-  const allHeadings = content.querySelectorAll('h1, h2, h3, h4, h5, h6');
-  console.log('TOC: Raw headings found:', allHeadings.length, Array.from(allHeadings).map(h => h.textContent.trim()));
+  // If we didn't find many headings in the selected container, 
+  // try searching the entire document as a fallback
+  if (allHeadings.length < 2) {
+    console.log('TOC: Not enough headings in selected container, searching entire document');
+    allHeadings = document.querySelectorAll('h1, h2, h3, h4, h5, h6');
+    console.log('TOC: Document-wide heading search found:', allHeadings.length, 'headings');
+  }
+  
+  console.log('TOC: Raw headings found:', allHeadings.length, Array.from(allHeadings).map(h => ({
+    tag: h.tagName,
+    text: h.textContent.trim(),
+    classes: h.className,
+    id: h.id
+  })));
   
   const headings = Array.from(allHeadings).filter(heading => {
     // Skip if has no_toc class
