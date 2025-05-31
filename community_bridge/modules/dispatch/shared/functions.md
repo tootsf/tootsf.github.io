@@ -1,5 +1,5 @@
 ---
-layout: docs
+layout: default
 title: Functions
 parent: Shared
 grand_parent: "🚨 Dispatch"

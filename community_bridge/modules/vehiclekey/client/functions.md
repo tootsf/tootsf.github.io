@@ -1,5 +1,5 @@
 ---
-layout: docs
+layout: default
 title: Functions
 parent: Client
 grand_parent: "🔑 Vehiclekey"
@@ -23,7 +23,8 @@ Client-side functions for vehicle key management.
 
 ## 🔹 GiveKeys
 
-## GiveKeys
+# GiveKeys
+{: .no_toc }
 {: .d-inline-block }
 Client
 {: .label .label-blue }
@@ -82,7 +83,8 @@ end
 
 ## 🔹 RemoveKeys
 
-## RemoveKeys
+# RemoveKeys
+{: .no_toc }
 {: .d-inline-block }
 Client
 {: .label .label-blue }

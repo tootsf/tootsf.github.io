@@ -1,5 +1,5 @@
 ---
-layout: docs
+layout: default
 title: Functions
 parent: Client
 grand_parent: "🧩 Framework"
@@ -14,11 +14,17 @@ has_children: true
 
 Client-side functions for framework integration and player data management.
 
+# Framework Client Functions
+{: .no_toc }
+
+Client-side functions for framework integration and player data management.
+
 ---
 
 ## 🔹 GetFrameworkJobs
 
-## GetFrameworkJobs
+# GetFrameworkJobs
+{: .no_toc }
 {: .d-inline-block }
 Client
 {: .label .label-blue }
@@ -51,7 +57,8 @@ end
 
 ## 🔹 GetFrameworkName
 
-## GetFrameworkName
+# GetFrameworkName
+{: .no_toc }
 
 Returns the name of the currently active framework.
 
@@ -89,7 +96,8 @@ print("Using framework: " .. frameworkName)
 
 ## 🔹 GetIsPlayerDead
 
-## GetIsPlayerDead
+# GetIsPlayerDead
+{: .no_toc }
 {: .d-inline-block }
 Client
 {: .label .label-blue }
@@ -121,7 +129,8 @@ end
 
 ## 🔹 GetItemCount
 
-## GetItemCount
+# GetItemCount
+{: .no_toc }
 {: .d-inline-block }
 Client
 {: .label .label-blue }
@@ -157,7 +166,8 @@ print("Player has " .. breadCount .. " bread")
 
 ## 🔹 GetItemInfo
 
-## GetItemInfo
+# GetItemInfo
+{: .no_toc }
 {: .d-inline-block }
 Client
 {: .label .label-blue }
@@ -193,7 +203,8 @@ print("Item label: " .. itemInfo.label)
 
 ## 🔹 GetPlayerData
 
-## GetPlayerData
+# GetPlayerData
+{: .no_toc }
 {: .d-inline-block }
 Client
 {: .label .label-blue }
@@ -224,7 +235,8 @@ print("Player name: " .. playerData.charinfo.firstname)
 
 ## 🔹 GetPlayerDob
 
-## GetPlayerDob
+# GetPlayerDob
+{: .no_toc }
 {: .d-inline-block }
 Client
 {: .label .label-blue }
@@ -255,7 +267,8 @@ print("Player DOB: " .. dob)
 
 ## 🔹 GetPlayerIdentifier
 
-## GetPlayerIdentifier
+# GetPlayerIdentifier
+{: .no_toc }
 {: .d-inline-block }
 Client
 {: .label .label-blue }
@@ -286,7 +299,8 @@ print("Player ID: " .. citizenId)
 
 ## 🔹 GetPlayerInventory
 
-## GetPlayerInventory
+# GetPlayerInventory
+{: .no_toc }
 {: .d-inline-block }
 Client
 {: .label .label-blue }
@@ -319,7 +333,8 @@ end
 
 ## 🔹 GetPlayerJob
 
-## GetPlayerJob
+# GetPlayerJob
+{: .no_toc }
 {: .d-inline-block }
 Client
 {: .label .label-blue }
@@ -359,7 +374,8 @@ print("Job: " .. jobLabel .. " (Grade: " .. gradeName .. ")")
 
 ## 🔹 GetPlayerJobData
 
-## GetPlayerJobData
+# GetPlayerJobData
+{: .no_toc }
 {: .d-inline-block }
 Client
 {: .label .label-blue }
@@ -392,7 +408,8 @@ print("Is boss: " .. tostring(jobData.boss))
 
 ## 🔹 GetPlayerMetaData
 
-## GetPlayerMetaData
+# GetPlayerMetaData
+{: .no_toc }
 {: .d-inline-block }
 Client
 {: .label .label-blue }
@@ -428,7 +445,8 @@ print("Player hunger: " .. hunger)
 
 ## 🔹 GetPlayerName
 
-## GetPlayerName
+# GetPlayerName
+{: .no_toc }
 {: .d-inline-block }
 Client
 {: .label .label-blue }
@@ -462,7 +480,8 @@ print("Player: " .. firstname .. " " .. lastname)
 
 ## 🔹 HasItem
 
-## HasItem
+# HasItem
+{: .no_toc }
 {: .d-inline-block }
 Client
 {: .label .label-blue }
@@ -499,7 +518,8 @@ end
 
 ## 🔹 HideHelpText
 
-## HideHelpText
+# HideHelpText
+{: .no_toc }
 {: .d-inline-block }
 Client
 {: .label .label-blue }
@@ -523,7 +543,8 @@ Bridge.Framework.HideHelpText()
 
 ## 🔹 Notify
 
-## Notify
+# Notify
+{: .no_toc }
 {: .d-inline-block }
 Client
 {: .label .label-blue }
@@ -558,7 +579,8 @@ Bridge.Framework.Notify("Hello player!", "success", 5000)
 
 ## 🔹 ShowHelpText
 
-## ShowHelpText
+# ShowHelpText
+{: .no_toc }
 {: .d-inline-block }
 Client
 {: .label .label-blue }

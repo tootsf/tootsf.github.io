@@ -1,5 +1,5 @@
 ---
-layout: docs
+layout: default
 title: Functions
 parent: Client
 grand_parent: "🎒 Inventory"
@@ -14,13 +14,16 @@ has_children: true
 
 Client-side functions for inventory management.
 
----
+# Inventory Client Functions
+{: .no_toc }
+
+Client-side functions for inventory management.
 
 ---
 
 ## 🔹 GetImagePath
 
-## GetImagePath
+# GetImagePath
 
 Gets the image path for an item.
 
@@ -48,7 +51,7 @@ SendNUIMessage({
 
 ## 🔹 GetItemCount
 
-## GetItemCount
+# GetItemCount
 
 Returns the count of a specific item in the player's inventory.
 
@@ -70,7 +73,7 @@ print("Player has " .. waterCount .. " water bottles")
 
 ## 🔹 GetItemInfo
 
-## GetItemInfo
+# GetItemInfo
 
 Returns detailed information about an item.
 
@@ -95,7 +98,7 @@ end
 
 ## 🔹 GetPlayerInventory
 
-## GetPlayerInventory
+# GetPlayerInventory
 
 Returns the complete player inventory.
 
@@ -118,7 +121,7 @@ end
 
 ## 🔹 HasItem
 
-## HasItem
+# HasItem
 
 Checks if the player has a specific item in their inventory.
 
@@ -145,7 +148,8 @@ end
 
 ## 🔹 OpenShop
 
-## OpenShop
+# OpenShop
+{: .no_toc }
 {: .d-inline-block }
 Client
 {: .label .label-blue }
@@ -182,7 +186,8 @@ Bridge.Inventory.OpenShop("General Store", {
 
 ## 🔹 StripPNG
 
-## StripPNG
+# StripPNG
+{: .no_toc }
 {: .d-inline-block }
 Client
 {: .label .label-blue }

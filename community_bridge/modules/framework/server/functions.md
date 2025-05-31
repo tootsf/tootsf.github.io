@@ -1,5 +1,5 @@
 ---
-layout: docs
+layout: default
 title: Functions
 parent: Server
 grand_parent: "🧩 Framework"
@@ -23,7 +23,8 @@ Server-side functions for framework integration and player data management.
 
 ## 🔹 GetFrameworkJobs
 
-## GetFrameworkJobs
+# GetFrameworkJobs
+{: .no_toc }
 {: .d-inline-block }
 Server
 {: .label .label-green }
@@ -55,7 +56,8 @@ end
 
 ## 🔹 GetFrameworkName
 
-## GetFrameworkName
+# GetFrameworkName
+{: .no_toc }
 {: .d-inline-block }
 Server
 {: .label .label-green }
@@ -85,7 +87,8 @@ print("Using framework: " .. frameworkName)
 
 ## 🔹 GetItem
 
-## GetItem
+# GetItem
+{: .no_toc }
 {: .d-inline-block }
 Server
 {: .label .label-green }
@@ -128,7 +131,8 @@ end
 
 ## 🔹 GetItemCount
 
-## GetItemCount
+# GetItemCount
+{: .no_toc }
 {: .d-inline-block }
 Server
 {: .label .label-green }
@@ -169,7 +173,8 @@ print("Player has " .. count .. " bread")
 
 ## 🔹 GetPlayer
 
-## GetPlayer
+# GetPlayer
+{: .no_toc }
 {: .d-inline-block }
 Server
 {: .label .label-green }
@@ -206,7 +211,8 @@ end
 
 ## 🔹 GetPlayerDob
 
-## GetPlayerDob
+# GetPlayerDob
+{: .no_toc }
 {: .d-inline-block }
 Server
 {: .label .label-green }
@@ -241,7 +247,8 @@ print("DOB: " .. dob)
 
 ## 🔹 GetPlayerIdentifier
 
-## GetPlayerIdentifier
+# GetPlayerIdentifier
+{: .no_toc }
 {: .d-inline-block }
 Server
 {: .label .label-green }
@@ -276,7 +283,8 @@ print("Player ID: " .. citizenId)
 
 ## 🔹 GetPlayerInventory
 
-## GetPlayerInventory
+# GetPlayerInventory
+{: .no_toc }
 {: .d-inline-block }
 Server
 {: .label .label-green }
@@ -313,7 +321,8 @@ end
 
 ## 🔹 GetPlayerName
 
-## GetPlayerName
+# GetPlayerName
+{: .no_toc }
 {: .d-inline-block }
 Server
 {: .label .label-green }
@@ -351,7 +360,8 @@ print("Player: " .. firstname .. " " .. lastname)
 
 ## 🔹 GetPlayers
 
-## GetPlayers
+# GetPlayers
+{: .no_toc }
 {: .d-inline-block }
 Server
 {: .label .label-green }
@@ -381,7 +391,8 @@ print("Connected players: " .. #players)
 
 ## 🔹 HasItem
 
-## HasItem
+# HasItem
+{: .no_toc }
 {: .d-inline-block }
 Server
 {: .label .label-green }

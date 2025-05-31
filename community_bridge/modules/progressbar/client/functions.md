@@ -1,5 +1,5 @@
 ---
-layout: docs
+layout: default
 title: Functions
 parent: Client
 grand_parent: "⏳ Progressbar"
@@ -23,7 +23,8 @@ Client-side functions for progress bar displays.
 
 ## 🔹 IsProgressActive
 
-## IsProgressActive
+# IsProgressActive
+{: .no_toc }
 {: .d-inline-block }
 Client
 {: .label .label-blue }
@@ -64,7 +65,8 @@ end
 
 ## 🔹 StartCircularProgress
 
-## StartCircularProgress
+# StartCircularProgress
+{: .no_toc }
 {: .d-inline-block }
 Client
 {: .label .label-blue }
@@ -117,7 +119,8 @@ end)
 
 ## 🔹 StartProgress
 
-## StartProgress
+# StartProgress
+{: .no_toc }
 {: .d-inline-block }
 Client
 {: .label .label-blue }
@@ -180,7 +183,8 @@ end)
 
 ## 🔹 StopProgress
 
-## StopProgress
+# StopProgress
+{: .no_toc }
 {: .d-inline-block }
 Client
 {: .label .label-blue }

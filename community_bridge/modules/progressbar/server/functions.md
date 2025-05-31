@@ -1,5 +1,5 @@
 ---
-layout: docs
+layout: default
 title: Functions
 parent: Server
 grand_parent: "⏳ Progressbar"
@@ -23,7 +23,8 @@ Server-side functions for progress bar displays.
 
 ## 🔹 BroadcastProgress
 
-## BroadcastProgress
+# BroadcastProgress
+{: .no_toc }
 {: .d-inline-block }
 Server
 {: .label .label-green }
@@ -81,7 +82,8 @@ end)
 
 ## 🔹 IsClientProgressActive
 
-## IsClientProgressActive
+# IsClientProgressActive
+{: .no_toc }
 {: .d-inline-block }
 Server
 {: .label .label-green }
@@ -122,7 +124,8 @@ end
 
 ## 🔹 StartSynchronizedProgress
 
-## StartSynchronizedProgress
+# StartSynchronizedProgress
+{: .no_toc }
 {: .d-inline-block }
 Server
 {: .label .label-green }
@@ -193,7 +196,8 @@ end)
 
 ## 🔹 StopClientProgress
 
-## StopClientProgress
+# StopClientProgress
+{: .no_toc }
 {: .d-inline-block }
 Server
 {: .label .label-green }
@@ -230,7 +234,8 @@ Bridge.Progressbar.StopClientProgress(source)
 
 ## 🔹 TriggerClientProgress
 
-## TriggerClientProgress
+# TriggerClientProgress
+{: .no_toc }
 {: .d-inline-block }
 Server
 {: .label .label-green }

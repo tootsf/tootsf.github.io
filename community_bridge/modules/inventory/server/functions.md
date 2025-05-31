@@ -1,5 +1,5 @@
 ---
-layout: docs
+layout: default
 title: Functions
 parent: Server
 grand_parent: "🎒 Inventory"
@@ -14,13 +14,17 @@ has_children: true
 
 Server-side functions for inventory management.
 
----
+# Inventory Server Functions
+{: .no_toc }
+
+Server-side functions for inventory management.
 
 ---
 
 ## 🔹 AddItem
 
-## AddItem
+# AddItem
+{: .no_toc }
 {: .d-inline-block }
 Server
 {: .label .label-green }
@@ -73,7 +77,8 @@ end
 
 ## 🔹 CanCarryItem
 
-## CanCarryItem
+# CanCarryItem
+{: .no_toc }
 
 ## Table of contents
 {: .no_toc .text-delta }
@@ -132,7 +137,8 @@ end
 
 ## 🔹 GetImagePath
 
-## GetImagePath
+# GetImagePath
+{: .no_toc }
 
 ## Table of contents
 {: .no_toc .text-delta }
@@ -193,7 +199,8 @@ local menuItems = {
 
 ## 🔹 GetItemBySlot
 
-## GetItemBySlot
+# GetItemBySlot
+{: .no_toc }
 
 ## Table of contents
 {: .no_toc .text-delta }
@@ -248,7 +255,8 @@ end
 
 ## 🔹 GetItemCount
 
-## GetItemCount
+# GetItemCount
+{: .no_toc }
 {: .d-inline-block }
 Server
 {: .label .label-green }
@@ -293,7 +301,8 @@ end
 
 ## 🔹 GetPlayerInventory
 
-## GetPlayerInventory
+# GetPlayerInventory
+{: .no_toc }
 {: .d-inline-block }
 Server
 {: .label .label-green }
@@ -335,7 +344,8 @@ end
 
 ## 🔹 HasItem
 
-## HasItem
+# HasItem
+{: .no_toc }
 {: .d-inline-block }
 Server
 {: .label .label-green }
@@ -382,7 +392,8 @@ end
 
 ## 🔹 OpenStash
 
-## OpenStash
+# OpenStash
+{: .no_toc }
 
 ## Table of contents
 {: .no_toc .text-delta }
@@ -443,7 +454,8 @@ Inventory.OpenStash(1, "police_evidence", "Evidence Locker", 100, 500000, nil, {
 
 ## 🔹 RegisterShop
 
-## RegisterShop
+# RegisterShop
+{: .no_toc }
 
 ## Table of contents
 {: .no_toc .text-delta }
@@ -509,7 +521,8 @@ Inventory.RegisterShop("police_shop", policeShop, nil, {"police"})
 
 ## 🔹 RegisterStash
 
-## RegisterStash
+# RegisterStash
+{: .no_toc }
 
 ## Table of contents
 {: .no_toc .text-delta }
@@ -576,7 +589,8 @@ local jobStash = Inventory.RegisterStash(
 
 ## 🔹 RemoveItem
 
-## RemoveItem
+# RemoveItem
+{: .no_toc }
 {: .d-inline-block }
 Server
 {: .label .label-green }
@@ -629,7 +643,8 @@ end
 
 ## 🔹 SetMetadata
 
-## SetMetadata
+# SetMetadata
+{: .no_toc }
 
 ## Table of contents
 {: .no_toc .text-delta }
@@ -688,7 +703,8 @@ Inventory.SetMetadata(1, "weapon_pistol", 5, metadata)
 
 ## 🔹 StripPNG
 
-## StripPNG
+# StripPNG
+{: .no_toc }
 
 ## Table of contents
 {: .no_toc .text-delta }
@@ -745,7 +761,8 @@ print(cleanName) -- Output: "water"
 
 ## 🔹 UpdatePlate
 
-## UpdatePlate
+# UpdatePlate
+{: .no_toc }
 
 ## Table of contents
 {: .no_toc .text-delta }

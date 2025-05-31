@@ -1,5 +1,5 @@
 ---
-layout: docs
+layout: default
 title: Functions
 parent: Client
 grand_parent: "⛽ Fuel"
@@ -23,7 +23,8 @@ Client-side functions for vehicle fuel management.
 
 ## 🔹 GetFuel
 
-## GetFuel
+# GetFuel
+{: .no_toc }
 
 Gets the current fuel level of a vehicle.
 
@@ -59,7 +60,8 @@ end
 
 ## 🔹 GetResourceName
 
-## GetResourceName
+# GetResourceName
+{: .no_toc }
 
 Gets the name of the fuel system currently being used.
 
@@ -87,7 +89,8 @@ print("Using fuel system: " .. fuelSystem)
 
 ## 🔹 SetFuel
 
-## SetFuel
+# SetFuel
+{: .no_toc }
 
 Sets the fuel level of a vehicle.
 

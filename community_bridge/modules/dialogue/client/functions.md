@@ -1,5 +1,5 @@
 ---
-layout: docs
+layout: default
 title: Functions
 parent: Client
 grand_parent: "💬 Dialogue"
@@ -23,7 +23,8 @@ Client-side functions for opening and closing dialogues.
 
 ## 🔹 Close
 
-## Close
+# Close
+{: .no_toc }
 {: .d-inline-block }
 Client
 {: .label .label-blue }
@@ -57,7 +58,8 @@ Bridge.Dialogue.Close("npc_greeting")
 
 ## 🔹 Open
 
-## Open
+# Open
+{: .no_toc }
 {: .d-inline-block }
 Client
 {: .label .label-blue }
