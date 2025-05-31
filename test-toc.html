@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TOC Test Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: #f6f8fa;
+        }
+        
+        .main-content {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        /* Copy the TOC styles */
+        .toc-right {
+            position: fixed;
+            right: 20px;
+            top: 120px;
+            width: 260px;
+            max-height: calc(100vh - 200px);
+            overflow-y: auto;
+            background: var(--sidebar-color, #f6f8fa);
+            border: 1px solid var(--border-color, #d1d9e0);
+            border-radius: 8px;
+            padding: 16px;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            font-size: 14px;
+            line-height: 1.4;
+            backdrop-filter: blur(10px);
+        }
+
+        .toc-right h3 {
+            margin: 0 0 12px 0;
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--body-heading-color, #24292e);
+            padding-bottom: 8px;
+            border-bottom: 1px solid var(--border-color, #d1d9e0);
+        }
+
+        .toc-right ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .toc-right li {
+            margin: 0;
+            padding: 2px 0;
+        }
+
+        .toc-right a {
+            display: block;
+            padding: 4px 8px;
+            text-decoration: none;
+            color: var(--body-text-color, #24292e);
+            border-radius: 4px;
+            transition: all 0.2s ease;
+            word-wrap: break-word;
+            hyphens: auto;
+        }
+
+        .toc-right a:hover {
+            background-color: var(--code-background-color, #f6f8fa);
+            color: var(--link-color, #0969da);
+        }
+
+        .toc-right .toc-active {
+            background-color: var(--link-color, #0969da) !important;
+            color: white !important;
+            font-weight: 600;
+        }
+
+        .toc-right .toc-h2 {
+            font-weight: 600;
+        }
+
+        .toc-right .toc-h3 {
+            padding-left: 16px;
+            font-weight: 500;
+        }
+
+        .toc-right .toc-h4 {
+            padding-left: 32px;
+            font-weight: 400;
+            font-size: 13px;
+        }
+    </style>
+</head>
+<body>
+    <div class="main-content">
+        <h1>Test Page for TOC</h1>
+        
+        <p>This is a test page to verify that the Table of Contents functionality works correctly.</p>
+        
+        <h2>🔹 First Function</h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+        <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+        
+        <h3>Syntax</h3>
+        <p>Some syntax information here.</p>
+        
+        <h3>Parameters</h3>
+        <p>Parameter information here.</p>
+        
+        <h2>🔹 Second Function</h2>
+        <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+        <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+        
+        <h3>Syntax</h3>
+        <p>More syntax information.</p>
+        
+        <h3>Examples</h3>
+        <p>Example code here.</p>
+        
+        <h2>🔹 Third Function</h2>
+        <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.</p>
+        <p>Totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt.</p>
+        
+        <h3>Return Value</h3>
+        <p>Return value information.</p>
+        
+        <h2>Utility Functions</h2>
+        <p>Some utility functions section.</p>
+        
+        <h3>Helper Function 1</h3>
+        <p>Helper function description.</p>
+        
+        <h3>Helper Function 2</h3>
+        <p>Another helper function.</p>
+    </div>
+
+    <script>
+        // Copy the exact TOC JavaScript code
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(function() {
+                generateTOC();
+                updateActiveSection();
+                
+                window.addEventListener('scroll', updateActiveSection);
+            }, 100);
+        });
+
+        function generateTOC() {
+            const content = document.querySelector('.main-content') || 
+                           document.querySelector('.main') || 
+                           document.querySelector('#main-content') ||
+                           document.querySelector('main');
+            
+            if (!content) {
+                console.log('No main content found for TOC');
+                return;
+            }
+            
+            const headings = content.querySelectorAll('h1, h2, h3, h4, h5, h6');
+            console.log('Found headings:', headings.length);
+            
+            if (headings.length < 2) return;
+            
+            const tocContainer = document.createElement('div');
+            tocContainer.className = 'toc-right';
+            tocContainer.id = 'toc-sidebar';
+            
+            const tocTitle = document.createElement('h3');
+            tocTitle.textContent = 'Table of Contents';
+            tocContainer.appendChild(tocTitle);
+            
+            const tocList = document.createElement('ul');
+            
+            let tocHTML = '';
+            
+            headings.forEach((heading, index) => {
+                if (heading.classList.contains('no_toc')) return;
+                
+                if (!heading.id) {
+                    const text = heading.textContent.trim().toLowerCase()
+                        .replace(/[^a-z0-9\s-]/g, '')
+                        .replace(/\s+/g, '-');
+                    heading.id = text || 'heading-' + index;
+                }
+                
+                const level = heading.tagName.toLowerCase();
+                const text = heading.textContent.trim();
+                const link = '#' + heading.id;
+                
+                if (!text) return;
+                
+                let displayText = text;
+                if (text.includes('🔹')) {
+                    displayText = text.replace('🔹', '').trim();
+                }
+                
+                tocHTML += `<li><a href="${link}" class="toc-${level}" data-target="${heading.id}">${displayText}</a></li>`;
+            });
+            
+            if (tocHTML) {
+                tocList.innerHTML = tocHTML;
+                tocContainer.appendChild(tocList);
+                document.body.appendChild(tocContainer);
+                
+                console.log('TOC generated with', tocHTML.split('<li>').length - 1, 'items');
+                
+                const tocLinks = tocContainer.querySelectorAll('a');
+                tocLinks.forEach(link => {
+                    link.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        const targetId = this.getAttribute('data-target');
+                        const targetElement = document.getElementById(targetId);
+                        if (targetElement) {
+                            targetElement.scrollIntoView({
+                                behavior: 'smooth',
+                                block: 'start'
+                            });
+                        }
+                    });
+                });
+            } else {
+                console.log('No TOC items generated');
+            }
+        }
+
+        function updateActiveSection() {
+            const tocLinks = document.querySelectorAll('.toc-right a');
+            if (tocLinks.length === 0) return;
+            
+            let activeLink = null;
+            const scrollPosition = window.scrollY + 150;
+            
+            tocLinks.forEach(link => {
+                const targetId = link.getAttribute('data-target');
+                const targetElement = document.getElementById(targetId);
+                
+                if (targetElement) {
+                    const elementTop = targetElement.offsetTop;
+                    
+                    if (scrollPosition >= elementTop) {
+                        activeLink = link;
+                    }
+                }
+            });
+            
+            tocLinks.forEach(link => link.classList.remove('toc-active'));
+            if (activeLink) {
+                activeLink.classList.add('toc-active');
+            }
+        }
+    </script>
+</body>
+</html>

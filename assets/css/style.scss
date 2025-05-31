@@ -1,11 +1,9 @@
+---
+---
 
 @import "{{ site.theme }}";
 
 /* Right-side Table of Contents Styles */
-.page-content {
-  position: relative;
-}
-
 .toc-right {
   position: fixed;
   right: 20px;
@@ -13,8 +11,8 @@
   width: 260px;
   max-height: calc(100vh - 200px);
   overflow-y: auto;
-  background: var(--sidebar-color);
-  border: 1px solid var(--border-color);
+  background: var(--sidebar-color, #f6f8fa);
+  border: 1px solid var(--border-color, #d1d9e0);
   border-radius: 8px;
   padding: 16px;
   z-index: 1000;
@@ -24,13 +22,24 @@
   backdrop-filter: blur(10px);
 }
 
+/* Dark theme support */
+.dark-scheme .toc-right {
+  background: #2d333b;
+  border-color: #444c56;
+}
+
 .toc-right h3 {
   margin: 0 0 12px 0;
   font-size: 16px;
   font-weight: 600;
-  color: var(--body-heading-color);
+  color: var(--body-heading-color, #24292e);
   padding-bottom: 8px;
-  border-bottom: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color, #d1d9e0);
+}
+
+.dark-scheme .toc-right h3 {
+  color: #adbac7;
+  border-bottom-color: #444c56;
 }
 
 .toc-right ul {
@@ -48,16 +57,37 @@
   display: block;
   padding: 4px 8px;
   text-decoration: none;
-  color: var(--body-text-color);
+  color: var(--body-text-color, #24292e);
   border-radius: 4px;
   transition: all 0.2s ease;
   word-wrap: break-word;
   hyphens: auto;
 }
 
+.dark-scheme .toc-right a {
+  color: #adbac7;
+}
+
 .toc-right a:hover {
-  background-color: var(--code-background-color);
-  color: var(--link-color);
+  background-color: var(--code-background-color, #f6f8fa);
+  color: var(--link-color, #0969da);
+}
+
+.dark-scheme .toc-right a:hover {
+  background-color: #373e47;
+  color: #539bf5;
+}
+
+/* Active TOC item */
+.toc-right .toc-active {
+  background-color: var(--link-color, #0969da) !important;
+  color: white !important;
+  font-weight: 600;
+}
+
+.dark-scheme .toc-right .toc-active {
+  background-color: #539bf5 !important;
+  color: #1c2128 !important;
 }
 
 .toc-right .toc-h2 {
@@ -85,12 +115,6 @@
   padding-left: 64px;
   font-weight: 400;
   font-size: 12px;
-}
-
-/* Active TOC item */
-.toc-right .toc-active {
-  background-color: var(--link-color);
-  color: white !important;
 }
 
 /* Function indicator styling in TOC */

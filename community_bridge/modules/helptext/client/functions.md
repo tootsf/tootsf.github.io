@@ -1,5 +1,5 @@
 ---
-layout: docs
+layout: docs-with-toc
 title: Functions
 parent: Client
 grand_parent: "❓ Helptext"

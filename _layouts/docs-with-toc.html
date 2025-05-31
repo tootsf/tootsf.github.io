@@ -1,3 +1,12 @@
+---
+layout: default
+---
+
+{{ content }}
+
+<!-- Include TOC for all docs pages -->
+{% if page.layout == "docs" or layout.name == "docs" %}
+<script>
 // Table of Contents functionality for just-the-docs
 document.addEventListener('DOMContentLoaded', function() {
     // Wait a bit for just-the-docs to load
@@ -7,7 +16,7 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Update active section on scroll
         window.addEventListener('scroll', updateActiveSection);
-    }, 100);
+    }, 200);
 });
 
 function generateTOC() {
@@ -15,7 +24,9 @@ function generateTOC() {
     const content = document.querySelector('.main-content') || 
                    document.querySelector('.main') || 
                    document.querySelector('#main-content') ||
-                   document.querySelector('main');
+                   document.querySelector('main') ||
+                   document.querySelector('.site-main') ||
+                   document.querySelector('[role="main"]');
     
     if (!content) {
         console.log('No main content found for TOC');
@@ -27,7 +38,8 @@ function generateTOC() {
     console.log('Found headings:', headings.length);
     
     if (headings.length < 2) return; // Don't show TOC if less than 2 headings
-      // Create TOC container
+    
+    // Create TOC container
     const tocContainer = document.createElement('div');
     tocContainer.className = 'toc-right';
     tocContainer.id = 'toc-sidebar';
@@ -69,7 +81,8 @@ function generateTOC() {
         
         tocHTML += `<li><a href="${link}" class="toc-${level}" data-target="${heading.id}">${displayText}</a></li>`;
     });
-      if (tocHTML) {
+    
+    if (tocHTML) {
         tocList.innerHTML = tocHTML;
         tocContainer.appendChild(tocList);
         document.body.appendChild(tocContainer);
@@ -122,3 +135,118 @@ function updateActiveSection() {
         activeLink.classList.add('toc-active');
     }
 }
+</script>
+
+<style>
+/* Inline TOC styles to ensure they load */
+.toc-right {
+  position: fixed;
+  right: 20px;
+  top: 120px;
+  width: 260px;
+  max-height: calc(100vh - 200px);
+  overflow-y: auto;
+  background: #f6f8fa;
+  border: 1px solid #d1d9e0;
+  border-radius: 8px;
+  padding: 16px;
+  z-index: 1000;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.dark-scheme .toc-right {
+  background: #2d333b;
+  border-color: #444c56;
+}
+
+.toc-right h3 {
+  margin: 0 0 12px 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: #24292e;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #d1d9e0;
+}
+
+.dark-scheme .toc-right h3 {
+  color: #adbac7;
+  border-bottom-color: #444c56;
+}
+
+.toc-right ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.toc-right li {
+  margin: 0;
+  padding: 2px 0;
+}
+
+.toc-right a {
+  display: block;
+  padding: 4px 8px;
+  text-decoration: none;
+  color: #24292e;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+  word-wrap: break-word;
+  hyphens: auto;
+}
+
+.dark-scheme .toc-right a {
+  color: #adbac7;
+}
+
+.toc-right a:hover {
+  background-color: #f6f8fa;
+  color: #0969da;
+}
+
+.dark-scheme .toc-right a:hover {
+  background-color: #373e47;
+  color: #539bf5;
+}
+
+.toc-right .toc-active {
+  background-color: #0969da !important;
+  color: white !important;
+  font-weight: 600;
+}
+
+.dark-scheme .toc-right .toc-active {
+  background-color: #539bf5 !important;
+  color: #1c2128 !important;
+}
+
+.toc-right .toc-h2 {
+  font-weight: 600;
+}
+
+.toc-right .toc-h3 {
+  padding-left: 16px;
+  font-weight: 500;
+}
+
+.toc-right .toc-h4 {
+  padding-left: 32px;
+  font-weight: 400;
+  font-size: 13px;
+}
+
+@media (max-width: 1400px) {
+  .toc-right {
+    display: none;
+  }
+}
+
+@media (min-width: 1400px) {
+  .main-content-wrap {
+    padding-right: 300px;
+  }
+}
+</style>
+{% endif %}
