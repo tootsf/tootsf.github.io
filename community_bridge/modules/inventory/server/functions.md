@@ -14,10 +14,7 @@ has_children: true
 
 Server-side functions for inventory management.
 
-# Inventory Server Functions
-{: .no_toc }
-
-Server-side functions for inventory management.
+---
 
 ---
 

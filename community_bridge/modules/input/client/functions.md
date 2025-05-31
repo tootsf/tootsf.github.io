@@ -14,10 +14,7 @@ has_children: true
 
 Client-side functions for input handling and validation.
 
-# Input Client Functions
-{: .no_toc }
-
-Client-side functions for input handling and validation.
+---
 
 ---
 

@@ -14,11 +14,6 @@ has_children: true
 
 Client-side functions for framework integration and player data management.
 
-# Framework Client Functions
-{: .no_toc }
-
-Client-side functions for framework integration and player data management.
-
 ---
 
 ## 🔹 GetFrameworkJobs
