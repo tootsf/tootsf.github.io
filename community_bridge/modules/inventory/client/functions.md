@@ -4,18 +4,25 @@ title: Functions
 parent: Client
 grand_parent: "🎒 Inventory"
 great_grand_parent: Modules
+has_children: true
 nav_order: 1
 permalink: /community_bridge/modules/inventory/client/functions/
 ---
 
-# Inventory Client Functions
+# Client Functions
 {: .no_toc }
 
-Client-side functions for inventory management.
+Client-side functions for the inventory module.
 
----
+## Available Functions
 
-## 🔹 GetImagePath
+- [GetImagePath](GetImagePath)
+- [GetItemCount](GetItemCount)
+- [GetItemInfo](GetItemInfo)
+- [GetPlayerInventory](GetPlayerInventory)
+- [HasItem](HasItem)
+- [OpenShop](OpenShop)
+- [StripPNG](StripPNG)
 
 # GetImagePath
 
@@ -158,10 +165,10 @@ function Inventory.OpenShop(shopTitle, shopInventory)
 
 ## Parameters
 
-**shopTitle:** `string`  
+**shopTitle:** `string`
 Title of the shop
 
-**shopInventory:** `table`  
+**shopInventory:** `table`
 Shop inventory data
 
 ## Example
@@ -196,12 +203,12 @@ function Inventory.StripPNG(item)
 
 ## Parameters
 
-**item:** `string`  
+**item:** `string`
 Item name potentially with .png extension
 
 ## Returns
 
-**string**  
+**string**
 Item name without .png extension
 
 ## Example

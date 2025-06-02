@@ -2,24 +2,18 @@
 layout: default
 title: Functions
 parent: Client
-grand_parent: "📱 Phone"
+grand_parent: 📱 Phone
 great_grand_parent: Modules
+has_children: true
 nav_order: 1
 permalink: /community_bridge/modules/phone/client/functions/
 ---
 
-# Phone Client Functions
+# Client Functions
 {: .no_toc }
 
-Client-side functions for phone system integration and email functionality.
+Client-side functions for the phone module.
 
----
+## Available Functions
 
-## 🔹 SendEmail
-
-**[SendEmail](SendEmail.md)**
-{: .d-inline-block }
-Client
-{: .label .label-blue }
-
-Send an email through the integrated phone system from the client-side.
+- [SendEmail](SendEmail)
