@@ -6,13 +6,7 @@ grand_parent: "⏳ Progressbar"
 great_grand_parent: Modules
 nav_order: 1
 permalink: /community_bridge/modules/progressbar/client/functions/
-has_children: true
 ---
-
-# Progressbar Client Functions
-{: .no_toc }
-
-Client-side functions for progress bar displays.
 
 # Progressbar Client Functions
 {: .no_toc }

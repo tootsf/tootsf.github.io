@@ -6,13 +6,7 @@ grand_parent: "🔑 Vehiclekey"
 great_grand_parent: Modules
 nav_order: 1
 permalink: /community_bridge/modules/vehiclekey/client/functions/
-has_children: true
 ---
-
-# Vehiclekey Client Functions
-{: .no_toc }
-
-Client-side functions for vehicle key management.
 
 # Vehiclekey Client Functions
 {: .no_toc }

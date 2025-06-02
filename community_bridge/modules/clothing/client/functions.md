@@ -6,13 +6,7 @@ grand_parent: "👔 Clothing"
 great_grand_parent: Modules
 nav_order: 1
 permalink: /community_bridge/modules/clothing/client/functions/
-has_children: true
 ---
-
-# Clothing Client Functions
-{: .no_toc }
-
-Client-side functions for managing player appearance and clothing.
 
 # Clothing Client Functions
 {: .no_toc }

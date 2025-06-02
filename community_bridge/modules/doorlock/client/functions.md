@@ -5,14 +5,8 @@ parent: Client
 grand_parent: "🚪 Doorlock"
 great_grand_parent: Modules
 nav_order: 1
-has_children: true
 permalink: /community_bridge/modules/doorlock/client/functions/
 ---
-
-# Doorlock Client Functions
-{: .no_toc }
-
-Client-side functions for managing door locks and access.
 
 # Doorlock Client Functions
 {: .no_toc }

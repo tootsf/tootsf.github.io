@@ -6,13 +6,7 @@ grand_parent: "🎯 Target"
 great_grand_parent: Modules
 nav_order: 1
 permalink: /community_bridge/modules/target/client/functions/
-has_children: true
 ---
-
-# Target Client Functions
-{: .no_toc }
-
-Client-side functions for targeting and interaction systems.
 
 # Target Client Functions
 {: .no_toc }
@@ -39,42 +33,42 @@ Bridge.Target.AddTargetCoords(coords, options)
 
 ## Parameters
 
-**coords:** `vector3`  
+**coords:** `vector3`
 Target coordinates.
 
-**options:** `table`  
+**options:** `table`
 Target configuration with the following properties:
 
-- **name:** `string`  
+- **name:** `string`
   Unique identifier.
 
-- **icon:** `string`  
+- **icon:** `string`
   Font Awesome icon.
 
-- **label:** `string`  
+- **label:** `string`
   Display text.
 
-- **action:** `function`  
+- **action:** `function`
   Callback function called when the option is selected.
 
-- **size:** `vector3` (optional)  
+- **size:** `vector3` (optional)
   Target zone size (default: vector3(1.0, 1.0, 1.0)).
 
-- **rotation:** `number` (optional)  
+- **rotation:** `number` (optional)
   Zone rotation in degrees (default: 0.0).
 
-- **debugPoly:** `boolean` (optional)  
+- **debugPoly:** `boolean` (optional)
   Show debug outline.
 
-- **distance:** `number` (optional)  
+- **distance:** `number` (optional)
   Interaction distance (default: 2.0).
 
-- **canInteract:** `function` (optional)  
+- **canInteract:** `function` (optional)
   Conditional function that returns whether interaction is allowed.
 
 ## Returns
 
-**Type:** `boolean`  
+**Type:** `boolean`
 Success status.
 
 ## Example
@@ -115,33 +109,33 @@ Bridge.Target.AddTargetEntity(entity, options)
 
 ## Parameters
 
-**entity:** `number`  
+**entity:** `number`
 Entity handle.
 
-**options:** `table`  
+**options:** `table`
 Target configuration with the following properties:
 
-- **name:** `string`  
+- **name:** `string`
   Unique identifier.
 
-- **icon:** `string`  
+- **icon:** `string`
   Font Awesome icon.
 
-- **label:** `string`  
+- **label:** `string`
   Display text.
 
-- **action:** `function`  
+- **action:** `function`
   Callback function called when the option is selected.
 
-- **distance:** `number` (optional)  
+- **distance:** `number` (optional)
   Interaction distance (default: 2.0).
 
-- **canInteract:** `function` (optional)  
+- **canInteract:** `function` (optional)
   Conditional function that returns whether interaction is allowed.
 
 ## Returns
 
-**Type:** `boolean`  
+**Type:** `boolean`
 Success status.
 
 ## Example
@@ -188,33 +182,33 @@ Bridge.Target.AddTargetModel(models, options)
 
 ## Parameters
 
-**models:** `table` or `string`  
+**models:** `table` or `string`
 Model name(s) or hash(es). Can be a single string or an array of strings.
 
-**options:** `table`  
+**options:** `table`
 Target configuration with the following properties:
 
-- **name:** `string`  
+- **name:** `string`
   Unique identifier.
 
-- **icon:** `string`  
+- **icon:** `string`
   Font Awesome icon.
 
-- **label:** `string`  
+- **label:** `string`
   Display text.
 
-- **action:** `function`  
+- **action:** `function`
   Callback function called when the option is selected.
 
-- **distance:** `number` (optional)  
+- **distance:** `number` (optional)
   Interaction distance (default: 2.0).
 
-- **canInteract:** `function` (optional)  
+- **canInteract:** `function` (optional)
   Conditional function that returns whether interaction is allowed.
 
 ## Returns
 
-**Type:** `boolean`  
+**Type:** `boolean`
 Success status.
 
 ## Example
@@ -224,8 +218,8 @@ local Bridge = exports['community_bridge']:Bridge()
 
 -- Target ATM models
 Bridge.Target.AddTargetModel({
-    "prop_atm_01", 
-    "prop_atm_02", 
+    "prop_atm_01",
+    "prop_atm_02",
     "prop_atm_03"
 }, {
     name = "use_atm",
@@ -258,51 +252,51 @@ Bridge.Target.AddTargetZone(name, coords, width, length, options)
 
 ## Parameters
 
-**name:** `string`  
+**name:** `string`
 Unique zone identifier.
 
-**coords:** `vector3`  
+**coords:** `vector3`
 Center coordinates of the zone.
 
-**width:** `number`  
+**width:** `number`
 Zone width.
 
-**length:** `number`  
+**length:** `number`
 Zone length.
 
-**options:** `table`  
+**options:** `table`
 Target configuration with the following properties:
 
-- **name:** `string`  
+- **name:** `string`
   Unique identifier.
 
-- **icon:** `string`  
+- **icon:** `string`
   Font Awesome icon.
 
-- **label:** `string`  
+- **label:** `string`
   Display text.
 
-- **action:** `function`  
+- **action:** `function`
   Callback function called when the option is selected.
 
-- **heading:** `number` (optional)  
+- **heading:** `number` (optional)
   Zone heading in degrees.
 
-- **minZ:** `number` (optional)  
+- **minZ:** `number` (optional)
   Minimum Z coordinate.
 
-- **maxZ:** `number` (optional)  
+- **maxZ:** `number` (optional)
   Maximum Z coordinate.
 
-- **distance:** `number` (optional)  
+- **distance:** `number` (optional)
   Interaction distance (default: 2.0).
 
-- **canInteract:** `function` (optional)  
+- **canInteract:** `function` (optional)
   Conditional function that returns whether interaction is allowed.
 
 ## Returns
 
-**Type:** `boolean`  
+**Type:** `boolean`
 Success status.
 
 ## Example
@@ -350,15 +344,15 @@ Bridge.Target.RemoveTargetEntity(entity, name)
 
 ## Parameters
 
-**entity:** `number`  
+**entity:** `number`
 Entity handle.
 
-**name:** `string` (optional)  
+**name:** `string` (optional)
 Specific target name to remove. If not provided, all targets from the entity will be removed.
 
 ## Returns
 
-**Type:** `boolean`  
+**Type:** `boolean`
 Success status.
 
 ## Example
@@ -394,15 +388,15 @@ Bridge.Target.RemoveTargetModel(models, name)
 
 ## Parameters
 
-**models:** `table` or `string`  
+**models:** `table` or `string`
 Model name(s) or hash(es). Can be a single string or an array of strings.
 
-**name:** `string` (optional)  
+**name:** `string` (optional)
 Specific target name to remove. If not provided, all targets from the specified models will be removed.
 
 ## Returns
 
-**Type:** `boolean`  
+**Type:** `boolean`
 Success status.
 
 ## Example
@@ -415,8 +409,8 @@ Bridge.Target.RemoveTargetModel("prop_atm_01", "use_atm")
 
 -- Remove all targets from multiple ATM models
 Bridge.Target.RemoveTargetModel({
-    "prop_atm_01", 
-    "prop_atm_02", 
+    "prop_atm_01",
+    "prop_atm_02",
     "prop_atm_03"
 })
 ```
@@ -441,12 +435,12 @@ Bridge.Target.RemoveTargetZone(name)
 
 ## Parameters
 
-**name:** `string`  
+**name:** `string`
 Zone identifier.
 
 ## Returns
 
-**Type:** `boolean`  
+**Type:** `boolean`
 Success status.
 
 ## Example

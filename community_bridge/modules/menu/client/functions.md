@@ -6,13 +6,7 @@ grand_parent: "📋 Menu"
 great_grand_parent: Modules
 nav_order: 1
 permalink: /community_bridge/modules/menu/client/functions/
-has_children: true
 ---
-
-# Menu Client Functions
-{: .no_toc }
-
-Client-side functions for menu creation and management.
 
 # Menu Client Functions
 {: .no_toc }

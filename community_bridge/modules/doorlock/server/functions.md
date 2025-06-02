@@ -5,14 +5,8 @@ parent: Server
 grand_parent: "🚪 Doorlock"
 great_grand_parent: Modules
 nav_order: 1
-has_children: true
 permalink: /community_bridge/modules/doorlock/server/functions/
 ---
-
-# Doorlock Server Functions
-{: .no_toc }
-
-Server-side functions for managing door locks and access.
 
 # Doorlock Server Functions
 {: .no_toc }

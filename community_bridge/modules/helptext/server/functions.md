@@ -6,13 +6,7 @@ grand_parent: "❓ Helptext"
 great_grand_parent: Modules
 nav_order: 1
 permalink: /community_bridge/modules/helptext/server/functions/
-has_children: true
 ---
-
-# Helptext Server Functions
-{: .no_toc }
-
-Server-side functions for displaying help text and instructions.
 
 # Helptext Server Functions
 {: .no_toc }

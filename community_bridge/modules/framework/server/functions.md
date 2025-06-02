@@ -6,13 +6,7 @@ grand_parent: "🧩 Framework"
 great_grand_parent: Modules
 nav_order: 1
 permalink: /community_bridge/modules/framework/server/functions/
-has_children: true
 ---
-
-# Framework Server Functions
-{: .no_toc }
-
-Server-side functions for framework integration and player data management.
 
 # Framework Server Functions
 {: .no_toc }
@@ -39,7 +33,7 @@ function Framework.GetFrameworkJobs()
 
 ## Returns
 
-**table**  
+**table**
 Array of job objects
 
 ## Example
@@ -72,7 +66,7 @@ function Framework.GetFrameworkName()
 
 ## Returns
 
-**string**  
+**string**
 The framework name
 
 ## Example
@@ -103,18 +97,18 @@ function Framework.GetItem(src, item, metadata)
 
 ## Parameters
 
-**src:** `number`  
+**src:** `number`
 Player server ID
 
-**item:** `string`  
+**item:** `string`
 Item name
 
-**metadata:** `table` (optional)  
+**metadata:** `table` (optional)
 Metadata to match
 
 ## Returns
 
-**table**  
+**table**
 Array of item tables
 
 ## Example
@@ -147,18 +141,18 @@ function Framework.GetItemCount(src, item, metadata)
 
 ## Parameters
 
-**src:** `number`  
+**src:** `number`
 Player server ID
 
-**item:** `string`  
+**item:** `string`
 Item name
 
-**metadata:** `table` (optional)  
+**metadata:** `table` (optional)
 Metadata to match
 
 ## Returns
 
-**number**  
+**number**
 Count of the item
 
 ## Example
@@ -189,12 +183,12 @@ function Framework.GetPlayer(src)
 
 ## Parameters
 
-**src:** `number`  
+**src:** `number`
 Player server ID
 
 ## Returns
 
-**table|nil**  
+**table|nil**
 Framework player object or nil if not found
 
 ## Example
@@ -227,12 +221,12 @@ function Framework.GetPlayerDob(src)
 
 ## Parameters
 
-**src:** `number`  
+**src:** `number`
 Player server ID
 
 ## Returns
 
-**string**  
+**string**
 Date of birth
 
 ## Example
@@ -263,12 +257,12 @@ function Framework.GetPlayerIdentifier(src)
 
 ## Parameters
 
-**src:** `number`  
+**src:** `number`
 Player server ID
 
 ## Returns
 
-**string**  
+**string**
 Citizen ID
 
 ## Example
@@ -299,12 +293,12 @@ function Framework.GetPlayerInventory(src)
 
 ## Parameters
 
-**src:** `number`  
+**src:** `number`
 Player server ID
 
 ## Returns
 
-**table**  
+**table**
 Array of inventory items
 
 ## Example
@@ -337,15 +331,15 @@ function Framework.GetPlayerName(src)
 
 ## Parameters
 
-**src:** `number`  
+**src:** `number`
 Player server ID
 
 ## Returns
 
-**string**  
+**string**
 First name
 
-**string**  
+**string**
 Last name
 
 ## Example
@@ -376,7 +370,7 @@ function Framework.GetPlayers()
 
 ## Returns
 
-**table**  
+**table**
 Array of player server IDs
 
 ## Example
@@ -407,15 +401,15 @@ function Framework.HasItem(src, item)
 
 ## Parameters
 
-**src:** `number`  
+**src:** `number`
 Player server ID
 
-**item:** `string`  
+**item:** `string`
 Item name
 
 ## Returns
 
-**boolean**  
+**boolean**
 True if player has the item
 
 ## Example

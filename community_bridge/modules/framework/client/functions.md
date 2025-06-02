@@ -6,13 +6,7 @@ grand_parent: "🧩 Framework"
 great_grand_parent: Modules
 nav_order: 1
 permalink: /community_bridge/modules/framework/client/functions/
-has_children: true
 ---
-
-# Framework Client Functions
-{: .no_toc }
-
-Client-side functions for framework integration and player data management.
 
 # Framework Client Functions
 {: .no_toc }
@@ -39,7 +33,7 @@ function Framework.GetFrameworkJobs()
 
 ## Returns
 
-**table**  
+**table**
 Array of job objects with name, label, and grades
 
 ## Example
@@ -112,7 +106,7 @@ function Framework.GetIsPlayerDead()
 
 ## Returns
 
-**boolean**  
+**boolean**
 True if player is dead/downed
 
 ## Example
@@ -145,12 +139,12 @@ function Framework.GetItemCount(item)
 
 ## Parameters
 
-**item:** `string`  
+**item:** `string`
 Item name
 
 ## Returns
 
-**number**  
+**number**
 Total item count
 
 ## Example
@@ -182,12 +176,12 @@ function Framework.GetItemInfo(item)
 
 ## Parameters
 
-**item:** `string`  
+**item:** `string`
 Item name
 
 ## Returns
 
-**table**  
+**table**
 Item information including name, label, weight, etc.
 
 ## Example
@@ -219,7 +213,7 @@ function Framework.GetPlayerData()
 
 ## Returns
 
-**table**  
+**table**
 Complete player data structure
 
 ## Example
@@ -251,7 +245,7 @@ function Framework.GetPlayerDob()
 
 ## Returns
 
-**string**  
+**string**
 Date of birth string
 
 ## Example
@@ -283,7 +277,7 @@ function Framework.GetPlayerIdentifier()
 
 ## Returns
 
-**string**  
+**string**
 Player identifier
 
 ## Example
@@ -315,7 +309,7 @@ function Framework.GetPlayerInventory()
 
 ## Returns
 
-**table**  
+**table**
 Array of inventory items
 
 ## Example
@@ -349,16 +343,16 @@ function Framework.GetPlayerJob()
 
 ## Returns
 
-**string**  
+**string**
 Job name
 
-**string**  
+**string**
 Job label
 
-**string**  
+**string**
 Grade name
 
-**string**  
+**string**
 Grade level
 
 ## Example
@@ -390,7 +384,7 @@ function Framework.GetPlayerJobData()
 
 ## Returns
 
-**table**  
+**table**
 Job data including name, label, grade, boss status, duty status
 
 ## Example
@@ -424,12 +418,12 @@ function Framework.GetPlayerMetaData(metadata)
 
 ## Parameters
 
-**metadata:** `string`  
+**metadata:** `string`
 The metadata key to retrieve
 
 ## Returns
 
-**any**  
+**any**
 The metadata value
 
 ## Example
@@ -461,10 +455,10 @@ function Framework.GetPlayerName()
 
 ## Returns
 
-**string**  
+**string**
 First name
 
-**string**  
+**string**
 Last name
 
 ## Example
@@ -496,12 +490,12 @@ function Framework.HasItem(item)
 
 ## Parameters
 
-**item:** `string`  
+**item:** `string`
 Item name to check
 
 ## Returns
 
-**boolean**  
+**boolean**
 True if player has the item
 
 ## Example
@@ -559,13 +553,13 @@ function Framework.Notify(message, type, time)
 
 ## Parameters
 
-**message:** `string`  
+**message:** `string`
 The notification message
 
-**type:** `string`  
+**type:** `string`
 Notification type
 
-**time:** `number`  
+**time:** `number`
 Duration in milliseconds
 
 ## Example
@@ -595,10 +589,10 @@ function Framework.ShowHelpText(message, position)
 
 ## Parameters
 
-**message:** `string`  
+**message:** `string`
 The help text message
 
-**position:** `any`  
+**position:** `any`
 Text position (implementation dependent)
 
 ## Example

@@ -6,13 +6,7 @@ grand_parent: "⏳ Progressbar"
 great_grand_parent: Modules
 nav_order: 1
 permalink: /community_bridge/modules/progressbar/server/functions/
-has_children: true
 ---
-
-# Progressbar Server Functions
-{: .no_toc }
-
-Server-side functions for progress bar displays.
 
 # Progressbar Server Functions
 {: .no_toc }

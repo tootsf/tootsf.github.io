@@ -6,13 +6,7 @@ grand_parent: "🎒 Inventory"
 great_grand_parent: Modules
 nav_order: 1
 permalink: /community_bridge/modules/inventory/server/functions/
-has_children: true
 ---
-
-# Inventory Server Functions
-{: .no_toc }
-
-Server-side functions for inventory management.
 
 # Inventory Server Functions
 {: .no_toc }

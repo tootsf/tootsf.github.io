@@ -6,13 +6,7 @@ grand_parent: "⛽ Fuel"
 great_grand_parent: Modules
 nav_order: 1
 permalink: /community_bridge/modules/fuel/client/functions/
-has_children: true
 ---
-
-# Fuel Client Functions
-{: .no_toc }
-
-Client-side functions for vehicle fuel management.
 
 # Fuel Client Functions
 {: .no_toc }
