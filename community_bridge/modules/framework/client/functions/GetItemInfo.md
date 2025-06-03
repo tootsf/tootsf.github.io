@@ -4,7 +4,6 @@ title: "GetItemInfo"
 parent: Functions
 grand_parent: Client
 great_grand_parent: "🧩 Framework"
-great_great_grand_parent: Modules
 nav_order: 5
 permalink: /community_bridge/modules/framework/client/functions/GetItemInfo/
 ---

@@ -4,7 +4,6 @@ title: "AddTargetEntity"
 parent: Functions
 grand_parent: Client
 great_grand_parent: 🎯 Target
-great_great_grand_parent: Modules
 nav_order: 2
 permalink: /community_bridge/modules/target/client/functions/AddTargetEntity/
 ---

@@ -4,7 +4,6 @@ title: "SetAppearance"
 parent: Functions
 grand_parent: Client
 great_grand_parent: 👔 Clothing
-great_great_grand_parent: Modules
 nav_order: 1
 permalink: /community_bridge/modules/clothing/client/functions/SetAppearance/
 ---

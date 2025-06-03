@@ -4,7 +4,6 @@ title: "adjustColourForColourblindness"
 parent: Functions
 grand_parent: Client
 great_grand_parent: ♿ Accessibility
-great_great_grand_parent: Modules
 nav_order: 1
 permalink: /community_bridge/modules/accessibility/client/functions/adjustColourForColourblindness/
 ---
@@ -22,21 +21,21 @@ Bridge.Accessibility.adjustColourForColourblindness(r, g, b, type)
 
 ## Parameters
 
-**r:** `number`  
+**r:** `number`
 Red color component (0-255)
 
-**g:** `number`  
+**g:** `number`
 Green color component (0-255)
 
-**b:** `number`  
+**b:** `number`
 Blue color component (0-255)
 
-**type:** `string`  
+**type:** `string`
 Colorblindness type ('protanopia', 'deuteranopia', 'tritanopia')
 
 ## Returns
 
-**table**  
+**table**
 Adjusted RGB color values
 
 ## Example

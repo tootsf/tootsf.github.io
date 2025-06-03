@@ -4,7 +4,6 @@ title: "OpenShop"
 parent: Functions
 grand_parent: Client
 great_grand_parent: 🛒 Shops
-great_great_grand_parent: Modules
 nav_order: 1
 permalink: /community_bridge/modules/shops/client/functions/OpenShop/
 ---

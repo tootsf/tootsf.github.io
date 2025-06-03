@@ -4,7 +4,6 @@ title: "StopClientProgress"
 parent: Functions
 grand_parent: Server
 great_grand_parent: ⏳ Progressbar
-great_great_grand_parent: Modules
 nav_order: 1
 permalink: /community_bridge/modules/progressbar/server/functions/StopClientProgress/
 ---

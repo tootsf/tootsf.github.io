@@ -4,7 +4,6 @@ title: "ShowHelpText"
 parent: Functions
 grand_parent: Client
 great_grand_parent: ❓ Helptext
-great_great_grand_parent: Modules
 nav_order: 1
 permalink: /community_bridge/modules/helptext/client/functions/ShowHelpText/
 ---

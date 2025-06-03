@@ -4,7 +4,6 @@ title: "ToggleDoorLock"
 parent: Functions
 grand_parent: Server
 great_grand_parent: 🚪 Doorlock
-great_great_grand_parent: Modules
 nav_order: 1
 permalink: /community_bridge/modules/doorlock/server/functions/ToggleDoorLock/
 ---

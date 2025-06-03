@@ -4,7 +4,6 @@ title: "Send911Call"
 parent: Functions
 grand_parent: Client
 great_grand_parent: "🚨 Dispatch"
-great_great_grand_parent: Modules
 nav_order: 1
 permalink: /community_bridge/modules/dispatch/client/functions/Send911Call/
 ---
