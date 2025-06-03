@@ -25,7 +25,7 @@ The accessibility module provides colorblind accessibility features and color ut
 
 - Default (no adjustment)
 - Protanomaly (red-blind)
-- Deuteranomaly (green-blind) 
+- Deuteranomaly (green-blind)
 - Dual (red-green blind)
 - Tritanopia (blue-blind)
 - Tritanomaly (blue-weak)

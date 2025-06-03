@@ -26,7 +26,7 @@ The clothing module provides functions for managing player appearance and clothi
 ### Client Functions
 - [View all client functions](client/functions/) - Complete list of client-side clothing functions
 
-### Server Functions  
+### Server Functions
 - [View all server functions](server/functions/) - Complete list of server-side clothing functions
 
 ---

@@ -36,7 +36,7 @@ The VehicleKey module offers:
 ## 📚 Supported Vehicle Key Resources
 
 - **qb-vehiclekeys**: QBCore vehicle keys
-- **qbx_vehiclekeys**: QBX vehicle keys  
+- **qbx_vehiclekeys**: QBX vehicle keys
 - **qs-vehiclekeys**: QuaS vehicle keys
 - **Renewed-Vehiclekeys**: Renewed Scripts vehicle keys
 - **wasabi_carlock**: Wasabi car lock system

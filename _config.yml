@@ -37,7 +37,7 @@ color_scheme: dark
 exclude:
   - "*.backup.md"
   - "**/functions/*.md"
-  
+
 # Just the Docs specific settings
 just_the_docs:
   # Enable search
