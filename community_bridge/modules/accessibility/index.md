@@ -14,16 +14,10 @@ The accessibility module provides colorblind accessibility features and color ut
 
 ---
 
-## 📚 Client Functions
+## 📚 Available Functions
 
-- [updatecolourblindness](client/updatecolourblindness.md) - Opens color blindness settings menu
-- [hexToRgb](client/hexToRgb.md) - Convert hex color to RGB
-- [rgbToHex](client/rgbToHex.md) - Convert RGB color to hex
-- [rgbToHsl](client/rgbToHsl.md) - Convert RGB color to HSL
-- [hslToRgb](client/hslToRgb.md) - Convert HSL color to RGB
-- [adjustColourForColourblindness](client/adjustColourForColourblindness.md) - Adjust color for colorblindness
-- [getAdjustedColour](client/getAdjustedColour.md) - Get color adjusted for user's colorblindness setting
-- [IsMale](client/IsMale.md) - Check if current player is male model
+### Client Functions
+- [View all client functions](client/functions/) - Complete list of client-side accessibility functions
 
 ---
 

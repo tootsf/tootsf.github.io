@@ -23,11 +23,11 @@ The doorlock module provides basic door locking functionality with support for m
 
 ## 📚 Client Functions
 
-- [GetClosestDoor](client/functions/GetClosestDoor.md) - Get the closest door to the player
+- [View all client functions](client/functions/) - Complete list of client-side door lock functions
 
 ## 📚 Server Functions
 
-- [ToggleDoorLock](server/functions/ToggleDoorLock.md) - Toggle a door's lock status
+- [View all server functions](server/functions/) - Complete list of server-side door lock functions
 
 ---
 

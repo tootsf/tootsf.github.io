@@ -24,20 +24,10 @@ The clothing module provides functions for managing player appearance and clothi
 ## 📚 Available Functions
 
 ### Client Functions
-- [`CopyAppearanceToClipboard()`](client/CopyAppearanceToClipboard.md) - Copy current appearance to clipboard
-- [`GetAppearance(entity)`](client/GetAppearance.md) - Get appearance data for a ped entity
-- [`IsMale()`](client/IsMale.md) - Check if current player ped is male
-- [`RestoreAppearance(entity)`](client/RestoreAppearance.md) - Restore previously stored appearance
-- [`SetAppearance(entity, skinData)`](client/SetAppearance.md) - Apply appearance data to a ped
-- [`ToggleDebugging()`](client/ToggleDebugging.md) - Toggle clothing debugging mode
-- [`UpdateAppearanceBackup(data)`](client/UpdateAppearanceBackup.md) - Update the appearance backup
+- [View all client functions](client/functions/) - Complete list of client-side clothing functions
 
-### Server Functions
-- [`GetAppearance(src)`](server/GetAppearance.md) - Get appearance data for a player
-- [`IsMale(src)`](server/IsMale.md) - Check if a player's ped is male
-- [`RestoreAppearance(src)`](server/RestoreAppearance.md) - Restore a player's previous appearance
-- [`SetAppearance(src, data)`](server/SetAppearance.md) - Set appearance for a player
-- [`SetAppearanceExt(src, data)`](server/SetAppearanceExt.md) - Set appearance with gender-specific data
+### Server Functions  
+- [View all server functions](server/functions/) - Complete list of server-side clothing functions
 
 ---
 

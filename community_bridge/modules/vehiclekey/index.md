@@ -55,8 +55,7 @@ The VehicleKey module offers:
 ## 📚 Available Functions
 
 ### Client Functions
-- [`Bridge.VehicleKey.GiveKeys()`](client/GiveKeys.md) - Give vehicle keys to player
-- [`Bridge.VehicleKey.RemoveKeys()`](client/RemoveKeys.md) - Remove vehicle keys from player
+- [View all client functions](client/functions/) - Complete list of client-side vehicle key functions
 
 ---
 

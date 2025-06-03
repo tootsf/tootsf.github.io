@@ -33,6 +33,19 @@ footer_content: "Copyright &copy; 2024 Community Bridge. Distributed under the <
 # Color scheme
 color_scheme: dark
 
+# Exclude files and directories from processing
+exclude:
+  - "*.backup.md"
+  - "**/functions/*.md"
+  
+# Just the Docs specific settings
+just_the_docs:
+  # Enable search
+  search_enabled: true
+  # Prevent auto-generation of nav for certain patterns
+  nav_exclude:
+    - "functions/"
+
 aux_links:
   "View on GitHub":
     - "//github.com/tootsf/community_bridge"

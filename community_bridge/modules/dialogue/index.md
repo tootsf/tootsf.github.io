@@ -23,8 +23,7 @@ The dialogue module provides an interactive dialogue system with camera manageme
 
 ## 📚 Client Functions
 
-- [Open](client/Open.md) - Open a dialogue with options
-- [Close](client/Close.md) - Close an active dialogue
+- [View all client functions](client/functions/) - Complete list of client-side dialogue functions
 
 ---
 
