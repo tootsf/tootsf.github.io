@@ -10,14 +10,18 @@ layout: default
 
   // Wait for page to fully load
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initTOC);
-  } else {
+    document.addEventListener('DOMContentLoaded', initTOC);  } else {
     initTOC();
   }
 
   function initTOC() {
     // Only add TOC if the page has has_toc: true
-    {% if page.has_toc %}
+    var hasToc = {{ page.has_toc | default: false }};
+    
+    if (!hasToc) {
+      console.log('Page does not have TOC enabled');
+      return;
+    }
 
     console.log('TOC script running...');
 
@@ -35,8 +39,6 @@ layout: default
     } catch (error) {
       console.error('Error creating TOC:', error);
     }
-
-    {% endif %}
   }
 
   function createTOC(headings) {
@@ -82,13 +84,13 @@ layout: default
       // Handle simple format: [FunctionName](link)
       else if (functionName.indexOf('[') === 0 && functionName.indexOf('](') > -1) {
         functionName = functionName.substring(1, functionName.indexOf(']('));
-      }
-
-      link.href = '#' + heading.id;
-      link.textContent = functionName;      listItem.appendChild(link);
+      }      link.href = '#' + heading.id;
+      link.textContent = functionName;
+      
+      listItem.appendChild(link);
       tocList.appendChild(listItem);
     }
-    
+
     tocContainer.appendChild(tocList);
 
     // Insert TOC
@@ -111,9 +113,9 @@ layout: default
       mainContent.classList.add('content-with-toc');
 
       // Insert TOC after main content
-      mainContent.parentNode.insertBefore(tocContainer, mainContent.nextSibling);
-
-      console.log('TOC added to page successfully');      // Add event listeners
+      mainContent.parentNode.insertBefore(tocContainer, mainContent.nextSibling);      console.log('TOC added to page successfully');
+      
+      // Add event listeners
       addTOCEventListeners(tocContainer);
     } else {
       console.log('Could not find main content elements');
