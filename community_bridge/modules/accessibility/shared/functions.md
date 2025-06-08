@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: functions
 title: Accessibility Functions
 parent: Shared
 grand_parent: "♿ Accessibility"

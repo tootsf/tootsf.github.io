@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: functions
 title: Phone Functions
 parent: Client
 grand_parent: 📱 Phone

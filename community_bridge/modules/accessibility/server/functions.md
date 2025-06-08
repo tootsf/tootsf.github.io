@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: functions
 title: Accessibility Functions
 parent: Server
 grand_parent: "♿ Accessibility"

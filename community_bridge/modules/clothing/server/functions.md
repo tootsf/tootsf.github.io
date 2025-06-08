@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: functions
 title: Clothing Functions
 parent: Server
 grand_parent: 👔 Clothing

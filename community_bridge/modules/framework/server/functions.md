@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: functions
 title: Framework Functions
 parent: Server
 grand_parent: 🧩 Framework

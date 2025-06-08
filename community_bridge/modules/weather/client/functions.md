@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: functions
 title: Weather Functions
 parent: Client
 grand_parent: "🌤️ Weather"

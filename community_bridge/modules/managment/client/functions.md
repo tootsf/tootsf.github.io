@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: functions
 title: Managment Functions
 parent: Client
 grand_parent: "📊 Managment"

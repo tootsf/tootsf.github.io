@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: functions
 title: Target Functions
 parent: Client
 grand_parent: 🎯 Target

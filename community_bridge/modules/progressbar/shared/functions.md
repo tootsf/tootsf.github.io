@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: functions
 title: Progressbar Functions
 parent: Shared
 grand_parent: "⏳ Progressbar"

@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: functions
 title: Dispatch Functions
 parent: Server
 grand_parent: "🚨 Dispatch"

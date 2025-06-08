@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: functions
 title: Menu Functions
 parent: Server
 grand_parent: "📋 Menu"

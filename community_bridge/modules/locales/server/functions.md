@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: functions
 title: Locales Functions
 parent: Server
 grand_parent: "🌐 Locales"

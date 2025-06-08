@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: functions
 title: Skills Functions
 parent: Client
 grand_parent: ⭐ Skills

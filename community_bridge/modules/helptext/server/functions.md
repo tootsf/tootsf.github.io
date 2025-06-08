@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: functions
 title: Helptext Functions
 parent: Server
 grand_parent: ❓ Helptext

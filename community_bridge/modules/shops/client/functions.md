@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: functions
 title: Shops Functions
 parent: Client
 grand_parent: 🛒 Shops

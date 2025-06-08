@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: functions
 title: Input Functions
 parent: Server
 grand_parent: "⌨️ Input"

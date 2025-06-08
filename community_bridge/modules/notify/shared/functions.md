@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: functions
 title: Notify Functions
 parent: Shared
 grand_parent: "🔔 Notify"

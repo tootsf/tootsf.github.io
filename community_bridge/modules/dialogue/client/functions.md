@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: functions
 title: Dialogue Functions
 parent: Client
 grand_parent: 💬 Dialogue

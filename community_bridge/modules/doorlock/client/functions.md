@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: functions
 title: Doorlock Functions
 parent: Client
 grand_parent: 🚪 Doorlock

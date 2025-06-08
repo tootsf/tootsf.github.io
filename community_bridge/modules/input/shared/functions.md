@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: functions
 title: Input Functions
 parent: Shared
 grand_parent: "⌨️ Input"

@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: functions
 title: Math Functions
 parent: Server
 grand_parent: "🔢 Math"

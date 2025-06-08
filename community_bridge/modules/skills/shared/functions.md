@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: functions
 title: Skills Functions
 parent: Shared
 grand_parent: "⭐ Skills"

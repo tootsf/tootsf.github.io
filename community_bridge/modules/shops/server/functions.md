@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: functions
 title: Shops Functions
 parent: Server
 grand_parent: "🛒 Shops"

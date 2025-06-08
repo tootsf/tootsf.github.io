@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: functions
 title: Inventory Functions
 parent: Shared
 grand_parent: "🎒 Inventory"

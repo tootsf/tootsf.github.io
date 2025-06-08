@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: functions
 title: Doorlock Functions
 parent: Shared
 grand_parent: "🚪 Doorlock"

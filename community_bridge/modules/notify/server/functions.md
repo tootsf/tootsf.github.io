@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: functions
 title: Notify Functions
 parent: Server
 grand_parent: 🔔 Notify

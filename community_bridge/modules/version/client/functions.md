@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: functions
 title: Version Functions
 parent: Client
 grand_parent: "📦 Version"

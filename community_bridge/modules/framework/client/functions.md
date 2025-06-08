@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: functions
 title: Framework Functions
 parent: Client
 grand_parent: "🧩 Framework"

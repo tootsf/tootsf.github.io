@@ -1,0 +1,130 @@
+---
+---
+
+@import "{{ site.theme }}";
+
+/* Custom right-side TOC styling */
+.main-content-wrap.toc-layout {
+  display: flex;
+  gap: 2rem;
+  align-items: flex-start;
+}
+
+.toc-layout .main-content {
+  flex: 1;
+  max-width: calc(100% - 280px);
+}
+
+/* TOC Container Styling */
+.page-toc {
+  position: sticky;
+  top: 2rem;
+  width: 260px;
+  max-height: calc(100vh - 4rem);
+  overflow-y: auto;
+  background: var(--sidebar-color, #f5f6fa);
+  border: 1px solid var(--border-color, #eeebee);
+  border-radius: 6px;
+  padding: 1rem;
+  margin-left: auto;
+  flex-shrink: 0;
+}
+
+.page-toc h2 {
+  font-size: 0.875rem !important;
+  font-weight: 600;
+  margin: 0 0 0.5rem 0;
+  color: var(--body-heading-color, #27262b);
+  border-bottom: 1px solid var(--border-color, #eeebee);
+  padding-bottom: 0.5rem;
+}
+
+.page-toc ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.page-toc li {
+  margin: 0.25rem 0;
+}
+
+.page-toc a {
+  display: block;
+  padding: 0.25rem 0.5rem;
+  text-decoration: none;
+  color: var(--body-text-color, #5c5962);
+  font-size: 0.8125rem;
+  border-radius: 3px;
+  transition: all 0.2s ease;
+}
+
+.page-toc a:hover {
+  background-color: var(--sidebar-color, #f5f6fa);
+  color: var(--link-color, #0066cc);
+}
+
+/* Add active link styling */
+.page-toc a.active {
+  background-color: var(--link-color, #0066cc);
+  color: white !important;
+}
+
+.dark-theme .page-toc a.active {
+  background-color: var(--link-color, #63b3ed);
+  color: #1a202c !important;
+}
+
+/* Dark theme adjustments */
+.dark-theme .page-toc {
+  background: var(--sidebar-color, #2d3748);
+  border-color: var(--border-color, #4a5568);
+}
+
+.dark-theme .page-toc h2 {
+  color: var(--body-heading-color, #e2e8f0);
+  border-bottom-color: var(--border-color, #4a5568);
+}
+
+.dark-theme .page-toc a {
+  color: var(--body-text-color, #a0aec0);
+}
+
+.dark-theme .page-toc a:hover {
+  background-color: var(--sidebar-color, #4a5568);
+  color: var(--link-color, #63b3ed);
+}
+
+.dark-theme .page-toc a:visited {
+  color: var(--body-text-color, #a0aec0);
+}
+
+/* Hide the original TOC at bottom */
+.main-content > .table-of-contents {
+  display: none;
+}
+
+/* Responsive design */
+@media (max-width: 1200px) {
+  .main-content-wrap.toc-layout {
+    flex-direction: column;
+  }
+  
+  .toc-layout .main-content {
+    max-width: 100%;
+  }
+  
+  .page-toc {
+    position: static;
+    width: 100%;
+    max-height: none;
+    margin-left: 0;
+    margin-top: 2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .page-toc {
+    padding: 0.75rem;
+  }
+}

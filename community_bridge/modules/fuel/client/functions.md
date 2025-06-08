@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: functions
 title: Fuel Functions
 parent: Client
 grand_parent: ⛽ Fuel

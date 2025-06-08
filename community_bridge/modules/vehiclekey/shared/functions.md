@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: functions
 title: Vehiclekey Functions
 parent: Shared
 grand_parent: "🔑 Vehiclekey"

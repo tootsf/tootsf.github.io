@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: functions
 title: Housing Functions
 parent: Server
 grand_parent: "🏠 Housing"
