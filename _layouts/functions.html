@@ -1,0 +1,123 @@
+---
+layout: default
+---
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // Only add TOC if the page has has_toc: true
+  {% if page.has_toc %}
+  
+  // Get all heading elements (h3 level since functions are listed as h3)
+  const headings = document.querySelectorAll('.main-content h3');
+  
+  if (headings.length > 0) {
+    // Create TOC container
+    const tocContainer = document.createElement('div');
+    tocContainer.className = 'page-toc';
+    
+    // Add TOC title
+    const tocTitle = document.createElement('h2');
+    tocTitle.textContent = 'On this page';
+    tocContainer.appendChild(tocTitle);
+    
+    // Create TOC list
+    const tocList = document.createElement('ul');
+    
+    headings.forEach(function(heading, index) {
+      // Create unique ID for heading if it doesn't have one
+      if (!heading.id) {
+        const text = heading.textContent.trim();
+        heading.id = text.toLowerCase()
+          .replace(/[^a-z0-9\s-]/g, '')
+          .replace(/\s+/g, '-')
+          .replace(/-+/g, '-')
+          .replace(/^-|-$/g, '');
+      }
+      
+      // Create TOC list item
+      const listItem = document.createElement('li');
+      const link = document.createElement('a');
+        // Extract function name from heading (handle complex markdown format)
+      let functionName = heading.textContent.trim();
+      
+      // Handle format: [[FunctionName](link/)](link)
+      if (functionName.startsWith('[[') && functionName.includes('](')) {
+        const match = functionName.match(/\[\[([^\]]+)\]/);
+        if (match) {
+          functionName = match[1];
+        }
+      }
+      // Handle simple format: [FunctionName](link)
+      else if (functionName.startsWith('[') && functionName.includes('](')) {
+        functionName = functionName.substring(1, functionName.indexOf(']('));
+      }
+      
+      link.href = '#' + heading.id;
+      link.textContent = functionName;
+      
+      listItem.appendChild(link);
+      tocList.appendChild(listItem);
+    });
+    
+    tocContainer.appendChild(tocList);
+    
+    // Find the main content wrapper and modify structure
+    const mainContentWrap = document.querySelector('.main-content-wrap');
+    const mainContent = document.querySelector('.main-content');
+    
+    if (mainContentWrap && mainContent) {
+      // Add flex class to wrapper
+      mainContentWrap.classList.add('toc-layout');
+      
+      // Insert TOC after main content
+      mainContent.insertAdjacentElement('afterend', tocContainer);
+    }
+    
+    // Add smooth scrolling for TOC links
+    tocContainer.addEventListener('click', function(e) {
+      if (e.target.tagName === 'A') {
+        e.preventDefault();
+        const target = document.querySelector(e.target.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          
+          // Update active link
+          tocContainer.querySelectorAll('a').forEach(link => link.classList.remove('active'));
+          e.target.classList.add('active');
+        }
+      }
+    });
+    
+    // Highlight current section on scroll
+    let timeout;
+    window.addEventListener('scroll', function() {
+      if (timeout) clearTimeout(timeout);
+      timeout = setTimeout(function() {
+        let current = '';
+        const scrollPosition = window.scrollY + 100;
+        
+        headings.forEach(function(heading) {
+          const rect = heading.getBoundingClientRect();
+          const top = rect.top + window.scrollY;
+          
+          if (top <= scrollPosition) {
+            current = heading.id;
+          }
+        });
+        
+        // Update active link
+        tocContainer.querySelectorAll('a').forEach(link => {
+          link.classList.remove('active');
+          if (link.getAttribute('href') === '#' + current) {
+            link.classList.add('active');
+          }
+        });
+      }, 10);
+    });
+  }
+  
+  {% endif %}
+});
+</script>
+
+{{ content }}

@@ -1,9 +1,7 @@
 ---
 ---
 
-@import "just-the-docs";
-
-/* Custom right-side TOC styling */
+/* Custom right-side TOC styling for GitHub Pages */
 .main-content-wrap.toc-layout {
   display: flex;
   gap: 2rem;
@@ -22,8 +20,8 @@
   width: 260px;
   max-height: calc(100vh - 4rem);
   overflow-y: auto;
-  background: var(--sidebar-color, #f5f6fa);
-  border: 1px solid var(--border-color, #eeebee);
+  background: #f5f6fa;
+  border: 1px solid #eeebee;
   border-radius: 6px;
   padding: 1rem;
   margin-left: auto;
@@ -34,8 +32,8 @@
   font-size: 0.875rem !important;
   font-weight: 600;
   margin: 0 0 0.5rem 0;
-  color: var(--body-heading-color, #27262b);
-  border-bottom: 1px solid var(--border-color, #eeebee);
+  color: #27262b;
+  border-bottom: 1px solid #eeebee;
   padding-bottom: 0.5rem;
 }
 
@@ -53,50 +51,50 @@
   display: block;
   padding: 0.25rem 0.5rem;
   text-decoration: none;
-  color: var(--body-text-color, #5c5962);
+  color: #5c5962;
   font-size: 0.8125rem;
   border-radius: 3px;
   transition: all 0.2s ease;
 }
 
 .page-toc a:hover {
-  background-color: var(--sidebar-color, #f5f6fa);
-  color: var(--link-color, #0066cc);
+  background-color: #f5f6fa;
+  color: #0066cc;
 }
 
 /* Add active link styling */
 .page-toc a.active {
-  background-color: var(--link-color, #0066cc);
+  background-color: #0066cc;
   color: white !important;
 }
 
-.dark-theme .page-toc a.active {
-  background-color: var(--link-color, #63b3ed);
-  color: #1a202c !important;
-}
-
 /* Dark theme adjustments */
-.dark-theme .page-toc {
-  background: var(--sidebar-color, #2d3748);
-  border-color: var(--border-color, #4a5568);
+[data-theme="dark"] .page-toc {
+  background: #2d3748;
+  border-color: #4a5568;
 }
 
-.dark-theme .page-toc h2 {
-  color: var(--body-heading-color, #e2e8f0);
-  border-bottom-color: var(--border-color, #4a5568);
+[data-theme="dark"] .page-toc h2 {
+  color: #e2e8f0;
+  border-bottom-color: #4a5568;
 }
 
-.dark-theme .page-toc a {
-  color: var(--body-text-color, #a0aec0);
+[data-theme="dark"] .page-toc a {
+  color: #a0aec0;
 }
 
-.dark-theme .page-toc a:hover {
-  background-color: var(--sidebar-color, #4a5568);
-  color: var(--link-color, #63b3ed);
+[data-theme="dark"] .page-toc a:hover {
+  background-color: #4a5568;
+  color: #63b3ed;
 }
 
-.dark-theme .page-toc a:visited {
-  color: var(--body-text-color, #a0aec0);
+[data-theme="dark"] .page-toc a:visited {
+  color: #a0aec0;
+}
+
+[data-theme="dark"] .page-toc a.active {
+  background-color: #63b3ed;
+  color: #1a202c !important;
 }
 
 /* Hide the original TOC at bottom */
