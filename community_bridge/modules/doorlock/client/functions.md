@@ -15,11 +15,11 @@ permalink: /community_bridge/modules/doorlock/client/functions/
 
 Client-side functions for the doorlock module.
 
-## Table of contents
+<div class="toc-container">## Table of contents
 {: .no_toc .text-delta }
 
 1. TOC
-{:toc}
+{:toc}</div>
 
 ---
 ## Functions
@@ -27,6 +27,7 @@ Client-side functions for the doorlock module.
 
 
 ### [GetClosestDoor](GetClosestDoor)
+
 
 
 

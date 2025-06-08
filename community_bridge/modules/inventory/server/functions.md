@@ -15,11 +15,11 @@ permalink: /community_bridge/modules/inventory/server/functions/
 
 Server-side functions for the inventory module.
 
-## Table of contents
+<div class="toc-container">## Table of contents
 {: .no_toc .text-delta }
 
 1. TOC
-{:toc}
+{:toc}</div>
 
 ---
 ## Functions
@@ -53,6 +53,7 @@ Server-side functions for the inventory module.
 ### [StripPNG](StripPNG)
 
 ### [UpdatePlate](UpdatePlate)
+
 
 
 

@@ -15,11 +15,11 @@ permalink: /community_bridge/modules/accessibility/client/functions/
 
 Client-side functions for the accessibility module.
 
-## Table of contents
+<div class="toc-container">## Table of contents
 {: .no_toc .text-delta }
 
 1. TOC
-{:toc}
+{:toc}</div>
 
 ---
 ## Functions
@@ -43,6 +43,7 @@ Client-side functions for the accessibility module.
 ### [rgbToHsl](rgbToHsl)
 
 ### [updatecolourblindness](updatecolourblindness)
+
 
 
 

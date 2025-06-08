@@ -15,11 +15,11 @@ permalink: /community_bridge/modules/menu/client/functions/
 
 Client-side functions for the menu module.
 
-## Table of contents
+<div class="toc-container">## Table of contents
 {: .no_toc .text-delta }
 
 1. TOC
-{:toc}
+{:toc}</div>
 
 ---
 
@@ -29,3 +29,4 @@ Client-side functions for the menu module.
 ### [Open](Open)
 ### [OxLibFormat](OxLibFormat)
 ### [QBMenuFormat](QBMenuFormat)
+

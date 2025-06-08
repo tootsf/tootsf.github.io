@@ -15,11 +15,11 @@ permalink: /community_bridge/modules/inventory/client/functions/
 
 Client-side functions for the inventory module.
 
-## Table of contents
+<div class="toc-container">## Table of contents
 {: .no_toc .text-delta }
 
 1. TOC
-{:toc}
+{:toc}</div>
 
 ---
 ## Functions
@@ -274,4 +274,5 @@ local Bridge = exports['community_bridge']:Bridge()
 local cleanName = Bridge.Inventory.StripPNG("water.png")
 -- Returns: "water"
 ```
+
 

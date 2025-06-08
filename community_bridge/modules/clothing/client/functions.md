@@ -15,11 +15,11 @@ permalink: /community_bridge/modules/clothing/client/functions/
 
 Client-side functions for the clothing module.
 
-## Table of contents
+<div class="toc-container">## Table of contents
 {: .no_toc .text-delta }
 
 1. TOC
-{:toc}
+{:toc}</div>
 
 ---
 ## Functions
@@ -45,6 +45,7 @@ Client-side functions for the clothing module.
 ### [ToggleDebugging](ToggleDebugging)
 
 ### [UpdateAppearanceBackup](UpdateAppearanceBackup)
+
 
 
 

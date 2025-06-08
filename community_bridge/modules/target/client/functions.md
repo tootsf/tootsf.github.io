@@ -15,11 +15,11 @@ permalink: /community_bridge/modules/target/client/functions/
 
 Client-side functions for the target module.
 
-## Table of contents
+<div class="toc-container">## Table of contents
 {: .no_toc .text-delta }
 
 1. TOC
-{:toc}
+{:toc}</div>
 
 ---
 ## Functions
@@ -39,5 +39,6 @@ Client-side functions for the target module.
 ### [RemoveTargetModel](RemoveTargetModel)
 
 ### [RemoveTargetZone](RemoveTargetZone)
+
 
 

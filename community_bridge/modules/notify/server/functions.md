@@ -15,11 +15,11 @@ permalink: /community_bridge/modules/notify/server/functions/
 
 Server-side functions for the notify module.
 
-## Table of contents
+<div class="toc-container">## Table of contents
 {: .no_toc .text-delta }
 
 1. TOC
-{:toc}
+{:toc}</div>
 
 ---
 ## Functions
@@ -31,6 +31,7 @@ Server-side functions for the notify module.
 ### [SendNotify](SendNotify)
 
 ### [ShowHelpText](ShowHelpText)
+
 
 
 

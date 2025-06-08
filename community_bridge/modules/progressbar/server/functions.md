@@ -15,11 +15,11 @@ permalink: /community_bridge/modules/progressbar/server/functions/
 
 Server-side functions for the progressbar module.
 
-## Table of contents
+<div class="toc-container">## Table of contents
 {: .no_toc .text-delta }
 
 1. TOC
-{:toc}
+{:toc}</div>
 
 ---
 ## Functions
@@ -35,6 +35,7 @@ Server-side functions for the progressbar module.
 ### [StopClientProgress](StopClientProgress)
 
 ### [TriggerClientProgress](TriggerClientProgress)
+
 
 
 
