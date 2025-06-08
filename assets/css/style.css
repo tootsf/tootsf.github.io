@@ -2,26 +2,15 @@
 ---
 
 /* Custom right-side TOC styling for GitHub Pages */
-.content-with-toc {
+.main-content-wrap.toc-layout {
   display: flex !important;
   gap: 2rem !important;
   align-items: flex-start !important;
 }
 
-.content-wrapper {
+.main-content-wrap.toc-layout .main-content {
   flex: 1 !important;
   max-width: calc(100% - 280px) !important;
-}
-
-.main-content-wrap.toc-layout {
-  display: flex;
-  gap: 2rem;
-  align-items: flex-start;
-}
-
-.toc-layout .main-content {
-  flex: 1;
-  max-width: calc(100% - 280px);
 }
 
 /* TOC Container Styling - Override Just the Docs */
@@ -122,16 +111,14 @@ nav[data-toggle="toc"],
 
 /* Responsive design */
 @media (max-width: 1200px) {
-  .content-with-toc,
   .main-content-wrap.toc-layout {
     flex-direction: column !important;
   }
-  
-  .content-wrapper,
-  .toc-layout .main-content {
+
+  .main-content-wrap.toc-layout .main-content {
     max-width: 100% !important;
   }
-  
+
   .page-toc {
     position: static !important;
     width: 100% !important;

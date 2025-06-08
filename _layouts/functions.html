@@ -7,54 +7,54 @@ layout: default
 <script>
 (function() {
   'use strict';
-  
+
   // Wait for page to fully load
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', initTOC);
   } else {
     initTOC();
   }
-  
+
   function initTOC() {
     // Only add TOC if the page has has_toc: true
     {% if page.has_toc %}
-    
+
     console.log('TOC script running...');
-    
+
     // Get all heading elements (h3 level since functions are listed as h3)
     var headings = document.querySelectorAll('.main-content h3');
     console.log('Found headings:', headings.length);
-    
+
     if (headings.length === 0) {
       console.log('No headings found, TOC not created');
       return;
     }
-    
+
     try {
       createTOC(headings);
     } catch (error) {
       console.error('Error creating TOC:', error);
     }
-    
+
     {% endif %}
   }
-  
+
   function createTOC(headings) {
     // Create TOC container
     var tocContainer = document.createElement('div');
     tocContainer.className = 'page-toc';
-    
+
     // Add TOC title
     var tocTitle = document.createElement('h2');
     tocTitle.textContent = 'On this page';
     tocContainer.appendChild(tocTitle);
-    
+
     // Create TOC list
     var tocList = document.createElement('ul');
-    
+
     for (var i = 0; i < headings.length; i++) {
       var heading = headings[i];
-      
+
       // Create unique ID for heading if it doesn't have one
       if (!heading.id) {
         var text = heading.textContent.trim();
@@ -64,14 +64,14 @@ layout: default
           .replace(/-+/g, '-')
           .replace(/^-|-$/g, '');
       }
-      
+
       // Create TOC list item
       var listItem = document.createElement('li');
       var link = document.createElement('a');
-      
+
       // Extract function name from heading
       var functionName = heading.textContent.trim();
-      
+
       // Handle format: [[FunctionName](link/)](link)
       if (functionName.indexOf('[[') === 0 && functionName.indexOf('](') > -1) {
         var match = functionName.match(/\[\[([^\]]+)\]/);
@@ -83,54 +83,46 @@ layout: default
       else if (functionName.indexOf('[') === 0 && functionName.indexOf('](') > -1) {
         functionName = functionName.substring(1, functionName.indexOf(']('));
       }
-      
+
       link.href = '#' + heading.id;
       link.textContent = functionName;
-      
+
       listItem.appendChild(link);
       tocList.appendChild(listItem);
     }
-    
+
     tocContainer.appendChild(tocList);
-    
+
     // Insert TOC
     insertTOC(tocContainer);
   }
-  
-  function insertTOC(tocContainer) {
+    function insertTOC(tocContainer) {
     // Find the main content wrapper
     var mainContentWrap = document.querySelector('.main-content-wrap');
     var mainContent = document.querySelector('.main-content');
-    
+
     console.log('Main content wrap:', mainContentWrap);
     console.log('Main content:', mainContent);
-    
+
     if (mainContentWrap && mainContent) {
-      // Create a flex container
-      var flexContainer = document.createElement('div');
-      flexContainer.style.cssText = 'display: flex !important; gap: 2rem !important; align-items: flex-start !important; width: 100% !important;';
-      
-      // Create content wrapper
-      var contentWrapper = document.createElement('div');
-      contentWrapper.style.cssText = 'flex: 1 !important; min-width: 0 !important;';
-      
-      // Insert flex container before main content
-      mainContent.parentNode.insertBefore(flexContainer, mainContent);
-      
-      // Move main content into wrapper
-      contentWrapper.appendChild(mainContent);
-      flexContainer.appendChild(contentWrapper);
-      flexContainer.appendChild(tocContainer);
-      
+      // Add toc-layout class to main-content-wrap
+      mainContentWrap.classList.add('toc-layout');
+
+      // Add class to main content for styling
+      mainContent.classList.add('content-with-toc');
+
+      // Insert TOC after main content
+      mainContent.parentNode.insertBefore(tocContainer, mainContent.nextSibling);
+
       console.log('TOC added to page successfully');
-      
+
       // Add event listeners
       addTOCEventListeners(tocContainer);
     } else {
       console.log('Could not find main content elements');
     }
   }
-  
+
   function addTOCEventListeners(tocContainer) {
     // Add smooth scrolling for TOC links
     tocContainer.addEventListener('click', function(e) {
