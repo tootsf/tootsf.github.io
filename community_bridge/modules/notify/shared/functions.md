@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Functions
+title: Notify Functions
 parent: Shared
 grand_parent: "🔔 Notify"
 great_grand_parent: Modules

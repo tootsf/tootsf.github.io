@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Functions
+title: Version Functions
 parent: Shared
 grand_parent: "📦 Version"
 great_grand_parent: Modules

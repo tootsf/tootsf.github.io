@@ -1,7 +1,7 @@
 ---
 layout: default
 title: "StartSynchronizedProgress"
-parent: Functions
+parent: Progressbar Functions
 grand_parent: Server
 great_grand_parent: ⏳ Progressbar
 nav_order: 1

@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Functions
+title: Framework Functions
 parent: Shared
 grand_parent: "🧩 Framework"
 great_grand_parent: Modules

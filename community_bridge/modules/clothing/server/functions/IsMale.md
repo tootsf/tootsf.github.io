@@ -1,7 +1,7 @@
 ---
 layout: default
 title: "IsMale"
-parent: Functions
+parent: Clothing Functions
 grand_parent: Server
 great_grand_parent: 👔 Clothing
 nav_order: 1

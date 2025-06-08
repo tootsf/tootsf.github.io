@@ -1,7 +1,7 @@
 ---
 layout: default
 title: "ShowDateInput"
-parent: Functions
+parent: Input Functions
 grand_parent: Client
 great_grand_parent: ⌨️ Input
 nav_order: 1

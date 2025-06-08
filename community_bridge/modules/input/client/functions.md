@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Functions
+title: Input Functions
 parent: Client
 grand_parent: ⌨️ Input
 great_grand_parent: Modules

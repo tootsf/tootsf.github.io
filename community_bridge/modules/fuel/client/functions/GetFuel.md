@@ -1,7 +1,7 @@
 ---
 layout: default
 title: "GetFuel"
-parent: Functions
+parent: Fuel Functions
 grand_parent: Client
 great_grand_parent: ⛽ Fuel
 nav_order: 1

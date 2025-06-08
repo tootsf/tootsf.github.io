@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Functions
+title: Weather Functions
 parent: Client
 grand_parent: "🌤️ Weather"
 great_grand_parent: Modules

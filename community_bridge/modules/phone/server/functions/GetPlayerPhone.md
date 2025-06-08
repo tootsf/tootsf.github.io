@@ -1,7 +1,7 @@
 ---
 layout: default
 title: "GetPlayerPhone"
-parent: Functions
+parent: Phone Functions
 grand_parent: Server
 great_grand_parent: 📱 Phone
 nav_order: 1

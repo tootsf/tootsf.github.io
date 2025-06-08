@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Functions
+title: Shops Functions
 parent: Server
 grand_parent: "🛒 Shops"
 great_grand_parent: Modules

@@ -1,7 +1,7 @@
 ---
 layout: default
 title: "SendEmail"
-parent: Functions
+parent: Phone Functions
 grand_parent: Client
 great_grand_parent: 📱 Phone
 nav_order: 1

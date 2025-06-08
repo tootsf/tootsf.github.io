@@ -1,7 +1,7 @@
 ---
 layout: default
 title: "hexToRgb"
-parent: Functions
+parent: Accessibility Functions
 grand_parent: Client
 great_grand_parent: ♿ Accessibility
 nav_order: 1

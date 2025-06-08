@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Functions
+title: Doorlock Functions
 parent: Shared
 grand_parent: "🚪 Doorlock"
 great_grand_parent: Modules

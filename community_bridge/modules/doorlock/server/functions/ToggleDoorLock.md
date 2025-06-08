@@ -1,7 +1,7 @@
 ---
 layout: default
 title: "ToggleDoorLock"
-parent: Functions
+parent: Doorlock Functions
 grand_parent: Server
 great_grand_parent: 🚪 Doorlock
 nav_order: 1

@@ -1,7 +1,7 @@
 ---
 layout: default
 title: "IsProgressActive"
-parent: Functions
+parent: Progressbar Functions
 grand_parent: Client
 great_grand_parent: ⏳ Progressbar
 nav_order: 1

@@ -1,7 +1,7 @@
 ---
 layout: default
 title: "CopyAppearanceToClipboard"
-parent: Functions
+parent: Clothing Functions
 grand_parent: Client
 great_grand_parent: 👔 Clothing
 nav_order: 1

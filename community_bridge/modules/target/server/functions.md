@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Functions
+title: Target Functions
 parent: Server
 grand_parent: "🎯 Target"
 great_grand_parent: Modules

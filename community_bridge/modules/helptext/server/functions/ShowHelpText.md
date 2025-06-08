@@ -1,7 +1,7 @@
 ---
 layout: default
 title: "ShowHelpText"
-parent: Functions
+parent: Helptext Functions
 grand_parent: Server
 great_grand_parent: ❓ Helptext
 nav_order: 1

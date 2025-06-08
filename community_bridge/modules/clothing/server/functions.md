@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Functions
+title: Clothing Functions
 parent: Server
 grand_parent: 👔 Clothing
 great_grand_parent: Modules

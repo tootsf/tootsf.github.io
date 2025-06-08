@@ -1,7 +1,7 @@
 ---
 layout: default
 title: "GetFrameworkJobs"
-parent: Functions
+parent: Framework Functions
 grand_parent: Client
 great_grand_parent: "🧩 Framework"
 nav_order: 1

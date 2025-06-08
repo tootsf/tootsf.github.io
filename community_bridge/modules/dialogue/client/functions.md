@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Functions
+title: Dialogue Functions
 parent: Client
 grand_parent: 💬 Dialogue
 great_grand_parent: Modules

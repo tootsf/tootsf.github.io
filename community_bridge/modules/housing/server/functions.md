@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Functions
+title: Housing Functions
 parent: Server
 grand_parent: "🏠 Housing"
 great_grand_parent: Modules

@@ -1,7 +1,7 @@
 ---
 layout: default
 title: "AddTargetModel"
-parent: Functions
+parent: Target Functions
 grand_parent: Client
 great_grand_parent: 🎯 Target
 nav_order: 3

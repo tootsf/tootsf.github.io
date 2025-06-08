@@ -1,7 +1,7 @@
 ---
 layout: default
 title: "HideHelpText"
-parent: Functions
+parent: Helptext Functions
 grand_parent: Client
 great_grand_parent: ❓ Helptext
 nav_order: 1

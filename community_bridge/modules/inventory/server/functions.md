@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Functions
+title: Inventory Functions
 parent: Server
 grand_parent: 🎒 Inventory
 great_grand_parent: Modules

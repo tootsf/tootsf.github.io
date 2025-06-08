@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Functions
+title: Managment Functions
 parent: Client
 grand_parent: "📊 Managment"
 great_grand_parent: Modules

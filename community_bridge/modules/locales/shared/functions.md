@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Functions
+title: Locales Functions
 parent: Shared
 grand_parent: "🌐 Locales"
 great_grand_parent: Modules

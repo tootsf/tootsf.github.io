@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Functions
+title: Phone Functions
 parent: Shared
 grand_parent: "📱 Phone"
 great_grand_parent: Modules

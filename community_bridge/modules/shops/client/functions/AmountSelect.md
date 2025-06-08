@@ -1,7 +1,7 @@
 ---
 layout: default
 title: "AmountSelect"
-parent: Functions
+parent: Shops Functions
 grand_parent: Client
 great_grand_parent: 🛒 Shops
 nav_order: 1

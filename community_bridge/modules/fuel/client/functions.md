@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Functions
+title: Fuel Functions
 parent: Client
 grand_parent: ⛽ Fuel
 great_grand_parent: Modules

@@ -1,7 +1,7 @@
 ---
 layout: default
 title: "HideHelpText"
-parent: Functions
+parent: Notify Functions
 grand_parent: Server
 great_grand_parent: 🔔 Notify
 nav_order: 1

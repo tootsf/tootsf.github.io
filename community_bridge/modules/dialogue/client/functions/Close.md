@@ -1,7 +1,7 @@
 ---
 layout: default
 title: "Close"
-parent: Functions
+parent: Dialogue Functions
 grand_parent: Client
 great_grand_parent: 💬 Dialogue
 nav_order: 1

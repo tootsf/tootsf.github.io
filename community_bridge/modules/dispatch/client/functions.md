@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Functions
+title: Dispatch Functions
 parent: Client
 grand_parent: "🚨 Dispatch"
 great_grand_parent: Modules

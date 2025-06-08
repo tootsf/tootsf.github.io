@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Functions
+title: Menu Functions
 parent: Shared
 grand_parent: "📋 Menu"
 great_grand_parent: Modules

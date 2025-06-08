@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Functions
+title: Accessibility Functions
 parent: Client
 grand_parent: ♿ Accessibility
 great_grand_parent: Modules

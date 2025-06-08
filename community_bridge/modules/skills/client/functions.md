@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Functions
+title: Skills Functions
 parent: Client
 grand_parent: ⭐ Skills
 great_grand_parent: Modules

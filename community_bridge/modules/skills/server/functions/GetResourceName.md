@@ -1,7 +1,7 @@
 ---
 layout: default
 title: "GetResourceName"
-parent: Functions
+parent: Skills Functions
 grand_parent: Server
 great_grand_parent: ⭐ Skills
 nav_order: 3

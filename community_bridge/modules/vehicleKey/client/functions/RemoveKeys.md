@@ -1,7 +1,7 @@
 ---
 layout: default
 title: "RemoveKeys"
-parent: Functions
+parent: Vehiclekey Functions
 grand_parent: Client
 great_grand_parent: 🔑 Vehiclekey
 nav_order: 1

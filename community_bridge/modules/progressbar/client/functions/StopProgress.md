@@ -1,7 +1,7 @@
 ---
 layout: default
 title: "StopProgress"
-parent: Functions
+parent: Progressbar Functions
 grand_parent: Client
 great_grand_parent: ⏳ Progressbar
 nav_order: 1

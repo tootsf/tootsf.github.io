@@ -1,7 +1,7 @@
 ---
 layout: default
 title: "RemoveItem"
-parent: Functions
+parent: Inventory Functions
 grand_parent: Server
 great_grand_parent: 🎒 Inventory
 nav_order: 1

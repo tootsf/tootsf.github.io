@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Functions
+title: Weather Functions
 parent: Shared
 grand_parent: "🌤️ Weather"
 great_grand_parent: Modules

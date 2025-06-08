@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Functions
+title: Progressbar Functions
 parent: Shared
 grand_parent: "⏳ Progressbar"
 great_grand_parent: Modules

@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Functions
+title: Skills Functions
 parent: Shared
 grand_parent: "⭐ Skills"
 great_grand_parent: Modules

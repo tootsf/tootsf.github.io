@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Functions
+title: Math Functions
 parent: Server
 grand_parent: "🔢 Math"
 great_grand_parent: Modules

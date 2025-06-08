@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Functions
+title: Version Functions
 parent: Client
 grand_parent: "📦 Version"
 great_grand_parent: Modules

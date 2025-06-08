@@ -1,7 +1,7 @@
 ---
 layout: default
 title: "AddAccountMoney"
-parent: Functions
+parent: Managment Functions
 grand_parent: Server
 great_grand_parent: 📊 Managment
 nav_order: 1

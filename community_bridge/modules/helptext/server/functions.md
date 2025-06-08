@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Functions
+title: Helptext Functions
 parent: Server
 grand_parent: ❓ Helptext
 great_grand_parent: Modules

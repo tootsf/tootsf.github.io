@@ -1,7 +1,7 @@
 ---
 layout: default
 title: "GetPlayerIdentifier"
-parent: Functions
+parent: Framework Functions
 grand_parent: Server
 great_grand_parent: 🧩 Framework
 nav_order: 1

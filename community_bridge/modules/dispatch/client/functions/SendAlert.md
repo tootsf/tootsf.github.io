@@ -1,7 +1,7 @@
 ---
 layout: default
 title: "SendAlert"
-parent: Functions
+parent: Dispatch Functions
 grand_parent: Client
 great_grand_parent: "🚨 Dispatch"
 nav_order: 2

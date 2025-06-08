@@ -1,7 +1,7 @@
 ---
 layout: default
 title: "OxLibFormat"
-parent: Functions
+parent: Menu Functions
 grand_parent: Client
 great_grand_parent: 📋 Menu
 nav_order: 1

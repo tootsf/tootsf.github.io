@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Functions
+title: Clothing Functions
 parent: Shared
 grand_parent: "👔 Clothing"
 great_grand_parent: Modules
