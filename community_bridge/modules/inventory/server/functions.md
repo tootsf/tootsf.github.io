@@ -27,45 +27,32 @@ Server-side functions for the inventory module.
 
 
 ### [AddItem](AddItem)
-{: .no_toc }
 
 ### [CanCarryItem](CanCarryItem)
-{: .no_toc }
 
 ### [GetImagePath](GetImagePath)
-{: .no_toc }
 
 ### [GetItemBySlot](GetItemBySlot)
-{: .no_toc }
 
 ### [GetItemCount](GetItemCount)
-{: .no_toc }
 
 ### [GetPlayerInventory](GetPlayerInventory)
-{: .no_toc }
 
 ### [HasItem](HasItem)
-{: .no_toc }
 
 ### [OpenStash](OpenStash)
-{: .no_toc }
 
 ### [RegisterShop](RegisterShop)
-{: .no_toc }
 
 ### [RegisterStash](RegisterStash)
-{: .no_toc }
 
 ### [RemoveItem](RemoveItem)
-{: .no_toc }
 
 ### [SetMetadata](SetMetadata)
-{: .no_toc }
 
 ### [StripPNG](StripPNG)
-{: .no_toc }
 
 ### [UpdatePlate](UpdatePlate)
-{: .no_toc }
+
 
 

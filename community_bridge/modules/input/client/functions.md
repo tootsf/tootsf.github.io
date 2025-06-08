@@ -27,27 +27,20 @@ Client-side functions for the input module.
 
 
 ### [SetValidationRule](SetValidationRule)
-{: .no_toc }
 
 ### [ShowColorInput](ShowColorInput)
-{: .no_toc }
 
 ### [ShowDateInput](ShowDateInput)
-{: .no_toc }
 
 ### [ShowInput](ShowInput)
-{: .no_toc }
 
 ### [ShowInputForm](ShowInputForm)
-{: .no_toc }
 
 ### [ShowNumberInput](ShowNumberInput)
-{: .no_toc }
 
 ### [ShowSelectInput](ShowSelectInput)
-{: .no_toc }
 
 ### [ValidateInput](ValidateInput)
-{: .no_toc }
+
 
 

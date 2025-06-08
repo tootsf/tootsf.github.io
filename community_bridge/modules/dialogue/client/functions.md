@@ -27,9 +27,8 @@ Client-side functions for the dialogue module.
 
 
 ### [Close](Close)
-{: .no_toc }
 
 ### [Open](Open)
-{: .no_toc }
+
 
 

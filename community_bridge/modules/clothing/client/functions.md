@@ -27,33 +27,24 @@ Client-side functions for the clothing module.
 
 
 ### [CopyAppearanceToClipboard](CopyAppearanceToClipboard)
-{: .no_toc }
 
 ### [ConvertFromDefault](ConvertFromDefault)
-{: .no_toc }
 
 ### [ConvertToDefault](ConvertToDefault)
-{: .no_toc }
 
 ### [GetAppearance](GetAppearance)
-{: .no_toc }
 
 ### [IsMale](IsMale)
-{: .no_toc }
 
 ### [OpenMenu](OpenMenu)
-{: .no_toc }
 
 ### [RestoreAppearance](RestoreAppearance)
-{: .no_toc }
 
 ### [SetAppearance](SetAppearance)
-{: .no_toc }
 
 ### [ToggleDebugging](ToggleDebugging)
-{: .no_toc }
 
 ### [UpdateAppearanceBackup](UpdateAppearanceBackup)
-{: .no_toc }
+
 
 

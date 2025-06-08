@@ -27,30 +27,22 @@ Client-side functions for the accessibility module.
 
 
 ### [IsMale](IsMale)
-{: .no_toc }
 
 ### [adjustColourForColourblindness](adjustColourForColourblindness)
-{: .no_toc }
 
 ### [getAdjustedColour](getAdjustedColour)
-{: .no_toc }
 
 ### [hexToRgb](hexToRgb)
-{: .no_toc }
 
 ### [hslToRgb](hslToRgb)
-{: .no_toc }
 
 ### [hue2rgb](hue2rgb)
-{: .no_toc }
 
 ### [rgbToHex](rgbToHex)
-{: .no_toc }
 
 ### [rgbToHsl](rgbToHsl)
-{: .no_toc }
 
 ### [updatecolourblindness](updatecolourblindness)
-{: .no_toc }
+
 
 

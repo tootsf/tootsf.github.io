@@ -27,6 +27,6 @@ Server-side functions for the doorlock module.
 
 
 ### [ToggleDoorLock](ToggleDoorLock)
-{: .no_toc }
+
 
 

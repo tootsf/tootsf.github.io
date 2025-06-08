@@ -27,12 +27,10 @@ Server-side functions for the managment module.
 
 
 ### [AddAccountMoney](AddAccountMoney)
-{: .no_toc }
 
 ### [GetAccountMoney](GetAccountMoney)
-{: .no_toc }
 
 ### [RemoveAccountMoney](RemoveAccountMoney)
-{: .no_toc }
+
 
 

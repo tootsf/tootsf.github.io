@@ -27,9 +27,8 @@ Server-side functions for the helptext module.
 
 
 ### [HideHelpText](HideHelpText)
-{: .no_toc }
 
 ### [ShowHelpText](ShowHelpText)
-{: .no_toc }
+
 
 

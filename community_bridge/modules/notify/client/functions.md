@@ -27,15 +27,12 @@ Client-side functions for the notify module.
 
 
 ### [GetResourceName](GetResourceName)
-{: .no_toc }
 
 ### [HideHelpText](HideHelpText)
-{: .no_toc }
 
 ### [SendNotify](SendNotify)
-{: .no_toc }
 
 ### [ShowHelpText](ShowHelpText)
-{: .no_toc }
+
 
 

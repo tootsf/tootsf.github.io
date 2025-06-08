@@ -27,12 +27,10 @@ Client-side functions for the shops module.
 
 
 ### [AmountSelect](AmountSelect)
-{: .no_toc }
 
 ### [FinalizeCheckOut](FinalizeCheckOut)
-{: .no_toc }
 
 ### [OpenShop](OpenShop)
-{: .no_toc }
+
 
 

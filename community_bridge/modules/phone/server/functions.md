@@ -27,9 +27,8 @@ Server-side functions for the phone module.
 
 
 ### [GetPlayerPhone](GetPlayerPhone)
-{: .no_toc }
 
 ### [SendEmail](SendEmail)
-{: .no_toc }
+
 
 

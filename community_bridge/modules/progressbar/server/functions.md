@@ -27,18 +27,14 @@ Server-side functions for the progressbar module.
 
 
 ### [BroadcastProgress](BroadcastProgress)
-{: .no_toc }
 
 ### [IsClientProgressActive](IsClientProgressActive)
-{: .no_toc }
 
 ### [StartSynchronizedProgress](StartSynchronizedProgress)
-{: .no_toc }
 
 ### [StopClientProgress](StopClientProgress)
-{: .no_toc }
 
 ### [TriggerClientProgress](TriggerClientProgress)
-{: .no_toc }
+
 
 

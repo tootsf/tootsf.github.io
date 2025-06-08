@@ -27,9 +27,8 @@ Client-side functions for the skills module.
 
 
 ### [[GetResourceName](GetResourceName/)]([GetResourceName](GetResourceName))
-{: .no_toc }
 
 ### [[GetSkillLevel](GetSkillLevel/)]([GetSkillLevel](GetSkillLevel))
-{: .no_toc }
+
 
 

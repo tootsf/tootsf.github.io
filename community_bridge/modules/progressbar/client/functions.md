@@ -27,15 +27,12 @@ Client-side functions for the progressbar module.
 
 
 ### [IsProgressActive](IsProgressActive)
-{: .no_toc }
 
 ### [StartCircularProgress](StartCircularProgress)
-{: .no_toc }
 
 ### [StartProgress](StartProgress)
-{: .no_toc }
 
 ### [StopProgress](StopProgress)
-{: .no_toc }
+
 
 

@@ -27,9 +27,8 @@ Client-side functions for the vehicleKey module.
 
 
 ### [GiveKeys](GiveKeys)
-{: .no_toc }
 
 ### [RemoveKeys](RemoveKeys)
-{: .no_toc }
+
 
 

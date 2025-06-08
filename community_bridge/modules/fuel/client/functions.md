@@ -27,15 +27,12 @@ Client-side functions for the fuel module.
 
 
 ### [GetFuel](GetFuel)
-{: .no_toc }
 
 ### [GetResourceName](GetResourceName)
-{: .no_toc }
 
 ### [SetFuel](SetFuel)
-{: .no_toc }
 
 ### [index](index)
-{: .no_toc }
+
 
 

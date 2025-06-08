@@ -27,27 +27,20 @@ Server-side functions for the clothing module.
 
 
 ### [GetAppearance](GetAppearance)
-{: .no_toc }
 
 ### [IsMale](IsMale)
-{: .no_toc }
 
 ### [RestoreAppearance](RestoreAppearance)
-{: .no_toc }
 
 ### [SetAppearance](SetAppearance)
-{: .no_toc }
 
 ### [SetAppearanceExt](SetAppearanceExt)
-{: .no_toc }
 
 ### [Save](Save)
-{: .no_toc }
 
 ### [Revert](Revert)
-{: .no_toc }
 
 ### [OpenMenu](OpenMenu)
-{: .no_toc }
+
 
 

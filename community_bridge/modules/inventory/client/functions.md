@@ -27,25 +27,18 @@ Client-side functions for the inventory module.
 
 
 ### [GetImagePath](GetImagePath)
-{: .no_toc }
 
 ### [GetItemCount](GetItemCount)
-{: .no_toc }
 
 ### [GetItemInfo](GetItemInfo)
-{: .no_toc }
 
 ### [GetPlayerInventory](GetPlayerInventory)
-{: .no_toc }
 
 ### [HasItem](HasItem)
-{: .no_toc }
 
 ### [OpenShop](OpenShop)
-{: .no_toc }
 
 ### [StripPNG](StripPNG)
-{: .no_toc }
 
 
 # GetImagePath
@@ -281,3 +274,4 @@ local Bridge = exports['community_bridge']:Bridge()
 local cleanName = Bridge.Inventory.StripPNG("water.png")
 -- Returns: "water"
 ```
+

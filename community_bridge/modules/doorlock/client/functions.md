@@ -27,6 +27,6 @@ Client-side functions for the doorlock module.
 
 
 ### [GetClosestDoor](GetClosestDoor)
-{: .no_toc }
+
 
 

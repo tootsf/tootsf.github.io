@@ -27,15 +27,12 @@ Server-side functions for the skills module.
 
 
 ### [[GetResourceName](GetResourceName/)]([GetResourceName](GetResourceName))
-{: .no_toc }
 
 ### [[GetSkillLevel](GetSkillLevel/)]([GetSkillLevel](GetSkillLevel))
-{: .no_toc }
 
 ### [[AddXp](AddXp/)]([AddXp](AddXp))
-{: .no_toc }
 
 ### [[RemoveXp](RemoveXp/)]([RemoveXp](RemoveXp))
-{: .no_toc }
+
 
 

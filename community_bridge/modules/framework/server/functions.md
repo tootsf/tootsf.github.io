@@ -27,36 +27,26 @@ Server-side functions for the framework module.
 
 
 ### [GetFrameworkJobs](GetFrameworkJobs)
-{: .no_toc }
 
 ### [GetFrameworkName](GetFrameworkName)
-{: .no_toc }
 
 ### [GetItem](GetItem)
-{: .no_toc }
 
 ### [GetItemCount](GetItemCount)
-{: .no_toc }
 
 ### [GetPlayer](GetPlayer)
-{: .no_toc }
 
 ### [GetPlayerDob](GetPlayerDob)
-{: .no_toc }
 
 ### [GetPlayerIdentifier](GetPlayerIdentifier)
-{: .no_toc }
 
 ### [GetPlayerInventory](GetPlayerInventory)
-{: .no_toc }
 
 ### [GetPlayerName](GetPlayerName)
-{: .no_toc }
 
 ### [GetPlayers](GetPlayers)
-{: .no_toc }
 
 ### [HasItem](HasItem)
-{: .no_toc }
+
 
 

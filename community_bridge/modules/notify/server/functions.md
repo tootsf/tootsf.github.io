@@ -27,12 +27,10 @@ Server-side functions for the notify module.
 
 
 ### [HideHelpText](HideHelpText)
-{: .no_toc }
 
 ### [SendNotify](SendNotify)
-{: .no_toc }
 
 ### [ShowHelpText](ShowHelpText)
-{: .no_toc }
+
 
 
