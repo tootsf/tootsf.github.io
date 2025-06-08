@@ -27,24 +27,17 @@ Client-side functions for the target module.
 
 
 ### [AddTargetCoords](AddTargetCoords)
-{: .no_toc }
 
 ### [AddTargetEntity](AddTargetEntity)
-{: .no_toc }
 
 ### [AddTargetModel](AddTargetModel)
-{: .no_toc }
 
 ### [AddTargetZone](AddTargetZone)
-{: .no_toc }
 
 ### [RemoveTargetEntity](RemoveTargetEntity)
-{: .no_toc }
 
 ### [RemoveTargetModel](RemoveTargetModel)
-{: .no_toc }
 
 ### [RemoveTargetZone](RemoveTargetZone)
-{: .no_toc }
 
 

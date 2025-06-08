@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: functions
 title: Dispatch Functions
 parent: Client
 grand_parent: "🚨 Dispatch"
@@ -27,10 +27,8 @@ Client-side functions for the dispatch module.
 
 
 ### [Send911Call](Send911Call)
-{: .no_toc }
 
 ### [SendAlert](SendAlert)
-{: .no_toc }
 
 
 

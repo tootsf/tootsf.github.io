@@ -27,6 +27,5 @@ Client-side functions for the phone module.
 
 
 ### [SendEmail](SendEmail)
-{: .no_toc }
 
 
