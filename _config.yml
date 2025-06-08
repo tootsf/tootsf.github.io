@@ -16,6 +16,7 @@ search:
   button: false
 
 # Table of contents settings
+heading_anchors: true
 toc:
   enabled: true
   h_min: 2
