@@ -5,8 +5,6 @@ parent: Functions
 grand_parent: Client
 great_grand_parent: "🎒 Inventory"
 nav_order: 1
-permalink: /community_bridge/modules/inventory/client/functions/GetItemInfo/
-nav_exclude: true
 ---
 
 # GetItemInfo

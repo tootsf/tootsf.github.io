@@ -5,8 +5,6 @@ parent: Functions
 grand_parent: Server
 great_grand_parent: 🎒 Inventory
 nav_order: 1
-permalink: /community_bridge/modules/inventory/server/functions/RegisterShop/
-nav_exclude: true
 ---
 
 # RegisterShop

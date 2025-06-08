@@ -4,9 +4,7 @@ title: "GetSkillLevel"
 parent: Functions
 grand_parent: Server
 great_grand_parent: ⭐ Skills
-nav_order: 1
-permalink: /community_bridge/modules/skills/server/functions/GetSkillLevel/
-nav_exclude: true
+nav_order: 4
 ---
 
 # GetSkillLevel

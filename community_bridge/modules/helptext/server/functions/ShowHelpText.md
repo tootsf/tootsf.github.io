@@ -5,8 +5,6 @@ parent: Functions
 grand_parent: Server
 great_grand_parent: ❓ Helptext
 nav_order: 1
-permalink: /community_bridge/modules/helptext/server/functions/ShowHelpText/
-nav_exclude: true
 ---
 
 # ShowHelpText

@@ -5,8 +5,6 @@ parent: Functions
 grand_parent: Client
 great_grand_parent: 🎯 Target
 nav_order: 3
-permalink: /community_bridge/modules/target/client/functions/AddTargetModel/
-nav_exclude: true
 ---
 
 # AddTargetModel

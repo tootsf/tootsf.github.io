@@ -5,8 +5,6 @@ parent: Functions
 grand_parent: Client
 great_grand_parent: 🔑 Vehiclekey
 nav_order: 1
-permalink: /community_bridge/modules/vehicleKey/client/functions/GiveKeys/
-nav_exclude: true
 ---
 
 # GiveKeys

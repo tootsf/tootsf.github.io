@@ -5,8 +5,6 @@ parent: Functions
 grand_parent: Client
 great_grand_parent: 🎯 Target
 nav_order: 4
-permalink: /community_bridge/modules/target/client/functions/AddTargetZone/
-nav_exclude: true
 ---
 
 # AddTargetZone

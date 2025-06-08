@@ -5,8 +5,6 @@ parent: Functions
 grand_parent: Client
 great_grand_parent: 🎯 Target
 nav_order: 5
-permalink: /community_bridge/modules/target/client/functions/RemoveTargetEntity/
-nav_exclude: true
 ---
 
 # RemoveTargetEntity

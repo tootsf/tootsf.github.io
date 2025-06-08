@@ -5,8 +5,6 @@ parent: Functions
 grand_parent: Server
 great_grand_parent: 👔 Clothing
 nav_order: 1
-permalink: /community_bridge/modules/clothing/server/functions/Revert/
-nav_exclude: true
 ---
 
 # Revert

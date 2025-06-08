@@ -5,8 +5,6 @@ parent: Functions
 grand_parent: Client
 great_grand_parent: 💬 Dialogue
 nav_order: 1
-permalink: /community_bridge/modules/dialogue/client/functions/Open/
-nav_exclude: true
 ---
 
 # Open

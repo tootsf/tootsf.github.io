@@ -5,8 +5,6 @@ parent: Functions
 grand_parent: Server
 great_grand_parent: 🧩 Framework
 nav_order: 1
-permalink: /community_bridge/modules/framework/server/functions/GetFrameworkName/
-nav_exclude: true
 ---
 
 # GetFrameworkName

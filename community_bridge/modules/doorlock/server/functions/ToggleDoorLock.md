@@ -5,8 +5,6 @@ parent: Functions
 grand_parent: Server
 great_grand_parent: 🚪 Doorlock
 nav_order: 1
-permalink: /community_bridge/modules/doorlock/server/functions/ToggleDoorLock/
-nav_exclude: true
 ---
 
 # ToggleDoorLock

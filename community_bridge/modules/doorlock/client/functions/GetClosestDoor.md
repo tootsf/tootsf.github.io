@@ -5,8 +5,6 @@ parent: Functions
 grand_parent: Client
 great_grand_parent: 🚪 Doorlock
 nav_order: 1
-permalink: /community_bridge/modules/doorlock/client/functions/GetClosestDoor/
-nav_exclude: true
 ---
 
 # GetClosestDoor

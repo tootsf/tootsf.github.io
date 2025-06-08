@@ -5,8 +5,6 @@ parent: Functions
 grand_parent: Client
 great_grand_parent: ⛽ Fuel
 nav_order: 1
-permalink: /community_bridge/modules/fuel/client/functions/index/
-nav_exclude: true
 ---
 
 # index

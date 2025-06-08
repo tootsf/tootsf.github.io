@@ -5,8 +5,6 @@ parent: Functions
 grand_parent: Client
 great_grand_parent: "🚨 Dispatch"
 nav_order: 1
-permalink: /community_bridge/modules/dispatch/client/functions/Send911Call/
-nav_exclude: true
 ---
 
 # Send911Call

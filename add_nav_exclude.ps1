@@ -14,48 +14,48 @@ Write-Host ""
 foreach ($file in $functionFiles) {
     try {
         $content = Get-Content $file.FullName -Raw
-        
+
         # Check if nav_exclude is already present
         if ($content -match "nav_exclude\s*:") {
             Write-Host "SKIP: $($file.Name) - nav_exclude already present" -ForegroundColor Yellow
             $skippedCount++
             continue
         }
-        
+
         # Check if this is a valid Jekyll file with front matter
         if ($content -notmatch "^---[\r\n]") {
             Write-Host "SKIP: $($file.Name) - No Jekyll front matter found" -ForegroundColor Yellow
             $skippedCount++
             continue
         }
-        
+
         # Find the end of the front matter
         $lines = $content -split "`r?`n"
         $frontMatterEnd = -1
-        
+
         for ($i = 1; $i -lt $lines.Count; $i++) {
             if ($lines[$i] -match "^---\s*$") {
                 $frontMatterEnd = $i
                 break
             }
         }
-        
+
         if ($frontMatterEnd -eq -1) {
             Write-Host "ERROR: $($file.Name) - Could not find end of front matter" -ForegroundColor Red
             $errorCount++
             continue
         }
-        
+
         # Insert nav_exclude: true before the closing ---
         $lines[$frontMatterEnd] = "nav_exclude: true`r`n---"
         $newContent = $lines -join "`r`n"
-        
+
         # Write the updated content back to the file
         Set-Content -Path $file.FullName -Value $newContent -NoNewline
-        
+
         Write-Host "UPDATED: $($file.Name)" -ForegroundColor Green
         $processedCount++
-        
+
     } catch {
         Write-Host "ERROR: $($file.Name) - $($_.Exception.Message)" -ForegroundColor Red
         $errorCount++

@@ -5,8 +5,6 @@ parent: Functions
 grand_parent: Client
 great_grand_parent: "🧩 Framework"
 nav_order: 6
-permalink: /community_bridge/modules/framework/client/functions/GetPlayerData/
-nav_exclude: true
 ---
 
 # GetPlayerData

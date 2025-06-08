@@ -5,8 +5,6 @@ parent: Functions
 grand_parent: Client
 great_grand_parent: 📱 Phone
 nav_order: 1
-permalink: /community_bridge/modules/phone/client/functions/SendEmail/
-nav_exclude: true
 ---
 
 # SendEmail

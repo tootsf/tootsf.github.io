@@ -5,8 +5,6 @@ parent: Functions
 grand_parent: Client
 great_grand_parent: ⏳ Progressbar
 nav_order: 1
-permalink: /community_bridge/modules/progressbar/client/functions/StartCircularProgress/
-nav_exclude: true
 ---
 
 # StartCircularProgress

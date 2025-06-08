@@ -5,8 +5,6 @@ parent: Functions
 grand_parent: Client
 great_grand_parent: "🚨 Dispatch"
 nav_order: 2
-permalink: /community_bridge/modules/dispatch/client/functions/SendAlert/
-nav_exclude: true
 ---
 
 # SendAlert
