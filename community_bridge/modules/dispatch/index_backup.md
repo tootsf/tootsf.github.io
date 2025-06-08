@@ -58,7 +58,7 @@ local function SendRobberyAlert()
     if currentTime - lastAlert < 30000 then -- 30 second cooldown
         return false, "Please wait before sending another alert"
     end
-    
+
     lastAlert = currentTime
     Bridge.Dispatch.SendAlert({
         message = "Store robbery in progress",
