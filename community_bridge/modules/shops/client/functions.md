@@ -11,10 +11,28 @@ permalink: /community_bridge/modules/shops/client/functions/
 ---
 
 # Client Functions
+{: .no_toc }
+
 Client-side functions for the shops module.
 
+## Table of contents
+{: .no_toc .text-delta }
+
+1. TOC
+{:toc}
+
+---
 ## Functions
+{: .no_toc }
+
 
 ### [AmountSelect](AmountSelect)
+{: .no_toc }
+
 ### [FinalizeCheckOut](FinalizeCheckOut)
+{: .no_toc }
+
 ### [OpenShop](OpenShop)
+{: .no_toc }
+
+

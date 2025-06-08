@@ -2,53 +2,11 @@
 layout: default
 ---
 
-{{ content }}
-
 <script>
-(function() {
-  'use strict';
+document.body.classList.add('layout-functions');
+</script>
 
-  // Wait for page to fully load
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initTOC);  } else {
-    initTOC();
-  }
-
-  function initTOC() {
-    // Only add TOC if the page has has_toc: true
-    var hasToc = {{ page.has_toc | default: false }};
-    
-    if (!hasToc) {
-      console.log('Page does not have TOC enabled');
-      return;
-    }
-
-    console.log('TOC script running...');
-
-    // Get all heading elements (h3 level since functions are listed as h3)
-    var headings = document.querySelectorAll('.main-content h3');
-    console.log('Found headings:', headings.length);
-
-    if (headings.length === 0) {
-      console.log('No headings found, TOC not created');
-      return;
-    }
-
-    try {
-      createTOC(headings);
-    } catch (error) {
-      console.error('Error creating TOC:', error);
-    }
-  }
-
-  function createTOC(headings) {
-    // Create TOC container
-    var tocContainer = document.createElement('div');
-    tocContainer.className = 'page-toc';
-
-    // Add TOC title
-    var tocTitle = document.createElement('h2');
-    tocTitle.textContent = 'On this page';
+{{ content }}
     tocContainer.appendChild(tocTitle);
 
     // Create TOC list
@@ -86,7 +44,7 @@ layout: default
         functionName = functionName.substring(1, functionName.indexOf(']('));
       }      link.href = '#' + heading.id;
       link.textContent = functionName;
-      
+
       listItem.appendChild(link);
       tocList.appendChild(listItem);
     }
@@ -114,7 +72,7 @@ layout: default
 
       // Insert TOC after main content
       mainContent.parentNode.insertBefore(tocContainer, mainContent.nextSibling);      console.log('TOC added to page successfully');
-      
+
       // Add event listeners
       addTOCEventListeners(tocContainer);
     } else {

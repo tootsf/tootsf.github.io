@@ -19,7 +19,7 @@ foreach ($file in $functionsFiles) {
     # Replace layout: default with layout: functions
     if ($content -match 'layout: default') {
         $newContent = $content -replace 'layout: default', 'layout: functions'
-        
+
         # Write back to file
         Set-Content -Path $file.FullName -Value $newContent -NoNewline
 

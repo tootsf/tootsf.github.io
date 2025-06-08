@@ -11,9 +11,25 @@ permalink: /community_bridge/modules/vehicleKey/client/functions/
 ---
 
 # Client Functions
+{: .no_toc }
+
 Client-side functions for the vehicleKey module.
 
+## Table of contents
+{: .no_toc .text-delta }
+
+1. TOC
+{:toc}
+
+---
 ## Functions
+{: .no_toc }
+
 
 ### [GiveKeys](GiveKeys)
+{: .no_toc }
+
 ### [RemoveKeys](RemoveKeys)
+{: .no_toc }
+
+

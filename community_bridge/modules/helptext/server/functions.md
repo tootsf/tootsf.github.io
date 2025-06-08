@@ -11,9 +11,25 @@ permalink: /community_bridge/modules/helptext/server/functions/
 ---
 
 # Server Functions
+{: .no_toc }
+
 Server-side functions for the helptext module.
 
+## Table of contents
+{: .no_toc .text-delta }
+
+1. TOC
+{:toc}
+
+---
 ## Functions
+{: .no_toc }
+
 
 ### [HideHelpText](HideHelpText)
+{: .no_toc }
+
 ### [ShowHelpText](ShowHelpText)
+{: .no_toc }
+
+

@@ -11,7 +11,17 @@ permalink: /community_bridge/modules/menu/client/functions/
 ---
 
 # Client Functions
+{: .no_toc }
+
 Client-side functions for the menu module.
+
+## Table of contents
+{: .no_toc .text-delta }
+
+1. TOC
+{:toc}
+
+---
 
 ## Functions
 

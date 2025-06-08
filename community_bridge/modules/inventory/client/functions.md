@@ -11,19 +11,46 @@ permalink: /community_bridge/modules/inventory/client/functions/
 ---
 
 # Client Functions
+{: .no_toc }
+
 Client-side functions for the inventory module.
 
+## Table of contents
+{: .no_toc .text-delta }
+
+1. TOC
+{:toc}
+
+---
 ## Functions
+{: .no_toc }
+
 
 ### [GetImagePath](GetImagePath)
+{: .no_toc }
+
 ### [GetItemCount](GetItemCount)
+{: .no_toc }
+
 ### [GetItemInfo](GetItemInfo)
+{: .no_toc }
+
 ### [GetPlayerInventory](GetPlayerInventory)
+{: .no_toc }
+
 ### [HasItem](HasItem)
+{: .no_toc }
+
 ### [OpenShop](OpenShop)
+{: .no_toc }
+
 ### [StripPNG](StripPNG)
+{: .no_toc }
+
 
 # GetImagePath
+{: .no_toc }
+
 
 Gets the image path for an item.
 
@@ -50,8 +77,12 @@ SendNUIMessage({
 ---
 
 ## 🔹 GetItemCount
+{: .no_toc }
+
 
 # GetItemCount
+{: .no_toc }
+
 
 Returns the count of a specific item in the player's inventory.
 
@@ -72,8 +103,12 @@ print("Player has " .. waterCount .. " water bottles")
 ---
 
 ## 🔹 GetItemInfo
+{: .no_toc }
+
 
 # GetItemInfo
+{: .no_toc }
+
 
 Returns detailed information about an item.
 
@@ -97,8 +132,12 @@ end
 ---
 
 ## 🔹 GetPlayerInventory
+{: .no_toc }
+
 
 # GetPlayerInventory
+{: .no_toc }
+
 
 Returns the complete player inventory.
 
@@ -120,8 +159,12 @@ end
 ---
 
 ## 🔹 HasItem
+{: .no_toc }
+
 
 # HasItem
+{: .no_toc }
+
 
 Checks if the player has a specific item in their inventory.
 
@@ -147,8 +190,12 @@ end
 ---
 
 ## 🔹 OpenShop
+{: .no_toc }
+
 
 # OpenShop
+{: .no_toc }
+
 {: .d-inline-block }
 Client
 {: .label .label-blue }
@@ -156,12 +203,16 @@ Client
 Opens a shop interface for the player. This function is only available when using ox_inventory.
 
 ## Syntax
+{: .no_toc }
+
 
 ```lua
 function Inventory.OpenShop(shopTitle, shopInventory)
 ```
 
 ## Parameters
+{: .no_toc }
+
 
 **shopTitle:** `string`
 Title of the shop
@@ -170,6 +221,8 @@ Title of the shop
 Shop inventory data
 
 ## Example
+{: .no_toc }
+
 
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
@@ -184,8 +237,12 @@ Bridge.Inventory.OpenShop("General Store", {
 ---
 
 ## 🔹 StripPNG
+{: .no_toc }
+
 
 # StripPNG
+{: .no_toc }
+
 {: .d-inline-block }
 Client
 {: .label .label-blue }
@@ -193,22 +250,30 @@ Client
 Utility function to remove .png extension from item names.
 
 ## Syntax
+{: .no_toc }
+
 
 ```lua
 function Inventory.StripPNG(item)
 ```
 
 ## Parameters
+{: .no_toc }
+
 
 **item:** `string`
 Item name potentially with .png extension
 
 ## Returns
+{: .no_toc }
+
 
 **string**
 Item name without .png extension
 
 ## Example
+{: .no_toc }
+
 
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
