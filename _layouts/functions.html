@@ -85,11 +85,11 @@ layout: default
       }
 
       link.href = '#' + heading.id;
-      link.textContent = functionName;
-
-      listItem.appendChild(link);
+      link.textContent = functionName;      listItem.appendChild(link);
       tocList.appendChild(listItem);
-    }    tocContainer.appendChild(tocList);
+    }
+    
+    tocContainer.appendChild(tocList);
 
     // Insert TOC
     insertTOC(tocContainer);
@@ -113,10 +113,9 @@ layout: default
       // Insert TOC after main content
       mainContent.parentNode.insertBefore(tocContainer, mainContent.nextSibling);
 
-      console.log('TOC added to page successfully');
-
-      // Add event listeners
-      addTOCEventListeners(tocContainer);    } else {
+      console.log('TOC added to page successfully');      // Add event listeners
+      addTOCEventListeners(tocContainer);
+    } else {
       console.log('Could not find main content elements');
     }
   }
