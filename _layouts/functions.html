@@ -89,14 +89,13 @@ layout: default
 
       listItem.appendChild(link);
       tocList.appendChild(listItem);
-    }
-
-    tocContainer.appendChild(tocList);
+    }    tocContainer.appendChild(tocList);
 
     // Insert TOC
     insertTOC(tocContainer);
   }
-    function insertTOC(tocContainer) {
+
+  function insertTOC(tocContainer) {
     // Find the main content wrapper
     var mainContentWrap = document.querySelector('.main-content-wrap');
     var mainContent = document.querySelector('.main-content');
@@ -117,11 +116,11 @@ layout: default
       console.log('TOC added to page successfully');
 
       // Add event listeners
-      addTOCEventListeners(tocContainer);
-    } else {
+      addTOCEventListeners(tocContainer);    } else {
       console.log('Could not find main content elements');
     }
   }
+
   function addTOCEventListeners(tocContainer) {
     // Add smooth scrolling for TOC links
     tocContainer.addEventListener('click', function(e) {
