@@ -5,6 +5,7 @@ parent: Modules
 grand_parent: Community Bridge
 nav_order: 3
 has_children: true
+nav_exclude: true
 permalink: /community_bridge/modules/dispatch/
 ---
 
