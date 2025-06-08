@@ -6,6 +6,7 @@ grand_parent: Client
 great_grand_parent: ⌨️ Input
 nav_order: 1
 permalink: /community_bridge/modules/input/client/functions/ShowDateInput/
+nav_exclude: true
 ---
 
 # ShowDateInput

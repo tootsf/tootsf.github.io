@@ -6,6 +6,7 @@ grand_parent: Server
 great_grand_parent: 🧩 Framework
 nav_order: 1
 permalink: /community_bridge/modules/framework/server/functions/GetPlayers/
+nav_exclude: true
 ---
 
 # GetPlayers

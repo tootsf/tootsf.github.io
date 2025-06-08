@@ -6,6 +6,7 @@ grand_parent: Client
 great_grand_parent: 💬 Dialogue
 nav_order: 1
 permalink: /community_bridge/modules/dialogue/client/functions/Close/
+nav_exclude: true
 ---
 
 # Close

@@ -6,6 +6,7 @@ grand_parent: Client
 great_grand_parent: "🧩 Framework"
 nav_order: 5
 permalink: /community_bridge/modules/framework/client/functions/GetItemInfo/
+nav_exclude: true
 ---
 
 # GetItemInfo

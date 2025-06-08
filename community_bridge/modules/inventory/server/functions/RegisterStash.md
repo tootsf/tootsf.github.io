@@ -6,6 +6,7 @@ grand_parent: Server
 great_grand_parent: 🎒 Inventory
 nav_order: 1
 permalink: /community_bridge/modules/inventory/server/functions/RegisterStash/
+nav_exclude: true
 ---
 
 # RegisterStash

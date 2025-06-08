@@ -6,6 +6,7 @@ grand_parent: Server
 great_grand_parent: 🔔 Notify
 nav_order: 1
 permalink: /community_bridge/modules/notify/server/functions/SendNotify/
+nav_exclude: true
 ---
 
 # SendNotify

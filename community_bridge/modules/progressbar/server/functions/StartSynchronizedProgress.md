@@ -6,6 +6,7 @@ grand_parent: Server
 great_grand_parent: ⏳ Progressbar
 nav_order: 1
 permalink: /community_bridge/modules/progressbar/server/functions/StartSynchronizedProgress/
+nav_exclude: true
 ---
 
 # StartSynchronizedProgress

@@ -1,14 +1,15 @@
 ---
 layout: default
-title: "[GetResourceName](GetResourceName/)"
+title: "GetResourceName"
 parent: Functions
 grand_parent: Client
 great_grand_parent: ⭐ Skills
 nav_order: 1
-permalink: /community_bridge/modules/skills/client/functions/[GetResourceName](GetResourceName)/
+permalink: /community_bridge/modules/skills/client/functions/GetResourceName/
+nav_exclude: true
 ---
 
-# [GetResourceName](GetResourceName/)
+# GetResourceName
 {: .no_toc }
 
 Get the name of the currently configured skill system resource.

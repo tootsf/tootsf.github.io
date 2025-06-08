@@ -6,6 +6,7 @@ grand_parent: Client
 great_grand_parent: ⌨️ Input
 nav_order: 1
 permalink: /community_bridge/modules/input/client/functions/ShowSelectInput/
+nav_exclude: true
 ---
 
 # ShowSelectInput

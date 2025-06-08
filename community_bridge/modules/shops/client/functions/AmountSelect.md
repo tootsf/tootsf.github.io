@@ -6,6 +6,7 @@ grand_parent: Client
 great_grand_parent: 🛒 Shops
 nav_order: 1
 permalink: /community_bridge/modules/shops/client/functions/AmountSelect/
+nav_exclude: true
 ---
 
 # AmountSelect

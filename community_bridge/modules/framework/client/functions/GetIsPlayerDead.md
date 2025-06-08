@@ -6,6 +6,7 @@ grand_parent: Client
 great_grand_parent: "🧩 Framework"
 nav_order: 3
 permalink: /community_bridge/modules/framework/client/functions/GetIsPlayerDead/
+nav_exclude: true
 ---
 
 # GetIsPlayerDead

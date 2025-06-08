@@ -6,6 +6,7 @@ grand_parent: Client
 great_grand_parent: 📋 Menu
 nav_order: 1
 permalink: /community_bridge/modules/menu/client/functions/MenuCallbackEvent/
+nav_exclude: true
 ---
 
 # MenuCallbackEvent

@@ -6,6 +6,7 @@ grand_parent: Client
 great_grand_parent: ❓ Helptext
 nav_order: 1
 permalink: /community_bridge/modules/helptext/client/functions/HideHelpText/
+nav_exclude: true
 ---
 
 # HideHelpText

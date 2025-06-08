@@ -6,6 +6,7 @@ grand_parent: Client
 great_grand_parent: ♿ Accessibility
 nav_order: 1
 permalink: /community_bridge/modules/accessibility/client/functions/adjustColourForColourblindness/
+nav_exclude: true
 ---
 
 # adjustColourForColourblindness
