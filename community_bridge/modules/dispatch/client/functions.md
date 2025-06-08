@@ -1,5 +1,5 @@
 ---
-layout: functions
+layout: default
 title: Dispatch Functions
 parent: Client
 grand_parent: "🚨 Dispatch"
