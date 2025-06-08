@@ -8,8 +8,6 @@ nav_order: 1
 ---
 
 # Send911Call
-{: .no_toc }
-
 Send a 911 call to dispatch.
 
 **Parameters:**

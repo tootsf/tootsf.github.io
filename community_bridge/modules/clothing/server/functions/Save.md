@@ -8,8 +8,6 @@ nav_order: 1
 ---
 
 # Save
-{: .no_toc }
-
 Saves a player's current appearance to the database.
 
 **Parameters:**

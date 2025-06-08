@@ -8,8 +8,6 @@ nav_order: 1
 ---
 
 # AddItem
-{: .no_toc }
-
 Adds an item to a player's inventory.
 
 ## Syntax

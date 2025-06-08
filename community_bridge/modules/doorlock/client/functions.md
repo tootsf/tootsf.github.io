@@ -10,10 +10,8 @@ permalink: /community_bridge/modules/doorlock/client/functions/
 ---
 
 # Client Functions
-{: .no_toc }
-
 Client-side functions for the doorlock module.
 
-## Available Functions
+## Functions
 
-- [GetClosestDoor](GetClosestDoor)
+### [GetClosestDoor](GetClosestDoor)

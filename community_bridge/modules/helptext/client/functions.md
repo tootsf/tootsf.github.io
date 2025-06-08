@@ -10,11 +10,11 @@ permalink: /community_bridge/modules/helptext/client/functions/
 ---
 
 # Client Functions
-{: .no_toc }
 
 Client-side functions for the helptext module.
 
-## Available Functions
+## Functions
 
-- [HideHelpText](HideHelpText)
-- [ShowHelpText](ShowHelpText)
+### [HideHelpText](HideHelpText)
+
+### [ShowHelpText](ShowHelpText)

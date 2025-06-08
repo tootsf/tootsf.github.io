@@ -8,8 +8,6 @@ nav_order: 1
 ---
 
 # OpenShop
-{: .no_toc }
-
 Displays the shop interface to the player with interactive item browsing.
 
 ## Syntax

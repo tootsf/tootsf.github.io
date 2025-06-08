@@ -8,8 +8,6 @@ nav_order: 1
 ---
 
 # RegisterStash
-{: .no_toc }
-
 ## Table of contents
 {: .no_toc .text-delta }
 

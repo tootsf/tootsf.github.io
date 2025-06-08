@@ -8,8 +8,6 @@ nav_order: 1
 ---
 
 # HasItem
-{: .no_toc }
-
 Checks if a player has an item.
 
 ## Syntax

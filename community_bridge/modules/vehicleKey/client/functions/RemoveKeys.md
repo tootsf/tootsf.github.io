@@ -8,8 +8,6 @@ nav_order: 1
 ---
 
 # RemoveKeys
-{: .no_toc }
-
 Removes vehicle keys from the current player for the specified vehicle.
 
 ## Syntax

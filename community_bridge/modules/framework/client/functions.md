@@ -10,13 +10,11 @@ permalink: /community_bridge/modules/framework/client/functions/
 ---
 
 # Client Functions
-{: .no_toc }
-
 Client-side functions for the framework module.
 
-## Available Functions
+## Functions
 
-- [GetFrameworkJobs](GetFrameworkJobs)
+### [GetFrameworkJobs](GetFrameworkJobs)
 
 ```
 

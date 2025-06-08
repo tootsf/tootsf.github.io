@@ -10,11 +10,9 @@ permalink: /community_bridge/modules/helptext/server/functions/
 ---
 
 # Server Functions
-{: .no_toc }
-
 Server-side functions for the helptext module.
 
-## Available Functions
+## Functions
 
-- [HideHelpText](HideHelpText)
-- [ShowHelpText](ShowHelpText)
+### [HideHelpText](HideHelpText)
+### [ShowHelpText](ShowHelpText)

@@ -8,8 +8,6 @@ nav_order: 1
 ---
 
 # GetResourceName
-{: .no_toc }
-
 Gets the name of the fuel system currently being used.
 
 ## Syntax

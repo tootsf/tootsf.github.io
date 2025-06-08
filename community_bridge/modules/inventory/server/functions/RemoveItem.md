@@ -8,8 +8,6 @@ nav_order: 1
 ---
 
 # RemoveItem
-{: .no_toc }
-
 Removes an item from a player's inventory.
 
 ## Syntax

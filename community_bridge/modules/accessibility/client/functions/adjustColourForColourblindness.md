@@ -8,8 +8,6 @@ nav_order: 1
 ---
 
 # adjustColourForColourblindness
-{: .no_toc }
-
 Adjusts colors based on colorblindness type.
 
 ## Syntax

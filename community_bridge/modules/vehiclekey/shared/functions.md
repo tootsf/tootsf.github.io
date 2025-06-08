@@ -10,6 +10,4 @@ has_children: false
 ---
 
 # Vehiclekey Shared Functions
-{: .no_toc }
-
 No shared-side functions available for the Vehiclekey module.

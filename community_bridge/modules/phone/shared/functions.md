@@ -10,6 +10,4 @@ has_children: false
 ---
 
 # Phone Shared Functions
-{: .no_toc }
-
 No shared-side functions available for the Phone module.

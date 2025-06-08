@@ -8,8 +8,6 @@ nav_order: 1
 ---
 
 # AddAccountMoney
-{: .no_toc }
-
 **[AddAccountMoney](AddAccountMoney.md)**
 {: .d-inline-block }
 Server

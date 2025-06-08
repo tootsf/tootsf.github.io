@@ -10,17 +10,15 @@ permalink: /community_bridge/modules/clothing/server/functions/
 ---
 
 # Server Functions
-{: .no_toc }
-
 Server-side functions for the clothing module.
 
-## Available Functions
+## Functions
 
-- [GetAppearance](GetAppearance)
-- [IsMale](IsMale)
-- [RestoreAppearance](RestoreAppearance)
-- [SetAppearance](SetAppearance)
-- [SetAppearanceExt](SetAppearanceExt)
-- [Save](Save)
-- [Revert](Revert)
-- [OpenMenu](OpenMenu)
+### [GetAppearance](GetAppearance)
+### [IsMale](IsMale)
+### [RestoreAppearance](RestoreAppearance)
+### [SetAppearance](SetAppearance)
+### [SetAppearanceExt](SetAppearanceExt)
+### [Save](Save)
+### [Revert](Revert)
+### [OpenMenu](OpenMenu)

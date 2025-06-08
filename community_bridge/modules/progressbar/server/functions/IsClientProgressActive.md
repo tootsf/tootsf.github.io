@@ -8,8 +8,6 @@ nav_order: 1
 ---
 
 # IsClientProgressActive
-{: .no_toc }
-
 Checks if a client has an active progress bar.
 
 ## Syntax

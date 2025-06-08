@@ -8,8 +8,6 @@ nav_order: 6
 ---
 
 # GetPlayerData
-{: .no_toc }
-
 Gets the complete player data from the framework.
 
 ## Syntax

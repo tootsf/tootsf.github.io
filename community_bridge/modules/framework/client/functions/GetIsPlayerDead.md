@@ -8,8 +8,6 @@ nav_order: 3
 ---
 
 # GetIsPlayerDead
-{: .no_toc }
-
 Returns whether the local player is currently dead.
 
 ## Description

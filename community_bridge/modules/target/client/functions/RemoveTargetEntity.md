@@ -8,8 +8,6 @@ nav_order: 5
 ---
 
 # RemoveTargetEntity
-{: .no_toc }
-
 Removes targeting from a specific entity.
 
 ## Syntax

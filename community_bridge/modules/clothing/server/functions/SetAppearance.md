@@ -8,8 +8,6 @@ nav_order: 1
 ---
 
 # SetAppearance
-{: .no_toc }
-
 Sets a player's appearance and stores their previous appearance as backup.
 
 **Parameters:**

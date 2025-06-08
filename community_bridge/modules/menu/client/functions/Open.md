@@ -8,8 +8,6 @@ nav_order: 1
 ---
 
 # Open
-{: .no_toc }
-
 Opens a menu based on the provided configuration. This function can handle both ox_lib and qb-menu formats.
 
 ## Syntax

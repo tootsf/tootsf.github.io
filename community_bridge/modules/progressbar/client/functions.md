@@ -10,13 +10,11 @@ permalink: /community_bridge/modules/progressbar/client/functions/
 ---
 
 # Client Functions
-{: .no_toc }
-
 Client-side functions for the progressbar module.
 
-## Available Functions
+## Functions
 
-- [IsProgressActive](IsProgressActive)
-- [StartCircularProgress](StartCircularProgress)
-- [StartProgress](StartProgress)
-- [StopProgress](StopProgress)
+### [IsProgressActive](IsProgressActive)
+### [StartCircularProgress](StartCircularProgress)
+### [StartProgress](StartProgress)
+### [StopProgress](StopProgress)

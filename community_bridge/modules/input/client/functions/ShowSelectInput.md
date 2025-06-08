@@ -8,8 +8,6 @@ nav_order: 1
 ---
 
 # ShowSelectInput
-{: .no_toc }
-
 Displays a selection dialog with options.
 
 ## Syntax

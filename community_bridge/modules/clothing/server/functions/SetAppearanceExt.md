@@ -8,8 +8,6 @@ nav_order: 1
 ---
 
 # SetAppearanceExt
-{: .no_toc }
-
 Sets a player's appearance using gender-specific data. Automatically selects male or female appearance based on the player's current model.
 
 **Parameters:**

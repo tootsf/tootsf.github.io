@@ -10,6 +10,4 @@ has_children: false
 ---
 
 # Menu Server Functions
-{: .no_toc }
-
 No server-side functions available for the Menu module.

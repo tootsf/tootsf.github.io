@@ -8,8 +8,6 @@ nav_order: 1
 ---
 
 # OpenMenu
-{: .no_toc }
-
 Opens the clothing menu interface for the player.
 
 **Example:**

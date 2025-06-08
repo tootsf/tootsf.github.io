@@ -8,8 +8,6 @@ nav_order: 1
 ---
 
 # ShowInput
-{: .no_toc }
-
 Displays a single input dialog.
 
 ## Syntax

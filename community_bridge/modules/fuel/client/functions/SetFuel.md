@@ -8,8 +8,6 @@ nav_order: 1
 ---
 
 # SetFuel
-{: .no_toc }
-
 Sets the fuel level of a vehicle.
 
 ## Syntax

@@ -8,8 +8,6 @@ nav_order: 1
 ---
 
 # ToggleDoorLock
-{: .no_toc }
-
 Toggle a door's lock status.
 
 **Parameters:**

@@ -8,8 +8,6 @@ nav_order: 1
 ---
 
 # StartCircularProgress
-{: .no_toc }
-
 Creates a circular progress indicator.
 
 ## Syntax

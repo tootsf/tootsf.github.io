@@ -8,8 +8,6 @@ nav_order: 1
 ---
 
 # SendEmail
-{: .no_toc }
-
 **[SendEmail](SendEmail.md)**
 {: .d-inline-block }
 Client

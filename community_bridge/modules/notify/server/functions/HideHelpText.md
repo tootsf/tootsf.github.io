@@ -8,8 +8,6 @@ nav_order: 1
 ---
 
 # HideHelpText
-{: .no_toc }
-
 Hides help text for a specific player.
 
 ## Syntax

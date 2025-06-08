@@ -10,12 +10,10 @@ permalink: /community_bridge/modules/notify/server/functions/
 ---
 
 # Server Functions
-{: .no_toc }
-
 Server-side functions for the notify module.
 
-## Available Functions
+## Functions
 
-- [HideHelpText](HideHelpText)
-- [SendNotify](SendNotify)
-- [ShowHelpText](ShowHelpText)
+### [HideHelpText](HideHelpText)
+### [SendNotify](SendNotify)
+### [ShowHelpText](ShowHelpText)

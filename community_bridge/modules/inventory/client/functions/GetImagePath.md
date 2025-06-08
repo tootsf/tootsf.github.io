@@ -8,8 +8,6 @@ nav_order: 1
 ---
 
 # GetImagePath
-{: .no_toc }
-
 Gets the image path for an item.
 
 **Parameters:**

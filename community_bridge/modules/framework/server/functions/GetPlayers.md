@@ -8,8 +8,6 @@ nav_order: 1
 ---
 
 # GetPlayers
-{: .no_toc }
-
 Gets a list of all currently connected players.
 
 ## Syntax

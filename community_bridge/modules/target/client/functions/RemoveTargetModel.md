@@ -8,8 +8,6 @@ nav_order: 6
 ---
 
 # RemoveTargetModel
-{: .no_toc }
-
 Removes targeting from entity models.
 
 ## Syntax

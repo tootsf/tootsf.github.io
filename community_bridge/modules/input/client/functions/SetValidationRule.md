@@ -8,8 +8,6 @@ nav_order: 1
 ---
 
 # SetValidationRule
-{: .no_toc }
-
 Defines a custom validation rule for input fields.
 
 ## Syntax

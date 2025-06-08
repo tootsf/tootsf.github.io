@@ -8,11 +8,7 @@ nav_order: 1
 ---
 
 # index
-{: .no_toc }
-
 # ⛽ Fuel – Client Functions
-{: .no_toc }
-
 The fuel client module provides vehicle fuel management functions.
 
 ## Functions

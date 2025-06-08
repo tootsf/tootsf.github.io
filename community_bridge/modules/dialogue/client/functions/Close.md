@@ -8,8 +8,6 @@ nav_order: 1
 ---
 
 # Close
-{: .no_toc }
-
 Closes an active dialogue.
 
 ## Syntax

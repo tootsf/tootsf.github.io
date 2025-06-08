@@ -10,6 +10,4 @@ has_children: false
 ---
 
 # Skills Shared Functions
-{: .no_toc }
-
 No shared-side functions available for the Skills module.

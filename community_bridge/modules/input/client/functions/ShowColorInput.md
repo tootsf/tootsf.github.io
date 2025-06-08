@@ -8,8 +8,6 @@ nav_order: 1
 ---
 
 # ShowColorInput
-{: .no_toc }
-
 Displays a color picker dialog.
 
 ## Syntax

@@ -8,8 +8,6 @@ nav_order: 1
 ---
 
 # UpdateAppearanceBackup
-{: .no_toc }
-
 Updates the stored appearance backup data.
 
 **Parameters:**

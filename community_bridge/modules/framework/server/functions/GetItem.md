@@ -8,8 +8,6 @@ nav_order: 1
 ---
 
 # GetItem
-{: .no_toc }
-
 Returns a table of items matching the specified name (and optionally metadata) from the player's inventory.
 
 ## Syntax

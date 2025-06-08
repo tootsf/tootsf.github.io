@@ -10,17 +10,15 @@ permalink: /community_bridge/modules/input/client/functions/
 ---
 
 # Client Functions
-{: .no_toc }
-
 Client-side functions for the input module.
 
-## Available Functions
+## Functions
 
-- [SetValidationRule](SetValidationRule)
-- [ShowColorInput](ShowColorInput)
-- [ShowDateInput](ShowDateInput)
-- [ShowInput](ShowInput)
-- [ShowInputForm](ShowInputForm)
-- [ShowNumberInput](ShowNumberInput)
-- [ShowSelectInput](ShowSelectInput)
-- [ValidateInput](ValidateInput)
+### [SetValidationRule](SetValidationRule)
+### [ShowColorInput](ShowColorInput)
+### [ShowDateInput](ShowDateInput)
+### [ShowInput](ShowInput)
+### [ShowInputForm](ShowInputForm)
+### [ShowNumberInput](ShowNumberInput)
+### [ShowSelectInput](ShowSelectInput)
+### [ValidateInput](ValidateInput)

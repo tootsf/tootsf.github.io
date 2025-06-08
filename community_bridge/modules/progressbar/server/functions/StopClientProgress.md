@@ -8,8 +8,6 @@ nav_order: 1
 ---
 
 # StopClientProgress
-{: .no_toc }
-
 Stops a progress bar on a specific client.
 
 ## Syntax

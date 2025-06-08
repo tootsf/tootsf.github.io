@@ -10,6 +10,4 @@ has_children: false
 ---
 
 # Housing Client Functions
-{: .no_toc }
-
 No client-side functions available for the Housing module.

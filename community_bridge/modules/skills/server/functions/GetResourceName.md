@@ -8,8 +8,6 @@ nav_order: 3
 ---
 
 # GetResourceName
-{: .no_toc }
-
 Get the name of the currently configured skill system resource.
 
 #

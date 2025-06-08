@@ -8,8 +8,6 @@ nav_order: 1
 ---
 
 # GetPlayer
-{: .no_toc }
-
 Gets the framework player object for a given source.
 
 ## Syntax

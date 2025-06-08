@@ -10,10 +10,8 @@ permalink: /community_bridge/modules/doorlock/server/functions/
 ---
 
 # Server Functions
-{: .no_toc }
-
 Server-side functions for the doorlock module.
 
-## Available Functions
+## Functions
 
-- [ToggleDoorLock](ToggleDoorLock)
+### [ToggleDoorLock](ToggleDoorLock)

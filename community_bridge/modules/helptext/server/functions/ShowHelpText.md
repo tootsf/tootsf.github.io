@@ -8,8 +8,6 @@ nav_order: 1
 ---
 
 # ShowHelpText
-{: .no_toc }
-
 Displays help text on the screen for a specific player.
 
 ## Syntax

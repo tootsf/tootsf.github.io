@@ -8,8 +8,6 @@ nav_order: 4
 ---
 
 # AddTargetZone
-{: .no_toc }
-
 Adds a rectangular target zone.
 
 ## Syntax

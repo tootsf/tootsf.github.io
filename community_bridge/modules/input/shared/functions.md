@@ -10,6 +10,4 @@ has_children: false
 ---
 
 # Input Shared Functions
-{: .no_toc }
-
 No shared-side functions available for the Input module.

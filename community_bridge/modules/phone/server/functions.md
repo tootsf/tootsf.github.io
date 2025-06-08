@@ -10,11 +10,9 @@ permalink: /community_bridge/modules/phone/server/functions/
 ---
 
 # Server Functions
-{: .no_toc }
-
 Server-side functions for the phone module.
 
-## Available Functions
+## Functions
 
-- [GetPlayerPhone](GetPlayerPhone)
-- [SendEmail](SendEmail)
+### [GetPlayerPhone](GetPlayerPhone)
+### [SendEmail](SendEmail)

@@ -8,8 +8,6 @@ nav_order: 1
 ---
 
 # BroadcastProgress
-{: .no_toc }
-
 Broadcasts a progress bar to all connected players.
 
 ## Syntax

@@ -8,8 +8,6 @@ nav_order: 1
 ---
 
 # hexToRgb
-{: .no_toc }
-
 Converts hex color to RGB values.
 
 ## Syntax

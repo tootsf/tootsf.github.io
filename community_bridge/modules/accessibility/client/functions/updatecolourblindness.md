@@ -8,8 +8,6 @@ nav_order: 1
 ---
 
 # updatecolourblindness
-{: .no_toc }
-
 Opens color blindness settings menu.
 
 **Example:**

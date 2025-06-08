@@ -8,8 +8,6 @@ nav_order: 1
 ---
 
 # ToggleDebugging
-{: .no_toc }
-
 Toggles clothing debugging mode which monitors and logs appearance changes.
 
 **Example:**

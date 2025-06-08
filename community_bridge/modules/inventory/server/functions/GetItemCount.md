@@ -8,8 +8,6 @@ nav_order: 1
 ---
 
 # GetItemCount
-{: .no_toc }
-
 Gets the count of an item in a player's inventory.
 
 ## Syntax

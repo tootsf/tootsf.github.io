@@ -10,10 +10,8 @@ permalink: /community_bridge/modules/phone/client/functions/
 ---
 
 # Client Functions
-{: .no_toc }
-
 Client-side functions for the phone module.
 
-## Available Functions
+## Functions
 
-- [SendEmail](SendEmail)
+### [SendEmail](SendEmail)

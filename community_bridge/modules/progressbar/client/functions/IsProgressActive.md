@@ -8,8 +8,6 @@ nav_order: 1
 ---
 
 # IsProgressActive
-{: .no_toc }
-
 Checks if a progress bar is currently active.
 
 ## Syntax

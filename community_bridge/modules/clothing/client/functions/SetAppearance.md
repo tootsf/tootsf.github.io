@@ -8,8 +8,6 @@ nav_order: 1
 ---
 
 # SetAppearance
-{: .no_toc }
-
 Applies appearance data to a ped entity.
 
 **Parameters:**

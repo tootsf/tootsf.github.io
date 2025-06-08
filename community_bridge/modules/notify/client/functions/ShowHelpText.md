@@ -8,8 +8,6 @@ nav_order: 1
 ---
 
 # ShowHelpText
-{: .no_toc }
-
 Shows help text on screen.
 
 ## Syntax

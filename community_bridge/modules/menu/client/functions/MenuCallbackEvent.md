@@ -8,10 +8,7 @@ nav_order: 1
 ---
 
 # MenuCallbackEvent
-{: .no_toc }
-
 # MenuCallback Event
-{: .no_toc }
 {: .d-inline-block }
 Client
 {: .label .label-blue }

@@ -8,8 +8,6 @@ nav_order: 1
 ---
 
 # ConvertFromDefault
-{: .no_toc }
-
 Converts appearance data from the default Bridge format to the specific clothing system format.
 
 **Parameters:**

@@ -8,8 +8,6 @@ nav_order: 1
 ---
 
 # GetPlayerName
-{: .no_toc }
-
 Returns the first and last name of the player.
 
 ## Syntax

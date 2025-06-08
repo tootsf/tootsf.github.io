@@ -8,8 +8,6 @@ nav_order: 1
 ---
 
 # Revert
-{: .no_toc }
-
 Reverts a player's appearance to their backup appearance.
 
 **Parameters:**

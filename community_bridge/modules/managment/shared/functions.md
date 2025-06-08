@@ -10,6 +10,4 @@ has_children: false
 ---
 
 # Managment Shared Functions
-{: .no_toc }
-
 No shared-side functions available for the Managment module.

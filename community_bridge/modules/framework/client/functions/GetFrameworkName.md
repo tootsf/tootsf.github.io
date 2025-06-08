@@ -8,8 +8,6 @@ nav_order: 2
 ---
 
 # GetFrameworkName
-{: .no_toc }
-
 Returns the name of the currently active framework.
 
 ## Description

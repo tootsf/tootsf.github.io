@@ -10,11 +10,9 @@ permalink: /community_bridge/modules/vehicleKey/client/functions/
 ---
 
 # Client Functions
-{: .no_toc }
-
 Client-side functions for the vehicleKey module.
 
-## Available Functions
+## Functions
 
-- [GiveKeys](GiveKeys)
-- [RemoveKeys](RemoveKeys)
+### [GiveKeys](GiveKeys)
+### [RemoveKeys](RemoveKeys)

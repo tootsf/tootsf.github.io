@@ -8,8 +8,6 @@ nav_order: 1
 ---
 
 # StartSynchronizedProgress
-{: .no_toc }
-
 Starts synchronized progress bars for multiple players.
 
 ## Syntax

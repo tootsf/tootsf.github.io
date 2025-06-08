@@ -8,8 +8,6 @@ nav_order: 3
 ---
 
 # AddTargetModel
-{: .no_toc }
-
 Adds targeting interaction to specific entity models.
 
 ## Syntax

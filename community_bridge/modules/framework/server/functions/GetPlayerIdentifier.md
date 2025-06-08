@@ -8,8 +8,6 @@ nav_order: 1
 ---
 
 # GetPlayerIdentifier
-{: .no_toc }
-
 Returns the citizen ID of the player.
 
 ## Syntax

@@ -8,8 +8,6 @@ nav_order: 4
 ---
 
 # GetSkillLevel
-{: .no_toc }
-
 Retrieve the current level of a specific skill for a player.
 
 #

@@ -8,8 +8,6 @@ nav_order: 1
 ---
 
 # hslToRgb
-{: .no_toc }
-
 Converts HSL color to RGB values.
 
 ## Syntax

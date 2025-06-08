@@ -10,6 +10,4 @@ has_children: false
 ---
 
 # Accessibility Server Functions
-{: .no_toc }
-
 No server-side functions available for the Accessibility module.

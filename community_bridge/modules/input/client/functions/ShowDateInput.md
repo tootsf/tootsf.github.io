@@ -8,8 +8,6 @@ nav_order: 1
 ---
 
 # ShowDateInput
-{: .no_toc }
-
 Displays a date selection dialog.
 
 ## Syntax

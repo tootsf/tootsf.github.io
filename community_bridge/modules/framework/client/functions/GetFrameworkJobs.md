@@ -8,7 +8,6 @@ nav_order: 1
 ---
 
 # GetFrameworkJobs
-{: .no_toc }
 {: .d-inline-block }
 Client
 {: .label .label-blue }

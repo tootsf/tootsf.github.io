@@ -8,8 +8,6 @@ nav_order: 1
 ---
 
 # GetFrameworkJobs
-{: .no_toc }
-
 Returns a table of all available jobs in the framework.
 
 ## Syntax

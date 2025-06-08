@@ -8,8 +8,6 @@ nav_order: 1
 ---
 
 # RemoveAccountMoney
-{: .no_toc }
-
 **[RemoveAccountMoney](RemoveAccountMoney.md)**
 {: .d-inline-block }
 Server

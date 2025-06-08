@@ -10,20 +10,18 @@ permalink: /community_bridge/modules/framework/server/functions/
 ---
 
 # Server Functions
-{: .no_toc }
-
 Server-side functions for the framework module.
 
-## Available Functions
+## Functions
 
-- [GetFrameworkJobs](GetFrameworkJobs)
-- [GetFrameworkName](GetFrameworkName)
-- [GetItem](GetItem)
-- [GetItemCount](GetItemCount)
-- [GetPlayer](GetPlayer)
-- [GetPlayerDob](GetPlayerDob)
-- [GetPlayerIdentifier](GetPlayerIdentifier)
-- [GetPlayerInventory](GetPlayerInventory)
-- [GetPlayerName](GetPlayerName)
-- [GetPlayers](GetPlayers)
-- [HasItem](HasItem)
+### [GetFrameworkJobs](GetFrameworkJobs)
+### [GetFrameworkName](GetFrameworkName)
+### [GetItem](GetItem)
+### [GetItemCount](GetItemCount)
+### [GetPlayer](GetPlayer)
+### [GetPlayerDob](GetPlayerDob)
+### [GetPlayerIdentifier](GetPlayerIdentifier)
+### [GetPlayerInventory](GetPlayerInventory)
+### [GetPlayerName](GetPlayerName)
+### [GetPlayers](GetPlayers)
+### [HasItem](HasItem)

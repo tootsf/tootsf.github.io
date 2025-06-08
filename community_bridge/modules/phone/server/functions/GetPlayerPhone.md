@@ -8,8 +8,6 @@ nav_order: 1
 ---
 
 # GetPlayerPhone
-{: .no_toc }
-
 **[GetPlayerPhone](GetPlayerPhone.md)**
 {: .d-inline-block }
 Server

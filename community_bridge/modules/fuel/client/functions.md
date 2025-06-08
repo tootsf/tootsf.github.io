@@ -10,13 +10,11 @@ permalink: /community_bridge/modules/fuel/client/functions/
 ---
 
 # Client Functions
-{: .no_toc }
-
 Client-side functions for the fuel module.
 
-## Available Functions
+## Functions
 
-- [GetFuel](GetFuel)
-- [GetResourceName](GetResourceName)
-- [SetFuel](SetFuel)
-- [index](index)
+### [GetFuel](GetFuel)
+### [GetResourceName](GetResourceName)
+### [SetFuel](SetFuel)
+### [index](index)

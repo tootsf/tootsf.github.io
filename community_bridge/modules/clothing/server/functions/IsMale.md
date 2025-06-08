@@ -8,8 +8,6 @@ nav_order: 1
 ---
 
 # IsMale
-{: .no_toc }
-
 Checks if a player's ped is using the male freemode model.
 
 **Parameters:**

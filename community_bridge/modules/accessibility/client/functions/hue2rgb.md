@@ -8,8 +8,6 @@ nav_order: 1
 ---
 
 # hue2rgb
-{: .no_toc }
-
 Helper function for HSL to RGB conversion.
 
 ## Syntax

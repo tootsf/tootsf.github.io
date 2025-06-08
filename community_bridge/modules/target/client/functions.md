@@ -10,16 +10,14 @@ permalink: /community_bridge/modules/target/client/functions/
 ---
 
 # Client Functions
-{: .no_toc }
-
 Client-side functions for the target module.
 
-## Available Functions
+## Functions
 
-- [AddTargetCoords](AddTargetCoords)
-- [AddTargetEntity](AddTargetEntity)
-- [AddTargetModel](AddTargetModel)
-- [AddTargetZone](AddTargetZone)
-- [RemoveTargetEntity](RemoveTargetEntity)
-- [RemoveTargetModel](RemoveTargetModel)
-- [RemoveTargetZone](RemoveTargetZone)
+### [AddTargetCoords](AddTargetCoords)
+### [AddTargetEntity](AddTargetEntity)
+### [AddTargetModel](AddTargetModel)
+### [AddTargetZone](AddTargetZone)
+### [RemoveTargetEntity](RemoveTargetEntity)
+### [RemoveTargetModel](RemoveTargetModel)
+### [RemoveTargetZone](RemoveTargetZone)

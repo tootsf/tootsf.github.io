@@ -8,8 +8,6 @@ nav_order: 1
 ---
 
 # GetFuel
-{: .no_toc }
-
 Gets the current fuel level of a vehicle.
 
 ## Syntax

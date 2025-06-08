@@ -8,8 +8,6 @@ nav_order: 1
 ---
 
 # rgbToHex
-{: .no_toc }
-
 Converts RGB values to hex color code.
 
 ## Syntax

@@ -8,8 +8,6 @@ nav_order: 1
 ---
 
 # RestoreAppearance
-{: .no_toc }
-
 Restores the previously stored appearance for a ped entity.
 
 **Parameters:**

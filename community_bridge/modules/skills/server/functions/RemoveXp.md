@@ -8,6 +8,4 @@ nav_order: 5
 ---
 
 # RemoveXp
-{: .no_toc }
-
 Remove experience points from a player's skill.

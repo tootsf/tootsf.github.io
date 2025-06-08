@@ -8,10 +8,7 @@ nav_order: 1
 ---
 
 # OxLibFormat
-{: .no_toc }
-
 # ox_lib Format
-{: .no_toc }
 {: .d-inline-block }
 Client
 {: .label .label-blue }

@@ -8,8 +8,6 @@ nav_order: 1
 ---
 
 # AddTargetCoords
-{: .no_toc }
-
 Adds targeting interaction at specific coordinates.
 
 ## Syntax

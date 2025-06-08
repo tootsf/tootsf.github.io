@@ -10,13 +10,11 @@ permalink: /community_bridge/modules/notify/client/functions/
 ---
 
 # Client Functions
-{: .no_toc }
-
 Client-side functions for the notify module.
 
-## Available Functions
+## Functions
 
-- [GetResourceName](GetResourceName)
-- [HideHelpText](HideHelpText)
-- [SendNotify](SendNotify)
-- [ShowHelpText](ShowHelpText)
+### [GetResourceName](GetResourceName)
+### [HideHelpText](HideHelpText)
+### [SendNotify](SendNotify)
+### [ShowHelpText](ShowHelpText)

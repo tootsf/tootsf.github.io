@@ -8,8 +8,6 @@ nav_order: 1
 ---
 
 # ShowInputForm
-{: .no_toc }
-
 Displays a multi-input form dialog.
 
 ## Syntax

@@ -10,6 +10,4 @@ has_children: false
 ---
 
 # Fuel Server Functions
-{: .no_toc }
-
 No server-side functions available for the Fuel module.

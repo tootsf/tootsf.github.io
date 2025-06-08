@@ -8,8 +8,6 @@ nav_order: 2
 ---
 
 # SendAlert
-{: .no_toc }
-
 Sends an emergency alert to the dispatch system.
 
 **Parameters:**

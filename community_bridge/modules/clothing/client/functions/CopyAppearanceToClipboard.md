@@ -8,8 +8,6 @@ nav_order: 1
 ---
 
 # CopyAppearanceToClipboard
-{: .no_toc }
-
 Copies the current player's appearance data to the clipboard.
 
 **Example:**

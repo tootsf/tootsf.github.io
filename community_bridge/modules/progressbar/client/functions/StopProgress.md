@@ -8,8 +8,6 @@ nav_order: 1
 ---
 
 # StopProgress
-{: .no_toc }
-
 Stops an active progress bar.
 
 ## Syntax

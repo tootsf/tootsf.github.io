@@ -10,13 +10,11 @@ permalink: /community_bridge/modules/menu/client/functions/
 ---
 
 # Client Functions
-{: .no_toc }
-
 Client-side functions for the menu module.
 
-## Available Functions
+## Functions
 
-- [MenuCallbackEvent](MenuCallbackEvent)
-- [Open](Open)
-- [OxLibFormat](OxLibFormat)
-- [QBMenuFormat](QBMenuFormat)
+### [MenuCallbackEvent](MenuCallbackEvent)
+### [Open](Open)
+### [OxLibFormat](OxLibFormat)
+### [QBMenuFormat](QBMenuFormat)

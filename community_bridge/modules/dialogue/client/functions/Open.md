@@ -8,8 +8,6 @@ nav_order: 1
 ---
 
 # Open
-{: .no_toc }
-
 Opens a dialogue with options.
 
 ## Syntax

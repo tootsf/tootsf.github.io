@@ -8,8 +8,6 @@ nav_order: 1
 ---
 
 # SendNotify
-{: .no_toc }
-
 Sends a notification to the player.
 
 ## Syntax

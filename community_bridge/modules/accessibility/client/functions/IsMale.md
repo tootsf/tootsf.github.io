@@ -8,8 +8,6 @@ nav_order: 1
 ---
 
 # IsMale
-{: .no_toc }
-
 Check if current player is male model.
 
 **Returns:**

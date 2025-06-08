@@ -10,6 +10,4 @@ has_children: false
 ---
 
 # Dialogue Server Functions
-{: .no_toc }
-
 No server-side functions available for the Dialogue module.

@@ -10,19 +10,17 @@ permalink: /community_bridge/modules/clothing/client/functions/
 ---
 
 # Client Functions
-{: .no_toc }
-
 Client-side functions for the clothing module.
 
-## Available Functions
+## Functions
 
-- [CopyAppearanceToClipboard](CopyAppearanceToClipboard)
-- [ConvertFromDefault](ConvertFromDefault)
-- [ConvertToDefault](ConvertToDefault)
-- [GetAppearance](GetAppearance)
-- [IsMale](IsMale)
-- [OpenMenu](OpenMenu)
-- [RestoreAppearance](RestoreAppearance)
-- [SetAppearance](SetAppearance)
-- [ToggleDebugging](ToggleDebugging)
-- [UpdateAppearanceBackup](UpdateAppearanceBackup)
+### [CopyAppearanceToClipboard](CopyAppearanceToClipboard)
+### [ConvertFromDefault](ConvertFromDefault)
+### [ConvertToDefault](ConvertToDefault)
+### [GetAppearance](GetAppearance)
+### [IsMale](IsMale)
+### [OpenMenu](OpenMenu)
+### [RestoreAppearance](RestoreAppearance)
+### [SetAppearance](SetAppearance)
+### [ToggleDebugging](ToggleDebugging)
+### [UpdateAppearanceBackup](UpdateAppearanceBackup)

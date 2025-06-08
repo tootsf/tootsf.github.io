@@ -10,12 +10,10 @@ permalink: /community_bridge/modules/managment/server/functions/
 ---
 
 # Server Functions
-{: .no_toc }
-
 Server-side functions for the managment module.
 
-## Available Functions
+## Functions
 
-- [AddAccountMoney](AddAccountMoney)
-- [GetAccountMoney](GetAccountMoney)
-- [RemoveAccountMoney](RemoveAccountMoney)
+### [AddAccountMoney](AddAccountMoney)
+### [GetAccountMoney](GetAccountMoney)
+### [RemoveAccountMoney](RemoveAccountMoney)

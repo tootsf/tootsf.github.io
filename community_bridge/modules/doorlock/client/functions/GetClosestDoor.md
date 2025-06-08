@@ -8,8 +8,6 @@ nav_order: 1
 ---
 
 # GetClosestDoor
-{: .no_toc }
-
 Gets the closest door to the current player's position.
 
 ## Syntax

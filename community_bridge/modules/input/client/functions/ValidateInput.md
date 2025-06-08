@@ -8,8 +8,6 @@ nav_order: 1
 ---
 
 # ValidateInput
-{: .no_toc }
-
 Validates an input value against specified rules.
 
 ## Syntax

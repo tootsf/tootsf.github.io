@@ -8,8 +8,6 @@ nav_order: 2
 ---
 
 # AddXp
-{: .no_toc }
-
 Add experience points to a player's skill.
 
 #

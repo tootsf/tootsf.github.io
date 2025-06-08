@@ -8,8 +8,6 @@ nav_order: 2
 ---
 
 # AddTargetEntity
-{: .no_toc }
-
 Adds targeting interaction to a specific entity.
 
 ## Syntax

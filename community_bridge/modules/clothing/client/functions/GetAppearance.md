@@ -8,8 +8,6 @@ nav_order: 1
 ---
 
 # GetAppearance
-{: .no_toc }
-
 Gets the complete appearance data for a ped entity.
 
 **Parameters:**

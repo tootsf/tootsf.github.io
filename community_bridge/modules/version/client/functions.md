@@ -10,6 +10,4 @@ has_children: false
 ---
 
 # Version Client Functions
-{: .no_toc }
-
 No client-side functions available for the Version module.

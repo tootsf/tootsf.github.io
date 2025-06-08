@@ -10,6 +10,4 @@ has_children: false
 ---
 
 # Weather Shared Functions
-{: .no_toc }
-
 No shared-side functions available for the Weather module.

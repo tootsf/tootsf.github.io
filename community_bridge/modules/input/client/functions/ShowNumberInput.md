@@ -8,8 +8,6 @@ nav_order: 1
 ---
 
 # ShowNumberInput
-{: .no_toc }
-
 Displays a number input dialog.
 
 ## Syntax

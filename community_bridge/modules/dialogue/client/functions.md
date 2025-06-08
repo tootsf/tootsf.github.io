@@ -10,11 +10,9 @@ permalink: /community_bridge/modules/dialogue/client/functions/
 ---
 
 # Client Functions
-{: .no_toc }
-
 Client-side functions for the dialogue module.
 
-## Available Functions
+## Functions
 
-- [Close](Close)
-- [Open](Open)
+### [Close](Close)
+### [Open](Open)

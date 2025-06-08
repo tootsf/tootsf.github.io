@@ -10,6 +10,4 @@ has_children: false
 ---
 
 # Math Client Functions
-{: .no_toc }
-
 No client-side functions available for the Math module.

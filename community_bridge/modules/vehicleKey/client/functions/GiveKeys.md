@@ -8,8 +8,6 @@ nav_order: 1
 ---
 
 # GiveKeys
-{: .no_toc }
-
 Gives vehicle keys to the current player for the specified vehicle.
 
 ## Syntax

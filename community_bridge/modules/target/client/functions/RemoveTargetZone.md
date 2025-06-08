@@ -8,8 +8,6 @@ nav_order: 7
 ---
 
 # RemoveTargetZone
-{: .no_toc }
-
 Removes a target zone.
 
 ## Syntax

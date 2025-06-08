@@ -8,8 +8,6 @@ nav_order: 1
 ---
 
 # StartProgress
-{: .no_toc }
-
 Creates and starts a progress bar with customizable options.
 
 ## Syntax

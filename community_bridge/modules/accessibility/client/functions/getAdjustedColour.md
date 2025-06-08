@@ -8,8 +8,6 @@ nav_order: 2
 ---
 
 # getAdjustedColour
-{: .no_toc }
-
 Gets color adjusted for current accessibility settings.
 
 ## Syntax

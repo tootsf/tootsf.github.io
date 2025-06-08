@@ -10,13 +10,11 @@ permalink: /community_bridge/modules/skills/server/functions/
 ---
 
 # Server Functions
-{: .no_toc }
-
 Server-side functions for the skills module.
 
-## Available Functions
+## Functions
 
-- [[GetResourceName](GetResourceName/)]([GetResourceName](GetResourceName))
-- [[GetSkillLevel](GetSkillLevel/)]([GetSkillLevel](GetSkillLevel))
-- [[AddXp](AddXp/)]([AddXp](AddXp))
-- [[RemoveXp](RemoveXp/)]([RemoveXp](RemoveXp))
+### [[GetResourceName](GetResourceName/)]([GetResourceName](GetResourceName))
+### [[GetSkillLevel](GetSkillLevel/)]([GetSkillLevel](GetSkillLevel))
+### [[AddXp](AddXp/)]([AddXp](AddXp))
+### [[RemoveXp](RemoveXp/)]([RemoveXp](RemoveXp))

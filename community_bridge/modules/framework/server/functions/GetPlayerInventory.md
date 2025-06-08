@@ -8,8 +8,6 @@ nav_order: 1
 ---
 
 # GetPlayerInventory
-{: .no_toc }
-
 Returns the entire inventory of the player as a table.
 
 ## Syntax

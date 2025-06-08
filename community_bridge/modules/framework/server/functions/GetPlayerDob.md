@@ -8,8 +8,6 @@ nav_order: 1
 ---
 
 # GetPlayerDob
-{: .no_toc }
-
 Gets the player's date of birth.
 
 ## Syntax

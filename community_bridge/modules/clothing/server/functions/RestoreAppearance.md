@@ -8,8 +8,6 @@ nav_order: 1
 ---
 
 # RestoreAppearance
-{: .no_toc }
-
 Restores a player's previously stored appearance.
 
 **Parameters:**

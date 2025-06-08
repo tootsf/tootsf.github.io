@@ -8,10 +8,7 @@ nav_order: 1
 ---
 
 # QBMenuFormat
-{: .no_toc }
-
 # QB Menu Format
-{: .no_toc }
 {: .d-inline-block }
 Client
 {: .label .label-blue }

@@ -8,8 +8,6 @@ nav_order: 1
 ---
 
 # GetAccountMoney
-{: .no_toc }
-
 **[GetAccountMoney](GetAccountMoney.md)**
 {: .d-inline-block }
 Server

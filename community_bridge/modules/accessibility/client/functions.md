@@ -10,18 +10,16 @@ permalink: /community_bridge/modules/accessibility/client/functions/
 ---
 
 # Client Functions
-{: .no_toc }
-
 Client-side functions for the accessibility module.
 
-## Available Functions
+## Functions
 
-- [IsMale](IsMale)
-- [adjustColourForColourblindness](adjustColourForColourblindness)
-- [getAdjustedColour](getAdjustedColour)
-- [hexToRgb](hexToRgb)
-- [hslToRgb](hslToRgb)
-- [hue2rgb](hue2rgb)
-- [rgbToHex](rgbToHex)
-- [rgbToHsl](rgbToHsl)
-- [updatecolourblindness](updatecolourblindness)
+### [IsMale](IsMale)
+### [adjustColourForColourblindness](adjustColourForColourblindness)
+### [getAdjustedColour](getAdjustedColour)
+### [hexToRgb](hexToRgb)
+### [hslToRgb](hslToRgb)
+### [hue2rgb](hue2rgb)
+### [rgbToHex](rgbToHex)
+### [rgbToHsl](rgbToHsl)
+### [updatecolourblindness](updatecolourblindness)

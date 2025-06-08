@@ -8,8 +8,6 @@ nav_order: 1
 ---
 
 # GetItemInfo
-{: .no_toc }
-
 Returns detailed information about an item.
 
 **Parameters:**

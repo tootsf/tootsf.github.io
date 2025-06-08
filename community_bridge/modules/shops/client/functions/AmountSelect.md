@@ -8,8 +8,6 @@ nav_order: 1
 ---
 
 # AmountSelect
-{: .no_toc }
-
 Opens a quantity selection interface for purchasing items.
 
 ## Syntax

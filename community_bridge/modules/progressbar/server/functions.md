@@ -10,14 +10,12 @@ permalink: /community_bridge/modules/progressbar/server/functions/
 ---
 
 # Server Functions
-{: .no_toc }
-
 Server-side functions for the progressbar module.
 
-## Available Functions
+## Functions
 
-- [BroadcastProgress](BroadcastProgress)
-- [IsClientProgressActive](IsClientProgressActive)
-- [StartSynchronizedProgress](StartSynchronizedProgress)
-- [StopClientProgress](StopClientProgress)
-- [TriggerClientProgress](TriggerClientProgress)
+### [BroadcastProgress](BroadcastProgress)
+### [IsClientProgressActive](IsClientProgressActive)
+### [StartSynchronizedProgress](StartSynchronizedProgress)
+### [StopClientProgress](StopClientProgress)
+### [TriggerClientProgress](TriggerClientProgress)

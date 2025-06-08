@@ -8,8 +8,6 @@ nav_order: 1
 ---
 
 # FinalizeCheckOut
-{: .no_toc }
-
 Presents payment method options and processes the final transaction.
 
 ## Syntax

@@ -10,19 +10,17 @@ permalink: /community_bridge/modules/inventory/client/functions/
 ---
 
 # Client Functions
-{: .no_toc }
-
 Client-side functions for the inventory module.
 
-## Available Functions
+## Functions
 
-- [GetImagePath](GetImagePath)
-- [GetItemCount](GetItemCount)
-- [GetItemInfo](GetItemInfo)
-- [GetPlayerInventory](GetPlayerInventory)
-- [HasItem](HasItem)
-- [OpenShop](OpenShop)
-- [StripPNG](StripPNG)
+### [GetImagePath](GetImagePath)
+### [GetItemCount](GetItemCount)
+### [GetItemInfo](GetItemInfo)
+### [GetPlayerInventory](GetPlayerInventory)
+### [HasItem](HasItem)
+### [OpenShop](OpenShop)
+### [StripPNG](StripPNG)
 
 # GetImagePath
 
@@ -150,7 +148,6 @@ end
 ## 🔹 OpenShop
 
 # OpenShop
-{: .no_toc }
 {: .d-inline-block }
 Client
 {: .label .label-blue }
@@ -188,7 +185,6 @@ Bridge.Inventory.OpenShop("General Store", {
 ## 🔹 StripPNG
 
 # StripPNG
-{: .no_toc }
 {: .d-inline-block }
 Client
 {: .label .label-blue }

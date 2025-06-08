@@ -10,12 +10,10 @@ permalink: /community_bridge/modules/dispatch/client/functions/
 ---
 
 # Client Functions
-{: .no_toc }
-
 Client-side functions for the dispatch module.
 
-## Available Functions
+## Functions
 
-- [Send911Call](Send911Call)
-- [SendAlert](SendAlert)
+### [Send911Call](Send911Call)
+### [SendAlert](SendAlert)
 

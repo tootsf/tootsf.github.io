@@ -8,8 +8,6 @@ nav_order: 1
 ---
 
 # TriggerClientProgress
-{: .no_toc }
-
 Triggers a progress bar on a specific client from the server.
 
 ## Syntax
