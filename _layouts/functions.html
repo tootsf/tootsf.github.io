@@ -60,8 +60,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     
     tocContainer.appendChild(tocList);
-    
-    // Find the main content wrapper and modify structure
+      // Find the main content wrapper and modify structure
     const mainContentWrap = document.querySelector('.main-content-wrap');
     const mainContent = document.querySelector('.main-content');
     
@@ -69,8 +68,23 @@ document.addEventListener('DOMContentLoaded', function() {
       // Add flex class to wrapper
       mainContentWrap.classList.add('toc-layout');
       
-      // Insert TOC after main content
-      mainContent.insertAdjacentElement('afterend', tocContainer);
+      // Create a container for the flex layout
+      const contentContainer = document.createElement('div');
+      contentContainer.className = 'content-with-toc';
+      contentContainer.style.cssText = 'display: flex; gap: 2rem; align-items: flex-start;';
+      
+      // Wrap main content
+      const contentWrapper = document.createElement('div');
+      contentWrapper.className = 'content-wrapper';
+      contentWrapper.style.cssText = 'flex: 1; max-width: calc(100% - 280px);';
+      
+      // Move main content into wrapper
+      mainContent.parentNode.insertBefore(contentContainer, mainContent);
+      contentContainer.appendChild(contentWrapper);
+      contentWrapper.appendChild(mainContent);
+      
+      // Add TOC to the container
+      contentContainer.appendChild(tocContainer);
     }
     
     // Add smooth scrolling for TOC links

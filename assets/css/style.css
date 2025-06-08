@@ -2,6 +2,17 @@
 ---
 
 /* Custom right-side TOC styling for GitHub Pages */
+.content-with-toc {
+  display: flex !important;
+  gap: 2rem !important;
+  align-items: flex-start !important;
+}
+
+.content-wrapper {
+  flex: 1 !important;
+  max-width: calc(100% - 280px) !important;
+}
+
 .main-content-wrap.toc-layout {
   display: flex;
   gap: 2rem;
@@ -15,17 +26,18 @@
 
 /* TOC Container Styling */
 .page-toc {
-  position: sticky;
-  top: 2rem;
-  width: 260px;
-  max-height: calc(100vh - 4rem);
-  overflow-y: auto;
-  background: #f5f6fa;
-  border: 1px solid #eeebee;
-  border-radius: 6px;
-  padding: 1rem;
-  margin-left: auto;
-  flex-shrink: 0;
+  position: sticky !important;
+  top: 2rem !important;
+  width: 260px !important;
+  max-height: calc(100vh - 4rem) !important;
+  overflow-y: auto !important;
+  background: #f5f6fa !important;
+  border: 1px solid #eeebee !important;
+  border-radius: 6px !important;
+  padding: 1rem !important;
+  margin-left: auto !important;
+  flex-shrink: 0 !important;
+  order: 2 !important;
 }
 
 .page-toc h2 {
@@ -98,26 +110,33 @@
 }
 
 /* Hide the original TOC at bottom */
-.main-content > .table-of-contents {
-  display: none;
+.main-content > .table-of-contents,
+.main-content .table-of-contents,
+nav[data-toggle="toc"],
+.toc,
+#markdown-toc {
+  display: none !important;
 }
 
 /* Responsive design */
 @media (max-width: 1200px) {
+  .content-with-toc,
   .main-content-wrap.toc-layout {
-    flex-direction: column;
+    flex-direction: column !important;
   }
   
+  .content-wrapper,
   .toc-layout .main-content {
-    max-width: 100%;
+    max-width: 100% !important;
   }
   
   .page-toc {
-    position: static;
-    width: 100%;
-    max-height: none;
-    margin-left: 0;
-    margin-top: 2rem;
+    position: static !important;
+    width: 100% !important;
+    max-height: none !important;
+    margin-left: 0 !important;
+    margin-top: 2rem !important;
+    order: 1 !important;
   }
 }
 
