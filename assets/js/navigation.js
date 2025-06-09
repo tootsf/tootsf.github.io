@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const bridgeCategory = document.createElement('li');
     bridgeCategory.classList.add('has-children');
     bridgeCategory.classList.add('active'); // MODIFIED: Force active for testing
-    bridgeCategory.style.border = "2px solid blue"; // ADDED: Debug style
+    // bridgeCategory.style.border = "2px solid blue"; // REMOVED: Debug style
 
     // Create parent link
     const bridgeCategoryLink = document.createElement('a');
@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Create nested modules list
     const modulesList = document.createElement('ul');
     modulesList.classList.add('nested');
-    modulesList.style.border = "2px solid red"; // ADDED: Debug style
+    // modulesList.style.border = "2px solid red"; // REMOVED: Debug style
 
     // Check if we're on a module page to expand the category
     const urlParams = new URLSearchParams(window.location.search);
