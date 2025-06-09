@@ -4,12 +4,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Community Bridge Documentation</title>    <link rel="icon" href="favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="assets/css/styles.css">
-    <!-- Add highlight.js with both themes - we'll toggle them with JS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/github.min.css" id="light-theme-highlight">
+    <!-- Add highlight.js with both themes - we'll toggle them with JS -->    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/github.min.css" id="light-theme-highlight">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/github-dark.min.css" id="dark-theme-highlight" disabled>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
     <!-- Add Lua language support -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/languages/lua.min.js"></script>
+    <!-- Prevent FOUC by setting theme immediately -->
+    <script>
+        (function() {
+            const stored = localStorage.getItem('theme');
+            const defaultTheme = stored || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+            document.documentElement.setAttribute('data-theme', defaultTheme);
+
+            // Set syntax highlighting theme immediately
+            const lightTheme = document.getElementById('light-theme-highlight');
+            const darkTheme = document.getElementById('dark-theme-highlight');
+            if (defaultTheme === 'dark') {
+                if (lightTheme) lightTheme.disabled = true;
+                if (darkTheme) darkTheme.disabled = false;
+            } else {
+                if (lightTheme) lightTheme.disabled = false;
+                if (darkTheme) darkTheme.disabled = true;
+            }
+        })();
+    </script>
 </head>
 <body>    <header>
         <h1>Community Bridge Docs</h1>
@@ -87,12 +105,13 @@
                 hljs.highlightElement(block);
               });
             }, 100);
-          }
-
-          // Initialize theme
+          }          // Initialize theme
           const stored = localStorage.getItem('theme');
           const defaultTheme = stored || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-          setTheme(defaultTheme);
+
+          // Update button icon to match current theme (theme is already set in head)
+          toggleBtn.textContent = defaultTheme === 'dark' ? '☀️' : '🌙';
+          toggleBtn.setAttribute('aria-label', defaultTheme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode');
 
           // Toggle theme on click
           toggleBtn.addEventListener('click', () => {
