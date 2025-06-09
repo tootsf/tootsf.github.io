@@ -58,20 +58,20 @@
                 });
             }, 100);
         });
-        
+
         // Theme toggle script
         (function() {
           const htmlEl = document.documentElement;
           const toggleBtn = document.getElementById('theme-toggle');
           const lightTheme = document.getElementById('light-theme-highlight');
           const darkTheme = document.getElementById('dark-theme-highlight');
-          
+
           // Function to set theme
           function setTheme(theme) {
             htmlEl.setAttribute('data-theme', theme);
             toggleBtn.textContent = theme === 'dark' ? '☀️' : '🌙';
             toggleBtn.setAttribute('aria-label', theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode');
-            
+
             // Toggle syntax highlighting theme
             if (theme === 'dark') {
               lightTheme.disabled = true;
@@ -80,7 +80,7 @@
               lightTheme.disabled = false;
               darkTheme.disabled = true;
             }
-            
+
             // Re-highlight code blocks if they exist
             setTimeout(() => {
               document.querySelectorAll('pre code').forEach(block => {
@@ -88,12 +88,12 @@
               });
             }, 100);
           }
-          
+
           // Initialize theme
           const stored = localStorage.getItem('theme');
           const defaultTheme = stored || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
           setTheme(defaultTheme);
-          
+
           // Toggle theme on click
           toggleBtn.addEventListener('click', () => {
             const newTheme = htmlEl.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
