@@ -4,17 +4,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Community Bridge Documentation</title>    <link rel="icon" href="favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="assets/css/styles.css">
-    <!-- Add highlight.js for code syntax highlighting -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/github.min.css">
+    <!-- Add highlight.js with both themes - we'll toggle them with JS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/github.min.css" id="light-theme-highlight">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/github-dark.min.css" id="dark-theme-highlight" disabled>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
     <!-- Add Lua language support -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/languages/lua.min.js"></script>
 </head>
 <body>    <header>
         <h1>Community Bridge Docs</h1>
-        <button class="mobile-menu-toggle" id="mobile-menu-toggle" aria-label="Toggle menu">☰</button>
-        <input id="search-input" type="text" placeholder="Search docs..." class="search-input">
-        <div id="search-results" class="search-results"></div>
+        <div class="header-buttons">
+            <button class="mobile-menu-toggle" id="mobile-menu-toggle" aria-label="Toggle menu">☰</button>
+            <button id="theme-toggle" aria-label="Toggle dark mode">🌙</button>
+        </div>
+        <div class="search-container">
+            <input id="search-input" type="text" placeholder="Search docs..." class="search-input">
+            <div id="search-results" class="search-results"></div>
+        </div>
     </header>
     <div class="container">
         <nav class="sidebar">
@@ -52,6 +58,49 @@
                 });
             }, 100);
         });
+        
+        // Theme toggle script
+        (function() {
+          const htmlEl = document.documentElement;
+          const toggleBtn = document.getElementById('theme-toggle');
+          const lightTheme = document.getElementById('light-theme-highlight');
+          const darkTheme = document.getElementById('dark-theme-highlight');
+          
+          // Function to set theme
+          function setTheme(theme) {
+            htmlEl.setAttribute('data-theme', theme);
+            toggleBtn.textContent = theme === 'dark' ? '☀️' : '🌙';
+            toggleBtn.setAttribute('aria-label', theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode');
+            
+            // Toggle syntax highlighting theme
+            if (theme === 'dark') {
+              lightTheme.disabled = true;
+              darkTheme.disabled = false;
+            } else {
+              lightTheme.disabled = false;
+              darkTheme.disabled = true;
+            }
+            
+            // Re-highlight code blocks if they exist
+            setTimeout(() => {
+              document.querySelectorAll('pre code').forEach(block => {
+                hljs.highlightElement(block);
+              });
+            }, 100);
+          }
+          
+          // Initialize theme
+          const stored = localStorage.getItem('theme');
+          const defaultTheme = stored || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+          setTheme(defaultTheme);
+          
+          // Toggle theme on click
+          toggleBtn.addEventListener('click', () => {
+            const newTheme = htmlEl.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+            localStorage.setItem('theme', newTheme);
+            setTheme(newTheme);
+          });
+        })();
     </script>
 </body>
 </html>
