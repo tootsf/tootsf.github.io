@@ -1,0 +1,119 @@
+{
+  "name": "ProgressBar",
+  "icon": "📏",
+  "description": "The ProgressBar module provides functions for creating and managing visual progress indicators for player actions.",
+  "clientFunctions": [
+    {
+      "name": "StartProgress",
+      "description": "Creates and starts a progress bar with customizable options.",
+      "syntax": "Bridge.Progressbar.StartProgress(config, callback)",
+      "parameters": [
+        {
+          "name": "config",
+          "type": "table",
+          "description": "Progress bar configuration with the following properties:",
+          "properties": [
+            {
+              "name": "name",
+              "type": "string",
+              "description": "Unique progress identifier"
+            },
+            {
+              "name": "duration",
+              "type": "number",
+              "description": "Progress duration in milliseconds"
+            },
+            {
+              "name": "label",
+              "type": "string",
+              "description": "Display label"
+            },
+            {
+              "name": "useWhileDead",
+              "type": "boolean",
+              "description": "Allow progress while dead"
+            },
+            {
+              "name": "canCancel",
+              "type": "boolean",
+              "description": "Allow cancellation"
+            },
+            {
+              "name": "disableControls",
+              "type": "table",
+              "description": "Controls to disable during progress"
+            },
+            {
+              "name": "animation",
+              "type": "table",
+              "description": "Animation configuration"
+            },
+            {
+              "name": "position",
+              "type": "string",
+              "description": "Screen position ('top', 'center', 'bottom')"
+            }
+          ]
+        },
+        {
+          "name": "callback",
+          "type": "function",
+          "description": "Function called when progress completes or is cancelled"
+        }
+      ],
+      "example": "local Bridge = exports['community_bridge']:Bridge()\n\nBridge.Progressbar.StartProgress({\n    name = 'repair_vehicle',\n    duration = 10000,\n    label = 'Repairing vehicle...',\n    useWhileDead = false,\n    canCancel = true,\n    disableControls = {\n        disableMovement = true,\n        disableCarMovement = true,\n        disableMouse = false,\n        disableCombat = true\n    },\n    animation = {\n        animDict = 'mini@repair',\n        anim = 'fixing_a_ped'\n    }\n}, function(cancelled)\n    if not cancelled then\n        Bridge.Progressbar.ShowNotification('Vehicle repaired!', 'success')\n    else\n        Bridge.Progressbar.ShowNotification('Repair cancelled', 'error')\n    end\nend)"
+    },
+    {
+      "name": "StartCircularProgress",
+      "description": "Creates and starts a circular progress indicator.",
+      "syntax": "Bridge.Progressbar.StartCircularProgress(config, callback)",
+      "parameters": [
+        {
+          "name": "config",
+          "type": "table",
+          "description": "Progress configuration similar to StartProgress with additional circular-specific options"
+        },
+        {
+          "name": "callback",
+          "type": "function",
+          "description": "Function called when progress completes or is cancelled"
+        }
+      ],
+      "example": "local Bridge = exports['community_bridge']:Bridge()\n\nBridge.Progressbar.StartCircularProgress({\n    name = 'lockpicking',\n    duration = 5000,\n    label = 'Lockpicking...',\n    position = 'center',\n    radius = 50\n}, function(cancelled)\n    if not cancelled then\n        print('Lockpicking successful')\n    end\nend)"
+    },
+    {
+      "name": "StopProgress",
+      "description": "Stops the currently active progress bar.",
+      "syntax": "Bridge.Progressbar.StopProgress(name)",
+      "parameters": [
+        {
+          "name": "name",
+          "type": "string",
+          "description": "The name of the progress bar to stop"
+        }
+      ],
+      "example": "local Bridge = exports['community_bridge']:Bridge()\n\n-- Start a progress bar\nBridge.Progressbar.StartProgress({\n    name = 'crafting_item',\n    duration = 15000,\n    label = 'Crafting...',\n}, function(cancelled) end)\n\n-- Later, stop it early\nBridge.Progressbar.StopProgress('crafting_item')"
+    },
+    {
+      "name": "IsProgressActive",
+      "description": "Checks if a progress bar is currently active.",
+      "syntax": "Bridge.Progressbar.IsProgressActive(name)",
+      "parameters": [
+        {
+          "name": "name",
+          "type": "string",
+          "optional": true,
+          "description": "The name of the progress bar to check. If not provided, checks if any progress is active."
+        }
+      ],
+      "returns": [
+        {
+          "type": "boolean",
+          "description": "true if progress is active, false otherwise"
+        }
+      ],
+      "example": "local Bridge = exports['community_bridge']:Bridge()\n\n-- Check if any progress is active\nif Bridge.Progressbar.IsProgressActive() then\n    print('Some progress is currently active')\nend\n\n-- Check if specific progress is active\nif Bridge.Progressbar.IsProgressActive('crafting_item') then\n    print('Crafting in progress')\nend"
+    }
+  ],
+  "serverFunctions": []
+}

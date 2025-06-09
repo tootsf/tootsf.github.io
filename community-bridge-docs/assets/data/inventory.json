@@ -1,0 +1,166 @@
+{
+  "name": "Inventory",
+  "icon": "🎒",
+  "description": "The Inventory module provides functions for handling player inventory items across different inventory systems.",
+  "clientFunctions": [
+    {
+      "name": "GetItemCount",
+      "description": "Returns the count of a specific item in the player's inventory.",
+      "syntax": "Bridge.Inventory.GetItemCount(item)",
+      "parameters": [
+        {
+          "name": "item",
+          "type": "string",
+          "description": "Name of the item"
+        }
+      ],
+      "returns": [
+        {
+          "type": "number",
+          "description": "Count of the item (0 if not found)"
+        }
+      ],
+      "example": "local Bridge = exports['community_bridge']:Bridge()\n\nlocal waterCount = Bridge.Inventory.GetItemCount(\"water\")\nprint(\"Player has \" .. waterCount .. \" water bottles\")"
+    },
+    {
+      "name": "GetItemInfo",
+      "description": "Gets information about a specific item from the inventory system.",
+      "syntax": "Bridge.Inventory.GetItemInfo(item)",
+      "parameters": [
+        {
+          "name": "item",
+          "type": "string",
+          "description": "Name of the item"
+        }
+      ],
+      "returns": [
+        {
+          "type": "table",
+          "description": "Table containing item information or nil if not found"
+        }
+      ],
+      "example": "local Bridge = exports['community_bridge']:Bridge()\n\nlocal itemInfo = Bridge.Inventory.GetItemInfo(\"phone\")\nif itemInfo then\n    print(\"Item label: \" .. itemInfo.label)\n    print(\"Item weight: \" .. itemInfo.weight)\nend"
+    },
+    {
+      "name": "GetImagePath",
+      "description": "Gets the image path for a specific item.",
+      "syntax": "Bridge.Inventory.GetImagePath(item)",
+      "parameters": [
+        {
+          "name": "item",
+          "type": "string",
+          "description": "Name of the item"
+        }
+      ],
+      "returns": [
+        {
+          "type": "string",
+          "description": "Path to the item's image or default image if not found"
+        }
+      ],
+      "example": "local Bridge = exports['community_bridge']:Bridge()\n\nlocal imagePath = Bridge.Inventory.GetImagePath(\"lockpick\")\nprint(\"Lockpick image: \" .. imagePath)"
+    }
+  ],
+  "serverFunctions": [
+    {
+      "name": "AddItem",
+      "description": "Adds an item to a player's inventory.",
+      "syntax": "Bridge.Inventory.AddItem(source, item, amount, metadata)",
+      "parameters": [
+        {
+          "name": "source",
+          "type": "number",
+          "description": "Player server ID"
+        },
+        {
+          "name": "item",
+          "type": "string",
+          "description": "Name of the item"
+        },
+        {
+          "name": "amount",
+          "type": "number",
+          "description": "Amount to add"
+        },
+        {
+          "name": "metadata",
+          "type": "table",
+          "optional": true,
+          "description": "Additional item metadata"
+        }
+      ],
+      "returns": [
+        {
+          "type": "boolean",
+          "description": "Success status of operation"
+        }
+      ],
+      "example": "local Bridge = exports['community_bridge']:Bridge()\n\n-- Add 1 phone with metadata\nlocal success = Bridge.Inventory.AddItem(source, \"phone\", 1, { number = \"555-123-4567\" })\nif success then\n    print(\"Added phone to inventory\")\nelse\n    print(\"Failed to add phone\")\nend"
+    },
+    {
+      "name": "RemoveItem",
+      "description": "Removes an item from a player's inventory.",
+      "syntax": "Bridge.Inventory.RemoveItem(source, item, amount, metadata)",
+      "parameters": [
+        {
+          "name": "source",
+          "type": "number",
+          "description": "Player server ID"
+        },
+        {
+          "name": "item",
+          "type": "string",
+          "description": "Name of the item"
+        },
+        {
+          "name": "amount",
+          "type": "number",
+          "description": "Amount to remove"
+        },
+        {
+          "name": "metadata",
+          "type": "table",
+          "optional": true,
+          "description": "Specific item metadata to match"
+        }
+      ],
+      "returns": [
+        {
+          "type": "boolean",
+          "description": "Success status of operation"
+        }
+      ],
+      "example": "local Bridge = exports['community_bridge']:Bridge()\n\n-- Remove 2 water bottles\nlocal success = Bridge.Inventory.RemoveItem(source, \"water\", 2)\nif success then\n    print(\"Removed water from inventory\")\nelse\n    print(\"Failed to remove water\")\nend"
+    },
+    {
+      "name": "GetItemCount",
+      "description": "Gets the count of an item in a player's inventory.",
+      "syntax": "Bridge.Inventory.GetItemCount(source, item, metadata)",
+      "parameters": [
+        {
+          "name": "source",
+          "type": "number",
+          "description": "Player server ID"
+        },
+        {
+          "name": "item",
+          "type": "string",
+          "description": "Name of the item"
+        },
+        {
+          "name": "metadata",
+          "type": "table",
+          "optional": true,
+          "description": "Specific item metadata to match"
+        }
+      ],
+      "returns": [
+        {
+          "type": "number",
+          "description": "Count of the specified item"
+        }
+      ],
+      "example": "local Bridge = exports['community_bridge']:Bridge()\n\n-- Get count of lockpicks\nlocal count = Bridge.Inventory.GetItemCount(source, \"lockpick\")\nprint(\"Player has \" .. count .. \" lockpicks\")"
+    }
+  ]
+}

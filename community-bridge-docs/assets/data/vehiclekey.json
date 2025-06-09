@@ -1,0 +1,95 @@
+{
+  "name": "Vehicle Key",
+  "icon": "🔑",
+  "description": "The Vehicle Key module provides functionality for managing vehicle keys, including giving and removing keys for specific vehicles.",
+  "clientFunctions": [
+    {
+      "name": "GiveKeys",
+      "description": "Gives vehicle keys to the current player for the specified vehicle.",
+      "syntax": "Bridge.VehicleKey.GiveKeys(vehicle, plate)",
+      "parameters": [
+        {
+          "name": "vehicle",
+          "type": "number",
+          "description": "The vehicle entity ID."
+        },
+        {
+          "name": "plate",
+          "type": "string",
+          "description": "The license plate of the vehicle."
+        }
+      ],
+      "returns": [
+        {
+          "type": "boolean",
+          "description": "true if keys given successfully, false if failed or no system."
+        }
+      ],
+      "example": "local Bridge = exports['community_bridge']:Bridge()\n\n-- Give keys to the vehicle the player is currently in\nlocal playerPed = PlayerPedId()\nlocal vehicle = GetVehiclePedIsIn(playerPed, false)\n\nif vehicle ~= 0 then\n    local plate = GetVehicleNumberPlateText(vehicle)\n    local success = Bridge.VehicleKey.GiveKeys(vehicle, plate)\n    \n    if success then\n        print(\"Vehicle keys given successfully\")\n    else\n        print(\"Failed to give vehicle keys\")\n    end\nend",
+      "behavior": [
+        {
+          "system": "qb-vehiclekeys",
+          "description": "Triggers qb-vehiclekeys:server:AcquireVehicleKeys server event"
+        },
+        {
+          "system": "qbx_vehiclekeys",
+          "description": "Uses QBX key acquisition system"
+        },
+        {
+          "system": "qs-vehiclekeys",
+          "description": "Integrates with QuaS vehicle key system"
+        },
+        {
+          "system": "Renewed-Vehiclekeys",
+          "description": "Uses Renewed Scripts key system"
+        },
+        {
+          "system": "Default",
+          "description": "Returns true with error message when no system is bridged"
+        }
+      ]
+    },
+    {
+      "name": "RemoveKeys",
+      "description": "Removes vehicle keys from the current player for the specified vehicle.",
+      "syntax": "Bridge.VehicleKey.RemoveKeys(plate)",
+      "parameters": [
+        {
+          "name": "plate",
+          "type": "string",
+          "description": "The license plate of the vehicle."
+        }
+      ],
+      "returns": [
+        {
+          "type": "boolean",
+          "description": "true if keys removed successfully, false if failed or no system."
+        }
+      ],
+      "example": "local Bridge = exports['community_bridge']:Bridge()\n\n-- Remove keys for the vehicle the player is currently in\nlocal playerPed = PlayerPedId()\nlocal vehicle = GetVehiclePedIsIn(playerPed, false)\n\nif vehicle ~= 0 then\n    local plate = GetVehicleNumberPlateText(vehicle)\n    local success = Bridge.VehicleKey.RemoveKeys(plate)\n    \n    if success then\n        print(\"Vehicle keys removed successfully\")\n    else\n        print(\"Failed to remove vehicle keys\")\n    end\nend",
+      "behavior": [
+        {
+          "system": "qb-vehiclekeys",
+          "description": "Removes keys from player data"
+        },
+        {
+          "system": "qbx_vehiclekeys",
+          "description": "Uses QBX key removal system"
+        },
+        {
+          "system": "qs-vehiclekeys",
+          "description": "Integrates with QuaS vehicle key system for removal"
+        },
+        {
+          "system": "Renewed-Vehiclekeys",
+          "description": "Uses Renewed Scripts key removal system"
+        },
+        {
+          "system": "Default",
+          "description": "Returns true with error message when no system is bridged"
+        }
+      ]
+    }
+  ],
+  "serverFunctions": []
+}

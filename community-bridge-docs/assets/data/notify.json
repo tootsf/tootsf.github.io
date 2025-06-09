@@ -1,0 +1,59 @@
+{
+  "name": "Notify",
+  "icon": "📢",
+  "description": "The Notify module provides standardized notification functions for displaying messages to players.",
+  "clientFunctions": [
+    {
+      "name": "SendNotify",
+      "description": "Sends a notification to the player.",
+      "syntax": "Bridge.Notify.SendNotify(message, type)",
+      "parameters": [
+        {
+          "name": "message",
+          "type": "string",
+          "description": "The notification message to display"
+        },
+        {
+          "name": "type",
+          "type": "string",
+          "description": "Type of notification ('success', 'error', 'info', 'warning')"
+        }
+      ],
+      "example": "local Bridge = exports['community_bridge']:Bridge()\nBridge.Notify.SendNotify(\"Purchase successful!\", \"success\")\nBridge.Notify.SendNotify(\"Insufficient funds!\", \"error\")"
+    },
+    {
+      "name": "ShowHelpText",
+      "description": "Shows help text at the bottom of the screen.",
+      "syntax": "Bridge.Notify.ShowHelpText(message)",
+      "parameters": [
+        {
+          "name": "message",
+          "type": "string",
+          "description": "The help text message to display"
+        }
+      ],
+      "example": "local Bridge = exports['community_bridge']:Bridge()\nBridge.Notify.ShowHelpText(\"Press [E] to interact\")"
+    },
+    {
+      "name": "HideHelpText",
+      "description": "Hides the currently displayed help text.",
+      "syntax": "Bridge.Notify.HideHelpText()",
+      "parameters": [],
+      "example": "local Bridge = exports['community_bridge']:Bridge()\nBridge.Notify.HideHelpText()"
+    },
+    {
+      "name": "GetResourceName",
+      "description": "Gets the name of the notification resource being used.",
+      "syntax": "Bridge.Notify.GetResourceName()",
+      "parameters": [],
+      "returns": [
+        {
+          "type": "string",
+          "description": "The name of the notification resource"
+        }
+      ],
+      "example": "local Bridge = exports['community_bridge']:Bridge()\nlocal notifyResource = Bridge.Notify.GetResourceName()\nprint(\"Using notification resource: \" .. notifyResource)"
+    }
+  ],
+  "serverFunctions": []
+}

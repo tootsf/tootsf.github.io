@@ -1,0 +1,427 @@
+// Module Loader - Dynamically loads module documentation from JSON files
+document.addEventListener('DOMContentLoaded', function() {
+    // Define all available modules with their icons
+    const modules = [
+        { id: 'vehiclekey', icon: '🔑', name: 'Vehicle Key' },
+        { id: 'target', icon: '🎯', name: 'Target' },
+        { id: 'skills', icon: '📊', name: 'Skills' },
+        { id: 'shops', icon: '🛒', name: 'Shops' },
+        { id: 'progressbar', icon: '📏', name: 'ProgressBar' },
+        { id: 'notify', icon: '📢', name: 'Notify' },
+        { id: 'management', icon: '👥', name: 'Management' },
+        { id: 'inventory', icon: '🎒', name: 'Inventory' }
+    ];
+
+    // Generate the sidebar navigation
+    generateNavigation(modules);
+
+    // Parse URL to determine what to show
+    const urlParams = new URLSearchParams(window.location.search);
+    const moduleId = urlParams.get('module');
+    const funcName = urlParams.get('func');
+    const funcType = urlParams.get('type'); // 'client' or 'server'
+
+    // If specific function is requested
+    if (moduleId && funcName && funcType) {
+        loadFunctionDoc(moduleId, funcName, funcType);
+    }
+    // If just module is specified
+    else if (moduleId) {
+        loadModuleDoc(moduleId);
+    }
+    // Otherwise show module list
+    else {
+        showModuleList(modules);
+    }
+});
+
+// Generate sidebar navigation
+function generateNavigation(modules) {
+    const mainNav = document.getElementById('main-nav');
+    if (!mainNav) return;
+
+    // Add modules to navigation
+    modules.forEach(module => {
+        // Create module list item
+        const moduleItem = document.createElement('li');
+        moduleItem.classList.add('has-children');
+
+        // Check if this module is currently active
+        const urlParams = new URLSearchParams(window.location.search);
+        const currentModule = urlParams.get('module');
+        if (currentModule === module.id) {
+            moduleItem.classList.add('active');
+        }
+
+        // Create module link
+        const moduleLink = document.createElement('a');
+        moduleLink.href = `?module=${module.id}`;
+        moduleLink.textContent = `${module.icon} ${module.name}`;
+
+        // Create nested function types list
+        const nestedList = document.createElement('ul');
+        nestedList.classList.add('nested');
+
+        // Add client functions link
+        const clientItem = document.createElement('li');
+        const clientLink = document.createElement('a');
+        clientLink.href = `?module=${module.id}#client-functions`;
+        clientLink.textContent = 'Client Functions';
+        clientItem.appendChild(clientLink);
+        nestedList.appendChild(clientItem);
+
+        // Add server functions link
+        const serverItem = document.createElement('li');
+        const serverLink = document.createElement('a');
+        serverLink.href = `?module=${module.id}#server-functions`;
+        serverLink.textContent = 'Server Functions';
+        serverItem.appendChild(serverLink);
+        nestedList.appendChild(serverItem);
+
+        // Assemble module navigation item
+        moduleItem.appendChild(moduleLink);
+        moduleItem.appendChild(nestedList);
+        mainNav.appendChild(moduleItem);
+    });    // Contributing link is already in the main navigation
+    // No need to add it again
+
+    // Add dropdown behavior for navigation
+    document.querySelectorAll('.sidebar .has-children').forEach(item => {
+        const link = item.querySelector('a');
+
+        link.addEventListener('click', function(e) {
+            if (this.getAttribute('href').includes('#')) return; // Don't prevent hash links
+            if (!e.target.closest('.nested')) {
+                e.preventDefault();
+                item.classList.toggle('active');
+                const nestedMenu = item.querySelector('.nested');
+                if (nestedMenu) {
+                    nestedMenu.style.display = nestedMenu.style.display === 'block' ? 'none' : 'block';
+                }
+            }
+        });
+
+        // Show nested menu for active items
+        if (item.classList.contains('active')) {
+            const nestedMenu = item.querySelector('.nested');
+            if (nestedMenu) {
+                nestedMenu.style.display = 'block';
+            }
+        }
+    });
+}
+
+// Load module documentation from JSON file
+async function loadModuleDoc(moduleId) {
+    const contentArea = document.getElementById('content-area');
+    if (!contentArea) return;
+
+    try {
+        // Set page title based on moduleId        document.title = `${moduleId.charAt(0).toUpperCase() + moduleId.slice(1)} Module - Community Bridge`;
+
+        // Fetch JSON data for this module
+        const response = await fetch(`assets/data/${moduleId}.json`);
+        if (!response.ok) {
+            throw new Error(`Failed to load module data: ${response.status}`);
+        }
+
+        const moduleData = await response.json();
+
+        // Render module content
+        renderModule(moduleData, contentArea);
+
+        // Update the table of contents
+        updateTableOfContents();
+
+        // Apply syntax highlighting
+        document.querySelectorAll('pre code').forEach((block) => {
+            hljs.highlightElement(block);
+        });
+
+        // Jump to hash if present
+        if (window.location.hash) {
+            const element = document.getElementById(window.location.hash.substring(1));
+            if (element) element.scrollIntoView();
+        }
+    } catch (error) {
+        contentArea.innerHTML = `
+            <div class="error-message">
+                <h3>Error Loading Documentation</h3>
+                <p>${error.message}</p>
+                <p>Please try another module or return to the <a href="/community-bridge-docs/">overview page</a>.</p>
+            </div>
+        `;
+    }
+}
+
+// Load specific function documentation
+async function loadFunctionDoc(moduleId, funcName, funcType) {
+    const contentArea = document.getElementById('content-area');
+    if (!contentArea) return;
+
+    try {
+        // Set page title
+        document.title = `${funcName} - ${moduleId.charAt(0).toUpperCase() + moduleId.slice(1)} Module - Community Bridge`;
+          // Fetch JSON data for this module
+        const response = await fetch(`assets/data/${moduleId}.json`);
+        if (!response.ok) {
+            throw new Error(`Failed to load module data: ${response.status}`);
+        }
+
+        const moduleData = await response.json();
+
+        // Find the function in the appropriate collection (client or server)
+        const functionCollection = funcType === 'server' ? moduleData.serverFunctions : moduleData.clientFunctions;
+        const func = functionCollection.find(f => f.name.toLowerCase() === funcName.toLowerCase());
+
+        if (!func) {
+            throw new Error(`Function "${funcName}" not found in module "${moduleData.name}"`);
+        }
+
+        // Render function content
+        renderFunction(func, moduleData, contentArea);
+
+        // Update the table of contents
+        updateTableOfContents();
+
+        // Apply syntax highlighting
+        document.querySelectorAll('pre code').forEach((block) => {
+            hljs.highlightElement(block);
+        });
+    } catch (error) {
+        contentArea.innerHTML = `
+            <div class="error-message">
+                <h3>Error Loading Function Documentation</h3>
+                <p>${error.message}</p>
+                <p>Please try another function or return to the <a href="?module=${moduleId}">module page</a>.</p>
+            </div>
+        `;
+    }
+}
+
+// Render module content
+function renderModule(moduleData, container) {
+    // Create module header
+    let html = `
+        <h1 id="${moduleData.name.toLowerCase().replace(/\s+/g, '-')}-module">${moduleData.icon} ${moduleData.name} Module</h1>
+        <p>${moduleData.description}</p>
+    `;
+
+    // Client functions section
+    if (moduleData.clientFunctions && moduleData.clientFunctions.length > 0) {
+        html += `<h2 id="client-functions">Client Functions</h2>`;
+        moduleData.clientFunctions.forEach(func => {
+            html += renderFunctionSummary(func, moduleData.name, 'client');
+        });
+    } else {
+        html += `<h2 id="client-functions">Client Functions</h2>
+                <p>No client-side functions are currently documented for this module.</p>`;
+    }
+
+    // Server functions section
+    if (moduleData.serverFunctions && moduleData.serverFunctions.length > 0) {
+        html += `<h2 id="server-functions">Server Functions</h2>`;
+        moduleData.serverFunctions.forEach(func => {
+            html += renderFunctionSummary(func, moduleData.name, 'server');
+        });
+    } else {
+        html += `<h2 id="server-functions">Server Functions</h2>
+                <p>No server-side functions are currently documented for this module.</p>`;
+    }
+
+    container.innerHTML = html;
+}
+
+// Render function summary (for module page)
+function renderFunctionSummary(func, moduleName, funcType) {
+    const moduleId = moduleName.toLowerCase().replace(/\s+/g, '-');
+    const funcId = func.name.toLowerCase();
+
+    return `
+    <div class="function-section">
+        <h3 id="${funcId}">
+            <a href="?module=${moduleId}&func=${func.name}&type=${funcType}">${func.name}</a>
+        </h3>
+        <div class="function-description">
+            <p>${func.description}</p>
+        </div>
+
+        <h4>Syntax:</h4>
+        <pre><code class="language-lua">${func.syntax}</code></pre>
+
+        <h4>Parameters:</h4>
+        <ul>
+            ${renderParameters(func.parameters)}
+        </ul>
+
+        ${func.returns ? `<h4>Returns:</h4>
+        <ul>
+            ${renderReturns(func.returns)}
+        </ul>` : ''}
+
+        <h4>Example:</h4>
+        <pre><code class="language-lua">${func.example}</code></pre>
+
+        ${func.behavior ? `<h4>System-Specific Behavior:</h4>
+        <ul>
+            ${renderBehavior(func.behavior)}
+        </ul>` : ''}
+
+        <p class="view-details">
+            <a href="?module=${moduleId}&func=${func.name}&type=${funcType}">View full documentation</a>
+        </p>
+    </div>`;
+}
+
+// Render full function documentation
+function renderFunction(func, moduleData, container) {
+    const moduleId = moduleData.name.toLowerCase().replace(/\s+/g, '-');
+
+    container.innerHTML = `        <p class="breadcrumb">
+            <a href="index.html">Home</a> &gt;
+            <a href="?module=${moduleId}">${moduleData.name} Module</a> &gt;
+            ${func.name}
+        </p>
+        <h1 id="${func.name.toLowerCase()}">${moduleData.icon} ${func.name}</h1>
+        <div class="function-section">
+            <div class="function-description">
+                <p>${func.description}</p>
+            </div>
+
+            <h2>Syntax:</h2>
+            <pre><code class="language-lua">${func.syntax}</code></pre>
+
+            <h2>Parameters:</h2>
+            <ul>
+                ${renderParameters(func.parameters)}
+            </ul>
+
+            ${func.returns ? `<h2>Returns:</h2>
+            <ul>
+                ${renderReturns(func.returns)}
+            </ul>` : ''}
+
+            <h2>Example:</h2>
+            <pre><code class="language-lua">${func.example}</code></pre>
+
+            ${func.behavior ? `<h2>System-Specific Behavior:</h2>
+            <ul>
+                ${renderBehavior(func.behavior)}
+            </ul>` : ''}
+        </div>
+    `;
+}
+
+// Show list of all modules on the homepage
+function showModuleList(modules) {
+    const contentArea = document.getElementById('content-area');
+    if (!contentArea) return;
+
+    // Set page title
+    document.title = "Community Bridge Documentation";
+
+    let html = `
+        <h1>Community Bridge Documentation</h1>
+        <p>Welcome to the Community Bridge documentation. Explore the modules below to learn about the API.</p>
+
+        <div class="module-grid">
+    `;
+
+    // Add each module card
+    modules.forEach(module => {
+        html += `
+            <div class="module-card">
+                <h3>${module.icon} ${module.name}</h3>
+                <p>Documentation for the ${module.name} module.</p>
+                <a href="?module=${module.id}" class="module-link">View Documentation</a>
+            </div>
+        `;
+    });
+
+    html += `</div>`;
+    contentArea.innerHTML = html;
+}
+
+// Parameter rendering helper
+function renderParameters(params) {
+    if (!params || params.length === 0) {
+        return '<li>None</li>';
+    }
+
+    return params.map(param => {
+        let html = `<li><code>${param.name}</code> (<code>${param.type}</code>)`;
+
+        if (param.optional) {
+            html += ' (optional)';
+        }
+
+        html += `: ${param.description}`;
+
+        if (param.properties && param.properties.length > 0) {
+            html += `<ul>
+                ${param.properties.map(prop =>
+                    `<li><code>${prop.name}</code> (<code>${prop.type}</code>)${prop.optional ? ' (optional)' : ''}: ${prop.description}</li>`
+                ).join('')}
+            </ul>`;
+        }
+
+        html += '</li>';
+        return html;
+    }).join('');
+}
+
+// Return value rendering helper
+function renderReturns(returns) {
+    if (typeof returns === 'string') {
+        return `<li>${returns}</li>`;
+    }
+
+    return returns.map(ret =>
+        `<li><code>${ret.type}</code>: ${ret.description}</li>`
+    ).join('');
+}
+
+// Behavior rendering helper
+function renderBehavior(behaviors) {
+    return behaviors.map(behavior =>
+        `<li><strong>${behavior.system}</strong>: ${behavior.description}</li>`
+    ).join('');
+}
+
+// Update the table of contents based on the headings in the content
+function updateTableOfContents() {
+    const tocContainer = document.getElementById("toc");
+    const headings = document.querySelectorAll(".main-content h1, .main-content h2, .main-content h3");
+
+    if (tocContainer && headings.length > 0) {
+        // Clear existing TOC
+        const existingList = tocContainer.querySelector("ul");
+        if (existingList) {
+            existingList.remove();
+        }
+
+        const tocList = document.createElement("ul");
+
+        headings.forEach(heading => {
+            const listItem = document.createElement("li");
+            const link = document.createElement("a");
+            const headingId = heading.id || heading.textContent.toLowerCase().replace(/\s+/g, '-');
+
+            heading.id = headingId; // Set the id for the heading if it doesn't have one
+            link.href = `#${headingId}`;
+            link.textContent = heading.textContent;
+
+            // Add appropriate indentation based on heading level
+            if (heading.tagName === "H2") {
+                listItem.style.marginLeft = "10px";
+            } else if (heading.tagName === "H3") {
+                listItem.style.marginLeft = "20px";
+            }
+
+            listItem.appendChild(link);
+            tocList.appendChild(listItem);
+        });
+
+        tocContainer.appendChild(tocList);
+    }
+}

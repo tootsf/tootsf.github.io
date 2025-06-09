@@ -1,0 +1,154 @@
+{
+  "name": "Management",
+  "icon": "👥",
+  "description": "The Management module provides functions for handling business and job management systems, including employee management, boss actions, and business finances.",
+  "clientFunctions": [
+    {
+      "name": "OpenBossMenu",
+      "description": "Opens the boss management menu for the player's current job.",
+      "syntax": "Bridge.Management.OpenBossMenu(job)",
+      "parameters": [
+        {
+          "name": "job",
+          "type": "string",
+          "description": "The job name to open the boss menu for"
+        }
+      ],
+      "example": "local Bridge = exports['community_bridge']:Bridge()\n\n-- Open boss menu for police job\nBridge.Management.OpenBossMenu('police')"
+    },
+    {
+      "name": "GetEmployees",
+      "description": "Gets a list of employees for a specific job.",
+      "syntax": "Bridge.Management.GetEmployees(job, callback)",
+      "parameters": [
+        {
+          "name": "job",
+          "type": "string",
+          "description": "The job name to get employees for"
+        },
+        {
+          "name": "callback",
+          "type": "function",
+          "description": "Callback function receiving the employee list"
+        }
+      ],
+      "example": "local Bridge = exports['community_bridge']:Bridge()\n\n-- Get employee list for mechanic job\nBridge.Management.GetEmployees('mechanic', function(employees)\n    for i, employee in ipairs(employees) do\n        print(employee.name .. ' - ' .. employee.grade)\n    end\nend)"
+    },
+    {
+      "name": "GetAccountMoney",
+      "description": "Gets the current account balance for a specific job.",
+      "syntax": "Bridge.Management.GetAccountMoney(job, callback)",
+      "parameters": [
+        {
+          "name": "job",
+          "type": "string",
+          "description": "The job name to check account balance for"
+        },
+        {
+          "name": "callback",
+          "type": "function",
+          "description": "Callback function receiving the account balance"
+        }
+      ],
+      "example": "local Bridge = exports['community_bridge']:Bridge()\n\n-- Get account balance for taxi job\nBridge.Management.GetAccountMoney('taxi', function(money)\n    print('Taxi business account: $' .. money)\nend)"
+    }
+  ],
+  "serverFunctions": [
+    {
+      "name": "AddMoney",
+      "description": "Adds money to a job's society account.",
+      "syntax": "Bridge.Management.AddMoney(job, amount)",
+      "parameters": [
+        {
+          "name": "job",
+          "type": "string",
+          "description": "Job name"
+        },
+        {
+          "name": "amount",
+          "type": "number",
+          "description": "Amount to add"
+        }
+      ],
+      "returns": [
+        {
+          "type": "boolean",
+          "description": "Success status of the operation"
+        }
+      ],
+      "example": "local Bridge = exports['community_bridge']:Bridge()\n\n-- Add $1000 to mechanic society account\nlocal success = Bridge.Management.AddMoney('mechanic', 1000)\nif success then\n    print('Added $1000 to mechanic account')\nend"
+    },
+    {
+      "name": "RemoveMoney",
+      "description": "Removes money from a job's society account.",
+      "syntax": "Bridge.Management.RemoveMoney(job, amount)",
+      "parameters": [
+        {
+          "name": "job",
+          "type": "string",
+          "description": "Job name"
+        },
+        {
+          "name": "amount",
+          "type": "number",
+          "description": "Amount to remove"
+        }
+      ],
+      "returns": [
+        {
+          "type": "boolean",
+          "description": "Success status of the operation"
+        }
+      ],
+      "example": "local Bridge = exports['community_bridge']:Bridge()\n\n-- Remove $500 from ambulance society account\nlocal success = Bridge.Management.RemoveMoney('ambulance', 500)\nif success then\n    print('Removed $500 from ambulance account')\nend"
+    },
+    {
+      "name": "GetAccountMoney",
+      "description": "Gets the current balance of a job's society account.",
+      "syntax": "Bridge.Management.GetAccountMoney(job)",
+      "parameters": [
+        {
+          "name": "job",
+          "type": "string",
+          "description": "Job name"
+        }
+      ],
+      "returns": [
+        {
+          "type": "number",
+          "description": "Current account balance"
+        }
+      ],
+      "example": "local Bridge = exports['community_bridge']:Bridge()\n\n-- Check police account balance\nlocal balance = Bridge.Management.GetAccountMoney('police')\nprint('Police society account has $' .. balance)"
+    },
+    {
+      "name": "PromoteEmployee",
+      "description": "Promotes an employee to a higher grade.",
+      "syntax": "Bridge.Management.PromoteEmployee(identifier, job, grade)",
+      "parameters": [
+        {
+          "name": "identifier",
+          "type": "string",
+          "description": "Player identifier"
+        },
+        {
+          "name": "job",
+          "type": "string",
+          "description": "Job name"
+        },
+        {
+          "name": "grade",
+          "type": "number",
+          "description": "New job grade"
+        }
+      ],
+      "returns": [
+        {
+          "type": "boolean",
+          "description": "Success status of the operation"
+        }
+      ],
+      "example": "local Bridge = exports['community_bridge']:Bridge()\n\n-- Promote employee to grade 2\nlocal success = Bridge.Management.PromoteEmployee('license:123456', 'police', 2)\nif success then\n    print('Employee promoted successfully')\nend"
+    }
+  ]
+}

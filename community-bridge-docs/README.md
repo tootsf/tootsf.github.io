@@ -1,45 +1,93 @@
-# Community Bridge Documentation
+# Community Bridge Documentation Site
 
-Welcome to the Community Bridge documentation! This project aims to provide a comprehensive guide for users and contributors to the Community Bridge project.
+This repository contains the documentation site for Community Bridge, a versatile API layer for FiveM scripts that provides a unified interface for commonly used functions across different resources and frameworks.
 
-## Project Structure
+## Documentation Structure
 
-The documentation is organized into several key sections:
+The documentation uses a unified approach with dynamic content loading:
 
-- **Overview**: A high-level description of the Community Bridge project and its key features.
-- **Getting Started**: Instructions on how to install and set up the Community Bridge project.
-- **Contributing**: Guidelines for contributing to the Community Bridge project, including coding standards and submission processes.
+1. All module documentation is stored in JSON files in `/assets/data/`
+2. A single `module.html` template loads content based on URL parameters (e.g., `module.html?module=target`)
+3. The main `index.html` file provides an overview and links to all modules
 
-## Getting Started
+## Features
 
-To get started with the Community Bridge documentation, you can view the following pages:
+- **Dynamic Content Loading**: Content is loaded from JSON files based on URL parameters
+- **Responsive Design**: Works on mobile and desktop devices with a collapsible sidebar
+- **Table of Contents**: Automatically generated for each page
+- **Syntax Highlighting**: Code blocks are highlighted for better readability
+- **Dark Mode Support**: Automatically switches based on system preferences
+- **Print-Friendly**: Optimized for printing documentation
 
-- [Overview](pages/overview.md)
-- [Getting Started](pages/getting-started.md)
-- [Contributing](pages/contributing.md)
+## JSON-based Documentation
 
-## Running the Static Site
+All module documentation is stored in structured JSON files and loaded dynamically:
 
-To run the static site locally, follow these steps:
+### How to use:
+1. Store documentation data in JSON files in `/assets/data/` (see examples in existing files)
+2. Add the module to the modules array in `assets/js/module-loader.js`
+3. Update the main `index.html` to include a link to the new module
 
-1. Clone the repository:
-   ```
-   git clone https://github.com/yourusername/community-bridge-docs.git
-   ```
+### To convert Markdown files to JSON:
+- Use the provided `tools/md2json.js` script:
+  ```bash
+  node tools/md2json.js path/to/module/directory
+  ```
+- Copy the resulting JSON file to `/assets/data/`
 
-2. Navigate to the project directory:
-   ```
-   cd community-bridge-docs
-   ```
+## Setting Up
 
-3. Open `index.html` in your web browser to view the documentation.
+1. Clone this repository
+2. Choose one of the two documentation approaches
+3. Create the necessary directory structure
+4. Add your documentation content
 
-## Customization
+### Recommended Directory Structure for JSON Approach
 
-Feel free to customize the styles and scripts located in the `assets/css` and `assets/js` directories to suit your needs. The CSS file (`styles.css`) controls the layout and appearance, while the JavaScript file (`toc.js`) manages the dynamic table of contents.
+```
+community-bridge-docs/
+├── assets/
+│   ├── css/
+│   │   └── styles.css
+│   ├── data/
+│   │   ├── target.json
+│   │   ├── vehiclekey.json
+│   │   └── ... (other module JSON files)
+│   └── js/
+│       ├── json-doc-renderer.js
+│       ├── navigation.js
+│       └── toc.js
+├── pages/
+│   ├── getting-started.html
+│   ├── contributing.html
+│   └── modules/
+│       ├── target/
+│       │   └── index.html
+│       ├── vehiclekey/
+│       │   └── index.html
+│       └── ... (other module pages)
+└── index.html
+```
 
-## Contributing
+### Required Libraries
 
-If you would like to contribute to the Community Bridge documentation, please refer to the [Contributing](pages/contributing.md) page for guidelines.
+- highlight.js - For code syntax highlighting
+- No additional libraries needed for the JSON approach
+- marked.js - Only needed if using the Markdown parser approach
 
-Thank you for your interest in the Community Bridge project!
+## Adding a New Module
+
+1. Create a JSON file for your module in `/assets/data/`
+2. Create a module directory in `/pages/modules/[module-name]/`
+3. Copy `module-template.html` to `/pages/modules/[module-name]/index.html`
+4. The navigation and content will be generated automatically
+
+## Converting from the Old Documentation
+
+Use the provided `md2json.js` tool to convert the old Markdown documentation to the JSON format:
+
+```bash
+node tools/md2json.js c:/path/to/old/docs/modules/target
+```
+
+Then copy the output JSON file to the `/assets/data/` directory.

@@ -1,21 +1,206 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
+<head>    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Community Bridge Documentation</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="assets/css/styles.css">
+    <!-- Add highlight.js for code syntax highlighting -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/github.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <!-- Add Lua language support -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/languages/lua.min.js"></script>
+</head>
+<body>    <header>
+        <h1>Community Bridge Docs</h1>
+        <button class="mobile-menu-toggle" id="mobile-menu-toggle" aria-label="Toggle menu">☰</button>
+        <input id="search-input" type="text" placeholder="Search docs..." class="search-input">
+        <div id="search-results" class="search-results"></div>
+    </header>
+    <div class="container">
+        <nav class="sidebar">
+            <h2>Docs Navigation</h2>
+            <ul id="main-nav">
+                <li class="active"><a href="index.html">Overview</a></li>
+                <li><a href="pages/getting-started.html">Getting Started</a></li>
+                <!-- Module navigation will be generated dynamically by navigation.js -->
+            </ul>
+        </nav>
+        <main class="main-content">
+            <h1 id="community-bridge">Community Bridge</h1>
+
+            <p>Welcome to the Community Bridge Documentation. Community Bridge is a versatile API layer for FiveM scripts that provides a unified interface for commonly used functions across different resources and frameworks.</p>
+
+            <h2 id="about">About</h2>
+            <p>Community Bridge standardizes common operations such as handling vehicle keys, targeting, notifications, inventory management, and more. By using Community Bridge in your scripts, you can ensure compatibility with multiple frameworks and resources without having to rewrite code.</p>
+
+            <h2 id="key-benefits">Key Benefits</h2>
+            <ul>
+                <li><strong>Framework-Agnostic:</strong> Works with multiple FiveM frameworks including QBCore, ESX, and others.</li>
+                <li><strong>Resource Independence:</strong> Integrates with various popular resources for each functionality.</li>
+                <li><strong>Simplified Development:</strong> Write once, compatible everywhere.</li>
+                <li><strong>Consistent API:</strong> Normalized function interfaces across different systems.</li>
+            </ul>
+
+            <h2 id="modules">Modules</h2>
+            <p>Community Bridge is organized into specialized modules, each handling a specific category of functionality:</p>
+
+            <div class="module-grid">                <div class="module-card">
+                    <h3>🔑 Vehicle Key</h3>
+                    <p>Managing vehicle keys and locks.</p>
+                    <a href="module.html?module=vehiclekey" class="module-link">View Documentation</a>
+                </div>
+
+                <div class="module-card">
+                    <h3>🎯 Target</h3>
+                    <p>Creating interactive targeting zones and options.</p>
+                    <a href="module.html?module=target" class="module-link">View Documentation</a>
+                </div>
+
+                <div class="module-card">
+                    <h3>📊 Skills</h3>
+                    <p>Player skill and attribute management.</p>
+                    <a href="module.html?module=skills" class="module-link">View Documentation</a>
+                </div>
+
+                <div class="module-card">
+                    <h3>🛒 Shops</h3>
+                    <p>Shop and vendor interactions.</p>
+                    <a href="module.html?module=shops" class="module-link">View Documentation</a>
+                </div>                <div class="module-card">
+                    <h3>📏 ProgressBar</h3>
+                    <p>Visual progress indicators for actions.</p>
+                    <a href="module.html?module=progressbar" class="module-link">View Documentation</a>
+                </div>
+
+                <div class="module-card">
+                    <h3>📢 Notify</h3>
+                    <p>Player notifications and alerts.</p>
+                    <a href="module.html?module=notify" class="module-link">View Documentation</a>
+                </div>
+
+                <div class="module-card">
+                    <h3>👥 Management</h3>
+                    <p>Business and job management systems.</p>
+                    <a href="module.html?module=management" class="module-link">View Documentation</a>
+                </div>
+
+                <div class="module-card">
+                    <h3>🎒 Inventory</h3>
+                    <p>Inventory handling functions.</p>
+                    <a href="module.html?module=inventory" class="module-link">View Documentation</a>
+                </div>
+            </div>
+
+            <h2 id="getting-started">Getting Started</h2>
+            <p>To start using Community Bridge in your scripts, check out our <a href="pages/getting-started.html">Getting Started</a> guide.</p>
+
+            <h2 id="contributing">Contributing</h2>
+            <p>Contributions to Community Bridge are welcome! Please see our <a href="pages/contributing.html">Contributing Guidelines</a> for more information.</p>
+        </main>
+        <aside class="toc" id="toc">
+            <h3>On this page</h3>
+            <!-- Table of contents will be generated dynamically -->
+        </aside>
+    </div>    <!-- Load our custom scripts -->
+    <script src="assets/js/json-doc-renderer.js"></script>
+    <script src="assets/js/navigation.js"></script>
+    <script src="assets/js/toc.js"></script>
+    <script src="assets/js/mobile-nav.js"></script>
+    <script src="assets/js/search.js"></script>
+    <script>
+        // Initialize search functionality
+        const searchInput = document.getElementById('search-input');
+        const searchResults = document.getElementById('search-results');
+
+        searchInput.addEventListener('input', function() {
+            const query = this.value.trim().toLowerCase();
+            if (query) {
+                // Show search results
+                searchResults.classList.add('active');
+
+                // Perform search in JSON data
+                fetch('assets/data/docs.json')
+                    .then(response => response.json())
+                    .then(data => {
+                        // Clear previous results
+                        searchResults.innerHTML = '';
+
+                        // Filter and display results
+                        const results = data.filter(item => item.title.toLowerCase().includes(query) || item.content.toLowerCase().includes(query));
+                        results.forEach(result => {
+                            const div = document.createElement('div');
+                            div.classList.add('search-result-item');
+                            div.innerHTML = `<strong>${result.title}</strong>: ${result.content.substring(0, 150)}...`;
+                            div.addEventListener('click', () => {
+                                window.location.href = result.url;
+                            });
+                            searchResults.appendChild(div);
+                        });
+
+                        if (results.length === 0) {
+                            searchResults.innerHTML = '<div class="search-result-item">No results found.</div>';
+                        }
+                    });
+            } else {
+                // Hide search results
+                searchResults.classList.remove('active');
+            }
+        });
+    </script>
+
     <style>
-        body {
-            margin: 0;
-            font-family: 'Segoe UI', Arial, sans-serif;
-            background: #f7f9fb;
-            color: #222;
+        .module-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 1.5rem 0;
         }
+
+        .module-card {
+            background: #fff;
+            border: 1px solid #e5e7eb;
+            border-radius: 6px;
+            padding: 1.25rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .module-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .module-card h3 {
+            margin-top: 0;
+            font-size: 1.15rem;
+            color: #4a6ee0;
+        }
+
+        .module-card p {
+            margin-bottom: 1.25rem;
+            color: #555;
+        }
+
+        .module-link {
+            display: inline-block;
+            color: #4a6ee0;
+            font-weight: 500;
+            text-decoration: none;
+            padding: 5px 0;
+            border-bottom: 1px solid #4a6ee0;
+            transition: border-color 0.2s;
+        }
+
+        .module-link:hover {
+            border-color: #2a4cbf;
+        }
+
         .container {
             display: flex;
             min-height: 100vh;
         }
+
         .sidebar {
             width: 240px;
             background: #fff;
@@ -24,28 +209,62 @@
             position: sticky;
             top: 0;
             height: 100vh;
+            overflow-y: auto;
         }
+
         .sidebar h2 {
             font-size: 1.1rem;
             color: #4a6ee0;
             margin-bottom: 1.5rem;
         }
+
         .sidebar ul {
             list-style: none;
             padding: 0;
         }
+
         .sidebar li {
             margin-bottom: 1rem;
         }
+
         .sidebar a {
             color: #222;
             text-decoration: none;
             font-weight: 500;
             transition: color 0.2s;
         }
+
         .sidebar a:hover {
             color: #4a6ee0;
         }
+
+        .sidebar .nested {
+            padding-left: 1rem;
+            margin-top: 0.5rem;
+            font-size: 0.95rem;
+            display: none;
+        }
+
+        .sidebar .has-children > a {
+            position: relative;
+        }
+
+        .sidebar .has-children > a::after {
+            content: "▶";
+            font-size: 0.75rem;
+            position: absolute;
+            right: 0;
+            transition: transform 0.2s;
+        }
+
+        .sidebar .has-children.active > a::after {
+            transform: rotate(90deg);
+        }
+
+        .sidebar .has-children.active .nested {
+            display: block;
+        }
+
         .main-content {
             flex: 1;
             max-width: 800px;
@@ -55,6 +274,7 @@
             box-shadow: 0 2px 8px rgba(0,0,0,0.03);
             min-height: 100vh;
         }
+
         .toc {
             width: 260px;
             background: #f9fafb;
@@ -63,63 +283,67 @@
             position: sticky;
             top: 0;
             height: 100vh;
+            overflow-y: auto;
         }
-        .toc h3 {
-            font-size: 1rem;
-            color: #4a6ee0;
-            margin-bottom: 1rem;
-        }
-        .toc ul {
-            list-style: none;
-            padding: 0;
-            font-size: 0.97rem;
-        }
-        .toc li {
-            margin-bottom: 0.5rem;
-        }
-        .toc a {
-            color: #4a6ee0;
-            text-decoration: none;
-            transition: text-decoration 0.2s;
-        }
-        .toc a:hover {
-            text-decoration: underline;
-        }
+
         @media (max-width: 1100px) {
             .toc { display: none; }
         }
+
         @media (max-width: 800px) {
             .sidebar { display: none; }
             .main-content { padding: 1rem; }
         }
+
+        .search-input {
+            margin-left: auto;
+            padding: 0.5rem 1rem;
+            border: 1px solid #e5e7eb;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            width: 250px;
+            transition: width 0.3s;
+        }
+
+        .search-input:focus {
+            width: 300px;
+            border-color: #4a6ee0;
+            outline: none;
+        }
+
+        .search-results {
+            position: absolute;
+            top: 60px;
+            right: 20px;
+            width: 300px;
+            max-height: 400px;
+            background: #fff;
+            border: 1px solid #e5e7eb;
+            border-radius: 4px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            overflow-y: auto;
+            z-index: 1000;
+            display: none;
+        }
+
+        .search-results.active {
+            display: block;
+        }
+
+        .search-result-item {
+            padding: 0.75rem 1rem;
+            border-bottom: 1px solid #e5e7eb;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .search-result-item:last-child {
+            border-bottom: none;
+        }
+
+        .search-result-item:hover {
+            background: #f1f5f9;
+        }
     </style>
-</head>
-<body>
-    <header style="background:#fff;border-bottom:1px solid #e5e7eb;padding:1rem 2rem;position:sticky;top:0;z-index:10;">
-        <h1 style="margin:0;font-size:1.7rem;color:#4a6ee0;letter-spacing:0.01em;">Community Bridge Docs</h1>
-    </header>
-    <div class="container">
-        <nav class="sidebar">
-            <h2>Docs Navigation</h2>
-            <ul>
-                <li><a href="#overview">Overview</a></li>
-                <li><a href="#getting-started">Getting Started</a></li>
-                <li><a href="#contributing">Contributing</a></li>
-            </ul>
-        </nav>
-        <main class="main-content">
-            <h1 id="overview">Overview</h1>
-            <p>Welcome to the Community Bridge documentation! This is a modern, customizable static site for your project docs.</p>
-            <h2 id="getting-started">Getting Started</h2>
-            <p>Instructions on how to get started with Community Bridge.</p>
-            <h2 id="contributing">Contributing</h2>
-            <p>Guidelines for contributing to the project.</p>
-        </main>
-        <aside class="toc" id="toc">
-            <h3>On this page</h3>
-            <!-- Table of contents will be injected here by toc.js -->
-        </aside>
-    </div>
-    <script src="assets/js/toc.js"></script>
 </body>
 </html>
