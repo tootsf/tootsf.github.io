@@ -18,6 +18,8 @@ document.addEventListener('DOMContentLoaded', function() {
     // Create Community Bridge parent category
     const bridgeCategory = document.createElement('li');
     bridgeCategory.classList.add('has-children');
+    bridgeCategory.classList.add('active'); // MODIFIED: Force active for testing
+    bridgeCategory.style.border = "2px solid blue"; // ADDED: Debug style
 
     // Create parent link
     const bridgeCategoryLink = document.createElement('a');
@@ -28,6 +30,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Create nested modules list
     const modulesList = document.createElement('ul');
     modulesList.classList.add('nested');
+    modulesList.style.border = "2px solid red"; // ADDED: Debug style
 
     // Check if we're on a module page to expand the category
     const urlParams = new URLSearchParams(window.location.search);
@@ -45,7 +48,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // Active state based on URL parameters or pathname
         if (currentModule === module.name || window.location.pathname.includes(`/modules/${module.name}/`)) {
             moduleItem.classList.add('active');
-            bridgeCategory.classList.add('active'); // Ensure parent is expanded
+            // bridgeCategory.classList.add('active'); // MODIFIED: Parent is already forced active for this test
         }
 
         // Create module link
