@@ -101,6 +101,18 @@
             setTheme(newTheme);
           });
         })();
+
+        // Add Edit this page link for module docs
+    document.addEventListener('DOMContentLoaded', function() {
+      const params = new URLSearchParams(window.location.search);
+      const module = params.get('module');
+      if (module) {
+        const editDiv = document.getElementById('edit-page-link');
+        if (editDiv) {
+          editDiv.innerHTML = `<a href="https://github.com/tootsf/tootsf.github.io/edit/main/assets/data/${module}.json" target="_blank" rel="noopener">✏️ Edit this module's docs on GitHub</a>`;
+        }
+      }
+    });
     </script>
 </body>
 </html>

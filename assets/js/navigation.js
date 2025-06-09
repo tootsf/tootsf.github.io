@@ -15,6 +15,12 @@ document.addEventListener('DOMContentLoaded', function() {
     const mainNav = document.getElementById('main-nav');
     if (!mainNav) return;
 
+    // Remove any previously generated module navigation (cleanup duplicates)
+    // Keep only the first two static items (Overview, Getting Started)
+    while (mainNav.children.length > 2) {
+        mainNav.removeChild(mainNav.lastElementChild);
+    }
+
     // Create Community Bridge parent category
     const bridgeCategory = document.createElement('li');
     bridgeCategory.classList.add('has-children');
