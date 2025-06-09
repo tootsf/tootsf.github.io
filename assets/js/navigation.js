@@ -14,21 +14,21 @@ document.addEventListener('DOMContentLoaded', function() {
 
     const mainNav = document.getElementById('main-nav');
     if (!mainNav) return;
-    
+
     // Create Community Bridge parent category
     const bridgeCategory = document.createElement('li');
     bridgeCategory.classList.add('has-children');
-    
+
     // Create parent link
     const bridgeCategoryLink = document.createElement('a');
     bridgeCategoryLink.href = '#';
     bridgeCategoryLink.textContent = '🌉 Community Bridge';
     bridgeCategory.appendChild(bridgeCategoryLink);
-    
+
     // Create nested modules list
     const modulesList = document.createElement('ul');
     modulesList.classList.add('nested');
-    
+
     // Check if we're on a module page to expand the category
     const urlParams = new URLSearchParams(window.location.search);
     const currentModule = urlParams.get('module');
@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // Create module nav item
         const moduleItem = document.createElement('li');
         moduleItem.classList.add('has-children');
-        
+
         // Active state based on URL parameters or pathname
         if (currentModule === module.name || window.location.pathname.includes(`/modules/${module.name}/`)) {
             moduleItem.classList.add('active');
