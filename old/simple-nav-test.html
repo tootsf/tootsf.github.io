@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Navigation Test</title>
+    <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <nav class="sidebar">
+            <h2>Navigation Test</h2>
+            <ul id="main-nav">
+                <li class="active"><a href="index.html">Overview</a></li>
+                <li><a href="pages/getting-started.html">Getting Started</a></li>
+                <!-- This will be populated by the script below -->
+            </ul>
+        </nav>
+        <main>
+            <h1>Navigation Test</h1>
+            <p>Testing navigation with fresh auto-discovery.</p>
+            <div id="status">Loading...</div>
+        </main>
+    </div>
+
+    <script src="assets/js/auto-module-discovery.js"></script>
+    <script>
+        async function testNavigation() {
+            const status = document.getElementById('status');
+            const mainNav = document.getElementById('main-nav');
+
+            try {
+                status.innerHTML = '🔄 Starting fresh auto-discovery...';
+
+                // Force completely fresh discovery
+                if (window.AutoModuleDiscovery) {
+                    window.AutoModuleDiscovery.reset();
+                }
+
+                // Get fresh modules
+                const modules = await window.AutoModuleDiscovery.getAll(true);
+                status.innerHTML = `✅ Found ${modules.length} modules. Generating navigation...`;
+
+                // Create Community Bridge section
+                const bridgeCategory = document.createElement('li');
+                bridgeCategory.classList.add('has-children');
+                bridgeCategory.classList.add('active'); // Always show as expanded
+
+                const bridgeCategoryLink = document.createElement('a');
+                bridgeCategoryLink.href = '#';
+                bridgeCategoryLink.textContent = '🌉 Community Bridge';
+                bridgeCategory.appendChild(bridgeCategoryLink);
+
+                const modulesList = document.createElement('ul');
+                modulesList.classList.add('nested');
+
+                // Add each module
+                modules.forEach(module => {
+                    console.log('Adding module to nav:', module);
+
+                    const moduleItem = document.createElement('li');
+                    const moduleLink = document.createElement('a');
+                    moduleLink.href = `module.html?module=${module.id}`;
+                    moduleLink.textContent = `${module.icon} ${module.title || module.name}`;
+
+                    moduleItem.appendChild(moduleLink);
+                    modulesList.appendChild(moduleItem);
+                });
+
+                bridgeCategory.appendChild(modulesList);
+                mainNav.appendChild(bridgeCategory);
+
+                status.innerHTML = `✅ Navigation generated with ${modules.length} modules!`;
+
+            } catch (error) {
+                console.error('Navigation test failed:', error);
+                status.innerHTML = `❌ Error: ${error.message}`;
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', testNavigation);
+    </script>
+</body>
+</html>

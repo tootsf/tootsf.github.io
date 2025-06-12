@@ -1,0 +1,49 @@
+{
+  "title": "Clothing Module",
+  "items": [
+    {
+      "title": "Overview",
+      "anchor": "#overview"
+    },
+    {
+      "title": "Client Functions",
+      "anchor": "#client-functions",
+      "children": [
+        {
+          "title": "GetResourceName",
+          "anchor": "#function-getresourcename"
+        },
+        {
+          "title": "OpenWardrobe",
+          "anchor": "#function-openwardrobe"
+        },
+        {
+          "title": "OpenShop",
+          "anchor": "#function-openshop"
+        },
+        {
+          "title": "SetOutfit",
+          "anchor": "#function-setoutfit"
+        }
+      ]
+    },
+    {
+      "title": "Server Functions",
+      "anchor": "#server-functions",
+      "children": [
+        {
+          "title": "SaveOutfit",
+          "anchor": "#function-saveoutfit"
+        },
+        {
+          "title": "GetPlayerOutfits",
+          "anchor": "#function-getplayeroutfits"
+        },
+        {
+          "title": "DeleteOutfit",
+          "anchor": "#function-deleteoutfit"
+        }
+      ]
+    }
+  ]
+}

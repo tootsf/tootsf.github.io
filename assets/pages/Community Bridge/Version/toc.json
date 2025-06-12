@@ -1,0 +1,45 @@
+{
+  "title": "Version Module",
+  "items": [
+    {
+      "title": "Overview",
+      "anchor": "#overview"
+    },
+    {
+      "title": "Client Functions",
+      "anchor": "#client-functions",
+      "children": [
+        {
+          "title": "GetCurrentVersion",
+          "anchor": "#function-getcurrentversion"
+        },
+        {
+          "title": "CheckForUpdates",
+          "anchor": "#function-checkforupdates"
+        },
+        {
+          "title": "GetLatestRelease",
+          "anchor": "#function-getlatestrelease"
+        }
+      ]
+    },
+    {
+      "title": "Server Functions",
+      "anchor": "#server-functions",
+      "children": [
+        {
+          "title": "GetCurrentVersion",
+          "anchor": "#function-getcurrentversion-1"
+        },
+        {
+          "title": "CheckForUpdates",
+          "anchor": "#function-checkforupdates-1"
+        },
+        {
+          "title": "NotifyAdminsOfUpdate",
+          "anchor": "#function-notifyadminsofupdate"
+        }
+      ]
+    }
+  ]
+}

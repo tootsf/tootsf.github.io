@@ -1,0 +1,55 @@
+{
+  "title": "Math Module",
+  "items": [
+    {
+      "title": "Overview",
+      "anchor": "#overview"
+    },
+    {
+      "title": "Shared Functions",
+      "anchor": "#shared-functions",
+      "children": [
+        {
+          "title": "Round",
+          "anchor": "#function-round"
+        },
+        {
+          "title": "Clamp",
+          "anchor": "#function-clamp"
+        },
+        {
+          "title": "Lerp",
+          "anchor": "#function-lerp"
+        },
+        {
+          "title": "Distance2D",
+          "anchor": "#function-distance2d"
+        },
+        {
+          "title": "Distance3D",
+          "anchor": "#function-distance3d"
+        },
+        {
+          "title": "RandomFloat",
+          "anchor": "#function-randomfloat"
+        },
+        {
+          "title": "RandomInt",
+          "anchor": "#function-randomint"
+        },
+        {
+          "title": "ToRadians",
+          "anchor": "#function-toradians"
+        },
+        {
+          "title": "ToDegrees",
+          "anchor": "#function-todegrees"
+        },
+        {
+          "title": "Normalize",
+          "anchor": "#function-normalize"
+        }
+      ]
+    }
+  ]
+}

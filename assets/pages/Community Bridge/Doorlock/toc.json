@@ -1,0 +1,45 @@
+{
+  "title": "Doorlock Module",
+  "items": [
+    {
+      "title": "Overview",
+      "anchor": "#overview"
+    },
+    {
+      "title": "Client Functions",
+      "anchor": "#client-functions",
+      "children": [
+        {
+          "title": "GetResourceName",
+          "anchor": "#function-getresourcename"
+        },
+        {
+          "title": "SetDoorState",
+          "anchor": "#function-setdoorstate"
+        },
+        {
+          "title": "GetDoorState",
+          "anchor": "#function-getdoorstate"
+        }
+      ]
+    },
+    {
+      "title": "Server Functions",
+      "anchor": "#server-functions",
+      "children": [
+        {
+          "title": "SetDoorState",
+          "anchor": "#function-setdoorstate-1"
+        },
+        {
+          "title": "GetDoorState",
+          "anchor": "#function-getdoorstate-1"
+        },
+        {
+          "title": "ToggleDoorLock",
+          "anchor": "#function-toggledoorlock"
+        }
+      ]
+    }
+  ]
+}

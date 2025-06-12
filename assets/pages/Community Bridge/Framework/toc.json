@@ -1,0 +1,105 @@
+{
+  "title": "Framework Module",
+  "items": [
+    {
+      "title": "Overview",
+      "anchor": "#overview"
+    },
+    {
+      "title": "Client Functions",
+      "anchor": "#client-functions",
+      "children": [
+        {
+          "title": "GetFrameworkName",
+          "anchor": "#function-getframeworkname"
+        },
+        {
+          "title": "GetPlayerData",
+          "anchor": "#function-getplayerdata"
+        },
+        {
+          "title": "GetPlayerIdentifier",
+          "anchor": "#function-getplayeridentifier"
+        },
+        {
+          "title": "GetPlayerName",
+          "anchor": "#function-getplayername"
+        },
+        {
+          "title": "GetPlayerJobData",
+          "anchor": "#function-getplayerjobdata"
+        },
+        {
+          "title": "Notify",
+          "anchor": "#function-notify"
+        },
+        {
+          "title": "ShowHelpText",
+          "anchor": "#function-showhelptext"
+        },
+        {
+          "title": "HideHelpText",
+          "anchor": "#function-hidehelptext"
+        },
+        {
+          "title": "GetVehicleProperties",
+          "anchor": "#function-getvehicleproperties"
+        },
+        {
+          "title": "SetVehicleProperties",
+          "anchor": "#function-setvehicleproperties"
+        }
+      ]
+    },
+    {
+      "title": "Server Functions",
+      "anchor": "#server-functions",
+      "children": [
+        {
+          "title": "GetPlayer",
+          "anchor": "#function-getplayer"
+        },
+        {
+          "title": "GetPlayerIdentifier",
+          "anchor": "#function-getplayeridentifier-1"
+        },
+        {
+          "title": "GetPlayerName",
+          "anchor": "#function-getplayername-1"
+        },
+        {
+          "title": "GetPlayerJobData",
+          "anchor": "#function-getplayerjobdata-1"
+        },
+        {
+          "title": "AddMoney",
+          "anchor": "#function-addmoney"
+        },
+        {
+          "title": "RemoveMoney",
+          "anchor": "#function-removemoney"
+        },
+        {
+          "title": "GetMoney",
+          "anchor": "#function-getmoney"
+        },
+        {
+          "title": "AddItem",
+          "anchor": "#function-additem"
+        },
+        {
+          "title": "RemoveItem",
+          "anchor": "#function-removeitem"
+        },
+        {
+          "title": "GetOwnedVehicles",
+          "anchor": "#function-getownedvehicles"
+        },
+        {
+          "title": "RegisterUsableItem",
+          "anchor": "#function-registerusableitem"
+        }
+      ]
+    }
+  ]
+}

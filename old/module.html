@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Community Bridge Documentation</title>    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <!-- Add highlight.js with both themes - we'll toggle them with JS -->    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/github.min.css" id="light-theme-highlight">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/github-dark.min.css" id="dark-theme-highlight" disabled>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <!-- Add Lua language support -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/languages/lua.min.js"></script>
+    <!-- Prevent FOUC by setting theme immediately -->
+    <script>
+        (function() {
+            const stored = localStorage.getItem('theme');
+            const defaultTheme = stored || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+            document.documentElement.setAttribute('data-theme', defaultTheme);
+
+            // Set syntax highlighting theme immediately
+            const lightTheme = document.getElementById('light-theme-highlight');
+            const darkTheme = document.getElementById('dark-theme-highlight');
+            if (defaultTheme === 'dark') {
+                if (lightTheme) lightTheme.disabled = true;
+                if (darkTheme) darkTheme.disabled = false;
+            } else {
+                if (lightTheme) lightTheme.disabled = false;
+                if (darkTheme) darkTheme.disabled = true;
+            }
+        })();
+    </script>
+</head>
+<body>    <header>
+        <h1>Community Bridge Docs</h1>
+        <div class="header-buttons">
+            <button class="mobile-menu-toggle" id="mobile-menu-toggle" aria-label="Toggle menu">☰</button>
+            <button id="theme-toggle" aria-label="Toggle dark mode">🌙</button>
+        </div>
+        <div class="search-container">
+            <input id="search-input" type="text" placeholder="Search docs..." class="search-input">
+            <div id="search-results" class="search-results"></div>
+        </div>
+    </header>
+    <div class="container">
+        <nav class="sidebar">
+            <h2>Docs Navigation</h2>            <ul id="main-nav">
+                <li><a href="index.html">Overview</a></li>
+                <li><a href="pages/getting-started.html">Getting Started</a></li>
+                <li><a href="pages/contributing.html">Contributing</a></li>
+                <!-- Module navigation will be generated dynamically -->
+            </ul>
+        </nav>
+        <main class="main-content">
+            <div id="content-area">
+                <!-- Content will be rendered here -->
+                <p>Loading documentation...</p>
+            </div>
+        </main>
+        <aside class="toc" id="toc">
+            <h3>On this page</h3>
+            <!-- Table of contents will be generated dynamically -->
+        </aside>    </div>    <!-- Load our custom scripts -->
+    <script src="assets/js/module-config.js"></script>
+    <script src="assets/js/auto-module-discovery.js"></script>
+    <script src="assets/js/navigation.js"></script>
+    <script src="assets/js/toc.js"></script>
+    <script src="assets/js/module-loader.js"></script>
+    <script src="assets/js/mobile-nav.js"></script>
+    <script src="assets/js/search.js"></script>
+    <script>
+        // Initialize syntax highlighting
+        document.addEventListener('DOMContentLoaded', () => {
+            // This will be called after content is rendered
+            setTimeout(() => {
+                document.querySelectorAll('pre code').forEach((block) => {
+                    hljs.highlightElement(block);
+                });
+            }, 100);
+        });
+
+        // Theme toggle script
+        (function() {
+          const htmlEl = document.documentElement;
+          const toggleBtn = document.getElementById('theme-toggle');
+          const lightTheme = document.getElementById('light-theme-highlight');
+          const darkTheme = document.getElementById('dark-theme-highlight');
+
+          // Function to set theme
+          function setTheme(theme) {
+            htmlEl.setAttribute('data-theme', theme);
+            toggleBtn.textContent = theme === 'dark' ? '☀️' : '🌙';
+            toggleBtn.setAttribute('aria-label', theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode');
+
+            // Toggle syntax highlighting theme
+            if (theme === 'dark') {
+              lightTheme.disabled = true;
+              darkTheme.disabled = false;
+            } else {
+              lightTheme.disabled = false;
+              darkTheme.disabled = true;
+            }
+
+            // Re-highlight code blocks if they exist
+            setTimeout(() => {
+              document.querySelectorAll('pre code').forEach(block => {
+                hljs.highlightElement(block);
+              });
+            }, 100);
+          }          // Initialize theme
+          const stored = localStorage.getItem('theme');
+          const defaultTheme = stored || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+
+          // Update button icon to match current theme (theme is already set in head)
+          toggleBtn.textContent = defaultTheme === 'dark' ? '☀️' : '🌙';
+          toggleBtn.setAttribute('aria-label', defaultTheme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode');
+
+          // Toggle theme on click
+          toggleBtn.addEventListener('click', () => {
+            const newTheme = htmlEl.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+            localStorage.setItem('theme', newTheme);
+            setTheme(newTheme);
+          });
+        })();
+
+        // Add Edit this page link for module docs
+    document.addEventListener('DOMContentLoaded', function() {
+      const params = new URLSearchParams(window.location.search);
+      const module = params.get('module');
+      if (module) {
+        const editDiv = document.getElementById('edit-page-link');
+        if (editDiv) {
+          editDiv.innerHTML = `<a href="https://github.com/tootsf/tootsf.github.io/edit/main/assets/data/${module}.json" target="_blank" rel="noopener">✏️ Edit this module's docs on GitHub</a>`;
+        }
+      }
+    });
+    </script>
+</body>
+</html>

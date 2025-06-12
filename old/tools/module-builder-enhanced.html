@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Community Bridge Module Builder</title>
+  <link rel="stylesheet" href="../assets/css/styles.css">
+  <link rel="stylesheet" href="module-builder.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <!-- Prevent FOUC by setting theme immediately -->
+  <script>
+    (function() {
+      const stored = localStorage.getItem('theme');
+      const defaultTheme = stored || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', defaultTheme);
+    })();
+  </script>
+</head>
+<body>
+  <!-- Toast notifications -->
+  <div id="toast" class="toast"></div>
+
+  <!-- Status indicator -->
+  <div id="status-indicator" class="status-indicator"></div>
+
+  <!-- Main layout -->
+  <div class="main-layout">
+    <!-- Sidebar -->
+    <nav id="json-sidebar" class="sidebar">
+      <div class="sidebar-header">
+        <span class="sidebar-title">
+          🛠️ Community<br>Bridge Module<br>Builder
+          <button id="theme-toggle" class="theme-toggle" title="Toggle dark/light mode">🌙</button>
+        </span>
+      </div>
+
+      <input id="sidebar-search" type="text" placeholder="Search modules..." class="sidebar-search">
+
+      <div class="sidebar-content">
+        <button id="create-new-btn" class="create-new-btn">
+          <span class="btn-icon">➕</span>
+          <span>Create New Module</span>
+        </button>
+
+        <button id="refresh-modules-btn" class="create-new-btn" style="background: var(--success-color); margin-bottom: 1rem;">
+          <span class="btn-icon">🔄</span>
+          <span>Refresh Modules</span>
+        </button>
+
+        <h2 class="modules-heading">Modules</h2>
+        <ul id="json-list" class="modules-list">
+          <!-- Populated by JavaScript -->
+        </ul>
+      </div>
+    </nav>
+
+    <!-- Main content area -->
+    <main class="main-content">
+      <!-- Tab Navigation -->
+      <div class="tab-nav">
+        <button data-tab="module-builder" class="active">Module Builder</button>
+        <button data-tab="navigation-editor">Navigation Editor</button>
+        <button data-tab="page-editor">Page Editor</button>
+      </div>
+
+      <!-- Tab Contents -->
+      <!-- Module Builder Tab -->
+      <div id="module-builder" class="tab-content active">
+        <div class="builder-container">
+          <form id="module-form" autocomplete="off">
+            <!-- Module Info Section -->
+            <div class="card-section">
+              <div class="floating-label-group">
+                <input type="text" id="mod-name" required />
+                <label for="mod-name">Module Name</label>
+              </div>
+              <div class="floating-label-group icon-input">
+                <input type="text" id="mod-icon" maxlength="2" />
+                <label for="mod-icon">Icon</label>
+              </div>
+              <div class="floating-label-group">
+                <textarea id="mod-desc" rows="2" required></textarea>
+                <label for="mod-desc">Description</label>
+              </div>
+            </div>
+
+            <!-- Client Functions Section -->
+            <div class="card-section client-section">
+              <h2>Client Functions</h2>
+              <div id="client-functions" class="function-list"></div>
+              <button type="button" class="add-btn" onclick="addFunction('client')">+ Add Client Function</button>
+            </div>
+
+            <!-- Server Functions Section -->
+            <div class="card-section server-section">
+              <h2>Server Functions</h2>
+              <div id="server-functions" class="function-list"></div>
+              <button type="button" class="add-btn" onclick="addFunction('server')">+ Add Server Function</button>
+            </div>
+
+            <!-- Action buttons -->
+            <div class="section-divider"></div>
+            <div class="action-buttons">
+              <button type="submit" class="add-btn generate-btn">Generate JSON</button>
+              <button type="button" class="add-btn save-btn" id="save-json-btn" style="display:none;">Save Module</button>
+            </div>
+          </form>
+
+          <!-- Import/Clear Controls -->
+          <div class="section-divider"></div>
+          <div class="import-controls">
+            <label for="import-json" class="import-label">
+              📁 Import JSON File
+              <input type="file" id="import-json" accept=".json" style="display: none;" />
+            </label>
+            <button type="button" class="clear-btn" onclick="clearForm()">🗑️ Clear Form</button>
+          </div>
+
+          <!-- JSON Output -->
+          <div id="output" class="output-section" style="display: none;">
+            <div class="section-header">
+              <h2>Generated JSON</h2>
+              <div class="output-actions">
+                <button onclick="copyJSON()" class="copy-btn">📋 Copy</button>
+                <button onclick="downloadJSON()" class="download-btn">💾 Download</button>
+                <button onclick="openDataFolder()" class="folder-btn">📁 Open Data Folder</button>
+              </div>
+            </div>
+            <pre id="json-output" class="json-output"></pre>
+          </div>
+        </div>
+      </div>      <!-- Navigation Editor Tab -->
+      <div id="navigation-editor" class="tab-content">
+        <div class="nav-editor-container">
+          <div class="nav-content">
+            <h2>📚 Navigation Configuration</h2>
+            <p>Visually configure the site navigation structure and module ordering.</p>
+
+          <div class="nav-sections">
+            <!-- Static Pages Section -->
+            <div class="nav-section">
+              <h3>📄 Static Pages</h3>
+              <div class="nav-items-list" id="static-pages-list">
+                <!-- Static pages will be loaded here -->
+              </div>
+            </div>
+
+            <!-- Modules Section -->
+            <div class="nav-section">
+              <h3>📦 Modules</h3>
+              <div class="module-controls">
+                <button class="add-btn" id="sync-modules-btn">🔄 Sync with Available Modules</button>
+                <button class="add-btn" id="add-module-btn">➕ Add Module</button>
+              </div>
+              <div class="nav-items-list sortable" id="modules-list">
+                <!-- Modules will be loaded here -->
+              </div>
+            </div>
+          </div>
+
+          <div class="nav-actions">
+            <button class="add-btn" id="load-nav-btn">📖 Load Current Navigation</button>            <button class="add-btn" id="save-nav-btn">💾 Save Navigation</button>
+            <button class="add-btn" id="preview-nav-btn">👁️ Preview Changes</button>
+            <button class="add-btn" id="reset-nav-btn">🔄 Reset to Default</button>
+          </div>
+          </div>
+        </div>
+      </div>      <!-- Page Editor Tab -->
+      <div id="page-editor" class="tab-content">
+        <div class="page-editor-container">
+          <div class="editor-header">
+            <h2>📝 Markdown Page Editor</h2>
+            <div class="file-controls">
+              <select id="markdown-file-selector">
+                <option value="">Select a file to edit...</option>
+              </select>
+              <button class="add-btn" id="new-page-btn">+ New Page</button>
+            </div>
+          </div>
+
+          <div class="three-column-layout">
+            <!-- Column 1: Editor -->
+            <div class="editor-column">
+              <div class="column-header">
+                <h3>📝 Editor</h3>
+              </div>
+
+              <div class="markdown-toolbar">
+                <button data-format="bold" title="Bold">**B**</button>
+                <button data-format="italic" title="Italic">*I*</button>
+                <button data-format="code" title="Inline Code">`</button>
+                <button data-format="link" title="Link">🔗</button>
+                <button data-format="heading" title="Heading">H</button>
+                <button data-format="list" title="List">•</button>
+                <button data-format="codeblock" title="Code Block">{ }</button>
+              </div>
+
+              <textarea id="markdown-input" placeholder="Write your markdown here..."></textarea>
+
+              <div class="editor-actions">
+                <button class="add-btn" id="save-markdown-btn">💾 Save</button>
+                <button class="add-btn" id="preview-toggle-btn">👁️ Toggle Preview</button>
+              </div>
+            </div>
+
+            <!-- Column 2: Function Management -->
+            <div class="functions-column">
+              <div class="column-header">
+                <h3>⚙️ Function Management</h3>
+              </div>
+              <!-- Function editing controls will be inserted here by JavaScript -->
+              <div id="function-management-container" class="function-management-container">
+                <div class="no-module-message">
+                  <p>📋 Select a module from the sidebar to manage its functions</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Column 3: Live Preview -->
+            <div class="preview-column">
+              <div class="column-header">
+                <h3>👁️ Live Preview</h3>
+              </div>
+
+              <div class="toc-panel">
+                <h4>Table of Contents</h4>
+                <div id="toc-preview"></div>
+              </div>
+
+              <div class="markdown-preview-container">
+                <div id="markdown-preview" class="markdown-preview"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="markdown-help">
+            <details>
+              <summary>📖 Markdown Help</summary>
+              <div class="help-content">
+                <h4>Markdown Syntax Reference</h4>
+                <ul>
+                  <li><code># Heading 1</code> - Main heading</li>
+                  <li><code>## Heading 2</code> - Sub heading</li>
+                  <li><code>**bold text**</code> - Bold text</li>
+                  <li><code>*italic text*</code> - Italic text</li>
+                  <li><code>`code`</code> - Inline code</li>
+                  <li><code>[link text](url)</code> - Links</li>
+                  <li><code>- item</code> - List items</li>
+                  <li><code>```code block```</code> - Code blocks</li>
+                </ul>
+              </div>
+            </details>
+          </div>
+        </div>
+      </div>
+    </main>  </div>  <script src="../assets/js/module-config.js"></script>
+  <script src="module-builder-integrated.js"></script>
+</body>
+</html>

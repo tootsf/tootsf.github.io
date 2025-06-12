@@ -1,93 +1,227 @@
-# Community Bridge Documentation Site
+# Simple Documentation Site
 
-This repository contains the documentation site for Community Bridge, a versatile API layer for FiveM scripts that provides a unified interface for commonly used functions across different resources and frameworks.
-
-## Documentation Structure
-
-The documentation uses a unified approach with dynamic content loading:
-
-1. All module documentation is stored in JSON files in `/assets/data/`
-2. A single `module.html` template loads content based on URL parameters (e.g., `module.html?module=target`)
-3. The main `index.html` file provides an overview and links to all modules
+A clean, modern documentation site similar to "Just the Docs" that automatically generates navigation from your folder structure.
 
 ## Features
 
-- **Dynamic Content Loading**: Content is loaded from JSON files based on URL parameters
-- **Responsive Design**: Works on mobile and desktop devices with a collapsible sidebar
-- **Table of Contents**: Automatically generated for each page
-- **Syntax Highlighting**: Code blocks are highlighted for better readability
-- **Dark Mode Support**: Automatically switches based on system preferences
-- **Print-Friendly**: Optimized for printing documentation
+- 📁 **Folder-based Navigation**: Create pages by adding folders to `assets/pages/`
+- 📝 **Markdown Support**: Use `index.md` files for markdown content
+- 🔧 **JSON Functions**: Define API functions in JSON format
+- 📑 **Custom TOC**: Use `toc.json` files for custom table of contents
+- 🔍 **Search**: Full-text search across all documentation
+- 🌙 **Dark Mode**: Toggle between light and dark themes
+- 📱 **Responsive**: Works on desktop and mobile devices
 
-## JSON-based Documentation
+## Quick Start
 
-All module documentation is stored in structured JSON files and loaded dynamically:
+### 1. Adding a New Page
 
-### How to use:
-1. Store documentation data in JSON files in `/assets/data/` (see examples in existing files)
-2. Add the module to the modules array in `assets/js/module-loader.js`
-3. Update the main `index.html` to include a link to the new module
-
-### To convert Markdown files to JSON:
-- Use the provided `tools/md2json.js` script:
-  ```bash
-  node tools/md2json.js path/to/module/directory
-  ```
-- Copy the resulting JSON file to `/assets/data/`
-
-## Setting Up
-
-1. Clone this repository
-2. Choose one of the two documentation approaches
-3. Create the necessary directory structure
-4. Add your documentation content
-
-### Recommended Directory Structure for JSON Approach
+Create a new folder in `assets/pages/` and add an `index.md` file:
 
 ```
-community-bridge-docs/
-├── assets/
-│   ├── css/
-│   │   └── styles.css
-│   ├── data/
-│   │   ├── target.json
-│   │   ├── vehiclekey.json
-│   │   └── ... (other module JSON files)
-│   └── js/
-│       ├── json-doc-renderer.js
-│       ├── navigation.js
-│       └── toc.js
-├── pages/
-│   ├── getting-started.html
-│   ├── contributing.html
-│   └── modules/
-│       ├── target/
-│       │   └── index.html
-│       ├── vehiclekey/
-│       │   └── index.html
-│       └── ... (other module pages)
-└── index.html
+assets/pages/
+  My New Section/
+    index.md
 ```
 
-### Required Libraries
+The folder name becomes the navigation title.
 
-- highlight.js - For code syntax highlighting
-- No additional libraries needed for the JSON approach
-- marked.js - Only needed if using the Markdown parser approach
+### 2. Adding Subsections
 
-## Adding a New Module
+Create subfolders with their own content:
 
-1. Create a JSON file for your module in `/assets/data/`
-2. Create a module directory in `/pages/modules/[module-name]/`
-3. Copy `module-template.html` to `/pages/modules/[module-name]/index.html`
-4. The navigation and content will be generated automatically
+```
+assets/pages/
+  My New Section/
+    index.md
+    Subsection 1/
+      index.md
+    Subsection 2/
+      functions.json
+      toc.json
+```
 
-## Converting from the Old Documentation
+### 3. JSON Function Documentation
 
-Use the provided `md2json.js` tool to convert the old Markdown documentation to the JSON format:
+Create JSON files to document API functions:
+
+```json
+{
+  "name": "My Module",
+  "icon": "🔧",
+  "description": "Description of your module",
+  "clientFunctions": [
+    {
+      "name": "MyFunction",
+      "description": "What this function does",
+      "syntax": "MyModule.MyFunction(param1, param2)",
+      "parameters": [
+        {
+          "name": "param1",
+          "type": "string",
+          "description": "First parameter"
+        }
+      ],
+      "returns": [
+        {
+          "type": "boolean",
+          "description": "Success status"
+        }
+      ],
+      "example": "local result = MyModule.MyFunction('test', 123)"
+    }
+  ],
+  "serverFunctions": []
+}
+```
+
+### 4. Custom Table of Contents
+
+Create a `toc.json` file for custom navigation:
+
+```json
+{
+  "title": "My Module",
+  "items": [
+    {
+      "title": "Overview",
+      "anchor": "#overview"
+    },
+    {
+      "title": "Functions",
+      "anchor": "#functions",
+      "children": [
+        {
+          "title": "MyFunction",
+          "anchor": "#function-myfunction"
+        }
+      ]
+    }
+  ]
+}
+```
+
+## File Structure
+
+```
+assets/pages/
+  Getting Started/           # Section folder
+    index.md                # Markdown content
+  Community Bridge/         # Section with subsections
+    index.md               # Overview page
+    Banking/               # Subsection
+      banking.json         # Function definitions
+      toc.json            # Custom TOC
+    Inventory/
+      inventory.json
+```
+
+## Building and Running
+
+### Option 1: Automatic (Recommended)
 
 ```bash
-node tools/md2json.js c:/path/to/old/docs/modules/target
+# Windows (Command Prompt)
+start-docs.bat
+
+# Windows (PowerShell)
+./start-docs.ps1
 ```
 
-Then copy the output JSON file to the `/assets/data/` directory.
+### Option 2: Manual
+
+```bash
+# Generate structure from folders
+python build/generate-structure.py
+
+# Start local server
+python -m http.server 8000
+```
+
+Visit `http://localhost:8000` to view your documentation.
+
+## Folder Icons
+
+The system automatically assigns icons based on folder names:
+
+- Banking: 🏦
+- Inventory: 📦
+- Management: ⚙️
+- Notifications: 🔔
+- Shops: 🛒
+- Target/Targeting: 🎯
+- Vehicle/Keys: 🔑
+- Getting Started: 🚀
+- Bridge: 🌉
+- Examples: 💡
+- API: 🔌
+
+## Customization
+
+### Themes
+
+The site includes light and dark themes. Users can toggle between them using the theme button in the header.
+
+### Styling
+
+Modify `assets/css/styles.css` to customize:
+
+- Colors and fonts
+- Layout and spacing
+- Component styles
+
+### Search
+
+Search automatically indexes:
+- Page titles
+- File paths
+- Content (when implemented)
+
+## Tips
+
+1. **Folder Names**: Use descriptive names as they become navigation labels
+2. **Icons**: Choose names that match the auto-icon system or add custom icons in the structure
+3. **Organization**: Group related content in the same section
+4. **TOC**: Use custom TOC files for complex pages with many sections
+5. **Updates**: Re-run the build script after adding new folders or files
+
+## Advanced Usage
+
+### Custom Structure
+
+Instead of auto-generation, you can manually edit `assets/pages-structure.json`:
+
+```json
+{
+  "Section Name": {
+    "type": "folder",
+    "icon": "📚",
+    "children": {
+      "Page Name": {
+        "type": "markdown",
+        "path": "assets/pages/Section/page.md",
+        "icon": "📄"
+      }
+    }
+  }
+}
+```
+
+### Multiple JSON Files
+
+If a folder contains multiple JSON files (excluding `toc.json`), the first one found will be used. Organize related functions in the same JSON file for better navigation.
+
+### Markdown Features
+
+The system supports full Markdown including:
+- Headers (auto-generate TOC)
+- Code blocks (syntax highlighting with Prism)
+- Links, images, tables
+- HTML when needed
+
+## Troubleshooting
+
+**Navigation not updating**: Re-run the build script
+**Icons not showing**: Check folder naming or add custom icons
+**Search not working**: Verify the structure file is generated correctly
+**Styles not loading**: Check file paths and server setup

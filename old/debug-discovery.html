@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Debug Auto-Discovery</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .debug-section { border: 1px solid #ccc; margin: 10px 0; padding: 15px; border-radius: 5px; }
+        .success { background: #d4edda; border-color: #c3e6cb; color: #155724; }
+        .error { background: #f8d7da; border-color: #f5c6cb; color: #721c24; }
+        .info { background: #d1ecf1; border-color: #bee5eb; color: #0c5460; }
+        .module { background: #f8f9fa; margin: 5px 0; padding: 10px; border-left: 3px solid #007bff; }
+        pre { background: #f1f1f1; padding: 10px; overflow-x: auto; }
+    </style>
+</head>
+<body>
+    <h1>🔍 Auto-Discovery Debug Tool</h1>
+
+    <div class="debug-section info">
+        <h2>Step 1: Check Auto-Discovery Availability</h2>
+        <div id="availability-status">Loading...</div>
+    </div>
+
+    <div class="debug-section info">
+        <h2>Step 2: Force Fresh Discovery</h2>
+        <div id="discovery-status">Loading...</div>
+    </div>
+
+    <div class="debug-section info">
+        <h2>Step 3: Discovered Modules</h2>
+        <div id="modules-list">Loading...</div>
+    </div>
+
+    <div class="debug-section info">
+        <h2>Step 4: Navigation Generation Test</h2>
+        <div id="navigation-test">Loading...</div>
+        <ul id="test-nav" style="border: 2px solid #007bff; padding: 20px;"></ul>
+    </div>
+
+    <script src="assets/js/auto-module-discovery.js"></script>
+    <script>
+        async function debugAutoDiscovery() {
+            const now = new Date().toLocaleTimeString();
+            console.log(`🔍 Debug started at ${now}`);
+
+            // Step 1: Check availability
+            const availabilityDiv = document.getElementById('availability-status');
+            if (window.AutoModuleDiscovery) {
+                availabilityDiv.innerHTML = `
+                    <div class="success">✅ AutoModuleDiscovery is available</div>
+                    <div>Loaded: ${window.AutoModuleDiscovery.loaded}</div>
+                    <div>Cached modules: ${window.AutoModuleDiscovery.modules.length}</div>
+                `;
+            } else {
+                availabilityDiv.innerHTML = `<div class="error">❌ AutoModuleDiscovery not available</div>`;
+                return;
+            }
+
+            // Step 2: Force fresh discovery
+            const discoveryDiv = document.getElementById('discovery-status');
+            try {
+                discoveryDiv.innerHTML = '<div>🔄 Resetting cache and forcing fresh discovery...</div>';
+
+                // Reset cache
+                window.AutoModuleDiscovery.reset();
+
+                // Force fresh discovery
+                const modules = await window.AutoModuleDiscovery.getAll(true);
+
+                discoveryDiv.innerHTML = `
+                    <div class="success">✅ Fresh discovery completed</div>
+                    <div>Found ${modules.length} modules</div>
+                `;
+
+                // Step 3: Show discovered modules
+                const modulesDiv = document.getElementById('modules-list');
+                if (modules.length === 0) {
+                    modulesDiv.innerHTML = '<div class="error">❌ No modules discovered</div>';
+                } else {
+                    let modulesHtml = `<div class="success">✅ Found ${modules.length} modules:</div>`;
+                    modules.forEach(module => {
+                        modulesHtml += `
+                            <div class="module">
+                                <strong>${module.icon} ${module.name}</strong><br>
+                                ID: ${module.id}<br>
+                                Title: ${module.title}<br>
+                                Description: ${module.description}<br>
+                                Client Functions: ${module.hasClientFunctions}<br>
+                                Server Functions: ${module.hasServerFunctions}
+                            </div>
+                        `;
+                    });
+                    modulesDiv.innerHTML = modulesHtml;
+                }
+
+                // Step 4: Test navigation generation
+                const navTestDiv = document.getElementById('navigation-test');
+                const testNavUl = document.getElementById('test-nav');
+
+                try {
+                    // Simulate navigation generation
+                    navTestDiv.innerHTML = '<div>🔧 Generating test navigation...</div>';
+
+                    modules.forEach(module => {
+                        const moduleItem = document.createElement('li');
+                        moduleItem.style.marginBottom = '10px';
+                        moduleItem.innerHTML = `
+                            <strong>${module.icon} ${module.title || module.name}</strong>
+                            <ul style="margin-left: 20px;">
+                                <li><a href="module.html?module=${module.id}#client-functions">Client Functions</a></li>
+                                <li><a href="module.html?module=${module.id}#server-functions">Server Functions</a></li>
+                            </ul>
+                        `;
+                        testNavUl.appendChild(moduleItem);
+                    });
+
+                    navTestDiv.innerHTML = `
+                        <div class="success">✅ Test navigation generated successfully</div>
+                        <div>Generated ${modules.length} navigation items below:</div>
+                    `;
+
+                } catch (error) {
+                    navTestDiv.innerHTML = `<div class="error">❌ Navigation generation failed: ${error.message}</div>`;
+                }
+
+            } catch (error) {
+                discoveryDiv.innerHTML = `<div class="error">❌ Discovery failed: ${error.message}</div>`;
+                console.error('Discovery error:', error);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', debugAutoDiscovery);
+    </script>
+</body>
+</html>

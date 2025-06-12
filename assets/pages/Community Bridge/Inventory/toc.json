@@ -1,0 +1,61 @@
+{
+  "title": "Inventory Module",
+  "items": [
+    {
+      "title": "Overview",
+      "anchor": "#overview"
+    },
+    {
+      "title": "Client Functions",
+      "anchor": "#client-functions",
+      "children": [
+        {
+          "title": "GetResourceName",
+          "anchor": "#function-getresourcename"
+        },
+        {
+          "title": "OpenInventory",
+          "anchor": "#function-openinventory"
+        },
+        {
+          "title": "OpenStash",
+          "anchor": "#function-openstash"
+        },
+        {
+          "title": "OpenShop",
+          "anchor": "#function-openshop"
+        }
+      ]
+    },
+    {
+      "title": "Server Functions",
+      "anchor": "#server-functions",
+      "children": [
+        {
+          "title": "AddItem",
+          "anchor": "#function-additem"
+        },
+        {
+          "title": "RemoveItem",
+          "anchor": "#function-removeitem"
+        },
+        {
+          "title": "GetItem",
+          "anchor": "#function-getitem"
+        },
+        {
+          "title": "GetItemCount",
+          "anchor": "#function-getitemcount"
+        },
+        {
+          "title": "CreateStash",
+          "anchor": "#function-createstash"
+        },
+        {
+          "title": "RegisterShop",
+          "anchor": "#function-registershop"
+        }
+      ]
+    }
+  ]
+}

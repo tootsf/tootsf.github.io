@@ -1,0 +1,49 @@
+{
+  "title": "Housing Module",
+  "items": [
+    {
+      "title": "Overview",
+      "anchor": "#overview"
+    },
+    {
+      "title": "Client Functions",
+      "anchor": "#client-functions",
+      "children": [
+        {
+          "title": "GetResourceName",
+          "anchor": "#function-getresourcename"
+        },
+        {
+          "title": "EnterHouse",
+          "anchor": "#function-enterhouse"
+        },
+        {
+          "title": "ExitHouse",
+          "anchor": "#function-exithouse"
+        }
+      ]
+    },
+    {
+      "title": "Server Functions",
+      "anchor": "#server-functions",
+      "children": [
+        {
+          "title": "GetPlayerHouses",
+          "anchor": "#function-getplayerhouses"
+        },
+        {
+          "title": "SetHouseOwner",
+          "anchor": "#function-sethouseowner"
+        },
+        {
+          "title": "AddHouseKey",
+          "anchor": "#function-addhousekey"
+        },
+        {
+          "title": "RemoveHouseKey",
+          "anchor": "#function-removehousekey"
+        }
+      ]
+    }
+  ]
+}

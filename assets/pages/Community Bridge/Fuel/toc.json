@@ -1,0 +1,27 @@
+{
+  "title": "Fuel Module",
+  "items": [
+    {
+      "title": "Overview",
+      "anchor": "#overview"
+    },
+    {
+      "title": "Client Functions",
+      "anchor": "#client-functions",
+      "children": [
+        {
+          "title": "GetResourceName",
+          "anchor": "#function-getresourcename"
+        },
+        {
+          "title": "GetFuel",
+          "anchor": "#function-getfuel"
+        },
+        {
+          "title": "SetFuel",
+          "anchor": "#function-setfuel"
+        }
+      ]
+    }
+  ]
+}

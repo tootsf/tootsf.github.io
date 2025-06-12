@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Debug Navigation</title>
+    <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <nav class="sidebar">
+            <h2>Debug Navigation</h2>
+            <ul id="main-nav">
+                <li class="active"><a href="index.html">Overview</a></li>
+                <li><a href="pages/getting-started.html">Getting Started</a></li>
+                <!-- Module navigation will be generated dynamically -->
+            </ul>
+        </nav>
+        <main>
+            <h1>Navigation Debug</h1>
+            <p>Check the console for debug output.</p>
+            <div id="debug-output"></div>
+        </main>
+    </div>
+
+    <!-- Load scripts in order -->
+    <script src="assets/js/auto-module-discovery.js"></script>
+    <script src="assets/js/navigation.js"></script>
+
+    <script>
+        // Additional debugging
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('=== DEBUGGING NAVIGATION ===');
+
+            setTimeout(() => {
+                const mainNav = document.getElementById('main-nav');
+                console.log('Main nav element:', mainNav);
+                console.log('Main nav children count:', mainNav ? mainNav.children.length : 'not found');
+
+                const bridgeSection = mainNav?.querySelector('.has-children');
+                console.log('Bridge section:', bridgeSection);
+                console.log('Bridge section classes:', bridgeSection?.className);
+
+                const modulesList = bridgeSection?.querySelector('.nested');
+                console.log('Modules list:', modulesList);
+                console.log('Modules list children:', modulesList?.children.length);
+                console.log('Modules list display style:', modulesList?.style.display);
+                console.log('Modules list computed display:', modulesList ? getComputedStyle(modulesList).display : 'not found');
+
+                // Output to page as well
+                const debugDiv = document.getElementById('debug-output');
+                debugDiv.innerHTML = `
+                    <h3>Debug Results:</h3>
+                    <p>Main nav children: ${mainNav ? mainNav.children.length : 'not found'}</p>
+                    <p>Bridge section found: ${!!bridgeSection}</p>
+                    <p>Bridge section classes: ${bridgeSection?.className || 'none'}</p>
+                    <p>Modules list found: ${!!modulesList}</p>
+                    <p>Modules list children: ${modulesList?.children.length || 0}</p>
+                    <p>Modules list display: ${modulesList ? getComputedStyle(modulesList).display : 'not found'}</p>
+                `;
+            }, 2000); // Wait 2 seconds for async operations
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,41 @@
+{
+  "title": "Weather Module",
+  "items": [
+    {
+      "title": "Overview",
+      "anchor": "#overview"
+    },
+    {
+      "title": "Client Functions",
+      "anchor": "#client-functions",
+      "children": [
+        {
+          "title": "GetCurrentWeather",
+          "anchor": "#function-getcurrentweather"
+        },
+        {
+          "title": "SetWeather",
+          "anchor": "#function-setweather"
+        },
+        {
+          "title": "GetResourceName",
+          "anchor": "#function-getresourcename"
+        }
+      ]
+    },
+    {
+      "title": "Server Functions",
+      "anchor": "#server-functions",
+      "children": [
+        {
+          "title": "SetWeather",
+          "anchor": "#function-setweather-1"
+        },
+        {
+          "title": "GetCurrentWeather",
+          "anchor": "#function-getcurrentweather-1"
+        }
+      ]
+    }
+  ]
+}

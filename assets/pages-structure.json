@@ -1,0 +1,163 @@
+{
+  "Getting Started": {
+    "type": "markdown",
+    "path": "assets/pages/Getting Started/index.md",
+    "icon": "🚀"
+  },
+  "Community Bridge": {
+    "type": "folder",
+    "path": "assets/pages/Community Bridge",
+    "icon": "🌉",
+    "children": {
+      "Overview": {
+        "type": "markdown",
+        "path": "assets/pages/Community Bridge/index.md",
+        "icon": "📖"
+      },
+      "Banking": {
+        "type": "json",
+        "path": "assets/pages/Community Bridge/Banking/banking.json",
+        "icon": "💰",
+        "tocPath": "assets/pages/Community Bridge/Banking/toc.json"
+      },
+      "Inventory": {
+        "type": "json",
+        "path": "assets/pages/Community Bridge/Inventory/inventory.json",
+        "icon": "🎒",
+        "tocPath": "assets/pages/Community Bridge/Inventory/toc.json"
+      },
+      "Notify": {
+        "type": "json",
+        "path": "assets/pages/Community Bridge/Notify/notify.json",
+        "icon": "📢",
+        "tocPath": "assets/pages/Community Bridge/Notify/toc.json"
+      },
+      "HelpText": {
+        "type": "json",
+        "path": "assets/pages/Community Bridge/HelpText/helptext.json",
+        "icon": "💬",
+        "tocPath": "assets/pages/Community Bridge/HelpText/toc.json"
+      },
+      "ProgressBar": {
+        "type": "json",
+        "path": "assets/pages/Community Bridge/ProgressBar/progressbar.json",
+        "icon": "📊",
+        "tocPath": "assets/pages/Community Bridge/ProgressBar/toc.json"
+      },
+      "Target": {
+        "type": "json",
+        "path": "assets/pages/Community Bridge/Target/target.json",
+        "icon": "🎯",
+        "tocPath": "assets/pages/Community Bridge/Target/toc.json"
+      },
+      "Input": {
+        "type": "json",
+        "path": "assets/pages/Community Bridge/Input/input.json",
+        "icon": "⌨️",
+        "tocPath": "assets/pages/Community Bridge/Input/toc.json"
+      },
+      "Menu": {
+        "type": "json",
+        "path": "assets/pages/Community Bridge/Menu/menu.json",
+        "icon": "📋",
+        "tocPath": "assets/pages/Community Bridge/Menu/toc.json"
+      },
+      "Dispatch": {
+        "type": "json",
+        "path": "assets/pages/Community Bridge/Dispatch/dispatch.json",
+        "icon": "🚨",
+        "tocPath": "assets/pages/Community Bridge/Dispatch/toc.json"
+      },
+      "Phone": {
+        "type": "json",
+        "path": "assets/pages/Community Bridge/Phone/phone.json",
+        "icon": "📱",
+        "tocPath": "assets/pages/Community Bridge/Phone/toc.json"
+      },
+      "Skills": {
+        "type": "json",
+        "path": "assets/pages/Community Bridge/Skills/skills.json",
+        "icon": "📈",
+        "tocPath": "assets/pages/Community Bridge/Skills/toc.json"
+      },
+      "Shops": {
+        "type": "json",
+        "path": "assets/pages/Community Bridge/Shops/shops.json",
+        "icon": "🛍️",
+        "tocPath": "assets/pages/Community Bridge/Shops/toc.json"
+      },
+      "Managment": {
+        "type": "json",
+        "path": "assets/pages/Community Bridge/Managment/managment.json",
+        "icon": "💼",
+        "tocPath": "assets/pages/Community Bridge/Managment/toc.json"
+      },
+      "Housing": {
+        "type": "json",
+        "path": "assets/pages/Community Bridge/Housing/housing.json",
+        "icon": "🏠",
+        "tocPath": "assets/pages/Community Bridge/Housing/toc.json"
+      },
+      "Weather": {
+        "type": "json",
+        "path": "assets/pages/Community Bridge/Weather/weather.json",
+        "icon": "🌤️",
+        "tocPath": "assets/pages/Community Bridge/Weather/toc.json"
+      },
+      "VehicleKey": {
+        "type": "json",
+        "path": "assets/pages/Community Bridge/VehicleKey/vehiclekey.json",
+        "icon": "🔑",
+        "tocPath": "assets/pages/Community Bridge/VehicleKey/toc.json"
+      },
+      "Fuel": {
+        "type": "json",
+        "path": "assets/pages/Community Bridge/Fuel/fuel.json",
+        "icon": "⛽",
+        "tocPath": "assets/pages/Community Bridge/Fuel/toc.json"
+      },
+      "Doorlock": {
+        "type": "json",
+        "path": "assets/pages/Community Bridge/Doorlock/doorlock.json",
+        "icon": "🚪",
+        "tocPath": "assets/pages/Community Bridge/Doorlock/toc.json"
+      },
+      "Dialogue": {
+        "type": "json",
+        "path": "assets/pages/Community Bridge/Dialogue/dialogue.json",
+        "icon": "💭",
+        "tocPath": "assets/pages/Community Bridge/Dialogue/toc.json"
+      },
+      "Clothing": {
+        "type": "json",
+        "path": "assets/pages/Community Bridge/Clothing/clothing.json",
+        "icon": "👕",
+        "tocPath": "assets/pages/Community Bridge/Clothing/toc.json"
+      },
+      "Framework": {
+        "type": "json",
+        "path": "assets/pages/Community Bridge/Framework/framework.json",
+        "icon": "🏗️",
+        "tocPath": "assets/pages/Community Bridge/Framework/toc.json"
+      },
+      "Version": {
+        "type": "json",
+        "path": "assets/pages/Community Bridge/Version/version.json",
+        "icon": "🔄",
+        "tocPath": "assets/pages/Community Bridge/Version/toc.json"
+      },
+      "Math": {
+        "type": "json",
+        "path": "assets/pages/Community Bridge/Math/math.json",
+        "icon": "🧮",
+        "tocPath": "assets/pages/Community Bridge/Math/toc.json"
+      },
+      "Locales": {
+        "type": "json",
+        "path": "assets/pages/Community Bridge/Locales/locales.json",
+        "icon": "🌍",
+        "tocPath": "assets/pages/Community Bridge/Locales/toc.json"
+      }
+    }
+  }
+}

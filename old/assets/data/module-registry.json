@@ -1,0 +1,17 @@
+﻿{
+    "lastUpdated":  "2025-06-11",
+    "modules":  [
+                    "\"banking\"",
+                    "\"banking_copy\"",
+                    "\"inventory\"",
+                    "\"management\"",
+                    "\"notify\"",
+                    "\"progressbar\"",
+                    "\"shops\"",
+                    "\"skills\"",
+                    "\"target\"",
+                    "\"test\"",
+                    "\"testmodule\"",
+                    "\"vehiclekey\""
+                ]
+}

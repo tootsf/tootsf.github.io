@@ -1,0 +1,37 @@
+{
+  "title": "HelpText Module",
+  "items": [
+    {
+      "title": "Overview",
+      "anchor": "#overview"
+    },
+    {
+      "title": "Client Functions",
+      "anchor": "#client-functions",
+      "children": [
+        {
+          "title": "ShowHelpText",
+          "anchor": "#function-showhelptext"
+        },
+        {
+          "title": "HideHelpText",
+          "anchor": "#function-hidehelptext"
+        }
+      ]
+    },
+    {
+      "title": "Server Functions",
+      "anchor": "#server-functions",
+      "children": [
+        {
+          "title": "ShowHelpText",
+          "anchor": "#function-showhelptext-1"
+        },
+        {
+          "title": "HideHelpText",
+          "anchor": "#function-hidehelptext-1"
+        }
+      ]
+    }
+  ]
+}

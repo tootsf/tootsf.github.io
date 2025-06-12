@@ -1,0 +1,146 @@
+[
+  {
+    "type": "folder",
+    "name": "Banking",
+    "title": "💰 Banking & Economy",
+    "icon": "💰"
+  },
+  {
+    "type": "folder",
+    "name": "Inventory",
+    "title": "🎒 Inventory Management",
+    "icon": "🎒"
+  },
+  {
+    "type": "folder",
+    "name": "Notify",
+    "title": "📢 Notification System",
+    "icon": "📢"
+  },
+  {
+    "type": "folder",
+    "name": "HelpText",
+    "title": "💬 Help Text Display",
+    "icon": "💬"
+  },
+  {
+    "type": "folder",
+    "name": "ProgressBar",
+    "title": "📊 Progress Bars",
+    "icon": "📊"
+  },
+  {
+    "type": "folder",
+    "name": "Target",
+    "title": "🎯 Targeting System",
+    "icon": "🎯"
+  },
+  {
+    "type": "folder",
+    "name": "Input",
+    "title": "⌨️ Input Dialogs",
+    "icon": "⌨️"
+  },
+  {
+    "type": "folder",
+    "name": "Menu",
+    "title": "📋 Menu System",
+    "icon": "📋"
+  },
+  {
+    "type": "folder",
+    "name": "Dispatch",
+    "title": "🚨 Emergency Dispatch",
+    "icon": "🚨"
+  },
+  {
+    "type": "folder",
+    "name": "Phone",
+    "title": "📱 Phone Integration",
+    "icon": "📱"
+  },
+  {
+    "type": "folder",
+    "name": "Skills",
+    "title": "📈 Skill System",
+    "icon": "📈"
+  },
+  {
+    "type": "folder",
+    "name": "Shops",
+    "title": "🛍️ Shop System (Fallback)",
+    "icon": "🛍️"
+  },
+  {
+    "type": "folder",
+    "name": "Managment",
+    "title": "💼 Business Management",
+    "icon": "💼"
+  },
+  {
+    "type": "folder",
+    "name": "Housing",
+    "title": "🏠 Housing Integration",
+    "icon": "🏠"
+  },
+  {
+    "type": "folder",
+    "name": "Weather",
+    "title": "🌤️ Weather Control",
+    "icon": "🌤️"
+  },
+  {
+    "type": "folder",
+    "name": "VehicleKey",
+    "title": "🔑 Vehicle Keys",
+    "icon": "🔑"
+  },
+  {
+    "type": "folder",
+    "name": "Fuel",
+    "title": "⛽ Fuel System",
+    "icon": "⛽"
+  },
+  {
+    "type": "folder",
+    "name": "Doorlock",
+    "title": "🚪 Door Management",
+    "icon": "🚪"
+  },
+  {
+    "type": "folder",
+    "name": "Dialogue",
+    "title": "💭 NPC Dialogue",
+    "icon": "💭"
+  },
+  {
+    "type": "folder",
+    "name": "Clothing",
+    "title": "👕 Appearance & Clothing",
+    "icon": "👕"
+  },
+  {
+    "type": "folder",
+    "name": "Framework",
+    "title": "🏗️ Framework Compatibility",
+    "icon": "🏗️"
+  },
+  {
+    "type": "folder",
+    "name": "Version",
+    "title": "🔄 Version Management",
+    "icon": "🔄"
+  },
+  {
+    "type": "folder",
+    "name": "Math",
+    "title": "🧮 Math Utilities",
+    "icon": "🧮"
+  },
+  {
+    "type": "folder",
+    "name": "Locales",
+    "title": "🌍 Localization System",
+    "icon": "🌍"
+  }
+]
