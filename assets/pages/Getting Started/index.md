@@ -1,5 +1,3 @@
-# Getting Started
-
 Welcome to Community Bridge! This guide will help you get up and running quickly.
 
 ## Installation
@@ -7,53 +5,37 @@ Welcome to Community Bridge! This guide will help you get up and running quickly
 ### Manual Installation
 
 1. Download the latest release from GitHub
-2. Extract the files to your resources folder
-3. Add `ensure community-bridge` to your server.cfg
+2. Extract the `community_bridge` folder to your resources directory
+3. Add `ensure community_bridge` to your server.cfg **after** your framework and **before** any scripts that use the bridge
 4. Restart your server
 
-### Using Git
+**Example server.cfg order:**
+```cfg
+# Framework (choose one)
+ensure es_extended
+# or ensure qb-core
+# or ensure qbx_core
 
-```bash
-cd resources
-git clone https://github.com/your-org/community-bridge.git
+# Community Bridge (after framework)
+ensure community_bridge
+
+# Your scripts that use Community Bridge (after bridge)
+ensure your-script
+ensure another-script
 ```
 
 ## Basic Setup
 
 ### 1. Configuration
+You can navigate to `community_bridge/settings` to customize the bridge settings. Here you can enable or disable specific modules, set default values, and configure compatibility with your resources
 
-Create a `config.lua` file in your resource:
 
-```lua
-Config = {
-    Framework = "auto", -- auto, esx, qbcore
-    Debug = false,
-    EnableModules = {
-        banking = true,
-        inventory = true,
-        notifications = true
-    }
-}
-```
-
-### 2. Initialize the Bridge
-
-In your client-side code:
+### 2. Using Bridge Functions
 
 ```lua
-Citizen.CreateThread(function()
-    while not Bridge do
-        Citizen.Wait(100)
-    end
+-- Initialize the bridge
+local Bridge = exports['community_bridge']:Bridge()
 
-    -- Bridge is now available
-    print("Bridge loaded!")
-end)
-```
-
-### 3. Using Bridge Functions
-
-```lua
 -- Get player balance
 local balance = Bridge.Banking.GetBalance()
 
@@ -64,19 +46,6 @@ Bridge.Notify.Send("Hello World!", "success")
 Bridge.Inventory.AddItem("bread", 5)
 ```
 
-## Framework Detection
-
-Community Bridge automatically detects your framework, but you can force a specific one:
-
-```lua
-Config.Framework = "esx" -- or "qbcore"
-```
-
-## Next Steps
-
-- Explore the [Banking Module](../Community%20Bridge/Banking/)
-- Learn about [Notifications](../Community%20Bridge/Notifications/)
-- Check out [code examples](../Examples/)
 
 ## Troubleshooting
 
@@ -85,9 +54,14 @@ Config.Framework = "esx" -- or "qbcore"
 **Bridge not loading**
 - Ensure the resource is started after your framework
 - Check console for error messages
-- Verify framework detection
+- Verify the resource name is exactly `community_bridge`
 
 **Functions not working**
 - Check if the module is enabled in config
 - Verify you're using the correct syntax
 - Enable debug mode for more information
+
+**"Bridge is nil" errors**
+- Make sure you're calling `exports['community_bridge']:Bridge()` correctly
+- Ensure Community Bridge started successfully before your script
+- Check the resource load order in server.cfg

@@ -8,10 +8,6 @@
         {
           "title": "Manual Installation",
           "anchor": "#manual-installation"
-        },
-        {
-          "title": "Using Git",
-          "anchor": "#using-git"
         }
       ]
     },
@@ -32,10 +28,6 @@
           "anchor": "#3-using-bridge-functions"
         }
       ]
-    },
-    {
-      "title": "Framework Detection",
-      "anchor": "#framework-detection"
     },
     {
       "title": "Next Steps",

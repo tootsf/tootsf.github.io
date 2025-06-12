@@ -396,6 +396,51 @@ p {
     color: var(--text-secondary);
 }
 
+/* List Styles - Fix indentation issues */
+ul, ol {
+    margin-bottom: 1rem;
+    padding-left: 1.5rem;
+    color: var(--text-secondary);
+}
+
+.content ul, .content ol {
+    list-style-type: disc;
+    padding-left: 2rem;
+    margin-bottom: 1.5rem;
+}
+
+.content ul ul, .content ol ol, .content ul ol, .content ol ul {
+    margin-bottom: 0.5rem;
+    margin-top: 0.5rem;
+    padding-left: 1.5rem;
+}
+
+.content li {
+    margin-bottom: 0.5rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+.content li p {
+    margin-bottom: 0.5rem;
+}
+
+.content li > ul, .content li > ol {
+    margin-top: 0.5rem;
+}
+
+/* Ensure navigation lists don't inherit content list styles */
+.nav-content ul, .nav-content ol,
+.sidebar ul, .sidebar ol,
+.toc ul, .toc ol {
+    list-style: none !important;
+    padding-left: 0 !important;
+}
+
+.nav-content li, .sidebar li, .toc li {
+    margin-bottom: 0.25rem !important;
+}
+
 /* Code */
 code {
     background-color: var(--bg-tertiary);
