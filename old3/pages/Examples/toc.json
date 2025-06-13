@@ -1,0 +1,103 @@
+{
+  "title": "Examples & Patterns",
+  "items": [
+    {
+      "title": "Basic Setup",
+      "anchor": "#basic-setup",
+      "children": [
+        {
+          "title": "Resource Manifest",
+          "anchor": "#resource-manifest-fxmanifestlua"
+        }
+      ]
+    },
+    {
+      "title": "Banking Examples",
+      "anchor": "#banking-examples",
+      "children": [
+        {
+          "title": "Check Player Balance",
+          "anchor": "#check-player-balance"
+        },
+        {
+          "title": "Transfer Money",
+          "anchor": "#transfer-money-between-players"
+        }
+      ]
+    },
+    {
+      "title": "Inventory Examples",
+      "anchor": "#inventory-examples",
+      "children": [
+        {
+          "title": "Give Item to Player",
+          "anchor": "#give-item-to-player"
+        },
+        {
+          "title": "Check Item Count",
+          "anchor": "#check-item-count"
+        }
+      ]
+    },
+    {
+      "title": "Notification Examples",
+      "anchor": "#notification-examples",
+      "children": [
+        {
+          "title": "Different Types",
+          "anchor": "#different-notification-types"
+        },
+        {
+          "title": "Advanced Notifications",
+          "anchor": "#advanced-notifications"
+        }
+      ]
+    },
+    {
+      "title": "Targeting Examples",
+      "anchor": "#targeting-examples",
+      "children": [
+        {
+          "title": "Simple Target",
+          "anchor": "#simple-target"
+        },
+        {
+          "title": "Entity Targeting",
+          "anchor": "#entity-targeting"
+        }
+      ]
+    },
+    {
+      "title": "Error Handling",
+      "anchor": "#error-handling",
+      "children": [
+        {
+          "title": "Safe Function Calls",
+          "anchor": "#safe-function-calls"
+        },
+        {
+          "title": "Debug Mode",
+          "anchor": "#debug-mode"
+        }
+      ]
+    },
+    {
+      "title": "Best Practices",
+      "anchor": "#best-practices"
+    },
+    {
+      "title": "Common Patterns",
+      "anchor": "#common-patterns",
+      "children": [
+        {
+          "title": "Initialization Pattern",
+          "anchor": "#initialization-pattern"
+        },
+        {
+          "title": "Event-Driven Pattern",
+          "anchor": "#event-driven-pattern"
+        }
+      ]
+    }
+  ]
+}

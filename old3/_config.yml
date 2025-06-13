@@ -1,0 +1,27 @@
+# GitHub Pages configuration
+title: Community Bridge Documentation
+description: Comprehensive documentation for the Community Bridge FiveM framework compatibility layer
+
+# Build settings
+markdown: kramdown
+highlighter: rouge
+theme: null
+
+# GitHub Pages settings
+plugins:
+  - jekyll-feed
+
+# Exclude files from processing
+exclude:
+  - node_modules/
+  - vendor/
+  - .github/
+  - README.md
+  - old/
+  - old2/
+  - build/
+
+# Include files that would normally be excluded
+include:
+  - assets/
+  - pages/
