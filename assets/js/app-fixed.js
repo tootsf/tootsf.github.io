@@ -200,9 +200,7 @@ class CommunityBridgeDocumentation {    constructor() {
         } finally {
             this.setLoading(false);
         }
-    }
-
-    async discoverPagesStructure() {
+    }    async discoverPagesStructure() {
         console.log('🔍 Starting discoverPagesStructure...');
         const structure = {};
 
@@ -220,7 +218,7 @@ class CommunityBridgeDocumentation {    constructor() {
                     items: {}
                 };
 
-                // Add main pages
+                // Add main pages (markdown files in root)
                 const mainPages = ['overview', 'getting-started', 'index'];
                 for (const page of mainPages) {
                     try {
@@ -235,84 +233,99 @@ class CommunityBridgeDocumentation {    constructor() {
                     } catch (e) {
                         console.log(`❌ Error checking page ${page}.md:`, e.message);
                     }
-                }
+                }                // DYNAMIC FOLDER DISCOVERY: Automatically detect all folders under Community Bridge
+                const foldersToCheck = await this.discoverCommunityBridgeFolders();
+                console.log('📁 Discovered folders:', foldersToCheck);
 
-                // Add modules from toc.json
-                const moduleItems = {};
-                let moduleCount = 0;
+                for (const folderInfo of foldersToCheck) {
+                    const { folderName, folderIcon } = folderInfo;
+                    console.log(`🔍 Processing dynamic folder: ${folderName}`);
 
-                for (const module of tocData) {
-                    if (module.type === 'folder') {
-                        console.log(`🔍 Processing module: ${module.name}`);
-                        const moduleName = module.name.toLowerCase();
-                        const jsonPath = `assets/pages/Community Bridge/Modules/${module.name}/${moduleName}.json`;
+                    // Try to load folder's toc.json
+                    try {
+                        const folderTocUrl = `assets/pages/Community Bridge/${folderName}/toc.json`;
+                        console.log(`📋 Attempting to load: ${folderTocUrl}`);
+                        const folderTocResponse = await fetch(folderTocUrl);
 
-                        try {
-                            const jsonResponse = await fetch(jsonPath);
-                            if (jsonResponse.ok) {
-                                moduleItems[module.title || module.name] = {
-                                    type: 'json-module',
-                                    path: `modules/${module.name}`,
-                                    jsonFile: jsonPath,
-                                    icon: module.icon,
-                                    name: module.name
-                                };
-                                moduleCount++;
-                                console.log(`✅ Added JSON module: ${module.name}`);
-                            }
-                        } catch (e) {
-                            console.log(`❌ Error loading ${jsonPath}:`, e.message);
-                        }
-                    }
-                }                if (Object.keys(moduleItems).length > 0) {
-                    structure['Community Bridge'].items['Modules'] = {
-                        icon: '📦',
-                        items: moduleItems
-                    };
-                }
+                        if (folderTocResponse.ok) {
+                            const folderTocData = await folderTocResponse.json();
+                            console.log(`📋 Loaded ${folderName} toc.json:`, folderTocData);
 
-                // Add Libraries section
-                const librariesResponse = await fetch('assets/pages/Community Bridge/Libraries/toc.json');
-                if (librariesResponse.ok) {
-                    const librariesTocData = await librariesResponse.json();
-                    console.log('📚 Processing libraries...', librariesTocData);
+                            const folderItems = {};
+                            let itemCount = 0;
 
-                    const libraryItems = {};
-                    let libraryCount = 0;
+                            for (const item of folderTocData) {                                if (item.type === 'folder') {
+                                    console.log(`🔍 Processing ${folderName} item: ${item.name}`);
+                                    const itemName = item.name.toLowerCase();
 
-                    for (const library of librariesTocData) {
-                        if (library.type === 'folder') {
-                            console.log(`🔍 Processing library: ${library.name}`);
-                            const libraryName = library.name.toLowerCase();
-                            const jsonPath = `assets/pages/Community Bridge/Libraries/${library.name}/${libraryName}.json`;
-
-                            try {
-                                const jsonResponse = await fetch(jsonPath);
-                                if (jsonResponse.ok) {
-                                    libraryItems[library.title || library.name] = {
-                                        type: 'json-module',
-                                        path: `libraries/${library.name}`,
-                                        jsonFile: jsonPath,
-                                        icon: library.icon,
-                                        name: library.name
-                                    };
-                                    libraryCount++;
-                                    console.log(`✅ Added JSON library: ${library.name}`);
+                                    // Construct the correct JSON path based on folder structure
+                                    let jsonPath;
+                                    if (folderName === 'Modules' || folderName === 'Libraries') {
+                                        // For Modules and Libraries: folderName/ItemName/itemname.json
+                                        jsonPath = `assets/pages/Community Bridge/${folderName}/${item.name}/${itemName}.json`;
+                                    } else {
+                                        // For other folders: folderName/ItemName/itemname.json (same pattern)
+                                        jsonPath = `assets/pages/Community Bridge/${folderName}/${item.name}/${itemName}.json`;
+                                    }                                    try {
+                                        const jsonResponse = await fetch(jsonPath);
+                                        if (jsonResponse.ok) {
+                                            folderItems[item.title || item.name] = {
+                                                type: 'json-module',
+                                                path: `${folderName.toLowerCase()}/${item.name}`,
+                                                jsonFile: jsonPath,
+                                                icon: item.icon,
+                                                name: item.name,
+                                                category: folderName
+                                            };
+                                            itemCount++;
+                                            console.log(`✅ Added JSON item: ${item.name} to ${folderName} (${jsonPath})`);
+                                        } else {
+                                            console.log(`⚠️ JSON file not found: ${jsonPath} (Status: ${jsonResponse.status})`);
+                                        }
+                                    } catch (e) {
+                                        console.log(`❌ Error loading ${jsonPath}:`, e.message);
+                                    }
+                                } else if (item.type === 'file' && item.name.endsWith('.md')) {
+                                    // Handle markdown files in folder
+                                    const mdPath = `assets/pages/Community Bridge/${folderName}/${item.name}`;
+                                    try {
+                                        const mdResponse = await fetch(mdPath);
+                                        if (mdResponse.ok) {
+                                            const itemKey = item.name.replace('.md', '');
+                                            folderItems[item.title || itemKey] = {
+                                                type: 'markdown',
+                                                path: `Community Bridge/${folderName}/${itemKey}`,
+                                                icon: item.icon,
+                                                category: folderName
+                                            };
+                                            itemCount++;
+                                            console.log(`✅ Added markdown file: ${item.name} to ${folderName}`);
+                                        }
+                                    } catch (e) {
+                                        console.log(`❌ Error loading ${mdPath}:`, e.message);
+                                    }
                                 }
-                            } catch (e) {
-                                console.log(`❌ Error loading ${jsonPath}:`, e.message);
                             }
-                        }
-                    }
 
-                    if (Object.keys(libraryItems).length > 0) {
-                        structure['Community Bridge'].items['Libraries'] = {
-                            icon: '📚',
-                            items: libraryItems
-                        };
-                        console.log(`✅ Added ${libraryCount} libraries to structure`);
+                            if (Object.keys(folderItems).length > 0) {
+                                structure['Community Bridge'].items[folderName] = {
+                                    icon: folderIcon,
+                                    items: folderItems
+                                };
+                                console.log(`✅ Added ${itemCount} items to ${folderName} folder`);
+                            }
+                        } else {
+                            console.log(`⚠️ No toc.json found for ${folderName}, checking for direct content...`);
+                            // If no toc.json, try to discover content directly
+                            await this.discoverFolderContentDirectly(structure, folderName, folderIcon);
+                        }
+                    } catch (error) {
+                        console.log(`❌ Error processing ${folderName}:`, error.message);
+                        // Fallback: try to discover content directly
+                        await this.discoverFolderContentDirectly(structure, folderName, folderIcon);
                     }
                 }
+
             } else {
                 // Fallback structure
                 structure['Community Bridge'] = {
@@ -340,6 +353,88 @@ class CommunityBridgeDocumentation {    constructor() {
         }
 
         return structure;
+    }
+
+    // NEW: Discover all folders under Community Bridge
+    async discoverCommunityBridgeFolders() {
+        console.log('🔍 Discovering Community Bridge folders...');
+
+        // Known folders with their icons (you can extend this list)
+        const knownFolders = [
+            { folderName: 'Modules', folderIcon: '📦' },
+            { folderName: 'Libraries', folderIcon: '📚' },
+            { folderName: 'Examples', folderIcon: '💡' },
+            { folderName: 'Getting Started', folderIcon: '🚀' },
+            { folderName: 'Instructions', folderIcon: '📋' },
+            { folderName: 'Tutorials', folderIcon: '🎓' },
+            { folderName: 'API Reference', folderIcon: '📖' },
+            { folderName: 'Configuration', folderIcon: '⚙️' },
+            { folderName: 'Troubleshooting', folderIcon: '🔧' }
+        ];
+
+        const discoveredFolders = [];
+
+        // Try to discover folders by attempting to fetch their toc.json or checking for common files
+        for (const { folderName, folderIcon } of knownFolders) {
+            try {
+                // Try to fetch the folder's toc.json or any common file to verify it exists
+                const tocResponse = await fetch(`assets/pages/Community Bridge/${folderName}/toc.json`);
+                const indexResponse = await fetch(`assets/pages/Community Bridge/${folderName}/index.md`);
+
+                if (tocResponse.ok || indexResponse.ok) {
+                    discoveredFolders.push({ folderName, folderIcon });
+                    console.log(`✅ Discovered folder: ${folderName}`);
+                }
+            } catch (e) {
+                console.log(`⚠️ Folder ${folderName} not accessible`);
+            }
+        }
+
+        // Fallback: If no dynamic discovery is possible, return known existing folders
+        if (discoveredFolders.length === 0) {
+            console.log('⚠️ Using fallback folder discovery');
+            return [
+                { folderName: 'Modules', folderIcon: '📦' },
+                { folderName: 'Libraries', folderIcon: '📚' }
+            ];
+        }
+
+        return discoveredFolders;
+    }
+
+    // NEW: Discover folder content directly when no toc.json exists
+    async discoverFolderContentDirectly(structure, folderName, folderIcon) {
+        console.log(`🔍 Discovering ${folderName} content directly...`);
+
+        const folderItems = {};
+
+        // Try common file patterns
+        const commonFiles = ['index.md', 'overview.md', 'readme.md', 'getting-started.md'];
+
+        for (const fileName of commonFiles) {
+            try {
+                const response = await fetch(`assets/pages/Community Bridge/${folderName}/${fileName}`);
+                if (response.ok) {
+                    const itemKey = fileName.replace('.md', '');
+                    folderItems[itemKey] = {
+                        type: 'markdown',
+                        path: `Community Bridge/${folderName}/${itemKey}`,
+                        category: folderName
+                    };
+                    console.log(`✅ Found direct file: ${fileName} in ${folderName}`);
+                }
+            } catch (e) {
+                // File doesn't exist, continue
+            }
+        }
+
+        if (Object.keys(folderItems).length > 0) {
+            structure['Community Bridge'].items[folderName] = {
+                icon: folderIcon,
+                items: folderItems
+            };
+            console.log(`✅ Added ${Object.keys(folderItems).length} items to ${folderName} via direct discovery`);
+        }
     }
 
     renderNavigation() {
@@ -419,26 +514,137 @@ class CommunityBridgeDocumentation {    constructor() {
 
     setupRouter() {
         window.addEventListener('hashchange', () => this.handleRouteChange());
-    }
-
-    handleRouteChange() {
+    }    handleRouteChange() {
         const hash = window.location.hash.slice(1);
         if (hash) {
             const decodedPath = decodeURIComponent(hash);
             console.log('🛣️ Route changed to:', decodedPath);
-            this.navigateToPath(decodedPath);
+
+            // Check if this is a function anchor (contains dashes indicating function-side-module format)
+            if (this.isFunctionAnchor(decodedPath)) {
+                console.log('🔗 Detected function anchor:', decodedPath);
+                this.handleFunctionAnchor(decodedPath);
+            } else {
+                // Regular page navigation
+                this.navigateToPath(decodedPath);
+            }
         }
     }
 
-    navigateToPath(path) {
+    isFunctionAnchor(path) {
+        // Function anchors follow the pattern: functionname-side-modulename
+        // They contain at least two dashes and are not typical page paths
+        const parts = path.split('-');
+        return parts.length >= 3 && !path.includes('/') && !path.includes(' ');
+    }
+
+    handleFunctionAnchor(anchorId) {
+        console.log('🎯 Handling function anchor:', anchorId);
+
+        // Check if the target element exists on the current page
+        const targetElement = document.getElementById(anchorId);
+        if (targetElement) {
+            console.log('✅ Found function element:', anchorId);
+            this.scrollToElement(targetElement);
+            this.highlightElement(targetElement);
+            this.updateTocActiveState(anchorId);
+        } else {
+            console.log('❌ Function element not found on current page:', anchorId);
+            // The function might be on a different module page
+            // Try to extract module name and navigate to that page first
+            this.navigateToModuleForFunction(anchorId);
+        }
+    }
+
+    navigateToModuleForFunction(anchorId) {
+        // Extract module name from anchor (last part after final dash)
+        const parts = anchorId.split('-');
+        if (parts.length >= 3) {
+            const moduleName = parts[parts.length - 1];
+            console.log('🔍 Trying to find module for function:', moduleName);
+
+            // Find the module path
+            const moduleItem = this.findModuleByName(moduleName);
+            if (moduleItem) {
+                console.log('📦 Found module:', moduleItem.path);
+                // Navigate to the module page, then scroll to the function
+                this.loadContent(moduleItem.path, moduleItem.type, moduleItem).then(() => {
+                    // After the module loads, try to scroll to the function
+                    setTimeout(() => {
+                        const targetElement = document.getElementById(anchorId);
+                        if (targetElement) {
+                            this.scrollToElement(targetElement);
+                            this.highlightElement(targetElement);
+                            this.updateTocActiveState(anchorId);
+                        }
+                    }, 500); // Give time for content to load
+                });
+            }
+        }
+    }
+
+    findModuleByName(moduleName) {
+        const searchItems = (items) => {
+            for (const [key, item] of Object.entries(items)) {
+                if (item.name && item.name.toLowerCase() === moduleName.toLowerCase()) {
+                    return item;
+                }
+                if (item.items) {
+                    const found = searchItems(item.items);
+                    if (found) return found;
+                }
+            }
+            return null;
+        };
+
+        for (const [category, categoryData] of Object.entries(this.allModules)) {
+            const found = searchItems(categoryData.items);
+            if (found) return found;
+        }
+        return null;
+    }
+
+    scrollToElement(element) {
+        // Calculate offset to account for fixed header
+        const header = document.querySelector('.header');
+        const headerHeight = header ? header.offsetHeight : 60;
+        const additionalOffset = 20;
+        const totalOffset = headerHeight + additionalOffset;
+
+        // Get target position and subtract offset
+        const targetPosition = element.getBoundingClientRect().top + window.pageYOffset - totalOffset;
+
+        // Smooth scroll to adjusted position
+        window.scrollTo({
+            top: targetPosition,
+            behavior: 'smooth'
+        });
+
+        console.log(`📍 Scrolled to element with ${totalOffset}px offset`);
+    }
+
+    updateTocActiveState(anchorId) {
+        // Remove active class from all TOC links
+        document.querySelectorAll('.toc-link').forEach(link => {
+            link.classList.remove('active');
+        });
+
+        // Add active class to the TOC link that corresponds to this anchor
+        const tocLink = document.querySelector(`.toc-link[href="#${anchorId}"]`);
+        if (tocLink) {
+            tocLink.classList.add('active');
+            console.log('✅ Updated TOC active state for:', anchorId);
+        }
+    }    async navigateToPath(path) {
         console.log('🎯 Navigating to:', path);
         const item = this.findNavigationItem(path);
         if (item) {
             console.log('✅ Found navigation item:', item);
-            this.loadContent(path, item.type, item);
+            return await this.loadContent(path, item.type, item);
         } else {
             console.warn('❌ Navigation item not found:', path);
             this.showError(`Page not found: ${path}`);
+            return Promise.reject(new Error(`Page not found: ${path}`));
         }
     }
 
@@ -461,9 +667,7 @@ class CommunityBridgeDocumentation {    constructor() {
             if (found) return found;
         }
         return null;
-    }
-
-    async loadContent(path, type, item) {
+    }    async loadContent(path, type, item) {
         this.setLoading(true);
 
         try {
@@ -474,6 +678,7 @@ class CommunityBridgeDocumentation {    constructor() {
             }            setTimeout(() => {
                 this.updateTableOfContents();
                 this.applySyntaxHighlighting();
+                this.setupCopyLinkButtons();
             }, 100);
 
         } catch (error) {
@@ -512,18 +717,32 @@ class CommunityBridgeDocumentation {    constructor() {
                 const moduleData = await response.json();
                 console.log('📊 Module data loaded:', moduleData);
 
-                // Extract module/library name and determine the correct directory
-                let itemName, tocPath;
-                if (path.startsWith('modules/')) {
-                    itemName = path.replace('modules/', '');
-                    tocPath = `assets/pages/Community Bridge/Modules/${itemName}/toc.json`;
-                } else if (path.startsWith('libraries/')) {
-                    itemName = path.replace('libraries/', '');
-                    tocPath = `assets/pages/Community Bridge/Libraries/${itemName}/toc.json`;
+                // Extract category and item name from path
+                let itemName, tocPath, category;
+                const pathParts = path.split('/');
+
+                if (pathParts.length >= 2) {
+                    category = pathParts[0];
+                    itemName = pathParts[1];
+
+                    // Map category names to proper case for file paths
+                    let folderName = category;
+                    if (category === 'modules') folderName = 'Modules';
+                    else if (category === 'libraries') folderName = 'Libraries';
+                    else {
+                        // For dynamic folders, capitalize first letter of each word
+                        folderName = category.split(' ').map(word =>
+                            word.charAt(0).toUpperCase() + word.slice(1)
+                        ).join(' ');
+                    }
+
+                    tocPath = `assets/pages/Community Bridge/${folderName}/${itemName}/toc.json`;
+                    console.log(`📋 Constructed TOC path: ${tocPath} for category: ${category}`);
                 } else {
-                    // Fallback for other paths
+                    // Fallback for legacy paths
                     itemName = path;
                     tocPath = null;
+                    category = 'unknown';
                 }
 
                 // Load the module/library's TOC
@@ -543,10 +762,10 @@ class CommunityBridgeDocumentation {    constructor() {
 
                 const mainContent = document.querySelector('.main-content');
                 if (mainContent) {
-                    // Pass item name for anchor generation
-                    mainContent.innerHTML = this.renderJsonModule(moduleData, tocData, itemName);
+                    // Pass item name and category for anchor generation
+                    mainContent.innerHTML = this.renderJsonModule(moduleData, tocData, itemName, category);
                 }
-                console.log(`✅ Loaded JSON module: ${moduleData.name}`);
+                console.log(`✅ Loaded JSON module: ${moduleData.name} from category: ${category}`);
             } else {
                 throw new Error(`Failed to load ${jsonFile}: ${response.status}`);
             }
@@ -554,7 +773,7 @@ class CommunityBridgeDocumentation {    constructor() {
             console.error('Error loading JSON module:', error);
             throw error;
         }
-    }    renderJsonModule(moduleData, tocData = null, moduleName = 'unknown') {
+    }    renderJsonModule(moduleData, tocData = null, moduleName = 'unknown', category = 'unknown') {
         if (!moduleData || (!moduleData.clientFunctions && !moduleData.serverFunctions && !moduleData.sharedFunctions)) {
             return '<div class="error-message">No module data available</div>';
         }
@@ -562,11 +781,15 @@ class CommunityBridgeDocumentation {    constructor() {
         // Store current module info for TOC generation
         this.currentModuleName = moduleName;
         this.currentModuleToc = tocData;
+        this.currentCategory = category;
 
         let html = `
             <div class="module-header">
                 <h1 id="overview">${moduleData.icon || '📦'} ${moduleData.name}</h1>
                 <p class="module-description">${moduleData.description || 'No description available.'}</p>
+                <div class="module-meta">
+                    <span class="module-category">📂 Category: ${category.charAt(0).toUpperCase() + category.slice(1)}</span>
+                </div>
             </div>
         `;
 
@@ -656,13 +879,14 @@ class CommunityBridgeDocumentation {    constructor() {
                         `).join('')}
                     </ul>
                 </div>
-            `;        }
-
-        return `
+            `;        }        return `
             <div class="function-card" id="${anchorId}">
                 <div class="function-header">
                     <h3>${func.name}</h3>
-                    <span class="badge ${sideClass}">${sideIcon} ${side}</span>
+                    <div class="function-badges">
+                        <span class="badge ${sideClass}">${sideIcon} ${side}</span>
+                        <button class="copy-link-btn" title="Copy direct link to this function" data-anchor="${anchorId}">🔗</button>
+                    </div>
                 </div>
                 <p>${func.description || 'No description available.'}</p>
                 <div class="function-syntax">
@@ -1177,27 +1401,20 @@ class CommunityBridgeDocumentation {    constructor() {
 
                 if (href.startsWith('#')) {
                     const targetId = href.substring(1);
+
+                    // Update the browser URL to include the function anchor
+                    const currentPath = window.location.hash.slice(1);
+                    if (this.isFunctionAnchor(targetId)) {
+                        // For function anchors, update the URL completely
+                        window.history.pushState(null, null, `#${targetId}`);
+                        console.log('🔗 Updated URL to:', `#${targetId}`);
+                    }
+
                     const targetElement = document.getElementById(targetId);
                     if (targetElement) {
-                        // Calculate offset to account for fixed header
-                        const header = document.querySelector('.header');
-                        const headerHeight = header ? header.offsetHeight : 60; // fallback to 60px
-                        const additionalOffset = 20; // Extra spacing for better visibility
-                        const totalOffset = headerHeight + additionalOffset;
-
-                        // Get target position and subtract offset
-                        const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - totalOffset;
-
-                        // Smooth scroll to adjusted position
-                        window.scrollTo({
-                            top: targetPosition,
-                            behavior: 'smooth'
-                        });
-
-                        // Add highlight effect to the target element (function card)
+                        this.scrollToElement(targetElement);
                         this.highlightElement(targetElement);
-
-                        console.log(`📍 Scrolled to ${targetId} with ${totalOffset}px offset and highlight effect`);
+                        console.log(`📍 Scrolled to ${targetId} with highlight effect`);
                     }
                 }
             }
@@ -1214,12 +1431,20 @@ class CommunityBridgeDocumentation {    constructor() {
         }, 2000); // 2 seconds to match a nice highlight duration
 
         console.log('✨ Applied highlight effect to element:', element.id);
-    }
-
-    loadInitialContent() {
+    }    loadInitialContent() {
         const hash = window.location.hash.slice(1);
         if (hash) {
-            this.navigateToPath(decodeURIComponent(hash));
+            const decodedPath = decodeURIComponent(hash);
+
+            // Check if this is a function anchor
+            if (this.isFunctionAnchor(decodedPath)) {
+                console.log('🔗 Initial load with function anchor:', decodedPath);
+                // For function anchors, we need to load the appropriate module first
+                this.navigateToModuleForFunction(decodedPath);
+            } else {
+                // Regular page navigation
+                this.navigateToPath(decodedPath);
+            }
         } else {
             // Load default content
             const firstItem = this.findFirstNavigationItem();
@@ -1265,6 +1490,49 @@ class CommunityBridgeDocumentation {    constructor() {
                 </div>
             `;
         }
+    }
+
+    setupCopyLinkButtons() {
+        const copyLinkButtons = document.querySelectorAll('.copy-link-btn');
+        copyLinkButtons.forEach(button => {
+            button.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const anchorId = button.getAttribute('data-anchor');
+                const currentUrl = window.location.origin + window.location.pathname;
+                const fullUrl = `${currentUrl}#${anchorId}`;
+
+                // Copy to clipboard
+                navigator.clipboard.writeText(fullUrl).then(() => {
+                    // Visual feedback
+                    const originalText = button.textContent;
+                    button.textContent = '✅';
+                    button.style.background = 'var(--accent-color)';
+
+                    setTimeout(() => {
+                        button.textContent = originalText;
+                        button.style.background = '';
+                    }, 2000);
+
+                    console.log('🔗 Copied function link:', fullUrl);
+                }).catch(err => {
+                    console.error('Failed to copy link:', err);
+                    // Fallback: select text for manual copy
+                    const textArea = document.createElement('textarea');
+                    textArea.value = fullUrl;
+                    document.body.appendChild(textArea);
+                    textArea.select();
+                    document.execCommand('copy');
+                    document.body.removeChild(textArea);
+
+                    button.textContent = '📋';
+                    setTimeout(() => {
+                        button.textContent = '🔗';
+                    }, 2000);
+                });
+            });
+        });
+
+        console.log(`✅ Set up ${copyLinkButtons.length} copy link buttons`);
     }
 }
 
