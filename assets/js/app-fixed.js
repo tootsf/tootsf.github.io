@@ -216,7 +216,7 @@ class CommunityBridgeDocumentation {    constructor() {
                 console.log('✅ Loaded toc.json successfully:', tocData);
 
                 structure['Community Bridge'] = {
-                    icon: '🏗️',
+                    icon: '',
                     items: {}
                 };
 
