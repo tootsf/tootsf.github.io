@@ -1,0 +1,123 @@
+{
+  "name": "Points",
+  "icon": "📍",
+  "description": "The Points library provides an efficient grid-based proximity detection system for 3D coordinates and entities. It uses spatial partitioning to optimize performance when tracking many points, with support for enter/exit/nearby callbacks.",
+  "clientFunctions": [
+    {
+      "name": "New",
+      "description": "Creates a new point with proximity detection callbacks. The point uses a grid-based system for efficient distance checking and supports both static coordinates and dynamic entity tracking.",
+      "syntax": "Point.New(id, coords, distance, onEnter, onExit, onNearby, args)",
+      "parameters": [
+        {
+          "name": "id",
+          "type": "string",
+          "description": "Unique identifier for the point"
+        },
+        {
+          "name": "coords",
+          "type": "vector3 | number",
+          "description": "3D coordinates for the point, or entity handle for dynamic tracking"
+        },
+        {
+          "name": "distance",
+          "type": "number",
+          "description": "Trigger distance for proximity detection"
+        },
+        {
+          "name": "onEnter",
+          "type": "function | nil",
+          "description": "Callback when player enters the point area (point, data) -> data"
+        },
+        {
+          "name": "onExit",
+          "type": "function | nil",
+          "description": "Callback when player exits the point area (point, data) -> data"
+        },
+        {
+          "name": "onNearby",
+          "type": "function | nil",
+          "description": "Callback while player is near the point (point, data) -> data"
+        },
+        {
+          "name": "args",
+          "type": "table | nil",
+          "description": "Initial data to pass to callbacks"
+        }
+      ],
+      "returns": [
+        {
+          "type": "table",
+          "description": "The created point object"
+        }
+      ],
+      "example": "-- Static point at coordinates\nlocal shopPoint = Point.New(\n    \"shop_entrance\",\n    vector3(25.7, -1347.3, 29.5),\n    3.0,\n    function(point, data)\n        print(\"Entered shop area\")\n        data.enterTime = GetGameTimer()\n        return data\n    end,\n    function(point, data)\n        local duration = GetGameTimer() - (data.enterTime or 0)\n        print(\"Left shop area after \" .. duration .. \"ms\")\n        return data\n    end,\n    nil,\n    { shopName = \"24/7 Store\" }\n)\n\n-- Dynamic point following a vehicle\nlocal vehicle = GetVehiclePedIsIn(PlayerPedId(), false)\nif vehicle ~= 0 then\n    local carPoint = Point.New(\n        \"my_car\",\n        vehicle,\n        5.0,\n        function(point, data)\n            print(\"Near my car\")\n            return data\n        end\n    )\nend"
+    },
+    {
+      "name": "Remove",
+      "description": "Removes an existing point by its ID and cleans up all associated grid references.",
+      "syntax": "Point.Remove(id)",
+      "parameters": [
+        {
+          "name": "id",
+          "type": "string",
+          "description": "ID of the point to remove"
+        }
+      ],
+      "returns": [],
+      "example": "-- Remove the shop point\nPoint.Remove(\"shop_entrance\")\nprint(\"Shop point removed\")\n\n-- Remove all vehicle points\nlocal allPoints = Point.GetAll()\nfor pointId, point in pairs(allPoints) do\n    if point.isEntity then\n        Point.Remove(pointId)\n    end\nend"
+    },
+    {
+      "name": "Get",
+      "description": "Retrieves a point by its ID.",
+      "syntax": "Point.Get(id)",
+      "parameters": [
+        {
+          "name": "id",
+          "type": "string",
+          "description": "ID of the point to retrieve"
+        }
+      ],
+      "returns": [
+        {
+          "type": "table",
+          "description": "The point object or nil if not found"
+        }
+      ],
+      "example": "local shopPoint = Point.Get(\"shop_entrance\")\nif shopPoint then\n    print(\"Shop point distance: \" .. shopPoint.distance)\n    print(\"Player inside: \" .. tostring(shopPoint.inside))\n    print(\"Coordinates: \" .. tostring(shopPoint.coords))\nelse\n    print(\"Shop point not found\")\nend"
+    },
+    {
+      "name": "UpdateCoords",
+      "description": "Updates the coordinates of an existing point and refreshes its grid position.",
+      "syntax": "Point.UpdateCoords(id, coords)",
+      "parameters": [
+        {
+          "name": "id",
+          "type": "string",
+          "description": "ID of the point to update"
+        },
+        {
+          "name": "coords",
+          "type": "vector3",
+          "description": "New coordinates for the point"
+        }
+      ],
+      "returns": [],
+      "example": "-- Move shop entrance to new location\nlocal newCoords = vector3(30.0, -1350.0, 29.5)\nPoint.UpdateCoords(\"shop_entrance\", newCoords)\nprint(\"Shop entrance moved to new location\")\n\n-- Update point based on player interaction\nlocal playerCoords = GetEntityCoords(PlayerPedId())\nPoint.UpdateCoords(\"meeting_point\", playerCoords)\nprint(\"Meeting point set to player location\")"
+    },
+    {
+      "name": "GetAll",
+      "description": "Returns all active points in the system.",
+      "syntax": "Point.GetAll()",
+      "parameters": [],
+      "returns": [
+        {
+          "type": "table",
+          "description": "Table containing all active points with their IDs as keys"
+        }
+      ],
+      "example": "local allPoints = Point.GetAll()\nprint(\"Total active points: \" .. table.getn(allPoints))\n\nfor pointId, point in pairs(allPoints) do\n    local status = point.inside and \"INSIDE\" or \"OUTSIDE\"\n    print(string.format(\"%s: %s (%.1fm)\", pointId, status, point.distance))\nend\n\n-- Count points by type\nlocal staticPoints = 0\nlocal entityPoints = 0\nfor _, point in pairs(allPoints) do\n    if point.isEntity then\n        entityPoints = entityPoints + 1\n    else\n        staticPoints = staticPoints + 1\n    end\nend\nprint(\"Static: \" .. staticPoints .. \", Entity: \" .. entityPoints)"
+    }
+  ],
+  "serverFunctions": [],
+  "sharedFunctions": []
+}

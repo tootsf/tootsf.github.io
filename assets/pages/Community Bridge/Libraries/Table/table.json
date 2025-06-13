@@ -1,0 +1,228 @@
+{
+  "name": "Table",
+  "icon": "📊",
+  "description": "The Table library provides comprehensive table manipulation utilities including deep cloning, searching, validation, and various data structure operations for Lua tables.",
+  "clientFunctions": [],
+  "serverFunctions": [],
+  "sharedFunctions": [
+    {
+      "name": "CheckPopulated",
+      "description": "Checks if a table contains any data, handling both array-style and hash-style tables correctly.",
+      "syntax": "Table.CheckPopulated(tbl)",
+      "parameters": [
+        {
+          "name": "tbl",
+          "type": "table",
+          "description": "The table to check for population"
+        }
+      ],
+      "returns": [
+        {
+          "type": "boolean",
+          "description": "True if table has any data, false if empty"
+        }
+      ],
+      "example": "local myTable = { name = \"John\", age = 25 }\nlocal isEmpty = Table.CheckPopulated(myTable)\nprint(\"Table is populated: \" .. tostring(isEmpty))\n\nlocal emptyTable = {}\nlocal isEmptyResult = Table.CheckPopulated(emptyTable)\nprint(\"Empty table check: \" .. tostring(isEmptyResult))"
+    },
+    {
+      "name": "DeepClone",
+      "description": "Creates a deep copy of a table, recursively cloning all nested tables. Supports omitting specific keys from the clone.",
+      "syntax": "Table.DeepClone(tbl, out, omit)",
+      "parameters": [
+        {
+          "name": "tbl",
+          "type": "table",
+          "description": "The table to clone"
+        },
+        {
+          "name": "out",
+          "type": "table | nil",
+          "description": "Optional output table to clone into"
+        },
+        {
+          "name": "omit",
+          "type": "table | nil",
+          "description": "Optional table of keys to omit from cloning"
+        }
+      ],
+      "returns": [
+        {
+          "type": "table",
+          "description": "A deep clone of the input table"
+        }
+      ],
+      "example": "local original = {\n    name = \"John\",\n    data = { health = 100, armor = 50 },\n    password = \"secret123\"\n}\n\n-- Clone without password field\nlocal cloned = Table.DeepClone(original, nil, { password = true })\nprint(\"Original name: \" .. original.name)\nprint(\"Cloned name: \" .. cloned.name)\nprint(\"Has password: \" .. tostring(cloned.password ~= nil))"
+    },
+    {
+      "name": "TableContains",
+      "description": "Searches for a value within a table, with optional nested table searching.",
+      "syntax": "Table.TableContains(tbl, search, nested)",
+      "parameters": [
+        {
+          "name": "tbl",
+          "type": "table",
+          "description": "The table to search in"
+        },
+        {
+          "name": "search",
+          "type": "any",
+          "description": "The value to search for"
+        },
+        {
+          "name": "nested",
+          "type": "boolean | nil",
+          "description": "Whether to search nested tables recursively"
+        }
+      ],
+      "returns": [
+        {
+          "type": "boolean",
+          "description": "True if value is found"
+        },
+        {
+          "type": "any",
+          "description": "The found value"
+        }
+      ],
+      "example": "local playerData = { \"John\", \"Jane\", \"Bob\" }\nlocal found, value = Table.TableContains(playerData, \"Jane\")\nif found then\n    print(\"Found player: \" .. value)\nend\n\n-- Nested search\nlocal complexData = {\n    users = { \"admin\", \"user1\" },\n    items = { \"sword\", \"shield\" }\n}\nlocal foundNested = Table.TableContains(complexData, \"admin\", true)\nprint(\"Found admin: \" .. tostring(foundNested))"
+    },
+    {
+      "name": "TableContainsKey",
+      "description": "Checks if a table contains a specific key.",
+      "syntax": "Table.TableContainsKey(tbl, search)",
+      "parameters": [
+        {
+          "name": "tbl",
+          "type": "table",
+          "description": "The table to search in"
+        },
+        {
+          "name": "search",
+          "type": "any",
+          "description": "The key to search for"
+        }
+      ],
+      "returns": [
+        {
+          "type": "boolean",
+          "description": "True if key exists"
+        },
+        {
+          "type": "any",
+          "description": "The found key"
+        }
+      ],
+      "example": "local playerStats = { health = 100, armor = 50, stamina = 75 }\nlocal hasHealth, key = Table.TableContainsKey(playerStats, \"health\")\nif hasHealth then\n    print(\"Player has health stat: \" .. playerStats[key])\nend"
+    },
+    {
+      "name": "TableGetKeys",
+      "description": "Extracts all keys from a table and returns them as an array.",
+      "syntax": "Table.TableGetKeys(tbl)",
+      "parameters": [
+        {
+          "name": "tbl",
+          "type": "table",
+          "description": "The table to extract keys from"
+        }
+      ],
+      "returns": [
+        {
+          "type": "table",
+          "description": "Array containing all keys from the input table"
+        }
+      ],
+      "example": "local config = { host = \"localhost\", port = 3306, database = \"mydb\" }\nlocal keys = Table.TableGetKeys(config)\nfor i, key in ipairs(keys) do\n    print(\"Key \" .. i .. \": \" .. key)\nend"
+    },
+    {
+      "name": "GetClosest",
+      "description": "Finds the closest entry in a table based on coordinate distance.",
+      "syntax": "Table.GetClosest(coords, tbl)",
+      "parameters": [
+        {
+          "name": "coords",
+          "type": "vector3",
+          "description": "The reference coordinates"
+        },
+        {
+          "name": "tbl",
+          "type": "table",
+          "description": "Table of entries with .coords property"
+        }
+      ],
+      "returns": [
+        {
+          "type": "table | nil",
+          "description": "The closest entry or nil if none found"
+        }
+      ],
+      "example": "local playerPos = GetEntityCoords(PlayerPedId())\nlocal shops = {\n    { name = \"24/7\", coords = vector3(25.7, -1347.3, 29.5) },\n    { name = \"LTD\", coords = vector3(1135.8, -982.3, 46.4) }\n}\n\nlocal closest = Table.GetClosest(playerPos, shops)\nif closest then\n    print(\"Closest shop: \" .. closest.name)\nend"
+    },
+    {
+      "name": "Append",
+      "description": "Appends all elements from one table to another table.",
+      "syntax": "Table.Append(tbl1, tbl2)",
+      "parameters": [
+        {
+          "name": "tbl1",
+          "type": "table",
+          "description": "The table to append to"
+        },
+        {
+          "name": "tbl2",
+          "type": "table",
+          "description": "The table to append from"
+        }
+      ],
+      "returns": [
+        {
+          "type": "table",
+          "description": "The modified first table"
+        }
+      ],
+      "example": "local weapons = { \"pistol\", \"knife\" }\nlocal newWeapons = { \"rifle\", \"shotgun\" }\nlocal allWeapons = Table.Append(weapons, newWeapons)\nprint(\"Total weapons: \" .. #allWeapons)"
+    },
+    {
+      "name": "Shuffle",
+      "description": "Randomly shuffles the elements in a table using the Fisher-Yates algorithm.",
+      "syntax": "Table.Shuffle(tbl)",
+      "parameters": [
+        {
+          "name": "tbl",
+          "type": "table",
+          "description": "The table to shuffle"
+        }
+      ],
+      "returns": [
+        {
+          "type": "table",
+          "description": "The shuffled table (modifies original)"
+        }
+      ],
+      "example": "local numbers = { 1, 2, 3, 4, 5 }\nprint(\"Original: \" .. table.concat(numbers, \", \"))\nlocal shuffled = Table.Shuffle(numbers)\nprint(\"Shuffled: \" .. table.concat(shuffled, \", \"))"
+    },
+    {
+      "name": "Compare",
+      "description": "Performs deep comparison between two values, recursively comparing nested tables.",
+      "syntax": "Table.Compare(a, b)",
+      "parameters": [
+        {
+          "name": "a",
+          "type": "any",
+          "description": "First value to compare"
+        },
+        {
+          "name": "b",
+          "type": "any",
+          "description": "Second value to compare"
+        }
+      ],
+      "returns": [
+        {
+          "type": "boolean",
+          "description": "True if values are deeply equal"
+        }
+      ],
+      "example": "local config1 = { host = \"localhost\", settings = { debug = true } }\nlocal config2 = { host = \"localhost\", settings = { debug = true } }\nlocal config3 = { host = \"localhost\", settings = { debug = false } }\n\nprint(\"Config1 == Config2: \" .. tostring(Table.Compare(config1, config2)))\nprint(\"Config1 == Config3: \" .. tostring(Table.Compare(config1, config3)))"
+    }
+  ]
+}

@@ -264,13 +264,54 @@ class CommunityBridgeDocumentation {    constructor() {
                             console.log(`❌ Error loading ${jsonPath}:`, e.message);
                         }
                     }
-                }
-
-                if (Object.keys(moduleItems).length > 0) {
+                }                if (Object.keys(moduleItems).length > 0) {
                     structure['Community Bridge'].items['Modules'] = {
                         icon: '📦',
                         items: moduleItems
                     };
+                }
+
+                // Add Libraries section
+                const librariesResponse = await fetch('assets/pages/Community Bridge/Libraries/toc.json');
+                if (librariesResponse.ok) {
+                    const librariesTocData = await librariesResponse.json();
+                    console.log('📚 Processing libraries...', librariesTocData);
+
+                    const libraryItems = {};
+                    let libraryCount = 0;
+
+                    for (const library of librariesTocData) {
+                        if (library.type === 'folder') {
+                            console.log(`🔍 Processing library: ${library.name}`);
+                            const libraryName = library.name.toLowerCase();
+                            const jsonPath = `assets/pages/Community Bridge/Libraries/${library.name}/${libraryName}.json`;
+
+                            try {
+                                const jsonResponse = await fetch(jsonPath);
+                                if (jsonResponse.ok) {
+                                    libraryItems[library.title || library.name] = {
+                                        type: 'json-module',
+                                        path: `libraries/${library.name}`,
+                                        jsonFile: jsonPath,
+                                        icon: library.icon,
+                                        name: library.name
+                                    };
+                                    libraryCount++;
+                                    console.log(`✅ Added JSON library: ${library.name}`);
+                                }
+                            } catch (e) {
+                                console.log(`❌ Error loading ${jsonPath}:`, e.message);
+                            }
+                        }
+                    }
+
+                    if (Object.keys(libraryItems).length > 0) {
+                        structure['Community Bridge'].items['Libraries'] = {
+                            icon: '📚',
+                            items: libraryItems
+                        };
+                        console.log(`✅ Added ${libraryCount} libraries to structure`);
+                    }
                 }
             } else {
                 // Fallback structure
@@ -471,27 +512,39 @@ class CommunityBridgeDocumentation {    constructor() {
                 const moduleData = await response.json();
                 console.log('📊 Module data loaded:', moduleData);
 
-                // Extract module name and path for TOC loading
-                const moduleName = path.replace('modules/', '');
-                const tocPath = `assets/pages/Community Bridge/Modules/${moduleName}/toc.json`;
+                // Extract module/library name and determine the correct directory
+                let itemName, tocPath;
+                if (path.startsWith('modules/')) {
+                    itemName = path.replace('modules/', '');
+                    tocPath = `assets/pages/Community Bridge/Modules/${itemName}/toc.json`;
+                } else if (path.startsWith('libraries/')) {
+                    itemName = path.replace('libraries/', '');
+                    tocPath = `assets/pages/Community Bridge/Libraries/${itemName}/toc.json`;
+                } else {
+                    // Fallback for other paths
+                    itemName = path;
+                    tocPath = null;
+                }
 
-                // Load the module's TOC
+                // Load the module/library's TOC
                 let tocData = null;
-                try {
-                    console.log(`📋 Loading module TOC: ${tocPath}`);
-                    const tocResponse = await fetch(tocPath);
-                    if (tocResponse.ok) {
-                        tocData = await tocResponse.json();
-                        console.log('📋 TOC data loaded:', tocData);
+                if (tocPath) {
+                    try {
+                        console.log(`📋 Loading TOC: ${tocPath}`);
+                        const tocResponse = await fetch(tocPath);
+                        if (tocResponse.ok) {
+                            tocData = await tocResponse.json();
+                            console.log('📋 TOC data loaded:', tocData);
+                        }
+                    } catch (tocError) {
+                        console.warn('⚠️ Could not load TOC:', tocError);
                     }
-                } catch (tocError) {
-                    console.warn('⚠️ Could not load TOC:', tocError);
                 }
 
                 const mainContent = document.querySelector('.main-content');
                 if (mainContent) {
-                    // Pass module name for anchor generation
-                    mainContent.innerHTML = this.renderJsonModule(moduleData, tocData, moduleName);
+                    // Pass item name for anchor generation
+                    mainContent.innerHTML = this.renderJsonModule(moduleData, tocData, itemName);
                 }
                 console.log(`✅ Loaded JSON module: ${moduleData.name}`);
             } else {
@@ -501,10 +554,8 @@ class CommunityBridgeDocumentation {    constructor() {
             console.error('Error loading JSON module:', error);
             throw error;
         }
-    }
-
-    renderJsonModule(moduleData, tocData = null, moduleName = 'unknown') {
-        if (!moduleData || (!moduleData.clientFunctions && !moduleData.serverFunctions)) {
+    }    renderJsonModule(moduleData, tocData = null, moduleName = 'unknown') {
+        if (!moduleData || (!moduleData.clientFunctions && !moduleData.serverFunctions && !moduleData.sharedFunctions)) {
             return '<div class="error-message">No module data available</div>';
         }
 
@@ -525,14 +576,22 @@ class CommunityBridgeDocumentation {    constructor() {
             moduleData.clientFunctions.forEach(func => {
                 html += this.renderFunction(func, 'client', moduleName);
             });
-            html += '</div></section>';
-        }
+            html += '</div></section>';        }
 
         // Server Functions
         if (moduleData.serverFunctions && moduleData.serverFunctions.length > 0) {
             html += '<section class="functions-section"><h2 id="server-functions">🖧 Server Functions</h2><div class="functions-grid">';
             moduleData.serverFunctions.forEach(func => {
                 html += this.renderFunction(func, 'server', moduleName);
+            });
+            html += '</div></section>';
+        }
+
+        // Shared Functions
+        if (moduleData.sharedFunctions && moduleData.sharedFunctions.length > 0) {
+            html += '<section class="functions-section"><h2 id="shared-functions">🔗 Shared Functions</h2><div class="functions-grid">';
+            moduleData.sharedFunctions.forEach(func => {
+                html += this.renderFunction(func, 'shared', moduleName);
             });
             html += '</div></section>';
         }
@@ -1017,11 +1076,11 @@ class CommunityBridgeDocumentation {    constructor() {
                            item.title.includes('Functions') ? '' : '⚡ ';
 
                 // Determine the correct anchor based on context
-                let anchor = item.anchor;
-
-                // If this is a function under Client Functions or Server Functions
+                let anchor = item.anchor;                // If this is a function under Client Functions, Server Functions, or Shared Functions
                 if (level > 0 && parentType && !item.title.includes('Functions')) {
-                    const side = parentType.includes('Client') ? 'client' : 'server';
+                    const side = parentType.includes('Client') ? 'client' : 
+                                parentType.includes('Server') ? 'server' : 
+                                parentType.includes('Shared') ? 'shared' : 'client';
                     const cleanFunctionName = item.title.toLowerCase().replace(/[^a-z0-9]/g, '');
                     const cleanModuleName = moduleName.toLowerCase().replace(/[^a-z0-9]/g, '');
                     anchor = `#${cleanFunctionName}-${side}-${cleanModuleName}`;

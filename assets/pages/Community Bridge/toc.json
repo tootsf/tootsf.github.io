@@ -136,11 +136,16 @@
     "name": "Math",
     "title": "🧮 Math Utilities",
     "icon": "🧮"
-  },
-  {
+  },  {
     "type": "folder",
     "name": "Locales",
     "title": "🌍 Localization System",
     "icon": "🌍"
+  },
+  {
+    "type": "folder",
+    "name": "Libraries",
+    "title": "📚 Core Libraries",
+    "icon": "📚"
   }
 ]
