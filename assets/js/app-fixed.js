@@ -1078,8 +1078,8 @@ class CommunityBridgeDocumentation {    constructor() {
                 // Determine the correct anchor based on context
                 let anchor = item.anchor;                // If this is a function under Client Functions, Server Functions, or Shared Functions
                 if (level > 0 && parentType && !item.title.includes('Functions')) {
-                    const side = parentType.includes('Client') ? 'client' : 
-                                parentType.includes('Server') ? 'server' : 
+                    const side = parentType.includes('Client') ? 'client' :
+                                parentType.includes('Server') ? 'server' :
                                 parentType.includes('Shared') ? 'shared' : 'client';
                     const cleanFunctionName = item.title.toLowerCase().replace(/[^a-z0-9]/g, '');
                     const cleanModuleName = moduleName.toLowerCase().replace(/[^a-z0-9]/g, '');
