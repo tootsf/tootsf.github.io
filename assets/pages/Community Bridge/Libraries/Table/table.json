@@ -1,77 +1,77 @@
 {
   "name": "Table",
   "icon": "📊",
-  "description": "The Table library provides comprehensive table manipulation utilities including deep cloning, searching, validation, and various data structure operations for Lua tables.",
+  "description": "The Table utility library provides comprehensive table manipulation functions including deep cloning, searching, comparison, and data transformation operations. Essential for data processing and state management throughout the system.",
   "clientFunctions": [],
   "serverFunctions": [],
   "sharedFunctions": [
     {
       "name": "CheckPopulated",
-      "description": "Checks if a table contains any data, handling both array-style and hash-style tables correctly.",
-      "syntax": "Table.CheckPopulated(tbl)",
+      "description": "Checks if a table contains any data, handling both array-style and key-value tables.",
+      "syntax": "Bridge.Table.CheckPopulated(tbl)",
       "parameters": [
         {
           "name": "tbl",
           "type": "table",
-          "description": "The table to check for population"
+          "description": "Table to check for data"
         }
       ],
       "returns": [
         {
           "type": "boolean",
-          "description": "True if table has any data, false if empty"
+          "description": "True if table contains data, false if empty"
         }
       ],
-      "example": "local myTable = { name = \"John\", age = 25 }\nlocal isEmpty = Table.CheckPopulated(myTable)\nprint(\"Table is populated: \" .. tostring(isEmpty))\n\nlocal emptyTable = {}\nlocal isEmptyResult = Table.CheckPopulated(emptyTable)\nprint(\"Empty table check: \" .. tostring(isEmptyResult))"
+      "example": "local Bridge = exports['community_bridge']:Bridge()\n\nlocal emptyArray = {}\nlocal emptyTable = {}\nlocal populatedTable = {key = 'value'}\n\nprint(Bridge.Table.CheckPopulated(emptyArray)) -- false\nprint(Bridge.Table.CheckPopulated(populatedTable)) -- true"
     },
     {
       "name": "DeepClone",
-      "description": "Creates a deep copy of a table, recursively cloning all nested tables. Supports omitting specific keys from the clone.",
-      "syntax": "Table.DeepClone(tbl, out, omit)",
+      "description": "Creates a deep copy of a table, recursively cloning nested tables with optional omission of specific keys.",
+      "syntax": "Bridge.Table.DeepClone(tbl, out, omit)",
       "parameters": [
         {
           "name": "tbl",
           "type": "table",
-          "description": "The table to clone"
+          "description": "Table to clone"
         },
         {
           "name": "out",
           "type": "table | nil",
-          "description": "Optional output table to clone into"
+          "description": "Optional existing table to clone into"
         },
         {
           "name": "omit",
           "type": "table | nil",
-          "description": "Optional table of keys to omit from cloning"
+          "description": "Table of keys to omit from cloning"
         }
       ],
       "returns": [
         {
           "type": "table",
-          "description": "A deep clone of the input table"
+          "description": "Deep cloned table"
         }
       ],
-      "example": "local original = {\n    name = \"John\",\n    data = { health = 100, armor = 50 },\n    password = \"secret123\"\n}\n\n-- Clone without password field\nlocal cloned = Table.DeepClone(original, nil, { password = true })\nprint(\"Original name: \" .. original.name)\nprint(\"Cloned name: \" .. cloned.name)\nprint(\"Has password: \" .. tostring(cloned.password ~= nil))"
+      "example": "local Bridge = exports['community_bridge']:Bridge()\n\nlocal original = {\n    name = 'Player',\n    stats = { health = 100, armor = 50 },\n    password = 'secret'\n}\n\nlocal clone = Bridge.Table.DeepClone(original, nil, {password = true})\nprint(clone.name) -- 'Player'\nprint(clone.stats.health) -- 100\nprint(clone.password) -- nil (omitted)"
     },
     {
       "name": "TableContains",
-      "description": "Searches for a value within a table, with optional nested table searching.",
-      "syntax": "Table.TableContains(tbl, search, nested)",
+      "description": "Searches for a value in a table with optional nested searching.",
+      "syntax": "Bridge.Table.TableContains(tbl, search, nested)",
       "parameters": [
         {
           "name": "tbl",
           "type": "table",
-          "description": "The table to search in"
+          "description": "Table to search in"
         },
         {
           "name": "search",
           "type": "any",
-          "description": "The value to search for"
+          "description": "Value to search for"
         },
         {
           "name": "nested",
           "type": "boolean | nil",
-          "description": "Whether to search nested tables recursively"
+          "description": "Whether to search recursively in nested tables"
         }
       ],
       "returns": [
@@ -84,22 +84,22 @@
           "description": "The found value"
         }
       ],
-      "example": "local playerData = { \"John\", \"Jane\", \"Bob\" }\nlocal found, value = Table.TableContains(playerData, \"Jane\")\nif found then\n    print(\"Found player: \" .. value)\nend\n\n-- Nested search\nlocal complexData = {\n    users = { \"admin\", \"user1\" },\n    items = { \"sword\", \"shield\" }\n}\nlocal foundNested = Table.TableContains(complexData, \"admin\", true)\nprint(\"Found admin: \" .. tostring(foundNested))"
+      "example": "local Bridge = exports['community_bridge']:Bridge()\n\nlocal data = {'apple', 'banana', {fruit = 'orange'}}\n\nlocal found, value = Bridge.Table.TableContains(data, 'apple')\nprint(found) -- true\n\nlocal foundNested = Bridge.Table.TableContains(data, 'orange', true)\nprint(foundNested) -- true"
     },
     {
       "name": "TableContainsKey",
       "description": "Checks if a table contains a specific key.",
-      "syntax": "Table.TableContainsKey(tbl, search)",
+      "syntax": "Bridge.Table.TableContainsKey(tbl, search)",
       "parameters": [
         {
           "name": "tbl",
           "type": "table",
-          "description": "The table to search in"
+          "description": "Table to search in"
         },
         {
           "name": "search",
           "type": "any",
-          "description": "The key to search for"
+          "description": "Key to search for"
         }
       ],
       "returns": [
@@ -112,65 +112,84 @@
           "description": "The found key"
         }
       ],
-      "example": "local playerStats = { health = 100, armor = 50, stamina = 75 }\nlocal hasHealth, key = Table.TableContainsKey(playerStats, \"health\")\nif hasHealth then\n    print(\"Player has health stat: \" .. playerStats[key])\nend"
+      "example": "local Bridge = exports['community_bridge']:Bridge()\n\nlocal player = {name = 'John', health = 100}\n\nlocal hasKey, key = Bridge.Table.TableContainsKey(player, 'name')\nprint(hasKey) -- true\nprint(key) -- 'name'"
     },
     {
       "name": "TableGetKeys",
-      "description": "Extracts all keys from a table and returns them as an array.",
-      "syntax": "Table.TableGetKeys(tbl)",
+      "description": "Returns an array of all keys in a table.",
+      "syntax": "Bridge.Table.TableGetKeys(tbl)",
       "parameters": [
         {
           "name": "tbl",
           "type": "table",
-          "description": "The table to extract keys from"
+          "description": "Table to get keys from"
         }
       ],
       "returns": [
         {
           "type": "table",
-          "description": "Array containing all keys from the input table"
+          "description": "Array of table keys"
         }
       ],
-      "example": "local config = { host = \"localhost\", port = 3306, database = \"mydb\" }\nlocal keys = Table.TableGetKeys(config)\nfor i, key in ipairs(keys) do\n    print(\"Key \" .. i .. \": \" .. key)\nend"
+      "example": "local Bridge = exports['community_bridge']:Bridge()\n\nlocal player = {name = 'John', health = 100, level = 5}\nlocal keys = Bridge.Table.TableGetKeys(player)\n-- keys = {'name', 'health', 'level'}"
     },
     {
       "name": "GetClosest",
-      "description": "Finds the closest entry in a table based on coordinate distance.",
-      "syntax": "Table.GetClosest(coords, tbl)",
+      "description": "Finds the closest object to given coordinates from a table of objects with .coords property.",
+      "syntax": "Bridge.Table.GetClosest(coords, tbl)",
       "parameters": [
         {
           "name": "coords",
           "type": "vector3",
-          "description": "The reference coordinates"
+          "description": "Reference coordinates"
         },
         {
           "name": "tbl",
           "type": "table",
-          "description": "Table of entries with .coords property"
+          "description": "Table of objects with .coords property"
         }
       ],
       "returns": [
         {
           "type": "table | nil",
-          "description": "The closest entry or nil if none found"
+          "description": "Closest object or nil if none found"
         }
       ],
-      "example": "local playerPos = GetEntityCoords(PlayerPedId())\nlocal shops = {\n    { name = \"24/7\", coords = vector3(25.7, -1347.3, 29.5) },\n    { name = \"LTD\", coords = vector3(1135.8, -982.3, 46.4) }\n}\n\nlocal closest = Table.GetClosest(playerPos, shops)\nif closest then\n    print(\"Closest shop: \" .. closest.name)\nend"
+      "example": "local Bridge = exports['community_bridge']:Bridge()\n\nlocal playerCoords = GetEntityCoords(PlayerPedId())\nlocal shops = {\n    {name = 'Shop A', coords = vector3(100, 100, 20)},\n    {name = 'Shop B', coords = vector3(200, 200, 20)}\n}\n\nlocal closest = Bridge.Table.GetClosest(playerCoords, shops)\nprint('Closest shop: ' .. closest.name)"
+    },
+    {
+      "name": "FindFirstUnoccupiedSlot",
+      "description": "Finds the first available slot number in a table of items with .slot property.",
+      "syntax": "Bridge.Table.FindFirstUnoccupiedSlot(tbl)",
+      "parameters": [
+        {
+          "name": "tbl",
+          "type": "table",
+          "description": "Table of items with .slot property"
+        }
+      ],
+      "returns": [
+        {
+          "type": "number | nil",
+          "description": "First available slot number or nil if all slots occupied"
+        }
+      ],
+      "example": "local Bridge = exports['community_bridge']:Bridge()\n\nlocal inventory = {\n    {item = 'bread', slot = 1},\n    {item = 'water', slot = 3}\n}\n\nlocal availableSlot = Bridge.Table.FindFirstUnoccupiedSlot(inventory)\nprint('Available slot: ' .. availableSlot) -- 2"
     },
     {
       "name": "Append",
-      "description": "Appends all elements from one table to another table.",
-      "syntax": "Table.Append(tbl1, tbl2)",
+      "description": "Appends all values from the second table to the first table.",
+      "syntax": "Bridge.Table.Append(tbl1, tbl2)",
       "parameters": [
         {
           "name": "tbl1",
           "type": "table",
-          "description": "The table to append to"
+          "description": "Target table to append to"
         },
         {
           "name": "tbl2",
           "type": "table",
-          "description": "The table to append from"
+          "description": "Source table to append from"
         }
       ],
       "returns": [
@@ -179,31 +198,59 @@
           "description": "The modified first table"
         }
       ],
-      "example": "local weapons = { \"pistol\", \"knife\" }\nlocal newWeapons = { \"rifle\", \"shotgun\" }\nlocal allWeapons = Table.Append(weapons, newWeapons)\nprint(\"Total weapons: \" .. #allWeapons)"
+      "example": "local Bridge = exports['community_bridge']:Bridge()\n\nlocal list1 = {'apple', 'banana'}\nlocal list2 = {'cherry', 'date'}\n\nBridge.Table.Append(list1, list2)\n-- list1 = {'apple', 'banana', 'cherry', 'date'}"
     },
     {
-      "name": "Shuffle",
-      "description": "Randomly shuffles the elements in a table using the Fisher-Yates algorithm.",
-      "syntax": "Table.Shuffle(tbl)",
+      "name": "Split",
+      "description": "Splits a table into two parts at the specified size.",
+      "syntax": "Bridge.Table.Split(tbl, size)",
       "parameters": [
         {
           "name": "tbl",
           "type": "table",
-          "description": "The table to shuffle"
+          "description": "Table to split"
+        },
+        {
+          "name": "size",
+          "type": "number | nil",
+          "description": "Split point (defaults to middle of table)"
         }
       ],
       "returns": [
         {
           "type": "table",
-          "description": "The shuffled table (modifies original)"
+          "description": "First part of the split"
+        },
+        {
+          "type": "table",
+          "description": "Second part of the split"
         }
       ],
-      "example": "local numbers = { 1, 2, 3, 4, 5 }\nprint(\"Original: \" .. table.concat(numbers, \", \"))\nlocal shuffled = Table.Shuffle(numbers)\nprint(\"Shuffled: \" .. table.concat(shuffled, \", \"))"
+      "example": "local Bridge = exports['community_bridge']:Bridge()\n\nlocal numbers = {1, 2, 3, 4, 5, 6}\nlocal first, second = Bridge.Table.Split(numbers, 3)\n-- first = {1, 2, 3}\n-- second = {4, 5, 6}"
+    },
+    {
+      "name": "Shuffle",
+      "description": "Randomly shuffles the elements of a table using Fisher-Yates algorithm.",
+      "syntax": "Bridge.Table.Shuffle(tbl)",
+      "parameters": [
+        {
+          "name": "tbl",
+          "type": "table",
+          "description": "Table to shuffle"
+        }
+      ],
+      "returns": [
+        {
+          "type": "table",
+          "description": "The shuffled table (same reference)"
+        }
+      ],
+      "example": "local Bridge = exports['community_bridge']:Bridge()\n\nlocal deck = {'A', 'K', 'Q', 'J'}\nBridge.Table.Shuffle(deck)\nprint('Shuffled deck: ' .. table.concat(deck, ', '))"
     },
     {
       "name": "Compare",
       "description": "Performs deep comparison between two values, recursively comparing nested tables.",
-      "syntax": "Table.Compare(a, b)",
+      "syntax": "Bridge.Table.Compare(a, b)",
       "parameters": [
         {
           "name": "a",
@@ -222,7 +269,7 @@
           "description": "True if values are deeply equal"
         }
       ],
-      "example": "local config1 = { host = \"localhost\", settings = { debug = true } }\nlocal config2 = { host = \"localhost\", settings = { debug = true } }\nlocal config3 = { host = \"localhost\", settings = { debug = false } }\n\nprint(\"Config1 == Config2: \" .. tostring(Table.Compare(config1, config2)))\nprint(\"Config1 == Config3: \" .. tostring(Table.Compare(config1, config3)))"
+      "example": "local Bridge = exports['community_bridge']:Bridge()\n\nlocal table1 = {name = 'John', stats = {health = 100}}\nlocal table2 = {name = 'John', stats = {health = 100}}\nlocal table3 = {name = 'Jane', stats = {health = 100}}\n\nprint(Bridge.Table.Compare(table1, table2)) -- true\nprint(Bridge.Table.Compare(table1, table3)) -- false"
     }
   ]
 }

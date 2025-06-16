@@ -34,12 +34,24 @@
           "anchor": "#function-getclosest"
         },
         {
+          "title": "FindFirstUnoccupiedSlot",
+          "anchor": "#function-findfirstunoccupiedslot"
+        },
+        {
           "title": "Append",
           "anchor": "#function-append"
         },
         {
+          "title": "Split",
+          "anchor": "#function-split"
+        },
+        {
           "title": "Shuffle",
           "anchor": "#function-shuffle"
+        },
+        {
+          "title": "Random",
+          "anchor": "#function-random"
         },
         {
           "title": "Compare",
