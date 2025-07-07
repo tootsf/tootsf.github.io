@@ -734,6 +734,9 @@ class CommunityBridgeDocumentation {
     }
 
     parseReadableFunction(name, content, side) {
+        console.log(`🔧 Parsing function: ${name}`);
+        console.log(`📄 Function content:`, content.substring(0, 300));
+        
         const func = {
             name: name,
             side: side,
@@ -748,18 +751,25 @@ class CommunityBridgeDocumentation {
         const descMatch = content.match(/\*\*Description:\*\*\s*([^\n]+)/);
         if (descMatch) {
             func.description = descMatch[1].trim();
+            console.log(`✅ Found description: ${func.description}`);
+        } else {
+            console.log(`❌ No description found in content`);
         }
         
         // Extract syntax
         const syntaxMatch = content.match(/\*\*Syntax:\*\*\s*`([^`]+)`/);
         if (syntaxMatch) {
             func.syntax = syntaxMatch[1].trim();
+            console.log(`✅ Found syntax: ${func.syntax}`);
+        } else {
+            console.log(`❌ No syntax found in content`);
         }
         
         // Extract parameters
         const paramSection = content.match(/\*\*Parameters:\*\*([\s\S]*?)(?=\*\*Returns:\*\*|\*\*Example:\*\*|$)/);
         if (paramSection) {
             const paramText = paramSection[1];
+            console.log(`📋 Parameter section found:`, paramText.substring(0, 200));
             if (paramText.includes('None')) {
                 func.parameters = [];
             } else {
@@ -771,14 +781,18 @@ class CommunityBridgeDocumentation {
                         type: paramMatch[2],
                         description: paramMatch[3]
                     });
+                    console.log(`✅ Found parameter: ${paramMatch[1]} (${paramMatch[2]})`);
                 }
             }
+        } else {
+            console.log(`❌ No parameters section found`);
         }
         
         // Extract returns
         const returnSection = content.match(/\*\*Returns:\*\*([\s\S]*?)(?=\*\*Example:\*\*|$)/);
         if (returnSection) {
             const returnText = returnSection[1];
+            console.log(`📋 Returns section found:`, returnText.substring(0, 200));
             if (returnText.includes('None')) {
                 func.returns = [];
             } else {
@@ -789,16 +803,23 @@ class CommunityBridgeDocumentation {
                         type: returnMatch[1],
                         description: returnMatch[2]
                     });
+                    console.log(`✅ Found return: ${returnMatch[1]}`);
                 }
             }
+        } else {
+            console.log(`❌ No returns section found`);
         }
         
         // Extract example
         const exampleMatch = content.match(/\*\*Example:\*\*\s*```(?:lua)?\n([\s\S]*?)```/);
         if (exampleMatch) {
             func.example = exampleMatch[1].trim();
+            console.log(`✅ Found example: ${func.example.substring(0, 50)}...`);
+        } else {
+            console.log(`❌ No example found`);
         }
         
+        console.log(`🔧 Final parsed function:`, func);
         return func;
     }
 
