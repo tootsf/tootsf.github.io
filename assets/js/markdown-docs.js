@@ -1,29 +1,30 @@
-// Community Bridge Markdown Documentation System - V2
+// Community Bridge Documentation Site - Markdown Enhanced Version
 class CommunityBridgeDocumentation {
     constructor() {
         this.currentTheme = localStorage.getItem('theme') || 'dark';
+        this.currentModule = null;
         this.allModules = {};
         this.searchIndex = [];
         this.isLoading = false;
-        this.currentModule = null;
-        this.currentModuleName = null;
+        this.currentModuleToc = null; // Store TOC data for current module
+        this.currentModuleName = null; // Store current module name for anchor generation
 
         this.init();
     }
 
     async init() {
-        console.log('🚀 Initializing Documentation System...');
+        console.log('🚀 Initializing Community Bridge Documentation...');
+
         try {
             this.setupTheme();
-            this.setupEventListeners();
+            this.setupBasicEventListeners();
             await this.loadModuleStructure();
-            this.renderNavigation();
             this.setupRouter();
-            await this.handleInitialPageLoad();
+            this.loadInitialContent();
             console.log('✅ Initialization complete!');
         } catch (error) {
             console.error('❌ Initialization failed:', error);
-            this.showError('Failed to initialize the documentation site. Check the console for details.');
+            this.showError('Failed to initialize documentation site');
         }
     }
 
@@ -35,250 +36,653 @@ class CommunityBridgeDocumentation {
         }
     }
 
-    setupEventListeners() {
+    setupBasicEventListeners() {
+        // Theme toggle
         const themeToggle = document.getElementById('theme-toggle');
         if (themeToggle) {
             themeToggle.addEventListener('click', () => this.toggleTheme());
         }
 
+        // Search functionality with better error handling
+        this.setupSearchInput();
+    }
+
+    setupSearchInput() {
         const searchInput = document.getElementById('search-input');
         if (searchInput) {
-            searchInput.addEventListener('input', (e) => this.handleSearch(e.target.value));
-            searchInput.addEventListener('focus', (e) => this.handleSearch(e.target.value)); // Show results on focus
-            document.addEventListener('click', (e) => {
-                if (!e.target.closest('.search-container')) {
+            // Clear any existing event listeners by cloning the element
+            const newSearchInput = searchInput.cloneNode(true);
+            searchInput.parentNode.replaceChild(newSearchInput, searchInput);
+
+            newSearchInput.addEventListener('input', (e) => {
+                const query = e.target.value.trim();
+                if (query.length > 0) {
+                    this.handleSearch(query);
+                } else {
                     this.hideSearchResults();
                 }
             });
-        }
 
-        const mobileNavToggle = document.getElementById('mobile-nav-toggle');
-        const sidebar = document.getElementById('sidebar');
-        if (mobileNavToggle && sidebar) {
-            mobileNavToggle.addEventListener('click', () => {
-                sidebar.classList.toggle('open');
+            newSearchInput.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') {
+                    this.hideSearchResults();
+                    e.target.blur();
+                }
             });
+
+            console.log('🔍 Search input configured');
+        } else {
+            console.warn('⚠️ Search input not found');
         }
+    }
+
+    // NEW: Fixed navigation event setup - called AFTER navigation is rendered
+    setupNavigationEvents() {
+        console.log('🎯 Setting up navigation click handlers...');
+
+        // Handle section headers (Community Bridge, etc.)
+        const sectionHeaders = document.querySelectorAll('.nav-section-header');
+        console.log('📂 Found section headers:', sectionHeaders.length);
+
+        sectionHeaders.forEach((header) => {
+            header.addEventListener('click', (e) => {
+                e.preventDefault();
+                const section = header.closest('.nav-section');
+                if (section) {
+                    section.classList.toggle('collapsed');
+                }
+            });
+        });
+
+        // Handle subsection headers (Modules, etc.)
+        const subsectionHeaders = document.querySelectorAll('.nav-subsection-header');
+        console.log('📦 Found subsection headers:', subsectionHeaders.length);
+
+        subsectionHeaders.forEach((header) => {
+            header.addEventListener('click', (e) => {
+                e.preventDefault();
+                const subsection = header.closest('.nav-subsection');
+                if (subsection) {
+                    subsection.classList.toggle('collapsed');
+                }
+            });
+        });
+
+        // Handle navigation item clicks
+        const navItems = document.querySelectorAll('.nav-item');
+        console.log('🔗 Found nav items:', navItems.length);
+
+        navItems.forEach((navItem) => {
+            navItem.addEventListener('click', (e) => {
+                e.preventDefault();
+                const path = navItem.getAttribute('data-path');
+                const type = navItem.getAttribute('data-type');
+                
+                if (path) {
+                    console.log('📄 Nav item clicked:', path, type);
+                    this.navigateToPath(path);
+                }
+            });
+        });
+
+        console.log('✅ Navigation events attached successfully');
     }
 
     toggleTheme() {
         this.currentTheme = this.currentTheme === 'dark' ? 'light' : 'dark';
+        document.documentElement.setAttribute('data-theme', this.currentTheme);
         localStorage.setItem('theme', this.currentTheme);
-        this.setupTheme();
+
+        const themeToggle = document.getElementById('theme-toggle');
+        if (themeToggle) {
+            themeToggle.textContent = this.currentTheme === 'dark' ? '☀️ Light' : '🌙 Dark';
+        }
     }
 
     async loadModuleStructure() {
+        console.log('📋 Starting loadModuleStructure...');
         this.setLoading(true);
+
         try {
-            console.log('🗺️ Loading module structure...');
-            // In a real-world scenario, a Node.js script would generate this `structure.json` before deployment.
-            // We will create a mock structure for now, and you can replace it with a generated file later.
-            this.allModules = await this.discoverStructureDynamically('./assets/pages');
+            console.log('� Starting discoverPagesStructure...');
+            const structure = await this.discoverPagesStructure();
+            
+            this.allModules = structure;
+            console.log('📋 Module structure loaded:', this.allModules);
+            
+            this.renderNavigation();
             await this.buildSearchIndex();
+            
+            console.log('✅ Module structure loaded successfully');
         } catch (error) {
             console.error('❌ Error loading module structure:', error);
-            this.showError('Could not load the documentation structure.');
+            this.showError('Failed to load documentation structure');
         } finally {
             this.setLoading(false);
         }
     }
 
-    async discoverStructureDynamically(basePath) {
-        console.log("🚀 Starting dynamic discovery...");
+    async discoverPagesStructure() {
+        console.log('🔍 Starting discoverPagesStructure...');
         const structure = {};
 
-        // Define categories and their icons
-        const categories = [
-            { name: "Community Bridge", icon: "🌉" },
-            { name: "Examples", icon: "💡" },
-            { name: "Getting Started", icon: "🚀" }
-        ];
+        try {
+            // Try to discover Community Bridge
+            console.log('🔍 Discovering Community Bridge folders...');
+            const communityBridgeFolders = await this.discoverCommunityBridgeFolders();
+            
+            if (communityBridgeFolders.length > 0) {
+                structure['Community Bridge'] = {
+                    icon: '🌉',
+                    items: {},
+                    type: 'section'
+                };
 
-        // Helper function to check if a file exists
-        const fileExists = async (path) => {
+                for (const folder of communityBridgeFolders) {
+                    await this.discoverFolderContentDirectly(structure, folder.folderName, folder.folderIcon);
+                }
+            }
+
+            // Try to discover Examples
+            const examplesTocPath = './assets/pages/Examples/toc.json';
             try {
-                const response = await fetch(path, { method: 'HEAD' });
-                return response.ok;
-            } catch (e) {
-                return false;
-            }
-        };
-
-        // Helper function to discover content in a folder
-        const discoverFolder = async (folderPath, knownItems) => {
-            const items = {};
-            for (const item of knownItems) {
-                const mdPath = `${folderPath}/${item}/${item}.md`;
-                const overviewPath = `${folderPath}/${item}/overview.md`;
-                const indexPath = `${folderPath}/${item}/index.md`;
-
-                if (await fileExists(mdPath)) {
-                    items[item] = { path: mdPath, type: 'markdown', name: item };
-                } else if (await fileExists(overviewPath)) {
-                    items[item] = { path: overviewPath, type: 'markdown', name: item };
-                } else if (await fileExists(indexPath)) {
-                    items[item] = { path: indexPath, type: 'markdown', name: item };
-                }
-            }
-            return items;
-        };
-
-        for (const category of categories) {
-            const categoryPath = `${basePath}/${category.name}`;
-            const categoryItems = {};
-
-            // Discover top-level markdown files
-            const topLevelFiles = ["overview", "getting-started", "index", "basic-usage", "advanced"];
-            for (const file of topLevelFiles) {
-                const filePath = `${categoryPath}/${file}.md`;
-                if (await fileExists(filePath)) {
-                    categoryItems[file] = { path: filePath, type: 'markdown', name: file };
-                }
-            }
-
-            // Discover subfolders like "Libraries" and "Modules"
-            const subFolders = {
-                "Libraries": { icon: "📚", items: [ "Anim", "Batch", "Cache", "Callback", "Cutscenes", "DUI", "Entities", "Generators", "Ids", "Logs", "Markers", "Math", "Particles", "Placers", "Point", "Points", "Raycast", "Scaleform", "Shells", "SQL", "StateBags", "Table", "Utility" ] },
-                "Modules": { icon: "📦", items: [ "Banking", "Clothing", "Dialogue", "Dispatch", "Doorlock", "Framework", "Fuel", "HelpText", "Housing", "Input", "Inventory", "Locales", "Managment", "Math", "Menu", "Notify", "Phone", "ProgressBar", "Shops", "Skills", "Target", "VehicleKey", "Version", "Weather" ] }
-            };
-
-            for (const folderName in subFolders) {
-                const folderConfig = subFolders[folderName];
-                const discoveredItems = await discoverFolder(`${categoryPath}/${folderName}`, folderConfig.items);
-                if (Object.keys(discoveredItems).length > 0) {
-                    categoryItems[folderName] = {
-                        path: `${categoryPath}/${folderName}`,
-                        type: 'folder',
-                        icon: folderConfig.icon,
-                        items: discoveredItems,
-                        name: folderName
+                const examplesResponse = await fetch(examplesTocPath);
+                if (examplesResponse.ok) {
+                    const examplesToc = await examplesResponse.json();
+                    structure['Examples'] = {
+                        icon: '💡',
+                        items: examplesToc.items || {},
+                        type: 'section'
                     };
                 }
+            } catch (e) {
+                console.log('📝 Examples not found, creating basic structure');
+                structure['Examples'] = {
+                    icon: '💡',
+                    items: {
+                        'basic-usage': {
+                            path: 'Examples/basic-usage',
+                            type: 'markdown',
+                            name: 'Basic Usage'
+                        }
+                    },
+                    type: 'section'
+                };
             }
 
-            structure[category.name] = {
-                path: categoryPath,
-                type: 'category',
-                icon: category.icon,
-                items: categoryItems,
-                name: category.name
+            // Try to discover Getting Started
+            const gettingStartedTocPath = './assets/pages/Getting Started/toc.json';
+            try {
+                const gettingStartedResponse = await fetch(gettingStartedTocPath);
+                if (gettingStartedResponse.ok) {
+                    const gettingStartedToc = await gettingStartedResponse.json();
+                    structure['Getting Started'] = {
+                        icon: '🚀',
+                        items: gettingStartedToc.items || {},
+                        type: 'section'
+                    };
+                }
+            } catch (e) {
+                console.log('📝 Getting Started not found, creating basic structure');
+                structure['Getting Started'] = {
+                    icon: '🚀',
+                    items: {
+                        'index': {
+                            path: 'Getting Started/index',
+                            type: 'markdown',
+                            name: 'Getting Started'
+                        }
+                    },
+                    type: 'section'
+                };
+            }
+
+        } catch (error) {
+            console.error('❌ Error in discoverPagesStructure:', error);
+            // Return minimal fallback structure
+            structure['Community Bridge'] = {
+                icon: '🌉',
+                items: {
+                    'overview': {
+                        path: 'Community Bridge/overview',
+                        type: 'markdown',
+                        name: 'Overview'
+                    }
+                },
+                type: 'section'
             };
         }
-        console.log("✅ Dynamic discovery complete!", structure);
+
         return structure;
     }
 
-    renderNavigation() {
-        const navMenu = document.getElementById('nav-menu');
-        if (!navMenu) return;
-        navMenu.innerHTML = this.buildNavHtml(this.allModules);
-        this.setupNavEventListeners();
+    // NEW: Discover all folders under Community Bridge
+    async discoverCommunityBridgeFolders() {
+        console.log('� Discovering Community Bridge folders...');
+
+        // Known folders with their icons (you can extend this list)
+        const knownFolders = [
+            { folderName: 'Modules', folderIcon: '📦' },
+            { folderName: 'Libraries', folderIcon: '📚' },
+            { folderName: 'Examples', folderIcon: '💡' },
+            { folderName: 'Getting Started', folderIcon: '🚀' },
+            { folderName: 'Instructions', folderIcon: '📋' },
+            { folderName: 'Tutorials', folderIcon: '🎓' },
+            { folderName: 'API Reference', folderIcon: '📖' },
+            { folderName: 'Configuration', folderIcon: '⚙️' },
+            { folderName: 'Troubleshooting', folderIcon: '🔧' }
+        ];
+
+        const discoveredFolders = [];
+
+        // Try to discover folders by attempting to fetch their toc.json or checking for common files
+        for (const { folderName, folderIcon } of knownFolders) {
+            try {
+                const tocPath = `./assets/pages/Community Bridge/${folderName}/toc.json`;
+                const response = await fetch(tocPath);
+                if (response.ok) {
+                    discoveredFolders.push({ folderName, folderIcon });
+                    console.log(`✅ Found folder: ${folderName}`);
+                }
+            } catch (e) {
+                // Try checking for common markdown files
+                try {
+                    const indexPath = `./assets/pages/Community Bridge/${folderName}/index.md`;
+                    const indexResponse = await fetch(indexPath);
+                    if (indexResponse.ok) {
+                        discoveredFolders.push({ folderName, folderIcon });
+                        console.log(`✅ Found folder: ${folderName} (via index.md)`);
+                    }
+                } catch (e2) {
+                    console.log(`⚠️ Folder not found: ${folderName}`);
+                }
+            }
+        }
+
+        // Fallback: If no dynamic discovery is possible, return known existing folders
+        if (discoveredFolders.length === 0) {
+            console.log('🔄 Using fallback folder list');
+            return [
+                { folderName: 'Libraries', folderIcon: '📚' },
+                { folderName: 'Modules', folderIcon: '📦' }
+            ];
+        }
+
+        return discoveredFolders;
     }
 
-    buildNavHtml(items, pathPrefix = '') {
-        let html = '';
-        for (const key in items) {
-            const item = items[key];
-            const currentPath = pathPrefix ? `${pathPrefix}/${key}` : key;
-            const safeId = currentPath.replace(/[^a-zA-Z0-9]/g, '-');
+    // NEW: Discover folder content directly when no toc.json exists
+    async discoverFolderContentDirectly(structure, folderName, folderIcon) {
+        console.log(`🔍 Discovering ${folderName} content directly...`);
 
-            if (item.type === 'category' || item.type === 'folder') {
+        const folderItems = {};
+
+        // Try common file patterns
+        const commonFiles = ['index.md', 'overview.md', 'readme.md', 'getting-started.md'];
+
+        for (const fileName of commonFiles) {
+            try {
+                const filePath = `./assets/pages/Community Bridge/${folderName}/${fileName}`;
+                const response = await fetch(filePath);
+                if (response.ok) {
+                    const fileKey = fileName.replace('.md', '');
+                    folderItems[fileKey] = {
+                        path: `Community Bridge/${folderName}/${fileKey}`,
+                        type: 'markdown',
+                        name: this.formatTitle(fileKey)
+                    };
+                    console.log(`✅ Found file: ${fileName}`);
+                }
+            } catch (e) {
+                // File doesn't exist, continue
+            }
+        }
+
+        if (Object.keys(folderItems).length > 0) {
+            structure['Community Bridge'].items[folderName] = {
+                icon: folderIcon,
+                items: folderItems,
+                type: 'subsection',
+                name: folderName
+            };
+        }
+    }
+
+    renderNavigation() {
+        const sidebar = document.querySelector('.sidebar');
+        if (!sidebar) return;
+
+        let html = '';
+
+        for (const [categoryName, categoryData] of Object.entries(this.allModules)) {
+            html += `
+                <div class="nav-section" data-category="${categoryName}">
+                    <div class="nav-section-header" data-category="${categoryName}">
+                        <span class="nav-icon">${categoryData.icon || '📁'}</span>
+                        <span class="nav-title">${categoryName}</span>
+                        <span class="nav-arrow">▼</span>
+                    </div>
+                    <div class="nav-section-content">
+                        ${this.renderNavItems(categoryData.items || {})}
+                    </div>
+                </div>
+            `;
+        }
+
+        sidebar.innerHTML = html;
+
+        // Initialize collapsed states
+        const sections = sidebar.querySelectorAll('.nav-section');
+        sections.forEach((section, index) => {
+            // First section expanded by default
+            if (index === 0) {
+                section.classList.add('expanded');
+            } else {
+                section.classList.add('collapsed');
+            }
+        });
+
+        const subsections = sidebar.querySelectorAll('.nav-subsection');
+        subsections.forEach(subsection => {
+            subsection.classList.add('collapsed');
+        });
+
+        // IMPORTANT: Set up navigation events AFTER rendering
+        this.setupNavigationEvents();
+
+        console.log('🎨 Navigation rendered successfully');
+    }
+
+    renderNavItems(items) {
+        let html = '';
+
+        for (const [itemName, itemData] of Object.entries(items)) {
+            if (itemData.type === 'subsection' && itemData.items) {
                 html += `
-                    <div class="nav-group" data-path="${currentPath}">
-                        <div class="nav-group-header" data-path="${currentPath}">
+                    <div class="nav-subsection" data-subsection="${itemName}">
+                        <div class="nav-subsection-header" data-subsection="${itemName}">
+                            <span class="nav-icon">${itemData.icon || '📁'}</span>
+                            <span class="nav-title">${itemName}</span>
                             <span class="nav-arrow">▶</span>
-                            <span class="nav-icon">${item.icon || '📁'}</span>
-                            <span class="nav-title">${this.formatTitle(item.name || key)}</span>
                         </div>
-                        <div class="nav-group-content" id="nav-content-${safeId}">
-                            ${this.buildNavHtml(item.items, currentPath)}
+                        <div class="nav-subsection-content">
+                            ${this.renderNavItems(itemData.items)}
                         </div>
                     </div>
                 `;
-            } else if (item.type === 'markdown') {
+            } else if (itemData.type === 'markdown') {
                 html += `
-                    <a class="nav-item" href="#${item.path.replace('.md', '')}" data-path="${item.path}">
+                    <div class="nav-item" data-path="${itemData.path}" data-type="markdown">
                         <span class="nav-icon">📄</span>
-                        <span class="nav-title">${this.formatTitle(item.name || key)}</span>
-                    </a>
+                        <span class="nav-title">${itemData.name || this.formatTitle(itemName)}</span>
+                    </div>
                 `;
             }
         }
+
         return html;
-    }
-
-    setupNavEventListeners() {
-        document.querySelectorAll('.nav-group-header').forEach(header => {
-            header.addEventListener('click', (e) => {
-                const group = e.currentTarget.parentElement;
-                group.classList.toggle('open');
-                const arrow = e.currentTarget.querySelector('.nav-arrow');
-                arrow.textContent = group.classList.contains('open') ? '▼' : '▶';
-            });
-        });
-    }
-
-    setupRouter() {
+    }    setupRouter() {
         window.addEventListener('hashchange', () => this.handleRouteChange());
     }
 
-    async handleInitialPageLoad() {
-        await this.handleRouteChange();
-        const path = window.location.hash.slice(1) || 'Community Bridge/overview';
-        this.expandNavToPath(path + '.md');
+    handleRouteChange() {
+        const hash = window.location.hash.slice(1);
+        if (hash) {
+            // Check if this is a function anchor
+            if (this.isFunctionAnchor(hash)) {
+                this.handleFunctionAnchor(hash);
+            } else {
+                this.navigateToPath(hash);
+            }
+        }
     }
 
-    async handleRouteChange() {
-        let path = window.location.hash.slice(1);
-        if (!path) {
-            path = 'Community Bridge/overview'; // Default page
-            window.location.hash = path;
-            return;
-        }
-
-        let functionToScrollTo = null;
-        if (path.includes('#')) {
-            [path, functionToScrollTo] = path.split('#');
-        }
-
-        const item = this.findItemByPath(path + '.md');
-        if (!item) {
-            this.showError(`Page not found for path: ${path}`);
-            return;
-        }
-
-        await this.loadContent(path, functionToScrollTo);
+    isFunctionAnchor(path) {
+        // Function anchors follow the pattern: functionname-side-modulename
+        // They contain at least two dashes and are not typical page paths
+        const parts = path.split('-');
+        return parts.length >= 3 && !path.includes('/') && !path.includes(' ');
     }
 
-    async loadContent(path, functionToScrollTo = null) {
+    handleFunctionAnchor(anchorId) {
+        console.log('🎯 Handling function anchor:', anchorId);
+
+        // Check if the target element exists on the current page
+        const targetElement = document.getElementById(anchorId);
+        if (targetElement) {
+            this.scrollToElement(targetElement);
+            this.updateTocActiveState(anchorId);
+        } else {
+            // Navigate to the module that contains this function
+            this.navigateToModuleForFunction(anchorId);
+        }
+    }
+
+    navigateToModuleForFunction(anchorId) {
+        // Extract module name from anchor (last part after final dash)
+        const parts = anchorId.split('-');
+        if (parts.length >= 3) {
+            const moduleName = parts[parts.length - 1];
+            const moduleInfo = this.findModuleByName(moduleName);
+            if (moduleInfo) {
+                console.log(`🔄 Navigating to module ${moduleInfo.path} for function ${anchorId}`);
+                this.navigateToPath(moduleInfo.path.replace('.md', ''));
+                // Set a timeout to scroll to the function after the page loads
+                setTimeout(() => {
+                    const element = document.getElementById(anchorId);
+                    if (element) {
+                        this.scrollToElement(element);
+                        this.updateTocActiveState(anchorId);
+                    }
+                }, 500);
+            }
+        }
+    }
+
+    findModuleByName(moduleName) {
+        const searchItems = (items) => {
+            for (const [key, item] of Object.entries(items)) {
+                if (item.type === 'markdown') {
+                    const itemModuleName = item.path.split('/').pop().replace('.md', '');
+                    if (itemModuleName.toLowerCase() === moduleName.toLowerCase()) {
+                        return item;
+                    }
+                } else if (item.items) {
+                    const found = searchItems(item.items);
+                    if (found) return found;
+                }
+            }
+            return null;
+        };
+
+        for (const [category, categoryData] of Object.entries(this.allModules)) {
+            const found = searchItems(categoryData.items || {});
+            if (found) return found;
+        }
+        return null;
+    }
+
+    scrollToElement(element) {
+        // Calculate offset to account for fixed header
+        const header = document.querySelector('.header');
+        const headerHeight = header ? header.offsetHeight : 60;
+        const additionalOffset = 20;
+        const totalOffset = headerHeight + additionalOffset;
+
+        // Get target position and subtract offset
+        const targetPosition = element.getBoundingClientRect().top + window.pageYOffset - totalOffset;
+
+        // Smooth scroll to adjusted position
+        window.scrollTo({
+            top: targetPosition,
+            behavior: 'smooth'
+        });
+
+        console.log(`📍 Scrolled to element with ${totalOffset}px offset`);
+    }
+
+    updateTocActiveState(anchorId) {
+        // Remove active class from all TOC links
+        document.querySelectorAll('.toc-link').forEach(link => {
+            link.classList.remove('active');
+        });
+
+        // Add active class to the TOC link that corresponds to this anchor
+        const tocLink = document.querySelector(`.toc-link[href="#${anchorId}"]`);
+        if (tocLink) {
+            tocLink.classList.add('active');
+        }
+    }
+
+    async navigateToPath(path) {
+        console.log('🎯 Navigating to:', path);
+        const item = this.findNavigationItem(path);
+        if (item) {
+            await this.loadContent(path, item.type, item);
+        } else {
+            console.warn('⚠️ Could not find navigation item for path:', path);
+            this.showError(`Page not found: ${path}`);
+        }
+    }
+
+    findNavigationItem(targetPath) {
+        const searchItems = (items) => {
+            for (const [key, item] of Object.entries(items)) {
+                const itemPath = item.path ? item.path.replace('.md', '') : '';
+                if (itemPath === targetPath) {
+                    return item;
+                } else if (item.items) {
+                    const found = searchItems(item.items);
+                    if (found) return found;
+                }
+            }
+            return null;
+        };
+
+        for (const [category, categoryData] of Object.entries(this.allModules)) {
+            const found = searchItems(categoryData.items || {});
+            if (found) return found;
+        }
+        return null;
+    }
+
+    async loadContent(path, type, item) {
         this.setLoading(true);
-        this.hideSearchResults();
-        document.getElementById('toc-container').style.display = 'none';
 
         try {
-            const response = await fetch(`./assets/pages/${path}.md`);
-            if (!response.ok) throw new Error(`File not found: ${path}.md`);
-            const markdown = await response.text();
-
-            this.currentModule = this.findItemByPath(path + '.md');
+            console.log(`📄 Loading content for: ${path}`);
+            
+            // Try to load markdown content
+            const markdownContent = await this.loadMarkdownContent(path);
+            
+            // Set current module info
+            this.currentModule = item;
             this.currentModuleName = path.split('/').pop();
-
-            this.renderPage(markdown);
-
-            if (functionToScrollTo) {
-                setTimeout(() => this.scrollToElement(functionToScrollTo), 100);
-            } else {
-                document.querySelector('.main-content').scrollTop = 0;
-            }
-
-            this.updateActiveNav(path + '.md');
-
+            
+            // Render the content
+            this.renderMarkdownContent(markdownContent, path);
+            
+            console.log(`✅ Content loaded successfully for: ${path}`);
         } catch (error) {
             console.error(`❌ Error loading content for ${path}:`, error);
-            this.showError(`Failed to load content for "${path}".`);
+            this.showError(`Failed to load content for: ${path}`);
         } finally {
             this.setLoading(false);
         }
+    }
+
+    async loadMarkdownContent(path) {
+        try {
+            console.log(`📄 Loading markdown content: ${path}`);
+            const response = await fetch(`./assets/pages/${path}.md`);
+
+            if (!response.ok) {
+                throw new Error(`Failed to load ${path}: ${response.status}`);
+            }
+
+            const content = await response.text();
+            
+            return {
+                content: content,
+                meta: this.parseMarkdownMeta(content)
+            };
+        } catch (error) {
+            console.error(`❌ Error loading markdown content for ${path}:`, error);
+            throw error;
+        }
+    }
+
+    parseMarkdownMeta(content) {
+        const meta = {};
+
+        // Look for META comment block
+        const metaMatch = content.match(/<!--META\s*([\s\S]*?)\s*-->/);
+        if (metaMatch) {
+            const metaContent = metaMatch[1];
+            const lines = metaContent.split('\n');
+
+            for (const line of lines) {
+                const trimmed = line.trim();
+                if (trimmed.includes(':')) {
+                    const [key, ...valueParts] = trimmed.split(':');
+                    const value = valueParts.join(':').trim();
+
+                    if (value === 'true' || value === 'false') {
+                        meta[key.trim()] = value === 'true';
+                    } else {
+                        meta[key.trim()] = value;
+                    }
+                }
+            }
+        }
+
+        // Extract TOC items
+        const tocItems = [];
+        const tocMatches = content.matchAll(/<!--TOC:\s*([^-]+?)-->/g);
+        for (const match of tocMatches) {
+            const title = match[1].trim();
+            const anchor = '#' + title.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+            tocItems.push({ title, anchor });
+        }
+
+        if (tocItems.length > 0) {
+            meta.tocItems = tocItems;
+        }
+
+        return meta;
+    }
+
+    renderMarkdownContent(markdownData, modulePath) {
+        const contentArea = document.getElementById('content-area');
+        if (!contentArea) return;
+
+        // Parse functions from markdown
+        const functions = this.parseFunctionsFromMarkdown(markdownData.content);
+        
+        // Convert markdown to HTML (basic conversion)
+        let html = this.convertMarkdownToHTML(markdownData.content);
+        
+        // Add functions section if functions exist
+        if (functions.length > 0) {
+            html += '<h2 id="functions-section">Functions</h2>';
+            html += functions.map(func => this.renderFunction(func, func.side, this.currentModuleName)).join('');
+        }
+
+        // Set content
+        contentArea.innerHTML = html;
+
+        // Update current module info
+        this.currentModule = markdownData;
+        this.currentModuleName = modulePath.split('/').pop();
+
+        // Generate and render TOC if needed
+        this.updateTableOfContents(functions);
+
+        // Setup syntax highlighting
+        this.applySyntaxHighlighting();
+
+        // Setup copy buttons
+        this.setupCopyLinkButtons();
     }
 
     renderPage(markdown) {
@@ -299,7 +703,6 @@ class CommunityBridgeDocumentation {
         let match;
         while ((match = regex.exec(markdown)) !== null) {
             try {
-                // This is a simple parser. A more robust solution would use a proper library.
                 const funcData = JSON.parse(match[1]);
                 functions.push(funcData);
             } catch (e) {
@@ -309,29 +712,59 @@ class CommunityBridgeDocumentation {
         return functions;
     }
 
-    renderMarkdown(markdown) {
+    convertMarkdownToHTML(markdown) {
+        // Remove function blocks before rendering markdown
         const cleanMarkdown = markdown.replace(/<--FNC\s*[\s\S]*?\s*FNC-->/g, '');
-        // Basic markdown conversion
-        let html = cleanMarkdown
-            .replace(/^# (.*$)/gim, '<h1>$1</h1>')
-            .replace(/^## (.*$)/gim, '<h2>$1</h2>')
-            .replace(/^### (.*$)/gim, '<h3>$1</h3>')
-            .replace(/\*\*([\s\S]+?)\*\*/g, '<strong>$1</strong>')
-            .replace(/\*([\s\S]+?)\*/g, '<em>$1</em>')
-            .replace(/`([^`]+)`/g, '<code>$1</code>')
-            .replace(/```lua\n([\s\S]*?)```/g, '<div class="code-block-container"><button class="copy-code-btn">Copy</button><pre><code class="language-lua">$1</code></pre></div>')
-            .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank">$1</a>')
-            .split('\n').map(p => p.trim() ? `<p>${p}</p>` : '').join('');
+        
+        // Remove META comments
+        let html = cleanMarkdown.replace(/<!--META[\s\S]*?-->/g, '');
+        
+        // Remove TOC comments
+        html = html.replace(/<!--TOC:[\s\S]*?-->/g, '');
+
+        // Convert headers
+        html = html.replace(/^### (.*$)/gim, '<h3>$1</h3>');
+        html = html.replace(/^## (.*$)/gim, '<h2>$1</h2>');
+        html = html.replace(/^# (.*$)/gim, '<h1>$1</h1>');
+
+        // Convert code blocks
+        html = html.replace(/```lua\n([\s\S]*?)\n```/g, '<div class="code-block-container"><button class="copy-code-btn">Copy</button><pre><code class="language-lua">$1</code></pre></div>');
+        html = html.replace(/```(\w+)?\n([\s\S]*?)\n```/g, '<div class="code-block-container"><button class="copy-code-btn">Copy</button><pre><code class="language-$1">$2</code></pre></div>');
+
+        // Convert inline code
+        html = html.replace(/`([^`]+)`/g, '<code>$1</code>');
+
+        // Convert bold
+        html = html.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+
+        // Convert italic
+        html = html.replace(/\*(.*?)\*/g, '<em>$1</em>');
+
+        // Convert links
+        html = html.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank">$1</a>');
+
+        // Convert lists
+        html = html.replace(/^- (.*)$/gm, '<li>$1</li>');
+        html = html.replace(/(<li>.*<\/li>)/s, '<ul>$1</ul>');
+
+        // Convert paragraphs
+        html = html.split('\n\n').map(p => p.trim() ? `<p>${p}</p>` : '').join('');
+
+        // Clean up
+        html = html.replace(/<p><\/p>/g, '');
+        html = html.replace(/<p>\s*<h/g, '<h');
+        html = html.replace(/<\/h([1-6])>\s*<\/p>/g, '</h$1>');
+        html = html.replace(/<p>\s*<div/g, '<div');
+        html = html.replace(/<\/div>\s*<\/p>/g, '</div>');
+        html = html.replace(/<p>\s*<ul>/g, '<ul>');
+        html = html.replace(/<\/ul>\s*<\/p>/g, '</ul>');
+
         return html;
     }
 
-    renderFunctions(functions) {
-        if (functions.length === 0) return '';
-        return '<h2 id="functions-header">Functions</h2>' + functions.map(func => this.renderFunction(func)).join('');
-    }
-
-    renderFunction(func) {
-        const anchor = this.generateAnchor(func.name, func.side, this.currentModuleName);
+    renderFunction(func, side, moduleName = 'unknown') {
+        const anchor = this.generateAnchor(func.name, side, moduleName);
+        
         const parameters = func.parameters?.map(p => `
             <li>
                 <code>${p.name}</code>
@@ -346,19 +779,23 @@ class CommunityBridgeDocumentation {
                 - <span class="param-desc">${r.description}</span>
             </li>`).join('') || '<li>None</li>';
 
-        const example = func.example ? `<div class="code-block-container"><button class="copy-code-btn">Copy</button><pre><code class="language-lua">${func.example.join('\n')}</code></pre></div>` : '<p>No example provided.</p>';
+        const example = func.example ? 
+            `<div class="code-block-container">
+                <button class="copy-code-btn">Copy</button>
+                <pre><code class="language-lua">${Array.isArray(func.example) ? func.example.join('\n') : func.example}</code></pre>
+            </div>` : '<p>No example provided.</p>';
 
         return `
             <div class="function-card" id="${anchor}">
                 <div class="function-header">
                     <span class="function-name">${func.name}</span>
                     <div class="function-meta">
-                        <span class="function-side ${func.side}">${func.side}</span>
+                        <span class="function-side ${side}">${side}</span>
                         <button class="copy-link-btn" title="Copy Link" data-anchor="${anchor}">🔗</button>
                     </div>
                 </div>
                 <div class="function-body">
-                    <p class="function-description">${func.description}</p>
+                    <p class="function-description">${func.description || 'No description provided.'}</p>
                     <h4>Parameters</h4>
                     <ul class="param-list">${parameters}</ul>
                     <h4>Returns</h4>
@@ -370,94 +807,122 @@ class CommunityBridgeDocumentation {
         `;
     }
 
-    updateTableOfContents(functions) {
+    generateAnchor(name, side, module) {
+        return `${name}-${side}-${module}`.toLowerCase().replace(/[^a-z0-9-]/g, '');
+    }
+
+    updateTableOfContents(functions = []) {
         const tocContainer = document.getElementById('toc-container');
         const tocContent = document.getElementById('toc-content');
-        if (!tocContent || functions.length === 0) {
+        
+        if (!tocContainer || !tocContent) return;
+
+        if (functions.length === 0) {
             tocContainer.style.display = 'none';
             return;
         }
 
-        tocContent.innerHTML = '<ul>' + functions.map(func => {
+        // Generate TOC from functions
+        const tocHtml = functions.map(func => {
             const anchor = this.generateAnchor(func.name, func.side, this.currentModuleName);
-            return `<li><a href="#${window.location.hash.split('#')[0]}#${anchor}" class="toc-link">${func.name}</a></li>`;
-        }).join('') + '</ul>';
+            return `<li><a href="#${anchor}" class="toc-link">${func.name}</a></li>`;
+        }).join('');
 
+        tocContent.innerHTML = `<ul class="toc-list">${tocHtml}</ul>`;
         tocContainer.style.display = 'block';
-        this.addTocClickHandlers(tocContent);
+
+        // Add click handlers
+        this.addTocClickHandlers(tocContainer);
     }
 
-    addTocClickHandlers(container) {
-        container.querySelectorAll('a.toc-link').forEach(link => {
+    addTocClickHandlers(tocContainer) {
+        tocContainer.querySelectorAll('.toc-link').forEach(link => {
             link.addEventListener('click', (e) => {
                 e.preventDefault();
-                const anchorId = e.currentTarget.getAttribute('href').split('#')[2];
-                this.scrollToElement(anchorId);
+                const anchorId = link.getAttribute('href').substring(1);
+                const element = document.getElementById(anchorId);
+                if (element) {
+                    this.scrollToElement(element);
+                    this.updateTocActiveState(anchorId);
+                }
             });
         });
     }
 
     async buildSearchIndex() {
         this.searchIndex = [];
-        const paths = this.getAllMarkdownPaths(this.allModules);
-
-        for (const path of paths) {
-            try {
-                const response = await fetch(`./assets/pages/${path}`);
-                if (!response.ok) continue;
-                const markdown = await response.text();
-                const functions = this.parseFunctionsFromMarkdown(markdown);
-                const moduleName = path.split('/').pop().replace('.md', '');
-                const item = this.findItemByPath(path);
-
+        
+        const addToIndex = (item, path, category) => {
+            if (item.type === 'markdown') {
                 this.searchIndex.push({
-                    type: 'Module',
-                    name: this.formatTitle(item.name || moduleName),
-                    path: path.replace('.md', ''),
-                    text: `module documentation page`
+                    name: item.name || path.split('/').pop(),
+                    path: path,
+                    category: category,
+                    type: 'module',
+                    description: item.meta?.description || ''
                 });
-
-                functions.forEach(func => {
-                    this.searchIndex.push({
-                        type: 'Function',
-                        name: func.name,
-                        path: path.replace('.md', ''),
-                        anchor: this.generateAnchor(func.name, func.side, moduleName),
-                        text: `${func.side} side. ${func.description}`
-                    });
+            } else if (item.type === 'subsection' && item.items) {
+                Object.keys(item.items).forEach(key => {
+                    addToIndex(item.items[key], `${path}/${key}`, category);
                 });
-            } catch (e) {
-                console.warn(`Could not build search index for ${path}:`, e);
             }
-        }
-        console.log(`📚 Search index built with ${this.searchIndex.length} items.`);
+        };
+
+        Object.keys(this.allModules).forEach(category => {
+            const categoryData = this.allModules[category];
+            if (categoryData.items) {
+                Object.keys(categoryData.items).forEach(key => {
+                    addToIndex(categoryData.items[key], `${category}/${key}`, category);
+                });
+            }
+        });
+
+        console.log('🔍 Search index built:', this.searchIndex.length, 'items');
     }
 
     handleSearch(query) {
-        const searchResults = document.querySelector('.search-results');
-        if (!query || query.trim().length < 2) {
-            searchResults.style.display = 'none';
+        if (!query.trim()) {
+            this.hideSearchResults();
             return;
         }
 
-        const results = this.searchIndex.filter(item =>
-            item.name.toLowerCase().includes(query.toLowerCase()) ||
-            item.text.toLowerCase().includes(query.toLowerCase())
-        );
+        const results = this.searchIndex.filter(item => {
+            const searchText = `${item.name} ${item.description}`.toLowerCase();
+            return searchText.includes(query.toLowerCase());
+        });
 
-        if (results.length > 0) {
-            searchResults.innerHTML = results.map(r => `
-                <a href="#${r.path}${r.anchor ? '#' + r.anchor : ''}" class="search-result-item">
-                    <div class="result-type">${r.type}</div>
-                    <div class="result-name">${r.name}</div>
-                    <div class="result-text">${r.text}</div>
-                </a>
-            `).join('');
-            searchResults.style.display = 'block';
+        this.showSearchResults(results, query);
+    }
+
+    showSearchResults(results, searchTerm) {
+        const searchResults = document.querySelector('.search-results');
+        if (!searchResults) return;
+
+        if (results.length === 0) {
+            searchResults.innerHTML = `
+                <div class="search-results-container">
+                    <h3>No results found for "${searchTerm}"</h3>
+                    <p>Try a different search term or browse the navigation.</p>
+                </div>
+            `;
         } else {
-            searchResults.innerHTML = '<div class="search-no-results">No results found</div>';
-            searchResults.style.display = 'block';
+            const resultsHtml = results.map(result => `
+                <div class="search-result-item" onclick="window.app.navigateToPath('${result.path}')">
+                    <h4>${result.name}</h4>
+                    <p class="result-path">${result.category} → ${result.path}</p>
+                    <p class="result-description">${result.description}</p>
+                </div>
+            `).join('');
+
+            searchResults.innerHTML = `
+                <div class="search-results-container">
+                    <h3>Search Results for "${searchTerm}" (${results.length})</h3>
+                    ${resultsHtml}
+                </div>
+            `;
         }
+
+        searchResults.style.display = 'block';
     }
 
     hideSearchResults() {
@@ -467,123 +932,93 @@ class CommunityBridgeDocumentation {
         }
     }
 
-    setLoading(isLoading) {
-        this.isLoading = isLoading;
-        const loadingElement = document.getElementById('loading');
-        if (loadingElement) {
-            loadingElement.style.display = isLoading ? 'flex' : 'none';
-        }
+    applySyntaxHighlighting() {
+        // Apply syntax highlighting to all code blocks after content is loaded
+        document.querySelectorAll('code.language-lua').forEach(codeElement => {
+            this.applyLuaSyntaxHighlighting(codeElement);
+        });
     }
 
-    showError(message) {
-        const contentArea = document.getElementById('content-area');
-        contentArea.innerHTML = `<div class="error-message"><h2>❌ Error</h2><p>${message}</p></div>`;
+    applyLuaSyntaxHighlighting(codeElement) {
+        let content = codeElement.textContent;
+
+        // Highlight Lua keywords
+        const keywords = ['local', 'function', 'end', 'if', 'then', 'else', 'elseif', 'for', 'while', 'do', 'repeat', 'until', 'return', 'break', 'true', 'false', 'nil'];
+        keywords.forEach(keyword => {
+            const regex = new RegExp(`\\b(${keyword})\\b`, 'g');
+            content = content.replace(regex, `<span class="keyword">$1</span>`);
+        });
+
+        // Highlight strings
+        content = content.replace(/"([^"]*?)"/g, '<span class="string">"$1"</span>');
+        content = content.replace(/'([^']*?)'/g, '<span class="string">\'$1\'</span>');
+
+        // Highlight comments
+        content = content.replace(/--.*$/gm, '<span class="comment">$&</span>');
+
+        // Highlight numbers
+        content = content.replace(/\b\d+\.?\d*\b/g, '<span class="number">$&</span>');
+
+        codeElement.innerHTML = content;
+    }
+
+    setupCopyLinkButtons() {
+        document.querySelectorAll('.copy-link-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const anchor = e.currentTarget.getAttribute('data-anchor');
+                const url = `${window.location.origin}${window.location.pathname}#${anchor}`;
+                
+                if (navigator.clipboard) {
+                    navigator.clipboard.writeText(url).then(() => {
+                        e.currentTarget.textContent = '✅';
+                        setTimeout(() => e.currentTarget.textContent = '🔗', 2000);
+                    });
+                }
+            });
+        });
+
+        document.querySelectorAll('.copy-code-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const codeElement = e.currentTarget.nextElementSibling.querySelector('code');
+                const code = codeElement.textContent;
+                
+                if (navigator.clipboard) {
+                    navigator.clipboard.writeText(code).then(() => {
+                        e.currentTarget.textContent = 'Copied!';
+                        setTimeout(() => e.currentTarget.textContent = 'Copy', 2000);
+                    });
+                }
+            });
+        });
+    }
+
+    loadInitialContent() {
+        // Load default content
+        const defaultPath = 'Community Bridge/overview';
+        this.navigateToPath(defaultPath);
     }
 
     formatTitle(title) {
         return title.replace(/[-_]/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
     }
 
-    generateAnchor(name, side, module) {
-        return `${name}-${side}-${module}`.toLowerCase();
-    }
-
-    scrollToElement(id) {
-        const element = document.getElementById(id);
-        if (element) {
-            const headerOffset = 80;
-            const elementPosition = element.getBoundingClientRect().top;
-            const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-
-            window.scrollTo({
-                top: offsetPosition,
-                behavior: "smooth"
-            });
-            element.classList.add('highlight');
-            setTimeout(() => element.classList.remove('highlight'), 2000);
+    setLoading(loading) {
+        this.isLoading = loading;
+        const loadingElement = document.getElementById('loading');
+        if (loadingElement) {
+            loadingElement.style.display = loading ? 'block' : 'none';
         }
     }
 
-    setupCopyButtons() {
-        document.querySelectorAll('.copy-link-btn').forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                const pagePath = window.location.hash.split('#')[1];
-                const anchor = e.currentTarget.dataset.anchor;
-                const url = `${window.location.origin}${window.location.pathname}#${pagePath}#${anchor}`;
-                navigator.clipboard.writeText(url).then(() => {
-                    e.currentTarget.textContent = '✅';
-                    setTimeout(() => e.currentTarget.textContent = '🔗', 2000);
-                });
-            });
-        });
-        document.querySelectorAll('.copy-code-btn').forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                const code = e.currentTarget.nextElementSibling.textContent;
-                navigator.clipboard.writeText(code).then(() => {
-                    e.currentTarget.textContent = 'Copied!';
-                    setTimeout(() => e.currentTarget.textContent = 'Copy', 2000);
-                });
-            });
-        });
-    }
-
-    applySyntaxHighlighting() {
-        // This is a placeholder. For real highlighting, integrate a library like Prism.js or highlight.js
-        document.querySelectorAll('code.language-lua').forEach(block => {
-            const keywords = ['local', 'function', 'end', 'if', 'then', 'else', 'for', 'while', 'do', 'return', 'true', 'false', 'nil'];
-            let html = block.innerHTML;
-            keywords.forEach(k => {
-                const regex = new RegExp(`\\b${k}\\b`, 'g');
-                html = html.replace(regex, `<span class="keyword">${k}</span>`);
-            });
-            block.innerHTML = html;
-        });
-    }
-
-    findItemByPath(path, items = this.allModules) {
-        for (const key in items) {
-            const item = items[key];
-            if (item.path === path) return item;
-            if (item.items) {
-                const found = this.findItemByPath(path, item.items);
-                if (found) return found;
-            }
-        }
-        return null;
-    }
-
-    getAllMarkdownPaths(items = this.allModules) {
-        let paths = [];
-        for (const key in items) {
-            const item = items[key];
-            if (item.type === 'markdown') {
-                paths.push(item.path);
-            } else if (item.items) {
-                paths = paths.concat(this.getAllMarkdownPaths(item.items));
-            }
-        }
-        return paths;
-    }
-
-    updateActiveNav(path) {
-        document.querySelectorAll('.nav-item').forEach(item => {
-            item.classList.toggle('active', item.dataset.path === path);
-        });
-    }
-
-    expandNavToPath(path) {
-        const navItem = document.querySelector(`.nav-item[data-path="${path}"]`);
-        if (navItem) {
-            let current = navItem.parentElement;
-            while (current && current.classList.contains('nav-group-content')) {
-                const group = current.parentElement;
-                if (group && group.classList.contains('nav-group')) {
-                    group.classList.add('open');
-                    const arrow = group.querySelector('.nav-arrow');
-                    if(arrow) arrow.textContent = '▼';
-                }
-                current = group.parentElement;
-            }
+    showError(message) {
+        const contentArea = document.getElementById('content-area');
+        if (contentArea) {
+            contentArea.innerHTML = `
+                <div class="error-message">
+                    <h2>❌ Error</h2>
+                    <p>${message}</p>
+                </div>
+            `;
         }
     }
 }
