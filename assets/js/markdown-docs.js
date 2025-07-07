@@ -606,8 +606,17 @@ class CommunityBridgeDocumentation {
         const functions = this.parseFunctionsFromMarkdown(markdownData.content);
         console.log('🔧 Parsed functions:', functions);
 
-        // Convert markdown to HTML (basic conversion)
-        let html = this.convertMarkdownToHTML(markdownData.content);
+        // Create clean markdown content WITHOUT function sections for base HTML
+        let cleanMarkdown = markdownData.content;
+        
+        if (functions.length > 0) {
+            // Remove function sections from markdown to avoid duplication
+            cleanMarkdown = this.removeFunctionSections(markdownData.content);
+            console.log('🧹 Removed function sections, clean markdown length:', cleanMarkdown.length);
+        }
+
+        // Convert clean markdown to HTML (without function sections)
+        let html = this.convertMarkdownToHTML(cleanMarkdown);
         console.log('📄 Base HTML length:', html.length);
 
         // Add functions sections organized like app-fixed.js
@@ -1518,6 +1527,35 @@ class CommunityBridgeDocumentation {
                 </div>
             `;
         }
+    }
+
+    removeFunctionSections(markdown) {
+        // Remove function sections to avoid duplication
+        const lines = markdown.split('\n');
+        let filteredLines = [];
+        let inFunctionSection = false;
+
+        for (let i = 0; i < lines.length; i++) {
+            const line = lines[i];
+
+            // Check if this is a function section header
+            if (line.match(/^## (Client|Server|Shared) Functions\s*$/)) {
+                inFunctionSection = true;
+                continue; // Skip the section header
+            }
+
+            // Check if we hit another ## section (not functions)
+            if (line.startsWith('## ') && !line.includes('Functions')) {
+                inFunctionSection = false;
+            }
+
+            // Only add lines that are not in function sections
+            if (!inFunctionSection) {
+                filteredLines.push(line);
+            }
+        }
+
+        return filteredLines.join('\n');
     }
 }
 
