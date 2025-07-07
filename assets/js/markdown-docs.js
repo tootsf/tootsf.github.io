@@ -679,30 +679,130 @@ class CommunityBridgeDocumentation {
         console.log('📄 First 500 chars of markdown:', markdown.substring(0, 500));
         
         const functions = [];
-        const regex = /<--FNC\s*([\s\S]*?)\s*FNC-->/g;
+        
+        // First try the old <--FNC format for backwards compatibility
+        const oldFormatRegex = /<--FNC\s*([\s\S]*?)\s*FNC-->/g;
         let match;
-        let matchCount = 0;
-        
-        // Test if the regex pattern exists in the content
-        const testMatch = markdown.includes('<--FNC');
-        console.log('🔍 Does markdown contain "<--FNC"?', testMatch);
-        
-        while ((match = regex.exec(markdown)) !== null) {
-            matchCount++;
-            console.log(`🔧 Found function block ${matchCount}:`, match[1].substring(0, 100) + '...');
+        while ((match = oldFormatRegex.exec(markdown)) !== null) {
             try {
                 const funcData = JSON.parse(match[1]);
-                console.log(`✅ Parsed function: ${funcData.name} (${funcData.side})`);
+                console.log(`✅ Parsed old format function: ${funcData.name} (${funcData.side})`);
                 functions.push(funcData);
             } catch (e) {
-                console.error("❌ Failed to parse function JSON:", e, match[1]);
+                console.error("❌ Failed to parse old format function JSON:", e);
             }
         }
         
-        console.log(`🔧 Total function blocks found: ${matchCount}`);
-        console.log(`✅ Successfully parsed functions: ${functions.length}`);
+        // If old format found, return those
+        if (functions.length > 0) {
+            console.log(`🔧 Found ${functions.length} functions in old format`);
+            return functions;
+        }
         
+        // Parse new human-readable format
+        console.log('� Trying human-readable markdown format...');
+        
+        // Find function sections (Client Functions, Server Functions, Shared Functions)
+        const sectionRegex = /^## (Client|Server|Shared) Functions\s*$([\s\S]*?)(?=^## |\n*$)/gm;
+        let sectionMatch;
+        
+        while ((sectionMatch = sectionRegex.exec(markdown)) !== null) {
+            const sectionType = sectionMatch[1].toLowerCase();
+            const sectionContent = sectionMatch[2];
+            
+            console.log(`� Found ${sectionType} functions section`);
+            
+            // Find individual functions within the section
+            const functionRegex = /^### ([^\n]+)\n([\s\S]*?)(?=^### |$)/gm;
+            let functionMatch;
+            
+            while ((functionMatch = functionRegex.exec(sectionContent)) !== null) {
+                const functionName = functionMatch[1].trim();
+                const functionContent = functionMatch[2];
+                
+                try {
+                    const func = this.parseReadableFunction(functionName, functionContent, sectionType);
+                    if (func) {
+                        console.log(`✅ Parsed readable function: ${func.name} (${func.side})`);
+                        functions.push(func);
+                    }
+                } catch (e) {
+                    console.error(`❌ Failed to parse function ${functionName}:`, e);
+                }
+            }
+        }
+        
+        console.log(`🔧 Total functions found: ${functions.length}`);
         return functions;
+    }
+
+    parseReadableFunction(name, content, side) {
+        const func = {
+            name: name,
+            side: side,
+            description: '',
+            syntax: '',
+            parameters: [],
+            returns: [],
+            example: ''
+        };
+        
+        // Extract description
+        const descMatch = content.match(/\*\*Description:\*\*\s*([^\n]+)/);
+        if (descMatch) {
+            func.description = descMatch[1].trim();
+        }
+        
+        // Extract syntax
+        const syntaxMatch = content.match(/\*\*Syntax:\*\*\s*`([^`]+)`/);
+        if (syntaxMatch) {
+            func.syntax = syntaxMatch[1].trim();
+        }
+        
+        // Extract parameters
+        const paramSection = content.match(/\*\*Parameters:\*\*([\s\S]*?)(?=\*\*Returns:\*\*|\*\*Example:\*\*|$)/);
+        if (paramSection) {
+            const paramText = paramSection[1];
+            if (paramText.includes('None')) {
+                func.parameters = [];
+            } else {
+                // Parse parameter lines like "- `amount` (number) - Amount to withdraw"
+                const paramMatches = paramText.matchAll(/- `([^`]+)` \(([^)]+)\) - ([^\n]+)/g);
+                for (const paramMatch of paramMatches) {
+                    func.parameters.push({
+                        name: paramMatch[1],
+                        type: paramMatch[2],
+                        description: paramMatch[3]
+                    });
+                }
+            }
+        }
+        
+        // Extract returns
+        const returnSection = content.match(/\*\*Returns:\*\*([\s\S]*?)(?=\*\*Example:\*\*|$)/);
+        if (returnSection) {
+            const returnText = returnSection[1];
+            if (returnText.includes('None')) {
+                func.returns = [];
+            } else {
+                // Parse return lines like "- `number` - The player's current bank balance"
+                const returnMatches = returnText.matchAll(/- `([^`]+)` - ([^\n]+)/g);
+                for (const returnMatch of returnMatches) {
+                    func.returns.push({
+                        type: returnMatch[1],
+                        description: returnMatch[2]
+                    });
+                }
+            }
+        }
+        
+        // Extract example
+        const exampleMatch = content.match(/\*\*Example:\*\*\s*```(?:lua)?\n([\s\S]*?)```/);
+        if (exampleMatch) {
+            func.example = exampleMatch[1].trim();
+        }
+        
+        return func;
     }
 
     convertMarkdownToHTML(markdown) {
