@@ -683,27 +683,62 @@ class CommunityBridgeDocumentation {
         // Parse human-readable format FIRST
         console.log('🔧 Parsing human-readable markdown format...');
 
-        // Find function sections (Client Functions, Server Functions, Shared Functions)
-        // More robust regex that captures everything until next ## or end of content
-        const sectionRegex = /^## (Client|Server|Shared) Functions\s*$([\s\S]*?)(?=^## |$)/gm;
-        let sectionMatch;
+        // Split markdown into lines for easier processing
+        const lines = markdown.split('\n');
+        let currentSection = null;
+        let currentSectionContent = [];
+        let sectionMap = {};
 
-        while ((sectionMatch = sectionRegex.exec(markdown)) !== null) {
-            const sectionType = sectionMatch[1].toLowerCase();
-            const sectionContent = sectionMatch[2];
+        // First pass: collect all sections
+        for (let i = 0; i < lines.length; i++) {
+            const line = lines[i];
 
-            console.log(`📋 Found ${sectionType} functions section`);
+            // Check if this is a function section header
+            const sectionMatch = line.match(/^## (Client|Server|Shared) Functions\s*$/);
+            if (sectionMatch) {
+                // Save previous section if exists
+                if (currentSection && currentSectionContent.length > 0) {
+                    sectionMap[currentSection] = currentSectionContent.join('\n');
+                }
+
+                // Start new section
+                currentSection = sectionMatch[1].toLowerCase();
+                currentSectionContent = [];
+                console.log(`📋 Found ${currentSection} functions section`);
+            } else if (currentSection) {
+                // Check if we hit another ## section (not functions)
+                if (line.startsWith('## ') && !line.includes('Functions')) {
+                    // End current section
+                    if (currentSectionContent.length > 0) {
+                        sectionMap[currentSection] = currentSectionContent.join('\n');
+                    }
+                    currentSection = null;
+                    currentSectionContent = [];
+                } else {
+                    // Add line to current section
+                    currentSectionContent.push(line);
+                }
+            }
+        }
+
+        // Save final section
+        if (currentSection && currentSectionContent.length > 0) {
+            sectionMap[currentSection] = currentSectionContent.join('\n');
+        }
+
+        // Second pass: parse functions from each section
+        for (const [sectionType, sectionContent] of Object.entries(sectionMap)) {
             console.log(`📄 Section content length: ${sectionContent.length}`);
             console.log(`📄 First 200 chars of section:`, sectionContent.substring(0, 200));
 
             // Split by ### headers to find functions
-            const lines = sectionContent.split('\n');
+            const sectionLines = sectionContent.split('\n');
             let currentFunction = null;
             let currentFunctionContent = [];
             let functionCount = 0;
 
-            for (let i = 0; i < lines.length; i++) {
-                const line = lines[i];
+            for (let i = 0; i < sectionLines.length; i++) {
+                const line = sectionLines[i];
 
                 // Check if this line is a function header (### FunctionName)
                 if (line.startsWith('### ')) {
