@@ -666,8 +666,9 @@ class CommunityBridgeDocumentation {
         console.log('📋 Updating TOC...');
         this.updateTableOfContents(functions);
 
-        // Skip post-processing syntax highlighting since we do it during rendering
-        console.log('🎨 Syntax highlighting already applied during rendering...');
+        // Apply syntax highlighting to code blocks after DOM insertion
+        console.log('🎨 Applying syntax highlighting to function code blocks...');
+        this.applySyntaxHighlighting();
 
         // Setup copy buttons
         console.log('📋 Setting up copy buttons...');
@@ -954,9 +955,9 @@ class CommunityBridgeDocumentation {
 
         console.log(`🔗 Creating anchor: ${anchorId} for function ${func.name} (${side}) in ${moduleName}`);
 
-        // Pre-apply syntax highlighting to code content
-        const syntaxCode = this.applySyntaxHighlightingToText(func.syntax || func.name + '()');
-        const exampleCode = func.example ? this.applySyntaxHighlightingToText(Array.isArray(func.example) ? func.example.join('\n') : func.example) : '';
+        // Don't pre-process syntax highlighting - we'll do it after DOM insertion
+        const syntaxCode = func.syntax || func.name + '()';
+        const exampleCode = func.example ? (Array.isArray(func.example) ? func.example.join('\n') : func.example) : '';
 
         let parametersHtml = '';
         if (func.parameters && func.parameters.length > 0) {
@@ -999,7 +1000,7 @@ class CommunityBridgeDocumentation {
                 <div class="function-syntax">
                     <h4>Syntax:</h4>
                     <div class="code-block-container">
-                        <pre class="code-block language-lua"><code class="language-lua">${syntaxCode}</code></pre>
+                        <pre class="code-block language-lua"><code class="language-lua" data-raw-content="${encodeURIComponent(syntaxCode)}">${syntaxCode}</code></pre>
                         <button class="copy-button" title="Copy code">📋</button>
                     </div>
                 </div>
@@ -1009,7 +1010,7 @@ class CommunityBridgeDocumentation {
                     <div class="function-example">
                         <h4>Example:</h4>
                         <div class="code-block-container">
-                            <pre class="code-block language-lua"><code class="language-lua">${exampleCode}</code></pre>
+                            <pre class="code-block language-lua"><code class="language-lua" data-raw-content="${encodeURIComponent(exampleCode)}">${exampleCode}</code></pre>
                             <button class="copy-button" title="Copy code">📋</button>
                         </div>
                     </div>
@@ -1427,7 +1428,14 @@ class CommunityBridgeDocumentation {
         }
         codeElement.classList.add('highlighted');
 
-        let content = codeElement.textContent;
+        // Get content from data attribute if available, otherwise use textContent
+        let content;
+        const rawContent = codeElement.getAttribute('data-raw-content');
+        if (rawContent) {
+            content = decodeURIComponent(rawContent);
+        } else {
+            content = codeElement.textContent;
+        }
 
         // Lua keywords
         const keywords = ['local', 'function', 'end', 'if', 'then', 'else', 'elseif', 'for', 'while', 'do', 'repeat', 'until', 'return', 'break', 'true', 'false', 'nil', 'and', 'or', 'not', 'in'];
