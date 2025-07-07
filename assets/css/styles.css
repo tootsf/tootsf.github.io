@@ -165,6 +165,20 @@ body {
   align-items: center;
   justify-content: space-between;
   transition: background-color 0.2s ease;
+  position: relative;
+}
+
+.nav-section-header::after {
+  content: "▼";
+  position: absolute;
+  right: 1rem;
+  font-size: 0.8rem;
+  opacity: 0.6;
+  transition: transform 0.3s ease;
+}
+
+.nav-section.collapsed .nav-section-header::after {
+  transform: rotate(-90deg);
 }
 
 .nav-section-header:hover {
@@ -524,11 +538,21 @@ body {
     position: relative;
 }
 
-/* Removed ::after pseudo-elements to avoid duplicate arrows */
-/* JavaScript now handles arrows via <span class="nav-arrow"> elements */
+.nav-subsection-header::after {
+    content: "▼";
+    position: absolute;
+    right: 1rem;
+    font-size: 0.7rem;
+    opacity: 0.6;
+    transition: transform 0.3s ease;
+}
 
-.nav-subsection-header:hover {
-    background-color: var(--nav-hover);
+.nav-subsection.collapsed .nav-subsection-header::after {
+    transform: rotate(-90deg);
+}
+
+.nav-subsection-header:hover::after {
+    opacity: 1;
 }
 
 /* Active navigation item */
