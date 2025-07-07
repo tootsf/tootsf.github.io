@@ -692,14 +692,21 @@ class CommunityBridgeDocumentation {
             const sectionContent = sectionMatch[2];
             
             console.log(`📋 Found ${sectionType} functions section`);
+            console.log(`📄 Section content length: ${sectionContent.length}`);
+            console.log(`📄 First 200 chars of section:`, sectionContent.substring(0, 200));
             
             // Find individual functions within the section
             const functionRegex = /^### ([^\n]+)\n([\s\S]*?)(?=^### |$)/gm;
             let functionMatch;
+            let functionCount = 0;
             
             while ((functionMatch = functionRegex.exec(sectionContent)) !== null) {
+                functionCount++;
                 const functionName = functionMatch[1].trim();
                 const functionContent = functionMatch[2];
+                
+                console.log(`🔧 Found function ${functionCount}: ${functionName}`);
+                console.log(`📄 Function content length: ${functionContent.length}`);
                 
                 try {
                     const func = this.parseReadableFunction(functionName, functionContent, sectionType);
@@ -711,6 +718,8 @@ class CommunityBridgeDocumentation {
                     console.error(`❌ Failed to parse function ${functionName}:`, e);
                 }
             }
+            
+            console.log(`📊 Found ${functionCount} functions in ${sectionType} section`);
         }
         
         // If no readable functions found, try the old <--FNC format for backwards compatibility
