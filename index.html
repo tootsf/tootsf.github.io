@@ -36,23 +36,31 @@
     <!-- Main Container -->
     <div class="container">
         <!-- Sidebar Navigation -->
-        <nav class="sidebar">
-            <!-- Navigation will be dynamically populated -->
+        <nav class="sidebar" id="sidebar">
+            <div id="nav-menu">
+                <!-- Navigation will be dynamically populated -->
+            </div>
         </nav>
 
         <!-- Main Content Area -->
         <main class="main-content">
-            <div class="loading">Loading documentation...</div>
+            <div id="loading" class="loading" style="display: none;">Loading documentation...</div>
+            <div id="search-results" class="search-results-area" style="display: none;"></div>
+            <div id="content-area" class="content-area">
+                <!-- Content will be dynamically populated -->
+            </div>
         </main>
 
         <!-- Table of Contents -->
-        <aside class="toc">
+        <aside class="toc" id="toc-container" style="display: none;">
             <div class="toc-header">On This Page</div>
-            <ul class="toc-list">
+            <div id="toc-content">
                 <!-- TOC will be dynamically populated -->
-            </ul>
+            </div>
         </aside>
-    </div>    <!-- Scripts -->
-    <script src="assets/js/app-fixed.js"></script>
+    </div>
+
+    <!-- Scripts -->
+    <script src="assets/js/markdown-docs.js"></script>
 </body>
 </html>
