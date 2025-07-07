@@ -10,7 +10,7 @@ The Cache library provides a powerful caching system with automatic updates, cha
 
 ## Overview
 
-The Cache provides functionality for FiveM resources.
+The Cache library provides functionality for FiveM resources with powerful caching capabilities.
 
 <--FNC
 {

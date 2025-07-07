@@ -672,11 +672,16 @@ class CommunityBridgeDocumentation {
     parseFunctionsFromMarkdown(markdown) {
         console.log('🔧 Parsing functions from markdown...');
         console.log('📄 Markdown content length:', markdown.length);
+        console.log('📄 First 500 chars of markdown:', markdown.substring(0, 500));
         
         const functions = [];
         const regex = /<--FNC\s*([\s\S]*?)\s*FNC-->/g;
         let match;
         let matchCount = 0;
+        
+        // Test if the regex pattern exists in the content
+        const testMatch = markdown.includes('<--FNC');
+        console.log('🔍 Does markdown contain "<--FNC"?', testMatch);
         
         while ((match = regex.exec(markdown)) !== null) {
             matchCount++;
@@ -958,16 +963,23 @@ class CommunityBridgeDocumentation {
         tocContainer.querySelectorAll('.toc-link').forEach(link => {
             link.addEventListener('click', (e) => {
                 e.preventDefault();
-                const anchorId = link.getAttribute('href').substring(1);
-                const element = document.getElementById(anchorId);
-                if (element) {
-                    this.scrollToElement(element);
-                    
-                    // Update URL hash
-                    window.location.hash = anchorId;
-                    
-                    // Update active state
-                    this.updateTocActiveState(anchorId);
+                const href = link.getAttribute('href');
+                if (href && href.startsWith('#')) {
+                    const anchorId = href.substring(1);
+                    const element = document.getElementById(anchorId);
+                    if (element) {
+                        this.scrollToElement(element);
+                        
+                        // Update URL hash without triggering navigation
+                        history.replaceState(null, null, href);
+                        
+                        // Update active state
+                        this.updateTocActiveState(anchorId);
+                    } else {
+                        console.warn('⚠️ TOC target element not found:', anchorId);
+                    }
+                } else {
+                    console.warn('⚠️ Invalid TOC link href:', href);
                 }
             });
         });
