@@ -666,9 +666,8 @@ class CommunityBridgeDocumentation {
         console.log('📋 Updating TOC...');
         this.updateTableOfContents(functions);
 
-        // Setup syntax highlighting like app-fixed.js
-        console.log('🎨 Applying syntax highlighting...');
-        this.applySyntaxHighlighting();
+        // Skip post-processing syntax highlighting since we do it during rendering
+        console.log('🎨 Syntax highlighting already applied during rendering...');
 
         // Setup copy buttons
         console.log('📋 Setting up copy buttons...');
@@ -955,6 +954,10 @@ class CommunityBridgeDocumentation {
 
         console.log(`🔗 Creating anchor: ${anchorId} for function ${func.name} (${side}) in ${moduleName}`);
 
+        // Pre-apply syntax highlighting to code content
+        const syntaxCode = this.applySyntaxHighlightingToText(func.syntax || func.name + '()');
+        const exampleCode = func.example ? this.applySyntaxHighlightingToText(Array.isArray(func.example) ? func.example.join('\n') : func.example) : '';
+
         let parametersHtml = '';
         if (func.parameters && func.parameters.length > 0) {
             parametersHtml = `
@@ -996,7 +999,7 @@ class CommunityBridgeDocumentation {
                 <div class="function-syntax">
                     <h4>Syntax:</h4>
                     <div class="code-block-container">
-                        <pre class="code-block language-lua"><code class="language-lua">${func.syntax || func.name + '()'}</code></pre>
+                        <pre class="code-block language-lua"><code class="language-lua">${syntaxCode}</code></pre>
                         <button class="copy-button" title="Copy code">📋</button>
                     </div>
                 </div>
@@ -1006,7 +1009,7 @@ class CommunityBridgeDocumentation {
                     <div class="function-example">
                         <h4>Example:</h4>
                         <div class="code-block-container">
-                            <pre class="code-block language-lua"><code class="language-lua">${Array.isArray(func.example) ? func.example.join('\n') : func.example}</code></pre>
+                            <pre class="code-block language-lua"><code class="language-lua">${exampleCode}</code></pre>
                             <button class="copy-button" title="Copy code">📋</button>
                         </div>
                     </div>
@@ -1450,7 +1453,37 @@ class CommunityBridgeDocumentation {
         content = content.replace(/(\+|\-|\*|\/|%|==|~=|<=|>=|<|>|=)/g, '<span class="operator">$1</span>');
 
         codeElement.innerHTML = content;
-    }    setupCopyLinkButtons() {
+    }    applySyntaxHighlightingToText(content) {
+        // Apply syntax highlighting and return HTML string
+        let html = content;
+
+        // Lua keywords
+        const keywords = ['local', 'function', 'end', 'if', 'then', 'else', 'elseif', 'for', 'while', 'do', 'repeat', 'until', 'return', 'break', 'true', 'false', 'nil', 'and', 'or', 'not', 'in'];
+        keywords.forEach(keyword => {
+            const regex = new RegExp(`\\b(${keyword})\\b`, 'g');
+            html = html.replace(regex, `<span class="keyword">$1</span>`);
+        });
+
+        // String literals
+        html = html.replace(/"([^"]*?)"/g, '<span class="string">"$1"</span>');
+        html = html.replace(/'([^']*?)'/g, '<span class="string">\'$1\'</span>');
+
+        // Comments
+        html = html.replace(/--.*$/gm, '<span class="comment">$&</span>');
+
+        // Numbers
+        html = html.replace(/\b\d+\.?\d*\b/g, '<span class="number">$&</span>');
+
+        // Function calls (word followed by parentheses)
+        html = html.replace(/\b([a-zA-Z_][a-zA-Z0-9_]*)\s*(?=\()/g, '<span class="function">$1</span>');
+
+        // Operators
+        html = html.replace(/(\+|\-|\*|\/|%|==|~=|<=|>=|<|>|=)/g, '<span class="operator">$1</span>');
+
+        return html;
+    }
+
+    setupCopyLinkButtons() {
         // Setup copy link buttons (same as app-fixed.js)
         const copyLinkButtons = document.querySelectorAll('.copy-link-btn');
         copyLinkButtons.forEach(button => {
