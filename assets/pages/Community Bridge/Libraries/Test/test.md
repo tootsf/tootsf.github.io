@@ -1,4 +1,4 @@
-# Test Library 📋
+# Test 📋
 
 ## Overview
 
@@ -16,17 +16,14 @@ This is a test library to verify the markdown function parsing works correctly.
   "returns": [
     { "type": "boolean", "description": "Returns true if successful" }
   ],
-  "example": [
-    "local success = TestFunction('Hello World')",
-    "print(success)"
-  ]
+  "example": "local success = TestFunction('Hello World')\nprint(success)"
 }
 FNC-->
 
 <--FNC
 {
   "name": "ServerTestFunction",
-  "side": "server",
+  "side": "server", 
   "description": "A server-side test function",
   "syntax": "ServerTestFunction(playerId, data)",
   "parameters": [
@@ -36,9 +33,6 @@ FNC-->
   "returns": [
     { "type": "boolean", "description": "Returns true if processed successfully" }
   ],
-  "example": [
-    "local result = ServerTestFunction(source, {test = true})",
-    "print('Server result:', result)"
-  ]
+  "example": "local result = ServerTestFunction(source, {test = true})\nprint('Server result:', result)"
 }
 FNC-->

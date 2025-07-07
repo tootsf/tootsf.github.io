@@ -291,6 +291,19 @@ class CommunityBridgeDocumentation {
                         };
                         foundCount++;
                         console.log(`✅ Found module: ${folderName}/${moduleName}/${moduleName.toLowerCase()}.md`);
+                    } else {
+                        // Try alternative pattern for special cases like Test/test.md
+                        const altPath = `./assets/pages/Community Bridge/${folderName}/${moduleName}/test.md`;
+                        const altResponse = await fetch(altPath, { method: 'HEAD' });
+                        if (altResponse.ok) {
+                            folderItems[moduleName] = {
+                                path: `Community Bridge/${folderName}/${moduleName}/test`,
+                                type: 'markdown',
+                                name: moduleName
+                            };
+                            foundCount++;
+                            console.log(`✅ Found module (alt): ${folderName}/${moduleName}/test.md`);
+                        }
                     }
                 } catch (e) {
                     // File doesn't exist, continue silently
@@ -657,17 +670,29 @@ class CommunityBridgeDocumentation {
     }
 
     parseFunctionsFromMarkdown(markdown) {
+        console.log('🔧 Parsing functions from markdown...');
+        console.log('📄 Markdown content length:', markdown.length);
+        
         const functions = [];
         const regex = /<--FNC\s*([\s\S]*?)\s*FNC-->/g;
         let match;
+        let matchCount = 0;
+        
         while ((match = regex.exec(markdown)) !== null) {
+            matchCount++;
+            console.log(`🔧 Found function block ${matchCount}:`, match[1].substring(0, 100) + '...');
             try {
                 const funcData = JSON.parse(match[1]);
+                console.log(`✅ Parsed function: ${funcData.name} (${funcData.side})`);
                 functions.push(funcData);
             } catch (e) {
-                console.error("Failed to parse function JSON:", e, match[1]);
+                console.error("❌ Failed to parse function JSON:", e, match[1]);
             }
         }
+        
+        console.log(`🔧 Total function blocks found: ${matchCount}`);
+        console.log(`✅ Successfully parsed functions: ${functions.length}`);
+        
         return functions;
     }
 
@@ -990,6 +1015,20 @@ class CommunityBridgeDocumentation {
         if (activeLink) {
             activeLink.classList.add('active');
         }
+    }
+
+    scrollToElement(element) {
+        if (!element) return;
+        
+        const header = document.querySelector('.header');
+        const headerHeight = header ? header.offsetHeight : 70;
+        const elementPosition = element.offsetTop;
+        const offsetPosition = elementPosition - headerHeight - 20;
+
+        window.scrollTo({
+            top: offsetPosition,
+            behavior: 'smooth'
+        });
     }
 
     scrollToElement(element) {
