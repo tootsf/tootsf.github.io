@@ -1429,8 +1429,13 @@ class CommunityBridgeDocumentation {
         codeElement.dataset.highlighted = 'true';
 
         let code = codeElement.textContent;
+        console.log('🎨 Highlighting code:', code.substring(0, 100));
         
-        // Don't escape HTML - we want to inject HTML spans
+        // Check if code already contains HTML tags (indicating double processing)
+        if (code.includes('<span') || code.includes('lua-keyword')) {
+            console.warn('⚠️ Code already contains HTML tags, skipping highlighting');
+            return;
+        }
         
         // Lua keywords (order matters - longer keywords first)
         const keywords = [
@@ -1457,8 +1462,12 @@ class CommunityBridgeDocumentation {
         // Function call highlighting (word followed by opening parenthesis)
         code = code.replace(/\b([a-zA-Z_][a-zA-Z0-9_\.]*)\s*(?=\()/g, '<span class="lua-function">$1</span>');
         
+        console.log('🎨 Highlighted code:', code.substring(0, 200));
+        
         // Set the highlighted HTML
         codeElement.innerHTML = code;
+        
+        console.log('🎨 Element innerHTML set, checking result:', codeElement.innerHTML.substring(0, 100));
     }
 
     setupCopyLinkButtons() {
