@@ -84,11 +84,12 @@ class CommunityBridgeDocumentation {
                 e.preventDefault();
                 const section = header.closest('.nav-section');
                 if (section) {
-                    section.classList.toggle('collapsed');
-                    section.classList.toggle('expanded');
+                    const isExpanded = section.classList.contains('expanded');
+                    section.classList.toggle('collapsed', isExpanded);
+                    section.classList.toggle('expanded', !isExpanded);
                     const arrow = header.querySelector('.nav-arrow');
                     if (arrow) {
-                        arrow.textContent = section.classList.contains('expanded') ? '▼' : '▶';
+                        arrow.textContent = isExpanded ? '▶' : '▼';
                     }
                 }
             });
@@ -102,11 +103,12 @@ class CommunityBridgeDocumentation {
                 e.preventDefault();
                 const subsection = header.closest('.nav-subsection');
                 if (subsection) {
-                    subsection.classList.toggle('collapsed');
-                    subsection.classList.toggle('expanded');
+                    const isExpanded = subsection.classList.contains('expanded');
+                    subsection.classList.toggle('collapsed', isExpanded);
+                    subsection.classList.toggle('expanded', !isExpanded);
                     const arrow = header.querySelector('.nav-arrow');
                     if (arrow) {
-                        arrow.textContent = subsection.classList.contains('expanded') ? '▼' : '▶';
+                        arrow.textContent = isExpanded ? '▶' : '▼';
                     }
                 }
             });
@@ -123,7 +125,20 @@ class CommunityBridgeDocumentation {
                 
                 if (path) {
                     console.log('📄 Nav item clicked:', path, type);
+                    
+                    // Remove active class from all nav items
+                    document.querySelectorAll('.nav-item').forEach(item => {
+                        item.classList.remove('active');
+                    });
+                    
+                    // Add active class to clicked item
+                    navItem.classList.add('active');
+                    
+                    // Navigate to the content
                     this.navigateToPath(path);
+                    
+                    // Update URL hash
+                    window.location.hash = path;
                 }
             });
         });
@@ -177,32 +192,58 @@ class CommunityBridgeDocumentation {
                 type: 'section'
             };
 
-            // Add top-level Community Bridge files
-            const topLevelFiles = ['overview', 'getting-started'];
-            for (const fileName of topLevelFiles) {
+            // Add known top-level files first
+            const topLevelFiles = [
+                { file: 'overview', name: 'Overview' },
+                { file: 'getting-started', name: 'Getting Started' }
+            ];
+
+            for (const { file, name } of topLevelFiles) {
                 try {
-                    const response = await fetch(`./assets/pages/Community Bridge/${fileName}.md`);
+                    const response = await fetch(`./assets/pages/Community Bridge/${file}.md`);
                     if (response.ok) {
-                        structure['Community Bridge'].items[fileName] = {
-                            path: `Community Bridge/${fileName}`,
+                        structure['Community Bridge'].items[file] = {
+                            path: `Community Bridge/${file}`,
                             type: 'markdown',
-                            name: this.formatTitle(fileName)
+                            name: name
                         };
-                        console.log(`✅ Found top-level file: ${fileName}.md`);
+                        console.log(`✅ Found top-level file: ${file}.md`);
                     }
                 } catch (e) {
-                    // File doesn't exist, continue
+                    console.log(`⚠️ Top-level file not found: ${file}.md`);
                 }
             }
 
-            // Discover Libraries and Modules
+            // Discover Libraries and Modules with more robust checking
             await this.discoverSubsection(structure, 'Libraries', '📚');
             await this.discoverSubsection(structure, 'Modules', '📦');
+
+            // Add Examples as top-level if it exists
+            try {
+                const examplesResponse = await fetch('./assets/pages/Examples/basic-usage.md');
+                if (examplesResponse.ok) {
+                    structure['Examples'] = {
+                        icon: '💡',
+                        items: {
+                            'basic-usage': {
+                                path: 'Examples/basic-usage',
+                                type: 'markdown',
+                                name: 'Basic Usage'
+                            }
+                        },
+                        type: 'section'
+                    };
+                    console.log('✅ Found Examples section');
+                }
+            } catch (e) {
+                console.log('📝 Examples not found, skipping');
+            }
 
         } catch (error) {
             console.error('❌ Error in discoverPagesStructure:', error);
         }
 
+        console.log('🔍 Final structure:', structure);
         return structure;
     }
 
@@ -216,23 +257,26 @@ class CommunityBridgeDocumentation {
         };
 
         if (knownModules[folderName]) {
+            let foundCount = 0;
             for (const moduleName of knownModules[folderName]) {
                 try {
                     // Try the main pattern: Libraries/Anim/anim.md
                     const mainPath = `./assets/pages/Community Bridge/${folderName}/${moduleName}/${moduleName.toLowerCase()}.md`;
-                    const response = await fetch(mainPath);
+                    const response = await fetch(mainPath, { method: 'HEAD' });
                     if (response.ok) {
                         folderItems[moduleName] = {
                             path: `Community Bridge/${folderName}/${moduleName}/${moduleName.toLowerCase()}`,
                             type: 'markdown',
                             name: moduleName
                         };
+                        foundCount++;
                         console.log(`✅ Found module: ${folderName}/${moduleName}/${moduleName.toLowerCase()}.md`);
                     }
                 } catch (e) {
-                    // File doesn't exist, continue
+                    // File doesn't exist, continue silently
                 }
             }
+            console.log(`📊 Found ${foundCount} modules in ${folderName}`);
         }
 
         if (Object.keys(folderItems).length > 0) {
@@ -243,6 +287,8 @@ class CommunityBridgeDocumentation {
                 name: folderName
             };
             console.log(`✅ Added ${folderName} subsection with ${Object.keys(folderItems).length} items`);
+        } else {
+            console.log(`⚠️ No items found for ${folderName}`);
         }
     }
 
@@ -331,13 +377,26 @@ class CommunityBridgeDocumentation {
     }
 
     findNavigationItem(targetPath) {
-        const searchItems = (items) => {
+        console.log('🔍 Looking for navigation item:', targetPath);
+        
+        const searchItems = (items, currentPath = '') => {
             for (const [key, item] of Object.entries(items)) {
-                const itemPath = item.path ? item.path.replace('.md', '') : '';
-                if (itemPath === targetPath) {
+                // Check exact path match
+                if (item.path === targetPath) {
+                    console.log('✅ Found exact path match:', item.path);
                     return item;
-                } else if (item.items) {
-                    const found = searchItems(item.items);
+                }
+                
+                // Also check without .md extension
+                const itemPathWithoutExt = item.path ? item.path.replace('.md', '') : '';
+                if (itemPathWithoutExt === targetPath) {
+                    console.log('✅ Found path match (no ext):', itemPathWithoutExt);
+                    return item;
+                }
+                
+                // Recursively search subsections
+                if (item.items) {
+                    const found = searchItems(item.items, `${currentPath}/${key}`);
                     if (found) return found;
                 }
             }
@@ -345,10 +404,90 @@ class CommunityBridgeDocumentation {
         };
 
         for (const [category, categoryData] of Object.entries(this.allModules)) {
-            const found = searchItems(categoryData.items || {});
-            if (found) return found;
+            console.log(`🔍 Searching category: ${category}`);
+            const found = searchItems(categoryData.items || {}, category);
+            if (found) {
+                console.log('✅ Found item in category:', category);
+                return found;
+            }
         }
+        
+        console.log('❌ Navigation item not found for:', targetPath);
+        console.log('🔍 Available paths:');
+        this.logAllPaths();
         return null;
+    }
+
+    logAllPaths() {
+        const logItems = (items, indent = '') => {
+            for (const [key, item] of Object.entries(items)) {
+                if (item.path) {
+                    console.log(`${indent}📄 ${item.path}`);
+                }
+                if (item.items) {
+                    console.log(`${indent}📁 ${key}/`);
+                    logItems(item.items, indent + '  ');
+                }
+            }
+        };
+
+        for (const [category, categoryData] of Object.entries(this.allModules)) {
+            console.log(`📁 ${category}/`);
+            logItems(categoryData.items || {}, '  ');
+        }
+    }
+
+    async loadContent(path, type, item) {
+        this.setLoading(true);
+
+        try {
+            console.log(`📄 Loading content for: ${path}`);
+            
+            // Try to load markdown content
+            const markdownContent = await this.loadMarkdownContent(path);
+            
+            // Set current module info
+            this.currentModule = item;
+            this.currentModuleName = path.split('/').pop();
+            
+            // Render the content
+            this.renderMarkdownContent(markdownContent, path);
+            
+            console.log(`✅ Content loaded successfully for: ${path}`);
+        } catch (error) {
+            console.error(`❌ Error loading content for ${path}:`, error);
+            this.showError(`Failed to load content for: ${path}`);
+        } finally {
+            this.setLoading(false);
+        }
+    }
+
+    loadInitialContent() {
+        // Try to load the first available content
+        for (const [category, categoryData] of Object.entries(this.allModules)) {
+            if (categoryData.items) {
+                for (const [key, item] of Object.entries(categoryData.items)) {
+                    if (item.type === 'markdown' && item.path) {
+                        console.log('🎯 Loading initial content:', item.path);
+                        this.navigateToPath(item.path);
+                        return;
+                    } else if (item.items) {
+                        // Check subsections
+                        for (const [subKey, subItem] of Object.entries(item.items)) {
+                            if (subItem.type === 'markdown' && subItem.path) {
+                                console.log('🎯 Loading initial content from subsection:', subItem.path);
+                                this.navigateToPath(subItem.path);
+                                return;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        
+        // Fallback - try to load overview
+        console.log('🎯 Fallback: trying to load overview');
+        this.navigateToPath('Community Bridge/overview');
     }
 
     async loadContent(path, type, item) {
