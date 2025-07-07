@@ -12,6 +12,40 @@ The Cache library provides a powerful caching system with automatic updates, cha
 
 The Cache provides functionality for FiveM resources.
 
+<--FNC
+{
+  "name": "OnChange",
+  "side": "shared",
+  "description": "Registers a callback function to be called when the cache value changes",
+  "syntax": "Cache.OnChange(name, onChange)",
+  "parameters": [
+    { "name": "name", "type": "string", "description": "Name of the cache entry" },
+    { "name": "onChange", "type": "function", "description": "Callback function with signature (newValue, oldValue)" }
+  ],
+  "returns": [
+    { "type": "string", "description": "Callback ID for removal purposes" }
+  ],
+  "example": "local callbackId = Cache.OnChange(\"player_health\", function(newHealth, oldHealth)\n    print(\"Health changed from \" .. oldHealth .. \" to \" .. newHealth)\nend)"
+}
+FNC-->
+
+<--FNC
+{
+  "name": "RemoveOnChange",
+  "side": "shared", 
+  "description": "Removes a previously registered onChange callback using its ID",
+  "syntax": "Cache.RemoveOnChange(name, id)",
+  "parameters": [
+    { "name": "name", "type": "string", "description": "Name of the cache entry" },
+    { "name": "id", "type": "string", "description": "Callback ID returned from OnChange" }
+  ],
+  "returns": [
+    { "type": "boolean", "description": "Returns true if callback was removed successfully" }
+  ],
+  "example": "local success = Cache.RemoveOnChange(\"player_health\", callbackId)\nprint(\"Callback removed: \" .. tostring(success))"
+}
+FNC-->
+
 ## Shared Functions
 
 ### Create
