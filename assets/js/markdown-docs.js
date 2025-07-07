@@ -684,7 +684,8 @@ class CommunityBridgeDocumentation {
         console.log('🔧 Parsing human-readable markdown format...');
 
         // Find function sections (Client Functions, Server Functions, Shared Functions)
-        const sectionRegex = /^## (Client|Server|Shared) Functions\s*\n([\s\S]*?)(?=\n## |$)/gm;
+        // More robust regex that captures everything until next ## or end of content
+        const sectionRegex = /^## (Client|Server|Shared) Functions\s*$([\s\S]*?)(?=^## |$)/gm;
         let sectionMatch;
 
         while ((sectionMatch = sectionRegex.exec(markdown)) !== null) {
