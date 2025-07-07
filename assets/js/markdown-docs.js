@@ -695,27 +695,57 @@ class CommunityBridgeDocumentation {
             console.log(`📄 Section content length: ${sectionContent.length}`);
             console.log(`📄 First 200 chars of section:`, sectionContent.substring(0, 200));
             
-            // Find individual functions within the section
-            const functionRegex = /^### ([^\n]+)\n([\s\S]*?)(?=^### |$)/gm;
-            let functionMatch;
+            // Split by ### headers to find functions
+            const lines = sectionContent.split('\n');
+            let currentFunction = null;
+            let currentFunctionContent = [];
             let functionCount = 0;
             
-            while ((functionMatch = functionRegex.exec(sectionContent)) !== null) {
-                functionCount++;
-                const functionName = functionMatch[1].trim();
-                const functionContent = functionMatch[2];
+            for (let i = 0; i < lines.length; i++) {
+                const line = lines[i];
                 
-                console.log(`🔧 Found function ${functionCount}: ${functionName}`);
-                console.log(`📄 Function content length: ${functionContent.length}`);
+                // Check if this line is a function header (### FunctionName)
+                if (line.startsWith('### ')) {
+                    // If we have a previous function, process it
+                    if (currentFunction) {
+                        functionCount++;
+                        console.log(`🔧 Found function ${functionCount}: ${currentFunction}`);
+                        console.log(`📄 Function content length: ${currentFunctionContent.join('\n').length}`);
+                        
+                        try {
+                            const func = this.parseReadableFunction(currentFunction, currentFunctionContent.join('\n'), sectionType);
+                            if (func) {
+                                console.log(`✅ Parsed readable function: ${func.name} (${func.side})`);
+                                functions.push(func);
+                            }
+                        } catch (e) {
+                            console.error(`❌ Failed to parse function ${currentFunction}:`, e);
+                        }
+                    }
+                    
+                    // Start new function
+                    currentFunction = line.substring(4).trim(); // Remove '### '
+                    currentFunctionContent = [];
+                } else if (currentFunction) {
+                    // Add line to current function content
+                    currentFunctionContent.push(line);
+                }
+            }
+            
+            // Process the last function
+            if (currentFunction) {
+                functionCount++;
+                console.log(`🔧 Found function ${functionCount}: ${currentFunction}`);
+                console.log(`📄 Function content length: ${currentFunctionContent.join('\n').length}`);
                 
                 try {
-                    const func = this.parseReadableFunction(functionName, functionContent, sectionType);
+                    const func = this.parseReadableFunction(currentFunction, currentFunctionContent.join('\n'), sectionType);
                     if (func) {
                         console.log(`✅ Parsed readable function: ${func.name} (${func.side})`);
                         functions.push(func);
                     }
                 } catch (e) {
-                    console.error(`❌ Failed to parse function ${functionName}:`, e);
+                    console.error(`❌ Failed to parse function ${currentFunction}:`, e);
                 }
             }
             
