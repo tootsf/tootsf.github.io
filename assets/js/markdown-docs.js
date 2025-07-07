@@ -666,8 +666,9 @@ class CommunityBridgeDocumentation {
         console.log('📋 Updating TOC...');
         this.updateTableOfContents(functions);
 
-        // Skip syntax highlighting for now to test if base code display works
-        console.log('🎨 Skipping syntax highlighting to test base display...');
+        // Apply syntax highlighting using a simple, reliable approach
+        console.log('🎨 Applying syntax highlighting...');
+        this.applySyntaxHighlighting();
 
         // Setup copy buttons
         console.log('📋 Setting up copy buttons...');
@@ -1414,52 +1415,51 @@ class CommunityBridgeDocumentation {
     }
 
     applySyntaxHighlighting() {
-        // Apply syntax highlighting to all code blocks
-        document.querySelectorAll('code.language-lua, .function-example code, .function-syntax code').forEach(codeElement => {
-            this.applyLuaSyntaxHighlighting(codeElement);
+        // Apply syntax highlighting to all code blocks in function cards
+        document.querySelectorAll('.function-card code.language-lua').forEach(codeElement => {
+            this.highlightLuaCode(codeElement);
         });
     }
 
-    applyLuaSyntaxHighlighting(codeElement) {
-        // Prevent double-processing
-        if (codeElement.classList.contains('highlighted')) {
+    highlightLuaCode(codeElement) {
+        // Skip if already highlighted
+        if (codeElement.dataset.highlighted === 'true') {
             return;
         }
-        codeElement.classList.add('highlighted');
+        codeElement.dataset.highlighted = 'true';
 
-        // Get content from data attribute if available, otherwise use textContent
-        let content;
-        const rawContent = codeElement.getAttribute('data-raw-content');
-        if (rawContent) {
-            content = decodeURIComponent(rawContent);
-        } else {
-            content = codeElement.textContent;
-        }
-
-        // Lua keywords
-        const keywords = ['local', 'function', 'end', 'if', 'then', 'else', 'elseif', 'for', 'while', 'do', 'repeat', 'until', 'return', 'break', 'true', 'false', 'nil', 'and', 'or', 'not', 'in'];
+        let code = codeElement.textContent;
+        
+        // Escape HTML first to prevent conflicts
+        code = code.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+        
+        // Lua keywords (order matters - longer keywords first)
+        const keywords = [
+            'function', 'local', 'return', 'end', 'if', 'then', 'else', 'elseif', 
+            'while', 'for', 'do', 'repeat', 'until', 'break', 'true', 'false', 
+            'nil', 'and', 'or', 'not', 'in'
+        ];
+        
+        // Apply keyword highlighting
         keywords.forEach(keyword => {
             const regex = new RegExp(`\\b(${keyword})\\b`, 'g');
-            content = content.replace(regex, `<span class="keyword">$1</span>`);
+            code = code.replace(regex, `<span class="lua-keyword">$1</span>`);
         });
-
-        // String literals
-        content = content.replace(/"([^"]*?)"/g, '<span class="string">"$1"</span>');
-        content = content.replace(/'([^']*?)'/g, '<span class="string">\'$1\'</span>');
-
-        // Comments
-        content = content.replace(/--.*$/gm, '<span class="comment">$&</span>');
-
-        // Numbers
-        content = content.replace(/\b\d+\.?\d*\b/g, '<span class="number">$&</span>');
-
-        // Function calls (word followed by parentheses)
-        content = content.replace(/\b([a-zA-Z_][a-zA-Z0-9_]*)\s*(?=\()/g, '<span class="function">$1</span>');
-
-        // Operators
-        content = content.replace(/(\+|\-|\*|\/|%|==|~=|<=|>=|<|>|=)/g, '<span class="operator">$1</span>');
-
-        codeElement.innerHTML = content;
+        
+        // String highlighting (both single and double quotes)
+        code = code.replace(/(["'])(?:(?!\1)[^\\]|\\.)*\1/g, '<span class="lua-string">$&</span>');
+        
+        // Comment highlighting
+        code = code.replace(/--.*$/gm, '<span class="lua-comment">$&</span>');
+        
+        // Number highlighting
+        code = code.replace(/\b\d+\.?\d*\b/g, '<span class="lua-number">$&</span>');
+        
+        // Function call highlighting (word followed by opening parenthesis)
+        code = code.replace(/\b([a-zA-Z_][a-zA-Z0-9_\.]*)\s*(?=\()/g, '<span class="lua-function">$1</span>');
+        
+        // Set the highlighted HTML
+        codeElement.innerHTML = code;
     }    applySyntaxHighlightingToText(content) {
         // Apply syntax highlighting and return HTML string
         let html = content;
