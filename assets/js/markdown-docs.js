@@ -48,6 +48,7 @@ class CommunityBridgeDocumentation {
     setupSearchInput() {
         const searchInput = document.getElementById('search-input');
         if (searchInput) {
+            // Clear any existing event listeners by cloning the element
             const newSearchInput = searchInput.cloneNode(true);
             searchInput.parentNode.replaceChild(newSearchInput, searchInput);
 
@@ -60,14 +61,33 @@ class CommunityBridgeDocumentation {
                 }
             });
 
+            newSearchInput.addEventListener('focus', (e) => {
+                if (e.target.value.trim()) {
+                    this.handleSearch(e.target.value.trim());
+                }
+            });
+
             newSearchInput.addEventListener('keydown', (e) => {
                 if (e.key === 'Escape') {
                     this.hideSearchResults();
                     e.target.blur();
+                } else if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+                    e.preventDefault();
+                    this.navigateSearchResults(e.key === 'ArrowDown' ? 1 : -1);
+                } else if (e.key === 'Enter') {
+                    e.preventDefault();
+                    this.selectCurrentSearchResult();
                 }
             });
 
-            console.log('🔍 Search input configured');
+            // Hide search results when clicking outside
+            document.addEventListener('click', (e) => {
+                if (!e.target.closest('.search-container')) {
+                    this.hideSearchResults();
+                }
+            });
+
+            console.log('🔍 Search input configured with enhanced functionality');
         } else {
             console.warn('⚠️ Search input not found');
         }
@@ -122,21 +142,21 @@ class CommunityBridgeDocumentation {
                 e.preventDefault();
                 const path = navItem.getAttribute('data-path');
                 const type = navItem.getAttribute('data-type');
-                
+
                 if (path) {
                     console.log('📄 Nav item clicked:', path, type);
-                    
+
                     // Remove active class from all nav items
                     document.querySelectorAll('.nav-item').forEach(item => {
                         item.classList.remove('active');
                     });
-                    
+
                     // Add active class to clicked item
                     navItem.classList.add('active');
-                    
+
                     // Navigate to the content
                     this.navigateToPath(path);
-                    
+
                     // Update URL hash
                     window.location.hash = path;
                 }
@@ -164,13 +184,13 @@ class CommunityBridgeDocumentation {
         try {
             console.log('🔍 Starting discoverPagesStructure...');
             const structure = await this.discoverPagesStructure();
-            
+
             this.allModules = structure;
             console.log('📋 Module structure loaded:', this.allModules);
-            
+
             this.renderNavigation();
             await this.buildSearchIndex();
-            
+
             console.log('✅ Module structure loaded successfully');
         } catch (error) {
             console.error('❌ Error loading module structure:', error);
@@ -378,7 +398,7 @@ class CommunityBridgeDocumentation {
 
     findNavigationItem(targetPath) {
         console.log('🔍 Looking for navigation item:', targetPath);
-        
+
         const searchItems = (items, currentPath = '') => {
             for (const [key, item] of Object.entries(items)) {
                 // Check exact path match
@@ -386,14 +406,14 @@ class CommunityBridgeDocumentation {
                     console.log('✅ Found exact path match:', item.path);
                     return item;
                 }
-                
+
                 // Also check without .md extension
                 const itemPathWithoutExt = item.path ? item.path.replace('.md', '') : '';
                 if (itemPathWithoutExt === targetPath) {
                     console.log('✅ Found path match (no ext):', itemPathWithoutExt);
                     return item;
                 }
-                
+
                 // Recursively search subsections
                 if (item.items) {
                     const found = searchItems(item.items, `${currentPath}/${key}`);
@@ -411,7 +431,7 @@ class CommunityBridgeDocumentation {
                 return found;
             }
         }
-        
+
         console.log('❌ Navigation item not found for:', targetPath);
         console.log('🔍 Available paths:');
         this.logAllPaths();
@@ -442,17 +462,17 @@ class CommunityBridgeDocumentation {
 
         try {
             console.log(`📄 Loading content for: ${path}`);
-            
+
             // Try to load markdown content
             const markdownContent = await this.loadMarkdownContent(path);
-            
+
             // Set current module info
             this.currentModule = item;
             this.currentModuleName = path.split('/').pop();
-            
+
             // Render the content
             this.renderMarkdownContent(markdownContent, path);
-            
+
             console.log(`✅ Content loaded successfully for: ${path}`);
         } catch (error) {
             console.error(`❌ Error loading content for ${path}:`, error);
@@ -484,7 +504,7 @@ class CommunityBridgeDocumentation {
                 }
             }
         }
-        
+
         // Fallback - try to load overview
         console.log('🎯 Fallback: trying to load overview');
         this.navigateToPath('Community Bridge/overview');
@@ -495,17 +515,17 @@ class CommunityBridgeDocumentation {
 
         try {
             console.log(`📄 Loading content for: ${path}`);
-            
+
             // Try to load markdown content
             const markdownContent = await this.loadMarkdownContent(path);
-            
+
             // Set current module info
             this.currentModule = item;
             this.currentModuleName = path.split('/').pop();
-            
+
             // Render the content
             this.renderMarkdownContent(markdownContent, path);
-            
+
             console.log(`✅ Content loaded successfully for: ${path}`);
         } catch (error) {
             console.error(`❌ Error loading content for ${path}:`, error);
@@ -525,7 +545,7 @@ class CommunityBridgeDocumentation {
             }
 
             const content = await response.text();
-            
+
             return {
                 content: content,
                 meta: this.parseMarkdownMeta(content)
@@ -567,10 +587,10 @@ class CommunityBridgeDocumentation {
 
         // Parse functions from markdown
         const functions = this.parseFunctionsFromMarkdown(markdownData.content);
-        
+
         // Convert markdown to HTML (basic conversion)
         let html = this.convertMarkdownToHTML(markdownData.content);
-        
+
         // Add functions section if functions exist
         if (functions.length > 0) {
             html += '<h2 id="functions-section">Functions</h2>';
@@ -612,10 +632,10 @@ class CommunityBridgeDocumentation {
     convertMarkdownToHTML(markdown) {
         // Remove function blocks before rendering markdown
         const cleanMarkdown = markdown.replace(/<--FNC\s*[\s\S]*?\s*FNC-->/g, '');
-        
+
         // Remove META comments
         let html = cleanMarkdown.replace(/<!--META[\s\S]*?-->/g, '');
-        
+
         // Remove TOC comments
         html = html.replace(/<!--TOC:[\s\S]*?-->/g, '');
 
@@ -653,44 +673,57 @@ class CommunityBridgeDocumentation {
 
     renderFunction(func, side, moduleName = 'unknown') {
         const anchor = this.generateAnchor(func.name, side, moduleName);
-        
+
         const parameters = func.parameters?.map(p => `
-            <li>
-                <code>${p.name}</code>
-                <span class="param-type">(${p.type})</span>
+            <li class="param-item">
+                <code class="param-name">${p.name}</code>
+                <span class="param-type">${p.type}</span>
                 ${p.optional ? '<span class="param-optional">optional</span>' : ''}
-                - <span class="param-desc">${p.description}</span>
-            </li>`).join('') || '<li>None</li>';
+                <span class="param-desc">${p.description}</span>
+            </li>`).join('') || '<li class="param-item">None</li>';
 
         const returns = func.returns?.map(r => `
-            <li>
-                <span class="param-type">(${r.type})</span>
-                - <span class="param-desc">${r.description}</span>
-            </li>`).join('') || '<li>None</li>';
+            <li class="param-item">
+                <span class="param-type">${r.type}</span>
+                <span class="param-desc">${r.description}</span>
+            </li>`).join('') || '<li class="param-item">None</li>';
 
-        const example = func.example ? 
+        const example = func.example ?
             `<div class="code-block-container">
-                <button class="copy-code-btn">Copy</button>
+                <button class="copy-code-btn" onclick="window.app.copyCode(this)">Copy</button>
                 <pre><code class="language-lua">${Array.isArray(func.example) ? func.example.join('\n') : func.example}</code></pre>
-            </div>` : '<p>No example provided.</p>';
+            </div>` : '<p class="no-example">No example provided.</p>';
 
         return `
             <div class="function-card" id="${anchor}">
                 <div class="function-header">
-                    <span class="function-name">${func.name}</span>
-                    <div class="function-meta">
-                        <span class="function-side ${side}">${side}</span>
-                        <button class="copy-link-btn" title="Copy Link" data-anchor="${anchor}">🔗</button>
+                    <div class="function-name-section">
+                        <span class="function-name">${func.name}</span>
+                        <span class="function-side ${side.toLowerCase()}">${side.toUpperCase()}</span>
+                    </div>
+                    <div class="function-actions">
+                        <button class="copy-link-btn" title="Copy Link" data-anchor="${anchor}">
+                            <span class="copy-icon">🔗</span>
+                        </button>
                     </div>
                 </div>
                 <div class="function-body">
                     <p class="function-description">${func.description || 'No description provided.'}</p>
-                    <h4>Parameters</h4>
-                    <ul class="param-list">${parameters}</ul>
-                    <h4>Returns</h4>
-                    <ul class="param-list">${returns}</ul>
-                    <h4>Example</h4>
-                    ${example}
+                    
+                    <div class="function-section">
+                        <h4 class="section-title">Parameters</h4>
+                        <ul class="param-list">${parameters}</ul>
+                    </div>
+                    
+                    <div class="function-section">
+                        <h4 class="section-title">Returns</h4>
+                        <ul class="param-list">${returns}</ul>
+                    </div>
+                    
+                    <div class="function-section">
+                        <h4 class="section-title">Example</h4>
+                        ${example}
+                    </div>
                 </div>
             </div>
         `;
@@ -698,9 +731,7 @@ class CommunityBridgeDocumentation {
 
     generateAnchor(name, side, module) {
         return `${name}-${side}-${module}`.toLowerCase().replace(/[^a-z0-9-]/g, '');
-    }
-
-    updateTableOfContents(functions = []) {
+    }    updateTableOfContents(functions = []) {
         const tocContainer = document.getElementById('toc-container');
         const tocContent = document.getElementById('toc-content');
         
@@ -711,17 +742,61 @@ class CommunityBridgeDocumentation {
             return;
         }
 
-        // Generate TOC from functions
-        const tocHtml = functions.map(func => {
-            const anchor = this.generateAnchor(func.name, func.side, this.currentModuleName);
-            return `<li><a href="#${anchor}" class="toc-link">${func.name}</a></li>`;
-        }).join('');
+        // Generate TOC from functions with better organization
+        const clientFunctions = functions.filter(f => f.side === 'client');
+        const serverFunctions = functions.filter(f => f.side === 'server');
+        const sharedFunctions = functions.filter(f => f.side === 'shared');
 
-        tocContent.innerHTML = `<ul class="toc-list">${tocHtml}</ul>`;
+        let tocHtml = '';
+
+        if (clientFunctions.length > 0) {
+            tocHtml += `
+                <div class="toc-section">
+                    <h4 class="toc-section-title">Client Functions</h4>
+                    <ul class="toc-list">
+                        ${clientFunctions.map(func => {
+                            const anchor = this.generateAnchor(func.name, func.side, this.currentModuleName);
+                            return `<li><a href="#${anchor}" class="toc-link" data-anchor="${anchor}">${func.name}</a></li>`;
+                        }).join('')}
+                    </ul>
+                </div>
+            `;
+        }
+
+        if (serverFunctions.length > 0) {
+            tocHtml += `
+                <div class="toc-section">
+                    <h4 class="toc-section-title">Server Functions</h4>
+                    <ul class="toc-list">
+                        ${serverFunctions.map(func => {
+                            const anchor = this.generateAnchor(func.name, func.side, this.currentModuleName);
+                            return `<li><a href="#${anchor}" class="toc-link" data-anchor="${anchor}">${func.name}</a></li>`;
+                        }).join('')}
+                    </ul>
+                </div>
+            `;
+        }
+
+        if (sharedFunctions.length > 0) {
+            tocHtml += `
+                <div class="toc-section">
+                    <h4 class="toc-section-title">Shared Functions</h4>
+                    <ul class="toc-list">
+                        ${sharedFunctions.map(func => {
+                            const anchor = this.generateAnchor(func.name, func.side, this.currentModuleName);
+                            return `<li><a href="#${anchor}" class="toc-link" data-anchor="${anchor}">${func.name}</a></li>`;
+                        }).join('')}
+                    </ul>
+                </div>
+            `;
+        }
+
+        tocContent.innerHTML = tocHtml;
         tocContainer.style.display = 'block';
 
-        // Add click handlers
+        // Add click handlers and scroll spy
         this.addTocClickHandlers(tocContainer);
+        this.setupScrollSpy();
     }
 
     addTocClickHandlers(tocContainer) {
@@ -732,9 +807,59 @@ class CommunityBridgeDocumentation {
                 const element = document.getElementById(anchorId);
                 if (element) {
                     this.scrollToElement(element);
+                    
+                    // Update URL hash
+                    window.location.hash = anchorId;
+                    
+                    // Update active state
+                    this.updateTocActiveState(anchorId);
                 }
             });
         });
+    }
+
+    setupScrollSpy() {
+        // Remove existing scroll listener
+        if (this.scrollSpyHandler) {
+            window.removeEventListener('scroll', this.scrollSpyHandler);
+        }
+
+        this.scrollSpyHandler = () => {
+            const functionCards = document.querySelectorAll('.function-card');
+            const header = document.querySelector('.header');
+            const headerHeight = header ? header.offsetHeight : 70;
+            const scrollPosition = window.scrollY + headerHeight + 100;
+
+            let activeAnchor = null;
+
+            functionCards.forEach(card => {
+                const cardTop = card.offsetTop;
+                const cardBottom = cardTop + card.offsetHeight;
+
+                if (scrollPosition >= cardTop && scrollPosition <= cardBottom) {
+                    activeAnchor = card.id;
+                }
+            });
+
+            if (activeAnchor) {
+                this.updateTocActiveState(activeAnchor);
+            }
+        };
+
+        window.addEventListener('scroll', this.scrollSpyHandler, { passive: true });
+    }
+
+    updateTocActiveState(anchorId) {
+        // Remove active class from all TOC links
+        document.querySelectorAll('.toc-link').forEach(link => {
+            link.classList.remove('active');
+        });
+
+        // Add active class to current link
+        const activeLink = document.querySelector(`.toc-link[data-anchor="${anchorId}"]`);
+        if (activeLink) {
+            activeLink.classList.add('active');
+        }
     }
 
     scrollToElement(element) {
@@ -755,7 +880,7 @@ class CommunityBridgeDocumentation {
 
     async buildSearchIndex() {
         this.searchIndex = [];
-        
+
         const addToIndex = (item, path, category) => {
             if (item.type === 'markdown') {
                 this.searchIndex.push({
@@ -791,7 +916,7 @@ class CommunityBridgeDocumentation {
         }
 
         const results = this.searchIndex.filter(item => {
-            const searchText = `${item.name} ${item.description}`.toLowerCase();
+            const searchText = `${item.name} ${item.description} ${item.category}`.toLowerCase();
             return searchText.includes(query.toLowerCase());
         });
 
@@ -805,28 +930,93 @@ class CommunityBridgeDocumentation {
         if (results.length === 0) {
             searchResults.innerHTML = `
                 <div class="search-results-container">
-                    <h3>No results found for "${searchTerm}"</h3>
+                    <h3>No results found for "${this.highlightMatch(searchTerm, searchTerm)}"</h3>
                     <p>Try a different search term or browse the navigation.</p>
                 </div>
             `;
         } else {
-            const resultsHtml = results.map(result => `
-                <div class="search-result-item" onclick="window.app.navigateToPath('${result.path}')">
-                    <h4>${result.name}</h4>
+            const resultsHtml = results.map((result, index) => `
+                <div class="search-result-item ${index === 0 ? 'highlighted' : ''}" 
+                     data-path="${result.path}" 
+                     data-index="${index}">
+                    <h4>${this.highlightMatch(result.name, searchTerm)}</h4>
                     <p class="result-path">${result.category} → ${result.path}</p>
-                    <p class="result-description">${result.description}</p>
+                    <p class="result-description">${this.highlightMatch(result.description || '', searchTerm)}</p>
                 </div>
             `).join('');
 
             searchResults.innerHTML = `
                 <div class="search-results-container">
-                    <h3>Search Results for "${searchTerm}" (${results.length})</h3>
-                    ${resultsHtml}
+                    <h3>Search Results for "${this.highlightMatch(searchTerm, searchTerm)}" (${results.length})</h3>
+                    <div class="search-results-list">
+                        ${resultsHtml}
+                    </div>
                 </div>
             `;
+
+            // Add click handlers to search results
+            searchResults.querySelectorAll('.search-result-item').forEach(item => {
+                item.addEventListener('click', () => {
+                    const path = item.getAttribute('data-path');
+                    if (path) {
+                        this.navigateToPath(path);
+                        this.hideSearchResults();
+                        document.getElementById('search-input').blur();
+                    }
+                });
+            });
         }
 
         searchResults.style.display = 'block';
+        this.currentSearchResults = results;
+        this.currentSearchIndex = 0;
+    }
+
+    highlightMatch(text, searchTerm) {
+        if (!text || !searchTerm) return text || '';
+        
+        const regex = new RegExp(`(${this.escapeRegex(searchTerm)})`, 'gi');
+        return text.replace(regex, '<mark>$1</mark>');
+    }
+
+    escapeRegex(string) {
+        return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    }
+
+    navigateSearchResults(direction) {
+        if (!this.currentSearchResults || this.currentSearchResults.length === 0) return;
+
+        // Remove current highlight
+        const currentHighlighted = document.querySelector('.search-result-item.highlighted');
+        if (currentHighlighted) {
+            currentHighlighted.classList.remove('highlighted');
+        }
+
+        // Update index
+        this.currentSearchIndex += direction;
+        if (this.currentSearchIndex < 0) {
+            this.currentSearchIndex = this.currentSearchResults.length - 1;
+        } else if (this.currentSearchIndex >= this.currentSearchResults.length) {
+            this.currentSearchIndex = 0;
+        }
+
+        // Highlight new item
+        const newHighlighted = document.querySelector(`[data-index="${this.currentSearchIndex}"]`);
+        if (newHighlighted) {
+            newHighlighted.classList.add('highlighted');
+            newHighlighted.scrollIntoView({ block: 'nearest' });
+        }
+    }
+
+    selectCurrentSearchResult() {
+        if (!this.currentSearchResults || this.currentSearchResults.length === 0) return;
+
+        const currentResult = this.currentSearchResults[this.currentSearchIndex];
+        if (currentResult) {
+            this.navigateToPath(currentResult.path);
+            this.hideSearchResults();
+            document.getElementById('search-input').blur();
+        }
     }
 
     hideSearchResults() {
@@ -834,6 +1024,8 @@ class CommunityBridgeDocumentation {
         if (searchResults) {
             searchResults.style.display = 'none';
         }
+        this.currentSearchResults = null;
+        this.currentSearchIndex = 0;
     }
 
     applySyntaxHighlighting() {
@@ -857,9 +1049,7 @@ class CommunityBridgeDocumentation {
         content = content.replace(/\b\d+\.?\d*\b/g, '<span class="number">$&</span>');
 
         codeElement.innerHTML = content;
-    }
-
-    setupCopyLinkButtons() {
+    }    setupCopyLinkButtons() {
         document.querySelectorAll('.copy-link-btn').forEach(btn => {
             btn.addEventListener('click', (e) => {
                 const anchor = e.currentTarget.getAttribute('data-anchor');
@@ -867,8 +1057,12 @@ class CommunityBridgeDocumentation {
                 
                 if (navigator.clipboard) {
                     navigator.clipboard.writeText(url).then(() => {
-                        e.currentTarget.textContent = '✅';
-                        setTimeout(() => e.currentTarget.textContent = '🔗', 2000);
+                        const icon = e.currentTarget.querySelector('.copy-icon');
+                        if (icon) {
+                            const originalText = icon.textContent;
+                            icon.textContent = '✅';
+                            setTimeout(() => icon.textContent = originalText, 2000);
+                        }
                     });
                 }
             });
@@ -876,17 +1070,49 @@ class CommunityBridgeDocumentation {
 
         document.querySelectorAll('.copy-code-btn').forEach(btn => {
             btn.addEventListener('click', (e) => {
-                const codeElement = e.currentTarget.nextElementSibling.querySelector('code');
-                const code = codeElement.textContent;
-                
-                if (navigator.clipboard) {
-                    navigator.clipboard.writeText(code).then(() => {
-                        e.currentTarget.textContent = 'Copied!';
-                        setTimeout(() => e.currentTarget.textContent = 'Copy', 2000);
-                    });
-                }
+                this.copyCode(e.currentTarget);
             });
         });
+    }
+
+    copyCode(button) {
+        const codeElement = button.nextElementSibling?.querySelector('code');
+        if (!codeElement) return;
+
+        const code = codeElement.textContent;
+        
+        if (navigator.clipboard) {
+            navigator.clipboard.writeText(code).then(() => {
+                const originalText = button.textContent;
+                button.textContent = 'Copied!';
+                button.classList.add('copied');
+                
+                setTimeout(() => {
+                    button.textContent = originalText;
+                    button.classList.remove('copied');
+                }, 2000);
+            }).catch(err => {
+                console.error('Failed to copy text: ', err);
+            });
+        } else {
+            // Fallback for older browsers
+            const textArea = document.createElement('textarea');
+            textArea.value = code;
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
+            
+            try {
+                document.execCommand('copy');
+                const originalText = button.textContent;
+                button.textContent = 'Copied!';
+                setTimeout(() => button.textContent = originalText, 2000);
+            } catch (err) {
+                console.error('Fallback: Failed to copy', err);
+            }
+            
+            document.body.removeChild(textArea);
+        }
     }
 
     loadInitialContent() {
