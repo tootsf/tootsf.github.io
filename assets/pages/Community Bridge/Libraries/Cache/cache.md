@@ -14,35 +14,96 @@ The Cache library provides functionality for FiveM resources with powerful cachi
 
 <--FNC
 {
+  "name": "Create",
+  "side": "shared",
+  "description": "Creates a new cache entry with a comparison function and optional update interval. The cache will automatically update based on the wait time and call registered callbacks when values change.",
+  "syntax": "Cache.Create(name, compare, waitTime)",
+  "parameters": [
+    { "name": "name", "type": "string", "description": "Unique name for the cache entry" },
+    { "name": "compare", "type": "function", "description": "Function that returns the current value to cache" },
+    { "name": "waitTime", "type": "number | nil", "description": "Update interval in milliseconds (nil for manual updates only)" }
+  ],
+  "returns": [
+    { "type": "CacheEntry | nil", "description": "The created cache entry or nil if creation failed" }
+  ],
+  "example": "-- Cache player health with 1 second updates\nlocal healthCache = Cache.Create(\n    \"player_health\",\n    function()\n        return GetEntityHealth(PlayerPedId())\n    end,\n    1000\n)\n\nprint(\"Health cache created with initial value: \" .. tostring(healthCache.Value))"
+}
+FNC-->
+
+<--FNC
+{
+  "name": "Get",
+  "side": "shared",
+  "description": "Retrieves the current cached value for the specified cache name.",
+  "syntax": "Cache.Get(name)",
+  "parameters": [
+    { "name": "name", "type": "string", "description": "Name of the cache entry to retrieve" }
+  ],
+  "returns": [
+    { "type": "any", "description": "The cached value or nil if cache doesn't exist" }
+  ],
+  "example": "-- Get the cached player health\nlocal currentHealth = Cache.Get(\"player_health\")\nif currentHealth then\n    print(\"Player health: \" .. currentHealth)\nelse\n    print(\"Health cache not found\")\nend"
+}
+FNC-->
+
+<--FNC
+{
   "name": "OnChange",
   "side": "shared",
-  "description": "Registers a callback function to be called when the cache value changes",
+  "description": "Registers a callback function to be called whenever the cached value changes. The callback receives both new and old values.",
   "syntax": "Cache.OnChange(name, onChange)",
   "parameters": [
-    { "name": "name", "type": "string", "description": "Name of the cache entry" },
+    { "name": "name", "type": "string", "description": "Name of the cache entry to monitor" },
     { "name": "onChange", "type": "function", "description": "Callback function with signature (newValue, oldValue)" }
   ],
   "returns": [
     { "type": "string", "description": "Callback ID for removal purposes" }
   ],
-  "example": "local callbackId = Cache.OnChange(\"player_health\", function(newHealth, oldHealth)\n    print(\"Health changed from \" .. oldHealth .. \" to \" .. newHealth)\nend)"
+  "example": "-- Monitor health changes\nlocal callbackId = Cache.OnChange(\"player_health\", function(newHealth, oldHealth)\n    local diff = newHealth - oldHealth\n    if diff > 0 then\n        print(\"Health increased by \" .. diff)\n    elseif diff < 0 then\n        print(\"Health decreased by \" .. math.abs(diff))\n    end\nend)\n\nprint(\"Health monitor registered with ID: \" .. callbackId)"
 }
 FNC-->
 
 <--FNC
 {
   "name": "RemoveOnChange",
-  "side": "shared", 
-  "description": "Removes a previously registered onChange callback using its ID",
+  "side": "shared",
+  "description": "Removes a previously registered onChange callback using its ID.",
   "syntax": "Cache.RemoveOnChange(name, id)",
   "parameters": [
     { "name": "name", "type": "string", "description": "Name of the cache entry" },
     { "name": "id", "type": "string", "description": "Callback ID returned from OnChange" }
   ],
-  "returns": [
-    { "type": "boolean", "description": "Returns true if callback was removed successfully" }
+  "returns": [],
+  "example": "-- Remove the health monitor callback\nCache.RemoveOnChange(\"player_health\", callbackId)\nprint(\"Health monitor callback removed\")"
+}
+FNC-->
+
+<--FNC
+{
+  "name": "Remove",
+  "side": "shared",
+  "description": "Completely removes a cache entry and all its associated callbacks. This will stop all automatic updates for the cache.",
+  "syntax": "Cache.Remove(name)",
+  "parameters": [
+    { "name": "name", "type": "string", "description": "Name of the cache entry to remove" }
   ],
-  "example": "local success = Cache.RemoveOnChange(\"player_health\", callbackId)\nprint(\"Callback removed: \" .. tostring(success))"
+  "returns": [],
+  "example": "-- Remove the health cache completely\nCache.Remove(\"player_health\")\nprint(\"Health cache removed\")"
+}
+FNC-->
+
+<--FNC
+{
+  "name": "Update",
+  "side": "shared",
+  "description": "Manually updates a cache entry with a new value and triggers onChange callbacks if the value has changed.",
+  "syntax": "Cache.Update(name, newValue)",
+  "parameters": [
+    { "name": "name", "type": "string", "description": "Name of the cache entry to update" },
+    { "name": "newValue", "type": "any", "description": "The new value to set" }
+  ],
+  "returns": [],
+  "example": "-- Manually update the health cache\nCache.Update(\"player_health\", 150)\nprint(\"Health cache manually updated to 150\")"
 }
 FNC-->
 

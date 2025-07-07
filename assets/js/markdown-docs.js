@@ -551,13 +551,17 @@ class CommunityBridgeDocumentation {
     async loadMarkdownContent(path) {
         try {
             console.log(`📄 Loading markdown content: ${path}`);
-            const response = await fetch(`./assets/pages/${path}.md`);
+            
+            // Add cache-busting parameter to force fresh content
+            const cacheBuster = Date.now();
+            const response = await fetch(`./assets/pages/${path}.md?v=${cacheBuster}`);
 
             if (!response.ok) {
                 throw new Error(`Failed to load ${path}: ${response.status}`);
             }
 
             const content = await response.text();
+            console.log(`📄 Loaded markdown content (${content.length} chars) with cache buster: ${cacheBuster}`);
 
             return {
                 content: content,
