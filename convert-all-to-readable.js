@@ -18,7 +18,7 @@ class BulkMarkdownConverter {
         // Convert Libraries
         await this.convertCategory(path.join(basePath, 'Libraries'), 'Libraries');
 
-        // Convert Modules  
+        // Convert Modules
         await this.convertCategory(path.join(basePath, 'Modules'), 'Modules');
 
         this.printSummary();

@@ -342,7 +342,7 @@ class CommunityBridgeDocumentation {
                         <span class="nav-title">${categoryName}</span>
                         <span class="nav-arrow">▼</span>
                     </div>
-                    <div class="nav-section-content">
+                    <div class="nav-items">
                         ${this.renderNavItems(categoryData.items || {})}
                     </div>
                 </div>
@@ -369,7 +369,7 @@ class CommunityBridgeDocumentation {
                             <span class="nav-title">${itemName}</span>
                             <span class="nav-arrow">▶</span>
                         </div>
-                        <div class="nav-subsection-content">
+                        <div class="nav-items">
                             ${this.renderNavItems(itemData.items)}
                         </div>
                     </div>
@@ -378,13 +378,16 @@ class CommunityBridgeDocumentation {
                 html += `
                     <div class="nav-item" data-path="${itemData.path}" data-type="markdown">
                         <span class="nav-icon">📄</span>
-                        <span class="nav-title">${itemData.name || this.formatTitle(itemName)}</span>
+                        <span class="nav-title">${itemData.name || itemName}</span>
                     </div>
                 `;
             }
         }
 
         return html;
+    }
+
+    setupRouter() {
     }
 
     setupRouter() {
@@ -608,7 +611,7 @@ class CommunityBridgeDocumentation {
 
         // Create clean markdown content WITHOUT function sections for base HTML
         let cleanMarkdown = markdownData.content;
-        
+
         if (functions.length > 0) {
             // Remove function sections from markdown to avoid duplication
             cleanMarkdown = this.removeFunctionSections(markdownData.content);

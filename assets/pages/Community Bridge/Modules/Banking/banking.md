@@ -63,7 +63,7 @@ end
 
 **Parameters:**
 - `fromPlayer` (number) - Source player ID
-- `toPlayer` (number) - Target player ID  
+- `toPlayer` (number) - Target player ID
 - `amount` (number) - Amount to transfer
 
 **Returns:**
