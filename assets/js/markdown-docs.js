@@ -317,7 +317,7 @@ class CommunityBridgeDocumentation {
 
         const folderItems = {};
 
-        // Try common file patterns
+        // Try common file patterns first
         const commonFiles = ['index.md', 'overview.md', 'readme.md', 'getting-started.md'];
 
         for (const fileName of commonFiles) {
@@ -338,6 +338,42 @@ class CommunityBridgeDocumentation {
             }
         }
 
+        // Now try to discover actual module files in subfolders
+        const knownModules = {
+            'Libraries': ['Anim', 'Batch', 'Cache', 'Callback', 'Cutscenes', 'DUI', 'Entities', 'Generators', 'Ids', 'Logs', 'Markers', 'Math', 'Particles', 'Placers', 'Point', 'Points', 'Raycast', 'Scaleform', 'Shells', 'SQL', 'StateBags', 'Table', 'Utility'],
+            'Modules': ['Banking', 'Clothing', 'Dialogue', 'Dispatch', 'Doorlock', 'Framework', 'Fuel', 'HelpText', 'Housing', 'Input', 'Inventory', 'Locales', 'Managment', 'Math', 'Menu', 'Notify', 'Phone', 'ProgressBar', 'Shops', 'Skills', 'Target', 'VehicleKey', 'Version', 'Weather']
+        };
+
+        if (knownModules[folderName]) {
+            for (const moduleName of knownModules[folderName]) {
+                try {
+                    // Try both lowercase and proper case file names
+                    const fileVariants = [
+                        `${moduleName.toLowerCase()}.md`,
+                        `${moduleName}.md`,
+                        'index.md',
+                        'overview.md'
+                    ];
+
+                    for (const fileName of fileVariants) {
+                        const filePath = `./assets/pages/Community Bridge/${folderName}/${moduleName}/${fileName}`;
+                        const response = await fetch(filePath);
+                        if (response.ok) {
+                            folderItems[moduleName] = {
+                                path: `Community Bridge/${folderName}/${moduleName}/${fileName.replace('.md', '')}`,
+                                type: 'markdown',
+                                name: moduleName
+                            };
+                            console.log(`✅ Found module file: ${folderName}/${moduleName}/${fileName}`);
+                            break; // Found a file for this module, stop trying variants
+                        }
+                    }
+                } catch (e) {
+                    // File doesn't exist, continue
+                }
+            }
+        }
+
         if (Object.keys(folderItems).length > 0) {
             structure['Community Bridge'].items[folderName] = {
                 icon: folderIcon,
@@ -349,8 +385,11 @@ class CommunityBridgeDocumentation {
     }
 
     renderNavigation() {
-        const sidebar = document.querySelector('.sidebar');
-        if (!sidebar) return;
+        const navMenu = document.getElementById('nav-menu');
+        if (!navMenu) {
+            console.error('❌ Navigation menu element not found');
+            return;
+        }
 
         let html = '';
 
@@ -369,10 +408,10 @@ class CommunityBridgeDocumentation {
             `;
         }
 
-        sidebar.innerHTML = html;
+        navMenu.innerHTML = html;
 
         // Initialize collapsed states
-        const sections = sidebar.querySelectorAll('.nav-section');
+        const sections = navMenu.querySelectorAll('.nav-section');
         sections.forEach((section, index) => {
             // First section expanded by default
             if (index === 0) {
@@ -382,7 +421,7 @@ class CommunityBridgeDocumentation {
             }
         });
 
-        const subsections = sidebar.querySelectorAll('.nav-subsection');
+        const subsections = navMenu.querySelectorAll('.nav-subsection');
         subsections.forEach(subsection => {
             subsection.classList.add('collapsed');
         });
