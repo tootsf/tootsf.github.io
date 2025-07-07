@@ -666,9 +666,8 @@ class CommunityBridgeDocumentation {
         console.log('📋 Updating TOC...');
         this.updateTableOfContents(functions);
 
-        // Apply syntax highlighting to code blocks after DOM insertion
-        console.log('🎨 Applying syntax highlighting to function code blocks...');
-        this.applySyntaxHighlighting();
+        // Skip syntax highlighting for now to test if base code display works
+        console.log('🎨 Skipping syntax highlighting to test base display...');
 
         // Setup copy buttons
         console.log('📋 Setting up copy buttons...');
@@ -1000,7 +999,7 @@ class CommunityBridgeDocumentation {
                 <div class="function-syntax">
                     <h4>Syntax:</h4>
                     <div class="code-block-container">
-                        <pre class="code-block language-lua"><code class="language-lua" data-raw-content="${encodeURIComponent(syntaxCode)}">${syntaxCode}</code></pre>
+                        <pre class="code-block language-lua"><code class="language-lua">${syntaxCode}</code></pre>
                         <button class="copy-button" title="Copy code">📋</button>
                     </div>
                 </div>
@@ -1010,7 +1009,7 @@ class CommunityBridgeDocumentation {
                     <div class="function-example">
                         <h4>Example:</h4>
                         <div class="code-block-container">
-                            <pre class="code-block language-lua"><code class="language-lua" data-raw-content="${encodeURIComponent(exampleCode)}">${exampleCode}</code></pre>
+                            <pre class="code-block language-lua"><code class="language-lua">${exampleCode}</code></pre>
                             <button class="copy-button" title="Copy code">📋</button>
                         </div>
                     </div>
