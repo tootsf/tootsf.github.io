@@ -1460,34 +1460,6 @@ class CommunityBridgeDocumentation {
         
         // Set the highlighted HTML
         codeElement.innerHTML = code;
-    }    applySyntaxHighlightingToText(content) {
-        // Apply syntax highlighting and return HTML string
-        let html = content;
-
-        // Lua keywords
-        const keywords = ['local', 'function', 'end', 'if', 'then', 'else', 'elseif', 'for', 'while', 'do', 'repeat', 'until', 'return', 'break', 'true', 'false', 'nil', 'and', 'or', 'not', 'in'];
-        keywords.forEach(keyword => {
-            const regex = new RegExp(`\\b(${keyword})\\b`, 'g');
-            html = html.replace(regex, `<span class="keyword">$1</span>`);
-        });
-
-        // String literals
-        html = html.replace(/"([^"]*?)"/g, '<span class="string">"$1"</span>');
-        html = html.replace(/'([^']*?)'/g, '<span class="string">\'$1\'</span>');
-
-        // Comments
-        html = html.replace(/--.*$/gm, '<span class="comment">$&</span>');
-
-        // Numbers
-        html = html.replace(/\b\d+\.?\d*\b/g, '<span class="number">$&</span>');
-
-        // Function calls (word followed by parentheses)
-        html = html.replace(/\b([a-zA-Z_][a-zA-Z0-9_]*)\s*(?=\()/g, '<span class="function">$1</span>');
-
-        // Operators
-        html = html.replace(/(\+|\-|\*|\/|%|==|~=|<=|>=|<|>|=)/g, '<span class="operator">$1</span>');
-
-        return html;
     }
 
     setupCopyLinkButtons() {
@@ -1537,20 +1509,6 @@ class CommunityBridgeDocumentation {
             setTimeout(() => {
                 button.textContent = '📋';
             }, 2000);
-        });
-    }
-
-    applySyntaxHighlighting() {
-        // Apply Lua syntax highlighting to code blocks
-        const codeBlocks = document.querySelectorAll('.code-block code');
-        codeBlocks.forEach(block => {
-            this.applyLuaSyntaxHighlighting(block);
-        });
-
-        // Set up copy button event listeners
-        const copyButtons = document.querySelectorAll('.copy-button');
-        copyButtons.forEach(button => {
-            button.addEventListener('click', () => this.copyCode(button));
         });
     }
 
