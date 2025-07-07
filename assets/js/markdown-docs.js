@@ -996,7 +996,7 @@ class CommunityBridgeDocumentation {
                 <div class="function-syntax">
                     <h4>Syntax:</h4>
                     <div class="code-block-container">
-                        <pre class="code-block"><code>${func.syntax || func.name + '()'}</code></pre>
+                        <pre class="code-block language-lua"><code class="language-lua">${func.syntax || func.name + '()'}</code></pre>
                         <button class="copy-button" title="Copy code">📋</button>
                     </div>
                 </div>
@@ -1006,7 +1006,7 @@ class CommunityBridgeDocumentation {
                     <div class="function-example">
                         <h4>Example:</h4>
                         <div class="code-block-container">
-                            <pre class="code-block"><code>${Array.isArray(func.example) ? func.example.join('\n') : func.example}</code></pre>
+                            <pre class="code-block language-lua"><code class="language-lua">${Array.isArray(func.example) ? func.example.join('\n') : func.example}</code></pre>
                             <button class="copy-button" title="Copy code">📋</button>
                         </div>
                     </div>
@@ -1411,24 +1411,43 @@ class CommunityBridgeDocumentation {
     }
 
     applySyntaxHighlighting() {
-        document.querySelectorAll('code.language-lua').forEach(codeElement => {
+        // Apply syntax highlighting to all code blocks
+        document.querySelectorAll('code.language-lua, .function-example code, .function-syntax code').forEach(codeElement => {
             this.applyLuaSyntaxHighlighting(codeElement);
         });
     }
 
     applyLuaSyntaxHighlighting(codeElement) {
+        // Prevent double-processing
+        if (codeElement.classList.contains('highlighted')) {
+            return;
+        }
+        codeElement.classList.add('highlighted');
+
         let content = codeElement.textContent;
 
-        const keywords = ['local', 'function', 'end', 'if', 'then', 'else', 'elseif', 'for', 'while', 'do', 'repeat', 'until', 'return', 'break', 'true', 'false', 'nil'];
+        // Lua keywords
+        const keywords = ['local', 'function', 'end', 'if', 'then', 'else', 'elseif', 'for', 'while', 'do', 'repeat', 'until', 'return', 'break', 'true', 'false', 'nil', 'and', 'or', 'not', 'in'];
         keywords.forEach(keyword => {
             const regex = new RegExp(`\\b(${keyword})\\b`, 'g');
             content = content.replace(regex, `<span class="keyword">$1</span>`);
         });
 
+        // String literals
         content = content.replace(/"([^"]*?)"/g, '<span class="string">"$1"</span>');
         content = content.replace(/'([^']*?)'/g, '<span class="string">\'$1\'</span>');
+
+        // Comments
         content = content.replace(/--.*$/gm, '<span class="comment">$&</span>');
+
+        // Numbers
         content = content.replace(/\b\d+\.?\d*\b/g, '<span class="number">$&</span>');
+
+        // Function calls (word followed by parentheses)
+        content = content.replace(/\b([a-zA-Z_][a-zA-Z0-9_]*)\s*(?=\()/g, '<span class="function">$1</span>');
+
+        // Operators
+        content = content.replace(/(\+|\-|\*|\/|%|==|~=|<=|>=|<|>|=)/g, '<span class="operator">$1</span>');
 
         codeElement.innerHTML = content;
     }    setupCopyLinkButtons() {

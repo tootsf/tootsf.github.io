@@ -1388,19 +1388,37 @@ body {
   cursor: pointer;
 }
 
-/* Syntax Highlighting */
+/* Syntax Highlighting - works with or without language-lua class */
+.code-block .keyword,
 .content-area .language-lua .keyword {
   color: #ff7b72;
   font-weight: bold;
 }
 
+.code-block .string,
 .content-area .language-lua .string {
   color: #a5d6ff;
 }
 
+.code-block .comment,
 .content-area .language-lua .comment {
   color: #8b949e;
   font-style: italic;
+}
+
+.code-block .number,
+.content-area .language-lua .number {
+  color: #79c0ff;
+}
+
+.code-block .function,
+.content-area .language-lua .function {
+  color: #d2a8ff;
+}
+
+.code-block .operator,
+.content-area .language-lua .operator {
+  color: #ff7b72;
 }
 
 /* Navigation Styles for Markdown */
