@@ -1430,8 +1430,7 @@ class CommunityBridgeDocumentation {
 
         let code = codeElement.textContent;
         
-        // Escape HTML first to prevent conflicts
-        code = code.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+        // Don't escape HTML - we want to inject HTML spans
         
         // Lua keywords (order matters - longer keywords first)
         const keywords = [
