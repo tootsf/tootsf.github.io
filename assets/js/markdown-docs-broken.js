@@ -1,4 +1,4 @@
-// Community Bridge Documentation Site - Markdown Enhanced Version (Clean)
+// Community Bridge Documentation Site - Markdown Enhanced Version
 class CommunityBridgeDocumentation {
     constructor() {
         this.currentTheme = localStorage.getItem('theme') || 'dark';
@@ -6,8 +6,8 @@ class CommunityBridgeDocumentation {
         this.allModules = {};
         this.searchIndex = [];
         this.isLoading = false;
-        this.currentModuleToc = null;
-        this.currentModuleName = null;
+        this.currentModuleToc = null; // Store TOC data for current module
+        this.currentModuleName = null; // Store current module name for anchor generation
 
         this.init();
     }
@@ -37,17 +37,20 @@ class CommunityBridgeDocumentation {
     }
 
     setupBasicEventListeners() {
+        // Theme toggle
         const themeToggle = document.getElementById('theme-toggle');
         if (themeToggle) {
             themeToggle.addEventListener('click', () => this.toggleTheme());
         }
 
+        // Search functionality with better error handling
         this.setupSearchInput();
     }
 
     setupSearchInput() {
         const searchInput = document.getElementById('search-input');
         if (searchInput) {
+            // Clear any existing event listeners by cloning the element
             const newSearchInput = searchInput.cloneNode(true);
             searchInput.parentNode.replaceChild(newSearchInput, searchInput);
 
@@ -73,9 +76,11 @@ class CommunityBridgeDocumentation {
         }
     }
 
+    // NEW: Fixed navigation event setup - called AFTER navigation is rendered
     setupNavigationEvents() {
         console.log('🎯 Setting up navigation click handlers...');
 
+        // Handle section headers (Community Bridge, etc.)
         const sectionHeaders = document.querySelectorAll('.nav-section-header');
         console.log('📂 Found section headers:', sectionHeaders.length);
 
@@ -85,15 +90,11 @@ class CommunityBridgeDocumentation {
                 const section = header.closest('.nav-section');
                 if (section) {
                     section.classList.toggle('collapsed');
-                    section.classList.toggle('expanded');
-                    const arrow = header.querySelector('.nav-arrow');
-                    if (arrow) {
-                        arrow.textContent = section.classList.contains('expanded') ? '▼' : '▶';
-                    }
                 }
             });
         });
 
+        // Handle subsection headers (Modules, etc.)
         const subsectionHeaders = document.querySelectorAll('.nav-subsection-header');
         console.log('📦 Found subsection headers:', subsectionHeaders.length);
 
@@ -103,15 +104,11 @@ class CommunityBridgeDocumentation {
                 const subsection = header.closest('.nav-subsection');
                 if (subsection) {
                     subsection.classList.toggle('collapsed');
-                    subsection.classList.toggle('expanded');
-                    const arrow = header.querySelector('.nav-arrow');
-                    if (arrow) {
-                        arrow.textContent = subsection.classList.contains('expanded') ? '▼' : '▶';
-                    }
                 }
             });
         });
 
+        // Handle navigation item clicks
         const navItems = document.querySelectorAll('.nav-item');
         console.log('🔗 Found nav items:', navItems.length);
 
@@ -147,7 +144,7 @@ class CommunityBridgeDocumentation {
         this.setLoading(true);
 
         try {
-            console.log('🔍 Starting discoverPagesStructure...');
+            console.log('� Starting discoverPagesStructure...');
             const structure = await this.discoverPagesStructure();
             
             this.allModules = structure;
@@ -199,6 +196,48 @@ class CommunityBridgeDocumentation {
             await this.discoverSubsection(structure, 'Libraries', '📚');
             await this.discoverSubsection(structure, 'Modules', '📦');
 
+            // Try to discover Examples (as a separate section)
+            try {
+                const examplesResponse = await fetch('./assets/pages/Examples/basic-usage.md');
+                if (examplesResponse.ok) {
+                    structure['Examples'] = {
+                        icon: '💡',
+                        items: {
+                            'basic-usage': {
+                                path: 'Examples/basic-usage',
+                                type: 'markdown',
+                                name: 'Basic Usage'
+                            }
+                        },
+                        type: 'section'
+                    };
+                    console.log('✅ Found Examples section');
+                }
+            } catch (e) {
+                console.log('📝 Examples not found, skipping');
+            }
+
+            // Try to discover Getting Started (as a separate section)
+            try {
+                const gettingStartedResponse = await fetch('./assets/pages/Getting Started/index.md');
+                if (gettingStartedResponse.ok) {
+                    structure['Getting Started'] = {
+                        icon: '🚀',
+                        items: {
+                            'index': {
+                                path: 'Getting Started/index',
+                                type: 'markdown',
+                                name: 'Getting Started'
+                            }
+                        },
+                        type: 'section'
+                    };
+                    console.log('✅ Found Getting Started section');
+                }
+            } catch (e) {
+                console.log('📝 Getting Started not found, skipping');
+            }
+
         } catch (error) {
             console.error('❌ Error in discoverPagesStructure:', error);
         }
@@ -246,6 +285,7 @@ class CommunityBridgeDocumentation {
         }
     }
 
+    // NEW: Discover all folders under Community Bridge
     renderNavigation() {
         const navMenu = document.getElementById('nav-menu');
         if (!navMenu) {
@@ -257,7 +297,49 @@ class CommunityBridgeDocumentation {
 
         for (const [categoryName, categoryData] of Object.entries(this.allModules)) {
             html += `
-                <div class="nav-section expanded" data-category="${categoryName}">
+                <div class="nav-section" data-category="${categoryName}">
+                    <div class="nav-section-header" data-category="${categoryName}">
+                        <span class="nav-icon">${categoryData.icon || '�'}</span>
+                        <span class="nav-title">${categoryName}</span>
+                        <span class="nav-arrow">▼</span>
+                    </div>
+                    <div class="nav-section-content">
+                        ${this.renderNavItems(categoryData.items || {})}
+                    </div>
+                </div>
+            `;
+        }
+
+        navMenu.innerHTML = html;
+
+        // Initialize collapsed states
+        const sections = navMenu.querySelectorAll('.nav-section');
+        sections.forEach((section, index) => {
+            // First section expanded by default
+            if (index === 0) {
+                section.classList.add('expanded');
+            } else {
+                section.classList.add('collapsed');
+            }
+        });
+
+        const subsections = navMenu.querySelectorAll('.nav-subsection');
+        subsections.forEach(subsection => {
+            subsection.classList.add('collapsed');
+        });
+
+        // IMPORTANT: Set up navigation events AFTER rendering
+        this.setupNavigationEvents();
+
+        console.log('🎨 Navigation rendered successfully');
+    }
+        }
+
+        let html = '';
+
+        for (const [categoryName, categoryData] of Object.entries(this.allModules)) {
+            html += `
+                <div class="nav-section" data-category="${categoryName}">
                     <div class="nav-section-header" data-category="${categoryName}">
                         <span class="nav-icon">${categoryData.icon || '📁'}</span>
                         <span class="nav-title">${categoryName}</span>
@@ -272,6 +354,22 @@ class CommunityBridgeDocumentation {
 
         navMenu.innerHTML = html;
 
+        // Initialize collapsed states
+        const sections = navMenu.querySelectorAll('.nav-section');
+        sections.forEach((section, index) => {
+            // First section expanded by default
+            if (index === 0) {
+                section.classList.add('expanded');
+            } else {
+                section.classList.add('collapsed');
+            }
+        });
+
+        const subsections = navMenu.querySelectorAll('.nav-subsection');
+        subsections.forEach(subsection => {
+            subsection.classList.add('collapsed');
+        });
+
         // IMPORTANT: Set up navigation events AFTER rendering
         this.setupNavigationEvents();
 
@@ -284,7 +382,7 @@ class CommunityBridgeDocumentation {
         for (const [itemName, itemData] of Object.entries(items)) {
             if (itemData.type === 'subsection' && itemData.items) {
                 html += `
-                    <div class="nav-subsection collapsed" data-subsection="${itemName}">
+                    <div class="nav-subsection" data-subsection="${itemName}">
                         <div class="nav-subsection-header" data-subsection="${itemName}">
                             <span class="nav-icon">${itemData.icon || '📁'}</span>
                             <span class="nav-title">${itemName}</span>
@@ -306,16 +404,116 @@ class CommunityBridgeDocumentation {
         }
 
         return html;
-    }
-
-    setupRouter() {
+    }    setupRouter() {
         window.addEventListener('hashchange', () => this.handleRouteChange());
     }
 
     handleRouteChange() {
         const hash = window.location.hash.slice(1);
         if (hash) {
-            this.navigateToPath(hash);
+            // Check if this is a function anchor
+            if (this.isFunctionAnchor(hash)) {
+                this.handleFunctionAnchor(hash);
+            } else {
+                this.navigateToPath(hash);
+            }
+        }
+    }
+
+    isFunctionAnchor(path) {
+        // Function anchors follow the pattern: functionname-side-modulename
+        // They contain at least two dashes and are not typical page paths
+        const parts = path.split('-');
+        return parts.length >= 3 && !path.includes('/') && !path.includes(' ');
+    }
+
+    handleFunctionAnchor(anchorId) {
+        console.log('🎯 Handling function anchor:', anchorId);
+
+        // Check if the target element exists on the current page
+        const targetElement = document.getElementById(anchorId);
+        if (targetElement) {
+            this.scrollToElement(targetElement);
+            this.updateTocActiveState(anchorId);
+        } else {
+            // Navigate to the module that contains this function
+            this.navigateToModuleForFunction(anchorId);
+        }
+    }
+
+    navigateToModuleForFunction(anchorId) {
+        // Extract module name from anchor (last part after final dash)
+        const parts = anchorId.split('-');
+        if (parts.length >= 3) {
+            const moduleName = parts[parts.length - 1];
+            const moduleInfo = this.findModuleByName(moduleName);
+            if (moduleInfo) {
+                console.log(`🔄 Navigating to module ${moduleInfo.path} for function ${anchorId}`);
+                this.navigateToPath(moduleInfo.path.replace('.md', ''));
+                // Set a timeout to scroll to the function after the page loads
+                setTimeout(() => {
+                    const element = document.getElementById(anchorId);
+                    if (element) {
+                        this.scrollToElement(element);
+                        this.updateTocActiveState(anchorId);
+                    }
+                }, 500);
+            }
+        }
+    }
+
+    findModuleByName(moduleName) {
+        const searchItems = (items) => {
+            for (const [key, item] of Object.entries(items)) {
+                if (item.type === 'markdown') {
+                    const itemModuleName = item.path.split('/').pop().replace('.md', '');
+                    if (itemModuleName.toLowerCase() === moduleName.toLowerCase()) {
+                        return item;
+                    }
+                } else if (item.items) {
+                    const found = searchItems(item.items);
+                    if (found) return found;
+                }
+            }
+            return null;
+        };
+
+        for (const [category, categoryData] of Object.entries(this.allModules)) {
+            const found = searchItems(categoryData.items || {});
+            if (found) return found;
+        }
+        return null;
+    }
+
+    scrollToElement(element) {
+        // Calculate offset to account for fixed header
+        const header = document.querySelector('.header');
+        const headerHeight = header ? header.offsetHeight : 60;
+        const additionalOffset = 20;
+        const totalOffset = headerHeight + additionalOffset;
+
+        // Get target position and subtract offset
+        const targetPosition = element.getBoundingClientRect().top + window.pageYOffset - totalOffset;
+
+        // Smooth scroll to adjusted position
+        window.scrollTo({
+            top: targetPosition,
+            behavior: 'smooth'
+        });
+
+        console.log(`📍 Scrolled to element with ${totalOffset}px offset`);
+    }
+
+    updateTocActiveState(anchorId) {
+        // Remove active class from all TOC links
+        document.querySelectorAll('.toc-link').forEach(link => {
+            link.classList.remove('active');
+        });
+
+        // Add active class to the TOC link that corresponds to this anchor
+        const tocLink = document.querySelector(`.toc-link[href="#${anchorId}"]`);
+        if (tocLink) {
+            tocLink.classList.add('active');
         }
     }
 
@@ -399,6 +597,8 @@ class CommunityBridgeDocumentation {
 
     parseMarkdownMeta(content) {
         const meta = {};
+
+        // Look for META comment block
         const metaMatch = content.match(/<!--META\s*([\s\S]*?)\s*-->/);
         if (metaMatch) {
             const metaContent = metaMatch[1];
@@ -417,6 +617,19 @@ class CommunityBridgeDocumentation {
                     }
                 }
             }
+        }
+
+        // Extract TOC items
+        const tocItems = [];
+        const tocMatches = content.matchAll(/<!--TOC:\s*([^-]+?)-->/g);
+        for (const match of tocMatches) {
+            const title = match[1].trim();
+            const anchor = '#' + title.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+            tocItems.push({ title, anchor });
+        }
+
+        if (tocItems.length > 0) {
+            meta.tocItems = tocItems;
         }
 
         return meta;
@@ -453,6 +666,18 @@ class CommunityBridgeDocumentation {
 
         // Setup copy buttons
         this.setupCopyLinkButtons();
+    }
+
+    renderPage(markdown) {
+        const contentArea = document.getElementById('content-area');
+        const functions = this.parseFunctionsFromMarkdown(markdown);
+        const contentHtml = this.renderMarkdown(markdown);
+        const functionsHtml = this.renderFunctions(functions);
+
+        contentArea.innerHTML = contentHtml + functionsHtml;
+        this.updateTableOfContents(functions);
+        this.setupCopyButtons();
+        this.applySyntaxHighlighting();
     }
 
     parseFunctionsFromMarkdown(markdown) {
@@ -501,6 +726,10 @@ class CommunityBridgeDocumentation {
         // Convert links
         html = html.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank">$1</a>');
 
+        // Convert lists
+        html = html.replace(/^- (.*)$/gm, '<li>$1</li>');
+        html = html.replace(/(<li>.*<\/li>)/s, '<ul>$1</ul>');
+
         // Convert paragraphs
         html = html.split('\n\n').map(p => p.trim() ? `<p>${p}</p>` : '').join('');
 
@@ -508,6 +737,10 @@ class CommunityBridgeDocumentation {
         html = html.replace(/<p><\/p>/g, '');
         html = html.replace(/<p>\s*<h/g, '<h');
         html = html.replace(/<\/h([1-6])>\s*<\/p>/g, '</h$1>');
+        html = html.replace(/<p>\s*<div/g, '<div');
+        html = html.replace(/<\/div>\s*<\/p>/g, '</div>');
+        html = html.replace(/<p>\s*<ul>/g, '<ul>');
+        html = html.replace(/<\/ul>\s*<\/p>/g, '</ul>');
 
         return html;
     }
@@ -593,25 +826,10 @@ class CommunityBridgeDocumentation {
                 const element = document.getElementById(anchorId);
                 if (element) {
                     this.scrollToElement(element);
+                    this.updateTocActiveState(anchorId);
                 }
             });
         });
-    }
-
-    scrollToElement(element) {
-        const header = document.querySelector('.header');
-        const headerHeight = header ? header.offsetHeight : 60;
-        const additionalOffset = 20;
-        const totalOffset = headerHeight + additionalOffset;
-
-        const targetPosition = element.getBoundingClientRect().top + window.pageYOffset - totalOffset;
-
-        window.scrollTo({
-            top: targetPosition,
-            behavior: 'smooth'
-        });
-
-        console.log(`📍 Scrolled to element with ${totalOffset}px offset`);
     }
 
     async buildSearchIndex() {
@@ -698,6 +916,7 @@ class CommunityBridgeDocumentation {
     }
 
     applySyntaxHighlighting() {
+        // Apply syntax highlighting to all code blocks after content is loaded
         document.querySelectorAll('code.language-lua').forEach(codeElement => {
             this.applyLuaSyntaxHighlighting(codeElement);
         });
@@ -706,15 +925,21 @@ class CommunityBridgeDocumentation {
     applyLuaSyntaxHighlighting(codeElement) {
         let content = codeElement.textContent;
 
+        // Highlight Lua keywords
         const keywords = ['local', 'function', 'end', 'if', 'then', 'else', 'elseif', 'for', 'while', 'do', 'repeat', 'until', 'return', 'break', 'true', 'false', 'nil'];
         keywords.forEach(keyword => {
             const regex = new RegExp(`\\b(${keyword})\\b`, 'g');
             content = content.replace(regex, `<span class="keyword">$1</span>`);
         });
 
+        // Highlight strings
         content = content.replace(/"([^"]*?)"/g, '<span class="string">"$1"</span>');
         content = content.replace(/'([^']*?)'/g, '<span class="string">\'$1\'</span>');
+
+        // Highlight comments
         content = content.replace(/--.*$/gm, '<span class="comment">$&</span>');
+
+        // Highlight numbers
         content = content.replace(/\b\d+\.?\d*\b/g, '<span class="number">$&</span>');
 
         codeElement.innerHTML = content;
@@ -751,6 +976,7 @@ class CommunityBridgeDocumentation {
     }
 
     loadInitialContent() {
+        // Load default content
         const defaultPath = 'Community Bridge/overview';
         this.navigateToPath(defaultPath);
     }
