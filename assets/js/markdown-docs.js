@@ -579,22 +579,44 @@ class CommunityBridgeDocumentation {
         }
 
         return meta;
-    }
-
-    renderMarkdownContent(markdownData, modulePath) {
+    }    renderMarkdownContent(markdownData, modulePath) {
         const contentArea = document.getElementById('content-area');
         if (!contentArea) return;
 
         // Parse functions from markdown
         const functions = this.parseFunctionsFromMarkdown(markdownData.content);
-
+        
         // Convert markdown to HTML (basic conversion)
         let html = this.convertMarkdownToHTML(markdownData.content);
-
-        // Add functions section if functions exist
+        
+        // Add functions sections organized like app-fixed.js
         if (functions.length > 0) {
-            html += '<h2 id="functions-section">Functions</h2>';
-            html += functions.map(func => this.renderFunction(func, func.side, this.currentModuleName)).join('');
+            const clientFunctions = functions.filter(f => f.side === 'client');
+            const serverFunctions = functions.filter(f => f.side === 'server');
+            const sharedFunctions = functions.filter(f => f.side === 'shared');
+
+            const moduleName = modulePath.split('/').pop();
+
+            if (clientFunctions.length > 0) {
+                html += '<h2 id="client-functions">Client Functions</h2>';
+                clientFunctions.forEach(func => {
+                    html += this.renderFunction(func, 'client', moduleName);
+                });
+            }
+
+            if (serverFunctions.length > 0) {
+                html += '<h2 id="server-functions">Server Functions</h2>';
+                serverFunctions.forEach(func => {
+                    html += this.renderFunction(func, 'server', moduleName);
+                });
+            }
+
+            if (sharedFunctions.length > 0) {
+                html += '<h2 id="shared-functions">Shared Functions</h2>';
+                sharedFunctions.forEach(func => {
+                    html += this.renderFunction(func, 'shared', moduleName);
+                });
+            }
         }
 
         // Set content
@@ -607,7 +629,7 @@ class CommunityBridgeDocumentation {
         // Generate and render TOC if needed
         this.updateTableOfContents(functions);
 
-        // Setup syntax highlighting
+        // Setup syntax highlighting like app-fixed.js
         this.applySyntaxHighlighting();
 
         // Setup copy buttons
@@ -672,59 +694,72 @@ class CommunityBridgeDocumentation {
     }
 
     renderFunction(func, side, moduleName = 'unknown') {
-        const anchor = this.generateAnchor(func.name, side, moduleName);
+        const sideClass = side === 'client' ? 'client' : side === 'server' ? 'server' : 'shared';
+        const sideIcon = side === 'client' ? '🖥️' : side === 'server' ? '🖧' : '🔄';
 
-        const parameters = func.parameters?.map(p => `
-            <li class="param-item">
-                <code class="param-name">${p.name}</code>
-                <span class="param-type">${p.type}</span>
-                ${p.optional ? '<span class="param-optional">optional</span>' : ''}
-                <span class="param-desc">${p.description}</span>
-            </li>`).join('') || '<li class="param-item">None</li>';
+        // Create comprehensive unique anchor ID: functionname-side-module (same as app-fixed.js)
+        const cleanFunctionName = func.name.toLowerCase().replace(/[^a-z0-9]/g, '');
+        const cleanModuleName = moduleName.toLowerCase().replace(/[^a-z0-9]/g, '');
+        const anchorId = `${cleanFunctionName}-${side}-${cleanModuleName}`;
 
-        const returns = func.returns?.map(r => `
-            <li class="param-item">
-                <span class="param-type">${r.type}</span>
-                <span class="param-desc">${r.description}</span>
-            </li>`).join('') || '<li class="param-item">None</li>';
+        console.log(`🔗 Creating anchor: ${anchorId} for function ${func.name} (${side}) in ${moduleName}`);
 
-        const example = func.example ?
-            `<div class="code-block-container">
-                <button class="copy-code-btn" onclick="window.app.copyCode(this)">Copy</button>
-                <pre><code class="language-lua">${Array.isArray(func.example) ? func.example.join('\n') : func.example}</code></pre>
-            </div>` : '<p class="no-example">No example provided.</p>';
+        let parametersHtml = '';
+        if (func.parameters && func.parameters.length > 0) {
+            parametersHtml = `
+                <div class="function-parameters">
+                    <h4>Parameters:</h4>
+                    <ul>
+                        ${func.parameters.map(param => `
+                            <li><code>${param.name}</code> (${param.type}) - ${param.description || ''}</li>
+                        `).join('')}
+                    </ul>
+                </div>
+            `;
+        }
+
+        let returnsHtml = '';
+        if (func.returns && func.returns.length > 0) {
+            returnsHtml = `
+                <div class="function-returns">
+                    <h4>Returns:</h4>
+                    <ul>
+                        ${func.returns.map(ret => `
+                            <li>(${ret.type}) - ${ret.description || ''}</li>
+                        `).join('')}
+                    </ul>
+                </div>
+            `;
+        }
 
         return `
-            <div class="function-card" id="${anchor}">
+            <div class="function-card" id="${anchorId}">
                 <div class="function-header">
-                    <div class="function-name-section">
-                        <span class="function-name">${func.name}</span>
-                        <span class="function-side ${side.toLowerCase()}">${side.toUpperCase()}</span>
-                    </div>
-                    <div class="function-actions">
-                        <button class="copy-link-btn" title="Copy Link" data-anchor="${anchor}">
-                            <span class="copy-icon">🔗</span>
-                        </button>
+                    <h3>${func.name}</h3>
+                    <div class="function-badges">
+                        <span class="badge ${sideClass}">${sideIcon} ${side}</span>
+                        <button class="copy-link-btn" title="Copy direct link to this function" data-anchor="${anchorId}">🔗</button>
                     </div>
                 </div>
-                <div class="function-body">
-                    <p class="function-description">${func.description || 'No description provided.'}</p>
-                    
-                    <div class="function-section">
-                        <h4 class="section-title">Parameters</h4>
-                        <ul class="param-list">${parameters}</ul>
-                    </div>
-                    
-                    <div class="function-section">
-                        <h4 class="section-title">Returns</h4>
-                        <ul class="param-list">${returns}</ul>
-                    </div>
-                    
-                    <div class="function-section">
-                        <h4 class="section-title">Example</h4>
-                        ${example}
+                <p>${func.description || 'No description available.'}</p>
+                <div class="function-syntax">
+                    <h4>Syntax:</h4>
+                    <div class="code-block-container">
+                        <pre class="code-block"><code>${func.syntax || func.name + '()'}</code></pre>
+                        <button class="copy-button" title="Copy code">📋</button>
                     </div>
                 </div>
+                ${parametersHtml}
+                ${returnsHtml}
+                ${func.example ? `
+                    <div class="function-example">
+                        <h4>Example:</h4>
+                        <div class="code-block-container">
+                            <pre class="code-block"><code>${Array.isArray(func.example) ? func.example.join('\n') : func.example}</code></pre>
+                            <button class="copy-button" title="Copy code">📋</button>
+                        </div>
+                    </div>
+                ` : ''}
             </div>
         `;
     }
@@ -732,71 +767,139 @@ class CommunityBridgeDocumentation {
     generateAnchor(name, side, module) {
         return `${name}-${side}-${module}`.toLowerCase().replace(/[^a-z0-9-]/g, '');
     }    updateTableOfContents(functions = []) {
+        console.log('📋 Updating table of contents...');
         const tocContainer = document.getElementById('toc-container');
         const tocContent = document.getElementById('toc-content');
         
-        if (!tocContainer || !tocContent) return;
+        if (!tocContainer || !tocContent) {
+            console.warn('⚠️ TOC container not found');
+            return;
+        }
 
         if (functions.length === 0) {
             tocContainer.style.display = 'none';
             return;
         }
 
-        // Generate TOC from functions with better organization
+        // Create TOC structure similar to app-fixed.js
         const clientFunctions = functions.filter(f => f.side === 'client');
         const serverFunctions = functions.filter(f => f.side === 'server');
         const sharedFunctions = functions.filter(f => f.side === 'shared');
 
-        let tocHtml = '';
+        const moduleName = this.currentModuleName || 'unknown';
+        
+        let tocItems = [];
 
         if (clientFunctions.length > 0) {
-            tocHtml += `
-                <div class="toc-section">
-                    <h4 class="toc-section-title">Client Functions</h4>
-                    <ul class="toc-list">
-                        ${clientFunctions.map(func => {
-                            const anchor = this.generateAnchor(func.name, func.side, this.currentModuleName);
-                            return `<li><a href="#${anchor}" class="toc-link" data-anchor="${anchor}">${func.name}</a></li>`;
-                        }).join('')}
-                    </ul>
-                </div>
-            `;
+            const clientItems = clientFunctions.map(func => {
+                const cleanFunctionName = func.name.toLowerCase().replace(/[^a-z0-9]/g, '');
+                const cleanModuleName = moduleName.toLowerCase().replace(/[^a-z0-9]/g, '');
+                const anchor = `#${cleanFunctionName}-client-${cleanModuleName}`;
+                return {
+                    title: func.name,
+                    anchor: anchor
+                };
+            });
+            
+            tocItems.push({
+                title: 'Client Functions',
+                anchor: '#client-functions',
+                children: clientItems
+            });
         }
 
         if (serverFunctions.length > 0) {
-            tocHtml += `
-                <div class="toc-section">
-                    <h4 class="toc-section-title">Server Functions</h4>
-                    <ul class="toc-list">
-                        ${serverFunctions.map(func => {
-                            const anchor = this.generateAnchor(func.name, func.side, this.currentModuleName);
-                            return `<li><a href="#${anchor}" class="toc-link" data-anchor="${anchor}">${func.name}</a></li>`;
-                        }).join('')}
-                    </ul>
-                </div>
-            `;
+            const serverItems = serverFunctions.map(func => {
+                const cleanFunctionName = func.name.toLowerCase().replace(/[^a-z0-9]/g, '');
+                const cleanModuleName = moduleName.toLowerCase().replace(/[^a-z0-9]/g, '');
+                const anchor = `#${cleanFunctionName}-server-${cleanModuleName}`;
+                return {
+                    title: func.name,
+                    anchor: anchor
+                };
+            });
+            
+            tocItems.push({
+                title: 'Server Functions',
+                anchor: '#server-functions',
+                children: serverItems
+            });
         }
 
         if (sharedFunctions.length > 0) {
-            tocHtml += `
-                <div class="toc-section">
-                    <h4 class="toc-section-title">Shared Functions</h4>
-                    <ul class="toc-list">
-                        ${sharedFunctions.map(func => {
-                            const anchor = this.generateAnchor(func.name, func.side, this.currentModuleName);
-                            return `<li><a href="#${anchor}" class="toc-link" data-anchor="${anchor}">${func.name}</a></li>`;
-                        }).join('')}
-                    </ul>
-                </div>
-            `;
+            const sharedItems = sharedFunctions.map(func => {
+                const cleanFunctionName = func.name.toLowerCase().replace(/[^a-z0-9]/g, '');
+                const cleanModuleName = moduleName.toLowerCase().replace(/[^a-z0-9]/g, '');
+                const anchor = `#${cleanFunctionName}-shared-${cleanModuleName}`;
+                return {
+                    title: func.name,
+                    anchor: anchor
+                };
+            });
+            
+            tocItems.push({
+                title: 'Shared Functions',
+                anchor: '#shared-functions',
+                children: sharedItems
+            });
         }
 
-        tocContent.innerHTML = tocHtml;
+        // Render TOC using the same structure as app-fixed.js
+        this.renderTocFromData({ items: tocItems }, tocContent);
         tocContainer.style.display = 'block';
+    }
 
-        // Add click handlers and scroll spy
+    renderTocFromData(tocData, tocContainer) {
+        console.log('📋 Rendering TOC from data structure');
+
+        let tocHtml = '';
+        const moduleName = this.currentModuleName || 'unknown';
+
+        const renderTocItems = (items, level = 0, parentType = null) => {
+            return items.map(item => {
+                const indent = level * 1;
+                const icon = level === 0 ? '' :
+                           item.title.includes('Functions') ? '' : '⚡ ';
+
+                // Determine the correct anchor based on context
+                let anchor = item.anchor;
+                
+                // If this is a function under Client Functions, Server Functions, or Shared Functions
+                if (level > 0 && parentType && !item.title.includes('Functions')) {
+                    const side = parentType.includes('Client') ? 'client' :
+                                parentType.includes('Server') ? 'server' :
+                                parentType.includes('Shared') ? 'shared' : 'client';
+                    const cleanFunctionName = item.title.toLowerCase().replace(/[^a-z0-9]/g, '');
+                    const cleanModuleName = moduleName.toLowerCase().replace(/[^a-z0-9]/g, '');
+                    anchor = `#${cleanFunctionName}-${side}-${cleanModuleName}`;
+                    console.log(`🔗 Generated TOC anchor: ${anchor} for ${item.title} (${side})`);
+                }
+
+                let html = `
+                    <li class="toc-item toc-level-${level + 1}" style="margin-left: ${indent}rem;">
+                        <a href="${anchor}" class="toc-link">
+                            ${icon}${item.title}
+                        </a>
+                    </li>
+                `;
+
+                // Render children if they exist, passing parent type for context
+                if (item.children && item.children.length > 0) {
+                    const currentParentType = item.title.includes('Functions') ? item.title : parentType;
+                    html += renderTocItems(item.children, level + 1, currentParentType);
+                }
+
+                return html;
+            }).join('');
+        };
+
+        tocHtml = `<ul class="toc-list">${renderTocItems(tocData.items)}</ul>`;
+        tocContainer.innerHTML = tocHtml;
+
+        // Add click handlers for smooth scrolling
         this.addTocClickHandlers(tocContainer);
-        this.setupScrollSpy();
+
+        console.log(`✅ TOC updated with ${tocData.items.length} main items`);
     }
 
     addTocClickHandlers(tocContainer) {
@@ -1050,69 +1153,67 @@ class CommunityBridgeDocumentation {
 
         codeElement.innerHTML = content;
     }    setupCopyLinkButtons() {
-        document.querySelectorAll('.copy-link-btn').forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                const anchor = e.currentTarget.getAttribute('data-anchor');
+        // Setup copy link buttons (same as app-fixed.js)
+        const copyLinkButtons = document.querySelectorAll('.copy-link-btn');
+        copyLinkButtons.forEach(button => {
+            button.addEventListener('click', (e) => {
+                const anchor = button.getAttribute('data-anchor');
                 const url = `${window.location.origin}${window.location.pathname}#${anchor}`;
                 
-                if (navigator.clipboard) {
-                    navigator.clipboard.writeText(url).then(() => {
-                        const icon = e.currentTarget.querySelector('.copy-icon');
-                        if (icon) {
-                            const originalText = icon.textContent;
-                            icon.textContent = '✅';
-                            setTimeout(() => icon.textContent = originalText, 2000);
-                        }
-                    });
-                }
-            });
-        });
-
-        document.querySelectorAll('.copy-code-btn').forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                this.copyCode(e.currentTarget);
+                navigator.clipboard.writeText(url).then(() => {
+                    const originalText = button.textContent;
+                    button.textContent = '✅';
+                    button.style.color = 'var(--accent-color)';
+                    
+                    setTimeout(() => {
+                        button.textContent = originalText;
+                        button.style.color = '';
+                    }, 2000);
+                }).catch(err => {
+                    console.error('Failed to copy link:', err);
+                    button.textContent = '❌';
+                    setTimeout(() => {
+                        button.textContent = '🔗';
+                    }, 2000);
+                });
             });
         });
     }
 
     copyCode(button) {
-        const codeElement = button.nextElementSibling?.querySelector('code');
-        if (!codeElement) return;
+        const codeBlock = button.parentNode.querySelector('code');
+        const text = codeBlock.textContent;
 
-        const code = codeElement.textContent;
-        
-        if (navigator.clipboard) {
-            navigator.clipboard.writeText(code).then(() => {
-                const originalText = button.textContent;
-                button.textContent = 'Copied!';
-                button.classList.add('copied');
-                
-                setTimeout(() => {
-                    button.textContent = originalText;
-                    button.classList.remove('copied');
-                }, 2000);
-            }).catch(err => {
-                console.error('Failed to copy text: ', err);
-            });
-        } else {
-            // Fallback for older browsers
-            const textArea = document.createElement('textarea');
-            textArea.value = code;
-            document.body.appendChild(textArea);
-            textArea.focus();
-            textArea.select();
-            
-            try {
-                document.execCommand('copy');
-                const originalText = button.textContent;
-                button.textContent = 'Copied!';
-                setTimeout(() => button.textContent = originalText, 2000);
-            } catch (err) {
-                console.error('Fallback: Failed to copy', err);
-            }
-            
-            document.body.removeChild(textArea);
-        }
+        navigator.clipboard.writeText(text).then(() => {
+            const originalText = button.textContent;
+            button.textContent = '✅';
+            button.style.color = 'var(--accent-color)';
+
+            setTimeout(() => {
+                button.textContent = originalText;
+                button.style.color = '';
+            }, 2000);
+        }).catch(err => {
+            console.error('Failed to copy code:', err);
+            button.textContent = '❌';
+            setTimeout(() => {
+                button.textContent = '📋';
+            }, 2000);
+        });
+    }
+
+    applySyntaxHighlighting() {
+        // Apply Lua syntax highlighting to code blocks
+        const codeBlocks = document.querySelectorAll('.code-block code');
+        codeBlocks.forEach(block => {
+            this.applyLuaSyntaxHighlighting(block);
+        });
+
+        // Set up copy button event listeners
+        const copyButtons = document.querySelectorAll('.copy-button');
+        copyButtons.forEach(button => {
+            button.addEventListener('click', () => this.copyCode(button));
+        });
     }
 
     loadInitialContent() {
