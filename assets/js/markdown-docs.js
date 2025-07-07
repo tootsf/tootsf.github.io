@@ -680,27 +680,8 @@ class CommunityBridgeDocumentation {
         
         const functions = [];
         
-        // First try the old <--FNC format for backwards compatibility
-        const oldFormatRegex = /<--FNC\s*([\s\S]*?)\s*FNC-->/g;
-        let match;
-        while ((match = oldFormatRegex.exec(markdown)) !== null) {
-            try {
-                const funcData = JSON.parse(match[1]);
-                console.log(`✅ Parsed old format function: ${funcData.name} (${funcData.side})`);
-                functions.push(funcData);
-            } catch (e) {
-                console.error("❌ Failed to parse old format function JSON:", e);
-            }
-        }
-        
-        // If old format found, return those
-        if (functions.length > 0) {
-            console.log(`🔧 Found ${functions.length} functions in old format`);
-            return functions;
-        }
-        
-        // Parse new human-readable format
-        console.log('� Trying human-readable markdown format...');
+        // Parse human-readable format FIRST
+        console.log('🔧 Parsing human-readable markdown format...');
         
         // Find function sections (Client Functions, Server Functions, Shared Functions)
         const sectionRegex = /^## (Client|Server|Shared) Functions\s*$([\s\S]*?)(?=^## |\n*$)/gm;
@@ -710,7 +691,7 @@ class CommunityBridgeDocumentation {
             const sectionType = sectionMatch[1].toLowerCase();
             const sectionContent = sectionMatch[2];
             
-            console.log(`� Found ${sectionType} functions section`);
+            console.log(`📋 Found ${sectionType} functions section`);
             
             // Find individual functions within the section
             const functionRegex = /^### ([^\n]+)\n([\s\S]*?)(?=^### |$)/gm;
@@ -728,6 +709,22 @@ class CommunityBridgeDocumentation {
                     }
                 } catch (e) {
                     console.error(`❌ Failed to parse function ${functionName}:`, e);
+                }
+            }
+        }
+        
+        // If no readable functions found, try the old <--FNC format for backwards compatibility
+        if (functions.length === 0) {
+            console.log('🔧 No readable functions found, trying old FNC format...');
+            const oldFormatRegex = /<--FNC\s*([\s\S]*?)\s*FNC-->/g;
+            let match;
+            while ((match = oldFormatRegex.exec(markdown)) !== null) {
+                try {
+                    const funcData = JSON.parse(match[1]);
+                    console.log(`✅ Parsed old format function: ${funcData.name} (${funcData.side})`);
+                    functions.push(funcData);
+                } catch (e) {
+                    console.error("❌ Failed to parse old format function JSON:", e);
                 }
             }
         }

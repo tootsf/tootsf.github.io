@@ -4,35 +4,43 @@
 
 This is a test library to verify the markdown function parsing works correctly.
 
-<--FNC
-{
-  "name": "TestFunction",
-  "side": "client",
-  "description": "A test function to verify the system works",
-  "syntax": "TestFunction(message)",
-  "parameters": [
-    { "name": "message", "type": "string", "description": "The message to display" }
-  ],
-  "returns": [
-    { "type": "boolean", "description": "Returns true if successful" }
-  ],
-  "example": "local success = TestFunction('Hello World')\nprint(success)"
-}
-FNC-->
+## Client Functions
 
-<--FNC
-{
-  "name": "ServerTestFunction",
-  "side": "server", 
-  "description": "A server-side test function",
-  "syntax": "ServerTestFunction(playerId, data)",
-  "parameters": [
-    { "name": "playerId", "type": "number", "description": "The player ID" },
-    { "name": "data", "type": "table", "description": "Data to process" }
-  ],
-  "returns": [
-    { "type": "boolean", "description": "Returns true if processed successfully" }
-  ],
-  "example": "local result = ServerTestFunction(source, {test = true})\nprint('Server result:', result)"
-}
-FNC-->
+### TestFunction
+
+**Description:** A test function to verify the system works
+
+**Syntax:** `TestFunction(message)`
+
+**Parameters:**
+- `message` (string) - The message to display
+
+**Returns:**
+- `boolean` - Returns true if successful
+
+**Example:**
+```lua
+local success = TestFunction('Hello World')
+print(success)
+```
+
+## Server Functions
+
+### ServerTestFunction
+
+**Description:** A server-side test function
+
+**Syntax:** `ServerTestFunction(playerId, data)`
+
+**Parameters:**
+- `playerId` (number) - The player ID
+- `data` (table) - Data to process
+
+**Returns:**
+- `boolean` - Returns true if processed successfully
+
+**Example:**
+```lua
+local result = ServerTestFunction(source, {test = true})
+print('Server result:', result)
+```
