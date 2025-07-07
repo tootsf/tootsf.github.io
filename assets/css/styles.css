@@ -524,21 +524,11 @@ body {
     position: relative;
 }
 
-.nav-subsection-header::after {
-    content: "▼";
-    position: absolute;
-    right: 1rem;
-    font-size: 0.7rem;
-    opacity: 0.6;
-    transition: transform 0.3s ease;
-}
+/* Removed ::after pseudo-elements to avoid duplicate arrows */
+/* JavaScript now handles arrows via <span class="nav-arrow"> elements */
 
-.nav-subsection.collapsed .nav-subsection-header::after {
-    transform: rotate(-90deg);
-}
-
-.nav-subsection-header:hover::after {
-    opacity: 1;
+.nav-subsection-header:hover {
+    background-color: var(--nav-hover);
 }
 
 /* Active navigation item */
