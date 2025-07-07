@@ -583,11 +583,15 @@ class CommunityBridgeDocumentation {
         const contentArea = document.getElementById('content-area');
         if (!contentArea) return;
 
+        console.log('📝 Rendering markdown content for:', modulePath);
+
         // Parse functions from markdown
         const functions = this.parseFunctionsFromMarkdown(markdownData.content);
+        console.log('🔧 Parsed functions:', functions);
         
         // Convert markdown to HTML (basic conversion)
         let html = this.convertMarkdownToHTML(markdownData.content);
+        console.log('📄 Base HTML length:', html.length);
         
         // Add functions sections organized like app-fixed.js
         if (functions.length > 0) {
@@ -596,10 +600,15 @@ class CommunityBridgeDocumentation {
             const sharedFunctions = functions.filter(f => f.side === 'shared');
 
             const moduleName = modulePath.split('/').pop();
+            console.log('🏷️ Module name:', moduleName);
+            console.log('🖥️ Client functions:', clientFunctions.length);
+            console.log('🖧 Server functions:', serverFunctions.length);
+            console.log('🔄 Shared functions:', sharedFunctions.length);
 
             if (clientFunctions.length > 0) {
                 html += '<h2 id="client-functions">Client Functions</h2>';
                 clientFunctions.forEach(func => {
+                    console.log('🔧 Rendering client function:', func.name);
                     html += this.renderFunction(func, 'client', moduleName);
                 });
             }
@@ -607,6 +616,7 @@ class CommunityBridgeDocumentation {
             if (serverFunctions.length > 0) {
                 html += '<h2 id="server-functions">Server Functions</h2>';
                 serverFunctions.forEach(func => {
+                    console.log('🔧 Rendering server function:', func.name);
                     html += this.renderFunction(func, 'server', moduleName);
                 });
             }
@@ -614,10 +624,15 @@ class CommunityBridgeDocumentation {
             if (sharedFunctions.length > 0) {
                 html += '<h2 id="shared-functions">Shared Functions</h2>';
                 sharedFunctions.forEach(func => {
+                    console.log('🔧 Rendering shared function:', func.name);
                     html += this.renderFunction(func, 'shared', moduleName);
                 });
             }
+        } else {
+            console.log('⚠️ No functions found in markdown');
         }
+
+        console.log('📄 Final HTML length:', html.length);
 
         // Set content
         contentArea.innerHTML = html;
@@ -627,13 +642,18 @@ class CommunityBridgeDocumentation {
         this.currentModuleName = modulePath.split('/').pop();
 
         // Generate and render TOC if needed
+        console.log('📋 Updating TOC...');
         this.updateTableOfContents(functions);
 
         // Setup syntax highlighting like app-fixed.js
+        console.log('🎨 Applying syntax highlighting...');
         this.applySyntaxHighlighting();
 
         // Setup copy buttons
+        console.log('📋 Setting up copy buttons...');
         this.setupCopyLinkButtons();
+
+        console.log('✅ Markdown content rendering complete');
     }
 
     parseFunctionsFromMarkdown(markdown) {
@@ -772,14 +792,17 @@ class CommunityBridgeDocumentation {
         const tocContent = document.getElementById('toc-content');
         
         if (!tocContainer || !tocContent) {
-            console.warn('⚠️ TOC container not found');
+            console.warn('⚠️ TOC container or content not found');
             return;
         }
 
         if (functions.length === 0) {
+            console.log('📋 No functions, hiding TOC');
             tocContainer.style.display = 'none';
             return;
         }
+
+        console.log('📋 Building TOC for', functions.length, 'functions');
 
         // Create TOC structure similar to app-fixed.js
         const clientFunctions = functions.filter(f => f.side === 'client');
@@ -844,12 +867,16 @@ class CommunityBridgeDocumentation {
             });
         }
 
+        console.log('📋 TOC items structure:', tocItems);
+
         // Render TOC using the same structure as app-fixed.js
         this.renderTocFromData({ items: tocItems }, tocContent);
         tocContainer.style.display = 'block';
+        
+        console.log('📋 TOC should now be visible');
     }
 
-    renderTocFromData(tocData, tocContainer) {
+    renderTocFromData(tocData, tocContent) {
         console.log('📋 Rendering TOC from data structure');
 
         let tocHtml = '';
@@ -894,10 +921,10 @@ class CommunityBridgeDocumentation {
         };
 
         tocHtml = `<ul class="toc-list">${renderTocItems(tocData.items)}</ul>`;
-        tocContainer.innerHTML = tocHtml;
+        tocContent.innerHTML = tocHtml;
 
         // Add click handlers for smooth scrolling
-        this.addTocClickHandlers(tocContainer);
+        this.addTocClickHandlers(document.getElementById('toc-container'));
 
         console.log(`✅ TOC updated with ${tocData.items.length} main items`);
     }
