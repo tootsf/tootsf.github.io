@@ -1437,30 +1437,55 @@ class CommunityBridgeDocumentation {
             return;
         }
         
-        // Lua keywords (order matters - longer keywords first)
+        // Use a simpler approach: replace strings with placeholders first
+        const stringPlaceholders = [];
+        let stringIndex = 0;
+        
+        // 1. Replace strings with placeholders
+        code = code.replace(/(["'])(?:(?!\1)[^\\]|\\.)*\1/g, (match) => {
+            const placeholder = `__STRING_${stringIndex}__`;
+            stringPlaceholders[stringIndex] = `<span class="lua-string">${match}</span>`;
+            stringIndex++;
+            return placeholder;
+        });
+        
+        // 2. Replace comments with placeholders
+        const commentPlaceholders = [];
+        let commentIndex = 0;
+        code = code.replace(/--.*$/gm, (match) => {
+            const placeholder = `__COMMENT_${commentIndex}__`;
+            commentPlaceholders[commentIndex] = `<span class="lua-comment">${match}</span>`;
+            commentIndex++;
+            return placeholder;
+        });
+        
+        // 3. Highlight keywords (now safe from string/comment conflicts)
         const keywords = [
             'function', 'local', 'return', 'end', 'if', 'then', 'else', 'elseif', 
             'while', 'for', 'do', 'repeat', 'until', 'break', 'true', 'false', 
             'nil', 'and', 'or', 'not', 'in'
         ];
         
-        // Apply keyword highlighting
         keywords.forEach(keyword => {
             const regex = new RegExp(`\\b(${keyword})\\b`, 'g');
             code = code.replace(regex, `<span class="lua-keyword">$1</span>`);
         });
         
-        // String highlighting (both single and double quotes)
-        code = code.replace(/(["'])(?:(?!\1)[^\\]|\\.)*\1/g, '<span class="lua-string">$&</span>');
-        
-        // Comment highlighting
-        code = code.replace(/--.*$/gm, '<span class="lua-comment">$&</span>');
-        
-        // Number highlighting
+        // 4. Highlight numbers
         code = code.replace(/\b\d+\.?\d*\b/g, '<span class="lua-number">$&</span>');
         
-        // Function call highlighting (word followed by opening parenthesis)
+        // 5. Highlight function calls
         code = code.replace(/\b([a-zA-Z_][a-zA-Z0-9_\.]*)\s*(?=\()/g, '<span class="lua-function">$1</span>');
+        
+        // 6. Restore strings
+        for (let i = 0; i < stringPlaceholders.length; i++) {
+            code = code.replace(`__STRING_${i}__`, stringPlaceholders[i]);
+        }
+        
+        // 7. Restore comments
+        for (let i = 0; i < commentPlaceholders.length; i++) {
+            code = code.replace(`__COMMENT_${i}__`, commentPlaceholders[i]);
+        }
         
         console.log('🎨 Highlighted code:', code.substring(0, 200));
         
