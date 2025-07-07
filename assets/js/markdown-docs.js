@@ -551,7 +551,7 @@ class CommunityBridgeDocumentation {
     async loadMarkdownContent(path) {
         try {
             console.log(`📄 Loading markdown content: ${path}`);
-            
+
             // Add cache-busting parameter to force fresh content
             const cacheBuster = Date.now();
             const response = await fetch(`./assets/pages/${path}.md?v=${cacheBuster}`);
@@ -605,11 +605,11 @@ class CommunityBridgeDocumentation {
         // Parse functions from markdown
         const functions = this.parseFunctionsFromMarkdown(markdownData.content);
         console.log('🔧 Parsed functions:', functions);
-        
+
         // Convert markdown to HTML (basic conversion)
         let html = this.convertMarkdownToHTML(markdownData.content);
         console.log('📄 Base HTML length:', html.length);
-        
+
         // Add functions sections organized like app-fixed.js
         if (functions.length > 0) {
             const clientFunctions = functions.filter(f => f.side === 'client');
@@ -677,33 +677,33 @@ class CommunityBridgeDocumentation {
         console.log('🔧 Parsing functions from markdown...');
         console.log('📄 Markdown content length:', markdown.length);
         console.log('📄 First 500 chars of markdown:', markdown.substring(0, 500));
-        
+
         const functions = [];
-        
+
         // Parse human-readable format FIRST
         console.log('🔧 Parsing human-readable markdown format...');
-        
+
         // Find function sections (Client Functions, Server Functions, Shared Functions)
         const sectionRegex = /^## (Client|Server|Shared) Functions\s*$([\s\S]*?)(?=^## |\n*$)/gm;
         let sectionMatch;
-        
+
         while ((sectionMatch = sectionRegex.exec(markdown)) !== null) {
             const sectionType = sectionMatch[1].toLowerCase();
             const sectionContent = sectionMatch[2];
-            
+
             console.log(`📋 Found ${sectionType} functions section`);
             console.log(`📄 Section content length: ${sectionContent.length}`);
             console.log(`📄 First 200 chars of section:`, sectionContent.substring(0, 200));
-            
+
             // Split by ### headers to find functions
             const lines = sectionContent.split('\n');
             let currentFunction = null;
             let currentFunctionContent = [];
             let functionCount = 0;
-            
+
             for (let i = 0; i < lines.length; i++) {
                 const line = lines[i];
-                
+
                 // Check if this line is a function header (### FunctionName)
                 if (line.startsWith('### ')) {
                     // If we have a previous function, process it
@@ -711,7 +711,7 @@ class CommunityBridgeDocumentation {
                         functionCount++;
                         console.log(`🔧 Found function ${functionCount}: ${currentFunction}`);
                         console.log(`📄 Function content length: ${currentFunctionContent.join('\n').length}`);
-                        
+
                         try {
                             const func = this.parseReadableFunction(currentFunction, currentFunctionContent.join('\n'), sectionType);
                             if (func) {
@@ -722,7 +722,7 @@ class CommunityBridgeDocumentation {
                             console.error(`❌ Failed to parse function ${currentFunction}:`, e);
                         }
                     }
-                    
+
                     // Start new function
                     currentFunction = line.substring(4).trim(); // Remove '### '
                     currentFunctionContent = [];
@@ -731,13 +731,13 @@ class CommunityBridgeDocumentation {
                     currentFunctionContent.push(line);
                 }
             }
-            
+
             // Process the last function
             if (currentFunction) {
                 functionCount++;
                 console.log(`🔧 Found function ${functionCount}: ${currentFunction}`);
                 console.log(`📄 Function content length: ${currentFunctionContent.join('\n').length}`);
-                
+
                 try {
                     const func = this.parseReadableFunction(currentFunction, currentFunctionContent.join('\n'), sectionType);
                     if (func) {
@@ -748,10 +748,10 @@ class CommunityBridgeDocumentation {
                     console.error(`❌ Failed to parse function ${currentFunction}:`, e);
                 }
             }
-            
+
             console.log(`📊 Found ${functionCount} functions in ${sectionType} section`);
         }
-        
+
         // If no readable functions found, try the old <--FNC format for backwards compatibility
         if (functions.length === 0) {
             console.log('🔧 No readable functions found, trying old FNC format...');
@@ -767,7 +767,7 @@ class CommunityBridgeDocumentation {
                 }
             }
         }
-        
+
         console.log(`🔧 Total functions found: ${functions.length}`);
         return functions;
     }
@@ -775,7 +775,7 @@ class CommunityBridgeDocumentation {
     parseReadableFunction(name, content, side) {
         console.log(`🔧 Parsing function: ${name}`);
         console.log(`📄 Function content:`, content.substring(0, 300));
-        
+
         const func = {
             name: name,
             side: side,
@@ -785,7 +785,7 @@ class CommunityBridgeDocumentation {
             returns: [],
             example: ''
         };
-        
+
         // Extract description
         const descMatch = content.match(/\*\*Description:\*\*\s*([^\n]+)/);
         if (descMatch) {
@@ -794,7 +794,7 @@ class CommunityBridgeDocumentation {
         } else {
             console.log(`❌ No description found in content`);
         }
-        
+
         // Extract syntax
         const syntaxMatch = content.match(/\*\*Syntax:\*\*\s*`([^`]+)`/);
         if (syntaxMatch) {
@@ -803,7 +803,7 @@ class CommunityBridgeDocumentation {
         } else {
             console.log(`❌ No syntax found in content`);
         }
-        
+
         // Extract parameters
         const paramSection = content.match(/\*\*Parameters:\*\*([\s\S]*?)(?=\*\*Returns:\*\*|\*\*Example:\*\*|$)/);
         if (paramSection) {
@@ -826,7 +826,7 @@ class CommunityBridgeDocumentation {
         } else {
             console.log(`❌ No parameters section found`);
         }
-        
+
         // Extract returns
         const returnSection = content.match(/\*\*Returns:\*\*([\s\S]*?)(?=\*\*Example:\*\*|$)/);
         if (returnSection) {
@@ -848,7 +848,7 @@ class CommunityBridgeDocumentation {
         } else {
             console.log(`❌ No returns section found`);
         }
-        
+
         // Extract example
         const exampleMatch = content.match(/\*\*Example:\*\*\s*```(?:lua)?\n([\s\S]*?)```/);
         if (exampleMatch) {
@@ -857,7 +857,7 @@ class CommunityBridgeDocumentation {
         } else {
             console.log(`❌ No example found`);
         }
-        
+
         console.log(`🔧 Final parsed function:`, func);
         return func;
     }
@@ -981,7 +981,7 @@ class CommunityBridgeDocumentation {
         console.log('📋 Updating table of contents...');
         const tocContainer = document.getElementById('toc-container');
         const tocContent = document.getElementById('toc-content');
-        
+
         if (!tocContainer || !tocContent) {
             console.warn('⚠️ TOC container or content not found');
             return;
@@ -1001,7 +1001,7 @@ class CommunityBridgeDocumentation {
         const sharedFunctions = functions.filter(f => f.side === 'shared');
 
         const moduleName = this.currentModuleName || 'unknown';
-        
+
         let tocItems = [];
 
         if (clientFunctions.length > 0) {
@@ -1014,7 +1014,7 @@ class CommunityBridgeDocumentation {
                     anchor: anchor
                 };
             });
-            
+
             tocItems.push({
                 title: 'Client Functions',
                 anchor: '#client-functions',
@@ -1032,7 +1032,7 @@ class CommunityBridgeDocumentation {
                     anchor: anchor
                 };
             });
-            
+
             tocItems.push({
                 title: 'Server Functions',
                 anchor: '#server-functions',
@@ -1050,7 +1050,7 @@ class CommunityBridgeDocumentation {
                     anchor: anchor
                 };
             });
-            
+
             tocItems.push({
                 title: 'Shared Functions',
                 anchor: '#shared-functions',
@@ -1063,7 +1063,7 @@ class CommunityBridgeDocumentation {
         // Render TOC using the same structure as app-fixed.js
         this.renderTocFromData({ items: tocItems }, tocContent);
         tocContainer.style.display = 'block';
-        
+
         console.log('📋 TOC should now be visible');
     }
 
@@ -1081,7 +1081,7 @@ class CommunityBridgeDocumentation {
 
                 // Determine the correct anchor based on context
                 let anchor = item.anchor;
-                
+
                 // If this is a function under Client Functions, Server Functions, or Shared Functions
                 if (level > 0 && parentType && !item.title.includes('Functions')) {
                     const side = parentType.includes('Client') ? 'client' :
@@ -1130,10 +1130,10 @@ class CommunityBridgeDocumentation {
                     const element = document.getElementById(anchorId);
                     if (element) {
                         this.scrollToElement(element);
-                        
+
                         // Update URL hash without triggering navigation
                         history.replaceState(null, null, href);
-                        
+
                         // Update active state
                         this.updateTocActiveState(anchorId);
                     } else {
@@ -1192,7 +1192,7 @@ class CommunityBridgeDocumentation {
 
     scrollToElement(element) {
         if (!element) return;
-        
+
         const header = document.querySelector('.header');
         const headerHeight = header ? header.offsetHeight : 70;
         const elementPosition = element.offsetTop;
@@ -1278,8 +1278,8 @@ class CommunityBridgeDocumentation {
             `;
         } else {
             const resultsHtml = results.map((result, index) => `
-                <div class="search-result-item ${index === 0 ? 'highlighted' : ''}" 
-                     data-path="${result.path}" 
+                <div class="search-result-item ${index === 0 ? 'highlighted' : ''}"
+                     data-path="${result.path}"
                      data-index="${index}">
                     <h4>${this.highlightMatch(result.name, searchTerm)}</h4>
                     <p class="result-path">${result.category} → ${result.path}</p>
@@ -1316,7 +1316,7 @@ class CommunityBridgeDocumentation {
 
     highlightMatch(text, searchTerm) {
         if (!text || !searchTerm) return text || '';
-        
+
         const regex = new RegExp(`(${this.escapeRegex(searchTerm)})`, 'gi');
         return text.replace(regex, '<mark>$1</mark>');
     }
@@ -1398,12 +1398,12 @@ class CommunityBridgeDocumentation {
             button.addEventListener('click', (e) => {
                 const anchor = button.getAttribute('data-anchor');
                 const url = `${window.location.origin}${window.location.pathname}#${anchor}`;
-                
+
                 navigator.clipboard.writeText(url).then(() => {
                     const originalText = button.textContent;
                     button.textContent = '✅';
                     button.style.color = 'var(--accent-color)';
-                    
+
                     setTimeout(() => {
                         button.textContent = originalText;
                         button.style.color = '';
