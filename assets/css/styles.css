@@ -609,6 +609,27 @@ body {
 
 .nav-subsection-header {
     position: relative;
+    padding: 8px 24px;
+    color: var(--text-primary);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    transition: all 0.2s ease;
+    font-size: 14px;
+    border-left: 3px solid transparent;
+    cursor: pointer;
+}
+
+.nav-subsection-header:hover {
+    background-color: var(--nav-hover);
+    border-left-color: var(--accent-color);
+}
+
+/* Items inside subsections should be more indented */
+.nav-subsection .nav-items .nav-item {
+    padding-left: 40px; /* More indented than the subsection header */
 }
 
 .nav-subsection-header::after {

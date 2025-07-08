@@ -164,34 +164,53 @@ class CommunityBridgeDocumentation {
         const structure = {};
 
         try {
-            // Create Community Bridge structure
-            structure['Community Bridge'] = {
-                icon: '🌉',
-                items: {},
-                type: 'section'
+            // Define known folders and their icons
+            const folderConfig = {
+                'Community Bridge': { icon: '🌉', hasSubsections: true },
+                'Examples': { icon: '💡', hasSubsections: false },
+                'Getting Started': { icon: '🚀', hasSubsections: false }
             };
 
-            // Add top-level Community Bridge files
-            const topLevelFiles = ['overview', 'getting-started'];
-            for (const fileName of topLevelFiles) {
-                try {
-                    const response = await fetch(`./assets/pages/Community Bridge/${fileName}.md`);
-                    if (response.ok) {
-                        structure['Community Bridge'].items[fileName] = {
-                            path: `Community Bridge/${fileName}`,
-                            type: 'markdown',
-                            name: this.formatTitle(fileName)
-                        };
-                        console.log(`✅ Found top-level file: ${fileName}.md`);
+            // Create structure for each folder
+            for (const [folderName, config] of Object.entries(folderConfig)) {
+                structure[folderName] = {
+                    icon: config.icon,
+                    items: {},
+                    type: 'section'
+                };
+
+                if (config.hasSubsections) {
+                    // Handle Community Bridge with subsections
+                    // Add top-level Community Bridge files
+                    const topLevelFiles = ['overview', 'getting-started'];
+                    for (const fileName of topLevelFiles) {
+                        try {
+                            const response = await fetch(`./assets/pages/${folderName}/${fileName}.md`);
+                            if (response.ok) {
+                                const content = await response.text();
+                                const icon = this.extractIconFromMarkdown(content) || '📄';
+                                
+                                structure[folderName].items[fileName] = {
+                                    path: `${folderName}/${fileName}`,
+                                    type: 'markdown',
+                                    name: this.formatTitle(fileName),
+                                    icon: icon
+                                };
+                                console.log(`✅ Found top-level file: ${fileName}.md with icon: ${icon}`);
+                            }
+                        } catch (e) {
+                            // File doesn't exist, continue
+                        }
                     }
-                } catch (e) {
-                    // File doesn't exist, continue
+
+                    // Discover Libraries and Modules for Community Bridge
+                    await this.discoverSubsection(structure, 'Libraries', '📚');
+                    await this.discoverSubsection(structure, 'Modules', '📦');
+                } else {
+                    // Handle simple folders like Examples and Getting Started
+                    await this.discoverSimpleFolder(structure, folderName);
                 }
             }
-
-            // Discover Libraries and Modules
-            await this.discoverSubsection(structure, 'Libraries', '📚');
-            await this.discoverSubsection(structure, 'Modules', '📦');
 
         } catch (error) {
             console.error('❌ Error in discoverPagesStructure:', error);
@@ -216,12 +235,16 @@ class CommunityBridgeDocumentation {
                     const mainPath = `./assets/pages/Community Bridge/${folderName}/${moduleName}/${moduleName.toLowerCase()}.md`;
                     const response = await fetch(mainPath);
                     if (response.ok) {
+                        const content = await response.text();
+                        const icon = this.extractIconFromMarkdown(content) || '📄';
+                        
                         folderItems[moduleName] = {
                             path: `Community Bridge/${folderName}/${moduleName}/${moduleName.toLowerCase()}`,
                             type: 'markdown',
-                            name: moduleName
+                            name: moduleName,
+                            icon: icon
                         };
-                        console.log(`✅ Found module: ${folderName}/${moduleName}/${moduleName.toLowerCase()}.md`);
+                        console.log(`✅ Found module: ${folderName}/${moduleName}/${moduleName.toLowerCase()}.md with icon: ${icon}`);
                     }
                 } catch (e) {
                     // File doesn't exist, continue
@@ -238,6 +261,91 @@ class CommunityBridgeDocumentation {
             };
             console.log(`✅ Added ${folderName} subsection with ${Object.keys(folderItems).length} items`);
         }
+    }
+
+    async discoverSimpleFolder(structure, folderName) {
+        console.log(`🔍 Discovering simple folder: ${folderName}`);
+        
+        try {
+            // Try to load toc.json first
+            try {
+                const tocResponse = await fetch(`./assets/pages/${folderName}/toc.json`);
+                if (tocResponse.ok) {
+                    const tocData = await tocResponse.json();
+                    for (const [fileName, fileData] of Object.entries(tocData)) {
+                        // Try to load the actual file to extract icon
+                        let icon = '📄'; // default
+                        try {
+                            const fileResponse = await fetch(`./assets/pages/${folderName}/${fileName}.md`);
+                            if (fileResponse.ok) {
+                                const content = await fileResponse.text();
+                                icon = this.extractIconFromMarkdown(content) || '📄';
+                            }
+                        } catch (e) {
+                            // Use default icon if file can't be loaded
+                        }
+
+                        structure[folderName].items[fileName] = {
+                            path: `${folderName}/${fileName}`,
+                            type: 'markdown',
+                            name: fileData.name || this.formatTitle(fileName),
+                            icon: icon
+                        };
+                        console.log(`✅ Added from toc: ${fileName} with icon: ${icon}`);
+                    }
+                    return;
+                }
+            } catch (e) {
+                console.log(`No toc.json found for ${folderName}, discovering files...`);
+            }
+
+            // If no toc.json, discover markdown files directly
+            const commonFiles = ['index', 'basic-usage', 'advanced'];
+            for (const fileName of commonFiles) {
+                try {
+                    const response = await fetch(`./assets/pages/${folderName}/${fileName}.md`);
+                    if (response.ok) {
+                        const content = await response.text();
+                        const icon = this.extractIconFromMarkdown(content) || '📄';
+                        
+                        structure[folderName].items[fileName] = {
+                            path: `${folderName}/${fileName}`,
+                            type: 'markdown',
+                            name: this.formatTitle(fileName),
+                            icon: icon
+                        };
+                        console.log(`✅ Found file: ${fileName}.md in ${folderName} with icon: ${icon}`);
+                    }
+                } catch (e) {
+                    // File doesn't exist, continue
+                }
+            }
+        } catch (error) {
+            console.error(`❌ Error discovering ${folderName}:`, error);
+        }
+    }
+
+    extractIconFromMarkdown(content) {
+        // Look for the main header pattern: # ModuleName Icon
+        // Example: # Anim 🎭
+        const headerMatch = content.match(/^#\s+(\w+)\s+([\u{1F600}-\u{1F64F}]|[\u{1F300}-\u{1F5FF}]|[\u{1F680}-\u{1F6FF}]|[\u{1F700}-\u{1F77F}]|[\u{1F780}-\u{1F7FF}]|[\u{1F800}-\u{1F8FF}]|[\u{2600}-\u{26FF}]|[\u{2700}-\u{27BF}])/mu);
+        
+        if (headerMatch) {
+            console.log(`🎯 Found icon in header: ${headerMatch[2]} for ${headerMatch[1]}`);
+            return headerMatch[2];
+        }
+
+        // Fallback: look for any emoji in the first few lines
+        const lines = content.split('\n').slice(0, 5);
+        for (const line of lines) {
+            const emojiMatch = line.match(/([\u{1F600}-\u{1F64F}]|[\u{1F300}-\u{1F5FF}]|[\u{1F680}-\u{1F6FF}]|[\u{1F700}-\u{1F77F}]|[\u{1F780}-\u{1F7FF}]|[\u{1F800}-\u{1F8FF}]|[\u{2600}-\u{26FF}]|[\u{2700}-\u{27BF}])/u);
+            if (emojiMatch) {
+                console.log(`🎯 Found fallback icon: ${emojiMatch[1]}`);
+                return emojiMatch[1];
+            }
+        }
+
+        return null; // No icon found
     }
 
     renderNavigation() {
@@ -290,7 +398,7 @@ class CommunityBridgeDocumentation {
             } else if (itemData.type === 'markdown') {
                 html += `
                     <div class="nav-item" data-path="${itemData.path}" data-type="markdown">
-                        <span class="nav-icon">📄</span>
+                        <span class="nav-icon">${itemData.icon || '📄'}</span>
                         <span class="nav-title">${itemData.name || this.formatTitle(itemName)}</span>
                     </div>
                 `;
