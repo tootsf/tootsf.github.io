@@ -985,33 +985,94 @@ class CommunityBridgeDocumentation {
 
     async buildSearchIndex() {
         this.searchIndex = [];
+        console.log('🔍 Building comprehensive search index...');
 
-        const addToIndex = (item, path, category) => {
+        const addToIndex = async (item, path, category) => {
             if (item.type === 'markdown') {
-                this.searchIndex.push({
-                    name: item.name || path.split('/').pop(),
-                    path: path,
-                    category: category,
-                    type: 'module',
-                    description: item.meta?.description || ''
-                });
+                try {
+                    // Load the markdown content
+                    const response = await fetch(`./assets/pages/${path}.md`);
+                    if (response.ok) {
+                        const content = await response.text();
+                        const functions = this.parseFunctionsFromMarkdown(content);
+                        
+                        // Add the main module/page to index
+                        this.searchIndex.push({
+                            name: item.name || path.split('/').pop(),
+                            path: path,
+                            category: category,
+                            type: 'module',
+                            description: item.meta?.description || this.extractDescription(content),
+                            content: content.toLowerCase(),
+                            functions: functions.map(f => f.name.toLowerCase())
+                        });
+
+                        // Add each function as a separate searchable item
+                        functions.forEach(func => {
+                            this.searchIndex.push({
+                                name: func.name,
+                                path: path,
+                                category: category,
+                                type: 'function',
+                                side: func.side,
+                                description: func.description || '',
+                                parentModule: item.name || path.split('/').pop(),
+                                anchor: this.generateAnchor(func.name, func.side, path.split('/').pop())
+                            });
+                        });
+
+                        console.log(`✅ Indexed ${item.name}: ${functions.length} functions`);
+                    }
+                } catch (error) {
+                    console.warn(`⚠️ Failed to index ${path}:`, error);
+                }
             } else if (item.type === 'subsection' && item.items) {
-                Object.keys(item.items).forEach(key => {
-                    addToIndex(item.items[key], `${path}/${key}`, category);
-                });
+                for (const key of Object.keys(item.items)) {
+                    await addToIndex(item.items[key], item.items[key].path || `${path}/${key}`, category);
+                }
             }
         };
 
-        Object.keys(this.allModules).forEach(category => {
+        // Process all categories
+        for (const category of Object.keys(this.allModules)) {
             const categoryData = this.allModules[category];
             if (categoryData.items) {
-                Object.keys(categoryData.items).forEach(key => {
-                    addToIndex(categoryData.items[key], `${category}/${key}`, category);
-                });
+                for (const key of Object.keys(categoryData.items)) {
+                    const item = categoryData.items[key];
+                    const itemPath = item.path || `${category}/${key}`;
+                    await addToIndex(item, itemPath, category);
+                }
             }
-        });
+        }
 
-        console.log('🔍 Search index built:', this.searchIndex.length, 'items');
+        console.log(`🔍 Search index built: ${this.searchIndex.length} items`);
+        console.log(`📊 Index breakdown:`, {
+            modules: this.searchIndex.filter(i => i.type === 'module').length,
+            functions: this.searchIndex.filter(i => i.type === 'function').length
+        });
+    }
+
+    extractDescription(content) {
+        // Try to extract description from META comment first
+        const metaMatch = content.match(/<!--META[\s\S]*?description:\s*([^\n]+)/);
+        if (metaMatch) {
+            return metaMatch[1].trim();
+        }
+
+        // Fallback: extract from the first paragraph after the title
+        const lines = content.split('\n');
+        let foundTitle = false;
+        for (const line of lines) {
+            if (line.startsWith('#') && !foundTitle) {
+                foundTitle = true;
+                continue;
+            }
+            if (foundTitle && line.trim() && !line.startsWith('#') && !line.startsWith('<!--')) {
+                return line.trim().substring(0, 150); // First 150 chars
+            }
+        }
+
+        return '';
     }
 
     handleSearch(query) {
@@ -1020,12 +1081,79 @@ class CommunityBridgeDocumentation {
             return;
         }
 
-        const results = this.searchIndex.filter(item => {
-            const searchText = `${item.name} ${item.description}`.toLowerCase();
-            return searchText.includes(query.toLowerCase());
+        const queryLower = query.toLowerCase();
+        const results = [];
+
+        // Search through all indexed items
+        this.searchIndex.forEach(item => {
+            let score = 0;
+            let matchType = '';
+
+            if (item.type === 'function') {
+                // Exact function name match gets highest score
+                if (item.name.toLowerCase() === queryLower) {
+                    score = 100;
+                    matchType = 'exact function';
+                }
+                // Function name starts with query
+                else if (item.name.toLowerCase().startsWith(queryLower)) {
+                    score = 90;
+                    matchType = 'function prefix';
+                }
+                // Function name contains query
+                else if (item.name.toLowerCase().includes(queryLower)) {
+                    score = 80;
+                    matchType = 'function contains';
+                }
+                // Function description contains query
+                else if (item.description.toLowerCase().includes(queryLower)) {
+                    score = 70;
+                    matchType = 'function description';
+                }
+            } else if (item.type === 'module') {
+                // Module name match
+                if (item.name.toLowerCase().includes(queryLower)) {
+                    score = 60;
+                    matchType = 'module name';
+                }
+                // Module description match
+                else if (item.description.toLowerCase().includes(queryLower)) {
+                    score = 50;
+                    matchType = 'module description';
+                }
+                // Content match (search in the actual markdown content)
+                else if (item.content && item.content.includes(queryLower)) {
+                    score = 40;
+                    matchType = 'content match';
+                }
+                // Function names in module match
+                else if (item.functions && item.functions.some(fn => fn.includes(queryLower))) {
+                    score = 65;
+                    matchType = 'has matching function';
+                }
+            }
+
+            if (score > 0) {
+                results.push({
+                    ...item,
+                    score: score,
+                    matchType: matchType
+                });
+            }
         });
 
-        this.showSearchResults(results, query);
+        // Sort by score (highest first), then by name
+        results.sort((a, b) => {
+            if (b.score !== a.score) {
+                return b.score - a.score;
+            }
+            return a.name.localeCompare(b.name);
+        });
+
+        // Limit results to top 10
+        const limitedResults = results.slice(0, 10);
+
+        this.showSearchResults(limitedResults, query);
     }
 
     showSearchResults(results, searchTerm) {
@@ -1040,13 +1168,45 @@ class CommunityBridgeDocumentation {
                 </div>
             `;
         } else {
-            const resultsHtml = results.map(result => `
-                <div class="search-result-item" onclick="window.app.navigateToPath('${result.path}')">
-                    <h4>${result.name}</h4>
-                    <p class="result-path">${result.category} → ${result.path}</p>
-                    <p class="result-description">${result.description}</p>
-                </div>
-            `).join('');
+            const resultsHtml = results.map(result => {
+                let resultContent = '';
+                let clickHandler = '';
+                
+                if (result.type === 'function') {
+                    // For functions, navigate to the module and scroll to the function
+                    clickHandler = `window.app.navigateToFunction('${result.path}', '${result.anchor}')`;
+                    const sideLabel = result.side ? `(${result.side.charAt(0).toUpperCase() + result.side.slice(1)})` : '';
+                    
+                    resultContent = `
+                        <div class="search-result-item function-result" onclick="${clickHandler}">
+                            <h4>
+                                <span class="function-icon">⚡</span>
+                                ${result.name} ${sideLabel}
+                                <span class="match-type">${result.matchType}</span>
+                            </h4>
+                            <p class="result-path">${result.category} → ${result.parentModule}</p>
+                            <p class="result-description">${result.description || 'Function in ' + result.parentModule}</p>
+                        </div>
+                    `;
+                } else {
+                    // For modules, navigate to the module
+                    clickHandler = `window.app.navigateToPath('${result.path}')`;
+                    
+                    resultContent = `
+                        <div class="search-result-item module-result" onclick="${clickHandler}">
+                            <h4>
+                                <span class="module-icon">📄</span>
+                                ${result.name}
+                                <span class="match-type">${result.matchType}</span>
+                            </h4>
+                            <p class="result-path">${result.category} → ${result.path}</p>
+                            <p class="result-description">${result.description}</p>
+                        </div>
+                    `;
+                }
+                
+                return resultContent;
+            }).join('');
 
             searchResults.innerHTML = `
                 <div class="search-results-container">
@@ -1059,10 +1219,37 @@ class CommunityBridgeDocumentation {
         searchResults.style.display = 'block';
     }
 
+    async navigateToFunction(path, anchor) {
+        // Navigate to the module first
+        await this.navigateToPath(path);
+        
+        // Wait a bit for content to load, then scroll to the function
+        setTimeout(() => {
+            const element = document.getElementById(anchor);
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                // Highlight the function briefly
+                element.style.backgroundColor = 'var(--accent-color-alpha)';
+                setTimeout(() => {
+                    element.style.backgroundColor = '';
+                }, 2000);
+            }
+        }, 100);
+        
+        // Hide search results
+        this.hideSearchResults();
+    }
+
     hideSearchResults() {
         const searchResults = document.querySelector('.search-results');
         if (searchResults) {
             searchResults.style.display = 'none';
+        }
+        
+        // Also clear the search input when hiding results via navigation
+        const searchInput = document.getElementById('search-input');
+        if (searchInput && searchInput.value) {
+            searchInput.value = '';
         }
     }
 
