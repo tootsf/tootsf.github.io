@@ -10,7 +10,7 @@ The Raycast library provides advanced ray casting functionality for collision de
 
 ## Overview
 
-The Raycast provides functionality for FiveM resources.
+The Raycast library provides raycasting utilities for line-of-sight calculations, hit detection, and world interaction using ray tracing for precise targeting and collision detection.
 
 ## GetForwardVector (Client)
 
@@ -136,7 +136,7 @@ if retval == 2 then
     else
         print("Looking at terrain/building")
     end
-    
+
     -- Place a marker at the hit location
     local markerId = Bridge.Markers.Create({
         position = hitCoords,

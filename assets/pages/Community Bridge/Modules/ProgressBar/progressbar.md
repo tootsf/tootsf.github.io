@@ -10,7 +10,7 @@ The ProgressBar module provides a unified interface for displaying progress bars
 
 ## Overview
 
-The ProgressBar provides functionality for FiveM resources.
+The ProgressBar module provides visual progress indicators and timed action feedback for player activities.
 
 ## Open (Client)
 

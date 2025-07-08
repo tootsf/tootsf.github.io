@@ -10,7 +10,7 @@ The Inventory module provides a unified interface for handling player inventory 
 
 ## Overview
 
-The Inventory provides functionality for FiveM resources.
+The Inventory module provides item management, storage systems, and inventory interface functions.
 
 ## GetImagePath (Client)
 

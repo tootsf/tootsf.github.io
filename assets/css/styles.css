@@ -584,6 +584,67 @@ body {
     opacity: 0.8;
 }
 
+/* TOC Category Styles */
+.toc-category {
+    margin-bottom: 1.5rem;
+}
+
+.toc-category-header {
+    display: flex;
+    align-items: center;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0 0 0.5rem 0;
+    padding: 0.5rem 1rem;
+    background: var(--bg-tertiary);
+    border-radius: 6px;
+    border-left: 3px solid var(--accent-color);
+}
+
+.toc-category-icon {
+    margin-right: 0.5rem;
+}
+
+.toc-count {
+    margin-left: auto;
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    background: var(--bg-secondary);
+    padding: 2px 6px;
+    border-radius: 3px;
+}
+
+.toc-category-list {
+    margin: 0;
+    padding-left: 0;
+}
+
+.toc-category-list .toc-link {
+    padding-left: 1.5rem;
+    position: relative;
+}
+
+.toc-category-list .toc-link::before {
+    content: "•";
+    position: absolute;
+    left: 0.7rem;
+    color: var(--text-secondary);
+    font-size: 0.8rem;
+}
+
+.toc-category-list .toc-link[data-side="client"]::before {
+    color: #4a9eff;
+}
+
+.toc-category-list .toc-link[data-side="server"]::before {
+    color: #ff6b6b;
+}
+
+.toc-category-list .toc-link[data-side="shared"]::before {
+    color: #ffd93d;
+}
+
 .toc-empty {
     padding: 1rem;
     text-align: center;

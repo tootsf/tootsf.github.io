@@ -10,7 +10,7 @@ The HelpText module provides functions for displaying and hiding help text messa
 
 ## Overview
 
-The HelpText provides functionality for FiveM resources.
+The HelpText module provides contextual help and instruction display systems for user interface guidance.
 
 ## HideHelpText (Client)
 

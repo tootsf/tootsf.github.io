@@ -10,7 +10,7 @@ The Skills module provides functions for managing player skills and experience p
 
 ## Overview
 
-The Skills provides functionality for FiveM resources.
+The Skills module provides character progression, experience systems, and skill development mechanics.
 
 ## GetResourceName (Client)
 

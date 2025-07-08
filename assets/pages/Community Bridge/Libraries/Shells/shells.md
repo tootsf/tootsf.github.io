@@ -10,7 +10,7 @@ The Shells library provides a comprehensive system for managing MLO (Map Locatio
 
 ## Overview
 
-The Shells provides functionality for FiveM resources.
+The Shells library provides interior shell management for creating instanced interiors, handling shell loading, and managing multiple instances of the same interior space.
 
 ## New (Client)
 
@@ -245,7 +245,7 @@ local Bridge = exports['community_bridge']:Bridge()
 Bridge.Shells.Event.Add('OnSpawn', function(objectData, entity)
     print('Shell object spawned: ' .. objectData.id)
     print('Entity handle: ' .. entity)
-    
+
     -- Custom logic for spawned objects
     if objectData.type == 'stash' then
         print('Stash object is now available')
@@ -255,7 +255,7 @@ end)
 -- Add remove event listener
 Bridge.Shells.Event.Add('OnRemove', function(objectData, entity)
     print('Shell object removed: ' .. objectData.id)
-    
+
     -- Cleanup custom data
     if objectData.type == 'stash' then
         print('Stash object removed')

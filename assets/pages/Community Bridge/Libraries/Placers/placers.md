@@ -10,7 +10,7 @@ The Placers library provides interactive object placement systems with real-time
 
 ## Overview
 
-The Placers provides functionality for FiveM resources.
+The Placers library provides object placement and positioning utilities for spawning, positioning, and managing entities and props in the game world with precise control.
 
 ## Placeable.PlaceObject (Client)
 
@@ -42,7 +42,7 @@ local coords, heading = Bridge.Placeable.PlaceObject('prop_cs_cardbox_01', 15.0,
 if coords then
     print('Object placed at: ' .. tostring(coords))
     print('Object heading: ' .. heading)
-    
+
     -- Spawn the actual object
     local finalObject = Bridge.Utility.CreateProp('prop_cs_cardbox_01', coords, heading, true)
 else

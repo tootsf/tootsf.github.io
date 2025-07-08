@@ -10,7 +10,7 @@ The Phone module provides functions for integrating with various phone systems, 
 
 ## Overview
 
-The Phone provides functionality for FiveM resources.
+The Phone module provides smartphone simulation with apps, messaging, and communication systems.
 
 ## SendEmail (Client)
 

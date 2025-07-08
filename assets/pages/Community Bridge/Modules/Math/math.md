@@ -10,7 +10,7 @@ Mathematical utility functions for 3D calculations, value clamping, interpolatio
 
 ## Overview
 
-The Math provides functionality for FiveM resources.
+The Math module provides advanced mathematical calculations and utility functions for gameplay mechanics.
 
 ## Clamp (Client)
 

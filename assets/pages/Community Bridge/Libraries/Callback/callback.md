@@ -10,7 +10,7 @@ The Callback library provides a robust client-server communication system with s
 
 ## Overview
 
-The Callback provides functionality for FiveM resources.
+The Callback library provides a robust client-server communication system with support for promises, callbacks, and resource-specific cleanup. It handles bi-directional communication between client and server with automatic timeout and error handling.
 
 ## Register (Client)
 

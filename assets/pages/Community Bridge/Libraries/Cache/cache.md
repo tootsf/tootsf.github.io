@@ -10,7 +10,7 @@ The Cache library provides a powerful caching system with automatic updates, cha
 
 ## Overview
 
-The Cache library provides functionality for FiveM resources with powerful caching capabilities.
+The Cache library provides a powerful caching system with automatic updates, change detection, and resource cleanup. It allows you to cache expensive calculations or frequently accessed data with configurable update intervals and callback support.
 
 ## Create (Shared)
 
@@ -32,8 +32,10 @@ Cache.Create(name, compare, waitTime)
 
 ### Example
 ```lua
+local Bridge = exports["community_bridge"]:Bridge()
+
 -- Cache player health with 1 second updates
-local healthCache = Cache.Create(
+local healthCache = Bridge.Cache.Create(
     "player_health",
     function()
         return GetEntityHealth(PlayerPedId())
@@ -62,7 +64,9 @@ Cache.Get(name)
 
 ### Example
 ```lua
-local healthCache = Cache.Get("player_health")
+local Bridge = exports["community_bridge"]:Bridge()
+
+local healthCache = Bridge.Cache.Get("player_health")
 if healthCache then
     print("Current health: " .. tostring(healthCache.Value))
 end
@@ -87,8 +91,10 @@ Cache.OnChange(name, onChange)
 
 ### Example
 ```lua
+local Bridge = exports["community_bridge"]:Bridge()
+
 -- Monitor health changes
-local callbackId = Cache.OnChange("player_health", function(newHealth, oldHealth)
+local callbackId = Bridge.Cache.OnChange("player_health", function(newHealth, oldHealth)
     local diff = newHealth - oldHealth
     if diff > 0 then
         print("Health increased by " .. diff)
@@ -116,8 +122,10 @@ Cache.RemoveOnChange(name, id)
 
 ### Example
 ```lua
+local Bridge = exports["community_bridge"]:Bridge()
+
 -- Remove the health monitor callback
-Cache.RemoveOnChange("player_health", callbackId)
+Bridge.Cache.RemoveOnChange("player_health", callbackId)
 print("Health monitor callback removed")
 ```
 
@@ -136,8 +144,10 @@ Cache.Remove(name)
 
 ### Example
 ```lua
+local Bridge = exports["community_bridge"]:Bridge()
+
 -- Remove the health cache completely
-Cache.Remove("player_health")
+Bridge.Cache.Remove("player_health")
 print("Health cache removed")
 ```
 
@@ -157,7 +167,9 @@ Cache.Update(name, newValue)
 
 ### Example
 ```lua
+local Bridge = exports["community_bridge"]:Bridge()
+
 -- Manually update the health cache
-Cache.Update("player_health", 150)
+Bridge.Cache.Update("player_health", 150)
 print("Health cache manually updated to 150")
 ```

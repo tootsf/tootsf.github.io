@@ -10,7 +10,7 @@ The Weather module provides control over weather and time synchronization system
 
 ## Overview
 
-The Weather provides functionality for FiveM resources.
+The Weather module provides dynamic weather systems and environmental controls for immersive gameplay.
 
 ## ToggleSync (Client)
 

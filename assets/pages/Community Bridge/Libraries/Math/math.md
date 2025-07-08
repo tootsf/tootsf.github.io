@@ -10,7 +10,7 @@ The Math utility library provides advanced mathematical functions for game devel
 
 ## Overview
 
-The Math provides functionality for FiveM resources.
+The Math module provides advanced mathematical calculations and utility functions for gameplay mechanics.
 
 ## Clamp (Shared)
 

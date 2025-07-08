@@ -10,5 +10,5 @@ The Housing module provides integration with various housing systems and tracks 
 
 ## Overview
 
-The Housing provides functionality for FiveM resources.
+The Housing module provides property ownership, interior management, and real estate systems for players.
 

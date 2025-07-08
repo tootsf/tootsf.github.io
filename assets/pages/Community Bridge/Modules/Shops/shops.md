@@ -10,7 +10,7 @@ The Shops module provides a fallback shop system when inventory modules don't su
 
 ## Overview
 
-The Shops provides functionality for FiveM resources.
+The Shops module provides retail and commercial systems for item purchasing, selling, and store management.
 
 ## FinalizeCheckOut (Client)
 
@@ -34,6 +34,8 @@ Bridge.Shops.FinalizeCheckOut(shopName, item, itemLabel, price, amount)
 
 ### Example
 ```lua
+local Bridge = exports["community_bridge"]:Bridge()
+
 -- Internal use only - handles payment selection UI
 ```
 
@@ -112,6 +114,8 @@ Bridge.Shops.CompleteCheckout(src, shopName, item, amount, paymentType)
 
 ### Example
 ```lua
+local Bridge = exports["community_bridge"]:Bridge()
+
 -- Internal use only - processes payments and gives items
 ```
 

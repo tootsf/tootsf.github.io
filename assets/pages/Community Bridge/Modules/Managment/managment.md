@@ -10,7 +10,7 @@ The Management module provides functions for handling business and organization 
 
 ## Overview
 
-The Managment provides functionality for FiveM resources.
+The Management module provides administrative tools and resource oversight functions for server management.
 
 ## AddAccountMoney (Server)
 

@@ -10,7 +10,7 @@ The Point system provides an efficient grid-based spatial management system for 
 
 ## Overview
 
-The Point provides functionality for FiveM resources.
+The Point library provides single coordinate point management with functions for distance calculations, coordinate transformations, and position-based operations.
 
 ## Register (Client)
 

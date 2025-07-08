@@ -10,7 +10,7 @@ The Dialogue module provides a modern web-based dialogue system for NPC interact
 
 ## Overview
 
-The Dialogue provides functionality for FiveM resources.
+The Dialogue module provides interactive conversation systems with NPC dialog management and player choice handling.
 
 ## Close (Client)
 

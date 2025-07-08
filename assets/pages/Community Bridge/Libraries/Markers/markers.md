@@ -10,7 +10,7 @@ The Markers library provides efficient 3D marker management with proximity-based
 
 ## Overview
 
-The Markers provides functionality for FiveM resources.
+The Markers library provides world marker management for creating visual indicators, waypoints, and interactive zones with customizable appearance and functionality.
 
 ## Create (Client)
 

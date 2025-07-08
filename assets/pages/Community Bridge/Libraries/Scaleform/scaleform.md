@@ -10,7 +10,7 @@ The Scaleform library provides advanced interface management for GTA V's built-i
 
 ## Overview
 
-The Scaleform provides functionality for FiveM resources.
+The Scaleform library provides scaleform movie management for displaying HUD elements, loading screens, and interactive UI components using GTA V's scaleform system.
 
 ## SetupInstructionalButtons (Client)
 
@@ -100,12 +100,12 @@ Bridge.Scaleform.Run(scaleform, function()
         Bridge.Framework.Notify('UI closed', 'info')
         return true -- Stop scaleform
     end
-    
+
     -- Check for interactions
     if IsControlJustPressed(0, 38) then -- E
         Bridge.Framework.Notify('Interaction pressed', 'success')
     end
-    
+
     return not isActive -- Stop when isActive becomes false
 end)
 

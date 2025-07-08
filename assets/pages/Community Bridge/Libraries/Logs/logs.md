@@ -10,7 +10,7 @@ The Logs library provides unified logging functionality that supports multiple l
 
 ## Overview
 
-The Logs provides functionality for FiveM resources.
+The Logs library provides comprehensive logging functionality with different log levels, file output, and structured logging for debugging and monitoring FiveM resources.
 
 ## Send (Server)
 

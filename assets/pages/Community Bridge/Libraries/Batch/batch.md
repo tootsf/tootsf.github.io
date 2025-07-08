@@ -10,7 +10,7 @@ The Batch library provides network event optimization by queuing multiple events
 
 ## Overview
 
-The Batch provides functionality for FiveM resources.
+The Batch library provides network event optimization by queuing multiple events and sending them together to reduce network strain and improve performance in multiplayer environments.
 
 ## Event.Fire (Client)
 

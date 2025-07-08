@@ -10,7 +10,7 @@ The Cutscenes library provides comprehensive cutscene management with character 
 
 ## Overview
 
-The Cutscenes provides functionality for FiveM resources.
+The Cutscenes library provides cinematic sequence management for creating and controlling in-game cutscenes, camera movements, and scripted sequences.
 
 ## GetTags (Client)
 
@@ -181,7 +181,7 @@ local cutsceneData = Bridge.Cutscene.Create(
 if cutsceneData then
     print('Cutscene created with ' .. #cutsceneData.peds .. ' participants')
     print('Using tags: ' .. table.concat(cutsceneData.tags, ', '))
-    
+
     -- Ready to start cutscene
     Bridge.Cutscene.Start(cutsceneData)
 else
@@ -217,10 +217,10 @@ local cutsceneData = Bridge.Cutscene.Create('mp_intro_concierge', false, {1, 2})
 if cutsceneData then
     -- Notify players
     Bridge.Framework.Notify('Starting cutscene...', 'info', 3000)
-    
+
     -- Start cutscene (blocking until finished)
     Bridge.Cutscene.Start(cutsceneData)
-    
+
     -- This code runs after cutscene completes
     print('Cutscene finished')
     Bridge.Framework.Notify('Cutscene complete', 'success', 2000)

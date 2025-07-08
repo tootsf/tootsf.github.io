@@ -10,7 +10,7 @@ Universal framework compatibility layer that provides consistent access to playe
 
 ## Overview
 
-The Framework provides functionality for FiveM resources.
+The Framework module provides core integration functions that bridge different FiveM frameworks and resources.
 
 ## GetFrameworkJobs (Client)
 

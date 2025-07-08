@@ -10,7 +10,7 @@ The Table utility library provides comprehensive table manipulation functions in
 
 ## Overview
 
-The Table provides functionality for FiveM resources.
+The Table library provides advanced table manipulation functions including deep comparison, merging, searching, filtering, and other table operations for complex data structures in Lua.
 
 ## CheckPopulated (Shared)
 

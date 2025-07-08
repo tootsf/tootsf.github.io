@@ -10,7 +10,7 @@ Banking and economy functions for managing player finances and transactions.
 
 ## Overview
 
-The Banking provides functionality for FiveM resources.
+The Banking module provides comprehensive financial management functions for handling player money, bank accounts, and transactions in FiveM.
 
 ## GetBalance (Client)
 
@@ -27,7 +27,9 @@ Bridge.Banking.GetBalance()
 
 ### Example
 ```lua
-local balance = Bridge.Banking.GetBalance()
+local Bridge = exports["community_bridge"]:Bridge()
+
+local balance = Bridge.Bridge.Banking.GetBalance()
 ```
 
 ## WithdrawMoney (Client)
@@ -48,7 +50,9 @@ Bridge.Banking.WithdrawMoney(amount)
 
 ### Example
 ```lua
-local success = Bridge.Banking.WithdrawMoney(500)
+local Bridge = exports["community_bridge"]:Bridge()
+
+local success = Bridge.Bridge.Banking.WithdrawMoney(500)
 ```
 
 ## TransferMoney (Server)
@@ -71,6 +75,8 @@ Bridge.Banking.TransferMoney(fromPlayer, toPlayer, amount)
 
 ### Example
 ```lua
-local success = Bridge.Banking.TransferMoney(1, 2, 1000)
+local Bridge = exports["community_bridge"]:Bridge()
+
+local success = Bridge.Bridge.Banking.TransferMoney(1, 2, 1000)
 ```
 

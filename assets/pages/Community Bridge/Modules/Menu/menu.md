@@ -10,7 +10,7 @@ The Menu module provides a unified interface for creating interactive menus. It 
 
 ## Overview
 
-The Menu provides functionality for FiveM resources.
+The Menu module provides interactive menu systems and user interface components for player interactions.
 
 ## Open (Client)
 

@@ -10,7 +10,7 @@ The Dispatch module provides a unified interface for sending alerts and notifica
 
 ## Overview
 
-The Dispatch provides functionality for FiveM resources.
+The Dispatch module provides emergency services dispatch and notification systems for roleplay scenarios.
 
 ## SendAlert (Client)
 

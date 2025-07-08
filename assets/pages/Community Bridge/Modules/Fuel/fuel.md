@@ -10,7 +10,7 @@ The Fuel module provides functions for managing vehicle fuel levels across diffe
 
 ## Overview
 
-The Fuel provides functionality for FiveM resources.
+The Fuel module provides vehicle fuel management and gas station systems for realistic vehicle operation.
 
 ## GetFuel (Client)
 

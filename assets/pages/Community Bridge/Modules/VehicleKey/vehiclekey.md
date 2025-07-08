@@ -10,7 +10,7 @@ The VehicleKey module provides functions for managing vehicle keys across differ
 
 ## Overview
 
-The VehicleKey provides functionality for FiveM resources.
+The VehicleKey module provides vehicle ownership, key management, and access control systems.
 
 ## GiveKeys (Client)
 

@@ -10,7 +10,7 @@ The SQL library provides simplified database operations with automatic table cre
 
 ## Overview
 
-The SQL provides functionality for FiveM resources.
+The SQL library provides simplified database operations with automatic table creation, upsert functionality, and common CRUD operations. It works with oxmysql and handles common database patterns used in FiveM development.
 
 ## Create (Server)
 
@@ -28,6 +28,8 @@ SQL.Create(tableName, columns)
 
 ### Example
 ```lua
+local Bridge = exports["community_bridge"]:Bridge()
+
 local columns = {
     { name = "id", type = "INT AUTO_INCREMENT PRIMARY KEY" },
     { name = "identifier", type = "VARCHAR(50) UNIQUE" },
@@ -35,7 +37,7 @@ local columns = {
     { name = "money", type = "INT DEFAULT 0" }
 }
 
-SQL.Create("players", columns)
+Bridge.SQL.Create("players", columns)
 print("Players table created successfully")
 ```
 
@@ -55,18 +57,20 @@ SQL.InsertOrUpdate(tableName, data)
 
 ### Example
 ```lua
+local Bridge = exports["community_bridge"]:Bridge()
+
 local playerData = {
     identifier = "steam:110000103fa6fc1",
     name = "John Doe",
     money = 5000
 }
 
-SQL.InsertOrUpdate("players", playerData)
+Bridge.SQL.InsertOrUpdate("players", playerData)
 print("Player data saved successfully")
 
 -- Update existing player
 playerData.money = 7500
-SQL.InsertOrUpdate("players", playerData)
+Bridge.SQL.InsertOrUpdate("players", playerData)
 print("Player money updated")
 ```
 
@@ -89,8 +93,10 @@ SQL.Get(tableName, where)
 
 ### Example
 ```lua
+local Bridge = exports["community_bridge"]:Bridge()
+
 -- Get specific player
-local result = SQL.Get("players", "identifier = 'steam:110000103fa6fc1'")
+local result = Bridge.SQL.Get("players", "identifier = 'steam:110000103fa6fc1'")
 if #result > 0 then
     local player = result[1]
     print("Player name: " .. player.name)
@@ -98,7 +104,7 @@ if #result > 0 then
 end
 
 -- Get players with money > 1000
-local richPlayers = SQL.Get("players", "money > 1000")
+local richPlayers = Bridge.SQL.Get("players", "money > 1000")
 print("Found " .. #richPlayers .. " rich players")
 ```
 
@@ -120,7 +126,9 @@ SQL.GetAll(tableName)
 
 ### Example
 ```lua
-local allPlayers = SQL.GetAll("players")
+local Bridge = exports["community_bridge"]:Bridge()
+
+local allPlayers = Bridge.SQL.GetAll("players")
 print("Total players in database: " .. #allPlayers)
 
 for i, player in ipairs(allPlayers) do
@@ -144,12 +152,14 @@ SQL.Delete(tableName, where)
 
 ### Example
 ```lua
+local Bridge = exports["community_bridge"]:Bridge()
+
 -- Delete specific player
-SQL.Delete("players", "identifier = 'steam:110000103fa6fc1'")
+Bridge.SQL.Delete("players", "identifier = 'steam:110000103fa6fc1'")
 print("Player deleted from database")
 
 -- Delete inactive players (example condition)
-SQL.Delete("players", "last_login < DATE_SUB(NOW(), INTERVAL 30 DAY)")
+Bridge.SQL.Delete("players", "last_login < DATE_SUB(NOW(), INTERVAL 30 DAY)")
 print("Inactive players cleaned up")
 ```
 

@@ -10,7 +10,7 @@ The Utility library provides a comprehensive collection of client-side helper fu
 
 ## Overview
 
-The Utility provides functionality for FiveM resources.
+The Utility library provides a collection of common helper functions and utilities for string manipulation, table operations, data validation, and other frequently used programming tasks in FiveM development.
 
 ## CreateProp (Client)
 

@@ -10,7 +10,7 @@ The Ids library provides utilities for generating unique identifiers with variou
 
 ## Overview
 
-The Ids provides functionality for FiveM resources.
+The Ids library provides unique identifier generation and management for creating UUIDs, sequential IDs, and other identifier systems for data integrity and uniqueness.
 
 ## CreateUniqueId (Shared)
 
@@ -32,12 +32,14 @@ Ids.CreateUniqueId(tbl, len, pattern)
 
 ### Example
 ```lua
+local Bridge = exports["community_bridge"]:Bridge()
+
 local existingIds = { ABC123 = true, DEF456 = true }
-local newId = Ids.CreateUniqueId(existingIds, 6)
+local newId = Bridge.Ids.CreateUniqueId(existingIds, 6)
 print("Generated unique ID: " .. newId)
 
 -- Custom pattern (only vowels)
-local vowelId = Ids.CreateUniqueId({}, 4, "AEIOU")
+local vowelId = Bridge.Ids.CreateUniqueId({}, 4, "AEIOU")
 print("Vowel ID: " .. vowelId)
 ```
 
@@ -60,8 +62,10 @@ Ids.RandomUpper(tbl, len)
 
 ### Example
 ```lua
+local Bridge = exports["community_bridge"]:Bridge()
+
 local players = {}
-local playerId = Ids.RandomUpper(players, 8)
+local playerId = Bridge.Ids.RandomUpper(players, 8)
 players[playerId] = { name = "John", level = 1 }
 print("Player ID: " .. playerId)
 ```
@@ -85,8 +89,10 @@ Ids.RandomLower(tbl, len)
 
 ### Example
 ```lua
+local Bridge = exports["community_bridge"]:Bridge()
+
 local sessions = {}
-local sessionId = Ids.RandomLower(sessions, 10)
+local sessionId = Bridge.Ids.RandomLower(sessions, 10)
 sessions[sessionId] = { startTime = GetGameTimer() }
 print("Session ID: " .. sessionId)
 ```
@@ -110,8 +116,10 @@ Ids.RandomString(tbl, len)
 
 ### Example
 ```lua
+local Bridge = exports["community_bridge"]:Bridge()
+
 local tokens = {}
-local accessToken = Ids.RandomString(tokens, 12)
+local accessToken = Bridge.Ids.RandomString(tokens, 12)
 tokens[accessToken] = { userId = 123, expires = GetGameTimer() + 3600000 }
 print("Access token: " .. accessToken)
 ```
@@ -135,8 +143,10 @@ Ids.RandomNumber(tbl, len)
 
 ### Example
 ```lua
+local Bridge = exports["community_bridge"]:Bridge()
+
 local orders = {}
-local orderId = Ids.RandomNumber(orders, 6)
+local orderId = Bridge.Ids.RandomNumber(orders, 6)
 orders[orderId] = { items = {"bread", "milk"}, total = 15.50 }
 print("Order ID: " .. orderId)
 ```
@@ -160,8 +170,10 @@ Ids.Random(tbl, len)
 
 ### Example
 ```lua
+local Bridge = exports["community_bridge"]:Bridge()
+
 local vehicles = {}
-local vehicleId = Ids.Random(vehicles, 8)
+local vehicleId = Bridge.Ids.Random(vehicles, 8)
 vehicles[vehicleId] = { model = "adder", plate = "FAST123" }
 print("Vehicle ID: " .. vehicleId)
 ```

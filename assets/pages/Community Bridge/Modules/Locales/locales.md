@@ -10,7 +10,7 @@ Multi-language localization system that automatically detects server language se
 
 ## Overview
 
-The Locales provides functionality for FiveM resources.
+The Locales module provides multi-language support and translation management for internationalization.
 
 ## Current Language (Client)
 
@@ -27,6 +27,8 @@ Lang
 
 ### Example
 ```lua
+local Bridge = exports["community_bridge"]:Bridge()
+
 print('Current language:', Lang) -- Output: 'en', 'fr', 'es', etc.
 ```
 
@@ -94,6 +96,8 @@ Lang
 
 ### Example
 ```lua
+local Bridge = exports["community_bridge"]:Bridge()
+
 print('Server language:', Lang)
 -- Use in conditional logic
 if Lang == 'es' then

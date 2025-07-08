@@ -10,7 +10,7 @@ The Clothing module provides functions for managing player appearance and clothi
 
 ## Overview
 
-The Clothing provides functionality for FiveM resources.
+The Clothing module provides wardrobe and outfit management functions for player customization and clothing persistence.
 
 ## ToggleDebugging (Client)
 
@@ -124,8 +124,10 @@ Bridge.Clothing.GetFullAppearanceData(src)
 
 ### Example
 ```lua
+local Bridge = exports["community_bridge"]:Bridge()
+
 -- Internal use - prefer GetAppearance() for most cases
-local fullData = Bridge.Clothing.GetFullAppearanceData(source)
+local fullData = Bridge.Bridge.Clothing.GetFullAppearanceData(source)
 ```
 
 ## SetAppearance (Server)

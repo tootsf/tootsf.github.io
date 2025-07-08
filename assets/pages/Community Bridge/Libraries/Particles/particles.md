@@ -10,7 +10,7 @@ The Particles library provides comprehensive particle effect management with aut
 
 ## Overview
 
-The Particles provides functionality for FiveM resources.
+The Particles library provides particle effect management for creating visual effects, managing particle systems, and controlling environmental effects in the game world.
 
 ## Play (Client)
 
@@ -83,8 +83,8 @@ local Bridge = exports['community_bridge']:Bridge()
 
 -- Create a particle effect
 local smokeHandle = Bridge.Particles.Play(
-    "core", "exp_grd_bzgas_smoke", 
-    GetEntityCoords(PlayerPedId()), 
+    "core", "exp_grd_bzgas_smoke",
+    GetEntityCoords(PlayerPedId()),
     vector3(0,0,0), 1.0, vector3(255,255,255), true
 )
 

@@ -10,7 +10,7 @@ The Notify module provides a unified interface for sending notifications across 
 
 ## Overview
 
-The Notify provides functionality for FiveM resources.
+The Notify module provides notification systems for displaying messages, alerts, and status updates to players.
 
 ## GetResourceName (Client)
 

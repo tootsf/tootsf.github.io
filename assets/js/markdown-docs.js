@@ -189,7 +189,7 @@ class CommunityBridgeDocumentation {
                             if (response.ok) {
                                 const content = await response.text();
                                 const icon = this.extractIconFromMarkdown(content) || '📄';
-                                
+
                                 structure[folderName].items[fileName] = {
                                     path: `${folderName}/${fileName}`,
                                     type: 'markdown',
@@ -224,7 +224,7 @@ class CommunityBridgeDocumentation {
 
         const folderItems = {};
         const knownModules = {
-            'Libraries': ['Anim', 'Batch', 'Cache', 'Callback', 'Cutscenes', 'DUI', 'Entities', 'Generators', 'Ids', 'Logs', 'Markers', 'Math', 'Particles', 'Placers', 'Point', 'Points', 'Raycast', 'Scaleform', 'Shells', 'SQL', 'StateBags', 'Table', 'Utility'],
+            'Libraries': ['Anim', 'Batch', 'Cache', 'Callback', 'Cutscenes', 'DUI', 'Entities', 'Ids', 'ItemsBuilder', 'Logs', 'LootTable', 'Markers', 'Math', 'Particles', 'Placers', 'Point', 'Points', 'Raycast', 'Scaleform', 'Shells', 'SQL', 'StateBags', 'Table', 'Utility'],
             'Modules': ['Banking', 'Clothing', 'Dialogue', 'Dispatch', 'Doorlock', 'Framework', 'Fuel', 'HelpText', 'Housing', 'Input', 'Inventory', 'Locales', 'Managment', 'Math', 'Menu', 'Notify', 'Phone', 'ProgressBar', 'Shops', 'Skills', 'Target', 'VehicleKey', 'Version', 'Weather']
         };
 
@@ -237,7 +237,7 @@ class CommunityBridgeDocumentation {
                     if (response.ok) {
                         const content = await response.text();
                         const icon = this.extractIconFromMarkdown(content) || '📄';
-                        
+
                         folderItems[moduleName] = {
                             path: `Community Bridge/${folderName}/${moduleName}/${moduleName.toLowerCase()}`,
                             type: 'markdown',
@@ -265,7 +265,7 @@ class CommunityBridgeDocumentation {
 
     async discoverSimpleFolder(structure, folderName) {
         console.log(`🔍 Discovering simple folder: ${folderName}`);
-        
+
         try {
             // Try to load toc.json first
             try {
@@ -307,7 +307,7 @@ class CommunityBridgeDocumentation {
                     if (response.ok) {
                         const content = await response.text();
                         const icon = this.extractIconFromMarkdown(content) || '📄';
-                        
+
                         structure[folderName].items[fileName] = {
                             path: `${folderName}/${fileName}`,
                             type: 'markdown',
@@ -329,7 +329,7 @@ class CommunityBridgeDocumentation {
         // Look for the main header pattern: # ModuleName Icon
         // Example: # Anim 🎭
         const headerMatch = content.match(/^#\s+(\w+)\s+([\u{1F600}-\u{1F64F}]|[\u{1F300}-\u{1F5FF}]|[\u{1F680}-\u{1F6FF}]|[\u{1F700}-\u{1F77F}]|[\u{1F780}-\u{1F7FF}]|[\u{1F800}-\u{1F8FF}]|[\u{2600}-\u{26FF}]|[\u{2700}-\u{27BF}])/mu);
-        
+
         if (headerMatch) {
             console.log(`🎯 Found icon in header: ${headerMatch[2]} for ${headerMatch[1]}`);
             return headerMatch[2];
@@ -623,16 +623,22 @@ class CommunityBridgeDocumentation {
         const headerLine = lines[0];
 
         // Parse function header: ## FunctionName (Client/Server/Shared)
-        const headerMatch = headerLine.match(/^##\s+(\w+).*\((Client|Server|Shared)\)/i);
+        // Updated regex to capture function names with dots like LootTable.GetRandomItemsWithLimit
+        const headerMatch = headerLine.match(/^##\s+([^\s(]+).*\((Client|Server|Shared)\)/i);
         if (!headerMatch) {
             return null;
         }
 
-        const name = headerMatch[1];
+        const fullName = headerMatch[1];
         const side = headerMatch[2].toLowerCase();
 
+        // Extract just the function name part (after the last dot if present)
+        const nameParts = fullName.split('.');
+        const functionName = nameParts[nameParts.length - 1];
+
         const func = {
-            name: name,
+            name: functionName,
+            fullName: fullName, // Keep the full name for display
             side: side,
             description: '',
             syntax: '',
@@ -907,7 +913,7 @@ class CommunityBridgeDocumentation {
         return `
             <div class="function-card" id="${anchor}">
                 <div class="function-header">
-                    <span class="function-name">${func.name}</span>
+                    <span class="function-name">${func.fullName || func.name}</span>
                     <div class="function-meta">
                         <span class="function-side ${side}">${side}</span>
                         <button class="copy-link-btn" title="Copy Link" data-anchor="${anchor}">🔗</button>
@@ -941,13 +947,51 @@ class CommunityBridgeDocumentation {
             return;
         }
 
-        // Generate TOC from functions
-        const tocHtml = functions.map(func => {
-            const anchor = this.generateAnchor(func.name, func.side, this.currentModuleName);
-            return `<li><a href="#${anchor}" class="toc-link">${func.name}</a></li>`;
-        }).join('');
+        // Group functions by side (Client, Server, Shared)
+        const groupedFunctions = {
+            'Client': [],
+            'Server': [],
+            'Shared': []
+        };
 
-        tocContent.innerHTML = `<ul class="toc-list">${tocHtml}</ul>`;
+        functions.forEach(func => {
+            const side = func.side.charAt(0).toUpperCase() + func.side.slice(1);
+            if (groupedFunctions[side]) {
+                groupedFunctions[side].push(func);
+            }
+        });
+
+        // Generate categorized TOC HTML
+        let tocHtml = '';
+
+        for (const [category, categoryFunctions] of Object.entries(groupedFunctions)) {
+            if (categoryFunctions.length > 0) {
+                const categoryIcon = {
+                    'Client': '🖥️',
+                    'Server': '⚙️',
+                    'Shared': '🔄'
+                }[category];
+
+                tocHtml += `
+                    <div class="toc-category">
+                        <h4 class="toc-category-header">
+                            <span class="toc-category-icon">${categoryIcon}</span>
+                            ${category} Functions
+                            <span class="toc-count">(${categoryFunctions.length})</span>
+                        </h4>
+                        <ul class="toc-list toc-category-list">
+                            ${categoryFunctions.map(func => {
+                                const anchor = this.generateAnchor(func.name, func.side, this.currentModuleName);
+                                const displayName = func.fullName || func.name;
+                                return `<li><a href="#${anchor}" class="toc-link" data-side="${func.side}">${displayName}</a></li>`;
+                            }).join('')}
+                        </ul>
+                    </div>
+                `;
+            }
+        }
+
+        tocContent.innerHTML = tocHtml;
         tocContainer.style.display = 'block';
 
         // Add click handlers
@@ -995,7 +1039,7 @@ class CommunityBridgeDocumentation {
                     if (response.ok) {
                         const content = await response.text();
                         const functions = this.parseFunctionsFromMarkdown(content);
-                        
+
                         // Add the main module/page to index
                         this.searchIndex.push({
                             name: item.name || path.split('/').pop(),
@@ -1004,13 +1048,14 @@ class CommunityBridgeDocumentation {
                             type: 'module',
                             description: item.meta?.description || this.extractDescription(content),
                             content: content.toLowerCase(),
-                            functions: functions.map(f => f.name.toLowerCase())
+                            functions: functions.map(f => (f.fullName || f.name).toLowerCase())
                         });
 
                         // Add each function as a separate searchable item
                         functions.forEach(func => {
+                            const displayName = func.fullName || func.name;
                             this.searchIndex.push({
-                                name: func.name,
+                                name: displayName,
                                 path: path,
                                 category: category,
                                 type: 'function',
@@ -1171,12 +1216,12 @@ class CommunityBridgeDocumentation {
             const resultsHtml = results.map(result => {
                 let resultContent = '';
                 let clickHandler = '';
-                
+
                 if (result.type === 'function') {
                     // For functions, navigate to the module and scroll to the function
                     clickHandler = `window.app.navigateToFunction('${result.path}', '${result.anchor}')`;
                     const sideLabel = result.side ? `(${result.side.charAt(0).toUpperCase() + result.side.slice(1)})` : '';
-                    
+
                     resultContent = `
                         <div class="search-result-item function-result" onclick="${clickHandler}">
                             <h4>
@@ -1191,7 +1236,7 @@ class CommunityBridgeDocumentation {
                 } else {
                     // For modules, navigate to the module
                     clickHandler = `window.app.navigateToPath('${result.path}')`;
-                    
+
                     resultContent = `
                         <div class="search-result-item module-result" onclick="${clickHandler}">
                             <h4>
@@ -1204,7 +1249,7 @@ class CommunityBridgeDocumentation {
                         </div>
                     `;
                 }
-                
+
                 return resultContent;
             }).join('');
 
@@ -1222,7 +1267,7 @@ class CommunityBridgeDocumentation {
     async navigateToFunction(path, anchor) {
         // Navigate to the module first
         await this.navigateToPath(path);
-        
+
         // Wait a bit for content to load, then scroll to the function
         setTimeout(() => {
             const element = document.getElementById(anchor);
@@ -1235,7 +1280,7 @@ class CommunityBridgeDocumentation {
                 }, 2000);
             }
         }, 100);
-        
+
         // Hide search results
         this.hideSearchResults();
     }
@@ -1245,7 +1290,7 @@ class CommunityBridgeDocumentation {
         if (searchResults) {
             searchResults.style.display = 'none';
         }
-        
+
         // Also clear the search input when hiding results via navigation
         const searchInput = document.getElementById('search-input');
         if (searchInput && searchInput.value) {

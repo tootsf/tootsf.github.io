@@ -10,7 +10,7 @@ The Target module provides a unified interface for adding interactive targets to
 
 ## Overview
 
-The Target provides functionality for FiveM resources.
+The Target module provides interaction targeting systems for world object and entity interaction.
 
 ## FixOptions (Client)
 

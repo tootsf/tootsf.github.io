@@ -10,7 +10,7 @@ The DUI (Direct User Interface) library provides HTML/CSS UI integration within 
 
 ## Overview
 
-The DUI provides functionality for FiveM resources.
+The DUI library provides Dynamic User Interface management for creating and controlling browser-based UI elements, web content integration, and HTML rendering in-game.
 
 ## Create (Client)
 
@@ -41,7 +41,7 @@ local Bridge = exports['community_bridge']:Bridge()
 local duiId = Bridge.DUI.Create('https://example.com/ui', 1920, 1080)
 if duiId then
     print('DUI created with ID: ' .. duiId)
-    
+
     -- Get textures for rendering
     local txd, txn = Bridge.DUI.GetTextures(duiId)
     print('Texture: ' .. txd .. '/' .. txn)

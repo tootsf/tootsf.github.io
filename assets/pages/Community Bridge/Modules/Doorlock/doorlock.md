@@ -10,7 +10,7 @@ The Doorlock module provides functions for managing door locking states across d
 
 ## Overview
 
-The Doorlock provides functionality for FiveM resources.
+The Doorlock module provides secure door and property locking mechanisms with access control and persistence.
 
 ## GetClosestDoor (Client)
 

@@ -10,7 +10,7 @@ Automated version checking system that monitors GitHub releases and notifies adm
 
 ## Overview
 
-The Version provides functionality for FiveM resources.
+The Version module provides version checking, update notifications, and compatibility management functions.
 
 ## VersionChecker (Server)
 

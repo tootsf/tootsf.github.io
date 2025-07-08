@@ -10,7 +10,7 @@ The Entities library provides a comprehensive system for managing networked enti
 
 ## Overview
 
-The Entities provides functionality for FiveM resources.
+The Entities library provides entity management functions for creating, tracking, and manipulating game entities including peds, vehicles, and objects with lifecycle management.
 
 ## Register (Client)
 

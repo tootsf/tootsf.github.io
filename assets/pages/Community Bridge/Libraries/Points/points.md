@@ -10,7 +10,7 @@ The Points library provides an efficient grid-based proximity detection system f
 
 ## Overview
 
-The Points provides functionality for FiveM resources.
+The Points library provides coordinate management and spatial calculations for handling multiple points, distance calculations, and area-based operations in 3D space.
 
 ## New (Client)
 
@@ -36,6 +36,8 @@ Point.New(id, coords, distance, onEnter, onExit, onNearby, args)
 
 ### Example
 ```lua
+local Bridge = exports["community_bridge"]:Bridge()
+
 -- Static point at coordinates
 local shopPoint = Point.New(
     "shop_entrance",
@@ -85,6 +87,8 @@ Point.Remove(id)
 
 ### Example
 ```lua
+local Bridge = exports["community_bridge"]:Bridge()
+
 -- Remove the shop point
 Point.Remove("shop_entrance")
 print("Shop point removed")
@@ -116,6 +120,8 @@ Point.Get(id)
 
 ### Example
 ```lua
+local Bridge = exports["community_bridge"]:Bridge()
+
 local shopPoint = Point.Get("shop_entrance")
 if shopPoint then
     print("Shop point distance: " .. shopPoint.distance)
@@ -142,6 +148,8 @@ Point.UpdateCoords(id, coords)
 
 ### Example
 ```lua
+local Bridge = exports["community_bridge"]:Bridge()
+
 -- Move shop entrance to new location
 local newCoords = vector3(30.0, -1350.0, 29.5)
 Point.UpdateCoords("shop_entrance", newCoords)
@@ -168,6 +176,8 @@ Point.GetAll()
 
 ### Example
 ```lua
+local Bridge = exports["community_bridge"]:Bridge()
+
 local allPoints = Point.GetAll()
 print("Total active points: " .. table.getn(allPoints))
 

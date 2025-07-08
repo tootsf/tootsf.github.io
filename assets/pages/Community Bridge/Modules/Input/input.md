@@ -10,7 +10,7 @@ The Input module provides a unified interface for creating input dialogs and for
 
 ## Overview
 
-The Input provides functionality for FiveM resources.
+The Input module provides user input handling and validation systems for forms, prompts, and data entry.
 
 ## Open (Client)
 

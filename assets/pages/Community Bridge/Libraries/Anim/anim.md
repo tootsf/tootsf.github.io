@@ -10,7 +10,7 @@ The Anim library provides a comprehensive animation management system for entiti
 
 ## Overview
 
-The Anim provides functionality for FiveM resources.
+The Anim library provides a comprehensive animation management system for entities in FiveM. It handles animation dictionary loading, playback control, and automatic cleanup with support for callbacks and status tracking.
 
 ## RequestDict (Client)
 

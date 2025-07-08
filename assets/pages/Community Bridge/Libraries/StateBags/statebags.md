@@ -10,7 +10,7 @@ The StateBags library provides simplified management of FiveM's StateBag system 
 
 ## Overview
 
-The StateBags provides functionality for FiveM resources.
+The StateBags library provides state synchronization between client and server using FiveM's StateBags system for efficient data sharing and automatic network synchronization.
 
 ## AddEntityChangeHandler (Client)
 
@@ -41,9 +41,9 @@ local healthHandler = Bridge.StateBags.AddEntityChangeHandler(
     function(entity, key, value, lastValue, replicated)
         if DoesEntityExist(entity) then
             local entityType = GetEntityType(entity)
-            print(string.format("Entity %d health changed: %d -> %d", 
+            print(string.format("Entity %d health changed: %d -> %d",
                 entity, lastValue or 0, value or 0))
-            
+
             if entityType == 1 and value <= 0 then -- Ped died
                 print("Ped has died!")
             end
@@ -106,9 +106,9 @@ local jobHandler = Bridge.StateBags.AddPlayerChangeHandler(
     false, -- All players
     function(playerId, key, value, lastValue, replicated)
         local playerName = GetPlayerName(playerId)
-        print(string.format("%s changed job from %s to %s", 
-            playerName, 
-            lastValue or "unemployed", 
+        print(string.format("%s changed job from %s to %s",
+            playerName,
+            lastValue or "unemployed",
             value or "unemployed"))
     end
 )
