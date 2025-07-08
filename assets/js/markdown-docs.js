@@ -16,6 +16,9 @@ class CommunityBridgeDocumentation {
         console.log('🚀 Initializing Community Bridge Documentation...');
 
         try {
+            // Cleanup previous instance if exists
+            this.cleanup();
+            
             this.setupTheme();
             this.setupBasicEventListeners();
             await this.loadModuleStructure();
@@ -25,6 +28,14 @@ class CommunityBridgeDocumentation {
         } catch (error) {
             console.error('❌ Initialization failed:', error);
             this.showError('Failed to initialize documentation site');
+        }
+    }
+
+    cleanup() {
+        // Remove click-outside handler if it exists
+        if (this.clickOutsideHandler) {
+            document.removeEventListener('click', this.clickOutsideHandler);
+            this.clickOutsideHandler = null;
         }
     }
 
@@ -67,10 +78,36 @@ class CommunityBridgeDocumentation {
                 }
             });
 
+            // Add click-outside functionality to close search
+            this.setupSearchClickOutside(newSearchInput);
+
             console.log('🔍 Search input configured');
         } else {
             console.warn('⚠️ Search input not found');
         }
+    }
+
+    setupSearchClickOutside(searchInput) {
+        // Remove any existing click handler
+        if (this.clickOutsideHandler) {
+            document.removeEventListener('click', this.clickOutsideHandler);
+        }
+
+        this.clickOutsideHandler = (event) => {
+            const searchResults = document.querySelector('.search-results');
+            const searchContainer = searchInput.closest('.search-container') || searchInput.parentElement;
+            
+            // Check if click is outside search input and search results
+            const isClickInsideSearch = searchContainer && searchContainer.contains(event.target);
+            const isClickInsideResults = searchResults && searchResults.contains(event.target);
+            
+            if (!isClickInsideSearch && !isClickInsideResults) {
+                this.hideSearchResults();
+            }
+        };
+
+        document.addEventListener('click', this.clickOutsideHandler);
+        console.log('👆 Click-outside handler for search configured');
     }
 
     setupNavigationEvents() {

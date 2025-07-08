@@ -115,7 +115,7 @@ local Bridge = exports['community_bridge']:Bridge()
 local randomItem = Bridge.LootTable.GetRandomItem('treasure_chest', 1)
 if randomItem then
     print('Found item:', randomItem.item, 'Count:', randomItem.count)
-    
+
     -- Add to player inventory
     Bridge.Inventory.AddItem(source, randomItem.item, randomItem.count, nil, randomItem.metadata)
 else
@@ -188,7 +188,7 @@ local items = Bridge.LootTable.GetRandomItemsWithLimit('treasure_chest', 1)
 for _, itemData in pairs(items) do
     -- itemData format: {item_name, metadata, count, tier, chance}
     local item, metadata, count, tier, chance = table.unpack(itemData)
-    
+
     Bridge.Inventory.AddItem(source, item, count, nil, metadata)
     print('Added: ' .. item .. ' x' .. count)
 end
