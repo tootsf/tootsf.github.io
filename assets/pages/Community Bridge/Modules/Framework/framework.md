@@ -12,24 +12,20 @@ Universal framework compatibility layer that provides consistent access to playe
 
 The Framework provides functionality for FiveM resources.
 
-## Client Functions
+## GetFrameworkJobs (Client)
 
-### GetFrameworkJobs
-
-<!--TOC: GetFrameworkJobs-->
-
-**Context:** 🖥️ Client
-
+### Description
 Function GetFrameworkJobs
 
-**Syntax:** `Bridge.Framework.GetFrameworkJobs()`
+### Syntax
+```lua
+Bridge.Framework.GetFrameworkJobs()
+```
 
-**Parameters:** None
+### Returns
+- (table): Array of job objects with name, label, and grades
 
-**Returns:**
-- (table) - Array of job objects with name, label, and grades
-
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 local jobs = Bridge.Framework.GetFrameworkJobs()
@@ -38,44 +34,40 @@ for _, job in pairs(jobs) do
 end
 ```
 
-### GetFrameworkName
+## GetFrameworkName (Client)
 
-<!--TOC: GetFrameworkName-->
-
-**Context:** 🖥️ Client
-
+### Description
 Function GetFrameworkName
 
-**Syntax:** `Bridge.Framework.GetFrameworkName()`
+### Syntax
+```lua
+Bridge.Framework.GetFrameworkName()
+```
 
-**Parameters:** None
+### Returns
+- (string): The name of the detected framework ('qb-core', 'qbx_core', 'es_extended')
 
-**Returns:**
-- (string) - The name of the detected framework ('qb-core', 'qbx_core', 'es_extended')
-
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 local frameworkName = Bridge.Framework.GetFrameworkName()
 print('Using framework:', frameworkName)
 ```
 
-### GetIsPlayerDead
+## GetIsPlayerDead (Client)
 
-<!--TOC: GetIsPlayerDead-->
-
-**Context:** 🖥️ Client
-
+### Description
 Function GetIsPlayerDead
 
-**Syntax:** `Bridge.Framework.GetIsPlayerDead()`
+### Syntax
+```lua
+Bridge.Framework.GetIsPlayerDead()
+```
 
-**Parameters:** None
+### Returns
+- (boolean): Whether the player is dead/downed
 
-**Returns:**
-- (boolean) - Whether the player is dead/downed
-
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 if Bridge.Framework.GetIsPlayerDead() then
@@ -83,23 +75,23 @@ if Bridge.Framework.GetIsPlayerDead() then
 end
 ```
 
-### GetItemInfo
+## GetItemInfo (Client)
 
-<!--TOC: GetItemInfo-->
-
-**Context:** 🖥️ Client
-
+### Description
 Function GetItemInfo
 
-**Syntax:** `Bridge.Framework.GetItemInfo(item)`
+### Syntax
+```lua
+Bridge.Framework.GetItemInfo(item)
+```
 
-**Parameters:**
-- `item` (string) - Item name
+### Parameters
+- **item** (string): Item name
 
-**Returns:**
-- (table) - Item information (name, label, weight, etc.)
+### Returns
+- (table): Item information (name, label, weight, etc.)
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 local itemInfo = Bridge.Framework.GetItemInfo('phone')
@@ -107,88 +99,80 @@ print('Item label:', itemInfo.label)
 print('Item weight:', itemInfo.weight)
 ```
 
-### GetPlayerData
+## GetPlayerData (Client)
 
-<!--TOC: GetPlayerData-->
-
-**Context:** 🖥️ Client
-
+### Description
 Function GetPlayerData
 
-**Syntax:** `Bridge.Framework.GetPlayerData()`
+### Syntax
+```lua
+Bridge.Framework.GetPlayerData()
+```
 
-**Parameters:** None
+### Returns
+- (table): Player data in framework's native format
 
-**Returns:**
-- (table) - Player data in framework's native format
-
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 local playerData = Bridge.Framework.GetPlayerData()
 print('Player name:', playerData.charinfo.firstname)
 ```
 
-### GetPlayerDob
+## GetPlayerDob (Client)
 
-<!--TOC: GetPlayerDob-->
-
-**Context:** 🖥️ Client
-
+### Description
 Function GetPlayerDob
 
-**Syntax:** `Bridge.Framework.GetPlayerDob()`
+### Syntax
+```lua
+Bridge.Framework.GetPlayerDob()
+```
 
-**Parameters:** None
+### Returns
+- (string): Player's date of birth
 
-**Returns:**
-- (string) - Player's date of birth
-
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 local dob = Bridge.Framework.GetPlayerDob()
 print('Player DOB:', dob)
 ```
 
-### GetPlayerIdentifier
+## GetPlayerIdentifier (Client)
 
-<!--TOC: GetPlayerIdentifier-->
-
-**Context:** 🖥️ Client
-
+### Description
 Function GetPlayerIdentifier
 
-**Syntax:** `Bridge.Framework.GetPlayerIdentifier()`
+### Syntax
+```lua
+Bridge.Framework.GetPlayerIdentifier()
+```
 
-**Parameters:** None
+### Returns
+- (string): Player's unique identifier (citizenid/identifier)
 
-**Returns:**
-- (string) - Player's unique identifier (citizenid/identifier)
-
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 local identifier = Bridge.Framework.GetPlayerIdentifier()
 print('Player ID:', identifier)
 ```
 
-### GetPlayerInventory
+## GetPlayerInventory (Client)
 
-<!--TOC: GetPlayerInventory-->
-
-**Context:** 🖥️ Client
-
+### Description
 Function GetPlayerInventory
 
-**Syntax:** `Bridge.Framework.GetPlayerInventory()`
+### Syntax
+```lua
+Bridge.Framework.GetPlayerInventory()
+```
 
-**Parameters:** None
+### Returns
+- (table): Player's inventory in standardized format
 
-**Returns:**
-- (table) - Player's inventory in standardized format
-
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 local inventory = Bridge.Framework.GetPlayerInventory()
@@ -197,44 +181,40 @@ for _, item in pairs(inventory) do
 end
 ```
 
-### GetPlayerJob
+## GetPlayerJob (Client)
 
-<!--TOC: GetPlayerJob-->
-
-**Context:** 🖥️ Client
-
+### Description
 Function GetPlayerJob
 
-**Syntax:** `Bridge.Framework.GetPlayerJob()`
+### Syntax
+```lua
+Bridge.Framework.GetPlayerJob()
+```
 
-**Parameters:** None
+### Returns
+- (string, string, string, number): Job name, label, grade name, grade level
 
-**Returns:**
-- (string, string, string, number) - Job name, label, grade name, grade level
-
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 local jobName, jobLabel, gradeName, gradeLevel = Bridge.Framework.GetPlayerJob()
 print('Job:', jobName, jobLabel)
 ```
 
-### GetPlayerJobData
+## GetPlayerJobData (Client)
 
-<!--TOC: GetPlayerJobData-->
-
-**Context:** 🖥️ Client
-
+### Description
 Function GetPlayerJobData
 
-**Syntax:** `Bridge.Framework.GetPlayerJobData()`
+### Syntax
+```lua
+Bridge.Framework.GetPlayerJobData()
+```
 
-**Parameters:** None
+### Returns
+- (table): Complete job information object
 
-**Returns:**
-- (table) - Complete job information object
-
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 local jobData = Bridge.Framework.GetPlayerJobData()
@@ -243,68 +223,66 @@ print('On duty:', jobData.onDuty)
 print('Is boss:', jobData.boss)
 ```
 
-### GetPlayerMetaData
+## GetPlayerMetaData (Client)
 
-<!--TOC: GetPlayerMetaData-->
-
-**Context:** 🖥️ Client
-
+### Description
 Function GetPlayerMetaData
 
-**Syntax:** `Bridge.Framework.GetPlayerMetaData(metadata)`
+### Syntax
+```lua
+Bridge.Framework.GetPlayerMetaData(metadata)
+```
 
-**Parameters:**
-- `metadata` (string|table) - Metadata key to retrieve
+### Parameters
+- **metadata** (string|table): Metadata key to retrieve
 
-**Returns:**
-- (any) - The metadata value
+### Returns
+- (any): The metadata value
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 local stress = Bridge.Framework.GetPlayerMetaData('stress')
 print('Player stress level:', stress)
 ```
 
-### GetPlayerName
+## GetPlayerName (Client)
 
-<!--TOC: GetPlayerName-->
-
-**Context:** 🖥️ Client
-
+### Description
 Function GetPlayerName
 
-**Syntax:** `Bridge.Framework.GetPlayerName()`
+### Syntax
+```lua
+Bridge.Framework.GetPlayerName()
+```
 
-**Parameters:** None
+### Returns
+- (string, string): First name, Last name
 
-**Returns:**
-- (string, string) - First name, Last name
-
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 local firstName, lastName = Bridge.Framework.GetPlayerName()
 print('Player name:', firstName, lastName)
 ```
 
-### GetVehicleProperties
+## GetVehicleProperties (Client)
 
-<!--TOC: GetVehicleProperties-->
-
-**Context:** 🖥️ Client
-
+### Description
 Function GetVehicleProperties
 
-**Syntax:** `Bridge.Framework.GetVehicleProperties(vehicle)`
+### Syntax
+```lua
+Bridge.Framework.GetVehicleProperties(vehicle)
+```
 
-**Parameters:**
-- `vehicle` (number) - Vehicle entity handle
+### Parameters
+- **vehicle** (number): Vehicle entity handle
 
-**Returns:**
-- (table) - Vehicle properties data
+### Returns
+- (table): Vehicle properties data
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 local vehicle = GetVehiclePedIsIn(PlayerPedId(), false)
@@ -312,23 +290,23 @@ local props = Bridge.Framework.GetVehicleProperties(vehicle)
 print('Plate:', props.plate)
 ```
 
-### HasItem
+## HasItem (Client)
 
-<!--TOC: HasItem-->
-
-**Context:** 🖥️ Client
-
+### Description
 Function HasItem
 
-**Syntax:** `Bridge.Framework.HasItem(item)`
+### Syntax
+```lua
+Bridge.Framework.HasItem(item)
+```
 
-**Parameters:**
-- `item` (string) - Item name to check
+### Parameters
+- **item** (string): Item name to check
 
-**Returns:**
-- (boolean) - Whether player has the item
+### Returns
+- (boolean): Whether player has the item
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 if Bridge.Framework.HasItem('phone') then
@@ -336,69 +314,67 @@ if Bridge.Framework.HasItem('phone') then
 end
 ```
 
-### HideHelpText
+## HideHelpText (Client)
 
-<!--TOC: HideHelpText-->
-
-**Context:** 🖥️ Client
-
+### Description
 Function HideHelpText
 
-**Syntax:** `Bridge.Framework.HideHelpText()`
+### Syntax
+```lua
+Bridge.Framework.HideHelpText()
+```
 
-**Parameters:** None
+### Returns
+- (nil): No description provided
 
-**Returns:**
-- (nil) - No description provided
-
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 Bridge.Framework.HideHelpText()
 ```
 
-### Notify
+## Notify (Client)
 
-<!--TOC: Notify-->
-
-**Context:** 🖥️ Client
-
+### Description
 Function Notify
 
-**Syntax:** `Bridge.Framework.Notify(message, type, time)`
+### Syntax
+```lua
+Bridge.Framework.Notify(message, type, time)
+```
 
-**Parameters:**
-- `message` (string) - Notification message
-- `type` (string) - Notification type
-- `time` (number) - Display duration
+### Parameters
+- **message** (string): Notification message
+- **type** (string): Notification type
+- **time** (number): Display duration
 
-**Returns:**
-- (nil) - No description provided
+### Returns
+- (nil): No description provided
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 Bridge.Framework.Notify('Hello World!', 'success', 5000)
 ```
 
-### SetVehicleProperties
+## SetVehicleProperties (Client)
 
-<!--TOC: SetVehicleProperties-->
-
-**Context:** 🖥️ Client
-
+### Description
 Function SetVehicleProperties
 
-**Syntax:** `Bridge.Framework.SetVehicleProperties(vehicle, properties)`
+### Syntax
+```lua
+Bridge.Framework.SetVehicleProperties(vehicle, properties)
+```
 
-**Parameters:**
-- `vehicle` (number) - Vehicle entity handle
-- `properties` (table) - Properties to apply
+### Parameters
+- **vehicle** (number): Vehicle entity handle
+- **properties** (table): Properties to apply
 
-**Returns:**
-- (boolean) - Success status
+### Returns
+- (boolean): Success status
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 local vehicle = GetVehiclePedIsIn(PlayerPedId(), false)
@@ -406,235 +382,229 @@ local props = { plate = 'BRIDGE1' }
 Bridge.Framework.SetVehicleProperties(vehicle, props)
 ```
 
-### ShowHelpText
+## ShowHelpText (Client)
 
-<!--TOC: ShowHelpText-->
-
-**Context:** 🖥️ Client
-
+### Description
 Function ShowHelpText
 
-**Syntax:** `Bridge.Framework.ShowHelpText(message, position)`
+### Syntax
+```lua
+Bridge.Framework.ShowHelpText(message, position)
+```
 
-**Parameters:**
-- `message` (string) - Help text message
-- `position` (string) - Text position
+### Parameters
+- **message** (string): Help text message
+- **position** (string): Text position
 
-**Returns:**
-- (nil) - No description provided
+### Returns
+- (nil): No description provided
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 Bridge.Framework.ShowHelpText('Press E to interact', 'top-center')
 ```
 
-### GetItemCount
+## GetItemCount (Client)
 
-<!--TOC: GetItemCount-->
-
-**Context:** 🖥️ Client
-
+### Description
 This will return the item count for the specified item in the players inventory.
 
-**Syntax:** `Bridge.Framework.GetItemCount(item)`
+### Syntax
+```lua
+Bridge.Framework.GetItemCount(item)
+```
 
-**Parameters:**
-- `item` (string)
+### Parameters
+- **item** (string): 
 
-**Returns:**
-- (number)
+### Returns
+- (number): 
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports["community_bridge"]:Bridge()\n\nBridge.Framework.GetItemCount()
 ```
 
-## Server Functions
+## AddHunger (Server)
 
-### AddHunger
-
-<!--TOC: AddHunger-->
-
-**Context:** 🖲️ Server
-
+### Description
 Function AddHunger
 
-**Syntax:** `Bridge.Framework.AddHunger(src, value)`
+### Syntax
+```lua
+Bridge.Framework.AddHunger(src, value)
+```
 
-**Parameters:**
-- `src` (number) - Player source ID
-- `value` (number) - Hunger amount to add
+### Parameters
+- **src** (number): Player source ID
+- **value** (number): Hunger amount to add
 
-**Returns:**
-- (number|nil) - New hunger level
+### Returns
+- (number|nil): New hunger level
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 local newHunger = Bridge.Framework.AddHunger(source, 20)
 print('New hunger level:', newHunger)
 ```
 
-### AddItem
+## AddItem (Server)
 
-<!--TOC: AddItem-->
-
-**Context:** 🖲️ Server
-
+### Description
 Function AddItem
 
-**Syntax:** `Bridge.Framework.AddItem(src, item, amount, slot, metadata)`
+### Syntax
+```lua
+Bridge.Framework.AddItem(src, item, amount, slot, metadata)
+```
 
-**Parameters:**
-- `src` (number) - Player source ID
-- `item` (string) - Item name
-- `amount` (number) - Item quantity
-- `slot` (number) - Optional specific slot
-- `metadata` (table) - Optional item metadata
+### Parameters
+- **src** (number): Player source ID
+- **item** (string): Item name
+- **amount** (number): Item quantity
+- **slot** (number): Optional specific slot
+- **metadata** (table): Optional item metadata
 
-**Returns:**
-- (boolean|nil) - Success status
+### Returns
+- (boolean|nil): Success status
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 local success = Bridge.Framework.AddItem(source, 'phone', 1)
 print('Item added:', success)
 ```
 
-### AddStress
+## AddStress (Server)
 
-<!--TOC: AddStress-->
-
-**Context:** 🖲️ Server
-
+### Description
 Function AddStress
 
-**Syntax:** `Bridge.Framework.AddStress(src, value)`
+### Syntax
+```lua
+Bridge.Framework.AddStress(src, value)
+```
 
-**Parameters:**
-- `src` (number) - Player source ID
-- `value` (number) - Stress amount to add
+### Parameters
+- **src** (number): Player source ID
+- **value** (number): Stress amount to add
 
-**Returns:**
-- (number|nil) - New stress level
+### Returns
+- (number|nil): New stress level
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 local newStress = Bridge.Framework.AddStress(source, 10)
 print('New stress level:', newStress)
 ```
 
-### AddThirst
+## AddThirst (Server)
 
-<!--TOC: AddThirst-->
-
-**Context:** 🖲️ Server
-
+### Description
 Function AddThirst
 
-**Syntax:** `Bridge.Framework.AddThirst(src, value)`
+### Syntax
+```lua
+Bridge.Framework.AddThirst(src, value)
+```
 
-**Parameters:**
-- `src` (number) - Player source ID
-- `value` (number) - Thirst amount to add
+### Parameters
+- **src** (number): Player source ID
+- **value** (number): Thirst amount to add
 
-**Returns:**
-- (number|nil) - New thirst level
+### Returns
+- (number|nil): New thirst level
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 local newThirst = Bridge.Framework.AddThirst(source, 25)
 print('New thirst level:', newThirst)
 ```
 
-### GetFrameworkJobs
+## GetFrameworkJobs (Server)
 
-<!--TOC: GetFrameworkJobs-->
-
-**Context:** 🖲️ Server
-
+### Description
 Function GetFrameworkJobs
 
-**Syntax:** `Bridge.Framework.GetFrameworkJobs()`
+### Syntax
+```lua
+Bridge.Framework.GetFrameworkJobs()
+```
 
-**Parameters:** None
+### Returns
+- (table): Array of all framework jobs
 
-**Returns:**
-- (table) - Array of all framework jobs
-
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 local jobs = Bridge.Framework.GetFrameworkJobs()
 print('Total jobs:', #jobs)
 ```
 
-### GetFrameworkName
+## GetFrameworkName (Server)
 
-<!--TOC: GetFrameworkName-->
-
-**Context:** 🖲️ Server
-
+### Description
 Function GetFrameworkName
 
-**Syntax:** `Bridge.Framework.GetFrameworkName()`
+### Syntax
+```lua
+Bridge.Framework.GetFrameworkName()
+```
 
-**Parameters:** None
+### Returns
+- (string): The name of the detected framework
 
-**Returns:**
-- (string) - The name of the detected framework
-
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 local frameworkName = Bridge.Framework.GetFrameworkName()
 print('Server using:', frameworkName)
 ```
 
-### GetHunger
+## GetHunger (Server)
 
-<!--TOC: GetHunger-->
-
-**Context:** 🖲️ Server
-
+### Description
 Function GetHunger
 
-**Syntax:** `Bridge.Framework.GetHunger(src)`
+### Syntax
+```lua
+Bridge.Framework.GetHunger(src)
+```
 
-**Parameters:**
-- `src` (number) - Player source ID
+### Parameters
+- **src** (number): Player source ID
 
-**Returns:**
-- (number|nil) - Current hunger level
+### Returns
+- (number|nil): Current hunger level
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 local hunger = Bridge.Framework.GetHunger(source)
 print('Player hunger:', hunger)
 ```
 
-### GetIsFrameworkAdmin
+## GetIsFrameworkAdmin (Server)
 
-<!--TOC: GetIsFrameworkAdmin-->
-
-**Context:** 🖲️ Server
-
+### Description
 Function GetIsFrameworkAdmin
 
-**Syntax:** `Bridge.Framework.GetIsFrameworkAdmin(src)`
+### Syntax
+```lua
+Bridge.Framework.GetIsFrameworkAdmin(src)
+```
 
-**Parameters:**
-- `src` (number) - Player source ID
+### Parameters
+- **src** (number): Player source ID
 
-**Returns:**
-- (boolean) - Whether the player is an admin
+### Returns
+- (boolean): Whether the player is an admin
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 if Bridge.Framework.GetIsFrameworkAdmin(source) then
@@ -642,23 +612,23 @@ if Bridge.Framework.GetIsFrameworkAdmin(source) then
 end
 ```
 
-### GetIsPlayerDead
+## GetIsPlayerDead (Server)
 
-<!--TOC: GetIsPlayerDead-->
-
-**Context:** 🖲️ Server
-
+### Description
 Function GetIsPlayerDead
 
-**Syntax:** `Bridge.Framework.GetIsPlayerDead(src)`
+### Syntax
+```lua
+Bridge.Framework.GetIsPlayerDead(src)
+```
 
-**Parameters:**
-- `src` (number) - Player source ID
+### Parameters
+- **src** (number): Player source ID
 
-**Returns:**
-- (boolean|nil) - Whether the player is dead/downed
+### Returns
+- (boolean|nil): Whether the player is dead/downed
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 if Bridge.Framework.GetIsPlayerDead(source) then
@@ -666,25 +636,25 @@ if Bridge.Framework.GetIsPlayerDead(source) then
 end
 ```
 
-### GetItem
+## GetItem (Server)
 
-<!--TOC: GetItem-->
-
-**Context:** 🖲️ Server
-
+### Description
 Function GetItem
 
-**Syntax:** `Bridge.Framework.GetItem(src, item, metadata)`
+### Syntax
+```lua
+Bridge.Framework.GetItem(src, item, metadata)
+```
 
-**Parameters:**
-- `src` (number) - Player source ID
-- `item` (string) - Item name
-- `metadata` (table) - Optional metadata filter
+### Parameters
+- **src** (number): Player source ID
+- **item** (string): Item name
+- **metadata** (table): Optional metadata filter
 
-**Returns:**
-- (table|nil) - Item data if found
+### Returns
+- (table|nil): Item data if found
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 local phoneItem = Bridge.Framework.GetItem(source, 'phone')
@@ -693,24 +663,24 @@ if phoneItem then
 end
 ```
 
-### GetItemBySlot
+## GetItemBySlot (Server)
 
-<!--TOC: GetItemBySlot-->
-
-**Context:** 🖲️ Server
-
+### Description
 Function GetItemBySlot
 
-**Syntax:** `Bridge.Framework.GetItemBySlot(src, slot)`
+### Syntax
+```lua
+Bridge.Framework.GetItemBySlot(src, slot)
+```
 
-**Parameters:**
-- `src` (number) - Player source ID
-- `slot` (number) - Inventory slot number
+### Parameters
+- **src** (number): Player source ID
+- **slot** (number): Inventory slot number
 
-**Returns:**
-- (table|nil) - Item in the specified slot
+### Returns
+- (table|nil): Item in the specified slot
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 local item = Bridge.Framework.GetItemBySlot(source, 1)
@@ -719,23 +689,23 @@ if item then
 end
 ```
 
-### GetOwnedVehicles
+## GetOwnedVehicles (Server)
 
-<!--TOC: GetOwnedVehicles-->
-
-**Context:** 🖲️ Server
-
+### Description
 Function GetOwnedVehicles
 
-**Syntax:** `Bridge.Framework.GetOwnedVehicles(src)`
+### Syntax
+```lua
+Bridge.Framework.GetOwnedVehicles(src)
+```
 
-**Parameters:**
-- `src` (number) - Player source ID
+### Parameters
+- **src** (number): Player source ID
 
-**Returns:**
-- (table) - Array of owned vehicles with vehicle and plate
+### Returns
+- (table): Array of owned vehicles with vehicle and plate
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 local vehicles = Bridge.Framework.GetOwnedVehicles(source)
@@ -744,23 +714,23 @@ for _, vehicle in pairs(vehicles) do
 end
 ```
 
-### GetPlayer
+## GetPlayer (Server)
 
-<!--TOC: GetPlayer-->
-
-**Context:** 🖲️ Server
-
+### Description
 Function GetPlayer
 
-**Syntax:** `Bridge.Framework.GetPlayer(src)`
+### Syntax
+```lua
+Bridge.Framework.GetPlayer(src)
+```
 
-**Parameters:**
-- `src` (number) - Player source ID
+### Parameters
+- **src** (number): Player source ID
 
-**Returns:**
-- (table|nil) - Player object in framework's native format
+### Returns
+- (table|nil): Player object in framework's native format
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 local player = Bridge.Framework.GetPlayer(source)
@@ -769,115 +739,115 @@ if player then
 end
 ```
 
-### GetPlayerDob
+## GetPlayerDob (Server)
 
-<!--TOC: GetPlayerDob-->
-
-**Context:** 🖲️ Server
-
+### Description
 Function GetPlayerDob
 
-**Syntax:** `Bridge.Framework.GetPlayerDob(src)`
+### Syntax
+```lua
+Bridge.Framework.GetPlayerDob(src)
+```
 
-**Parameters:**
-- `src` (number) - Player source ID
+### Parameters
+- **src** (number): Player source ID
 
-**Returns:**
-- (string|nil) - Player's date of birth
+### Returns
+- (string|nil): Player's date of birth
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 local dob = Bridge.Framework.GetPlayerDob(source)
 print('DOB:', dob)
 ```
 
-### GetPlayerDuty
+## GetPlayerDuty (Server)
 
-<!--TOC: GetPlayerDuty-->
-
-**Context:** 🖲️ Server
-
+### Description
 Function GetPlayerDuty
 
-**Syntax:** `Bridge.Framework.GetPlayerDuty(src)`
+### Syntax
+```lua
+Bridge.Framework.GetPlayerDuty(src)
+```
 
-**Parameters:**
-- `src` (number) - Player source ID
+### Parameters
+- **src** (number): Player source ID
 
-**Returns:**
-- (boolean|nil) - Whether the player is on duty
+### Returns
+- (boolean|nil): Whether the player is on duty
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 local onDuty = Bridge.Framework.GetPlayerDuty(source)
 print('On duty:', onDuty)
 ```
 
-### GetPlayerGang
+## GetPlayerGang (Server)
 
-<!--TOC: GetPlayerGang-->
-
-**Context:** 🖲️ Server
-
+### Description
 Function GetPlayerGang
 
-**Syntax:** `Bridge.Framework.GetPlayerGang(src)`
+### Syntax
+```lua
+Bridge.Framework.GetPlayerGang(src)
+```
 
-**Parameters:**
-- `src` (number) - Player source ID
+### Parameters
+- **src** (number): Player source ID
 
-**Returns:**
-- (string|nil) - Player's gang name
+### Returns
+- (string|nil): Player's gang name
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 local gang = Bridge.Framework.GetPlayerGang(source)
 print('Player gang:', gang)
 ```
 
-### GetPlayerIdentifier
+## GetPlayerIdentifier (Server)
 
-<!--TOC: GetPlayerIdentifier-->
-
-**Context:** 🖲️ Server
-
+### Description
 Function GetPlayerIdentifier
 
-**Syntax:** `Bridge.Framework.GetPlayerIdentifier(src)`
+### Syntax
+```lua
+Bridge.Framework.GetPlayerIdentifier(src)
+```
 
-**Parameters:**
-- `src` (number) - Player source ID
+### Parameters
+- **src** (number): Player source ID
 
-**Returns:**
-- (string|nil) - Player's unique identifier
+### Returns
+- (string|nil): Player's unique identifier
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 local identifier = Bridge.Framework.GetPlayerIdentifier(source)
 print('Player ID:', identifier)
 ```
 
-### GetPlayerInventory
+## GetPlayerInventory (Server)
 
-<!--TOC: GetPlayerInventory-->
-
-**Context:** 🖲️ Server
-
+### Description
 Function GetPlayerInventory
 
-**Syntax:** `Bridge.Framework.GetPlayerInventory(src)`
+### Syntax
+```lua
+Bridge.Framework.GetPlayerInventory(src)
+```
 
-**Parameters:**
-- `src` (number) - Player source ID
+### Parameters
+- **src** (number): Player source ID
 
-**Returns:**
-- (table|nil) - Player's complete inventory
+### Returns
+- (table|nil): Player's complete inventory
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 local inventory = Bridge.Framework.GetPlayerInventory(source)
@@ -886,46 +856,46 @@ for _, item in pairs(inventory) do
 end
 ```
 
-### GetPlayerJob
+## GetPlayerJob (Server)
 
-<!--TOC: GetPlayerJob-->
-
-**Context:** 🖲️ Server
-
+### Description
 Function GetPlayerJob
 
-**Syntax:** `Bridge.Framework.GetPlayerJob(src)`
+### Syntax
+```lua
+Bridge.Framework.GetPlayerJob(src)
+```
 
-**Parameters:**
-- `src` (number) - Player source ID
+### Parameters
+- **src** (number): Player source ID
 
-**Returns:**
-- (string, string, string, number) - Job name, label, grade name, grade level
+### Returns
+- (string, string, string, number): Job name, label, grade name, grade level
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 local jobName, jobLabel, gradeName, gradeLevel = Bridge.Framework.GetPlayerJob(source)
 print('Job:', jobName)
 ```
 
-### GetPlayerJobData
+## GetPlayerJobData (Server)
 
-<!--TOC: GetPlayerJobData-->
-
-**Context:** 🖲️ Server
-
+### Description
 Function GetPlayerJobData
 
-**Syntax:** `Bridge.Framework.GetPlayerJobData(src)`
+### Syntax
+```lua
+Bridge.Framework.GetPlayerJobData(src)
+```
 
-**Parameters:**
-- `src` (number) - Player source ID
+### Parameters
+- **src** (number): Player source ID
 
-**Returns:**
-- (table|nil) - Complete job information object
+### Returns
+- (table|nil): Complete job information object
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 local jobData = Bridge.Framework.GetPlayerJobData(source)
@@ -935,162 +905,160 @@ if jobData then
 end
 ```
 
-### GetPlayerMetadata
+## GetPlayerMetadata (Server)
 
-<!--TOC: GetPlayerMetadata-->
-
-**Context:** 🖲️ Server
-
+### Description
 Function GetPlayerMetadata
 
-**Syntax:** `Bridge.Framework.GetPlayerMetadata(src, metadata)`
+### Syntax
+```lua
+Bridge.Framework.GetPlayerMetadata(src, metadata)
+```
 
-**Parameters:**
-- `src` (number) - Player source ID
-- `metadata` (string) - Metadata key
+### Parameters
+- **src** (number): Player source ID
+- **metadata** (string): Metadata key
 
-**Returns:**
-- (any|nil) - Metadata value
+### Returns
+- (any|nil): Metadata value
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 local stress = Bridge.Framework.GetPlayerMetadata(source, 'stress')
 print('Player stress:', stress)
 ```
 
-### GetPlayerName
+## GetPlayerName (Server)
 
-<!--TOC: GetPlayerName-->
-
-**Context:** 🖲️ Server
-
+### Description
 Function GetPlayerName
 
-**Syntax:** `Bridge.Framework.GetPlayerName(src)`
+### Syntax
+```lua
+Bridge.Framework.GetPlayerName(src)
+```
 
-**Parameters:**
-- `src` (number) - Player source ID
+### Parameters
+- **src** (number): Player source ID
 
-**Returns:**
-- (string|nil, string|nil) - First name, Last name
+### Returns
+- (string|nil, string|nil): First name, Last name
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 local firstName, lastName = Bridge.Framework.GetPlayerName(source)
 print('Player:', firstName, lastName)
 ```
 
-### GetPlayerPhone
+## GetPlayerPhone (Server)
 
-<!--TOC: GetPlayerPhone-->
-
-**Context:** 🖲️ Server
-
+### Description
 Function GetPlayerPhone
 
-**Syntax:** `Bridge.Framework.GetPlayerPhone(src)`
+### Syntax
+```lua
+Bridge.Framework.GetPlayerPhone(src)
+```
 
-**Parameters:**
-- `src` (number) - Player source ID
+### Parameters
+- **src** (number): Player source ID
 
-**Returns:**
-- (string|nil) - Player's phone number
+### Returns
+- (string|nil): Player's phone number
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 local phone = Bridge.Framework.GetPlayerPhone(source)
 print('Player phone:', phone)
 ```
 
-### GetPlayers
+## GetPlayers (Server)
 
-<!--TOC: GetPlayers-->
-
-**Context:** 🖲️ Server
-
+### Description
 Function GetPlayers
 
-**Syntax:** `Bridge.Framework.GetPlayers()`
+### Syntax
+```lua
+Bridge.Framework.GetPlayers()
+```
 
-**Parameters:** None
+### Returns
+- (table): Array of all online player source IDs
 
-**Returns:**
-- (table) - Array of all online player source IDs
-
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 local players = Bridge.Framework.GetPlayers()
 print('Online players:', #players)
 ```
 
-### GetPlayersByJob
+## GetPlayersByJob (Server)
 
-<!--TOC: GetPlayersByJob-->
-
-**Context:** 🖲️ Server
-
+### Description
 Function GetPlayersByJob
 
-**Syntax:** `Bridge.Framework.GetPlayersByJob(job)`
+### Syntax
+```lua
+Bridge.Framework.GetPlayersByJob(job)
+```
 
-**Parameters:**
-- `job` (string) - Job name to filter by
+### Parameters
+- **job** (string): Job name to filter by
 
-**Returns:**
-- (table) - Array of player source IDs with the job
+### Returns
+- (table): Array of player source IDs with the job
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 local police = Bridge.Framework.GetPlayersByJob('police')
 print('Police online:', #police)
 ```
 
-### GetThirst
+## GetThirst (Server)
 
-<!--TOC: GetThirst-->
-
-**Context:** 🖲️ Server
-
+### Description
 Function GetThirst
 
-**Syntax:** `Bridge.Framework.GetThirst(src)`
+### Syntax
+```lua
+Bridge.Framework.GetThirst(src)
+```
 
-**Parameters:**
-- `src` (number) - Player source ID
+### Parameters
+- **src** (number): Player source ID
 
-**Returns:**
-- (number|nil) - Current thirst level
+### Returns
+- (number|nil): Current thirst level
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 local thirst = Bridge.Framework.GetThirst(source)
 print('Player thirst:', thirst)
 ```
 
-### RegisterUsableItem
+## RegisterUsableItem (Server)
 
-<!--TOC: RegisterUsableItem-->
-
-**Context:** 🖲️ Server
-
+### Description
 Function RegisterUsableItem
 
-**Syntax:** `Bridge.Framework.RegisterUsableItem(itemName, callback)`
+### Syntax
+```lua
+Bridge.Framework.RegisterUsableItem(itemName, callback)
+```
 
-**Parameters:**
-- `itemName` (string) - Item name to register
-- `callback` (function) - Function to call when item is used
+### Parameters
+- **itemName** (string): Item name to register
+- **callback** (function): Function to call when item is used
 
-**Returns:**
-- (function|nil) - Registration result
+### Returns
+- (function|nil): Registration result
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 Bridge.Framework.RegisterUsableItem('phone', function(src, itemData)
@@ -1098,377 +1066,377 @@ Bridge.Framework.RegisterUsableItem('phone', function(src, itemData)
 end)
 ```
 
-### RemoveHunger
+## RemoveHunger (Server)
 
-<!--TOC: RemoveHunger-->
-
-**Context:** 🖲️ Server
-
+### Description
 Function RemoveHunger
 
-**Syntax:** `Bridge.Framework.RemoveHunger(src, value)`
+### Syntax
+```lua
+Bridge.Framework.RemoveHunger(src, value)
+```
 
-**Parameters:**
-- `src` (number) - Player source ID
-- `value` (number) - Hunger amount to remove
+### Parameters
+- **src** (number): Player source ID
+- **value** (number): Hunger amount to remove
 
-**Returns:**
-- (number|nil) - New hunger level
+### Returns
+- (number|nil): New hunger level
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 local newHunger = Bridge.Framework.RemoveHunger(source, 15)
 print('Reduced hunger to:', newHunger)
 ```
 
-### RemoveItem
+## RemoveItem (Server)
 
-<!--TOC: RemoveItem-->
-
-**Context:** 🖲️ Server
-
+### Description
 Function RemoveItem
 
-**Syntax:** `Bridge.Framework.RemoveItem(src, item, amount, slot, metadata)`
+### Syntax
+```lua
+Bridge.Framework.RemoveItem(src, item, amount, slot, metadata)
+```
 
-**Parameters:**
-- `src` (number) - Player source ID
-- `item` (string) - Item name
-- `amount` (number) - Item quantity
-- `slot` (number) - Optional specific slot
-- `metadata` (table) - Optional metadata filter
+### Parameters
+- **src** (number): Player source ID
+- **item** (string): Item name
+- **amount** (number): Item quantity
+- **slot** (number): Optional specific slot
+- **metadata** (table): Optional metadata filter
 
-**Returns:**
-- (boolean|nil) - Success status
+### Returns
+- (boolean|nil): Success status
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 local success = Bridge.Framework.RemoveItem(source, 'phone', 1)
 print('Item removed:', success)
 ```
 
-### RemoveStress
+## RemoveStress (Server)
 
-<!--TOC: RemoveStress-->
-
-**Context:** 🖲️ Server
-
+### Description
 Function RemoveStress
 
-**Syntax:** `Bridge.Framework.RemoveStress(src, value)`
+### Syntax
+```lua
+Bridge.Framework.RemoveStress(src, value)
+```
 
-**Parameters:**
-- `src` (number) - Player source ID
-- `value` (number) - Stress amount to remove
+### Parameters
+- **src** (number): Player source ID
+- **value** (number): Stress amount to remove
 
-**Returns:**
-- (number|nil) - New stress level
+### Returns
+- (number|nil): New stress level
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 local newStress = Bridge.Framework.RemoveStress(source, 5)
 print('Reduced stress to:', newStress)
 ```
 
-### RemoveThirst
+## RemoveThirst (Server)
 
-<!--TOC: RemoveThirst-->
-
-**Context:** 🖲️ Server
-
+### Description
 Function RemoveThirst
 
-**Syntax:** `Bridge.Framework.RemoveThirst(src, value)`
+### Syntax
+```lua
+Bridge.Framework.RemoveThirst(src, value)
+```
 
-**Parameters:**
-- `src` (number) - Player source ID
-- `value` (number) - Thirst amount to remove
+### Parameters
+- **src** (number): Player source ID
+- **value** (number): Thirst amount to remove
 
-**Returns:**
-- (number|nil) - New thirst level
+### Returns
+- (number|nil): New thirst level
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 local newThirst = Bridge.Framework.RemoveThirst(source, 10)
 print('Reduced thirst to:', newThirst)
 ```
 
-### RevivePlayer
+## RevivePlayer (Server)
 
-<!--TOC: RevivePlayer-->
-
-**Context:** 🖲️ Server
-
+### Description
 Function RevivePlayer
 
-**Syntax:** `Bridge.Framework.RevivePlayer(src)`
+### Syntax
+```lua
+Bridge.Framework.RevivePlayer(src)
+```
 
-**Parameters:**
-- `src` (number) - Player source ID
+### Parameters
+- **src** (number): Player source ID
 
-**Returns:**
-- (boolean) - Success status
+### Returns
+- (boolean): Success status
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 local success = Bridge.Framework.RevivePlayer(source)
 print('Revive success:', success)
 ```
 
-### SetMetadata
+## SetMetadata (Server)
 
-<!--TOC: SetMetadata-->
-
-**Context:** 🖲️ Server
-
+### Description
 Function SetMetadata
 
-**Syntax:** `Bridge.Framework.SetMetadata(src, item, slot, metadata)`
+### Syntax
+```lua
+Bridge.Framework.SetMetadata(src, item, slot, metadata)
+```
 
-**Parameters:**
-- `src` (number) - Player source ID
-- `item` (string) - Item name
-- `slot` (number) - Item slot
-- `metadata` (table) - New metadata
+### Parameters
+- **src** (number): Player source ID
+- **item** (string): Item name
+- **slot** (number): Item slot
+- **metadata** (table): New metadata
 
-**Returns:**
-- (boolean|nil) - Success status
+### Returns
+- (boolean|nil): Success status
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 local metadata = { quality = 100 }
 Bridge.Framework.SetMetadata(source, 'phone', 1, metadata)
 ```
 
-### SetPlayerDuty
+## SetPlayerDuty (Server)
 
-<!--TOC: SetPlayerDuty-->
-
-**Context:** 🖲️ Server
-
+### Description
 Function SetPlayerDuty
 
-**Syntax:** `Bridge.Framework.SetPlayerDuty(src, status)`
+### Syntax
+```lua
+Bridge.Framework.SetPlayerDuty(src, status)
+```
 
-**Parameters:**
-- `src` (number) - Player source ID
-- `status` (boolean) - Duty status to set
+### Parameters
+- **src** (number): Player source ID
+- **status** (boolean): Duty status to set
 
-**Returns:**
-- (nil) - No description provided
+### Returns
+- (nil): No description provided
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 Bridge.Framework.SetPlayerDuty(source, true)
 ```
 
-### SetPlayerJob
+## SetPlayerJob (Server)
 
-<!--TOC: SetPlayerJob-->
-
-**Context:** 🖲️ Server
-
+### Description
 Function SetPlayerJob
 
-**Syntax:** `Bridge.Framework.SetPlayerJob(src, name, grade)`
+### Syntax
+```lua
+Bridge.Framework.SetPlayerJob(src, name, grade)
+```
 
-**Parameters:**
-- `src` (number) - Player source ID
-- `name` (string) - Job name
-- `grade` (string|number) - Job grade
+### Parameters
+- **src** (number): Player source ID
+- **name** (string): Job name
+- **grade** (string|number): Job grade
 
-**Returns:**
-- (boolean|nil) - Success status
+### Returns
+- (boolean|nil): Success status
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 Bridge.Framework.SetPlayerJob(source, 'police', '1')
 ```
 
-### SetPlayerMetadata
+## SetPlayerMetadata (Server)
 
-<!--TOC: SetPlayerMetadata-->
-
-**Context:** 🖲️ Server
-
+### Description
 Function SetPlayerMetadata
 
-**Syntax:** `Bridge.Framework.SetPlayerMetadata(src, metadata, value)`
+### Syntax
+```lua
+Bridge.Framework.SetPlayerMetadata(src, metadata, value)
+```
 
-**Parameters:**
-- `src` (number) - Player source ID
-- `metadata` (string) - Metadata key
-- `value` (any) - Value to set
+### Parameters
+- **src** (number): Player source ID
+- **metadata** (string): Metadata key
+- **value** (any): Value to set
 
-**Returns:**
-- (boolean|nil) - Success status
+### Returns
+- (boolean|nil): Success status
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 Bridge.Framework.SetPlayerMetadata(source, 'stress', 50)
 ```
 
-### AddAccountBalance
+## AddAccountBalance (Server)
 
-<!--TOC: AddAccountBalance-->
-
-**Context:** 🖲️ Server
-
+### Description
 Adds the specified amount to the player's account balance of the specified type.
 
-**Syntax:** `Bridge.Framework.AddAccountBalance(src, _type, amount)`
+### Syntax
+```lua
+Bridge.Framework.AddAccountBalance(src, _type, amount)
+```
 
-**Parameters:**
-- `src` (number)
-- `_type` (string)
-- `amount` (number)
+### Parameters
+- **src** (number): 
+- **_type** (string): 
+- **amount** (number): 
 
-**Returns:**
-- (boolean) - | nil
+### Returns
+- (boolean): | nil
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports["community_bridge"]:Bridge()\n\nBridge.Framework.AddAccountBalance()
 ```
 
-### GetStatus
+## GetStatus (Server)
 
-<!--TOC: GetStatus-->
-
-**Context:** 🖲️ Server
-
+### Description
 Function GetStatus
 
-**Syntax:** `Bridge.Framework.GetStatus(src, column)`
+### Syntax
+```lua
+Bridge.Framework.GetStatus(src, column)
+```
 
-**Parameters:**
-- `src` (any) - Parameter src
-- `column` (any) - Parameter column
+### Parameters
+- **src** (any): Parameter src
+- **column** (any): Parameter column
 
-**Returns:**
-- (nil) - No return value
+### Returns
+- (nil): No return value
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports["community_bridge"]:Bridge()\n\nBridge.Framework.GetStatus()
 ```
 
-### GetAccountBalance
+## GetAccountBalance (Server)
 
-<!--TOC: GetAccountBalance-->
-
-**Context:** 🖲️ Server
-
+### Description
 Returns the player's account balance of the specified type.
 
-**Syntax:** `Bridge.Framework.GetAccountBalance(src, _type)`
+### Syntax
+```lua
+Bridge.Framework.GetAccountBalance(src, _type)
+```
 
-**Parameters:**
-- `src` (number)
-- `_type` (string)
+### Parameters
+- **src** (number): 
+- **_type** (string): 
 
-**Returns:**
-- (number) - | nil
+### Returns
+- (number): | nil
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports["community_bridge"]:Bridge()\n\nBridge.Framework.GetAccountBalance()
 ```
 
-### GetItemCount
+## GetItemCount (Server)
 
-<!--TOC: GetItemCount-->
-
-**Context:** 🖲️ Server
-
+### Description
 Returns the count of items matching the specified name and if passed metadata from the player's inventory.
 
-**Syntax:** `Bridge.Framework.GetItemCount(src, item, metadata)`
+### Syntax
+```lua
+Bridge.Framework.GetItemCount(src, item, metadata)
+```
 
-**Parameters:**
-- `src` (number)
-- `item` (string)
-- `metadata` (table)
+### Parameters
+- **src** (number): 
+- **item** (string): 
+- **metadata** (table): 
 
-**Returns:**
-- (number) - | nil
+### Returns
+- (number): | nil
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports["community_bridge"]:Bridge()\n\nBridge.Framework.GetItemCount()
 ```
 
-### RemoveAccountBalance
+## RemoveAccountBalance (Server)
 
-<!--TOC: RemoveAccountBalance-->
-
-**Context:** 🖲️ Server
-
+### Description
 Removes the specified amount from the player's account balance of the specified type.
 
-**Syntax:** `Bridge.Framework.RemoveAccountBalance(src, _type, amount)`
+### Syntax
+```lua
+Bridge.Framework.RemoveAccountBalance(src, _type, amount)
+```
 
-**Parameters:**
-- `src` (number)
-- `_type` (string)
-- `amount` (number)
+### Parameters
+- **src** (number): 
+- **_type** (string): 
+- **amount** (number): 
 
-**Returns:**
-- (boolean) - | nil
+### Returns
+- (boolean): | nil
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports["community_bridge"]:Bridge()\n\nBridge.Framework.RemoveAccountBalance()
 ```
 
-### GetItemInfo
+## GetItemInfo (Server)
 
-<!--TOC: GetItemInfo-->
-
-**Context:** 🖲️ Server
-
+### Description
 This will return a table with the item info, {name, label, stack, weight, description, image}
 
-**Syntax:** `Bridge.Framework.GetItemInfo(item)`
+### Syntax
+```lua
+Bridge.Framework.GetItemInfo(item)
+```
 
-**Parameters:**
-- `item` (string)
+### Parameters
+- **item** (string): 
 
-**Returns:**
-- (table)
+### Returns
+- (table): 
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports["community_bridge"]:Bridge()\n\nBridge.Framework.GetItemInfo()
 ```
 
-### HasItem
+## HasItem (Server)
 
-<!--TOC: HasItem-->
-
-**Context:** 🖲️ Server
-
+### Description
 Returns boolean if the player has the specified item in their inventory.
 
-**Syntax:** `Bridge.Framework.HasItem(src, item)`
+### Syntax
+```lua
+Bridge.Framework.HasItem(src, item)
+```
 
-**Parameters:**
-- `src` (number)
-- `item` (string)
+### Parameters
+- **src** (number): 
+- **item** (string): 
 
-**Returns:**
-- (boolean)
+### Returns
+- (boolean): 
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports["community_bridge"]:Bridge()\n\nBridge.Framework.HasItem()
 ```

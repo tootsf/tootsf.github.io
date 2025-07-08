@@ -12,25 +12,23 @@ The Entities library provides a comprehensive system for managing networked enti
 
 The Entities provides functionality for FiveM resources.
 
-## Client Functions
+## Register (Client)
 
-### Register
-
-<!--TOC: Register-->
-
-**Context:** 🖥️ Client
-
+### Description
 Registers an entity for proximity-based spawning and management. The entity will automatically spawn when players are within range and despawn when they leave.
 
-**Syntax:** `Bridge.ClientEntity.Register(entityData)`
+### Syntax
+```lua
+Bridge.ClientEntity.Register(entityData)
+```
 
-**Parameters:**
-- `entityData` (table) - Entity configuration with id, entityType, model, coords, rotation, and optional callbacks
+### Parameters
+- **entityData** (table): Entity configuration with id, entityType, model, coords, rotation, and optional callbacks
 
-**Returns:**
-- (string) - Point system ID for the registered entity
+### Returns
+- (string): Point system ID for the registered entity
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 
@@ -57,22 +55,20 @@ local pointId = Bridge.ClientEntity.Register(npcData)
 print("Registered entity with point ID: " .. pointId)
 ```
 
-### Unregister
+## Unregister (Client)
 
-<!--TOC: Unregister-->
-
-**Context:** 🖥️ Client
-
+### Description
 Unregisters an entity and removes it from the world if currently spawned. Cleans up all associated resources.
 
-**Syntax:** `Bridge.ClientEntity.Unregister(id)`
+### Syntax
+```lua
+Bridge.ClientEntity.Unregister(id)
+```
 
-**Parameters:**
-- `id` (string | number) - The ID of the entity to unregister
+### Parameters
+- **id** (string | number): The ID of the entity to unregister
 
-**Returns:** None
-
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 
@@ -87,30 +83,28 @@ for _, entityId in ipairs(entityIds) do
 end
 ```
 
-## Server Functions
+## Create (Server)
 
-### Create
-
-<!--TOC: Create-->
-
-**Context:** 🖲️ Server
-
+### Description
 Creates a server-side entity representation that will be synchronized to all clients with proximity-based spawning.
 
-**Syntax:** `Bridge.ServerEntity.Create(id, entityType, model, coords, rotation, meta)`
+### Syntax
+```lua
+Bridge.ServerEntity.Create(id, entityType, model, coords, rotation, meta)
+```
 
-**Parameters:**
-- `id` (string | nil) - Unique identifier for the entity (auto-generated if nil)
-- `entityType` (string) - Type of entity: 'object', 'ped', or 'vehicle'
-- `model` (string | number) - Model name or hash for the entity
-- `coords` (vector3) - Spawn coordinates for the entity
-- `rotation` (vector3 | number | nil) - Rotation vector for objects or heading for peds/vehicles
-- `meta` (table | nil) - Additional metadata and configuration options
+### Parameters
+- **id** (string | nil): Unique identifier for the entity (auto-generated if nil)
+- **entityType** (string): Type of entity: 'object', 'ped', or 'vehicle'
+- **model** (string | number): Model name or hash for the entity
+- **coords** (vector3): Spawn coordinates for the entity
+- **rotation** (vector3 | number | nil): Rotation vector for objects or heading for peds/vehicles
+- **meta** (table | nil): Additional metadata and configuration options
 
-**Returns:**
-- (table) - The created entity data structure
+### Returns
+- (table): The created entity data structure
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 
@@ -147,22 +141,20 @@ local policeVehicle = Bridge.ServerEntity.Create(
 print("Created entities: " .. guard.id .. " and " .. policeVehicle.id)
 ```
 
-### Delete
+## Delete (Server)
 
-<!--TOC: Delete-->
-
-**Context:** 🖲️ Server
-
+### Description
 Deletes a server-side entity and notifies all clients to remove it from their world.
 
-**Syntax:** `Bridge.ServerEntity.Delete(id)`
+### Syntax
+```lua
+Bridge.ServerEntity.Delete(id)
+```
 
-**Parameters:**
-- `id` (string | number) - The ID of the entity to delete
+### Parameters
+- **id** (string | number): The ID of the entity to delete
 
-**Returns:** None
-
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 
@@ -178,24 +170,24 @@ end
 print("Event cleanup completed")
 ```
 
-### Update
+## Update (Server)
 
-<!--TOC: Update-->
-
-**Context:** 🖲️ Server
-
+### Description
 Updates specific data fields for a server-side entity and synchronizes the changes to all clients.
 
-**Syntax:** `Bridge.ServerEntity.Update(id, data)`
+### Syntax
+```lua
+Bridge.ServerEntity.Update(id, data)
+```
 
-**Parameters:**
-- `id` (string | number) - The ID of the entity to update
-- `data` (table) - Table containing the fields to update
+### Parameters
+- **id** (string | number): The ID of the entity to update
+- **data** (table): Table containing the fields to update
 
-**Returns:**
-- (boolean) - True if entity was found and updated, false otherwise
+### Returns
+- (boolean): True if entity was found and updated, false otherwise
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 
@@ -220,25 +212,23 @@ Bridge.ServerEntity.Update("police_vehicle_01", {
 })
 ```
 
-### TriggerAction
+## TriggerAction (Server)
 
-<!--TOC: TriggerAction-->
-
-**Context:** 🖲️ Server
-
+### Description
 Triggers a specific action on the client-side entity. Actions are only executed if the entity is currently spawned for the client.
 
-**Syntax:** `Bridge.ServerEntity.TriggerAction(entityId, actionName, endPosition, ...)`
+### Syntax
+```lua
+Bridge.ServerEntity.TriggerAction(entityId, actionName, endPosition, ...)
+```
 
-**Parameters:**
-- `entityId` (string | number) - The ID of the entity to trigger action on
-- `actionName` (string) - Name of the action function to execute
-- `endPosition` (vector3 | nil) - Optional end position for movement actions
-- `...` (any) - Additional arguments for the action function
+### Parameters
+- **entityId** (string | number): The ID of the entity to trigger action on
+- **actionName** (string): Name of the action function to execute
+- **endPosition** (vector3 | nil): Optional end position for movement actions
+- **...** (any): Additional arguments for the action function
 
-**Returns:** None
-
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 
@@ -269,24 +259,22 @@ Bridge.ServerEntity.TriggerAction(
 )
 ```
 
-### TriggerActions
+## TriggerActions (Server)
 
-<!--TOC: TriggerActions-->
-
-**Context:** 🖲️ Server
-
+### Description
 Triggers multiple actions in sequence on the client-side entity. Actions are queued and executed in order.
 
-**Syntax:** `Bridge.ServerEntity.TriggerActions(entityId, actions, endPosition)`
+### Syntax
+```lua
+Bridge.ServerEntity.TriggerActions(entityId, actions, endPosition)
+```
 
-**Parameters:**
-- `entityId` (string | number) - The ID of the entity to trigger actions on
-- `actions` (table) - Array of action objects with name and params properties
-- `endPosition` (vector3 | nil) - Optional final position for movement sequences
+### Parameters
+- **entityId** (string | number): The ID of the entity to trigger actions on
+- **actions** (table): Array of action objects with name and params properties
+- **endPosition** (vector3 | nil): Optional final position for movement sequences
 
-**Returns:** None
-
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 

@@ -12,32 +12,30 @@ The Particles library provides comprehensive particle effect management with aut
 
 The Particles provides functionality for FiveM resources.
 
-## Client Functions
+## Play (Client)
 
-### Play
-
-<!--TOC: Play-->
-
-**Context:** 🖥️ Client
-
+### Description
 Creates a particle effect at the specified position with full control over appearance and behavior. Automatically handles asset loading and cleanup.
 
-**Syntax:** `Bridge.Particles.Play(dict, ptfx, pos, rot, scale, color, looped, loopLength)`
+### Syntax
+```lua
+Bridge.Particles.Play(dict, ptfx, pos, rot, scale, color, looped, loopLength)
+```
 
-**Parameters:**
-- `dict` (string) - Particle effect dictionary name
-- `ptfx` (string) - Particle effect name within the dictionary
-- `pos` (vector3) - Position coordinates for the particle effect
-- `rot` (vector3) - Rotation angles (x, y, z) for the particle effect
-- `scale` (number) - Scale multiplier for the particle effect size
-- `color` (vector3) - RGB color values (0-255) for the particle effect
-- `looped` (boolean) - Whether the particle effect should loop continuously
-- `loopLength` (number | nil) - Duration in milliseconds for looped effects (nil for infinite)
+### Parameters
+- **dict** (string): Particle effect dictionary name
+- **ptfx** (string): Particle effect name within the dictionary
+- **pos** (vector3): Position coordinates for the particle effect
+- **rot** (vector3): Rotation angles (x, y, z) for the particle effect
+- **scale** (number): Scale multiplier for the particle effect size
+- **color** (vector3): RGB color values (0-255) for the particle effect
+- **looped** (boolean): Whether the particle effect should loop continuously
+- **loopLength** (number | nil): Duration in milliseconds for looped effects (nil for infinite)
 
-**Returns:**
-- (number | nil) - Particle effect handle or nil if creation failed
+### Returns
+- (number | nil): Particle effect handle or nil if creation failed
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 
@@ -66,22 +64,20 @@ local fireHandle = Bridge.Particles.Play(
 )
 ```
 
-### Stop
+## Stop (Client)
 
-<!--TOC: Stop-->
-
-**Context:** 🖥️ Client
-
+### Description
 Stops and removes a particle effect using its handle.
 
-**Syntax:** `Bridge.Particles.Stop(handle)`
+### Syntax
+```lua
+Bridge.Particles.Stop(handle)
+```
 
-**Parameters:**
-- `handle` (number) - Particle effect handle returned from Play function
+### Parameters
+- **handle** (number): Particle effect handle returned from Play function
 
-**Returns:** None
-
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 
@@ -99,23 +95,23 @@ SetTimeout(5000, function()
 end)
 ```
 
-### Register
+## Register (Client)
 
-<!--TOC: Register-->
-
-**Context:** 🖥️ Client
-
+### Description
 Registers a proximity-based particle effect that automatically spawns/despawns based on player distance. Integrates with the Points system for efficient management.
 
-**Syntax:** `Bridge.Particles.Register(data)`
+### Syntax
+```lua
+Bridge.Particles.Register(data)
+```
 
-**Parameters:**
-- `data` (table) - Configuration table with particle properties
+### Parameters
+- **data** (table): Configuration table with particle properties
 
-**Returns:**
-- (string) - Unique ID for the registered particle effect
+### Returns
+- (string): Unique ID for the registered particle effect
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 
@@ -134,22 +130,20 @@ local campfireId = Bridge.Particles.Register({
 print("Campfire registered with ID: " .. campfireId)
 ```
 
-### Remove
+## Remove (Client)
 
-<!--TOC: Remove-->
-
-**Context:** 🖥️ Client
-
+### Description
 Removes a registered particle effect and cleans up all associated resources.
 
-**Syntax:** `Bridge.Particles.Remove(id)`
+### Syntax
+```lua
+Bridge.Particles.Remove(id)
+```
 
-**Parameters:**
-- `id` (string) - ID of the registered particle effect to remove
+### Parameters
+- **id** (string): ID of the registered particle effect to remove
 
-**Returns:** None
-
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 
@@ -158,31 +152,31 @@ Bridge.Particles.Remove(campfireId)
 print("Campfire particle effect removed")
 ```
 
-### CreateOnEntity
+## CreateOnEntity (Client)
 
-<!--TOC: CreateOnEntity-->
-
-**Context:** 🖥️ Client
-
+### Description
 Creates a particle effect attached to an entity with offset positioning and automatic cleanup.
 
-**Syntax:** `Bridge.Particles.CreateOnEntity(dict, ptfx, entity, offset, rot, scale, color, looped, loopLength)`
+### Syntax
+```lua
+Bridge.Particles.CreateOnEntity(dict, ptfx, entity, offset, rot, scale, color, looped, loopLength)
+```
 
-**Parameters:**
-- `dict` (string) - Particle effect dictionary name
-- `ptfx` (string) - Particle effect name
-- `entity` (number) - Entity handle to attach the effect to
-- `offset` (vector3) - Offset position relative to entity
-- `rot` (vector3) - Rotation angles for the effect
-- `scale` (number) - Scale multiplier
-- `color` (vector3) - RGB color values
-- `looped` (boolean) - Whether to loop the effect
-- `loopLength` (number | nil) - Loop duration in milliseconds
+### Parameters
+- **dict** (string): Particle effect dictionary name
+- **ptfx** (string): Particle effect name
+- **entity** (number): Entity handle to attach the effect to
+- **offset** (vector3): Offset position relative to entity
+- **rot** (vector3): Rotation angles for the effect
+- **scale** (number): Scale multiplier
+- **color** (vector3): RGB color values
+- **looped** (boolean): Whether to loop the effect
+- **loopLength** (number | nil): Loop duration in milliseconds
 
-**Returns:**
-- (number) - Particle effect handle
+### Returns
+- (number): Particle effect handle
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 
@@ -203,32 +197,32 @@ if vehicle ~= 0 then
 end
 ```
 
-### CreateOnEntityBone
+## CreateOnEntityBone (Client)
 
-<!--TOC: CreateOnEntityBone-->
-
-**Context:** 🖥️ Client
-
+### Description
 Creates a particle effect attached to a specific bone of an entity for precise positioning.
 
-**Syntax:** `Bridge.Particles.CreateOnEntityBone(dict, ptfx, entity, bone, offset, rot, scale, color, looped, loopLength)`
+### Syntax
+```lua
+Bridge.Particles.CreateOnEntityBone(dict, ptfx, entity, bone, offset, rot, scale, color, looped, loopLength)
+```
 
-**Parameters:**
-- `dict` (string) - Particle effect dictionary name
-- `ptfx` (string) - Particle effect name
-- `entity` (number) - Entity handle
-- `bone` (number) - Bone index to attach to
-- `offset` (vector3) - Offset from bone position
-- `rot` (vector3) - Rotation angles
-- `scale` (number) - Scale multiplier
-- `color` (vector3) - RGB color values
-- `looped` (boolean) - Whether to loop the effect
-- `loopLength` (number | nil) - Loop duration in milliseconds
+### Parameters
+- **dict** (string): Particle effect dictionary name
+- **ptfx** (string): Particle effect name
+- **entity** (number): Entity handle
+- **bone** (number): Bone index to attach to
+- **offset** (vector3): Offset from bone position
+- **rot** (vector3): Rotation angles
+- **scale** (number): Scale multiplier
+- **color** (vector3): RGB color values
+- **looped** (boolean): Whether to loop the effect
+- **loopLength** (number | nil): Loop duration in milliseconds
 
-**Returns:**
-- (number) - Particle effect handle
+### Returns
+- (number): Particle effect handle
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 

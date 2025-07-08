@@ -12,25 +12,23 @@ The Table utility library provides comprehensive table manipulation functions in
 
 The Table provides functionality for FiveM resources.
 
-## Shared Functions
+## CheckPopulated (Shared)
 
-### CheckPopulated
-
-<!--TOC: CheckPopulated-->
-
-**Context:** 🔄 Shared
-
+### Description
 Checks if a table contains any data, handling both array-style and key-value tables.
 
-**Syntax:** `Bridge.Table.CheckPopulated(tbl)`
+### Syntax
+```lua
+Bridge.Table.CheckPopulated(tbl)
+```
 
-**Parameters:**
-- `tbl` (table) - Table to check for data
+### Parameters
+- **tbl** (table): Table to check for data
 
-**Returns:**
-- (boolean) - True if table contains data, false if empty
+### Returns
+- (boolean): True if table contains data, false if empty
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 
@@ -42,25 +40,25 @@ print(Bridge.Table.CheckPopulated(emptyArray)) -- false
 print(Bridge.Table.CheckPopulated(populatedTable)) -- true
 ```
 
-### DeepClone
+## DeepClone (Shared)
 
-<!--TOC: DeepClone-->
-
-**Context:** 🔄 Shared
-
+### Description
 Creates a deep copy of a table, recursively cloning nested tables with optional omission of specific keys.
 
-**Syntax:** `Bridge.Table.DeepClone(tbl, out, omit)`
+### Syntax
+```lua
+Bridge.Table.DeepClone(tbl, out, omit)
+```
 
-**Parameters:**
-- `tbl` (table) - Table to clone
-- `out` (table | nil) - Optional existing table to clone into
-- `omit` (table | nil) - Table of keys to omit from cloning
+### Parameters
+- **tbl** (table): Table to clone
+- **out** (table | nil): Optional existing table to clone into
+- **omit** (table | nil): Table of keys to omit from cloning
 
-**Returns:**
-- (table) - Deep cloned table
+### Returns
+- (table): Deep cloned table
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 
@@ -76,26 +74,26 @@ print(clone.stats.health) -- 100
 print(clone.password) -- nil (omitted)
 ```
 
-### TableContains
+## TableContains (Shared)
 
-<!--TOC: TableContains-->
-
-**Context:** 🔄 Shared
-
+### Description
 Searches for a value in a table with optional nested searching.
 
-**Syntax:** `Bridge.Table.TableContains(tbl, search, nested)`
+### Syntax
+```lua
+Bridge.Table.TableContains(tbl, search, nested)
+```
 
-**Parameters:**
-- `tbl` (table) - Table to search in
-- `search` (any) - Value to search for
-- `nested` (boolean | nil) - Whether to search recursively in nested tables
+### Parameters
+- **tbl** (table): Table to search in
+- **search** (any): Value to search for
+- **nested** (boolean | nil): Whether to search recursively in nested tables
 
-**Returns:**
-- (boolean) - True if value is found
-- (any) - The found value
+### Returns
+- (boolean): True if value is found
+- (any): The found value
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 
@@ -108,25 +106,25 @@ local foundNested = Bridge.Table.TableContains(data, 'orange', true)
 print(foundNested) -- true
 ```
 
-### TableContainsKey
+## TableContainsKey (Shared)
 
-<!--TOC: TableContainsKey-->
-
-**Context:** 🔄 Shared
-
+### Description
 Checks if a table contains a specific key.
 
-**Syntax:** `Bridge.Table.TableContainsKey(tbl, search)`
+### Syntax
+```lua
+Bridge.Table.TableContainsKey(tbl, search)
+```
 
-**Parameters:**
-- `tbl` (table) - Table to search in
-- `search` (any) - Key to search for
+### Parameters
+- **tbl** (table): Table to search in
+- **search** (any): Key to search for
 
-**Returns:**
-- (boolean) - True if key exists
-- (any) - The found key
+### Returns
+- (boolean): True if key exists
+- (any): The found key
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 
@@ -137,23 +135,23 @@ print(hasKey) -- true
 print(key) -- 'name'
 ```
 
-### TableGetKeys
+## TableGetKeys (Shared)
 
-<!--TOC: TableGetKeys-->
-
-**Context:** 🔄 Shared
-
+### Description
 Returns an array of all keys in a table.
 
-**Syntax:** `Bridge.Table.TableGetKeys(tbl)`
+### Syntax
+```lua
+Bridge.Table.TableGetKeys(tbl)
+```
 
-**Parameters:**
-- `tbl` (table) - Table to get keys from
+### Parameters
+- **tbl** (table): Table to get keys from
 
-**Returns:**
-- (table) - Array of table keys
+### Returns
+- (table): Array of table keys
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 
@@ -162,24 +160,24 @@ local keys = Bridge.Table.TableGetKeys(player)
 -- keys = {'name', 'health', 'level'}
 ```
 
-### GetClosest
+## GetClosest (Shared)
 
-<!--TOC: GetClosest-->
-
-**Context:** 🔄 Shared
-
+### Description
 Finds the closest object to given coordinates from a table of objects with .coords property.
 
-**Syntax:** `Bridge.Table.GetClosest(coords, tbl)`
+### Syntax
+```lua
+Bridge.Table.GetClosest(coords, tbl)
+```
 
-**Parameters:**
-- `coords` (vector3) - Reference coordinates
-- `tbl` (table) - Table of objects with .coords property
+### Parameters
+- **coords** (vector3): Reference coordinates
+- **tbl** (table): Table of objects with .coords property
 
-**Returns:**
-- (table | nil) - Closest object or nil if none found
+### Returns
+- (table | nil): Closest object or nil if none found
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 
@@ -193,23 +191,23 @@ local closest = Bridge.Table.GetClosest(playerCoords, shops)
 print('Closest shop: ' .. closest.name)
 ```
 
-### FindFirstUnoccupiedSlot
+## FindFirstUnoccupiedSlot (Shared)
 
-<!--TOC: FindFirstUnoccupiedSlot-->
-
-**Context:** 🔄 Shared
-
+### Description
 Finds the first available slot number in a table of items with .slot property.
 
-**Syntax:** `Bridge.Table.FindFirstUnoccupiedSlot(tbl)`
+### Syntax
+```lua
+Bridge.Table.FindFirstUnoccupiedSlot(tbl)
+```
 
-**Parameters:**
-- `tbl` (table) - Table of items with .slot property
+### Parameters
+- **tbl** (table): Table of items with .slot property
 
-**Returns:**
-- (number | nil) - First available slot number or nil if all slots occupied
+### Returns
+- (number | nil): First available slot number or nil if all slots occupied
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 
@@ -222,24 +220,24 @@ local availableSlot = Bridge.Table.FindFirstUnoccupiedSlot(inventory)
 print('Available slot: ' .. availableSlot) -- 2
 ```
 
-### Append
+## Append (Shared)
 
-<!--TOC: Append-->
-
-**Context:** 🔄 Shared
-
+### Description
 Appends all values from the second table to the first table.
 
-**Syntax:** `Bridge.Table.Append(tbl1, tbl2)`
+### Syntax
+```lua
+Bridge.Table.Append(tbl1, tbl2)
+```
 
-**Parameters:**
-- `tbl1` (table) - Target table to append to
-- `tbl2` (table) - Source table to append from
+### Parameters
+- **tbl1** (table): Target table to append to
+- **tbl2** (table): Source table to append from
 
-**Returns:**
-- (table) - The modified first table
+### Returns
+- (table): The modified first table
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 
@@ -250,25 +248,25 @@ Bridge.Table.Append(list1, list2)
 -- list1 = {'apple', 'banana', 'cherry', 'date'}
 ```
 
-### Split
+## Split (Shared)
 
-<!--TOC: Split-->
-
-**Context:** 🔄 Shared
-
+### Description
 Splits a table into two parts at the specified size.
 
-**Syntax:** `Bridge.Table.Split(tbl, size)`
+### Syntax
+```lua
+Bridge.Table.Split(tbl, size)
+```
 
-**Parameters:**
-- `tbl` (table) - Table to split
-- `size` (number | nil) - Split point (defaults to middle of table)
+### Parameters
+- **tbl** (table): Table to split
+- **size** (number | nil): Split point (defaults to middle of table)
 
-**Returns:**
-- (table) - First part of the split
-- (table) - Second part of the split
+### Returns
+- (table): First part of the split
+- (table): Second part of the split
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 
@@ -278,23 +276,23 @@ local first, second = Bridge.Table.Split(numbers, 3)
 -- second = {4, 5, 6}
 ```
 
-### Shuffle
+## Shuffle (Shared)
 
-<!--TOC: Shuffle-->
-
-**Context:** 🔄 Shared
-
+### Description
 Randomly shuffles the elements of a table using Fisher-Yates algorithm.
 
-**Syntax:** `Bridge.Table.Shuffle(tbl)`
+### Syntax
+```lua
+Bridge.Table.Shuffle(tbl)
+```
 
-**Parameters:**
-- `tbl` (table) - Table to shuffle
+### Parameters
+- **tbl** (table): Table to shuffle
 
-**Returns:**
-- (table) - The shuffled table (same reference)
+### Returns
+- (table): The shuffled table (same reference)
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 
@@ -303,24 +301,24 @@ Bridge.Table.Shuffle(deck)
 print('Shuffled deck: ' .. table.concat(deck, ', '))
 ```
 
-### Compare
+## Compare (Shared)
 
-<!--TOC: Compare-->
-
-**Context:** 🔄 Shared
-
+### Description
 Performs deep comparison between two values, recursively comparing nested tables.
 
-**Syntax:** `Bridge.Table.Compare(a, b)`
+### Syntax
+```lua
+Bridge.Table.Compare(a, b)
+```
 
-**Parameters:**
-- `a` (any) - First value to compare
-- `b` (any) - Second value to compare
+### Parameters
+- **a** (any): First value to compare
+- **b** (any): Second value to compare
 
-**Returns:**
-- (boolean) - True if values are deeply equal
+### Returns
+- (boolean): True if values are deeply equal
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 

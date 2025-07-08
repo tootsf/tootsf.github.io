@@ -6,6 +6,8 @@
     <title>The Order Of the Sacred Framework's Documentation</title>
     <meta name="description" content="Comprehensive documentation for Community Bridge FiveM modules and libraries">
     <link rel="stylesheet" href="assets/css/styles.css">
+    <!-- Highlight.js for syntax highlighting -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏗️</text></svg>">
 </head>
 <body>
@@ -61,6 +63,21 @@
     </div>
 
     <!-- Scripts -->
-    <script src="assets/js/markdown-docs.js?v=1751861920"></script>
+    <!-- Highlight.js for syntax highlighting -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/lua.min.js"></script>
+    <script>
+        hljs.highlightAll();
+
+        // Minimal fix for keyword issue - remove only problematic token text
+        setTimeout(() => {
+            document.querySelectorAll('pre code').forEach(code => {
+                if (code.innerHTML.includes('keyword>')) {
+                    code.innerHTML = code.innerHTML.replace(/keyword>/g, '');
+                }
+            });
+        }, 100);
+    </script>
+    <script src="assets/js/markdown-docs.js?v=16"></script>
 </body>
 </html>

@@ -12,31 +12,29 @@ The Points library provides an efficient grid-based proximity detection system f
 
 The Points provides functionality for FiveM resources.
 
-## Client Functions
+## New (Client)
 
-### New
-
-<!--TOC: New-->
-
-**Context:** 🖥️ Client
-
+### Description
 Creates a new point with proximity detection callbacks. The point uses a grid-based system for efficient distance checking and supports both static coordinates and dynamic entity tracking.
 
-**Syntax:** `Point.New(id, coords, distance, onEnter, onExit, onNearby, args)`
+### Syntax
+```lua
+Point.New(id, coords, distance, onEnter, onExit, onNearby, args)
+```
 
-**Parameters:**
-- `id` (string) - Unique identifier for the point
-- `coords` (vector3 | number) - 3D coordinates for the point, or entity handle for dynamic tracking
-- `distance` (number) - Trigger distance for proximity detection
-- `onEnter` (function | nil) - Callback when player enters the point area (point, data) -> data
-- `onExit` (function | nil) - Callback when player exits the point area (point, data) -> data
-- `onNearby` (function | nil) - Callback while player is near the point (point, data) -> data
-- `args` (table | nil) - Initial data to pass to callbacks
+### Parameters
+- **id** (string): Unique identifier for the point
+- **coords** (vector3 | number): 3D coordinates for the point, or entity handle for dynamic tracking
+- **distance** (number): Trigger distance for proximity detection
+- **onEnter** (function | nil): Callback when player enters the point area (point, data) -> data
+- **onExit** (function | nil): Callback when player exits the point area (point, data) -> data
+- **onNearby** (function | nil): Callback while player is near the point (point, data) -> data
+- **args** (table | nil): Initial data to pass to callbacks
 
-**Returns:**
-- (table) - The created point object
+### Returns
+- (table): The created point object
 
-**Example:**
+### Example
 ```lua
 -- Static point at coordinates
 local shopPoint = Point.New(
@@ -72,22 +70,20 @@ if vehicle ~= 0 then
 end
 ```
 
-### Remove
+## Remove (Client)
 
-<!--TOC: Remove-->
-
-**Context:** 🖥️ Client
-
+### Description
 Removes an existing point by its ID and cleans up all associated grid references.
 
-**Syntax:** `Point.Remove(id)`
+### Syntax
+```lua
+Point.Remove(id)
+```
 
-**Parameters:**
-- `id` (string) - ID of the point to remove
+### Parameters
+- **id** (string): ID of the point to remove
 
-**Returns:** None
-
-**Example:**
+### Example
 ```lua
 -- Remove the shop point
 Point.Remove("shop_entrance")
@@ -102,23 +98,23 @@ for pointId, point in pairs(allPoints) do
 end
 ```
 
-### Get
+## Get (Client)
 
-<!--TOC: Get-->
-
-**Context:** 🖥️ Client
-
+### Description
 Retrieves a point by its ID.
 
-**Syntax:** `Point.Get(id)`
+### Syntax
+```lua
+Point.Get(id)
+```
 
-**Parameters:**
-- `id` (string) - ID of the point to retrieve
+### Parameters
+- **id** (string): ID of the point to retrieve
 
-**Returns:**
-- (table) - The point object or nil if not found
+### Returns
+- (table): The point object or nil if not found
 
-**Example:**
+### Example
 ```lua
 local shopPoint = Point.Get("shop_entrance")
 if shopPoint then
@@ -130,23 +126,21 @@ else
 end
 ```
 
-### UpdateCoords
+## UpdateCoords (Client)
 
-<!--TOC: UpdateCoords-->
-
-**Context:** 🖥️ Client
-
+### Description
 Updates the coordinates of an existing point and refreshes its grid position.
 
-**Syntax:** `Point.UpdateCoords(id, coords)`
+### Syntax
+```lua
+Point.UpdateCoords(id, coords)
+```
 
-**Parameters:**
-- `id` (string) - ID of the point to update
-- `coords` (vector3) - New coordinates for the point
+### Parameters
+- **id** (string): ID of the point to update
+- **coords** (vector3): New coordinates for the point
 
-**Returns:** None
-
-**Example:**
+### Example
 ```lua
 -- Move shop entrance to new location
 local newCoords = vector3(30.0, -1350.0, 29.5)
@@ -159,22 +153,20 @@ Point.UpdateCoords("meeting_point", playerCoords)
 print("Meeting point set to player location")
 ```
 
-### GetAll
+## GetAll (Client)
 
-<!--TOC: GetAll-->
-
-**Context:** 🖥️ Client
-
+### Description
 Returns all active points in the system.
 
-**Syntax:** `Point.GetAll()`
+### Syntax
+```lua
+Point.GetAll()
+```
 
-**Parameters:** None
+### Returns
+- (table): Table containing all active points with their IDs as keys
 
-**Returns:**
-- (table) - Table containing all active points with their IDs as keys
-
-**Example:**
+### Example
 ```lua
 local allPoints = Point.GetAll()
 print("Total active points: " .. table.getn(allPoints))

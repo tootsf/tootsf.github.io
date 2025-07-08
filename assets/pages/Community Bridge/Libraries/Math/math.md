@@ -12,27 +12,25 @@ The Math utility library provides advanced mathematical functions for game devel
 
 The Math provides functionality for FiveM resources.
 
-## Shared Functions
+## Clamp (Shared)
 
-### Clamp
-
-<!--TOC: Clamp-->
-
-**Context:** 🔄 Shared
-
+### Description
 Constrains a value between a minimum and maximum range.
 
-**Syntax:** `Bridge.Math.Clamp(value, min, max)`
+### Syntax
+```lua
+Bridge.Math.Clamp(value, min, max)
+```
 
-**Parameters:**
-- `value` (number) - Value to clamp
-- `min` (number) - Minimum allowed value
-- `max` (number) - Maximum allowed value
+### Parameters
+- **value** (number): Value to clamp
+- **min** (number): Minimum allowed value
+- **max** (number): Maximum allowed value
 
-**Returns:**
-- (number) - Clamped value within min-max range
+### Returns
+- (number): Clamped value within min-max range
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 
@@ -41,27 +39,27 @@ local damage = Bridge.Math.Clamp(-10, 0, 100) -- 0
 local normal = Bridge.Math.Clamp(50, 0, 100) -- 50
 ```
 
-### Remap
+## Remap (Shared)
 
-<!--TOC: Remap-->
-
-**Context:** 🔄 Shared
-
+### Description
 Remaps a value from one range to another range proportionally.
 
-**Syntax:** `Bridge.Math.Remap(value, min, max, newMin, newMax)`
+### Syntax
+```lua
+Bridge.Math.Remap(value, min, max, newMin, newMax)
+```
 
-**Parameters:**
-- `value` (number) - Value to remap
-- `min` (number) - Original range minimum
-- `max` (number) - Original range maximum
-- `newMin` (number) - Target range minimum
-- `newMax` (number) - Target range maximum
+### Parameters
+- **value** (number): Value to remap
+- **min** (number): Original range minimum
+- **max** (number): Original range maximum
+- **newMin** (number): Target range minimum
+- **newMax** (number): Target range maximum
 
-**Returns:**
-- (number) - Remapped value in new range
+### Returns
+- (number): Remapped value in new range
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 
@@ -74,23 +72,23 @@ local temp = 20
 local colorValue = Bridge.Math.Remap(temp, -40, 40, 0, 255) -- ~191
 ```
 
-### PointInRadius
+## PointInRadius (Shared)
 
-<!--TOC: PointInRadius-->
-
-**Context:** 🔄 Shared
-
+### Description
 Generates a random point within a circular radius.
 
-**Syntax:** `Bridge.Math.PointInRadius(radius)`
+### Syntax
+```lua
+Bridge.Math.PointInRadius(radius)
+```
 
-**Parameters:**
-- `radius` (number) - Radius of the circle
+### Parameters
+- **radius** (number): Radius of the circle
 
-**Returns:**
-- (vector2) - Random point within the radius
+### Returns
+- (vector2): Random point within the radius
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 
@@ -104,25 +102,25 @@ local spawnCoords = vector3(
 )
 ```
 
-### Normalize
+## Normalize (Shared)
 
-<!--TOC: Normalize-->
-
-**Context:** 🔄 Shared
-
+### Description
 Normalizes a value to a 0-1 range based on min and max values.
 
-**Syntax:** `Bridge.Math.Normalize(value, min, max)`
+### Syntax
+```lua
+Bridge.Math.Normalize(value, min, max)
+```
 
-**Parameters:**
-- `value` (number) - Value to normalize
-- `min` (number) - Minimum value of the range
-- `max` (number) - Maximum value of the range
+### Parameters
+- **value** (number): Value to normalize
+- **min** (number): Minimum value of the range
+- **max** (number): Maximum value of the range
 
-**Returns:**
-- (number) - Normalized value between 0 and 1
+### Returns
+- (number): Normalized value between 0 and 1
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 
@@ -135,24 +133,24 @@ local speed = 50
 local speedPercent = Bridge.Math.Normalize(speed, 0, 200) -- 0.25
 ```
 
-### Normalize2D
+## Normalize2D (Shared)
 
-<!--TOC: Normalize2D-->
-
-**Context:** 🔄 Shared
-
+### Description
 Normalizes a 2D vector to unit length, handling both vector2 and separate x,y parameters.
 
-**Syntax:** `Bridge.Math.Normalize2D(x, y)`
+### Syntax
+```lua
+Bridge.Math.Normalize2D(x, y)
+```
 
-**Parameters:**
-- `x` (number | vector2) - X component or vector2 object
-- `y` (number | nil) - Y component (if x is not vector2)
+### Parameters
+- **x** (number | vector2): X component or vector2 object
+- **y** (number | nil): Y component (if x is not vector2)
 
-**Returns:**
-- (vector2) - Normalized vector2 with unit length
+### Returns
+- (vector2): Normalized vector2 with unit length
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 
@@ -166,25 +164,25 @@ local normalizedXY = Bridge.Math.Normalize2D(10, 0)
 -- Result: vector2(1, 0) - pointing right
 ```
 
-### Normalize3D
+## Normalize3D (Shared)
 
-<!--TOC: Normalize3D-->
-
-**Context:** 🔄 Shared
-
+### Description
 Normalizes a 3D vector to unit length, handling both vector3 and separate x,y,z parameters.
 
-**Syntax:** `Bridge.Math.Normalize3D(x, y, z)`
+### Syntax
+```lua
+Bridge.Math.Normalize3D(x, y, z)
+```
 
-**Parameters:**
-- `x` (number | vector3) - X component or vector3 object
-- `y` (number | nil) - Y component (if x is not vector3)
-- `z` (number | nil) - Z component (if x is not vector3)
+### Parameters
+- **x** (number | vector3): X component or vector3 object
+- **y** (number | nil): Y component (if x is not vector3)
+- **z** (number | nil): Z component (if x is not vector3)
 
-**Returns:**
-- (vector3) - Normalized vector3 with unit length
+### Returns
+- (vector3): Normalized vector3 with unit length
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 
@@ -196,26 +194,26 @@ local normalized = Bridge.Math.Normalize3D(direction)
 -- Use normalized for consistent movement speed
 ```
 
-### Normalize4D
+## Normalize4D (Shared)
 
-<!--TOC: Normalize4D-->
-
-**Context:** 🔄 Shared
-
+### Description
 Normalizes a 4D vector to unit length, handling both vector4 and separate x,y,z,w parameters.
 
-**Syntax:** `Bridge.Math.Normalize4D(x, y, z, w)`
+### Syntax
+```lua
+Bridge.Math.Normalize4D(x, y, z, w)
+```
 
-**Parameters:**
-- `x` (number | vector4) - X component or vector4 object
-- `y` (number | nil) - Y component (if x is not vector4)
-- `z` (number | nil) - Z component (if x is not vector4)
-- `w` (number | nil) - W component (if x is not vector4)
+### Parameters
+- **x** (number | vector4): X component or vector4 object
+- **y** (number | nil): Y component (if x is not vector4)
+- **z** (number | nil): Z component (if x is not vector4)
+- **w** (number | nil): W component (if x is not vector4)
 
-**Returns:**
-- (vector4) - Normalized vector4 with unit length
+### Returns
+- (vector4): Normalized vector4 with unit length
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 
@@ -225,24 +223,24 @@ local normalized = Bridge.Math.Normalize4D(data)
 -- Result: Unit vector in 4D space
 ```
 
-### DirectionToTarget
+## DirectionToTarget (Shared)
 
-<!--TOC: DirectionToTarget-->
-
-**Context:** 🔄 Shared
-
+### Description
 Calculates the normalized direction vector from one point to another.
 
-**Syntax:** `Bridge.Math.DirectionToTarget(fromV3, toV3)`
+### Syntax
+```lua
+Bridge.Math.DirectionToTarget(fromV3, toV3)
+```
 
-**Parameters:**
-- `fromV3` (vector3) - Starting position
-- `toV3` (vector3) - Target position
+### Parameters
+- **fromV3** (vector3): Starting position
+- **toV3** (vector3): Target position
 
-**Returns:**
-- (vector3) - Normalized direction vector pointing from source to target
+### Returns
+- (vector3): Normalized direction vector pointing from source to target
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 
@@ -255,25 +253,25 @@ local moveSpeed = 5.0
 local newPos = playerPos + (direction * moveSpeed)
 ```
 
-### GetOffsetFromMatrix
+## GetOffsetFromMatrix (Shared)
 
-<!--TOC: GetOffsetFromMatrix-->
-
-**Context:** 🔄 Shared
-
+### Description
 Calculates world coordinates by applying rotation and offset to a base position using matrix transformation.
 
-**Syntax:** `Bridge.Math.GetOffsetFromMatrix(position, rotation, offset)`
+### Syntax
+```lua
+Bridge.Math.GetOffsetFromMatrix(position, rotation, offset)
+```
 
-**Parameters:**
-- `position` (vector3) - Base world position
-- `rotation` (vector3) - Rotation in degrees (pitch, roll, yaw)
-- `offset` (vector3) - Local offset to apply
+### Parameters
+- **position** (vector3): Base world position
+- **rotation** (vector3): Rotation in degrees (pitch, roll, yaw)
+- **offset** (vector3): Local offset to apply
 
-**Returns:**
-- (vector3) - World coordinates after transformation
+### Returns
+- (vector3): World coordinates after transformation
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 

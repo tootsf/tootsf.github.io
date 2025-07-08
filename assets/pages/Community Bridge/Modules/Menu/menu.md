@@ -12,26 +12,24 @@ The Menu module provides a unified interface for creating interactive menus. It 
 
 The Menu provides functionality for FiveM resources.
 
-## Client Functions
+## Open (Client)
 
-### Open
-
-<!--TOC: Open-->
-
-**Context:** 🖥️ Client
-
+### Description
 Opens a menu with specified configuration and options.
 
-**Syntax:** `Bridge.Menu.Open(data, useQb)`
+### Syntax
+```lua
+Bridge.Menu.Open(data, useQb)
+```
 
-**Parameters:**
-- `data` (table) - Menu configuration including title, description, and options
-- `useQb` (boolean) - Whether to use QB-Core menu format
+### Parameters
+- **data** (table): Menu configuration including title, description, and options
+- **useQb** (boolean): Whether to use QB-Core menu format (optional)
 
-**Returns:**
-- (string) - Menu ID for tracking and management
+### Returns
+- (string): Menu ID for tracking and management
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 

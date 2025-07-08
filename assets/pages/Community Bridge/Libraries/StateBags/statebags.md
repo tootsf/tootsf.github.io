@@ -12,27 +12,25 @@ The StateBags library provides simplified management of FiveM's StateBag system 
 
 The StateBags provides functionality for FiveM resources.
 
-## Client Functions
+## AddEntityChangeHandler (Client)
 
-### AddEntityChangeHandler
-
-<!--TOC: AddEntityChangeHandler-->
-
-**Context:** 🖥️ Client
-
+### Description
 Registers a handler to monitor state changes on entities. Automatically resolves entities from statebag names and validates their existence before triggering callbacks.
 
-**Syntax:** `Bridge.StateBags.AddEntityChangeHandler(keyName, entityId, callback)`
+### Syntax
+```lua
+Bridge.StateBags.AddEntityChangeHandler(keyName, entityId, callback)
+```
 
-**Parameters:**
-- `keyName` (string) - The statebag key to monitor for changes
-- `entityId` (string | nil) - Specific entity ID to watch (nil to watch all entities)
-- `callback` (function) - Callback function with signature (entity, key, value, lastValue, replicated)
+### Parameters
+- **keyName** (string): The statebag key to monitor for changes
+- **entityId** (string | nil): Specific entity ID to watch (nil to watch all entities)
+- **callback** (function): Callback function with signature (entity, key, value, lastValue, replicated)
 
-**Returns:**
-- (number) - Handler ID for removing the handler later
+### Returns
+- (number): Handler ID for removing the handler later
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 
@@ -66,25 +64,25 @@ if myVehicle ~= 0 then
 end
 ```
 
-### AddPlayerChangeHandler
+## AddPlayerChangeHandler (Client)
 
-<!--TOC: AddPlayerChangeHandler-->
-
-**Context:** 🖥️ Client
-
+### Description
 Registers a handler to monitor state changes on players with optional filtering to watch only the current player or all players.
 
-**Syntax:** `Bridge.StateBags.AddPlayerChangeHandler(keyName, filter, callback)`
+### Syntax
+```lua
+Bridge.StateBags.AddPlayerChangeHandler(keyName, filter, callback)
+```
 
-**Parameters:**
-- `keyName` (string) - The statebag key to monitor for changes
-- `filter` (boolean | nil) - If true, only watch changes from the current player
-- `callback` (function) - Callback function with signature (playerId, key, value, lastValue, replicated)
+### Parameters
+- **keyName** (string): The statebag key to monitor for changes
+- **filter** (boolean | nil): If true, only watch changes from the current player
+- **callback** (function): Callback function with signature (playerId, key, value, lastValue, replicated)
 
-**Returns:**
-- (number) - Handler ID for removing the handler later
+### Returns
+- (number): Handler ID for removing the handler later
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 

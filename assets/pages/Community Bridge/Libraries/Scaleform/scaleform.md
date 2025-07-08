@@ -12,25 +12,23 @@ The Scaleform library provides advanced interface management for GTA V's built-i
 
 The Scaleform provides functionality for FiveM resources.
 
-## Client Functions
+## SetupInstructionalButtons (Client)
 
-### SetupInstructionalButtons
-
-<!--TOC: SetupInstructionalButtons-->
-
-**Context:** 🖥️ Client
-
+### Description
 Creates and configures an instructional buttons scaleform with custom button layouts and control bindings.
 
-**Syntax:** `Bridge.Scaleform.SetupInstructionalButtons(buttons)`
+### Syntax
+```lua
+Bridge.Scaleform.SetupInstructionalButtons(buttons)
+```
 
-**Parameters:**
-- `buttons` (table | nil) - Array of button configuration objects (uses defaults if nil)
+### Parameters
+- **buttons** (table | nil): Array of button configuration objects (uses defaults if nil)
 
-**Returns:**
-- (number) - Scaleform handle for the configured instructional buttons
+### Returns
+- (number): Scaleform handle for the configured instructional buttons
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 
@@ -72,23 +70,21 @@ Bridge.Scaleform.Run(scaleform, function()
 end)
 ```
 
-### Run
+## Run (Client)
 
-<!--TOC: Run-->
-
-**Context:** 🖥️ Client
-
+### Description
 Starts rendering a scaleform with optional update callback for dynamic content and stop conditions.
 
-**Syntax:** `Bridge.Scaleform.Run(scaleform, onUpdate)`
+### Syntax
+```lua
+Bridge.Scaleform.Run(scaleform, onUpdate)
+```
 
-**Parameters:**
-- `scaleform` (number) - Scaleform handle to render
-- `onUpdate` (function | nil) - Optional callback function called each frame (return true to stop)
+### Parameters
+- **scaleform** (number): Scaleform handle to render
+- **onUpdate** (function | nil): Optional callback function called each frame (return true to stop)
 
-**Returns:** None
-
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 
@@ -120,21 +116,17 @@ CreateThread(function()
 end)
 ```
 
-### Stop
+## Stop (Client)
 
-<!--TOC: Stop-->
-
-**Context:** 🖥️ Client
-
+### Description
 Stops the currently running scaleform rendering, cleaning up the display thread.
 
-**Syntax:** `Bridge.Scaleform.Stop()`
+### Syntax
+```lua
+Bridge.Scaleform.Stop()
+```
 
-**Parameters:** None
-
-**Returns:** None
-
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 

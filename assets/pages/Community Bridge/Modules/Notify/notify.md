@@ -12,24 +12,20 @@ The Notify module provides a unified interface for sending notifications across 
 
 The Notify provides functionality for FiveM resources.
 
-## Client Functions
+## GetResourceName (Client)
 
-### GetResourceName
-
-<!--TOC: GetResourceName-->
-
-**Context:** 🖥️ Client
-
+### Description
 Gets the name of the currently active notification system.
 
-**Syntax:** `Bridge.Notify.GetResourceName()`
+### Syntax
+```lua
+Bridge.Notify.GetResourceName()
+```
 
-**Parameters:** None
+### Returns
+- (string): Name of the notification resource being used
 
-**Returns:**
-- (string) - Name of the notification resource being used
-
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 
@@ -37,25 +33,25 @@ local notifySystem = Bridge.Notify.GetResourceName()
 print("Using notification system: " .. notifySystem)
 ```
 
-### SendNotify
+## SendNotify (Client)
 
-<!--TOC: SendNotify-->
-
-**Context:** 🖥️ Client
-
+### Description
 Sends a notification message to the client with specified type and duration.
 
-**Syntax:** `Bridge.Notify.SendNotify(message, type, time)`
+### Syntax
+```lua
+Bridge.Notify.SendNotify(message, type, time)
+```
 
-**Parameters:**
-- `message` (string) - The notification message to display
-- `type` (string) - The type of notification (success, error, info, warning)
-- `time` (number) - Duration in milliseconds (default: 3000)
+### Parameters
+- **message** (string): The notification message to display
+- **type** (string): The type of notification (success, error, info, warning)
+- **time** (number): Duration in milliseconds (default: 3000) (optional)
 
-**Returns:**
-- (nil) - No return value
+### Returns
+- (nil): No return value
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 
@@ -66,22 +62,20 @@ Bridge.Notify.SendNotify("Action completed successfully!", "success", 5000)
 Bridge.Notify.SendNotify("Something went wrong!", "error")
 ```
 
-### HideHelpText
+## HideHelpText (Client)
 
-<!--TOC: HideHelpText-->
-
-**Context:** 🖥️ Client
-
+### Description
 DEPRECATED: Hides the help text message on screen. Use HelpText.HideHelpText() instead.
 
-**Syntax:** `Bridge.Notify.HideHelpText()`
+### Syntax
+```lua
+Bridge.Notify.HideHelpText()
+```
 
-**Parameters:** None
+### Returns
+- (nil): No return value
 
-**Returns:**
-- (nil) - No return value
-
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 
@@ -89,23 +83,23 @@ local Bridge = exports['community_bridge']:Bridge()
 Bridge.Notify.HideHelpText()
 ```
 
-### ShowHelpText
+## ShowHelpText (Client)
 
-<!--TOC: ShowHelpText-->
-
-**Context:** 🖥️ Client
-
+### Description
 DEPRECATED: Shows a help text message on screen. Use HelpText.ShowHelpText() instead.
 
-**Syntax:** `Bridge.Notify.ShowHelpText(message)`
+### Syntax
+```lua
+Bridge.Notify.ShowHelpText(message)
+```
 
-**Parameters:**
-- `message` (string) - The help text message to display
+### Parameters
+- **message** (string): The help text message to display
 
-**Returns:**
-- (nil) - No return value
+### Returns
+- (nil): No return value
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 
@@ -113,28 +107,26 @@ local Bridge = exports['community_bridge']:Bridge()
 Bridge.Notify.ShowHelpText("Press E to interact")
 ```
 
-## Server Functions
+## SendNotify (Server)
 
-### SendNotify
-
-<!--TOC: SendNotify-->
-
-**Context:** 🖲️ Server
-
+### Description
 Sends a notification message to a specific player.
 
-**Syntax:** `Bridge.Notify.SendNotify(src, message, type, time)`
+### Syntax
+```lua
+Bridge.Notify.SendNotify(src, message, type, time)
+```
 
-**Parameters:**
-- `src` (number) - Player server ID to send notification to
-- `message` (string) - The notification message to display
-- `type` (string) - The type of notification (success, error, info, warning)
-- `time` (number) - Duration in milliseconds (default: 3000)
+### Parameters
+- **src** (number): Player server ID to send notification to
+- **message** (string): The notification message to display
+- **type** (string): The type of notification (success, error, info, warning)
+- **time** (number): Duration in milliseconds (default: 3000) (optional)
 
-**Returns:**
-- (nil) - No return value
+### Returns
+- (nil): No return value
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 
@@ -145,23 +137,23 @@ Bridge.Notify.SendNotify(source, "Welcome to the server!", "info", 8000)
 Bridge.Notify.SendNotify(source, "You don't have permission!", "error")
 ```
 
-### HideHelpText
+## HideHelpText (Server)
 
-<!--TOC: HideHelpText-->
-
-**Context:** 🖲️ Server
-
+### Description
 DEPRECATED: Hides the help text message on screen for a specific player. Use HelpText.HideHelpText() instead.
 
-**Syntax:** `Bridge.Notify.HideHelpText(src)`
+### Syntax
+```lua
+Bridge.Notify.HideHelpText(src)
+```
 
-**Parameters:**
-- `src` (number) - Player server ID
+### Parameters
+- **src** (number): Player server ID
 
-**Returns:**
-- (nil) - No return value
+### Returns
+- (nil): No return value
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 
@@ -169,24 +161,24 @@ local Bridge = exports['community_bridge']:Bridge()
 Bridge.Notify.HideHelpText(source)
 ```
 
-### ShowHelpText
+## ShowHelpText (Server)
 
-<!--TOC: ShowHelpText-->
-
-**Context:** 🖲️ Server
-
+### Description
 DEPRECATED: Shows a help text message on screen for a specific player. Use HelpText.ShowHelpText() instead.
 
-**Syntax:** `Bridge.Notify.ShowHelpText(src, message)`
+### Syntax
+```lua
+Bridge.Notify.ShowHelpText(src, message)
+```
 
-**Parameters:**
-- `src` (number) - Player server ID
-- `message` (string) - The help text message to display
+### Parameters
+- **src** (number): Player server ID
+- **message** (string): The help text message to display
 
-**Returns:**
-- (nil) - No return value
+### Returns
+- (nil): No return value
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 

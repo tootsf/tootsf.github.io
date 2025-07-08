@@ -12,27 +12,25 @@ The DUI (Direct User Interface) library provides HTML/CSS UI integration within 
 
 The DUI provides functionality for FiveM resources.
 
-## Client Functions
+## Create (Client)
 
-### Create
-
-<!--TOC: Create-->
-
-**Context:** 🖥️ Client
-
+### Description
 Creates a new DUI browser instance with specified URL and dimensions, returning a unique ID for management.
 
-**Syntax:** `Bridge.DUI.Create(url, width, height)`
+### Syntax
+```lua
+Bridge.DUI.Create(url, width, height)
+```
 
-**Parameters:**
-- `url` (string) - URL to load in the DUI browser
-- `width` (number | nil) - Width of the DUI in pixels (default: 1280)
-- `height` (number | nil) - Height of the DUI in pixels (default: 720)
+### Parameters
+- **url** (string): URL to load in the DUI browser
+- **width** (number | nil): Width of the DUI in pixels (default: 1280)
+- **height** (number | nil): Height of the DUI in pixels (default: 720)
 
-**Returns:**
-- (number | nil) - DUI instance ID if successful, nil if failed
+### Returns
+- (number | nil): DUI instance ID if successful, nil if failed
 
-**Example:**
+### Example
 ```lua
 -- NOTE: DUI library is currently commented out in source
 -- This documentation represents the intended API
@@ -58,23 +56,23 @@ if localDui then
 end
 ```
 
-### Destroy
+## Destroy (Client)
 
-<!--TOC: Destroy-->
-
-**Context:** 🖥️ Client
-
+### Description
 Destroys a DUI instance and cleans up associated resources including textures and browser handles.
 
-**Syntax:** `Bridge.DUI.Destroy(id)`
+### Syntax
+```lua
+Bridge.DUI.Destroy(id)
+```
 
-**Parameters:**
-- `id` (number) - DUI instance ID to destroy
+### Parameters
+- **id** (number): DUI instance ID to destroy
 
-**Returns:**
-- (boolean) - True if successfully destroyed, false if ID not found
+### Returns
+- (boolean): True if successfully destroyed, false if ID not found
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 
@@ -90,24 +88,24 @@ end
 Bridge.DUI.CleanupAll()
 ```
 
-### SetURL
+## SetURL (Client)
 
-<!--TOC: SetURL-->
-
-**Context:** 🖥️ Client
-
+### Description
 Changes the URL of an existing DUI instance, loading new content without recreating the browser.
 
-**Syntax:** `Bridge.DUI.SetURL(id, url)`
+### Syntax
+```lua
+Bridge.DUI.SetURL(id, url)
+```
 
-**Parameters:**
-- `id` (number) - DUI instance ID
-- `url` (string) - New URL to load
+### Parameters
+- **id** (number): DUI instance ID
+- **url** (string): New URL to load
 
-**Returns:**
-- (boolean) - True if URL was set successfully
+### Returns
+- (boolean): True if URL was set successfully
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 
@@ -119,24 +117,24 @@ Bridge.DUI.SetURL(duiId, 'https://example.com/settings')
 Bridge.DUI.SetURL(duiId, 'file://ui/character.html')
 ```
 
-### SendMessage
+## SendMessage (Client)
 
-<!--TOC: SendMessage-->
-
-**Context:** 🖥️ Client
-
+### Description
 Sends a JSON message from the game to the DUI browser for JavaScript handling.
 
-**Syntax:** `Bridge.DUI.SendMessage(id, message)`
+### Syntax
+```lua
+Bridge.DUI.SendMessage(id, message)
+```
 
-**Parameters:**
-- `id` (number) - DUI instance ID
-- `message` (table) - Message object (will be JSON encoded)
+### Parameters
+- **id** (number): DUI instance ID
+- **message** (table): Message object (will be JSON encoded)
 
-**Returns:**
-- (boolean) - True if message was sent successfully
+### Returns
+- (boolean): True if message was sent successfully
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 
@@ -160,26 +158,26 @@ local inventoryUpdate = {
 Bridge.DUI.SendMessage(duiId, inventoryUpdate)
 ```
 
-### Click
+## Click (Client)
 
-<!--TOC: Click-->
-
-**Context:** 🖥️ Client
-
+### Description
 Simulates a mouse click at specified coordinates on the DUI interface.
 
-**Syntax:** `Bridge.DUI.Click(id, x, y, button)`
+### Syntax
+```lua
+Bridge.DUI.Click(id, x, y, button)
+```
 
-**Parameters:**
-- `id` (number) - DUI instance ID
-- `x` (number) - X coordinate to click
-- `y` (number) - Y coordinate to click
-- `button` (string | nil) - Mouse button: 'left', 'middle', 'right' (default: 'left')
+### Parameters
+- **id** (number): DUI instance ID
+- **x** (number): X coordinate to click
+- **y** (number): Y coordinate to click
+- **button** (string | nil): Mouse button: 'left', 'middle', 'right' (default: 'left')
 
-**Returns:**
-- (boolean) - True if click was simulated successfully
+### Returns
+- (boolean): True if click was simulated successfully
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 
@@ -194,26 +192,26 @@ local buttonPos = {x = 150, y = 50}
 Bridge.DUI.Click(duiId, buttonPos.x, buttonPos.y)
 ```
 
-### TrackMouse
+## TrackMouse (Client)
 
-<!--TOC: TrackMouse-->
-
-**Context:** 🖥️ Client
-
+### Description
 Enables or disables real-time mouse tracking for a DUI instance with coordinate scaling options.
 
-**Syntax:** `Bridge.DUI.TrackMouse(id, enabled, scaleX, scaleY)`
+### Syntax
+```lua
+Bridge.DUI.TrackMouse(id, enabled, scaleX, scaleY)
+```
 
-**Parameters:**
-- `id` (number) - DUI instance ID
-- `enabled` (boolean) - Whether to enable mouse tracking
-- `scaleX` (number | nil) - X coordinate scale factor (default: 1.0)
-- `scaleY` (number | nil) - Y coordinate scale factor (default: 1.0)
+### Parameters
+- **id** (number): DUI instance ID
+- **enabled** (boolean): Whether to enable mouse tracking
+- **scaleX** (number | nil): X coordinate scale factor (default: 1.0)
+- **scaleY** (number | nil): Y coordinate scale factor (default: 1.0)
 
-**Returns:**
-- (boolean) - True if tracking state was set successfully
+### Returns
+- (boolean): True if tracking state was set successfully
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 
@@ -227,24 +225,24 @@ Bridge.DUI.TrackMouse(duiId, true, 0.5, 0.5)
 Bridge.DUI.TrackMouse(duiId, false)
 ```
 
-### GetTextures
+## GetTextures (Client)
 
-<!--TOC: GetTextures-->
-
-**Context:** 🖥️ Client
-
+### Description
 Retrieves the texture dictionary and name for rendering the DUI in-game.
 
-**Syntax:** `Bridge.DUI.GetTextures(id)`
+### Syntax
+```lua
+Bridge.DUI.GetTextures(id)
+```
 
-**Parameters:**
-- `id` (number) - DUI instance ID
+### Parameters
+- **id** (number): DUI instance ID
 
-**Returns:**
-- (string | nil) - Texture dictionary name
-- (string | nil) - Texture name
+### Returns
+- (string | nil): Texture dictionary name
+- (string | nil): Texture name
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 
@@ -258,23 +256,23 @@ else
 end
 ```
 
-### Exists
+## Exists (Client)
 
-<!--TOC: Exists-->
-
-**Context:** 🖥️ Client
-
+### Description
 Checks if a DUI instance exists and is active.
 
-**Syntax:** `Bridge.DUI.Exists(id)`
+### Syntax
+```lua
+Bridge.DUI.Exists(id)
+```
 
-**Parameters:**
-- `id` (number) - DUI instance ID to check
+### Parameters
+- **id** (number): DUI instance ID to check
 
-**Returns:**
-- (boolean) - True if instance exists and is active
+### Returns
+- (boolean): True if instance exists and is active
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 
@@ -286,21 +284,17 @@ else
 end
 ```
 
-### CleanupAll
+## CleanupAll (Client)
 
-<!--TOC: CleanupAll-->
-
-**Context:** 🖥️ Client
-
+### Description
 Destroys all active DUI instances, useful for resource cleanup.
 
-**Syntax:** `Bridge.DUI.CleanupAll()`
+### Syntax
+```lua
+Bridge.DUI.CleanupAll()
+```
 
-**Parameters:** None
-
-**Returns:** None
-
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 

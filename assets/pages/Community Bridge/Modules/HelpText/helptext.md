@@ -12,24 +12,20 @@ The HelpText module provides functions for displaying and hiding help text messa
 
 The HelpText provides functionality for FiveM resources.
 
-## Client Functions
+## HideHelpText (Client)
 
-### HideHelpText
-
-<!--TOC: HideHelpText-->
-
-**Context:** 🖥️ Client
-
+### Description
 Hides the currently displayed help text message.
 
-**Syntax:** `Bridge.HelpText.HideHelpText()`
+### Syntax
+```lua
+Bridge.HelpText.HideHelpText()
+```
 
-**Parameters:** None
+### Returns
+- (nil): No return value
 
-**Returns:**
-- (nil) - No return value
-
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 
@@ -37,24 +33,24 @@ local Bridge = exports['community_bridge']:Bridge()
 Bridge.HelpText.HideHelpText()
 ```
 
-### ShowHelpText
+## ShowHelpText (Client)
 
-<!--TOC: ShowHelpText-->
-
-**Context:** 🖥️ Client
-
+### Description
 Displays a help text message on the screen at the specified position.
 
-**Syntax:** `Bridge.HelpText.ShowHelpText(message, position)`
+### Syntax
+```lua
+Bridge.HelpText.ShowHelpText(message, position)
+```
 
-**Parameters:**
-- `message` (string) - The help text message to display
-- `position` (string) - Position on screen (top, center, bottom, etc.)
+### Parameters
+- **message** (string): The help text message to display
+- **position** (string): Position on screen (top, center, bottom, etc.) (optional)
 
-**Returns:**
-- (nil) - No return value
+### Returns
+- (nil): No return value
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 
@@ -65,25 +61,23 @@ Bridge.HelpText.ShowHelpText("Press [E] to interact")
 Bridge.HelpText.ShowHelpText("Hold [F] to enter vehicle", "center")
 ```
 
-## Server Functions
+## HideHelpText (Server)
 
-### HideHelpText
-
-<!--TOC: HideHelpText-->
-
-**Context:** 🖲️ Server
-
+### Description
 Hides help text for a specific player.
 
-**Syntax:** `Bridge.HelpText.HideHelpText(src)`
+### Syntax
+```lua
+Bridge.HelpText.HideHelpText(src)
+```
 
-**Parameters:**
-- `src` (number) - Player server ID to hide help text for
+### Parameters
+- **src** (number): Player server ID to hide help text for
 
-**Returns:**
-- (nil) - No return value
+### Returns
+- (nil): No return value
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 
@@ -91,25 +85,25 @@ local Bridge = exports['community_bridge']:Bridge()
 Bridge.HelpText.HideHelpText(source)
 ```
 
-### ShowHelpText
+## ShowHelpText (Server)
 
-<!--TOC: ShowHelpText-->
-
-**Context:** 🖲️ Server
-
+### Description
 Shows help text to a specific player.
 
-**Syntax:** `Bridge.HelpText.ShowHelpText(src, message, position)`
+### Syntax
+```lua
+Bridge.HelpText.ShowHelpText(src, message, position)
+```
 
-**Parameters:**
-- `src` (number) - Player server ID to show help text to
-- `message` (string) - The help text message to display
-- `position` (string) - Position on screen (top, center, bottom, etc.)
+### Parameters
+- **src** (number): Player server ID to show help text to
+- **message** (string): The help text message to display
+- **position** (string): Position on screen (top, center, bottom, etc.) (optional)
 
-**Returns:**
-- (nil) - No return value
+### Returns
+- (nil): No return value
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 

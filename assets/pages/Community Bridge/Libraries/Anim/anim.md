@@ -12,25 +12,23 @@ The Anim library provides a comprehensive animation management system for entiti
 
 The Anim provides functionality for FiveM resources.
 
-## Client Functions
+## RequestDict (Client)
 
-### RequestDict
-
-<!--TOC: RequestDict-->
-
-**Context:** 🖥️ Client
-
+### Description
 Requests and loads an animation dictionary with timeout handling.
 
-**Syntax:** `Bridge.Anim.RequestDict(animDict)`
+### Syntax
+```lua
+Bridge.Anim.RequestDict(animDict)
+```
 
-**Parameters:**
-- `animDict` (string) - The animation dictionary name to load
+### Parameters
+- **animDict** (string): The animation dictionary name to load
 
-**Returns:**
-- (boolean) - True if dictionary was loaded successfully, false otherwise
+### Returns
+- (boolean): True if dictionary was loaded successfully, false otherwise
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 
@@ -42,21 +40,17 @@ else
 end
 ```
 
-### Start
+## Start (Client)
 
-<!--TOC: Start-->
-
-**Context:** 🖥️ Client
-
+### Description
 Starts the animation update loop that manages all active animations. This is called automatically when playing animations.
 
-**Syntax:** `Bridge.Anim.Start()`
+### Syntax
+```lua
+Bridge.Anim.Start()
+```
 
-**Parameters:** None
-
-**Returns:** None
-
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 
@@ -65,32 +59,32 @@ Bridge.Anim.Start()
 print("Animation update loop started")
 ```
 
-### Play
+## Play (Client)
 
-<!--TOC: Play-->
-
-**Context:** 🖥️ Client
-
+### Description
 Plays an animation on the specified entity with comprehensive control options and callback support.
 
-**Syntax:** `Bridge.Anim.Play(id, entity, animDict, animName, blendIn, blendOut, duration, flag, playbackRate, onComplete)`
+### Syntax
+```lua
+Bridge.Anim.Play(id, entity, animDict, animName, blendIn, blendOut, duration, flag, playbackRate, onComplete)
+```
 
-**Parameters:**
-- `id` (string | nil) - Unique identifier for the animation (auto-generated if nil)
-- `entity` (number) - The entity handle to play the animation on
-- `animDict` (string) - The animation dictionary name
-- `animName` (string) - The animation name within the dictionary
-- `blendIn` (number | nil) - Blend in speed (default: 8.0)
-- `blendOut` (number | nil) - Blend out speed (default: -8.0)
-- `duration` (number | nil) - Animation duration in milliseconds (-1 for natural length, default: -1)
-- `flag` (number | nil) - Animation flags (default: 1)
-- `playbackRate` (number | nil) - Animation playback rate (default: 0.0)
-- `onComplete` (function | nil) - Callback function called when animation completes with (success, reason)
+### Parameters
+- **id** (string | nil): Unique identifier for the animation (auto-generated if nil)
+- **entity** (number): The entity handle to play the animation on
+- **animDict** (string): The animation dictionary name
+- **animName** (string): The animation name within the dictionary
+- **blendIn** (number | nil): Blend in speed (default: 8.0)
+- **blendOut** (number | nil): Blend out speed (default: -8.0)
+- **duration** (number | nil): Animation duration in milliseconds (-1 for natural length, default: -1)
+- **flag** (number | nil): Animation flags (default: 1)
+- **playbackRate** (number | nil): Animation playback rate (default: 0.0)
+- **onComplete** (function | nil): Callback function called when animation completes with (success, reason)
 
-**Returns:**
-- (string | nil) - Animation ID if successful, nil if failed
+### Returns
+- (string | nil): Animation ID if successful, nil if failed
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 
@@ -119,23 +113,23 @@ local animId = Bridge.Anim.Play(
 print("Playing animation with ID: " .. tostring(animId))
 ```
 
-### Stop
+## Stop (Client)
 
-<!--TOC: Stop-->
-
-**Context:** 🖥️ Client
-
+### Description
 Stops an active animation by its ID and triggers the completion callback with stopped status.
 
-**Syntax:** `Bridge.Anim.Stop(id)`
+### Syntax
+```lua
+Bridge.Anim.Stop(id)
+```
 
-**Parameters:**
-- `id` (string) - The animation ID to stop
+### Parameters
+- **id** (string): The animation ID to stop
 
-**Returns:**
-- (boolean) - True if animation was stopped successfully, false if ID not found
+### Returns
+- (boolean): True if animation was stopped successfully, false if ID not found
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 

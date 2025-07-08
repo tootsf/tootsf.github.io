@@ -12,26 +12,24 @@ The VehicleKey module provides functions for managing vehicle keys across differ
 
 The VehicleKey provides functionality for FiveM resources.
 
-## Client Functions
+## GiveKeys (Client)
 
-### GiveKeys
-
-<!--TOC: GiveKeys-->
-
-**Context:** 🖥️ Client
-
+### Description
 Gives the player keys to a specific vehicle.
 
-**Syntax:** `Bridge.VehicleKey.GiveKeys(vehicle, plate)`
+### Syntax
+```lua
+Bridge.VehicleKey.GiveKeys(vehicle, plate)
+```
 
-**Parameters:**
-- `vehicle` (number) - Vehicle entity handle
-- `plate` (string) - License plate of the vehicle
+### Parameters
+- **vehicle** (number): Vehicle entity handle
+- **plate** (string): License plate of the vehicle
 
-**Returns:**
-- (boolean) - Returns false if plate is invalid, otherwise no return value
+### Returns
+- (boolean): Returns false if plate is invalid, otherwise no return value
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 
@@ -44,24 +42,24 @@ if vehicle ~= 0 then
 end
 ```
 
-### RemoveKeys
+## RemoveKeys (Client)
 
-<!--TOC: RemoveKeys-->
-
-**Context:** 🖥️ Client
-
+### Description
 Removes the player's keys to a specific vehicle.
 
-**Syntax:** `Bridge.VehicleKey.RemoveKeys(vehicle, plate)`
+### Syntax
+```lua
+Bridge.VehicleKey.RemoveKeys(vehicle, plate)
+```
 
-**Parameters:**
-- `vehicle` (number) - Vehicle entity handle
-- `plate` (string) - License plate of the vehicle
+### Parameters
+- **vehicle** (number): Vehicle entity handle
+- **plate** (string): License plate of the vehicle
 
-**Returns:**
-- (boolean) - Returns false if plate is invalid, otherwise no return value
+### Returns
+- (boolean): Returns false if plate is invalid, otherwise no return value
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 

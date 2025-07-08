@@ -2,22 +2,18 @@
 
 This guide provides practical examples of how to use Community Bridge modules in your FiveM server.
 
-## Getting Started
 
 Before using any Community Bridge functions, ensure the resource is started and properly configured on your server.
 
-### Basic Setup
 
 ```lua
 -- server.lua or client.lua
 -- Community Bridge is automatically available as 'Bridge' global
 ```
 
-## HelpText Module Examples
 
 The HelpText module provides functions for displaying help messages to players.
 
-### Showing Help Text
 
 ```lua
 -- Client-side: Show a simple help text
@@ -34,7 +30,6 @@ Bridge.HelpText.ShowHelpText("Important message", "bottom", {
 })
 ```
 
-### Hiding Help Text
 
 ```lua
 -- Hide the currently displayed help text
@@ -46,11 +41,9 @@ Citizen.SetTimeout(5000, function()
 end)
 ```
 
-## Notify Module Examples
 
 The Notify module handles different types of notifications.
 
-### Basic Notifications
 
 ```lua
 -- Client-side notifications
@@ -63,7 +56,6 @@ Bridge.Notify.Warning("Be careful!")
 Bridge.Notify.Custom("Custom message", "purple", 5000)
 ```
 
-### Server-side Notifications
 
 ```lua
 -- server.lua
@@ -74,11 +66,9 @@ Bridge.Notify.Player(playerId, "success", "Welcome to the server!")
 Bridge.Notify.All("info", "Server restart in 5 minutes")
 ```
 
-## Target Module Examples
 
 The Target module provides interaction zones and entity targeting.
 
-### Entity Targeting
 
 ```lua
 -- client.lua
@@ -110,7 +100,6 @@ Bridge.Target.AddEntity(vehicle, {
 })
 ```
 
-### Zone Targeting
 
 ```lua
 -- Create an interaction zone
@@ -140,11 +129,9 @@ Bridge.Target.AddZone("gas_station_pump", {
 })
 ```
 
-## Menu Module Examples
 
 The Menu module provides various menu interfaces.
 
-### Context Menu
 
 ```lua
 -- Show a context menu
@@ -172,7 +159,6 @@ Bridge.Menu.Context({
 })
 ```
 
-### Input Dialog
 
 ```lua
 -- Show input dialog
@@ -207,11 +193,9 @@ Bridge.Menu.Input({
 end)
 ```
 
-## Progressbar Module Examples
 
 The Progressbar module provides progress indicators for actions.
 
-### Basic Progress Bar
 
 ```lua
 -- Show a progress bar
@@ -236,7 +220,6 @@ Bridge.Progressbar.Start({
 end)
 ```
 
-### Progress with Animation
 
 ```lua
 -- Progress bar with animation
@@ -263,11 +246,9 @@ Bridge.Progressbar.Start({
 end)
 ```
 
-## Inventory Module Examples
 
 Integration with inventory systems.
 
-### Adding Items
 
 ```lua
 -- Server-side: Add item to player
@@ -279,7 +260,6 @@ Bridge.Inventory.AddItem(playerId, "water", 5, {
 })
 ```
 
-### Checking Items
 
 ```lua
 -- Server-side: Check if player has item
@@ -292,9 +272,7 @@ else
 end
 ```
 
-## Advanced Examples
 
-### Combining Multiple Modules
 
 ```lua
 -- Complex interaction example
@@ -338,7 +316,6 @@ function StartVehicleRepair(vehicle)
 end
 ```
 
-### Event-Driven Architecture
 
 ```lua
 -- client.lua
@@ -376,9 +353,7 @@ AddEventHandler("shop:buyItem", function(data)
 end)
 ```
 
-## Best Practices
 
-### Error Handling
 
 ```lua
 -- Always check if functions exist before calling
@@ -389,7 +364,6 @@ else
 end
 ```
 
-### Resource Management
 
 ```lua
 -- Clean up when resource stops
@@ -405,7 +379,6 @@ AddEventHandler("onResourceStop", function(resource)
 end)
 ```
 
-### Performance Optimization
 
 ```lua
 -- Use citizens/threads efficiently

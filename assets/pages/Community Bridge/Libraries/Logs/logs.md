@@ -12,25 +12,21 @@ The Logs library provides unified logging functionality that supports multiple l
 
 The Logs provides functionality for FiveM resources.
 
-## Server Functions
+## Send (Server)
 
-### Send
-
-<!--TOC: Send-->
-
-**Context:** 🖲️ Server
-
+### Description
 Sends a log message to the configured logging system. Supports built-in Discord webhooks, qb-log, and ox_lib logging systems based on server configuration.
 
-**Syntax:** `Bridge.Logs.Send(src, message)`
+### Syntax
+```lua
+Bridge.Logs.Send(src, message)
+```
 
-**Parameters:**
-- `src` (number) - Source player ID for the log entry
-- `message` (string) - The log message to send
+### Parameters
+- **src** (number): Source player ID for the log entry
+- **message** (string): The log message to send
 
-**Returns:** None
-
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 

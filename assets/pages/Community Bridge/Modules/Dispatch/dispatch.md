@@ -12,25 +12,23 @@ The Dispatch module provides a unified interface for sending alerts and notifica
 
 The Dispatch provides functionality for FiveM resources.
 
-## Client Functions
+## SendAlert (Client)
 
-### SendAlert
-
-<!--TOC: SendAlert-->
-
-**Context:** 🖥️ Client
-
+### Description
 Sends a dispatch alert to specified job players through the configured dispatch system.
 
-**Syntax:** `Bridge.Dispatch.SendAlert(data)`
+### Syntax
+```lua
+Bridge.Dispatch.SendAlert(data)
+```
 
-**Parameters:**
-- `data` (table) - Alert configuration data
+### Parameters
+- **data** (table): Alert configuration data
 
-**Returns:**
-- (nil) - No return value
+### Returns
+- (nil): No return value
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 

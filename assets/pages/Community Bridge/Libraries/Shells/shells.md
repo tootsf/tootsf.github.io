@@ -12,25 +12,23 @@ The Shells library provides a comprehensive system for managing MLO (Map Locatio
 
 The Shells provides functionality for FiveM resources.
 
-## Client Functions
+## New (Client)
 
-### New
-
-<!--TOC: New-->
-
-**Context:** 🖥️ Client
-
+### Description
 Creates a new shell instance with exterior and interior configurations, setting up entity management and interaction points.
 
-**Syntax:** `Bridge.Shells.New(data)`
+### Syntax
+```lua
+Bridge.Shells.New(data)
+```
 
-**Parameters:**
-- `data` (table) - Shell configuration with id, model, coords, exterior/interior objects
+### Parameters
+- **data** (table): Shell configuration with id, model, coords, exterior/interior objects
 
-**Returns:**
-- (table) - Created shell instance with spawned entity tracking
+### Returns
+- (table): Created shell instance with spawned entity tracking
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 
@@ -69,23 +67,21 @@ local shell = Bridge.Shells.New({
 print('Shell created: ' .. shell.id)
 ```
 
-### Enter
+## Enter (Client)
 
-<!--TOC: Enter-->
-
-**Context:** 🖥️ Client
-
+### Description
 Enters a shell interior, handling screen fade, entity teleportation, and interior object spawning.
 
-**Syntax:** `Bridge.Shells.Enter(id, entranceId)`
+### Syntax
+```lua
+Bridge.Shells.Enter(id, entranceId)
+```
 
-**Parameters:**
-- `id` (string) - Shell identifier
-- `entranceId` (string) - Entrance point identifier within the shell
+### Parameters
+- **id** (string): Shell identifier
+- **entranceId** (string): Entrance point identifier within the shell
 
-**Returns:** None
-
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 
@@ -94,23 +90,21 @@ Bridge.Shells.Enter('apartment_1', 'front_door')
 print('Entering apartment...')
 ```
 
-### Exit
+## Exit (Client)
 
-<!--TOC: Exit-->
-
-**Context:** 🖥️ Client
-
+### Description
 Exits a shell interior, returning to the exterior with proper cleanup and entity management.
 
-**Syntax:** `Bridge.Shells.Exit(id, exitId)`
+### Syntax
+```lua
+Bridge.Shells.Exit(id, exitId)
+```
 
-**Parameters:**
-- `id` (string) - Shell identifier
-- `exitId` (string) - Exit point identifier within the shell
+### Parameters
+- **id** (string): Shell identifier
+- **exitId** (string): Exit point identifier within the shell
 
-**Returns:** None
-
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 
@@ -119,22 +113,20 @@ Bridge.Shells.Exit('apartment_1', 'exit_door')
 print('Exiting apartment...')
 ```
 
-### Inside
+## Inside (Client)
 
-<!--TOC: Inside-->
-
-**Context:** 🖥️ Client
-
+### Description
 Checks if the player is currently inside a shell and returns the shell ID.
 
-**Syntax:** `Bridge.Shells.Inside()`
+### Syntax
+```lua
+Bridge.Shells.Inside()
+```
 
-**Parameters:** None
+### Returns
+- (string | boolean): Shell ID if inside a shell, false if outside
 
-**Returns:**
-- (string | boolean) - Shell ID if inside a shell, false if outside
-
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 
@@ -147,22 +139,20 @@ else
 end
 ```
 
-### SetupInterior
+## SetupInterior (Client)
 
-<!--TOC: SetupInterior-->
-
-**Context:** 🖥️ Client
-
+### Description
 Sets up all interior objects and interaction points for a shell.
 
-**Syntax:** `Bridge.Shells.SetupInterior(shell)`
+### Syntax
+```lua
+Bridge.Shells.SetupInterior(shell)
+```
 
-**Parameters:**
-- `shell` (table) - Shell instance to set up interior for
+### Parameters
+- **shell** (table): Shell instance to set up interior for
 
-**Returns:** None
-
-**Example:**
+### Example
 ```lua
 -- Internal function - called automatically during shell transitions
 local Bridge = exports['community_bridge']:Bridge()
@@ -170,22 +160,20 @@ local shell = Bridge.Shells.All['apartment_1']
 Bridge.Shells.SetupInterior(shell)
 ```
 
-### SetupExterior
+## SetupExterior (Client)
 
-<!--TOC: SetupExterior-->
-
-**Context:** 🖥️ Client
-
+### Description
 Sets up all exterior objects and interaction points for a shell.
 
-**Syntax:** `Bridge.Shells.SetupExterior(shell)`
+### Syntax
+```lua
+Bridge.Shells.SetupExterior(shell)
+```
 
-**Parameters:**
-- `shell` (table) - Shell instance to set up exterior for
+### Parameters
+- **shell** (table): Shell instance to set up exterior for
 
-**Returns:** None
-
-**Example:**
+### Example
 ```lua
 -- Internal function - called automatically during shell transitions
 local Bridge = exports['community_bridge']:Bridge()
@@ -193,22 +181,20 @@ local shell = Bridge.Shells.All['apartment_1']
 Bridge.Shells.SetupExterior(shell)
 ```
 
-### ClearInterior
+## ClearInterior (Client)
 
-<!--TOC: ClearInterior-->
-
-**Context:** 🖥️ Client
-
+### Description
 Removes all interior entities and interaction points for a shell.
 
-**Syntax:** `Bridge.Shells.ClearInterior(shell)`
+### Syntax
+```lua
+Bridge.Shells.ClearInterior(shell)
+```
 
-**Parameters:**
-- `shell` (table) - Shell instance to clear interior for
+### Parameters
+- **shell** (table): Shell instance to clear interior for
 
-**Returns:** None
-
-**Example:**
+### Example
 ```lua
 -- Internal function - called automatically during shell transitions
 local Bridge = exports['community_bridge']:Bridge()
@@ -216,22 +202,20 @@ local shell = Bridge.Shells.All['apartment_1']
 Bridge.Shells.ClearInterior(shell)
 ```
 
-### ClearExterior
+## ClearExterior (Client)
 
-<!--TOC: ClearExterior-->
-
-**Context:** 🖥️ Client
-
+### Description
 Removes all exterior entities and interaction points for a shell.
 
-**Syntax:** `Bridge.Shells.ClearExterior(shell)`
+### Syntax
+```lua
+Bridge.Shells.ClearExterior(shell)
+```
 
-**Parameters:**
-- `shell` (table) - Shell instance to clear exterior for
+### Parameters
+- **shell** (table): Shell instance to clear exterior for
 
-**Returns:** None
-
-**Example:**
+### Example
 ```lua
 -- Internal function - called automatically during shell transitions
 local Bridge = exports['community_bridge']:Bridge()
@@ -239,23 +223,21 @@ local shell = Bridge.Shells.All['apartment_1']
 Bridge.Shells.ClearExterior(shell)
 ```
 
-### Event.Add
+## Event.Add (Client)
 
-<!--TOC: Event.Add-->
-
-**Context:** 🖥️ Client
-
+### Description
 Adds an event callback for shell lifecycle events (OnSpawn, OnRemove).
 
-**Syntax:** `Bridge.Shells.Event.Add(eventName, callback)`
+### Syntax
+```lua
+Bridge.Shells.Event.Add(eventName, callback)
+```
 
-**Parameters:**
-- `eventName` (string) - Event name ('OnSpawn' or 'OnRemove')
-- `callback` (function) - Callback function to execute on event
+### Parameters
+- **eventName** (string): Event name ('OnSpawn' or 'OnRemove')
+- **callback** (function): Callback function to execute on event
 
-**Returns:** None
-
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 
@@ -281,25 +263,23 @@ Bridge.Shells.Event.Add('OnRemove', function(objectData, entity)
 end)
 ```
 
-## Server Functions
+## New (Server)
 
-### New
-
-<!--TOC: New-->
-
-**Context:** 🖲️ Server
-
+### Description
 Creates a new shell on the server with routing bucket management and interaction point configuration.
 
-**Syntax:** `Bridge.Shells.New(data)`
+### Syntax
+```lua
+Bridge.Shells.New(data)
+```
 
-**Parameters:**
-- `data` (table) - Shell configuration with id, model, coords, interior/exterior objects, and bucket settings
+### Parameters
+- **data** (table): Shell configuration with id, model, coords, interior/exterior objects, and bucket settings
 
-**Returns:**
-- (table) - Created shell instance with bucket and interaction data
+### Returns
+- (table): Created shell instance with bucket and interaction data
 
-**Example:**
+### Example
 ```lua
 -- Server-side shell creation
 local Bridge = exports['community_bridge']:Bridge()
@@ -334,30 +314,30 @@ local shell = Bridge.Shells.New({
 print('Server shell created with bucket: ' .. shell.bucket)
 ```
 
-### Interactable.New
+## Interactable.New (Server)
 
-<!--TOC: Interactable.New-->
-
-**Context:** 🖲️ Server
-
+### Description
 Creates a new interaction point configuration for shells with type, positioning, and metadata.
 
-**Syntax:** `Bridge.Shells.Interactable.New(type, id, model, coords, rotation, entityType, distance, meta)`
+### Syntax
+```lua
+Bridge.Shells.Interactable.New(type, id, model, coords, rotation, entityType, distance, meta)
+```
 
-**Parameters:**
-- `type` (string) - Interaction type (entrance, exit, stash, etc.)
-- `id` (string) - Unique identifier for the interaction
-- `model` (string | nil) - Model to spawn for the interaction (optional)
-- `coords` (vector3) - World coordinates for the interaction
-- `rotation` (vector3 | nil) - Rotation vector (default: 0,0,0)
-- `entityType` (string | nil) - Entity type (object, ped, vehicle - default: object)
-- `distance` (number | nil) - Interaction distance (default: 2.0)
-- `meta` (table | nil) - Additional metadata for the interaction
+### Parameters
+- **type** (string): Interaction type (entrance, exit, stash, etc.)
+- **id** (string): Unique identifier for the interaction
+- **model** (string | nil): Model to spawn for the interaction (optional)
+- **coords** (vector3): World coordinates for the interaction
+- **rotation** (vector3 | nil): Rotation vector (default: 0,0,0)
+- **entityType** (string | nil): Entity type (object, ped, vehicle - default: object)
+- **distance** (number | nil): Interaction distance (default: 2.0)
+- **meta** (table | nil): Additional metadata for the interaction
 
-**Returns:**
-- (table) - Configured interaction object
+### Returns
+- (table): Configured interaction object
 
-**Example:**
+### Example
 ```lua
 -- Server-side interaction creation
 local Bridge = exports['community_bridge']:Bridge()

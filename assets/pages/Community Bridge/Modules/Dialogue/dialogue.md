@@ -12,25 +12,23 @@ The Dialogue module provides a modern web-based dialogue system for NPC interact
 
 The Dialogue provides functionality for FiveM resources.
 
-## Client Functions
+## Close (Client)
 
-### Close
-
-<!--TOC: Close-->
-
-**Context:** 🖥️ Client
-
+### Description
 Closes a specific dialogue instance.
 
-**Syntax:** `Bridge.Dialogue.Close(name)`
+### Syntax
+```lua
+Bridge.Dialogue.Close(name)
+```
 
-**Parameters:**
-- `name` (string) - Name of the dialogue to close
+### Parameters
+- **name** (string): Name of the dialogue to close
 
-**Returns:**
-- (nil) - No return value
+### Returns
+- (nil): No return value
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 
@@ -38,27 +36,27 @@ local Bridge = exports['community_bridge']:Bridge()
 Bridge.Dialogue.Close("shop_keeper")
 ```
 
-### Open
+## Open (Client)
 
-<!--TOC: Open-->
-
-**Context:** 🖥️ Client
-
+### Description
 Opens a dialogue interface with NPC and presents options to the player.
 
-**Syntax:** `Bridge.Dialogue.Open(name, dialogue, characterOptions, dialogueOptions, onSelected)`
+### Syntax
+```lua
+Bridge.Dialogue.Open(name, dialogue, characterOptions, dialogueOptions, onSelected)
+```
 
-**Parameters:**
-- `name` (string) - Unique identifier for this dialogue instance
-- `dialogue` (string) - The text that the NPC says
-- `characterOptions` (number|table) - Entity handle or table with entity, offset, and rotationOffset
-- `dialogueOptions` (table) - Array of dialogue choices with id and label
-- `onSelected` (function) - Callback function when player selects an option
+### Parameters
+- **name** (string): Unique identifier for this dialogue instance
+- **dialogue** (string): The text that the NPC says
+- **characterOptions** (number|table): Entity handle or table with entity, offset, and rotationOffset
+- **dialogueOptions** (table): Array of dialogue choices with id and label
+- **onSelected** (function): Callback function when player selects an option (optional)
 
-**Returns:**
-- (string) - ID of the selected dialogue option
+### Returns
+- (string): ID of the selected dialogue option
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 

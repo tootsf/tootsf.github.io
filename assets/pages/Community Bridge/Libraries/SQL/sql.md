@@ -12,25 +12,21 @@ The SQL library provides simplified database operations with automatic table cre
 
 The SQL provides functionality for FiveM resources.
 
-## Server Functions
+## Create (Server)
 
-### Create
-
-<!--TOC: Create-->
-
-**Context:** 🖲️ Server
-
+### Description
 Creates a table with the specified columns if it doesn't already exist. Uses CREATE TABLE IF NOT EXISTS syntax.
 
-**Syntax:** `SQL.Create(tableName, columns)`
+### Syntax
+```lua
+SQL.Create(tableName, columns)
+```
 
-**Parameters:**
-- `tableName` (string) - Name of the table to create
-- `columns` (table) - Array of column definitions with 'name' and 'type' properties
+### Parameters
+- **tableName** (string): Name of the table to create
+- **columns** (table): Array of column definitions with 'name' and 'type' properties
 
-**Returns:** None
-
-**Example:**
+### Example
 ```lua
 local columns = {
     { name = "id", type = "INT AUTO_INCREMENT PRIMARY KEY" },
@@ -43,23 +39,21 @@ SQL.Create("players", columns)
 print("Players table created successfully")
 ```
 
-### InsertOrUpdate
+## InsertOrUpdate (Server)
 
-<!--TOC: InsertOrUpdate-->
-
-**Context:** 🖲️ Server
-
+### Description
 Inserts a new record or updates an existing one if a duplicate key is found. Uses INSERT ... ON DUPLICATE KEY UPDATE syntax.
 
-**Syntax:** `SQL.InsertOrUpdate(tableName, data)`
+### Syntax
+```lua
+SQL.InsertOrUpdate(tableName, data)
+```
 
-**Parameters:**
-- `tableName` (string) - Name of the table to insert/update
-- `data` (table) - Key-value pairs representing column names and values
+### Parameters
+- **tableName** (string): Name of the table to insert/update
+- **data** (table): Key-value pairs representing column names and values
 
-**Returns:** None
-
-**Example:**
+### Example
 ```lua
 local playerData = {
     identifier = "steam:110000103fa6fc1",
@@ -76,24 +70,24 @@ SQL.InsertOrUpdate("players", playerData)
 print("Player money updated")
 ```
 
-### Get
+## Get (Server)
 
-<!--TOC: Get-->
-
-**Context:** 🖲️ Server
-
+### Description
 Retrieves records from a table based on a WHERE condition.
 
-**Syntax:** `SQL.Get(tableName, where)`
+### Syntax
+```lua
+SQL.Get(tableName, where)
+```
 
-**Parameters:**
-- `tableName` (string) - Name of the table to query
-- `where` (string) - WHERE clause condition (without the WHERE keyword)
+### Parameters
+- **tableName** (string): Name of the table to query
+- **where** (string): WHERE clause condition (without the WHERE keyword)
 
-**Returns:**
-- (table) - Array of records matching the condition
+### Returns
+- (table): Array of records matching the condition
 
-**Example:**
+### Example
 ```lua
 -- Get specific player
 local result = SQL.Get("players", "identifier = 'steam:110000103fa6fc1'")
@@ -108,23 +102,23 @@ local richPlayers = SQL.Get("players", "money > 1000")
 print("Found " .. #richPlayers .. " rich players")
 ```
 
-### GetAll
+## GetAll (Server)
 
-<!--TOC: GetAll-->
-
-**Context:** 🖲️ Server
-
+### Description
 Retrieves all records from a table without any filtering.
 
-**Syntax:** `SQL.GetAll(tableName)`
+### Syntax
+```lua
+SQL.GetAll(tableName)
+```
 
-**Parameters:**
-- `tableName` (string) - Name of the table to query
+### Parameters
+- **tableName** (string): Name of the table to query
 
-**Returns:**
-- (table) - Array of all records in the table
+### Returns
+- (table): Array of all records in the table
 
-**Example:**
+### Example
 ```lua
 local allPlayers = SQL.GetAll("players")
 print("Total players in database: " .. #allPlayers)
@@ -134,23 +128,21 @@ for i, player in ipairs(allPlayers) do
 end
 ```
 
-### Delete
+## Delete (Server)
 
-<!--TOC: Delete-->
-
-**Context:** 🖲️ Server
-
+### Description
 Deletes records from a table based on a WHERE condition.
 
-**Syntax:** `SQL.Delete(tableName, where)`
+### Syntax
+```lua
+SQL.Delete(tableName, where)
+```
 
-**Parameters:**
-- `tableName` (string) - Name of the table to delete from
-- `where` (string) - WHERE clause condition (without the WHERE keyword)
+### Parameters
+- **tableName** (string): Name of the table to delete from
+- **where** (string): WHERE clause condition (without the WHERE keyword)
 
-**Returns:** None
-
-**Example:**
+### Example
 ```lua
 -- Delete specific player
 SQL.Delete("players", "identifier = 'steam:110000103fa6fc1'")

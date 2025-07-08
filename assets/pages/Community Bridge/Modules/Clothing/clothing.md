@@ -12,90 +12,84 @@ The Clothing module provides functions for managing player appearance and clothi
 
 The Clothing provides functionality for FiveM resources.
 
-## Client Functions
+## ToggleDebugging (Client)
 
-### ToggleDebugging
-
-<!--TOC: ToggleDebugging-->
-
-**Context:** 🖥️ Client
-
+### Description
 Function ToggleDebugging
 
-**Syntax:** `Bridge.Clothing.ToggleDebugging()`
+### Syntax
+```lua
+Bridge.Clothing.ToggleDebugging()
+```
 
-**Parameters:** None
+### Returns
+- (nil): No return value
 
-**Returns:**
-- (nil) - No return value
-
-**Example:**
+### Example
 ```lua
 local Bridge = exports["community_bridge"]:Bridge()\n\nBridge.Clothing.ToggleDebugging()
 ```
 
-### RestoreAppearance
+## RestoreAppearance (Client)
 
-<!--TOC: RestoreAppearance-->
-
-**Context:** 🖥️ Client
-
+### Description
 This will return the peds components to the previously stored components
 
-**Syntax:** `Bridge.Clothing.RestoreAppearance(entity)`
+### Syntax
+```lua
+Bridge.Clothing.RestoreAppearance(entity)
+```
 
-**Parameters:**
-- `entity` (any) - Parameter entity
+### Parameters
+- **entity** (any): Parameter entity
 
-**Returns:**
-- (boolean)
+### Returns
+- (boolean): 
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports["community_bridge"]:Bridge()\n\nBridge.Clothing.RestoreAppearance()
 ```
 
-### UpdateAppearanceBackup
+## UpdateAppearanceBackup (Client)
 
-<!--TOC: UpdateAppearanceBackup-->
-
-**Context:** 🖥️ Client
-
+### Description
 Function UpdateAppearanceBackup
 
-**Syntax:** `Bridge.Clothing.UpdateAppearanceBackup(data)`
+### Syntax
+```lua
+Bridge.Clothing.UpdateAppearanceBackup(data)
+```
 
-**Parameters:**
-- `data` (any) - Parameter data
+### Parameters
+- **data** (any): Parameter data
 
-**Returns:**
-- (nil) - No return value
+### Returns
+- (nil): No return value
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports["community_bridge"]:Bridge()\n\nBridge.Clothing.UpdateAppearanceBackup()
 ```
 
-## Server Functions
+## GetAppearance (Server)
 
-### GetAppearance
-
-<!--TOC: GetAppearance-->
-
-**Context:** 🖲️ Server
-
+### Description
 Retrieves a player's appearance data in a standardized format.
 
-**Syntax:** `Bridge.Clothing.GetAppearance(src, fullData)`
+### Syntax
+```lua
+Bridge.Clothing.GetAppearance(src, fullData)
+```
 
-**Parameters:**
-- `src` (number) - Player server ID
-- `fullData` (boolean) - If true, returns full data including model and raw skin data
+### Parameters
+- **src** (number): Player server ID
+- **fullData** (boolean): If true, returns full data including model and raw skin data (optional)
 
-**Returns:**
-- (table|nil) - Player's appearance data or nil if not found
+### Returns
+- (table|nil): Player's appearance data or nil if not found
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 
@@ -112,48 +106,48 @@ if fullData then
 end
 ```
 
-### GetFullAppearanceData
+## GetFullAppearanceData (Server)
 
-<!--TOC: GetFullAppearanceData-->
-
-**Context:** 🖲️ Server
-
+### Description
 Internal function to get complete appearance data including caching.
 
-**Syntax:** `Bridge.Clothing.GetFullAppearanceData(src)`
+### Syntax
+```lua
+Bridge.Clothing.GetFullAppearanceData(src)
+```
 
-**Parameters:**
-- `src` (number) - Player server ID
+### Parameters
+- **src** (number): Player server ID
 
-**Returns:**
-- (table|nil) - Complete appearance data with model, skin, and converted formats
+### Returns
+- (table|nil): Complete appearance data with model, skin, and converted formats
 
-**Example:**
+### Example
 ```lua
 -- Internal use - prefer GetAppearance() for most cases
 local fullData = Bridge.Clothing.GetFullAppearanceData(source)
 ```
 
-### SetAppearance
+## SetAppearance (Server)
 
-<!--TOC: SetAppearance-->
-
-**Context:** 🖲️ Server
-
+### Description
 Sets a player's appearance based on provided appearance data.
 
-**Syntax:** `Bridge.Clothing.SetAppearance(src, data, updateBackup, save)`
+### Syntax
+```lua
+Bridge.Clothing.SetAppearance(src, data, updateBackup, save)
+```
 
-**Parameters:**
-- `src` (number) - Player server ID
-- `data` (table) - Appearance data to apply
-- `updateBackup` (boolean) - Whether to update the backup appearance data
-- `save` (boolean) - Whether to save the appearance to database
+### Parameters
+- **src** (number): Player server ID
+- **data** (table): Appearance data to apply
+- **updateBackup** (boolean): Whether to update the backup appearance data (optional)
+- **save** (boolean): Whether to save the appearance to database (optional)
 
-**Returns:**
-- (table|nil) - Updated appearance data or nil if failed
+### Returns
+- (table|nil): Updated appearance data or nil if failed
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 
@@ -171,24 +165,24 @@ if result then
 end
 ```
 
-### SetAppearanceExt
+## SetAppearanceExt (Server)
 
-<!--TOC: SetAppearanceExt-->
-
-**Context:** 🖲️ Server
-
+### Description
 Sets appearance using gender-specific data tables.
 
-**Syntax:** `Bridge.Clothing.SetAppearanceExt(src, data)`
+### Syntax
+```lua
+Bridge.Clothing.SetAppearanceExt(src, data)
+```
 
-**Parameters:**
-- `src` (number) - Player server ID
-- `data` (table) - Table with 'male' and 'female' appearance data
+### Parameters
+- **src** (number): Player server ID
+- **data** (table): Table with 'male' and 'female' appearance data
 
-**Returns:**
-- (table|nil) - Updated appearance data or nil if failed
+### Returns
+- (table|nil): Updated appearance data or nil if failed
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 
@@ -211,23 +205,23 @@ local uniformData = {
 Bridge.Clothing.SetAppearanceExt(source, uniformData)
 ```
 
-### RestoreAppearance
+## RestoreAppearance (Server)
 
-<!--TOC: RestoreAppearance-->
-
-**Context:** 🖲️ Server
-
+### Description
 Function RestoreAppearance
 
-**Syntax:** `Bridge.Clothing.RestoreAppearance(src)`
+### Syntax
+```lua
+Bridge.Clothing.RestoreAppearance(src)
+```
 
-**Parameters:**
-- `src` (any) - Parameter src
+### Parameters
+- **src** (any): Parameter src
 
-**Returns:**
-- (nil) - No return value
+### Returns
+- (nil): No return value
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports["community_bridge"]:Bridge()\n\nBridge.Clothing.RestoreAppearance()
 ```

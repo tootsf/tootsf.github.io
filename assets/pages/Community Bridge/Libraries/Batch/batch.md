@@ -12,24 +12,20 @@ The Batch library provides network event optimization by queuing multiple events
 
 The Batch provides functionality for FiveM resources.
 
-## Client Functions
+## Event.Fire (Client)
 
-### Event.Fire
-
-<!--TOC: Event.Fire-->
-
-**Context:** 🖥️ Client
-
+### Description
 Processes an array of batched events received from the server, triggering each event for the appropriate player.
 
-**Syntax:** `Bridge.Batch.Event.Fire(array)`
+### Syntax
+```lua
+Bridge.Batch.Event.Fire(array)
+```
 
-**Parameters:**
-- `array` (table) - Array of event objects with src, event, and args properties
+### Parameters
+- **array** (table): Array of event objects with src, event, and args properties
 
-**Returns:** None
-
-**Example:**
+### Example
 ```lua
 -- Internal function - called automatically via network events
 -- Client receives and processes batched events from server
@@ -53,26 +49,22 @@ local eventArray = {
 Bridge.Batch.Event.Fire(eventArray)
 ```
 
-## Server Functions
+## Event.Queue (Server)
 
-### Event.Queue
-
-<!--TOC: Event.Queue-->
-
-**Context:** 🖲️ Server
-
+### Description
 Queues client events for batched sending to reduce network calls, automatically sending after 100ms timeout.
 
-**Syntax:** `Bridge.Batch.Event.Queue(src, event, ...)`
+### Syntax
+```lua
+Bridge.Batch.Event.Queue(src, event, ...)
+```
 
-**Parameters:**
-- `src` (number | number[]) - Target player ID or -1 for all players
-- `event` (string) - Event name to trigger on client
-- `...` (any) - Arguments to pass to the client event
+### Parameters
+- **src** (number | number[]): Target player ID or -1 for all players
+- **event** (string): Event name to trigger on client
+- **...** (any): Arguments to pass to the client event
 
-**Returns:** None
-
-**Example:**
+### Example
 ```lua
 -- Server-side event batching
 local Bridge = exports['community_bridge']:Bridge()

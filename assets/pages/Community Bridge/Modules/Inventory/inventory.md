@@ -12,25 +12,23 @@ The Inventory module provides a unified interface for handling player inventory 
 
 The Inventory provides functionality for FiveM resources.
 
-## Client Functions
+## GetImagePath (Client)
 
-### GetImagePath
-
-<!--TOC: GetImagePath-->
-
-**Context:** 🖥️ Client
-
+### Description
 Gets the image path for a specific item, with fallback to a default placeholder if not found.
 
-**Syntax:** `Bridge.Inventory.GetImagePath(item)`
+### Syntax
+```lua
+Bridge.Inventory.GetImagePath(item)
+```
 
-**Parameters:**
-- `item` (string) - Name of the item
+### Parameters
+- **item** (string): Name of the item
 
-**Returns:**
-- (string) - Path to the item's image or default placeholder if not found
+### Returns
+- (string): Path to the item's image or default placeholder if not found
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 
@@ -38,23 +36,23 @@ local imagePath = Bridge.Inventory.GetImagePath("lockpick")
 print("Lockpick image: " .. imagePath)
 ```
 
-### GetItemCount
+## GetItemCount (Client)
 
-<!--TOC: GetItemCount-->
-
-**Context:** 🖥️ Client
-
+### Description
 Returns the count of a specific item in the player's inventory.
 
-**Syntax:** `Bridge.Inventory.GetItemCount(item)`
+### Syntax
+```lua
+Bridge.Inventory.GetItemCount(item)
+```
 
-**Parameters:**
-- `item` (string) - Name of the item
+### Parameters
+- **item** (string): Name of the item
 
-**Returns:**
-- (number) - Count of the item (0 if not found)
+### Returns
+- (number): Count of the item (0 if not found)
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 
@@ -62,23 +60,23 @@ local waterCount = Bridge.Inventory.GetItemCount("water")
 print("Player has " .. waterCount .. " water bottles")
 ```
 
-### GetItemInfo
+## GetItemInfo (Client)
 
-<!--TOC: GetItemInfo-->
-
-**Context:** 🖥️ Client
-
+### Description
 Gets detailed information about a specific item from the inventory system.
 
-**Syntax:** `Bridge.Inventory.GetItemInfo(item)`
+### Syntax
+```lua
+Bridge.Inventory.GetItemInfo(item)
+```
 
-**Parameters:**
-- `item` (string) - Name of the item
+### Parameters
+- **item** (string): Name of the item
 
-**Returns:**
-- (table) - Table containing item information: {name, label, stack, weight, description, image}
+### Returns
+- (table): Table containing item information: {name, label, stack, weight, description, image}
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 
@@ -89,23 +87,23 @@ if itemInfo then
 end
 ```
 
-### HasItem
+## HasItem (Client)
 
-<!--TOC: HasItem-->
-
-**Context:** 🖥️ Client
-
+### Description
 Checks if the player has a specific item in their inventory.
 
-**Syntax:** `Bridge.Inventory.HasItem(item)`
+### Syntax
+```lua
+Bridge.Inventory.HasItem(item)
+```
 
-**Parameters:**
-- `item` (string) - Name of the item
+### Parameters
+- **item** (string): Name of the item
 
-**Returns:**
-- (boolean) - True if the player has the item, false otherwise
+### Returns
+- (boolean): True if the player has the item, false otherwise
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 
@@ -116,22 +114,20 @@ else
 end
 ```
 
-### GetPlayerInventory
+## GetPlayerInventory (Client)
 
-<!--TOC: GetPlayerInventory-->
-
-**Context:** 🖥️ Client
-
+### Description
 Returns the player's entire inventory in a standardized format.
 
-**Syntax:** `Bridge.Inventory.GetPlayerInventory()`
+### Syntax
+```lua
+Bridge.Inventory.GetPlayerInventory()
+```
 
-**Parameters:** None
+### Returns
+- (table): Array of inventory items: {name, label, count, slot, metadata}
 
-**Returns:**
-- (table) - Array of inventory items: {name, label, count, slot, metadata}
-
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 
@@ -141,69 +137,69 @@ for i, item in pairs(inventory) do
 end
 ```
 
-### OpenShop
+## OpenShop (Client)
 
-<!--TOC: OpenShop-->
-
-**Context:** 🖥️ Client
-
+### Description
 Opens a shop interface for the player.
 
-**Syntax:** `Bridge.Inventory.OpenShop(shopId)`
+### Syntax
+```lua
+Bridge.Inventory.OpenShop(shopId)
+```
 
-**Parameters:**
-- `shopId` (string) - Unique identifier for the shop
+### Parameters
+- **shopId** (string): Unique identifier for the shop
 
-**Returns:**
-- (nil) - No return value
+### Returns
+- (nil): No return value
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 
 Bridge.Inventory.OpenShop("general_store")
 ```
 
-### OpenStash
+## OpenStash (Client)
 
-<!--TOC: OpenStash-->
-
-**Context:** 🖥️ Client
-
+### Description
 Opens a stash interface for the player.
 
-**Syntax:** `Bridge.Inventory.OpenStash(stashId)`
+### Syntax
+```lua
+Bridge.Inventory.OpenStash(stashId)
+```
 
-**Parameters:**
-- `stashId` (string) - Unique identifier for the stash
+### Parameters
+- **stashId** (string): Unique identifier for the stash
 
-**Returns:**
-- (nil) - No return value
+### Returns
+- (nil): No return value
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 
 Bridge.Inventory.OpenStash("police_evidence")
 ```
 
-### StripPNG
+## StripPNG (Client)
 
-<!--TOC: StripPNG-->
-
-**Context:** 🖥️ Client
-
+### Description
 Removes the .png extension from an item name if present.
 
-**Syntax:** `Bridge.Inventory.StripPNG(item)`
+### Syntax
+```lua
+Bridge.Inventory.StripPNG(item)
+```
 
-**Parameters:**
-- `item` (string) - Item name that may contain .png extension
+### Parameters
+- **item** (string): Item name that may contain .png extension
 
-**Returns:**
-- (string) - Item name without .png extension
+### Returns
+- (string): Item name without .png extension
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 
@@ -211,29 +207,27 @@ local cleanName = Bridge.Inventory.StripPNG("phone.png")
 print(cleanName) -- outputs: phone
 ```
 
-## Server Functions
+## AddItem (Server)
 
-### AddItem
-
-<!--TOC: AddItem-->
-
-**Context:** 🖲️ Server
-
+### Description
 Adds an item to a player's inventory with optional metadata.
 
-**Syntax:** `Bridge.Inventory.AddItem(src, item, count, slot, metadata)`
+### Syntax
+```lua
+Bridge.Inventory.AddItem(src, item, count, slot, metadata)
+```
 
-**Parameters:**
-- `src` (number) - Player server ID
-- `item` (string) - Name of the item
-- `count` (number) - Amount to add
-- `slot` (number) - Specific slot to add to
-- `metadata` (table) - Additional item metadata
+### Parameters
+- **src** (number): Player server ID
+- **item** (string): Name of the item
+- **count** (number): Amount to add
+- **slot** (number): Specific slot to add to (optional)
+- **metadata** (table): Additional item metadata (optional)
 
-**Returns:**
-- (boolean) - Success status of operation
+### Returns
+- (boolean): Success status of operation
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 
@@ -246,27 +240,27 @@ else
 end
 ```
 
-### RemoveItem
+## RemoveItem (Server)
 
-<!--TOC: RemoveItem-->
-
-**Context:** 🖲️ Server
-
+### Description
 Removes an item from a player's inventory.
 
-**Syntax:** `Bridge.Inventory.RemoveItem(src, item, count, slot, metadata)`
+### Syntax
+```lua
+Bridge.Inventory.RemoveItem(src, item, count, slot, metadata)
+```
 
-**Parameters:**
-- `src` (number) - Player server ID
-- `item` (string) - Name of the item
-- `count` (number) - Amount to remove
-- `slot` (number) - Specific slot to remove from
-- `metadata` (table) - Specific item metadata to match
+### Parameters
+- **src** (number): Player server ID
+- **item** (string): Name of the item
+- **count** (number): Amount to remove
+- **slot** (number): Specific slot to remove from (optional)
+- **metadata** (table): Specific item metadata to match (optional)
 
-**Returns:**
-- (boolean) - Success status of operation
+### Returns
+- (boolean): Success status of operation
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 
@@ -279,25 +273,25 @@ else
 end
 ```
 
-### GetItemCount
+## GetItemCount (Server)
 
-<!--TOC: GetItemCount-->
-
-**Context:** 🖲️ Server
-
+### Description
 Gets the count of an item in a player's inventory, with optional metadata matching.
 
-**Syntax:** `Bridge.Inventory.GetItemCount(src, item, metadata)`
+### Syntax
+```lua
+Bridge.Inventory.GetItemCount(src, item, metadata)
+```
 
-**Parameters:**
-- `src` (number) - Player server ID
-- `item` (string) - Name of the item
-- `metadata` (table) - Specific item metadata to match
+### Parameters
+- **src** (number): Player server ID
+- **item** (string): Name of the item
+- **metadata** (table): Specific item metadata to match (optional)
 
-**Returns:**
-- (number) - Count of the specified item
+### Returns
+- (number): Count of the specified item
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 
@@ -306,24 +300,24 @@ local count = Bridge.Inventory.GetItemCount(source, "lockpick")
 print("Player has " .. count .. " lockpicks")
 ```
 
-### AddTrunkItems
+## AddTrunkItems (Server)
 
-<!--TOC: AddTrunkItems-->
-
-**Context:** 🖲️ Server
-
+### Description
 Adds multiple items to a vehicle trunk inventory.
 
-**Syntax:** `Bridge.Inventory.AddTrunkItems(identifier, items)`
+### Syntax
+```lua
+Bridge.Inventory.AddTrunkItems(identifier, items)
+```
 
-**Parameters:**
-- `identifier` (string) - Vehicle plate or unique identifier
-- `items` (table) - Array of items to add: {item, count, metadata}
+### Parameters
+- **identifier** (string): Vehicle plate or unique identifier
+- **items** (table): Array of items to add: {item, count, metadata}
 
-**Returns:**
-- (boolean) - Success status of operation
+### Returns
+- (boolean): Success status of operation
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 
@@ -334,49 +328,49 @@ local items = {
 local success = Bridge.Inventory.AddTrunkItems("ABC123", items)
 ```
 
-### AddItemsToTrunk
+## AddItemsToTrunk (Server)
 
-<!--TOC: AddItemsToTrunk-->
-
-**Context:** 🖲️ Server
-
+### Description
 Alternative method to add items to a vehicle trunk.
 
-**Syntax:** `Bridge.Inventory.AddItemsToTrunk(identifier, items)`
+### Syntax
+```lua
+Bridge.Inventory.AddItemsToTrunk(identifier, items)
+```
 
-**Parameters:**
-- `identifier` (string) - Vehicle identifier
-- `items` (table) - Items to add to trunk
+### Parameters
+- **identifier** (string): Vehicle identifier
+- **items** (table): Items to add to trunk
 
-**Returns:**
-- (boolean) - Success status
+### Returns
+- (boolean): Success status
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 
 Bridge.Inventory.AddItemsToTrunk(vehicleId, itemsArray)
 ```
 
-### CanCarryItem
+## CanCarryItem (Server)
 
-<!--TOC: CanCarryItem-->
-
-**Context:** 🖲️ Server
-
+### Description
 Checks if a player can carry additional items without exceeding weight limits.
 
-**Syntax:** `Bridge.Inventory.CanCarryItem(src, item, count)`
+### Syntax
+```lua
+Bridge.Inventory.CanCarryItem(src, item, count)
+```
 
-**Parameters:**
-- `src` (number) - Player server ID
-- `item` (string) - Name of the item
-- `count` (number) - Amount to check
+### Parameters
+- **src** (number): Player server ID
+- **item** (string): Name of the item
+- **count** (number): Amount to check
 
-**Returns:**
-- (boolean) - True if player can carry the items
+### Returns
+- (boolean): True if player can carry the items
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 
@@ -387,165 +381,165 @@ else
 end
 ```
 
-### ClearStash
+## ClearStash (Server)
 
-<!--TOC: ClearStash-->
-
-**Context:** 🖲️ Server
-
+### Description
 Clears all items from a specific stash inventory.
 
-**Syntax:** `Bridge.Inventory.ClearStash(id, type)`
+### Syntax
+```lua
+Bridge.Inventory.ClearStash(id, type)
+```
 
-**Parameters:**
-- `id` (string) - Stash identifier
-- `type` (string) - Type of stash
+### Parameters
+- **id** (string): Stash identifier
+- **type** (string): Type of stash
 
-**Returns:**
-- (boolean) - Success status
+### Returns
+- (boolean): Success status
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 
 Bridge.Inventory.ClearStash("evidence_locker", "stash")
 ```
 
-### GetImagePath
+## GetImagePath (Server)
 
-<!--TOC: GetImagePath-->
-
-**Context:** 🖲️ Server
-
+### Description
 Server-side function to get item image path.
 
-**Syntax:** `Bridge.Inventory.GetImagePath(item)`
+### Syntax
+```lua
+Bridge.Inventory.GetImagePath(item)
+```
 
-**Parameters:**
-- `item` (string) - Item name
+### Parameters
+- **item** (string): Item name
 
-**Returns:**
-- (string) - Image path for the item
+### Returns
+- (string): Image path for the item
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 
 local imagePath = Bridge.Inventory.GetImagePath("lockpick")
 ```
 
-### GetItem
+## GetItem (Server)
 
-<!--TOC: GetItem-->
-
-**Context:** 🖲️ Server
-
+### Description
 Gets a specific item from player inventory by name.
 
-**Syntax:** `Bridge.Inventory.GetItem(src, item)`
+### Syntax
+```lua
+Bridge.Inventory.GetItem(src, item)
+```
 
-**Parameters:**
-- `src` (number) - Player server ID
-- `item` (string) - Item name
+### Parameters
+- **src** (number): Player server ID
+- **item** (string): Item name
 
-**Returns:**
-- (table) - Item data or nil if not found
+### Returns
+- (table): Item data or nil if not found
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 
 local item = Bridge.Inventory.GetItem(source, "phone")
 ```
 
-### GetItemBySlot
+## GetItemBySlot (Server)
 
-<!--TOC: GetItemBySlot-->
-
-**Context:** 🖲️ Server
-
+### Description
 Gets an item from a specific inventory slot.
 
-**Syntax:** `Bridge.Inventory.GetItemBySlot(src, slot)`
+### Syntax
+```lua
+Bridge.Inventory.GetItemBySlot(src, slot)
+```
 
-**Parameters:**
-- `src` (number) - Player server ID
-- `slot` (number) - Inventory slot number
+### Parameters
+- **src** (number): Player server ID
+- **slot** (number): Inventory slot number
 
-**Returns:**
-- (table) - Item data or nil if slot is empty
+### Returns
+- (table): Item data or nil if slot is empty
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 
 local item = Bridge.Inventory.GetItemBySlot(source, 1)
 ```
 
-### GetItemInfo
+## GetItemInfo (Server)
 
-<!--TOC: GetItemInfo-->
-
-**Context:** 🖲️ Server
-
+### Description
 Server-side function to get detailed item information.
 
-**Syntax:** `Bridge.Inventory.GetItemInfo(item)`
+### Syntax
+```lua
+Bridge.Inventory.GetItemInfo(item)
+```
 
-**Parameters:**
-- `item` (string) - Item name
+### Parameters
+- **item** (string): Item name
 
-**Returns:**
-- (table) - Item information table
+### Returns
+- (table): Item information table
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 
 local itemInfo = Bridge.Inventory.GetItemInfo("lockpick")
 ```
 
-### GetPlayerInventory
+## GetPlayerInventory (Server)
 
-<!--TOC: GetPlayerInventory-->
-
-**Context:** 🖲️ Server
-
+### Description
 Server-side function to get a player's complete inventory.
 
-**Syntax:** `Bridge.Inventory.GetPlayerInventory(src)`
+### Syntax
+```lua
+Bridge.Inventory.GetPlayerInventory(src)
+```
 
-**Parameters:**
-- `src` (number) - Player server ID
+### Parameters
+- **src** (number): Player server ID
 
-**Returns:**
-- (table) - Player's inventory data
+### Returns
+- (table): Player's inventory data
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 
 local inventory = Bridge.Inventory.GetPlayerInventory(source)
 ```
 
-### HasItem
+## HasItem (Server)
 
-<!--TOC: HasItem-->
-
-**Context:** 🖲️ Server
-
+### Description
 Server-side function to check if a player has a specific item.
 
-**Syntax:** `Bridge.Inventory.HasItem(src, item)`
+### Syntax
+```lua
+Bridge.Inventory.HasItem(src, item)
+```
 
-**Parameters:**
-- `src` (number) - Player server ID
-- `item` (string) - Item name
+### Parameters
+- **src** (number): Player server ID
+- **item** (string): Item name
 
-**Returns:**
-- (boolean) - True if player has the item
+### Returns
+- (boolean): True if player has the item
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 
@@ -554,71 +548,71 @@ if Bridge.Inventory.HasItem(source, "lockpick") then
 end
 ```
 
-### OpenShop
+## OpenShop (Server)
 
-<!--TOC: OpenShop-->
-
-**Context:** 🖲️ Server
-
+### Description
 Server-side function to open a shop for a player.
 
-**Syntax:** `Bridge.Inventory.OpenShop(src, shopId)`
+### Syntax
+```lua
+Bridge.Inventory.OpenShop(src, shopId)
+```
 
-**Parameters:**
-- `src` (number) - Player server ID
-- `shopId` (string) - Shop identifier
+### Parameters
+- **src** (number): Player server ID
+- **shopId** (string): Shop identifier
 
-**Returns:**
-- (nil) - No return value
+### Returns
+- (nil): No return value
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 
 Bridge.Inventory.OpenShop(source, "general_store")
 ```
 
-### OpenStash
+## OpenStash (Server)
 
-<!--TOC: OpenStash-->
-
-**Context:** 🖲️ Server
-
+### Description
 Server-side function to open a stash for a player.
 
-**Syntax:** `Bridge.Inventory.OpenStash(src, stashId)`
+### Syntax
+```lua
+Bridge.Inventory.OpenStash(src, stashId)
+```
 
-**Parameters:**
-- `src` (number) - Player server ID
-- `stashId` (string) - Stash identifier
+### Parameters
+- **src** (number): Player server ID
+- **stashId** (string): Stash identifier
 
-**Returns:**
-- (nil) - No return value
+### Returns
+- (nil): No return value
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 
 Bridge.Inventory.OpenStash(source, "police_evidence")
 ```
 
-### RegisterShop
+## RegisterShop (Server)
 
-<!--TOC: RegisterShop-->
-
-**Context:** 🖲️ Server
-
+### Description
 Registers a new shop with the inventory system.
 
-**Syntax:** `Bridge.Inventory.RegisterShop(shopData)`
+### Syntax
+```lua
+Bridge.Inventory.RegisterShop(shopData)
+```
 
-**Parameters:**
-- `shopData` (table) - Shop configuration data
+### Parameters
+- **shopData** (table): Shop configuration data
 
-**Returns:**
-- (boolean) - Success status
+### Returns
+- (boolean): Success status
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 
@@ -629,101 +623,101 @@ local shopData = {
 Bridge.Inventory.RegisterShop(shopData)
 ```
 
-### RegisterStash
+## RegisterStash (Server)
 
-<!--TOC: RegisterStash-->
-
-**Context:** 🖲️ Server
-
+### Description
 Registers a new stash inventory.
 
-**Syntax:** `Bridge.Inventory.RegisterStash(id, label, slots, weight, owner, jobs, gangs)`
+### Syntax
+```lua
+Bridge.Inventory.RegisterStash(id, label, slots, weight, owner, jobs, gangs)
+```
 
-**Parameters:**
-- `id` (string) - Unique stash identifier
-- `label` (string) - Display name for the stash
-- `slots` (number) - Number of inventory slots
-- `weight` (number) - Maximum weight capacity
-- `owner` (string) - Owner identifier
-- `jobs` (table) - Allowed jobs
-- `gangs` (table) - Allowed gangs
+### Parameters
+- **id** (string): Unique stash identifier
+- **label** (string): Display name for the stash
+- **slots** (number): Number of inventory slots
+- **weight** (number): Maximum weight capacity
+- **owner** (string): Owner identifier (optional)
+- **jobs** (table): Allowed jobs (optional)
+- **gangs** (table): Allowed gangs (optional)
 
-**Returns:**
-- (boolean) - Success status
+### Returns
+- (boolean): Success status
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 
 Bridge.Inventory.RegisterStash("police_evidence", "Evidence Locker", 50, 100000, nil, {"police"}, nil)
 ```
 
-### SetMetadata
+## SetMetadata (Server)
 
-<!--TOC: SetMetadata-->
-
-**Context:** 🖲️ Server
-
+### Description
 Sets metadata for a specific item in player inventory.
 
-**Syntax:** `Bridge.Inventory.SetMetadata(src, slot, metadata)`
+### Syntax
+```lua
+Bridge.Inventory.SetMetadata(src, slot, metadata)
+```
 
-**Parameters:**
-- `src` (number) - Player server ID
-- `slot` (number) - Inventory slot
-- `metadata` (table) - Metadata to set
+### Parameters
+- **src** (number): Player server ID
+- **slot** (number): Inventory slot
+- **metadata** (table): Metadata to set
 
-**Returns:**
-- (boolean) - Success status
+### Returns
+- (boolean): Success status
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 
 Bridge.Inventory.SetMetadata(source, 1, {durability = 50})
 ```
 
-### StripPNG
+## StripPNG (Server)
 
-<!--TOC: StripPNG-->
-
-**Context:** 🖲️ Server
-
+### Description
 Server-side function to remove .png extension from item names.
 
-**Syntax:** `Bridge.Inventory.StripPNG(item)`
+### Syntax
+```lua
+Bridge.Inventory.StripPNG(item)
+```
 
-**Parameters:**
-- `item` (string) - Item name
+### Parameters
+- **item** (string): Item name
 
-**Returns:**
-- (string) - Item name without extension
+### Returns
+- (string): Item name without extension
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 
 local cleanName = Bridge.Inventory.StripPNG("phone.png")
 ```
 
-### UpdatePlate
+## UpdatePlate (Server)
 
-<!--TOC: UpdatePlate-->
-
-**Context:** 🖲️ Server
-
+### Description
 Updates the plate identifier for a vehicle trunk inventory.
 
-**Syntax:** `Bridge.Inventory.UpdatePlate(oldPlate, newPlate)`
+### Syntax
+```lua
+Bridge.Inventory.UpdatePlate(oldPlate, newPlate)
+```
 
-**Parameters:**
-- `oldPlate` (string) - Current plate number
-- `newPlate` (string) - New plate number
+### Parameters
+- **oldPlate** (string): Current plate number
+- **newPlate** (string): New plate number
 
-**Returns:**
-- (boolean) - Success status
+### Returns
+- (boolean): Success status
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 

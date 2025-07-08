@@ -2,9 +2,7 @@
 
 This page contains practical examples of how to use Community Bridge in your FiveM resources.
 
-## Basic Setup
 
-### Resource Manifest (fxmanifest.lua)
 
 ```lua
 fx_version 'cerulean'
@@ -28,9 +26,7 @@ server_scripts {
 }
 ```
 
-## Banking Examples
 
-### Check Player Balance
 
 ```lua
 -- Client-side
@@ -42,7 +38,6 @@ else
 end
 ```
 
-### Transfer Money Between Players
 
 ```lua
 -- Server-side
@@ -62,9 +57,7 @@ RegisterCommand('transfer', function(source, args)
 end)
 ```
 
-## Inventory Examples
 
-### Give Item to Player
 
 ```lua
 -- Server-side
@@ -81,7 +74,6 @@ RegisterCommand('giveitem', function(source, args)
 end)
 ```
 
-### Check Item Count
 
 ```lua
 -- Client or Server
@@ -89,9 +81,7 @@ local breadCount = Bridge.Inventory.GetItemCount('bread')
 print('Player has ' .. breadCount .. ' bread')
 ```
 
-## Notification Examples
 
-### Different Notification Types
 
 ```lua
 -- Success notification
@@ -107,7 +97,6 @@ Bridge.Notify.Send('New message received', 'info')
 Bridge.Notify.Send('Low health warning', 'warning')
 ```
 
-### Advanced Notifications
 
 ```lua
 -- Notification with duration
@@ -122,9 +111,7 @@ Bridge.Notify.SendAdvanced({
 })
 ```
 
-## Targeting Examples
 
-### Simple Target
 
 ```lua
 -- Client-side
@@ -147,7 +134,6 @@ Bridge.Target.AddBoxZone('example_shop', vector3(100.0, 200.0, 30.0), 2.0, 2.0, 
 })
 ```
 
-### Entity Targeting
 
 ```lua
 -- Target vehicles
@@ -169,9 +155,7 @@ Bridge.Target.AddEntityZone('vehicle_interaction', GetPlayerPed(-1), {
 })
 ```
 
-## Error Handling
 
-### Safe Function Calls
 
 ```lua
 -- Always check if Bridge is available
@@ -194,7 +178,6 @@ else
 end
 ```
 
-### Debug Mode
 
 Enable debug mode in your config for detailed logging:
 
@@ -204,7 +187,6 @@ Config.Debug = true
 
 This will show additional console output for troubleshooting.
 
-## Best Practices
 
 1. **Always check availability**: Ensure Bridge modules are loaded before using them
 2. **Handle errors gracefully**: Use pcall or check return values
@@ -213,9 +195,7 @@ This will show additional console output for troubleshooting.
 5. **Test thoroughly**: Verify functionality across different frameworks
 6. **Keep it simple**: Don't over-complicate basic operations
 
-## Common Patterns
 
-### Initialization Pattern
 
 ```lua
 local Bridge = nil
@@ -237,7 +217,6 @@ function initializeResource()
 end
 ```
 
-### Event-Driven Pattern
 
 ```lua
 -- Register events for cross-resource communication

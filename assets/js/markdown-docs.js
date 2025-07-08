@@ -48,7 +48,6 @@ class CommunityBridgeDocumentation {
     setupSearchInput() {
         const searchInput = document.getElementById('search-input');
         if (searchInput) {
-            // Clear any existing event listeners by cloning the element
             const newSearchInput = searchInput.cloneNode(true);
             searchInput.parentNode.replaceChild(newSearchInput, searchInput);
 
@@ -61,33 +60,14 @@ class CommunityBridgeDocumentation {
                 }
             });
 
-            newSearchInput.addEventListener('focus', (e) => {
-                if (e.target.value.trim()) {
-                    this.handleSearch(e.target.value.trim());
-                }
-            });
-
             newSearchInput.addEventListener('keydown', (e) => {
                 if (e.key === 'Escape') {
                     this.hideSearchResults();
                     e.target.blur();
-                } else if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
-                    e.preventDefault();
-                    this.navigateSearchResults(e.key === 'ArrowDown' ? 1 : -1);
-                } else if (e.key === 'Enter') {
-                    e.preventDefault();
-                    this.selectCurrentSearchResult();
                 }
             });
 
-            // Hide search results when clicking outside
-            document.addEventListener('click', (e) => {
-                if (!e.target.closest('.search-container')) {
-                    this.hideSearchResults();
-                }
-            });
-
-            console.log('🔍 Search input configured with enhanced functionality');
+            console.log('🔍 Search input configured');
         } else {
             console.warn('⚠️ Search input not found');
         }
@@ -104,10 +84,12 @@ class CommunityBridgeDocumentation {
                 e.preventDefault();
                 const section = header.closest('.nav-section');
                 if (section) {
-                    const isExpanded = section.classList.contains('expanded');
-                    section.classList.toggle('collapsed', isExpanded);
-                    section.classList.toggle('expanded', !isExpanded);
-                    // CSS ::after pseudo-element handles arrow rotation automatically
+                    section.classList.toggle('collapsed');
+                    section.classList.toggle('expanded');
+                    const arrow = header.querySelector('.nav-arrow');
+                    if (arrow) {
+                        arrow.textContent = section.classList.contains('expanded') ? '▼' : '▶';
+                    }
                 }
             });
         });
@@ -120,10 +102,12 @@ class CommunityBridgeDocumentation {
                 e.preventDefault();
                 const subsection = header.closest('.nav-subsection');
                 if (subsection) {
-                    const isExpanded = subsection.classList.contains('expanded');
-                    subsection.classList.toggle('collapsed', isExpanded);
-                    subsection.classList.toggle('expanded', !isExpanded);
-                    // CSS ::after pseudo-element handles arrow rotation automatically
+                    subsection.classList.toggle('collapsed');
+                    subsection.classList.toggle('expanded');
+                    const arrow = header.querySelector('.nav-arrow');
+                    if (arrow) {
+                        arrow.textContent = subsection.classList.contains('expanded') ? '▼' : '▶';
+                    }
                 }
             });
         });
@@ -139,20 +123,7 @@ class CommunityBridgeDocumentation {
 
                 if (path) {
                     console.log('📄 Nav item clicked:', path, type);
-
-                    // Remove active class from all nav items
-                    document.querySelectorAll('.nav-item').forEach(item => {
-                        item.classList.remove('active');
-                    });
-
-                    // Add active class to clicked item
-                    navItem.classList.add('active');
-
-                    // Navigate to the content
                     this.navigateToPath(path);
-
-                    // Update URL hash
-                    window.location.hash = path;
                 }
             });
         });
@@ -206,58 +177,32 @@ class CommunityBridgeDocumentation {
                 type: 'section'
             };
 
-            // Add known top-level files first
-            const topLevelFiles = [
-                { file: 'overview', name: 'Overview' },
-                { file: 'getting-started', name: 'Getting Started' }
-            ];
-
-            for (const { file, name } of topLevelFiles) {
+            // Add top-level Community Bridge files
+            const topLevelFiles = ['overview', 'getting-started'];
+            for (const fileName of topLevelFiles) {
                 try {
-                    const response = await fetch(`./assets/pages/Community Bridge/${file}.md`);
+                    const response = await fetch(`./assets/pages/Community Bridge/${fileName}.md`);
                     if (response.ok) {
-                        structure['Community Bridge'].items[file] = {
-                            path: `Community Bridge/${file}`,
+                        structure['Community Bridge'].items[fileName] = {
+                            path: `Community Bridge/${fileName}`,
                             type: 'markdown',
-                            name: name
+                            name: this.formatTitle(fileName)
                         };
-                        console.log(`✅ Found top-level file: ${file}.md`);
+                        console.log(`✅ Found top-level file: ${fileName}.md`);
                     }
                 } catch (e) {
-                    console.log(`⚠️ Top-level file not found: ${file}.md`);
+                    // File doesn't exist, continue
                 }
             }
 
-            // Discover Libraries and Modules with more robust checking
+            // Discover Libraries and Modules
             await this.discoverSubsection(structure, 'Libraries', '📚');
             await this.discoverSubsection(structure, 'Modules', '📦');
-
-            // Add Examples as top-level if it exists
-            try {
-                const examplesResponse = await fetch('./assets/pages/Examples/basic-usage.md');
-                if (examplesResponse.ok) {
-                    structure['Examples'] = {
-                        icon: '💡',
-                        items: {
-                            'basic-usage': {
-                                path: 'Examples/basic-usage',
-                                type: 'markdown',
-                                name: 'Basic Usage'
-                            }
-                        },
-                        type: 'section'
-                    };
-                    console.log('✅ Found Examples section');
-                }
-            } catch (e) {
-                console.log('📝 Examples not found, skipping');
-            }
 
         } catch (error) {
             console.error('❌ Error in discoverPagesStructure:', error);
         }
 
-        console.log('🔍 Final structure:', structure);
         return structure;
     }
 
@@ -266,44 +211,28 @@ class CommunityBridgeDocumentation {
 
         const folderItems = {};
         const knownModules = {
-            'Libraries': ['Anim', 'Batch', 'Cache', 'Callback', 'Cutscenes', 'DUI', 'Entities', 'Generators', 'Ids', 'Logs', 'Markers', 'Math', 'Particles', 'Placers', 'Point', 'Points', 'Raycast', 'Scaleform', 'Shells', 'SQL', 'StateBags', 'Table', 'Utility', 'Test'],
+            'Libraries': ['Anim', 'Batch', 'Cache', 'Callback', 'Cutscenes', 'DUI', 'Entities', 'Generators', 'Ids', 'Logs', 'Markers', 'Math', 'Particles', 'Placers', 'Point', 'Points', 'Raycast', 'Scaleform', 'Shells', 'SQL', 'StateBags', 'Table', 'Utility'],
             'Modules': ['Banking', 'Clothing', 'Dialogue', 'Dispatch', 'Doorlock', 'Framework', 'Fuel', 'HelpText', 'Housing', 'Input', 'Inventory', 'Locales', 'Managment', 'Math', 'Menu', 'Notify', 'Phone', 'ProgressBar', 'Shops', 'Skills', 'Target', 'VehicleKey', 'Version', 'Weather']
         };
 
         if (knownModules[folderName]) {
-            let foundCount = 0;
             for (const moduleName of knownModules[folderName]) {
                 try {
                     // Try the main pattern: Libraries/Anim/anim.md
                     const mainPath = `./assets/pages/Community Bridge/${folderName}/${moduleName}/${moduleName.toLowerCase()}.md`;
-                    const response = await fetch(mainPath, { method: 'HEAD' });
+                    const response = await fetch(mainPath);
                     if (response.ok) {
                         folderItems[moduleName] = {
                             path: `Community Bridge/${folderName}/${moduleName}/${moduleName.toLowerCase()}`,
                             type: 'markdown',
                             name: moduleName
                         };
-                        foundCount++;
                         console.log(`✅ Found module: ${folderName}/${moduleName}/${moduleName.toLowerCase()}.md`);
-                    } else {
-                        // Try alternative pattern for special cases like Test/test.md
-                        const altPath = `./assets/pages/Community Bridge/${folderName}/${moduleName}/test.md`;
-                        const altResponse = await fetch(altPath, { method: 'HEAD' });
-                        if (altResponse.ok) {
-                            folderItems[moduleName] = {
-                                path: `Community Bridge/${folderName}/${moduleName}/test`,
-                                type: 'markdown',
-                                name: moduleName
-                            };
-                            foundCount++;
-                            console.log(`✅ Found module (alt): ${folderName}/${moduleName}/test.md`);
-                        }
                     }
                 } catch (e) {
-                    // File doesn't exist, continue silently
+                    // File doesn't exist, continue
                 }
             }
-            console.log(`📊 Found ${foundCount} modules in ${folderName}`);
         }
 
         if (Object.keys(folderItems).length > 0) {
@@ -314,8 +243,6 @@ class CommunityBridgeDocumentation {
                 name: folderName
             };
             console.log(`✅ Added ${folderName} subsection with ${Object.keys(folderItems).length} items`);
-        } else {
-            console.log(`⚠️ No items found for ${folderName}`);
         }
     }
 
@@ -334,8 +261,9 @@ class CommunityBridgeDocumentation {
                     <div class="nav-section-header" data-category="${categoryName}">
                         <span class="nav-icon">${categoryData.icon || '📁'}</span>
                         <span class="nav-title">${categoryName}</span>
+                        <span class="nav-arrow">▼</span>
                     </div>
-                    <div class="nav-items">
+                    <div class="nav-section-content">
                         ${this.renderNavItems(categoryData.items || {})}
                     </div>
                 </div>
@@ -360,8 +288,9 @@ class CommunityBridgeDocumentation {
                         <div class="nav-subsection-header" data-subsection="${itemName}">
                             <span class="nav-icon">${itemData.icon || '📁'}</span>
                             <span class="nav-title">${itemName}</span>
+                            <span class="nav-arrow">▶</span>
                         </div>
-                        <div class="nav-items">
+                        <div class="nav-subsection-content">
                             ${this.renderNavItems(itemData.items)}
                         </div>
                     </div>
@@ -370,16 +299,13 @@ class CommunityBridgeDocumentation {
                 html += `
                     <div class="nav-item" data-path="${itemData.path}" data-type="markdown">
                         <span class="nav-icon">📄</span>
-                        <span class="nav-title">${itemData.name || itemName}</span>
+                        <span class="nav-title">${itemData.name || this.formatTitle(itemName)}</span>
                     </div>
                 `;
             }
         }
 
         return html;
-    }
-
-    setupRouter() {
     }
 
     setupRouter() {
@@ -405,26 +331,13 @@ class CommunityBridgeDocumentation {
     }
 
     findNavigationItem(targetPath) {
-        console.log('🔍 Looking for navigation item:', targetPath);
-
-        const searchItems = (items, currentPath = '') => {
+        const searchItems = (items) => {
             for (const [key, item] of Object.entries(items)) {
-                // Check exact path match
-                if (item.path === targetPath) {
-                    console.log('✅ Found exact path match:', item.path);
+                const itemPath = item.path ? item.path.replace('.md', '') : '';
+                if (itemPath === targetPath) {
                     return item;
-                }
-
-                // Also check without .md extension
-                const itemPathWithoutExt = item.path ? item.path.replace('.md', '') : '';
-                if (itemPathWithoutExt === targetPath) {
-                    console.log('✅ Found path match (no ext):', itemPathWithoutExt);
-                    return item;
-                }
-
-                // Recursively search subsections
-                if (item.items) {
-                    const found = searchItems(item.items, `${currentPath}/${key}`);
+                } else if (item.items) {
+                    const found = searchItems(item.items);
                     if (found) return found;
                 }
             }
@@ -432,90 +345,10 @@ class CommunityBridgeDocumentation {
         };
 
         for (const [category, categoryData] of Object.entries(this.allModules)) {
-            console.log(`🔍 Searching category: ${category}`);
-            const found = searchItems(categoryData.items || {}, category);
-            if (found) {
-                console.log('✅ Found item in category:', category);
-                return found;
-            }
+            const found = searchItems(categoryData.items || {});
+            if (found) return found;
         }
-
-        console.log('❌ Navigation item not found for:', targetPath);
-        console.log('🔍 Available paths:');
-        this.logAllPaths();
         return null;
-    }
-
-    logAllPaths() {
-        const logItems = (items, indent = '') => {
-            for (const [key, item] of Object.entries(items)) {
-                if (item.path) {
-                    console.log(`${indent}📄 ${item.path}`);
-                }
-                if (item.items) {
-                    console.log(`${indent}📁 ${key}/`);
-                    logItems(item.items, indent + '  ');
-                }
-            }
-        };
-
-        for (const [category, categoryData] of Object.entries(this.allModules)) {
-            console.log(`📁 ${category}/`);
-            logItems(categoryData.items || {}, '  ');
-        }
-    }
-
-    async loadContent(path, type, item) {
-        this.setLoading(true);
-
-        try {
-            console.log(`📄 Loading content for: ${path}`);
-
-            // Try to load markdown content
-            const markdownContent = await this.loadMarkdownContent(path);
-
-            // Set current module info
-            this.currentModule = item;
-            this.currentModuleName = path.split('/').pop();
-
-            // Render the content
-            this.renderMarkdownContent(markdownContent, path);
-
-            console.log(`✅ Content loaded successfully for: ${path}`);
-        } catch (error) {
-            console.error(`❌ Error loading content for ${path}:`, error);
-            this.showError(`Failed to load content for: ${path}`);
-        } finally {
-            this.setLoading(false);
-        }
-    }
-
-    loadInitialContent() {
-        // Try to load the first available content
-        for (const [category, categoryData] of Object.entries(this.allModules)) {
-            if (categoryData.items) {
-                for (const [key, item] of Object.entries(categoryData.items)) {
-                    if (item.type === 'markdown' && item.path) {
-                        console.log('🎯 Loading initial content:', item.path);
-                        this.navigateToPath(item.path);
-                        return;
-                    } else if (item.items) {
-                        // Check subsections
-                        for (const [subKey, subItem] of Object.entries(item.items)) {
-                            if (subItem.type === 'markdown' && subItem.path) {
-                                console.log('🎯 Loading initial content from subsection:', subItem.path);
-                                this.navigateToPath(subItem.path);
-                                return;
-                            }
-                        }
-                    }
-                }
-            }
-        }
-
-        // Fallback - try to load overview
-        console.log('🎯 Fallback: trying to load overview');
-        this.navigateToPath('Community Bridge/overview');
     }
 
     async loadContent(path, type, item) {
@@ -546,17 +379,13 @@ class CommunityBridgeDocumentation {
     async loadMarkdownContent(path) {
         try {
             console.log(`📄 Loading markdown content: ${path}`);
-
-            // Add cache-busting parameter to force fresh content
-            const cacheBuster = Date.now();
-            const response = await fetch(`./assets/pages/${path}.md?v=${cacheBuster}`);
+            const response = await fetch(`./assets/pages/${path}.md`);
 
             if (!response.ok) {
                 throw new Error(`Failed to load ${path}: ${response.status}`);
             }
 
             const content = await response.text();
-            console.log(`📄 Loaded markdown content (${content.length} chars) with cache buster: ${cacheBuster}`);
 
             return {
                 content: content,
@@ -591,230 +420,116 @@ class CommunityBridgeDocumentation {
         }
 
         return meta;
-    }    renderMarkdownContent(markdownData, modulePath) {
+    }
+
+    renderMarkdownContent(markdownData, modulePath) {
         const contentArea = document.getElementById('content-area');
         if (!contentArea) return;
 
-        console.log('📝 Rendering markdown content for:', modulePath);
-
         // Parse functions from markdown
         const functions = this.parseFunctionsFromMarkdown(markdownData.content);
-        console.log('🔧 Parsed functions:', functions);
 
-        // Create clean markdown content WITHOUT function sections for base HTML
-        let cleanMarkdown = markdownData.content;
+        // Convert markdown to HTML (basic conversion)
+        let html = this.convertMarkdownToHTML(markdownData.content);
 
+        // Add functions section if functions exist
         if (functions.length > 0) {
-            // Remove function sections from markdown to avoid duplication
-            cleanMarkdown = this.removeFunctionSections(markdownData.content);
-            console.log('🧹 Removed function sections, clean markdown length:', cleanMarkdown.length);
+            html += '<h2 id="functions-section">Functions</h2>';
+            html += functions.map(func => this.renderFunction(func, func.side, this.currentModuleName)).join('');
         }
-
-        // Convert clean markdown to HTML (without function sections)
-        let html = this.convertMarkdownToHTML(cleanMarkdown);
-        console.log('📄 Base HTML length:', html.length);
-
-        // Add functions sections organized like app-fixed.js
-        if (functions.length > 0) {
-            const clientFunctions = functions.filter(f => f.side === 'client');
-            const serverFunctions = functions.filter(f => f.side === 'server');
-            const sharedFunctions = functions.filter(f => f.side === 'shared');
-
-            const moduleName = modulePath.split('/').pop();
-            console.log('🏷️ Module name:', moduleName);
-            console.log('🖥️ Client functions:', clientFunctions.length);
-            console.log('🖧 Server functions:', serverFunctions.length);
-            console.log('🔄 Shared functions:', sharedFunctions.length);
-
-            if (clientFunctions.length > 0) {
-                html += '<h2 id="client-functions">Client Functions</h2>';
-                clientFunctions.forEach(func => {
-                    console.log('🔧 Rendering client function:', func.name);
-                    html += this.renderFunction(func, 'client', moduleName);
-                });
-            }
-
-            if (serverFunctions.length > 0) {
-                html += '<h2 id="server-functions">Server Functions</h2>';
-                serverFunctions.forEach(func => {
-                    console.log('🔧 Rendering server function:', func.name);
-                    html += this.renderFunction(func, 'server', moduleName);
-                });
-            }
-
-            if (sharedFunctions.length > 0) {
-                html += '<h2 id="shared-functions">Shared Functions</h2>';
-                sharedFunctions.forEach(func => {
-                    console.log('🔧 Rendering shared function:', func.name);
-                    html += this.renderFunction(func, 'shared', moduleName);
-                });
-            }
-        } else {
-            console.log('⚠️ No functions found in markdown');
-        }
-
-        console.log('📄 Final HTML length:', html.length);
 
         // Set content
         contentArea.innerHTML = html;
+
+        // Trigger syntax highlighting with highlight.js
+        setTimeout(() => {
+            if (typeof hljs !== 'undefined') {
+                // Find all code blocks and highlight them
+                const codeBlocks = contentArea.querySelectorAll('pre code');
+                codeBlocks.forEach(block => {
+                    hljs.highlightElement(block);
+                });
+            }
+        }, 50);
 
         // Update current module info
         this.currentModule = markdownData;
         this.currentModuleName = modulePath.split('/').pop();
 
         // Generate and render TOC if needed
-        console.log('📋 Updating TOC...');
         this.updateTableOfContents(functions);
 
-        // Apply syntax highlighting using a simple, reliable approach
-        console.log('🎨 Applying syntax highlighting...');
+        // Setup syntax highlighting
         this.applySyntaxHighlighting();
 
         // Setup copy buttons
-        console.log('📋 Setting up copy buttons...');
         this.setupCopyLinkButtons();
-
-        console.log('✅ Markdown content rendering complete');
     }
 
     parseFunctionsFromMarkdown(markdown) {
         console.log('🔧 Parsing functions from markdown...');
         console.log('📄 Markdown content length:', markdown.length);
-        console.log('📄 First 500 chars of markdown:', markdown.substring(0, 500));
 
         const functions = [];
 
-        // Parse human-readable format FIRST
-        console.log('🔧 Parsing human-readable markdown format...');
+        // Parse markdown function documentation using headers and structured content
+        // Look for function patterns like:
+        // ## FunctionName (Client/Server/Shared)
+        // ### Description
+        // ### Syntax
+        // ### Parameters
+        // ### Returns
+        // ### Example
 
-        // Split markdown into lines for easier processing
-        const lines = markdown.split('\n');
-        let currentSection = null;
-        let currentSectionContent = [];
-        let sectionMap = {};
+        const sections = this.splitMarkdownBySections(markdown);
 
-        // First pass: collect all sections
-        for (let i = 0; i < lines.length; i++) {
-            const line = lines[i];
-
-            // Check if this is a function section header
-            const sectionMatch = line.match(/^## (Client|Server|Shared) Functions\s*$/);
-            if (sectionMatch) {
-                // Save previous section if exists
-                if (currentSection && currentSectionContent.length > 0) {
-                    sectionMap[currentSection] = currentSectionContent.join('\n');
-                }
-
-                // Start new section
-                currentSection = sectionMatch[1].toLowerCase();
-                currentSectionContent = [];
-                console.log(`📋 Found ${currentSection} functions section`);
-            } else if (currentSection) {
-                // Check if we hit another ## section (not functions)
-                if (line.startsWith('## ') && !line.includes('Functions')) {
-                    // End current section
-                    if (currentSectionContent.length > 0) {
-                        sectionMap[currentSection] = currentSectionContent.join('\n');
-                    }
-                    currentSection = null;
-                    currentSectionContent = [];
-                } else {
-                    // Add line to current section
-                    currentSectionContent.push(line);
-                }
+        for (const section of sections) {
+            const func = this.parseMarkdownFunctionSection(section);
+            if (func) {
+                functions.push(func);
             }
         }
 
-        // Save final section
-        if (currentSection && currentSectionContent.length > 0) {
-            sectionMap[currentSection] = currentSectionContent.join('\n');
-        }
-
-        // Second pass: parse functions from each section
-        for (const [sectionType, sectionContent] of Object.entries(sectionMap)) {
-            console.log(`📄 Section content length: ${sectionContent.length}`);
-            console.log(`📄 First 200 chars of section:`, sectionContent.substring(0, 200));
-
-            // Split by ### headers to find functions
-            const sectionLines = sectionContent.split('\n');
-            let currentFunction = null;
-            let currentFunctionContent = [];
-            let functionCount = 0;
-
-            for (let i = 0; i < sectionLines.length; i++) {
-                const line = sectionLines[i];
-
-                // Check if this line is a function header (### FunctionName)
-                if (line.startsWith('### ')) {
-                    // If we have a previous function, process it
-                    if (currentFunction) {
-                        functionCount++;
-                        console.log(`🔧 Found function ${functionCount}: ${currentFunction}`);
-                        console.log(`📄 Function content length: ${currentFunctionContent.join('\n').length}`);
-
-                        try {
-                            const func = this.parseReadableFunction(currentFunction, currentFunctionContent.join('\n'), sectionType);
-                            if (func) {
-                                console.log(`✅ Parsed readable function: ${func.name} (${func.side})`);
-                                functions.push(func);
-                            }
-                        } catch (e) {
-                            console.error(`❌ Failed to parse function ${currentFunction}:`, e);
-                        }
-                    }
-
-                    // Start new function
-                    currentFunction = line.substring(4).trim(); // Remove '### '
-                    currentFunctionContent = [];
-                } else if (currentFunction) {
-                    // Add line to current function content
-                    currentFunctionContent.push(line);
-                }
-            }
-
-            // Process the last function
-            if (currentFunction) {
-                functionCount++;
-                console.log(`🔧 Found function ${functionCount}: ${currentFunction}`);
-                console.log(`📄 Function content length: ${currentFunctionContent.join('\n').length}`);
-
-                try {
-                    const func = this.parseReadableFunction(currentFunction, currentFunctionContent.join('\n'), sectionType);
-                    if (func) {
-                        console.log(`✅ Parsed readable function: ${func.name} (${func.side})`);
-                        functions.push(func);
-                    }
-                } catch (e) {
-                    console.error(`❌ Failed to parse function ${currentFunction}:`, e);
-                }
-            }
-
-            console.log(`📊 Found ${functionCount} functions in ${sectionType} section`);
-        }
-
-        // If no readable functions found, try the old <--FNC format for backwards compatibility
-        if (functions.length === 0) {
-            console.log('🔧 No readable functions found, trying old FNC format...');
-            const oldFormatRegex = /<--FNC\s*([\s\S]*?)\s*FNC-->/g;
-            let match;
-            while ((match = oldFormatRegex.exec(markdown)) !== null) {
-                try {
-                    const funcData = JSON.parse(match[1]);
-                    console.log(`✅ Parsed old format function: ${funcData.name} (${funcData.side})`);
-                    functions.push(funcData);
-                } catch (e) {
-                    console.error("❌ Failed to parse old format function JSON:", e);
-                }
-            }
-        }
-
-        console.log(`🔧 Total functions found: ${functions.length}`);
+        console.log(`✅ Successfully parsed functions: ${functions.length}`);
         return functions;
     }
 
-    parseReadableFunction(name, content, side) {
-        console.log(`🔧 Parsing function: ${name}`);
-        console.log(`📄 Function content:`, content.substring(0, 300));
+    splitMarkdownBySections(markdown) {
+        // Split markdown by ## headers (function definitions)
+        const sections = [];
+        const lines = markdown.split('\n');
+        let currentSection = [];
+
+        for (const line of lines) {
+            if (line.match(/^##\s+\w+.*\((Client|Server|Shared)\)/i)) {
+                if (currentSection.length > 0) {
+                    sections.push(currentSection.join('\n'));
+                }
+                currentSection = [line];
+            } else {
+                currentSection.push(line);
+            }
+        }
+
+        if (currentSection.length > 0) {
+            sections.push(currentSection.join('\n'));
+        }
+
+        return sections;
+    }
+
+    parseMarkdownFunctionSection(section) {
+        const lines = section.split('\n');
+        const headerLine = lines[0];
+
+        // Parse function header: ## FunctionName (Client/Server/Shared)
+        const headerMatch = headerLine.match(/^##\s+(\w+).*\((Client|Server|Shared)\)/i);
+        if (!headerMatch) {
+            return null;
+        }
+
+        const name = headerMatch[1];
+        const side = headerMatch[2].toLowerCase();
 
         const func = {
             name: name,
@@ -826,85 +541,192 @@ class CommunityBridgeDocumentation {
             example: ''
         };
 
-        // Extract description
-        const descMatch = content.match(/\*\*Description:\*\*\s*([^\n]+)/);
-        if (descMatch) {
-            func.description = descMatch[1].trim();
-            console.log(`✅ Found description: ${func.description}`);
-        } else {
-            console.log(`❌ No description found in content`);
-        }
+        let currentSection = 'description';
+        let currentContent = [];
 
-        // Extract syntax
-        const syntaxMatch = content.match(/\*\*Syntax:\*\*\s*`([^`]+)`/);
-        if (syntaxMatch) {
-            func.syntax = syntaxMatch[1].trim();
-            console.log(`✅ Found syntax: ${func.syntax}`);
-        } else {
-            console.log(`❌ No syntax found in content`);
-        }
+        for (let i = 1; i < lines.length; i++) {
+            const line = lines[i];
 
-        // Extract parameters
-        const paramSection = content.match(/\*\*Parameters:\*\*([\s\S]*?)(?=\*\*Returns:\*\*|\*\*Example:\*\*|$)/);
-        if (paramSection) {
-            const paramText = paramSection[1];
-            console.log(`📋 Parameter section found:`, paramText.substring(0, 200));
-            if (paramText.includes('None')) {
-                func.parameters = [];
-            } else {
-                // Parse parameter lines like "- `amount` (number) - Amount to withdraw"
-                const paramMatches = paramText.matchAll(/- `([^`]+)` \(([^)]+)\) - ([^\n]+)/g);
-                for (const paramMatch of paramMatches) {
-                    func.parameters.push({
-                        name: paramMatch[1],
-                        type: paramMatch[2],
-                        description: paramMatch[3]
-                    });
-                    console.log(`✅ Found parameter: ${paramMatch[1]} (${paramMatch[2]})`);
+            if (line.match(/^###\s+Description/i)) {
+                currentSection = 'description';
+                currentContent = [];
+            } else if (line.match(/^###\s+Syntax/i)) {
+                if (currentContent.length > 0) {
+                    func.description = currentContent.join('\n').trim();
                 }
-            }
-        } else {
-            console.log(`❌ No parameters section found`);
-        }
-
-        // Extract returns
-        const returnSection = content.match(/\*\*Returns:\*\*([\s\S]*?)(?=\*\*Example:\*\*|$)/);
-        if (returnSection) {
-            const returnText = returnSection[1];
-            console.log(`📋 Returns section found:`, returnText.substring(0, 200));
-            if (returnText.includes('None')) {
-                func.returns = [];
-            } else {
-                // Parse return lines like "- `number` - The player's current bank balance"
-                const returnMatches = returnText.matchAll(/- `([^`]+)` - ([^\n]+)/g);
-                for (const returnMatch of returnMatches) {
-                    func.returns.push({
-                        type: returnMatch[1],
-                        description: returnMatch[2]
-                    });
-                    console.log(`✅ Found return: ${returnMatch[1]}`);
+                currentSection = 'syntax';
+                currentContent = [];
+            } else if (line.match(/^###\s+Parameters/i)) {
+                if (currentContent.length > 0 && currentSection === 'syntax') {
+                    func.syntax = this.extractCodeFromContent(currentContent.join('\n'));
                 }
+                currentSection = 'parameters';
+                currentContent = [];
+            } else if (line.match(/^###\s+Returns/i)) {
+                if (currentContent.length > 0 && currentSection === 'parameters') {
+                    func.parameters = this.parseParametersFromMarkdown(currentContent.join('\n'));
+                }
+                currentSection = 'returns';
+                currentContent = [];
+            } else if (line.match(/^###\s+Example/i)) {
+                if (currentContent.length > 0 && currentSection === 'returns') {
+                    func.returns = this.parseReturnsFromMarkdown(currentContent.join('\n'));
+                } else if (currentContent.length > 0 && currentSection === 'parameters') {
+                    func.parameters = this.parseParametersFromMarkdown(currentContent.join('\n'));
+                }
+                currentSection = 'example';
+                currentContent = [];
+            } else if (line.trim() !== '') {
+                currentContent.push(line);
             }
-        } else {
-            console.log(`❌ No returns section found`);
         }
 
-        // Extract example
-        const exampleMatch = content.match(/\*\*Example:\*\*\s*```(?:lua)?\n([\s\S]*?)```/);
-        if (exampleMatch) {
-            func.example = exampleMatch[1].trim();
-            console.log(`✅ Found example: ${func.example.substring(0, 50)}...`);
-        } else {
-            console.log(`❌ No example found`);
+        // Handle the last section
+        if (currentContent.length > 0) {
+            switch (currentSection) {
+                case 'description':
+                    func.description = currentContent.join('\n').trim();
+                    break;
+                case 'syntax':
+                    func.syntax = this.extractCodeFromContent(currentContent.join('\n'));
+                    break;
+                case 'parameters':
+                    func.parameters = this.parseParametersFromMarkdown(currentContent.join('\n'));
+                    break;
+                case 'returns':
+                    func.returns = this.parseReturnsFromMarkdown(currentContent.join('\n'));
+                    break;
+                case 'example':
+                    func.example = this.extractCodeFromContent(currentContent.join('\n'));
+                    break;
+            }
         }
 
-        console.log(`🔧 Final parsed function:`, func);
         return func;
     }
 
+    extractCodeFromContent(content) {
+        // Extract code from markdown code blocks
+        const codeBlockMatch = content.match(/```(?:lua|javascript|js)?\s*([\s\S]*?)\s*```/);
+        if (codeBlockMatch) {
+            return codeBlockMatch[1].trim();
+        }
+
+        // Extract code from inline code
+        const inlineCodeMatch = content.match(/`([^`]+)`/);
+        if (inlineCodeMatch) {
+            return inlineCodeMatch[1];
+        }
+
+        // Return plain text if no code blocks found
+        return content.trim();
+    }
+
+    parseParametersFromMarkdown(content) {
+        const parameters = [];
+
+        // Look for list items with parameter information
+        // Format: - **paramName** (type): description
+        const paramRegex = /[-*]\s*\*\*(\w+)\*\*\s*\(([^)]+)\):\s*(.+)/gi;
+        let match;
+
+        while ((match = paramRegex.exec(content)) !== null) {
+            parameters.push({
+                name: match[1],
+                type: match[2].trim(),
+                description: match[3].trim()
+            });
+        }
+
+        // Alternative format: - paramName (type) - description
+        if (parameters.length === 0) {
+            const altParamRegex = /[-*]\s*(\w+)\s*\(([^)]+)\)\s*[-–—]\s*(.+)/gi;
+            while ((match = altParamRegex.exec(content)) !== null) {
+                parameters.push({
+                    name: match[1],
+                    type: match[2].trim(),
+                    description: match[3].trim()
+                });
+            }
+        }
+
+        return parameters;
+    }
+
+    parseReturnsFromMarkdown(content) {
+        const returns = [];
+
+        // Look for return type information
+        // Format: - (type): description
+        const returnRegex = /[-*]\s*\(([^)]+)\):\s*(.+)/gi;
+        let match;
+
+        while ((match = returnRegex.exec(content)) !== null) {
+            returns.push({
+                type: match[1].trim(),
+                description: match[2].trim()
+            });
+        }
+
+        // Alternative format: Returns type - description
+        if (returns.length === 0) {
+            const altReturnRegex = /Returns?\s+(\w+)\s*[-–—]\s*(.+)/gi;
+            while ((match = altReturnRegex.exec(content)) !== null) {
+                returns.push({
+                    type: match[1],
+                    description: match[2].trim()
+                });
+            }
+        }
+
+        return returns;
+    }
+
     convertMarkdownToHTML(markdown) {
-        // Remove function blocks before rendering markdown
-        const cleanMarkdown = markdown.replace(/<--FNC\s*[\s\S]*?\s*FNC-->/g, '');
+        // Remove function sections before rendering regular markdown content
+        // Function sections will be rendered separately as cards
+        let cleanMarkdown = markdown;
+
+        // Remove function sections (## FunctionName (Side) ... until next non-function ## or end)
+        // Split by lines and filter out function sections
+        const lines = markdown.split('\n');
+        const cleanLines = [];
+        let inFunctionSection = false;
+
+        for (let i = 0; i < lines.length; i++) {
+            const line = lines[i];
+
+            // Check if this line starts a function section
+            if (line.match(/^##\s+\w+.*\((Client|Server|Shared)\)/i)) {
+                inFunctionSection = true;
+                continue;
+            }
+
+            // Check if this line starts a non-function section (like ## Overview)
+            if (line.match(/^##\s+/) && !line.match(/\((Client|Server|Shared)\)/i)) {
+                inFunctionSection = false;
+                cleanLines.push(line);
+                continue;
+            }
+
+            // If we're not in a function section, keep the line
+            if (!inFunctionSection) {
+                cleanLines.push(line);
+            }
+        }
+
+        cleanMarkdown = cleanLines.join('\n');
+
+        // Also remove any standalone old format headers that might have been missed
+        cleanMarkdown = cleanMarkdown.replace(/^## (Client|Server|Shared) Functions\s*$/gm, '');
+        cleanMarkdown = cleanMarkdown.replace(/^### \w+\s*$/gm, '');  // Remove standalone ### headers outside functions
+
+        // More aggressive cleaning of leftover content
+        cleanMarkdown = cleanMarkdown.replace(/^Context:.*$/gm, '');
+        cleanMarkdown = cleanMarkdown.replace(/^Syntax:.*$/gm, '');
+        cleanMarkdown = cleanMarkdown.replace(/^Parameters:.*$/gm, '');
+        cleanMarkdown = cleanMarkdown.replace(/^Returns:.*$/gm, '');
+        cleanMarkdown = cleanMarkdown.replace(/^Example:.*$/gm, '');
 
         // Remove META comments
         let html = cleanMarkdown.replace(/<!--META[\s\S]*?-->/g, '');
@@ -918,8 +740,8 @@ class CommunityBridgeDocumentation {
         html = html.replace(/^# (.*$)/gim, '<h1>$1</h1>');
 
         // Convert code blocks
-        html = html.replace(/```lua\n([\s\S]*?)\n```/g, '<div class="code-block-container"><button class="copy-code-btn">Copy</button><pre><code class="language-lua">$1</code></pre></div>');
-        html = html.replace(/```(\w+)?\n([\s\S]*?)\n```/g, '<div class="code-block-container"><button class="copy-code-btn">Copy</button><pre><code class="language-$1">$2</code></pre></div>');
+        html = html.replace(/```lua\n([\s\S]*?)\n```/g, '<div class="code-block-container"><button class="copy-button">Copy</button><pre><code class="lua">$1</code></pre></div>');
+        html = html.replace(/```(\w+)?\n([\s\S]*?)\n```/g, '<div class="code-block-container"><button class="copy-button">Copy</button><pre><code class="$1">$2</code></pre></div>');
 
         // Convert inline code
         html = html.replace(/`([^`]+)`/g, '<code>$1</code>');
@@ -933,318 +755,115 @@ class CommunityBridgeDocumentation {
         // Convert links
         html = html.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank">$1</a>');
 
+        // Convert unordered lists
+        html = html.replace(/^- (.*$)/gim, '<li>$1</li>');
+        html = html.replace(/(<li>.*<\/li>)/s, '<ul>$1</ul>');
+
         // Convert paragraphs
-        html = html.split('\n\n').map(p => p.trim() ? `<p>${p}</p>` : '').join('');
+        html = html.split('\n\n').map(p => {
+            p = p.trim();
+            if (!p) return '';
+            if (p.startsWith('<h') || p.startsWith('<div') || p.startsWith('<ul') || p.startsWith('<pre')) {
+                return p;
+            }
+            return `<p>${p}</p>`;
+        }).join('');
 
         // Clean up
         html = html.replace(/<p><\/p>/g, '');
         html = html.replace(/<p>\s*<h/g, '<h');
         html = html.replace(/<\/h([1-6])>\s*<\/p>/g, '</h$1>');
+        html = html.replace(/<p>\s*<div/g, '<div');
+        html = html.replace(/<\/div>\s*<\/p>/g, '</div>');
+        html = html.replace(/<p>\s*<ul/g, '<ul');
+        html = html.replace(/<\/ul>\s*<\/p>/g, '</ul>');
 
         return html;
     }
 
     renderFunction(func, side, moduleName = 'unknown') {
-        const sideClass = side === 'client' ? 'client' : side === 'server' ? 'server' : 'shared';
-        const sideIcon = side === 'client' ? '🖥️' : side === 'server' ? '🖧' : '🔄';
+        const anchor = this.generateAnchor(func.name, side, moduleName);
 
-        // Create comprehensive unique anchor ID: functionname-side-module (same as app-fixed.js)
-        const cleanFunctionName = func.name.toLowerCase().replace(/[^a-z0-9]/g, '');
-        const cleanModuleName = moduleName.toLowerCase().replace(/[^a-z0-9]/g, '');
-        const anchorId = `${cleanFunctionName}-${side}-${cleanModuleName}`;
+        const parameters = func.parameters?.map(p => `
+            <li>
+                <code>${p.name}</code>
+                <span class="param-type">(${p.type})</span>
+                ${p.optional ? '<span class="param-optional">optional</span>' : ''}
+                - <span class="param-desc">${p.description}</span>
+            </li>`).join('') || '<li>None</li>';
 
-        console.log(`🔗 Creating anchor: ${anchorId} for function ${func.name} (${side}) in ${moduleName}`);
+        const returns = func.returns?.map(r => `
+            <li>
+                <span class="param-type">(${r.type})</span>
+                - <span class="param-desc">${r.description}</span>
+            </li>`).join('') || '<li>None</li>';
 
-        // Don't pre-process syntax highlighting - we'll do it after DOM insertion
-        const syntaxCode = func.syntax || func.name + '()';
-        const exampleCode = func.example ? (Array.isArray(func.example) ? func.example.join('\n') : func.example) : '';
-
-        let parametersHtml = '';
-        if (func.parameters && func.parameters.length > 0) {
-            parametersHtml = `
-                <div class="function-parameters">
-                    <h4>Parameters:</h4>
-                    <ul>
-                        ${func.parameters.map(param => `
-                            <li><code>${param.name}</code> (${param.type}) - ${param.description || ''}</li>
-                        `).join('')}
-                    </ul>
-                </div>
-            `;
-        }
-
-        let returnsHtml = '';
-        if (func.returns && func.returns.length > 0) {
-            returnsHtml = `
-                <div class="function-returns">
-                    <h4>Returns:</h4>
-                    <ul>
-                        ${func.returns.map(ret => `
-                            <li>(${ret.type}) - ${ret.description || ''}</li>
-                        `).join('')}
-                    </ul>
-                </div>
-            `;
-        }
+        const example = func.example ?
+            `<div class="code-block-container">
+                <button class="copy-button">Copy</button>
+                <pre><code class="lua">${Array.isArray(func.example) ? func.example.join('\n') : func.example}</code></pre>
+            </div>` : '<p>No example provided.</p>';
 
         return `
-            <div class="function-card" id="${anchorId}">
+            <div class="function-card" id="${anchor}">
                 <div class="function-header">
-                    <h3>${func.name}</h3>
-                    <div class="function-badges">
-                        <span class="badge ${sideClass}">${sideIcon} ${side}</span>
-                        <button class="copy-link-btn" title="Copy direct link to this function" data-anchor="${anchorId}">🔗</button>
+                    <span class="function-name">${func.name}</span>
+                    <div class="function-meta">
+                        <span class="function-side ${side}">${side}</span>
+                        <button class="copy-link-btn" title="Copy Link" data-anchor="${anchor}">🔗</button>
                     </div>
                 </div>
-                <p>${func.description || 'No description available.'}</p>
-                <div class="function-syntax">
-                    <h4>Syntax:</h4>
-                    <div class="code-block-container">
-                        <pre class="code-block language-lua"><code class="language-lua">${syntaxCode}</code></pre>
-                        <button class="copy-button" title="Copy code">📋</button>
-                    </div>
+                <div class="function-body">
+                    <p class="function-description">${func.description || 'No description provided.'}</p>
+                    <h4>Parameters</h4>
+                    <ul class="param-list">${parameters}</ul>
+                    <h4>Returns</h4>
+                    <ul class="param-list">${returns}</ul>
+                    <h4>Example</h4>
+                    ${example}
                 </div>
-                ${parametersHtml}
-                ${returnsHtml}
-                ${func.example ? `
-                    <div class="function-example">
-                        <h4>Example:</h4>
-                        <div class="code-block-container">
-                            <pre class="code-block language-lua"><code class="language-lua">${exampleCode}</code></pre>
-                            <button class="copy-button" title="Copy code">📋</button>
-                        </div>
-                    </div>
-                ` : ''}
             </div>
         `;
     }
 
     generateAnchor(name, side, module) {
         return `${name}-${side}-${module}`.toLowerCase().replace(/[^a-z0-9-]/g, '');
-    }    updateTableOfContents(functions = []) {
-        console.log('📋 Updating table of contents...');
+    }
+
+    updateTableOfContents(functions = []) {
         const tocContainer = document.getElementById('toc-container');
         const tocContent = document.getElementById('toc-content');
 
-        if (!tocContainer || !tocContent) {
-            console.warn('⚠️ TOC container or content not found');
-            return;
-        }
+        if (!tocContainer || !tocContent) return;
 
         if (functions.length === 0) {
-            console.log('📋 No functions, hiding TOC');
             tocContainer.style.display = 'none';
             return;
         }
 
-        console.log('📋 Building TOC for', functions.length, 'functions');
+        // Generate TOC from functions
+        const tocHtml = functions.map(func => {
+            const anchor = this.generateAnchor(func.name, func.side, this.currentModuleName);
+            return `<li><a href="#${anchor}" class="toc-link">${func.name}</a></li>`;
+        }).join('');
 
-        // Create TOC structure similar to app-fixed.js
-        const clientFunctions = functions.filter(f => f.side === 'client');
-        const serverFunctions = functions.filter(f => f.side === 'server');
-        const sharedFunctions = functions.filter(f => f.side === 'shared');
-
-        const moduleName = this.currentModuleName || 'unknown';
-
-        let tocItems = [];
-
-        if (clientFunctions.length > 0) {
-            const clientItems = clientFunctions.map(func => {
-                const cleanFunctionName = func.name.toLowerCase().replace(/[^a-z0-9]/g, '');
-                const cleanModuleName = moduleName.toLowerCase().replace(/[^a-z0-9]/g, '');
-                const anchor = `#${cleanFunctionName}-client-${cleanModuleName}`;
-                return {
-                    title: func.name,
-                    anchor: anchor
-                };
-            });
-
-            tocItems.push({
-                title: 'Client Functions',
-                anchor: '#client-functions',
-                children: clientItems
-            });
-        }
-
-        if (serverFunctions.length > 0) {
-            const serverItems = serverFunctions.map(func => {
-                const cleanFunctionName = func.name.toLowerCase().replace(/[^a-z0-9]/g, '');
-                const cleanModuleName = moduleName.toLowerCase().replace(/[^a-z0-9]/g, '');
-                const anchor = `#${cleanFunctionName}-server-${cleanModuleName}`;
-                return {
-                    title: func.name,
-                    anchor: anchor
-                };
-            });
-
-            tocItems.push({
-                title: 'Server Functions',
-                anchor: '#server-functions',
-                children: serverItems
-            });
-        }
-
-        if (sharedFunctions.length > 0) {
-            const sharedItems = sharedFunctions.map(func => {
-                const cleanFunctionName = func.name.toLowerCase().replace(/[^a-z0-9]/g, '');
-                const cleanModuleName = moduleName.toLowerCase().replace(/[^a-z0-9]/g, '');
-                const anchor = `#${cleanFunctionName}-shared-${cleanModuleName}`;
-                return {
-                    title: func.name,
-                    anchor: anchor
-                };
-            });
-
-            tocItems.push({
-                title: 'Shared Functions',
-                anchor: '#shared-functions',
-                children: sharedItems
-            });
-        }
-
-        console.log('📋 TOC items structure:', tocItems);
-
-        // Render TOC using the same structure as app-fixed.js
-        this.renderTocFromData({ items: tocItems }, tocContent);
+        tocContent.innerHTML = `<ul class="toc-list">${tocHtml}</ul>`;
         tocContainer.style.display = 'block';
 
-        console.log('📋 TOC should now be visible');
-    }
-
-    renderTocFromData(tocData, tocContent) {
-        console.log('📋 Rendering TOC from data structure');
-
-        let tocHtml = '';
-        const moduleName = this.currentModuleName || 'unknown';
-
-        const renderTocItems = (items, level = 0, parentType = null) => {
-            return items.map(item => {
-                const indent = level * 1;
-                const icon = level === 0 ? '' :
-                           item.title.includes('Functions') ? '' : '⚡ ';
-
-                // Determine the correct anchor based on context
-                let anchor = item.anchor;
-
-                // If this is a function under Client Functions, Server Functions, or Shared Functions
-                if (level > 0 && parentType && !item.title.includes('Functions')) {
-                    const side = parentType.includes('Client') ? 'client' :
-                                parentType.includes('Server') ? 'server' :
-                                parentType.includes('Shared') ? 'shared' : 'client';
-                    const cleanFunctionName = item.title.toLowerCase().replace(/[^a-z0-9]/g, '');
-                    const cleanModuleName = moduleName.toLowerCase().replace(/[^a-z0-9]/g, '');
-                    anchor = `#${cleanFunctionName}-${side}-${cleanModuleName}`;
-                    console.log(`🔗 Generated TOC anchor: ${anchor} for ${item.title} (${side})`);
-                }
-
-                let html = `
-                    <li class="toc-item toc-level-${level + 1}" style="margin-left: ${indent}rem;">
-                        <a href="${anchor}" class="toc-link">
-                            ${icon}${item.title}
-                        </a>
-                    </li>
-                `;
-
-                // Render children if they exist, passing parent type for context
-                if (item.children && item.children.length > 0) {
-                    const currentParentType = item.title.includes('Functions') ? item.title : parentType;
-                    html += renderTocItems(item.children, level + 1, currentParentType);
-                }
-
-                return html;
-            }).join('');
-        };
-
-        tocHtml = `<ul class="toc-list">${renderTocItems(tocData.items)}</ul>`;
-        tocContent.innerHTML = tocHtml;
-
-        // Add click handlers for smooth scrolling
-        this.addTocClickHandlers(document.getElementById('toc-container'));
-
-        console.log(`✅ TOC updated with ${tocData.items.length} main items`);
+        // Add click handlers
+        this.addTocClickHandlers(tocContainer);
     }
 
     addTocClickHandlers(tocContainer) {
         tocContainer.querySelectorAll('.toc-link').forEach(link => {
             link.addEventListener('click', (e) => {
                 e.preventDefault();
-                const href = link.getAttribute('href');
-                if (href && href.startsWith('#')) {
-                    const anchorId = href.substring(1);
-                    const element = document.getElementById(anchorId);
-                    if (element) {
-                        this.scrollToElement(element);
-
-                        // Update URL hash without triggering navigation
-                        history.replaceState(null, null, href);
-
-                        // Update active state
-                        this.updateTocActiveState(anchorId);
-                    } else {
-                        console.warn('⚠️ TOC target element not found:', anchorId);
-                    }
-                } else {
-                    console.warn('⚠️ Invalid TOC link href:', href);
+                const anchorId = link.getAttribute('href').substring(1);
+                const element = document.getElementById(anchorId);
+                if (element) {
+                    this.scrollToElement(element);
                 }
             });
-        });
-    }
-
-    setupScrollSpy() {
-        // Remove existing scroll listener
-        if (this.scrollSpyHandler) {
-            window.removeEventListener('scroll', this.scrollSpyHandler);
-        }
-
-        this.scrollSpyHandler = () => {
-            const functionCards = document.querySelectorAll('.function-card');
-            const header = document.querySelector('.header');
-            const headerHeight = header ? header.offsetHeight : 70;
-            const scrollPosition = window.scrollY + headerHeight + 100;
-
-            let activeAnchor = null;
-
-            functionCards.forEach(card => {
-                const cardTop = card.offsetTop;
-                const cardBottom = cardTop + card.offsetHeight;
-
-                if (scrollPosition >= cardTop && scrollPosition <= cardBottom) {
-                    activeAnchor = card.id;
-                }
-            });
-
-            if (activeAnchor) {
-                this.updateTocActiveState(activeAnchor);
-            }
-        };
-
-        window.addEventListener('scroll', this.scrollSpyHandler, { passive: true });
-    }
-
-    updateTocActiveState(anchorId) {
-        // Remove active class from all TOC links
-        document.querySelectorAll('.toc-link').forEach(link => {
-            link.classList.remove('active');
-        });
-
-        // Add active class to current link
-        const activeLink = document.querySelector(`.toc-link[data-anchor="${anchorId}"]`);
-        if (activeLink) {
-            activeLink.classList.add('active');
-        }
-    }
-
-    scrollToElement(element) {
-        if (!element) return;
-
-        const header = document.querySelector('.header');
-        const headerHeight = header ? header.offsetHeight : 70;
-        const elementPosition = element.offsetTop;
-        const offsetPosition = elementPosition - headerHeight - 20;
-
-        window.scrollTo({
-            top: offsetPosition,
-            behavior: 'smooth'
         });
     }
 
@@ -1302,7 +921,7 @@ class CommunityBridgeDocumentation {
         }
 
         const results = this.searchIndex.filter(item => {
-            const searchText = `${item.name} ${item.description} ${item.category}`.toLowerCase();
+            const searchText = `${item.name} ${item.description}`.toLowerCase();
             return searchText.includes(query.toLowerCase());
         });
 
@@ -1316,93 +935,28 @@ class CommunityBridgeDocumentation {
         if (results.length === 0) {
             searchResults.innerHTML = `
                 <div class="search-results-container">
-                    <h3>No results found for "${this.highlightMatch(searchTerm, searchTerm)}"</h3>
+                    <h3>No results found for "${searchTerm}"</h3>
                     <p>Try a different search term or browse the navigation.</p>
                 </div>
             `;
         } else {
-            const resultsHtml = results.map((result, index) => `
-                <div class="search-result-item ${index === 0 ? 'highlighted' : ''}"
-                     data-path="${result.path}"
-                     data-index="${index}">
-                    <h4>${this.highlightMatch(result.name, searchTerm)}</h4>
+            const resultsHtml = results.map(result => `
+                <div class="search-result-item" onclick="window.app.navigateToPath('${result.path}')">
+                    <h4>${result.name}</h4>
                     <p class="result-path">${result.category} → ${result.path}</p>
-                    <p class="result-description">${this.highlightMatch(result.description || '', searchTerm)}</p>
+                    <p class="result-description">${result.description}</p>
                 </div>
             `).join('');
 
             searchResults.innerHTML = `
                 <div class="search-results-container">
-                    <h3>Search Results for "${this.highlightMatch(searchTerm, searchTerm)}" (${results.length})</h3>
-                    <div class="search-results-list">
-                        ${resultsHtml}
-                    </div>
+                    <h3>Search Results for "${searchTerm}" (${results.length})</h3>
+                    ${resultsHtml}
                 </div>
             `;
-
-            // Add click handlers to search results
-            searchResults.querySelectorAll('.search-result-item').forEach(item => {
-                item.addEventListener('click', () => {
-                    const path = item.getAttribute('data-path');
-                    if (path) {
-                        this.navigateToPath(path);
-                        this.hideSearchResults();
-                        document.getElementById('search-input').blur();
-                    }
-                });
-            });
         }
 
         searchResults.style.display = 'block';
-        this.currentSearchResults = results;
-        this.currentSearchIndex = 0;
-    }
-
-    highlightMatch(text, searchTerm) {
-        if (!text || !searchTerm) return text || '';
-
-        const regex = new RegExp(`(${this.escapeRegex(searchTerm)})`, 'gi');
-        return text.replace(regex, '<mark>$1</mark>');
-    }
-
-    escapeRegex(string) {
-        return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-    }
-
-    navigateSearchResults(direction) {
-        if (!this.currentSearchResults || this.currentSearchResults.length === 0) return;
-
-        // Remove current highlight
-        const currentHighlighted = document.querySelector('.search-result-item.highlighted');
-        if (currentHighlighted) {
-            currentHighlighted.classList.remove('highlighted');
-        }
-
-        // Update index
-        this.currentSearchIndex += direction;
-        if (this.currentSearchIndex < 0) {
-            this.currentSearchIndex = this.currentSearchResults.length - 1;
-        } else if (this.currentSearchIndex >= this.currentSearchResults.length) {
-            this.currentSearchIndex = 0;
-        }
-
-        // Highlight new item
-        const newHighlighted = document.querySelector(`[data-index="${this.currentSearchIndex}"]`);
-        if (newHighlighted) {
-            newHighlighted.classList.add('highlighted');
-            newHighlighted.scrollIntoView({ block: 'nearest' });
-        }
-    }
-
-    selectCurrentSearchResult() {
-        if (!this.currentSearchResults || this.currentSearchResults.length === 0) return;
-
-        const currentResult = this.currentSearchResults[this.currentSearchIndex];
-        if (currentResult) {
-            this.navigateToPath(currentResult.path);
-            this.hideSearchResults();
-            document.getElementById('search-input').blur();
-        }
     }
 
     hideSearchResults() {
@@ -1410,138 +964,58 @@ class CommunityBridgeDocumentation {
         if (searchResults) {
             searchResults.style.display = 'none';
         }
-        this.currentSearchResults = null;
-        this.currentSearchIndex = 0;
     }
 
     applySyntaxHighlighting() {
-        // Apply syntax highlighting to all code blocks in function cards
-        document.querySelectorAll('.function-card code.language-lua').forEach(codeElement => {
-            this.highlightLuaCode(codeElement);
+        document.querySelectorAll('code.language-lua').forEach(codeElement => {
+            this.applyLuaSyntaxHighlighting(codeElement);
         });
     }
 
-    highlightLuaCode(codeElement) {
-        // Skip if already highlighted
-        if (codeElement.dataset.highlighted === 'true') {
-            return;
-        }
-        codeElement.dataset.highlighted = 'true';
+    applyLuaSyntaxHighlighting(codeElement) {
+        let content = codeElement.textContent;
 
-        let code = codeElement.textContent;
-        console.log('🎨 Highlighting code:', code.substring(0, 100));
-        
-        // Check if code already contains HTML tags (indicating double processing)
-        if (code.includes('<span') || code.includes('lua-keyword')) {
-            console.warn('⚠️ Code already contains HTML tags, skipping highlighting');
-            return;
-        }
-        
-        // Use a simpler approach: replace strings with placeholders first
-        const stringPlaceholders = [];
-        let stringIndex = 0;
-        
-        // 1. Replace strings with placeholders
-        code = code.replace(/(["'])(?:(?!\1)[^\\]|\\.)*\1/g, (match) => {
-            const placeholder = `__STRING_${stringIndex}__`;
-            stringPlaceholders[stringIndex] = `<span class="lua-string">${match}</span>`;
-            stringIndex++;
-            return placeholder;
-        });
-        
-        // 2. Replace comments with placeholders
-        const commentPlaceholders = [];
-        let commentIndex = 0;
-        code = code.replace(/--.*$/gm, (match) => {
-            const placeholder = `__COMMENT_${commentIndex}__`;
-            commentPlaceholders[commentIndex] = `<span class="lua-comment">${match}</span>`;
-            commentIndex++;
-            return placeholder;
-        });
-        
-        // 3. Highlight keywords (now safe from string/comment conflicts)
-        const keywords = [
-            'function', 'local', 'return', 'end', 'if', 'then', 'else', 'elseif', 
-            'while', 'for', 'do', 'repeat', 'until', 'break', 'true', 'false', 
-            'nil', 'and', 'or', 'not', 'in'
-        ];
-        
+        const keywords = ['local', 'function', 'end', 'if', 'then', 'else', 'elseif', 'for', 'while', 'do', 'repeat', 'until', 'return', 'break', 'true', 'false', 'nil'];
         keywords.forEach(keyword => {
             const regex = new RegExp(`\\b(${keyword})\\b`, 'g');
-            code = code.replace(regex, `<span class="lua-keyword">$1</span>`);
+            content = content.replace(regex, `<span class="keyword">$1</span>`);
         });
-        
-        // 4. Highlight numbers
-        code = code.replace(/\b\d+\.?\d*\b/g, '<span class="lua-number">$&</span>');
-        
-        // 5. Highlight function calls
-        code = code.replace(/\b([a-zA-Z_][a-zA-Z0-9_\.]*)\s*(?=\()/g, '<span class="lua-function">$1</span>');
-        
-        // 6. Restore strings
-        for (let i = 0; i < stringPlaceholders.length; i++) {
-            code = code.replace(`__STRING_${i}__`, stringPlaceholders[i]);
-        }
-        
-        // 7. Restore comments
-        for (let i = 0; i < commentPlaceholders.length; i++) {
-            code = code.replace(`__COMMENT_${i}__`, commentPlaceholders[i]);
-        }
-        
-        console.log('🎨 Highlighted code:', code.substring(0, 200));
-        
-        // Set the highlighted HTML
-        codeElement.innerHTML = code;
-        
-        console.log('🎨 Element innerHTML set, checking result:', codeElement.innerHTML.substring(0, 100));
+
+        content = content.replace(/"([^"]*?)"/g, '<span class="string">"$1"</span>');
+        content = content.replace(/'([^']*?)'/g, '<span class="string">\'$1\'</span>');
+        content = content.replace(/--.*$/gm, '<span class="comment">$&</span>');
+        content = content.replace(/\b\d+\.?\d*\b/g, '<span class="number">$&</span>');
+
+        codeElement.innerHTML = content;
     }
 
     setupCopyLinkButtons() {
-        // Setup copy link buttons (same as app-fixed.js)
-        const copyLinkButtons = document.querySelectorAll('.copy-link-btn');
-        copyLinkButtons.forEach(button => {
-            button.addEventListener('click', (e) => {
-                const anchor = button.getAttribute('data-anchor');
+        document.querySelectorAll('.copy-link-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const anchor = e.currentTarget.getAttribute('data-anchor');
                 const url = `${window.location.origin}${window.location.pathname}#${anchor}`;
 
-                navigator.clipboard.writeText(url).then(() => {
-                    const originalText = button.textContent;
-                    button.textContent = '✅';
-                    button.style.color = 'var(--accent-color)';
-
-                    setTimeout(() => {
-                        button.textContent = originalText;
-                        button.style.color = '';
-                    }, 2000);
-                }).catch(err => {
-                    console.error('Failed to copy link:', err);
-                    button.textContent = '❌';
-                    setTimeout(() => {
-                        button.textContent = '🔗';
-                    }, 2000);
-                });
+                if (navigator.clipboard) {
+                    navigator.clipboard.writeText(url).then(() => {
+                        e.currentTarget.textContent = '✅';
+                        setTimeout(() => e.currentTarget.textContent = '🔗', 2000);
+                    });
+                }
             });
         });
-    }
 
-    copyCode(button) {
-        const codeBlock = button.parentNode.querySelector('code');
-        const text = codeBlock.textContent;
+        document.querySelectorAll('.copy-button').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const codeElement = e.currentTarget.nextElementSibling.querySelector('code');
+                const code = codeElement.textContent;
 
-        navigator.clipboard.writeText(text).then(() => {
-            const originalText = button.textContent;
-            button.textContent = '✅';
-            button.style.color = 'var(--accent-color)';
-
-            setTimeout(() => {
-                button.textContent = originalText;
-                button.style.color = '';
-            }, 2000);
-        }).catch(err => {
-            console.error('Failed to copy code:', err);
-            button.textContent = '❌';
-            setTimeout(() => {
-                button.textContent = '📋';
-            }, 2000);
+                if (navigator.clipboard) {
+                    navigator.clipboard.writeText(code).then(() => {
+                        e.currentTarget.textContent = 'Copied!';
+                        setTimeout(() => e.currentTarget.textContent = 'Copy', 2000);
+                    });
+                }
+            });
         });
     }
 
@@ -1572,35 +1046,6 @@ class CommunityBridgeDocumentation {
                 </div>
             `;
         }
-    }
-
-    removeFunctionSections(markdown) {
-        // Remove function sections to avoid duplication
-        const lines = markdown.split('\n');
-        let filteredLines = [];
-        let inFunctionSection = false;
-
-        for (let i = 0; i < lines.length; i++) {
-            const line = lines[i];
-
-            // Check if this is a function section header
-            if (line.match(/^## (Client|Server|Shared) Functions\s*$/)) {
-                inFunctionSection = true;
-                continue; // Skip the section header
-            }
-
-            // Check if we hit another ## section (not functions)
-            if (line.startsWith('## ') && !line.includes('Functions')) {
-                inFunctionSection = false;
-            }
-
-            // Only add lines that are not in function sections
-            if (!inFunctionSection) {
-                filteredLines.push(line);
-            }
-        }
-
-        return filteredLines.join('\n');
     }
 }
 

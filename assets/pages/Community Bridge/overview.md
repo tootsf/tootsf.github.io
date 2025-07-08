@@ -8,7 +8,6 @@
 
 Community Bridge is a **comprehensive FiveM framework** designed to revolutionize server development through modular functionality and seamless integration. It serves as a unified bridge between different systems, resources, and frameworks commonly used in FiveM development.
 
-### 🎯 Core Philosophy
 
 - **🧩 Modular by Design**: Pick and choose only what you need
 - **🔄 Framework Agnostic**: Works with any framework or standalone
@@ -19,13 +18,11 @@ Community Bridge is a **comprehensive FiveM framework** designed to revolutioniz
 
 ## ✨ Key Features
 
-### 🏗️ Modular Architecture
 - **🔌 Plug-and-Play Modules**: Each module can be independently enabled or disabled
 - **⚙️ Flexible Configuration**: Extensive configuration options for each module
 - **🌐 Framework Agnostic**: Works seamlessly with ESX, QBCore, and custom frameworks
 - **📈 Scalable Design**: Add or remove functionality without breaking existing code
 
-### 🧩 Comprehensive Module Library
 
 #### 💬 Communication & UI Systems
 | Module | Description | Status |
@@ -62,7 +59,6 @@ Community Bridge is a **comprehensive FiveM framework** designed to revolutioniz
 | **Phone** | Mobile phone integration | ✅ Active |
 | **Clothing** | Clothing management | ✅ Active |
 
-### 📚 Rich Library Functions
 
 #### 🎬 Animation & Visual Effects
 - **Animation System**: Comprehensive animation controls with sequencing
@@ -82,7 +78,6 @@ Community Bridge is a **comprehensive FiveM framework** designed to revolutioniz
 - **Logging**: Comprehensive logging with multiple outputs
 - **State Management**: Advanced state bag utilities
 
-### 🌐 Multi-language Support
 
 Support for **25+ languages** with intelligent localization:
 
@@ -103,7 +98,6 @@ Support for **25+ languages** with intelligent localization:
 
 Community Bridge follows a **clean separation architecture** with optimized communication between layers:
 
-### 🎮 Client-Side (`client.lua`)
 ```mermaid
 graph TD
     A[Client Events] --> B[UI Controllers]
@@ -112,14 +106,12 @@ graph TD
     D --> E[Player Feedback]
 ```
 
-**Responsibilities:**
 - 🖼️ UI interactions and visual effects
 - ⌨️ Player input handling and validation
 - 🎯 Local game state management
 - ⚡ Real-time feedback systems
 - 🎨 Rendering and animation control
 
-### 🖥️ Server-Side (`server.lua`)
 ```mermaid
 graph TD
     A[Server Events] --> B[Data Validation]
@@ -128,14 +120,12 @@ graph TD
     D --> E[Response Handler]
 ```
 
-**Responsibilities:**
 - 🗄️ Data persistence and validation
 - 👥 Player management and sessions
 - 📡 Cross-player communications
 - 🔒 Security and anti-cheat measures
 - 📊 Performance monitoring
 
-### 🔄 Shared (`shared.lua`)
 ```mermaid
 graph LR
     A[Common Config] --> B[Utility Functions]
@@ -143,7 +133,6 @@ graph LR
     C --> D[Constants]
 ```
 
-**Responsibilities:**
 - ⚙️ Common configurations and constants
 - 🛠️ Utility functions used by both sides
 - 📋 Shared data structures and enums
@@ -153,7 +142,6 @@ graph LR
 
 ## 🚀 Getting Started
 
-### 📖 Quick Start Guide
 
 1. **📥 Installation**: Download and install Community Bridge
 2. **⚙️ Configuration**: Configure your preferred modules in `settings/`
@@ -161,7 +149,6 @@ graph LR
 4. **🎨 Customization**: Customize modules to fit your server's needs
 5. **🚀 Deploy**: Launch your enhanced server!
 
-### 📂 Module Structure
 
 Each module follows a **consistent, predictable structure**:
 
@@ -178,7 +165,6 @@ Each module follows a **consistent, predictable structure**:
 │       └── 📄 ...
 ```
 
-### 📚 Library Structure
 
 Libraries provide **reusable utility functions**:
 
@@ -195,7 +181,6 @@ Libraries provide **reusable utility functions**:
 
 ## 🎯 Best Practices
 
-### ⚡ Performance Optimization
 | Practice | Description | Impact |
 |----------|-------------|--------|
 | **Smart Caching** | Use multi-layer caching appropriately | 🟢 High |
@@ -203,7 +188,6 @@ Libraries provide **reusable utility functions**:
 | **Database Optimization** | Use prepared statements and indexing | 🟢 High |
 | **Event Management** | Proper event lifecycle management | 🟡 Medium |
 
-### 🔒 Security Guidelines
 | Practice | Description | Priority |
 |----------|-------------|----------|
 | **Input Validation** | Validate all user inputs server-side | 🔴 Critical |
@@ -211,7 +195,6 @@ Libraries provide **reusable utility functions**:
 | **Rate Limiting** | Prevent spam and abuse | 🟠 High |
 | **Activity Monitoring** | Log and monitor suspicious activities | 🟡 Medium |
 
-### 🛠️ Maintainability Standards
 - **📝 Code Documentation**: Comprehensive inline documentation
 - **🔄 Version Control**: Proper versioning for all customizations
 - **🧪 Testing**: Thorough testing before production deployment
@@ -220,19 +203,16 @@ Libraries provide **reusable utility functions**:
 
 ## 👥 Support and Community
 
-### 🤝 Community Resources
 - **📖 Documentation**: Comprehensive API reference with examples
 - **💡 Examples**: Real-world usage examples and tutorials
 - **👥 Developer Community**: Active community of FiveM developers
 - **🔄 Regular Updates**: Frequent updates with new features and improvements
 
-### 🆘 Getting Help
 - **📚 Documentation First**: Check our comprehensive guides
 - **🔍 Search Function**: Use the built-in search to find specific topics
 - **💬 Community Forums**: Connect with other developers
 - **🐛 Issue Tracking**: Report bugs and request features
 
-### 📈 Roadmap & Updates
 - **🔮 Planned Features**: Upcoming modules and enhancements
 - **🐛 Bug Fixes**: Regular maintenance and stability improvements
 - **🚀 Performance**: Ongoing optimization efforts
@@ -242,7 +222,6 @@ Libraries provide **reusable utility functions**:
 
 ## 🎯 Next Steps
 
-### 🗺️ Your Journey Starts Here
 
 | Step | Action | Description |
 |------|--------|-------------|
@@ -252,7 +231,6 @@ Libraries provide **reusable utility functions**:
 | **4** | [⚙️ Configuration](./configuration.md) | Advanced customization options |
 | **5** | [🚀 Deploy](./deployment.md) | Production deployment guidelines |
 
-### 🔗 Quick Links
 
 > **Essential Resources for Community Bridge Development**
 
@@ -269,7 +247,6 @@ Libraries provide **reusable utility functions**:
 
 ## 🌟 Why Choose Community Bridge?
 
-### ✅ Proven Benefits
 
 - **⚡ 50% Faster Development**: Pre-built modules accelerate development
 - **🔒 Enterprise Security**: Built-in security measures and validation
@@ -277,10 +254,7 @@ Libraries provide **reusable utility functions**:
 - **🌐 Global Ready**: Multi-language support out of the box
 - **👥 Community Driven**: Backed by active developer community
 
-### 🚀 Ready to Transform Your FiveM Server?
 
 > **Start building something amazing today!**
 >
 > Community Bridge provides everything you need to create professional, feature-rich FiveM servers with minimal effort and maximum flexibility.
-
-**[🎯 Get Started Now →](./getting-started.md)**

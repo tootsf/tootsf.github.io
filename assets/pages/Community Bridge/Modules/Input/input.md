@@ -12,28 +12,26 @@ The Input module provides a unified interface for creating input dialogs and for
 
 The Input provides functionality for FiveM resources.
 
-## Client Functions
+## Open (Client)
 
-### Open
-
-<!--TOC: Open-->
-
-**Context:** 🖥️ Client
-
+### Description
 Opens an input dialog with specified fields and configuration.
 
-**Syntax:** `Bridge.Input.Open(title, data, isQBFormat, submitText)`
+### Syntax
+```lua
+Bridge.Input.Open(title, data, isQBFormat, submitText)
+```
 
-**Parameters:**
-- `title` (string) - Title of the input dialog
-- `data` (table) - Input configuration data (format depends on isQBFormat)
-- `isQBFormat` (boolean) - Whether the data is in QB-Core format (will be auto-converted)
-- `submitText` (string) - Text for the submit button (default: 'Submit')
+### Parameters
+- **title** (string): Title of the input dialog
+- **data** (table): Input configuration data (format depends on isQBFormat)
+- **isQBFormat** (boolean): Whether the data is in QB-Core format (will be auto-converted) (optional)
+- **submitText** (string): Text for the submit button (default: 'Submit') (optional)
 
-**Returns:**
-- (table|nil) - Table with input values, or nil if cancelled
+### Returns
+- (table|nil): Table with input values, or nil if cancelled
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 

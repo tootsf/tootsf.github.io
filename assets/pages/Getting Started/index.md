@@ -1,15 +1,12 @@
 Welcome to Community Bridge! This guide will help you get up and running quickly.
 
-## Installation
 
-### Manual Installation
 
 1. Download the latest release from GitHub
 2. Extract the `community_bridge` folder to your resources directory
 3. Add `ensure community_bridge` to your server.cfg **after** your framework and **before** any scripts that use the bridge
 4. Restart your server
 
-**Example server.cfg order:**
 ```cfg
 # Framework (choose one)
 ensure es_extended
@@ -24,13 +21,10 @@ ensure your-script
 ensure another-script
 ```
 
-## Basic Setup
 
-### 1. Configuration
 You can navigate to `community_bridge/settings` to customize the bridge settings. Here you can enable or disable specific modules, set default values, and configure compatibility with your resources
 
 
-### 2. Using Bridge Functions
 
 ```lua
 -- Initialize the bridge
@@ -47,21 +41,16 @@ Bridge.Inventory.AddItem("bread", 5)
 ```
 
 
-## Troubleshooting
 
-### Common Issues
 
-**Bridge not loading**
 - Ensure the resource is started after your framework
 - Check console for error messages
 - Verify the resource name is exactly `community_bridge`
 
-**Functions not working**
 - Check if the module is enabled in config
 - Verify you're using the correct syntax
 - Enable debug mode for more information
 
-**"Bridge is nil" errors**
 - Make sure you're calling `exports['community_bridge']:Bridge()` correctly
 - Ensure Community Bridge started successfully before your script
 - Check the resource load order in server.cfg

@@ -12,25 +12,21 @@ The Callback library provides a robust client-server communication system with s
 
 The Callback provides functionality for FiveM resources.
 
-## Client Functions
+## Register (Client)
 
-### Register
-
-<!--TOC: Register-->
-
-**Context:** 🖥️ Client
-
+### Description
 Registers a client-side callback function that can be triggered by the server.
 
-**Syntax:** `Bridge.Callback.Register(name, handler)`
+### Syntax
+```lua
+Bridge.Callback.Register(name, handler)
+```
 
-**Parameters:**
-- `name` (string) - Unique name for the callback
-- `handler` (function) - Function to execute when callback is triggered
+### Parameters
+- **name** (string): Unique name for the callback
+- **handler** (function): Function to execute when callback is triggered
 
-**Returns:** None
-
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 
@@ -45,23 +41,21 @@ Bridge.Callback.Register('getPlayerInfo', function()
 end)
 ```
 
-### RegisterRebound
+## RegisterRebound (Client)
 
-<!--TOC: RegisterRebound-->
-
-**Context:** 🖥️ Client
-
+### Description
 Registers a rebound callback that receives responses from server callbacks triggered by this client.
 
-**Syntax:** `Bridge.Callback.RegisterRebound(name, handler)`
+### Syntax
+```lua
+Bridge.Callback.RegisterRebound(name, handler)
+```
 
-**Parameters:**
-- `name` (string) - Name of the callback to rebound from
-- `handler` (function) - Function to handle the rebound response
+### Parameters
+- **name** (string): Name of the callback to rebound from
+- **handler** (function): Function to handle the rebound response
 
-**Returns:** None
-
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 
@@ -75,24 +69,24 @@ Bridge.Callback.RegisterRebound('validateUser', function(isValid, reason)
 end)
 ```
 
-### Trigger
+## Trigger (Client)
 
-<!--TOC: Trigger-->
-
-**Context:** 🖥️ Client
-
+### Description
 Triggers a server-side callback and optionally handles the response with a callback or returns a promise.
 
-**Syntax:** `Bridge.Callback.Trigger(name, ...)`
+### Syntax
+```lua
+Bridge.Callback.Trigger(name, ...)
+```
 
-**Parameters:**
-- `name` (string) - Name of the server callback to trigger
-- `...` (any) - Arguments to pass to the server callback (optional callback function as first argument)
+### Parameters
+- **name** (string): Name of the server callback to trigger
+- **...** (any): Arguments to pass to the server callback (optional callback function as first argument)
 
-**Returns:**
-- (any) - Return value from server callback (when not using callback function)
+### Returns
+- (any): Return value from server callback (when not using callback function)
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 
@@ -106,25 +100,21 @@ local money = Bridge.Callback.Trigger('getUserMoney', GetPlayerServerId(PlayerId
 print('Player has $' .. money)
 ```
 
-## Server Functions
+## Register (Server)
 
-### Register
-
-<!--TOC: Register-->
-
-**Context:** 🖲️ Server
-
+### Description
 Registers a server-side callback function that can be triggered by clients.
 
-**Syntax:** `Bridge.Callback.Register(name, handler)`
+### Syntax
+```lua
+Bridge.Callback.Register(name, handler)
+```
 
-**Parameters:**
-- `name` (string) - Unique name for the callback
-- `handler` (function) - Function to execute when callback is triggered (first parameter is source player ID)
+### Parameters
+- **name** (string): Unique name for the callback
+- **handler** (function): Function to execute when callback is triggered (first parameter is source player ID)
 
-**Returns:** None
-
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 
@@ -138,25 +128,25 @@ Bridge.Callback.Register('getUserMoney', function(source, targetId)
 end)
 ```
 
-### Trigger
+## Trigger (Server)
 
-<!--TOC: Trigger-->
-
-**Context:** 🖲️ Server
-
+### Description
 Triggers a client-side callback on specific player(s) and optionally handles the response.
 
-**Syntax:** `Bridge.Callback.Trigger(name, target, ...)`
+### Syntax
+```lua
+Bridge.Callback.Trigger(name, target, ...)
+```
 
-**Parameters:**
-- `name` (string) - Name of the client callback to trigger
-- `target` (number | table) - Player ID or table of player IDs to trigger callback on
-- `...` (any) - Arguments to pass to the client callback (optional callback function as first argument)
+### Parameters
+- **name** (string): Name of the client callback to trigger
+- **target** (number | table): Player ID or table of player IDs to trigger callback on
+- **...** (any): Arguments to pass to the client callback (optional callback function as first argument)
 
-**Returns:**
-- (any) - Return value from client callback (when not using callback function)
+### Returns
+- (any): Return value from client callback (when not using callback function)
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 

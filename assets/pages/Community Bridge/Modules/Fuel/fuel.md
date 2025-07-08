@@ -12,25 +12,23 @@ The Fuel module provides functions for managing vehicle fuel levels across diffe
 
 The Fuel provides functionality for FiveM resources.
 
-## Client Functions
+## GetFuel (Client)
 
-### GetFuel
-
-<!--TOC: GetFuel-->
-
-**Context:** 🖥️ Client
-
+### Description
 Gets the current fuel level of a vehicle.
 
-**Syntax:** `Bridge.Fuel.GetFuel(vehicle)`
+### Syntax
+```lua
+Bridge.Fuel.GetFuel(vehicle)
+```
 
-**Parameters:**
-- `vehicle` (number) - Vehicle entity handle
+### Parameters
+- **vehicle** (number): Vehicle entity handle
 
-**Returns:**
-- (number) - Fuel level (0.0 to 100.0)
+### Returns
+- (number): Fuel level (0.0 to 100.0)
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 
@@ -42,22 +40,20 @@ if vehicle ~= 0 then
 end
 ```
 
-### GetResourceName
+## GetResourceName (Client)
 
-<!--TOC: GetResourceName-->
-
-**Context:** 🖥️ Client
-
+### Description
 Returns the name of the currently active fuel system.
 
-**Syntax:** `Bridge.Fuel.GetResourceName()`
+### Syntax
+```lua
+Bridge.Fuel.GetResourceName()
+```
 
-**Parameters:** None
+### Returns
+- (string): Name of the fuel resource being used
 
-**Returns:**
-- (string) - Name of the fuel resource being used
-
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 
@@ -65,25 +61,25 @@ local fuelSystem = Bridge.Fuel.GetResourceName()
 print("Using fuel system: " .. fuelSystem)
 ```
 
-### SetFuel
+## SetFuel (Client)
 
-<!--TOC: SetFuel-->
-
-**Context:** 🖥️ Client
-
+### Description
 Sets the fuel level of a vehicle. Some systems add fuel, others set absolute values.
 
-**Syntax:** `Bridge.Fuel.SetFuel(vehicle, fuel, type)`
+### Syntax
+```lua
+Bridge.Fuel.SetFuel(vehicle, fuel, type)
+```
 
-**Parameters:**
-- `vehicle` (number) - Vehicle entity handle
-- `fuel` (number) - Fuel amount (0.0 to 100.0 or amount to add)
-- `type` (string) - Fuel type (for systems that support multiple fuel types)
+### Parameters
+- **vehicle** (number): Vehicle entity handle
+- **fuel** (number): Fuel amount (0.0 to 100.0 or amount to add)
+- **type** (string): Fuel type (for systems that support multiple fuel types) (optional)
 
-**Returns:**
-- (number|nil) - New fuel level or nil if vehicle doesn't exist
+### Returns
+- (number|nil): New fuel level or nil if vehicle doesn't exist
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 

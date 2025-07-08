@@ -12,27 +12,25 @@ The Management module provides functions for handling business and organization 
 
 The Managment provides functionality for FiveM resources.
 
-## Server Functions
+## AddAccountMoney (Server)
 
-### AddAccountMoney
-
-<!--TOC: AddAccountMoney-->
-
-**Context:** 🖲️ Server
-
+### Description
 Adds money to a specified business account with a reason for the transaction.
 
-**Syntax:** `Bridge.Managment.AddAccountMoney(account, amount, reason)`
+### Syntax
+```lua
+Bridge.Managment.AddAccountMoney(account, amount, reason)
+```
 
-**Parameters:**
-- `account` (string) - The account identifier/name
-- `amount` (number) - Amount of money to add
-- `reason` (string) - Reason for the transaction
+### Parameters
+- **account** (string): The account identifier/name
+- **amount** (number): Amount of money to add
+- **reason** (string): Reason for the transaction
 
-**Returns:**
-- (boolean) - True if money was added successfully
+### Returns
+- (boolean): True if money was added successfully
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 
@@ -44,23 +42,23 @@ else
 end
 ```
 
-### GetAccountMoney
+## GetAccountMoney (Server)
 
-<!--TOC: GetAccountMoney-->
-
-**Context:** 🖲️ Server
-
+### Description
 Retrieves the account details and balance for a specified business account.
 
-**Syntax:** `Bridge.Managment.GetAccountMoney(account)`
+### Syntax
+```lua
+Bridge.Managment.GetAccountMoney(account)
+```
 
-**Parameters:**
-- `account` (string) - The account identifier/name
+### Parameters
+- **account** (string): The account identifier/name
 
-**Returns:**
-- (table) - Account details including balance information
+### Returns
+- (table): Account details including balance information
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 
@@ -70,22 +68,20 @@ if accountData.balance then
 end
 ```
 
-### GetManagmentName
+## GetManagmentName (Server)
 
-<!--TOC: GetManagmentName-->
-
-**Context:** 🖲️ Server
-
+### Description
 Returns the name of the currently active management system.
 
-**Syntax:** `Bridge.Managment.GetManagmentName()`
+### Syntax
+```lua
+Bridge.Managment.GetManagmentName()
+```
 
-**Parameters:** None
+### Returns
+- (string): Name of the management system in use
 
-**Returns:**
-- (string) - Name of the management system in use
-
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 
@@ -93,25 +89,25 @@ local systemName = Bridge.Managment.GetManagmentName()
 print("Using management system: " .. systemName)
 ```
 
-### RemoveAccountMoney
+## RemoveAccountMoney (Server)
 
-<!--TOC: RemoveAccountMoney-->
-
-**Context:** 🖲️ Server
-
+### Description
 Removes money from a specified business account with a reason for the transaction.
 
-**Syntax:** `Bridge.Managment.RemoveAccountMoney(account, amount, reason)`
+### Syntax
+```lua
+Bridge.Managment.RemoveAccountMoney(account, amount, reason)
+```
 
-**Parameters:**
-- `account` (string) - The account identifier/name
-- `amount` (number) - Amount of money to remove
-- `reason` (string) - Reason for the transaction
+### Parameters
+- **account** (string): The account identifier/name
+- **amount** (number): Amount of money to remove
+- **reason** (string): Reason for the transaction
 
-**Returns:**
-- (boolean) - True if money was removed successfully
+### Returns
+- (boolean): True if money was removed successfully
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 

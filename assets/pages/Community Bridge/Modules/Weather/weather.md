@@ -12,25 +12,23 @@ The Weather module provides control over weather and time synchronization system
 
 The Weather provides functionality for FiveM resources.
 
-## Client Functions
+## ToggleSync (Client)
 
-### ToggleSync
-
-<!--TOC: ToggleSync-->
-
-**Context:** 🖥️ Client
-
+### Description
 Toggles the player's weather and time synchronization on or off.
 
-**Syntax:** `Bridge.Weather.ToggleSync(toggle)`
+### Syntax
+```lua
+Bridge.Weather.ToggleSync(toggle)
+```
 
-**Parameters:**
-- `toggle` (boolean) - True to enable sync, false to disable
+### Parameters
+- **toggle** (boolean): True to enable sync, false to disable
 
-**Returns:**
-- (nil) - No return value
+### Returns
+- (nil): No return value
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 

@@ -12,25 +12,23 @@ The Markers library provides efficient 3D marker management with proximity-based
 
 The Markers provides functionality for FiveM resources.
 
-## Client Functions
+## Create (Client)
 
-### Create
-
-<!--TOC: Create-->
-
-**Context:** 🖥️ Client
-
+### Description
 Creates a 3D marker with comprehensive customization options. The marker automatically renders when players are within draw distance and supports various visual effects.
 
-**Syntax:** `Bridge.Markers.Create(data)`
+### Syntax
+```lua
+Bridge.Markers.Create(data)
+```
 
-**Parameters:**
-- `data` (table) - Configuration table with marker properties
+### Parameters
+- **data** (table): Configuration table with marker properties
 
-**Returns:**
-- (string | nil) - Unique marker ID or nil if creation failed
+### Returns
+- (string | nil): Unique marker ID or nil if creation failed
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 
@@ -60,23 +58,23 @@ local customMarkerId = Bridge.Markers.Create({
 })
 ```
 
-### Remove
+## Remove (Client)
 
-<!--TOC: Remove-->
-
-**Context:** 🖥️ Client
-
+### Description
 Removes a specific marker by its ID and cleans up all associated resources.
 
-**Syntax:** `Bridge.Markers.Remove(id)`
+### Syntax
+```lua
+Bridge.Markers.Remove(id)
+```
 
-**Parameters:**
-- `id` (string) - ID of the marker to remove
+### Parameters
+- **id** (string): ID of the marker to remove
 
-**Returns:**
-- (boolean) - True if marker was successfully removed, false if not found
+### Returns
+- (boolean): True if marker was successfully removed, false if not found
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 
@@ -89,21 +87,17 @@ else
 end
 ```
 
-### RemoveAll
+## RemoveAll (Client)
 
-<!--TOC: RemoveAll-->
-
-**Context:** 🖥️ Client
-
+### Description
 Removes all active markers and cleans up all associated resources. Useful for cleanup operations or scene resets.
 
-**Syntax:** `Bridge.Markers.RemoveAll()`
+### Syntax
+```lua
+Bridge.Markers.RemoveAll()
+```
 
-**Parameters:** None
-
-**Returns:** None
-
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 

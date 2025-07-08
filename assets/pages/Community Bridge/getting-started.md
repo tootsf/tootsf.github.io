@@ -21,7 +21,6 @@ Before diving in, make sure you have:
 
 ## 📦 Installation
 
-### Step 1: Download Community Bridge
 
 1. 📥 **Download** the latest release from the repository
 2. 📂 **Extract** the archive to your FiveM resources folder
@@ -35,7 +34,6 @@ resources/
 └── community_bridge/  # 👈 Your Community Bridge installation
 ```
 
-### Step 2: Database Setup
 
 Community Bridge requires a MySQL database for data persistence:
 
@@ -49,7 +47,6 @@ CREATE DATABASE IF NOT EXISTS community_bridge;
 
 > 💡 **Pro Tip**: Community Bridge uses an intelligent database migration system that automatically handles table creation and updates.
 
-### Step 3: Configuration
 
 #### 🖥️ Server Configuration (`server.cfg`)
 
@@ -75,7 +72,6 @@ Configure Community Bridge in the `settings/` folder:
 | `clientConfig.lua` | 🎮 Client Settings | UI preferences, keybinds |
 | `sharedConfig.lua` | 🔄 Shared Settings | Modules, locales, common config |
 
-### Step 4: Framework Integration
 
 > 🔌 **Framework Bridge**: Community Bridge automatically detects and integrates with popular frameworks.
 
@@ -113,7 +109,6 @@ Config.Framework = 'custom'
 
 ## 🧩 Module Configuration
 
-### 🎛️ Enabling/Disabling Modules
 
 In `sharedConfig.lua`, configure which modules to use:
 
@@ -143,7 +138,6 @@ Config.Modules = {
 
 > 💡 **Performance Tip**: Only enable modules you actually use to optimize server performance!
 
-### 🔧 Module-Specific Configuration
 
 Each module has its own configuration file in `modules/moduleName/config.lua`:
 
@@ -168,7 +162,6 @@ Config.HelpText = {
 
 ## 💻 Basic Usage Examples
 
-### 💬 Using HelpText Module
 
 ```lua
 -- 🎮 Client-side usage
@@ -185,7 +178,6 @@ Bridge.HelpText.ShowHelpText('Custom message', 'top', {
 Bridge.HelpText.HideHelpText()
 ```
 
-### 📢 Using Notify Module
 
 ```lua
 -- 🎮 Client-side notifications
@@ -199,7 +191,6 @@ Bridge.Notify.Player(playerId, 'success', '🎉 Welcome to the server!')
 Bridge.Notify.All('info', '📢 Server announcement!')
 ```
 
-### 🎯 Using Target Module
 
 ```lua
 -- 🎯 Add target to entity
@@ -240,7 +231,6 @@ Bridge.Target.AddZone('unique_zone_id', {
 
 ## ⚡ Advanced Configuration
 
-### 🚀 Performance Tuning
 
 ```lua
 -- In serverConfig.lua
@@ -254,7 +244,6 @@ Config.Performance = {
 }
 ```
 
-### 🔒 Security Settings
 
 ```lua
 -- In serverConfig.lua
@@ -268,7 +257,6 @@ Config.Security = {
 }
 ```
 
-### 🌍 Localization
 
 ```lua
 -- In sharedConfig.lua
@@ -291,7 +279,6 @@ Config.CustomLocales = {
 
 ## 🔧 Troubleshooting
 
-### ❓ Common Issues
 
 #### 🚫 Module Not Loading
 | Issue | Solution |
@@ -317,7 +304,6 @@ Config.CustomLocales = {
 |                         | 3. ⚙️ Review bridge configuration |
 |                         | 4. 🧪 Test with minimal configuration |
 
-### 🐛 Debug Mode
 
 Enable debug mode for detailed logging:
 
@@ -329,7 +315,6 @@ Config.Debug = true
 -- Logs include: database queries, network events, module loading
 ```
 
-### 📊 Performance Monitoring
 
 Monitor resource performance:
 
@@ -349,14 +334,12 @@ print('Render Time:', clientStats.renderTime)
 
 ## 🎯 Next Steps
 
-### 📚 Learning Path
 
 1. **🧩 Explore Modules**: Review available modules and their APIs
 2. **📖 Check Examples**: Look at practical usage examples
 3. **🎨 Customize**: Adapt modules to your server's needs
 4. **👥 Join Community**: Connect with other developers
 
-### 🔗 Useful Links
 
 | Resource | Description |
 |----------|-------------|
@@ -367,4 +350,3 @@ print('Render Time:', clientStats.renderTime)
 | [🔧 Troubleshooting Guide](./troubleshooting.md) | Common issues and solutions |
 
 > 🚀 **Ready to build something amazing?** Start with the [Module Documentation](../Modules/) to see what's possible!
-

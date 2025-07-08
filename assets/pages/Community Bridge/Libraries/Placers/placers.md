@@ -12,30 +12,28 @@ The Placers library provides interactive object placement systems with real-time
 
 The Placers provides functionality for FiveM resources.
 
-## Client Functions
+## Placeable.PlaceObject (Client)
 
-### Placeable.PlaceObject
-
-<!--TOC: Placeable.PlaceObject-->
-
-**Context:** 🖥️ Client
-
+### Description
 Simple object placement system with raycast-based positioning and basic controls for rotation and distance.
 
-**Syntax:** `Bridge.Placeable.PlaceObject(object, distance, snapToGround, allowedMats, offset)`
+### Syntax
+```lua
+Bridge.Placeable.PlaceObject(object, distance, snapToGround, allowedMats, offset)
+```
 
-**Parameters:**
-- `object` (string | number) - Object model name or hash to place
-- `distance` (number | nil) - Maximum placement distance from player (default: 10.0)
-- `snapToGround` (boolean | nil) - Whether to snap placed object to ground surface
-- `allowedMats` (table | nil) - Table of allowed material hashes for placement validation
-- `offset` (vector3 | nil) - Additional offset to apply to placement coordinates
+### Parameters
+- **object** (string | number): Object model name or hash to place
+- **distance** (number | nil): Maximum placement distance from player (default: 10.0)
+- **snapToGround** (boolean | nil): Whether to snap placed object to ground surface
+- **allowedMats** (table | nil): Table of allowed material hashes for placement validation
+- **offset** (vector3 | nil): Additional offset to apply to placement coordinates
 
-**Returns:**
-- (vector3 | nil) - Final placement coordinates or nil if cancelled
-- (number | nil) - Final heading/rotation or nil if cancelled
+### Returns
+- (vector3 | nil): Final placement coordinates or nil if cancelled
+- (number | nil): Final heading/rotation or nil if cancelled
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 
@@ -73,21 +71,17 @@ else
 end
 ```
 
-### Placeable.StopPlacing
+## Placeable.StopPlacing (Client)
 
-<!--TOC: Placeable.StopPlacing-->
-
-**Context:** 🖥️ Client
-
+### Description
 Cancels the current object placement operation and cleans up the preview object.
 
-**Syntax:** `Bridge.Placeable.StopPlacing()`
+### Syntax
+```lua
+Bridge.Placeable.StopPlacing()
+```
 
-**Parameters:** None
-
-**Returns:** None
-
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 
@@ -96,24 +90,24 @@ Bridge.Placeable.StopPlacing()
 print('Object placement cancelled')
 ```
 
-### PlaceableObject.PlaceObject
+## PlaceableObject.PlaceObject (Client)
 
-<!--TOC: PlaceableObject.PlaceObject-->
-
-**Context:** 🖥️ Client
-
+### Description
 Advanced object placement system with movement modes, boundary checking, material validation, and comprehensive controls.
 
-**Syntax:** `Bridge.PlaceableObject.PlaceObject(entity, settings)`
+### Syntax
+```lua
+Bridge.PlaceableObject.PlaceObject(entity, settings)
+```
 
-**Parameters:**
-- `entity` (number) - Entity handle of the object to place
-- `settings` (table) - Comprehensive placement configuration including boundaries, materials, controls, and callbacks
+### Parameters
+- **entity** (number): Entity handle of the object to place
+- **settings** (table): Comprehensive placement configuration including boundaries, materials, controls, and callbacks
 
-**Returns:**
-- (promise) - Promise that resolves with placement result or rejects if cancelled
+### Returns
+- (promise): Promise that resolves with placement result or rejects if cancelled
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 
@@ -161,21 +155,17 @@ end, function(error)
 end)
 ```
 
-### PlaceableObject.StopPlacing
+## PlaceableObject.StopPlacing (Client)
 
-<!--TOC: PlaceableObject.StopPlacing-->
-
-**Context:** 🖥️ Client
-
+### Description
 Stops the current advanced placement operation and triggers cleanup callbacks.
 
-**Syntax:** `Bridge.PlaceableObject.StopPlacing()`
+### Syntax
+```lua
+Bridge.PlaceableObject.StopPlacing()
+```
 
-**Parameters:** None
-
-**Returns:** None
-
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 

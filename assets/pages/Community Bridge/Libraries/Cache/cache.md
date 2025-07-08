@@ -12,164 +12,25 @@ The Cache library provides a powerful caching system with automatic updates, cha
 
 The Cache library provides functionality for FiveM resources with powerful caching capabilities.
 
-## Shared Functions
+## Create (Shared)
 
-### Create
-
-**Description:** Creates a new cache entry with a comparison function and optional update interval. The cache will automatically update based on the wait time and call registered callbacks when values change.
-
-**Syntax:** `Cache.Create(name, compare, waitTime)`
-
-**Parameters:**
-- `name` (string) - Unique name for the cache entry
-- `compare` (function) - Function that returns the current value to cache
-- `waitTime` (number | nil) - Update interval in milliseconds (nil for manual updates only)
-
-**Returns:**
-- `CacheEntry | nil` - The created cache entry or nil if creation failed
-
-**Example:**
-```lua
--- Cache player health with 1 second updates
-local healthCache = Cache.Create(
-    "player_health",
-    function()
-        return GetEntityHealth(PlayerPedId())
-    end,
-    1000
-)
-
-print("Health cache created with initial value: " .. tostring(healthCache.Value))
-```
-
-### Get
-
-**Description:** Retrieves the current cached value for the specified cache name.
-
-**Syntax:** `Cache.Get(name)`
-
-**Parameters:**
-- `name` (string) - Name of the cache entry to retrieve
-
-**Returns:**
-- `any` - The cached value or nil if cache doesn't exist
-
-**Example:**
-```lua
--- Get the cached player health
-local currentHealth = Cache.Get("player_health")
-if currentHealth then
-    print("Player health: " .. currentHealth)
-else
-    print("Health cache not found")
-end
-```
-
-### OnChange
-
-**Description:** Registers a callback function to be called whenever the cached value changes. The callback receives both new and old values.
-
-**Syntax:** `Cache.OnChange(name, onChange)`
-
-**Parameters:**
-- `name` (string) - Name of the cache entry to monitor
-- `onChange` (function) - Callback function with signature (newValue, oldValue)
-
-**Returns:**
-- `string` - Callback ID for removal purposes
-
-**Example:**
-```lua
--- Monitor health changes
-local callbackId = Cache.OnChange("player_health", function(newHealth, oldHealth)
-    local diff = newHealth - oldHealth
-    if diff > 0 then
-        print("Health increased by " .. diff)
-    elseif diff < 0 then
-        print("Health decreased by " .. math.abs(diff))
-    end
-end)
-
-print("Health monitor registered with ID: " .. callbackId)
-```
-
-### RemoveOnChange
-
-**Description:** Removes a previously registered onChange callback using its ID.
-
-**Syntax:** `Cache.RemoveOnChange(name, id)`
-
-**Parameters:**
-- `name` (string) - Name of the cache entry
-- `id` (string) - Callback ID returned from OnChange
-
-**Returns:** None
-
-**Example:**
-```lua
--- Remove the health monitor callback
-Cache.RemoveOnChange("player_health", callbackId)
-print("Health monitor callback removed")
-```
-
-### Remove
-
-**Description:** Completely removes a cache entry and all its associated callbacks. This will stop all automatic updates for the cache.
-
-**Syntax:** `Cache.Remove(name)`
-
-**Parameters:**
-- `name` (string) - Name of the cache entry to remove
-
-**Returns:** None
-
-**Example:**
-```lua
--- Remove the health cache completely
-Cache.Remove("player_health")
-print("Health cache removed")
-```
-
-### Update
-
-**Description:** Manually updates a cache entry with a new value and triggers onChange callbacks if the value has changed.
-
-**Syntax:** `Cache.Update(name, newValue)`
-
-**Parameters:**
-- `name` (string) - Name of the cache entry to update
-- `newValue` (any) - The new value to set
-
-**Returns:** None
-
-**Example:**
-```lua
--- Manually update the health cache
-Cache.Update("player_health", 150)
-print("Health cache manually updated to 150")
-```
-
-## Shared Functions
-
-### Create
-
-<!--TOC: Create-->
-
-**Context:** 🔄 Shared
-
+### Description
 Creates a new cache entry with a comparison function and optional update interval. The cache will automatically update based on the wait time and call registered callbacks when values change.
 
-**Syntax:** `Cache.Create(name, compare, waitTime)`
+### Syntax
+```lua
+Cache.Create(name, compare, waitTime)
+```
 
-**Parameters:**
-- `name` (string) - Unique name for the cache entry
-- `compare` (function) - Function that returns the current value to cache
-- `waitTime` (number | nil) - Update interval in milliseconds (nil for manual updates only)
+### Parameters
+- **name** (string): Unique name for the cache entry
+- **compare** (function): Function that returns the current value to cache
+- **waitTime** (number): Update interval in milliseconds (optional, nil for manual updates only)
 
-**Returns:**
-- (CacheEntry | nil) - The created cache entry or nil if creation failed
+### Returns
+- (CacheEntry): The created cache entry or nil if creation failed
 
-**Example:**
+### Example
 ```lua
 -- Cache player health with 1 second updates
 local healthCache = Cache.Create(
@@ -183,51 +44,48 @@ local healthCache = Cache.Create(
 print("Health cache created with initial value: " .. tostring(healthCache.Value))
 ```
 
-### Get
+## Get (Shared)
 
-<!--TOC: Get-->
+### Description
+Retrieves an existing cache entry by name.
 
-**Context:** 🔄 Shared
-
-Retrieves the current cached value for the specified cache name.
-
-**Syntax:** `Cache.Get(name)`
-
-**Parameters:**
-- `name` (string) - Name of the cache entry to retrieve
-
-**Returns:**
-- (any) - The cached value or nil if cache doesn't exist
-
-**Example:**
+### Syntax
 ```lua
--- Get the cached player health
-local currentHealth = Cache.Get("player_health")
-if currentHealth then
-    print("Player health: " .. currentHealth)
-else
-    print("Health cache not found")
+Cache.Get(name)
+```
+
+### Parameters
+- **name** (string): Name of the cache entry to retrieve
+
+### Returns
+- (CacheEntry): The cache entry or nil if not found
+
+### Example
+```lua
+local healthCache = Cache.Get("player_health")
+if healthCache then
+    print("Current health: " .. tostring(healthCache.Value))
 end
 ```
 
-### OnChange
+## OnChange (Shared)
 
-<!--TOC: OnChange-->
-
-**Context:** 🔄 Shared
-
+### Description
 Registers a callback function to be called whenever the cached value changes. The callback receives both new and old values.
 
-**Syntax:** `Cache.OnChange(name, onChange)`
+### Syntax
+```lua
+Cache.OnChange(name, onChange)
+```
 
-**Parameters:**
-- `name` (string) - Name of the cache entry to monitor
-- `onChange` (function) - Callback function with signature (newValue, oldValue)
+### Parameters
+- **name** (string): Name of the cache entry to monitor
+- **onChange** (function): Callback function with signature (newValue, oldValue)
 
-**Returns:**
-- (string) - Callback ID for removal purposes
+### Returns
+- (string): Callback ID for removal purposes
 
-**Example:**
+### Example
 ```lua
 -- Monitor health changes
 local callbackId = Cache.OnChange("player_health", function(newHealth, oldHealth)
@@ -242,71 +100,64 @@ end)
 print("Health monitor registered with ID: " .. callbackId)
 ```
 
-### RemoveOnChange
+## RemoveOnChange (Shared)
 
-<!--TOC: RemoveOnChange-->
-
-**Context:** 🔄 Shared
-
+### Description
 Removes a previously registered onChange callback using its ID.
 
-**Syntax:** `Cache.RemoveOnChange(name, id)`
+### Syntax
+```lua
+Cache.RemoveOnChange(name, id)
+```
 
-**Parameters:**
-- `name` (string) - Name of the cache entry
-- `id` (string) - Callback ID returned from OnChange
+### Parameters
+- **name** (string): Name of the cache entry
+- **id** (string): Callback ID returned from OnChange
 
-**Returns:** None
-
-**Example:**
+### Example
 ```lua
 -- Remove the health monitor callback
 Cache.RemoveOnChange("player_health", callbackId)
 print("Health monitor callback removed")
 ```
 
-### Remove
+## Remove (Shared)
 
-<!--TOC: Remove-->
-
-**Context:** 🔄 Shared
-
+### Description
 Completely removes a cache entry and all its associated callbacks. This will stop all automatic updates for the cache.
 
-**Syntax:** `Cache.Remove(name)`
+### Syntax
+```lua
+Cache.Remove(name)
+```
 
-**Parameters:**
-- `name` (string) - Name of the cache entry to remove
+### Parameters
+- **name** (string): Name of the cache entry to remove
 
-**Returns:** None
-
-**Example:**
+### Example
 ```lua
 -- Remove the health cache completely
 Cache.Remove("player_health")
 print("Health cache removed")
 ```
 
-### Update
+## Update (Shared)
 
-<!--TOC: Update-->
-
-**Context:** 🔄 Shared
-
+### Description
 Manually updates a cache entry with a new value and triggers onChange callbacks if the value has changed.
 
-**Syntax:** `Cache.Update(name, newValue)`
+### Syntax
+```lua
+Cache.Update(name, newValue)
+```
 
-**Parameters:**
-- `name` (string) - Name of the cache entry to update
-- `newValue` (any) - The new value to set
+### Parameters
+- **name** (string): Name of the cache entry to update
+- **newValue** (any): The new value to set
 
-**Returns:** None
-
-**Example:**
+### Example
 ```lua
 -- Manually update the health cache
 Cache.Update("player_health", 150)
 print("Health cache manually updated to 150")
 ```
-

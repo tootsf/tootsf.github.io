@@ -12,26 +12,24 @@ The Generators library provides tools for creating and managing randomized conte
 
 The Generators provides functionality for FiveM resources.
 
-## Server Functions
+## LootTable.Register (Server)
 
-### LootTable.Register
-
-<!--TOC: LootTable.Register-->
-
-**Context:** 🖲️ Server
-
+### Description
 Registers a new loot table with items, chances, and tier configuration for randomized loot generation.
 
-**Syntax:** `Bridge.LootTable.Register(name, items)`
+### Syntax
+```lua
+Bridge.LootTable.Register(name, items)
+```
 
-**Parameters:**
-- `name` (string) - Unique identifier for the loot table
-- `items` (table) - Table of items with min/max counts, chance percentages, tiers, and metadata
+### Parameters
+- **name** (string): Unique identifier for the loot table
+- **items** (table): Table of items with min/max counts, chance percentages, tiers, and metadata
 
-**Returns:**
-- (table) - The registered loot table in normalized format
+### Returns
+- (table): The registered loot table in normalized format
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 
@@ -66,53 +64,53 @@ Bridge.LootTable.Register('treasure_chest', {
 print('Treasure chest loot table registered')
 ```
 
-### LootTable.Get
+## LootTable.Get (Server)
 
-<!--TOC: LootTable.Get-->
-
-**Context:** 🖲️ Server
-
+### Description
 Retrieves a registered loot table by name.
 
-**Syntax:** `Bridge.LootTable.Get(name)`
+### Syntax
+```lua
+Bridge.LootTable.Get(name)
+```
 
-**Parameters:**
-- `name` (string) - Name of the loot table to retrieve
+### Parameters
+- **name** (string): Name of the loot table to retrieve
 
-**Returns:**
-- (table) - The loot table array or empty table if not found
+### Returns
+- (table): The loot table array or empty table if not found
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 
 local chestLoot = Bridge.LootTable.Get('treasure_chest')
-if #chestLoot > 0 then
+if #chestLoot &gt; 0 then
     print('Found ' .. #chestLoot .. ' items in treasure chest loot table')
 else
     print('Treasure chest loot table not found')
 end
 ```
 
-### LootTable.GetRandomItem
+## LootTable.GetRandomItem (Server)
 
-<!--TOC: LootTable.GetRandomItem-->
-
-**Context:** 🖲️ Server
-
+### Description
 Gets a single random item from a loot table based on chance rolls and tier filtering.
 
-**Syntax:** `Bridge.LootTable.GetRandomItem(name, tier, randomNumber)`
+### Syntax
+```lua
+Bridge.LootTable.GetRandomItem(name, tier, randomNumber)
+```
 
-**Parameters:**
-- `name` (string) - Name of the loot table
-- `tier` (number | nil) - Tier filter for items (default: 1)
-- `randomNumber` (number | nil) - Custom random number 1-100 (auto-generated if nil)
+### Parameters
+- **name** (string): Name of the loot table
+- **tier** (number | nil): Tier filter for items (default: 1)
+- **randomNumber** (number | nil): Custom random number 1-100 (auto-generated if nil)
 
-**Returns:**
-- (table | nil) - Random item with count, metadata, tier, and chance or nil if no match
+### Returns
+- (table | nil): Random item with count, metadata, tier, and chance or nil if no match
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 
@@ -121,7 +119,7 @@ local item = Bridge.LootTable.GetRandomItem('treasure_chest', 1)
 if item then
     print('Found: ' .. item.item .. ' x' .. item.count)
     print('Tier: ' .. item.tier .. ', Chance: ' .. item.chance .. '%')
-    
+
     -- Add to player inventory
     Bridge.Inventory.AddItem(source, item.item, item.count, nil, item.metadata)
 else
@@ -135,25 +133,25 @@ if rareItem then
 end
 ```
 
-### LootTable.GetRandomItems
+## LootTable.GetRandomItems (Server)
 
-<!--TOC: LootTable.GetRandomItems-->
-
-**Context:** 🖲️ Server
-
+### Description
 Gets all items from a loot table that match the chance roll and tier criteria.
 
-**Syntax:** `Bridge.LootTable.GetRandomItems(name, tier, randomNumber)`
+### Syntax
+```lua
+Bridge.LootTable.GetRandomItems(name, tier, randomNumber)
+```
 
-**Parameters:**
-- `name` (string) - Name of the loot table
-- `tier` (number | nil) - Tier filter for items (default: 1)
-- `randomNumber` (number | nil) - Custom random number 1-100 (auto-generated if nil)
+### Parameters
+- **name** (string): Name of the loot table
+- **tier** (number | nil): Tier filter for items (default: 1)
+- **randomNumber** (number | nil): Custom random number 1-100 (auto-generated if nil)
 
-**Returns:**
-- (table) - Array of all matching items with counts, metadata, tiers, and chances
+### Returns
+- (table): Array of all matching items with counts, metadata, tiers, and chances
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 
@@ -166,32 +164,32 @@ for _, item in pairs(items) do
     Bridge.Inventory.AddItem(source, item.item, item.count, nil, item.metadata)
 end
 
-if #items > 0 then
+if #items &gt; 0 then
     Bridge.Framework.Notify('You found ' .. #items .. ' items!', 'success')
 else
     Bridge.Framework.Notify('The chest was empty...', 'error')
 end
 ```
 
-### LootTable.GetRandomItemsWithLimit
+## LootTable.GetRandomItemsWithLimit (Server)
 
-<!--TOC: LootTable.GetRandomItemsWithLimit-->
-
-**Context:** 🖲️ Server
-
+### Description
 Gets random items with one-time selection (items are removed from table after being selected).
 
-**Syntax:** `Bridge.LootTable.GetRandomItemsWithLimit(name, tier, randomNumber)`
+### Syntax
+```lua
+Bridge.LootTable.GetRandomItemsWithLimit(name, tier, randomNumber)
+```
 
-**Parameters:**
-- `name` (string) - Name of the loot table
-- `tier` (number | nil) - Tier filter for items (default: 1)
-- `randomNumber` (number | nil) - Custom random number 1-100 (auto-generated if nil)
+### Parameters
+- **name** (string): Name of the loot table
+- **tier** (number | nil): Tier filter for items (default: 1)
+- **randomNumber** (number | nil): Custom random number 1-100 (auto-generated if nil)
 
-**Returns:**
-- (table) - Array of selected items (items removed from source table)
+### Returns
+- (table): Array of selected items (items removed from source table)
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 
@@ -208,25 +206,23 @@ end
 print('Loot table depleted by ' .. #items .. ' items')
 ```
 
-### ItemsBuilder.Generate
+## ItemsBuilder.Generate (Server)
 
-<!--TOC: ItemsBuilder.Generate-->
-
-**Context:** 🖲️ Server
-
+### Description
 Generates item configuration files for different inventory systems (QB-Core old/new, OX Inventory) from a universal item table.
 
-**Syntax:** `Bridge.ItemsBuilder.Generate(invoking, outputPrefix, itemsTable, useQB)`
+### Syntax
+```lua
+Bridge.ItemsBuilder.Generate(invoking, outputPrefix, itemsTable, useQB)
+```
 
-**Parameters:**
-- `invoking` (string | nil) - Resource name generating the files (auto-detected if nil)
-- `outputPrefix` (string | nil) - Output directory name (default: 'generated_items')
-- `itemsTable` (table) - Universal item definitions with label, weight, description, etc.
-- `useQB` (boolean | nil) - Whether input is in QB format (true) or OX format (false)
+### Parameters
+- **invoking** (string | nil): Resource name generating the files (auto-detected if nil)
+- **outputPrefix** (string | nil): Output directory name (default: 'generated_items')
+- **itemsTable** (table): Universal item definitions with label, weight, description, etc.
+- **useQB** (boolean | nil): Whether input is in QB format (true) or OX format (false)
 
-**Returns:** None
-
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 
@@ -263,8 +259,8 @@ Bridge.ItemsBuilder.Generate(
 )
 
 print('Generated item files:')
-print('- my_resource(qb_core_old).lua')
-print('- my_resource(qb_core_new).lua')
-print('- my_resource(ox_inventory).lua')
+print('- my_resource_qb_core_old.lua')
+print('- my_resource_qb_core_new.lua')
+print('- my_resource_ox_inventory.lua')
 ```
 

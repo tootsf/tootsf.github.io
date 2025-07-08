@@ -12,25 +12,23 @@ The Raycast library provides advanced ray casting functionality for collision de
 
 The Raycast provides functionality for FiveM resources.
 
-## Client Functions
+## GetForwardVector (Client)
 
-### GetForwardVector
-
-<!--TOC: GetForwardVector-->
-
-**Context:** 🖥️ Client
-
+### Description
 Calculates the forward vector from a given rotation or camera rotation, useful for determining direction-based calculations.
 
-**Syntax:** `Bridge.Raycast.GetForwardVector(rotation)`
+### Syntax
+```lua
+Bridge.Raycast.GetForwardVector(rotation)
+```
 
-**Parameters:**
-- `rotation` (vector3 | nil) - Rotation vector to calculate forward direction from (uses camera rotation if nil)
+### Parameters
+- **rotation** (vector3 | nil): Rotation vector to calculate forward direction from (uses camera rotation if nil)
 
-**Returns:**
-- (vector3) - Normalized forward vector
+### Returns
+- (vector3): Normalized forward vector
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 
@@ -44,30 +42,30 @@ local customForward = Bridge.Raycast.GetForwardVector(customRotation)
 print("Custom forward: " .. tostring(customForward))
 ```
 
-### ToCoords
+## ToCoords (Client)
 
-<!--TOC: ToCoords-->
-
-**Context:** 🖥️ Client
-
+### Description
 Performs a raycast between two coordinate points with comprehensive collision detection, returning detailed hit information including entity, material, and surface normals.
 
-**Syntax:** `Bridge.Raycast.ToCoords(startCoords, endCoords, flag, ignore)`
+### Syntax
+```lua
+Bridge.Raycast.ToCoords(startCoords, endCoords, flag, ignore)
+```
 
-**Parameters:**
-- `startCoords` (vector3) - Starting coordinates for the raycast
-- `endCoords` (vector3) - Ending coordinates for the raycast
-- `flag` (number | nil) - Collision flags to determine what to hit (default: 511 for all)
-- `ignore` (number | nil) - Entity handle to ignore during raycast (default: 4)
+### Parameters
+- **startCoords** (vector3): Starting coordinates for the raycast
+- **endCoords** (vector3): Ending coordinates for the raycast
+- **flag** (number | nil): Collision flags to determine what to hit (default: 511 for all)
+- **ignore** (number | nil): Entity handle to ignore during raycast (default: 4)
 
-**Returns:**
-- (number) - Result code (2 = hit, 1 = miss)
-- (number) - Entity handle that was hit
-- (vector3) - Final coordinates where ray hit
-- (vector3) - Surface normal vector at hit point
-- (number) - Material hash of the surface hit
+### Returns
+- (number): Result code (2 = hit, 1 = miss)
+- (number): Entity handle that was hit
+- (vector3): Final coordinates where ray hit
+- (vector3): Surface normal vector at hit point
+- (number): Material hash of the surface hit
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 
@@ -92,29 +90,29 @@ else
 end
 ```
 
-### FromCamera
+## FromCamera (Client)
 
-<!--TOC: FromCamera-->
-
-**Context:** 🖥️ Client
-
+### Description
 Performs a raycast from the camera position in the direction the camera is facing, with automatic fallback for missed hits. Perfect for player interaction systems.
 
-**Syntax:** `Bridge.Raycast.FromCamera(flags, ignore, distance)`
+### Syntax
+```lua
+Bridge.Raycast.FromCamera(flags, ignore, distance)
+```
 
-**Parameters:**
-- `flags` (number | nil) - Collision flags to determine what to hit
-- `ignore` (number | nil) - Entity handle to ignore during raycast
-- `distance` (number | nil) - Maximum raycast distance (default: 10)
+### Parameters
+- **flags** (number | nil): Collision flags to determine what to hit
+- **ignore** (number | nil): Entity handle to ignore during raycast
+- **distance** (number | nil): Maximum raycast distance (default: 10)
 
-**Returns:**
-- (number) - Result code (2 = hit, 1 = miss)
-- (number) - Entity handle that was hit
-- (vector3) - Final coordinates where ray hit
-- (vector3) - Surface normal vector at hit point
-- (number) - Material hash of the surface hit
+### Returns
+- (number): Result code (2 = hit, 1 = miss)
+- (number): Entity handle that was hit
+- (vector3): Final coordinates where ray hit
+- (vector3): Surface normal vector at hit point
+- (number): Material hash of the surface hit
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 

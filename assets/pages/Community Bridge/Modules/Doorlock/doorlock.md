@@ -12,48 +12,42 @@ The Doorlock module provides functions for managing door locking states across d
 
 The Doorlock provides functionality for FiveM resources.
 
-## Client Functions
+## GetClosestDoor (Client)
 
-### GetClosestDoor
-
-<!--TOC: GetClosestDoor-->
-
-**Context:** 🖥️ Client
-
+### Description
 This will get the closest door to the ped
 
-**Syntax:** `Bridge.Doorlock.GetClosestDoor()`
+### Syntax
+```lua
+Bridge.Doorlock.GetClosestDoor()
+```
 
-**Parameters:** None
+### Returns
+- (string): | nil
 
-**Returns:**
-- (string) - | nil
-
-**Example:**
+### Example
 ```lua
 local Bridge = exports["community_bridge"]:Bridge()\n\nBridge.Doorlock.GetClosestDoor()
 ```
 
-## Server Functions
+## ToggleDoorLock (Server)
 
-### ToggleDoorLock
-
-<!--TOC: ToggleDoorLock-->
-
-**Context:** 🖲️ Server
-
+### Description
 Toggles the lock state of a specific door by its ID.
 
-**Syntax:** `Bridge.Doorlock.ToggleDoorLock(doorID, toggle)`
+### Syntax
+```lua
+Bridge.Doorlock.ToggleDoorLock(doorID, toggle)
+```
 
-**Parameters:**
-- `doorID` (string) - Unique identifier of the door to toggle
-- `toggle` (boolean) - True to lock the door, false to unlock
+### Parameters
+- **doorID** (string): Unique identifier of the door to toggle
+- **toggle** (boolean): True to lock the door, false to unlock
 
-**Returns:**
-- (boolean) - True if the door state was changed successfully
+### Returns
+- (boolean): True if the door state was changed successfully
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 

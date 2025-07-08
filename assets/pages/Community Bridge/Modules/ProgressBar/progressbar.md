@@ -12,27 +12,25 @@ The ProgressBar module provides a unified interface for displaying progress bars
 
 The ProgressBar provides functionality for FiveM resources.
 
-## Client Functions
+## Open (Client)
 
-### Open
-
-<!--TOC: Open-->
-
-**Context:** 🖥️ Client
-
+### Description
 Opens a progress bar with specified options. Supports both bar and circle styles.
 
-**Syntax:** `Bridge.ProgressBar.Open(options, callback, isQBFormat)`
+### Syntax
+```lua
+Bridge.ProgressBar.Open(options, callback, isQBFormat)
+```
 
-**Parameters:**
-- `options` (table) - Progress bar configuration options
-- `callback` (function) - Function to call when progress bar completes or is cancelled
-- `isQBFormat` (boolean) - Whether the options are in QB-Core format (will be auto-converted)
+### Parameters
+- **options** (table): Progress bar configuration options
+- **callback** (function): Function to call when progress bar completes or is cancelled (optional)
+- **isQBFormat** (boolean): Whether the options are in QB-Core format (will be auto-converted) (optional)
 
-**Returns:**
-- (boolean) - Returns true if progress bar completed successfully, false if cancelled
+### Returns
+- (boolean): Returns true if progress bar completed successfully, false if cancelled
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 

@@ -12,24 +12,20 @@ The Skills module provides functions for managing player skills and experience p
 
 The Skills provides functionality for FiveM resources.
 
-## Client Functions
+## GetResourceName (Client)
 
-### GetResourceName
-
-<!--TOC: GetResourceName-->
-
-**Context:** 🖥️ Client
-
+### Description
 Gets the name of the currently active skills system.
 
-**Syntax:** `Bridge.Skills.GetResourceName()`
+### Syntax
+```lua
+Bridge.Skills.GetResourceName()
+```
 
-**Parameters:** None
+### Returns
+- (string): Name of the skills system being used
 
-**Returns:**
-- (string) - Name of the skills system being used
-
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 
@@ -37,23 +33,23 @@ local skillsSystem = Bridge.Skills.GetResourceName()
 print("Using skills system: " .. skillsSystem)
 ```
 
-### GetSkillLevel
+## GetSkillLevel (Client)
 
-<!--TOC: GetSkillLevel-->
-
-**Context:** 🖥️ Client
-
+### Description
 Gets the current level of a specific skill for the player.
 
-**Syntax:** `Bridge.Skills.GetSkillLevel(skillName)`
+### Syntax
+```lua
+Bridge.Skills.GetSkillLevel(skillName)
+```
 
-**Parameters:**
-- `skillName` (string) - Name of the skill to check
+### Parameters
+- **skillName** (string): Name of the skill to check
 
-**Returns:**
-- (number) - Current level of the skill (0 if not supported)
+### Returns
+- (number): Current level of the skill (0 if not supported)
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 
@@ -64,27 +60,25 @@ print("Driving level: " .. drivingLevel)
 print("Shooting level: " .. shootingLevel)
 ```
 
-## Server Functions
+## AddXp (Server)
 
-### AddXp
-
-<!--TOC: AddXp-->
-
-**Context:** 🖲️ Server
-
+### Description
 Adds experience points to a specific skill for a player.
 
-**Syntax:** `Bridge.Skills.AddXp(src, skillName, amount)`
+### Syntax
+```lua
+Bridge.Skills.AddXp(src, skillName, amount)
+```
 
-**Parameters:**
-- `src` (number) - Player server ID
-- `skillName` (string) - Name of the skill to add XP to
-- `amount` (number) - Amount of XP to add
+### Parameters
+- **src** (number): Player server ID
+- **skillName** (string): Name of the skill to add XP to
+- **amount** (number): Amount of XP to add
 
-**Returns:**
-- (boolean) - True if XP was added successfully, false if not supported
+### Returns
+- (boolean): True if XP was added successfully, false if not supported
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 
@@ -95,22 +89,20 @@ if success then
 end
 ```
 
-### GetResourceName
+## GetResourceName (Server)
 
-<!--TOC: GetResourceName-->
-
-**Context:** 🖲️ Server
-
+### Description
 Gets the name of the currently active skills system.
 
-**Syntax:** `Bridge.Skills.GetResourceName()`
+### Syntax
+```lua
+Bridge.Skills.GetResourceName()
+```
 
-**Parameters:** None
+### Returns
+- (string): Name of the skills system being used
 
-**Returns:**
-- (string) - Name of the skills system being used
-
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 
@@ -118,24 +110,24 @@ local skillsSystem = Bridge.Skills.GetResourceName()
 print("Using skills system: " .. skillsSystem)
 ```
 
-### GetSkillLevel
+## GetSkillLevel (Server)
 
-<!--TOC: GetSkillLevel-->
-
-**Context:** 🖲️ Server
-
+### Description
 Gets the current level of a specific skill for a player.
 
-**Syntax:** `Bridge.Skills.GetSkillLevel(src, skillName)`
+### Syntax
+```lua
+Bridge.Skills.GetSkillLevel(src, skillName)
+```
 
-**Parameters:**
-- `src` (number) - Player server ID
-- `skillName` (string) - Name of the skill to check
+### Parameters
+- **src** (number): Player server ID
+- **skillName** (string): Name of the skill to check
 
-**Returns:**
-- (number) - Current level of the skill (0 if not supported)
+### Returns
+- (number): Current level of the skill (0 if not supported)
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 
@@ -143,25 +135,25 @@ local playerDrivingLevel = Bridge.Skills.GetSkillLevel(source, "driving")
 print("Player driving level: " .. playerDrivingLevel)
 ```
 
-### RemoveXp
+## RemoveXp (Server)
 
-<!--TOC: RemoveXp-->
-
-**Context:** 🖲️ Server
-
+### Description
 Removes experience points from a specific skill for a player.
 
-**Syntax:** `Bridge.Skills.RemoveXp(src, skillName, amount)`
+### Syntax
+```lua
+Bridge.Skills.RemoveXp(src, skillName, amount)
+```
 
-**Parameters:**
-- `src` (number) - Player server ID
-- `skillName` (string) - Name of the skill to remove XP from
-- `amount` (number) - Amount of XP to remove
+### Parameters
+- **src** (number): Player server ID
+- **skillName** (string): Name of the skill to remove XP from
+- **amount** (number): Amount of XP to remove
 
-**Returns:**
-- (boolean) - True if XP was removed successfully, false if not supported
+### Returns
+- (boolean): True if XP was removed successfully, false if not supported
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 

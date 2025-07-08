@@ -12,31 +12,29 @@ The Point system provides an efficient grid-based spatial management system for 
 
 The Point provides functionality for FiveM resources.
 
-## Client Functions
+## Register (Client)
 
-### Register
-
-<!--TOC: Register-->
-
-**Context:** 🖥️ Client
-
+### Description
 Creates a new point that tracks player proximity with enter/exit callbacks. Supports both static coordinates and dynamic entities.
 
-**Syntax:** `Bridge.Point.Register(id, target, distance, args, onEnter, onExit, onNearby)`
+### Syntax
+```lua
+Bridge.Point.Register(id, target, distance, args, onEnter, onExit, onNearby)
+```
 
-**Parameters:**
-- `id` (string) - Unique identifier for the point
-- `target` (number | vector3) - Entity handle for dynamic tracking or vector3 for static position
-- `distance` (number) - Trigger distance for enter/exit events
-- `args` (any) - Custom data to pass to callback functions
-- `onEnter` (function) - Callback when player enters the point (point, data) -> updatedData
-- `onExit` (function) - Callback when player exits the point (point, data) -> updatedData
-- `onNearby` (function | nil) - Optional callback for nearby points processing
+### Parameters
+- **id** (string): Unique identifier for the point
+- **target** (number | vector3): Entity handle for dynamic tracking or vector3 for static position
+- **distance** (number): Trigger distance for enter/exit events
+- **args** (any): Custom data to pass to callback functions
+- **onEnter** (function): Callback when player enters the point (point, data) -> updatedData
+- **onExit** (function): Callback when player exits the point (point, data) -> updatedData
+- **onNearby** (function | nil): Optional callback for nearby points processing
 
-**Returns:**
-- (table) - Point object reference
+### Returns
+- (table): Point object reference
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 
@@ -76,22 +74,20 @@ local vehiclePoint = Bridge.Point.Register(
 )
 ```
 
-### Remove
+## Remove (Client)
 
-<!--TOC: Remove-->
-
-**Context:** 🖥️ Client
-
+### Description
 Removes a point by its ID and cleans up associated resources.
 
-**Syntax:** `Bridge.Point.Remove(id)`
+### Syntax
+```lua
+Bridge.Point.Remove(id)
+```
 
-**Parameters:**
-- `id` (string) - ID of the point to remove
+### Parameters
+- **id** (string): ID of the point to remove
 
-**Returns:** None
-
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 
@@ -100,23 +96,23 @@ Bridge.Point.Remove('shop_entrance')
 print('Shop entrance point removed')
 ```
 
-### Get
+## Get (Client)
 
-<!--TOC: Get-->
-
-**Context:** 🖥️ Client
-
+### Description
 Retrieves a point object by its ID.
 
-**Syntax:** `Bridge.Point.Get(id)`
+### Syntax
+```lua
+Bridge.Point.Get(id)
+```
 
-**Parameters:**
-- `id` (string) - ID of the point to retrieve
+### Parameters
+- **id** (string): ID of the point to retrieve
 
-**Returns:**
-- (table | nil) - Point object or nil if not found
+### Returns
+- (table | nil): Point object or nil if not found
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 
@@ -129,23 +125,21 @@ else
 end
 ```
 
-### UpdateCoords
+## UpdateCoords (Client)
 
-<!--TOC: UpdateCoords-->
-
-**Context:** 🖥️ Client
-
+### Description
 Updates the coordinates of an existing point and refreshes its grid position.
 
-**Syntax:** `Bridge.Point.UpdateCoords(id, coords)`
+### Syntax
+```lua
+Bridge.Point.UpdateCoords(id, coords)
+```
 
-**Parameters:**
-- `id` (string) - ID of the point to update
-- `coords` (vector3) - New coordinates for the point
+### Parameters
+- **id** (string): ID of the point to update
+- **coords** (vector3): New coordinates for the point
 
-**Returns:** None
-
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 
@@ -155,22 +149,20 @@ Bridge.Point.UpdateCoords('shop_entrance', newLocation)
 print('Point moved to new location')
 ```
 
-### GetAll
+## GetAll (Client)
 
-<!--TOC: GetAll-->
-
-**Context:** 🖥️ Client
-
+### Description
 Returns all active points in the system.
 
-**Syntax:** `Bridge.Point.GetAll()`
+### Syntax
+```lua
+Bridge.Point.GetAll()
+```
 
-**Parameters:** None
+### Returns
+- (table): Table of all active points indexed by ID
 
-**Returns:**
-- (table) - Table of all active points indexed by ID
-
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 
@@ -182,23 +174,23 @@ for id, point in pairs(allPoints) do
 end
 ```
 
-### GetNearbyCells
+## GetNearbyCells (Client)
 
-<!--TOC: GetNearbyCells-->
-
-**Context:** 🖥️ Client
-
+### Description
 Returns grid cell keys that are near the specified coordinates. Used internally for spatial optimization.
 
-**Syntax:** `Bridge.Point.GetNearbyCells(coords)`
+### Syntax
+```lua
+Bridge.Point.GetNearbyCells(coords)
+```
 
-**Parameters:**
-- `coords` (vector3) - Coordinates to find nearby cells for
+### Parameters
+- **coords** (vector3): Coordinates to find nearby cells for
 
-**Returns:**
-- (table) - Array of nearby grid cell keys
+### Returns
+- (table): Array of nearby grid cell keys
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 
@@ -208,23 +200,23 @@ local nearbyCells = Bridge.Point.GetNearbyCells(playerCoords)
 print('Nearby cells: ' .. #nearbyCells)
 ```
 
-### CheckPointsInSameCell
+## CheckPointsInSameCell (Client)
 
-<!--TOC: CheckPointsInSameCell-->
-
-**Context:** 🖥️ Client
-
+### Description
 Returns all points in the same grid cell as the specified point for proximity checking.
 
-**Syntax:** `Bridge.Point.CheckPointsInSameCell(point)`
+### Syntax
+```lua
+Bridge.Point.CheckPointsInSameCell(point)
+```
 
-**Parameters:**
-- `point` (table) - Point object to check against
+### Parameters
+- **point** (table): Point object to check against
 
-**Returns:**
-- (table) - Table of nearby points in the same cell
+### Returns
+- (table): Table of nearby points in the same cell
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 

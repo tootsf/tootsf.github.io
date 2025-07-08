@@ -12,25 +12,23 @@ The Cutscenes library provides comprehensive cutscene management with character 
 
 The Cutscenes provides functionality for FiveM resources.
 
-## Client Functions
+## GetTags (Client)
 
-### GetTags
-
-<!--TOC: GetTags-->
-
-**Context:** 🖥️ Client
-
+### Description
 Retrieves available character tags from a specific cutscene for character assignment.
 
-**Syntax:** `Bridge.Cutscene.GetTags(cutscene)`
+### Syntax
+```lua
+Bridge.Cutscene.GetTags(cutscene)
+```
 
-**Parameters:**
-- `cutscene` (string) - Name of the cutscene to analyze for character tags
+### Parameters
+- **cutscene** (string): Name of the cutscene to analyze for character tags
 
-**Returns:**
-- (table) - Array of character tag objects with male/female variants
+### Returns
+- (table): Array of character tag objects with male/female variants
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 
@@ -45,23 +43,23 @@ for i, tag in pairs(tags) do
 end
 ```
 
-### Load
+## Load (Client)
 
-<!--TOC: Load-->
-
-**Context:** 🖥️ Client
-
+### Description
 Loads a cutscene with appropriate playback list based on player gender, with timeout handling.
 
-**Syntax:** `Bridge.Cutscene.Load(cutscene)`
+### Syntax
+```lua
+Bridge.Cutscene.Load(cutscene)
+```
 
-**Parameters:**
-- `cutscene` (string) - Name of the cutscene to load
+### Parameters
+- **cutscene** (string): Name of the cutscene to load
 
-**Returns:**
-- (boolean) - True if cutscene loaded successfully, false if failed or timed out
+### Returns
+- (boolean): True if cutscene loaded successfully, false if failed or timed out
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 
@@ -76,23 +74,23 @@ else
 end
 ```
 
-### SavePedOutfit
+## SavePedOutfit (Client)
 
-<!--TOC: SavePedOutfit-->
-
-**Context:** 🖥️ Client
-
+### Description
 Saves all clothing and prop components of a ped for later restoration after cutscenes.
 
-**Syntax:** `Bridge.Cutscene.SavePedOutfit(ped)`
+### Syntax
+```lua
+Bridge.Cutscene.SavePedOutfit(ped)
+```
 
-**Parameters:**
-- `ped` (number) - Ped entity handle to save outfit from
+### Parameters
+- **ped** (number): Ped entity handle to save outfit from
 
-**Returns:**
-- (table) - Complete outfit data including all components and props
+### Returns
+- (table): Complete outfit data including all components and props
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 
@@ -112,23 +110,21 @@ local cutsceneData = {
 }
 ```
 
-### ApplyPedOutfit
+## ApplyPedOutfit (Client)
 
-<!--TOC: ApplyPedOutfit-->
-
-**Context:** 🖥️ Client
-
+### Description
 Applies saved outfit data to a ped, restoring all clothing components and props.
 
-**Syntax:** `Bridge.Cutscene.ApplyPedOutfit(ped, outfitData)`
+### Syntax
+```lua
+Bridge.Cutscene.ApplyPedOutfit(ped, outfitData)
+```
 
-**Parameters:**
-- `ped` (number) - Ped entity handle to apply outfit to
-- `outfitData` (table) - Outfit data from SavePedOutfit function
+### Parameters
+- **ped** (number): Ped entity handle to apply outfit to
+- **outfitData** (table): Outfit data from SavePedOutfit function
 
-**Returns:** None
-
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 
@@ -146,25 +142,25 @@ local customOutfit = {
 Bridge.Cutscene.ApplyPedOutfit(playerPed, customOutfit)
 ```
 
-### Create
+## Create (Client)
 
-<!--TOC: Create-->
-
-**Context:** 🖥️ Client
-
+### Description
 Creates a comprehensive cutscene setup with character registration, tag assignment, and outfit preservation for multiple participants.
 
-**Syntax:** `Bridge.Cutscene.Create(cutscene, coords, srcs)`
+### Syntax
+```lua
+Bridge.Cutscene.Create(cutscene, coords, srcs)
+```
 
-**Parameters:**
-- `cutscene` (string) - Name of the cutscene to create
-- `coords` (vector3 | boolean | nil) - Cutscene coordinates (false for player position, nil for cutscene default)
-- `srcs` (table | nil) - Array of participants: server IDs (numbers), entity handles, or model names (strings)
+### Parameters
+- **cutscene** (string): Name of the cutscene to create
+- **coords** (vector3 | boolean | nil): Cutscene coordinates (false for player position, nil for cutscene default)
+- **srcs** (table | nil): Array of participants: server IDs (numbers), entity handles, or model names (strings)
 
-**Returns:**
-- (table | boolean) - Cutscene data object for use with Start() or false if creation failed
+### Returns
+- (table | boolean): Cutscene data object for use with Start() or false if creation failed
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 
@@ -199,22 +195,20 @@ if simpleData then
 end
 ```
 
-### Start
+## Start (Client)
 
-<!--TOC: Start-->
-
-**Context:** 🖥️ Client
-
+### Description
 Starts a prepared cutscene with fade effects, control blocking, and automatic cleanup when finished.
 
-**Syntax:** `Bridge.Cutscene.Start(cutsceneData)`
+### Syntax
+```lua
+Bridge.Cutscene.Start(cutsceneData)
+```
 
-**Parameters:**
-- `cutsceneData` (table) - Cutscene data object from Create() function
+### Parameters
+- **cutsceneData** (table): Cutscene data object from Create() function
 
-**Returns:** None
-
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 

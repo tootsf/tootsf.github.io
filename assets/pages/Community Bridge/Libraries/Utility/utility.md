@@ -12,28 +12,26 @@ The Utility library provides a comprehensive collection of client-side helper fu
 
 The Utility provides functionality for FiveM resources.
 
-## Client Functions
+## CreateProp (Client)
 
-### CreateProp
-
-<!--TOC: CreateProp-->
-
-**Context:** 🖥️ Client
-
+### Description
 Creates a prop (object) at specified coordinates with automatic model loading and cleanup.
 
-**Syntax:** `Bridge.Utility.CreateProp(model, coords, heading, networked)`
+### Syntax
+```lua
+Bridge.Utility.CreateProp(model, coords, heading, networked)
+```
 
-**Parameters:**
-- `model` (string | number) - Model name or hash of the prop to create
-- `coords` (vector3) - World coordinates where to create the prop
-- `heading` (number) - Rotation heading of the prop
-- `networked` (boolean) - Whether the prop should be networked to other players
+### Parameters
+- **model** (string | number): Model name or hash of the prop to create
+- **coords** (vector3): World coordinates where to create the prop
+- **heading** (number): Rotation heading of the prop
+- **networked** (boolean): Whether the prop should be networked to other players
 
-**Returns:**
-- (number | nil) - Entity handle of created prop, or nil if failed
+### Returns
+- (number | nil): Entity handle of created prop, or nil if failed
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 
@@ -53,27 +51,27 @@ else
 end
 ```
 
-### CreateVehicle
+## CreateVehicle (Client)
 
-<!--TOC: CreateVehicle-->
-
-**Context:** 🖥️ Client
-
+### Description
 Creates a vehicle with specified model and coordinates, returning both entity handle and metadata.
 
-**Syntax:** `Bridge.Utility.CreateVehicle(model, coords, heading, networked)`
+### Syntax
+```lua
+Bridge.Utility.CreateVehicle(model, coords, heading, networked)
+```
 
-**Parameters:**
-- `model` (string | number) - Vehicle model name or hash
-- `coords` (vector3) - Spawn coordinates
-- `heading` (number) - Vehicle heading
-- `networked` (boolean) - Whether vehicle should be networked
+### Parameters
+- **model** (string | number): Vehicle model name or hash
+- **coords** (vector3): Spawn coordinates
+- **heading** (number): Vehicle heading
+- **networked** (boolean): Whether vehicle should be networked
 
-**Returns:**
-- (number | nil) - Vehicle entity handle
-- (table) - Vehicle metadata with networkid, coords, and heading
+### Returns
+- (number | nil): Vehicle entity handle
+- (table): Vehicle metadata with networkid, coords, and heading
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 
@@ -93,27 +91,27 @@ if vehicle then
 end
 ```
 
-### CreatePed
+## CreatePed (Client)
 
-<!--TOC: CreatePed-->
-
-**Context:** 🖥️ Client
-
+### Description
 Creates a ped with specified model and coordinates with automatic tracking for cleanup.
 
-**Syntax:** `Bridge.Utility.CreatePed(model, coords, heading, networked, settings)`
+### Syntax
+```lua
+Bridge.Utility.CreatePed(model, coords, heading, networked, settings)
+```
 
-**Parameters:**
-- `model` (string | number) - Ped model name or hash
-- `coords` (vector3) - Spawn coordinates
-- `heading` (number) - Ped heading
-- `networked` (boolean) - Whether ped should be networked
-- `settings` (table | nil) - Optional ped configuration settings
+### Parameters
+- **model** (string | number): Ped model name or hash
+- **coords** (vector3): Spawn coordinates
+- **heading** (number): Ped heading
+- **networked** (boolean): Whether ped should be networked
+- **settings** (table | nil): Optional ped configuration settings
 
-**Returns:**
-- (number | nil) - Ped entity handle or nil if failed
+### Returns
+- (number | nil): Ped entity handle or nil if failed
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 
@@ -133,24 +131,24 @@ if shopKeeper then
 end
 ```
 
-### GetStreetNameAtCoords
+## GetStreetNameAtCoords (Client)
 
-<!--TOC: GetStreetNameAtCoords-->
-
-**Context:** 🖥️ Client
-
+### Description
 Gets the street name and crossing street at specified coordinates.
 
-**Syntax:** `Bridge.Utility.GetStreetNameAtCoords(coords)`
+### Syntax
+```lua
+Bridge.Utility.GetStreetNameAtCoords(coords)
+```
 
-**Parameters:**
-- `coords` (vector3) - Coordinates to get street names for
+### Parameters
+- **coords** (vector3): Coordinates to get street names for
 
-**Returns:**
-- (string) - Primary street name
-- (string) - Crossing street name
+### Returns
+- (string): Primary street name
+- (string): Crossing street name
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 
@@ -165,23 +163,23 @@ end
 print('Current location: ' .. locationText)
 ```
 
-### StartBusySpinner
+## StartBusySpinner (Client)
 
-<!--TOC: StartBusySpinner-->
-
-**Context:** 🖥️ Client
-
+### Description
 Shows a busy spinner with custom text during loading operations.
 
-**Syntax:** `Bridge.Utility.StartBusySpinner(text)`
+### Syntax
+```lua
+Bridge.Utility.StartBusySpinner(text)
+```
 
-**Parameters:**
-- `text` (string) - Text to display with the spinner
+### Parameters
+- **text** (string): Text to display with the spinner
 
-**Returns:**
-- (boolean) - True if spinner was started successfully
+### Returns
+- (boolean): True if spinner was started successfully
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 
@@ -195,22 +193,20 @@ Wait(3000)
 Bridge.Utility.StopBusySpinner()
 ```
 
-### StopBusySpinner
+## StopBusySpinner (Client)
 
-<!--TOC: StopBusySpinner-->
-
-**Context:** 🖥️ Client
-
+### Description
 Stops the currently active busy spinner.
 
-**Syntax:** `Bridge.Utility.StopBusySpinner()`
+### Syntax
+```lua
+Bridge.Utility.StopBusySpinner()
+```
 
-**Parameters:** None
+### Returns
+- (boolean): True if spinner was stopped, false if none was active
 
-**Returns:**
-- (boolean) - True if spinner was stopped, false if none was active
-
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 
@@ -223,29 +219,29 @@ else
 end
 ```
 
-### CreateBlip
+## CreateBlip (Client)
 
-<!--TOC: CreateBlip-->
-
-**Context:** 🖥️ Client
-
+### Description
 Creates a blip on the map at specified coordinates with automatic tracking for cleanup.
 
-**Syntax:** `Bridge.Utility.CreateBlip(coords, sprite, color, scale, label, shortRange, displayType)`
+### Syntax
+```lua
+Bridge.Utility.CreateBlip(coords, sprite, color, scale, label, shortRange, displayType)
+```
 
-**Parameters:**
-- `coords` (vector3) - Coordinates for the blip
-- `sprite` (number | nil) - Blip sprite ID (default: 8)
-- `color` (number | nil) - Blip color ID (default: 3)
-- `scale` (number | nil) - Blip scale (default: 0.8)
-- `label` (string) - Blip label text
-- `shortRange` (boolean) - Whether blip is short range
-- `displayType` (number | nil) - Blip display type (default: 2)
+### Parameters
+- **coords** (vector3): Coordinates for the blip
+- **sprite** (number | nil): Blip sprite ID (default: 8)
+- **color** (number | nil): Blip color ID (default: 3)
+- **scale** (number | nil): Blip scale (default: 0.8)
+- **label** (string): Blip label text
+- **shortRange** (boolean): Whether blip is short range
+- **displayType** (number | nil): Blip display type (default: 2)
 
-**Returns:**
-- (number) - Blip handle
+### Returns
+- (number): Blip handle
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 
@@ -263,29 +259,29 @@ local shopBlip = Bridge.Utility.CreateBlip(
 print('Shop blip created with handle: ' .. shopBlip)
 ```
 
-### CreateEntityBlip
+## CreateEntityBlip (Client)
 
-<!--TOC: CreateEntityBlip-->
-
-**Context:** 🖥️ Client
-
+### Description
 Creates a blip that follows a specific entity with automatic tracking.
 
-**Syntax:** `Bridge.Utility.CreateEntityBlip(entity, sprite, color, scale, label, shortRange, displayType)`
+### Syntax
+```lua
+Bridge.Utility.CreateEntityBlip(entity, sprite, color, scale, label, shortRange, displayType)
+```
 
-**Parameters:**
-- `entity` (number) - Entity handle to attach blip to
-- `sprite` (number | nil) - Blip sprite ID (default: 8)
-- `color` (number | nil) - Blip color ID (default: 3)
-- `scale` (number | nil) - Blip scale (default: 0.8)
-- `label` (string) - Blip label text
-- `shortRange` (boolean) - Whether blip is short range
-- `displayType` (number | nil) - Blip display type (default: 2)
+### Parameters
+- **entity** (number): Entity handle to attach blip to
+- **sprite** (number | nil): Blip sprite ID (default: 8)
+- **color** (number | nil): Blip color ID (default: 3)
+- **scale** (number | nil): Blip scale (default: 0.8)
+- **label** (string): Blip label text
+- **shortRange** (boolean): Whether blip is short range
+- **displayType** (number | nil): Blip display type (default: 2)
 
-**Returns:**
-- (number) - Blip handle
+### Returns
+- (number): Blip handle
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 
@@ -305,23 +301,23 @@ if vehicle ~= 0 then
 end
 ```
 
-### RemoveBlip
+## RemoveBlip (Client)
 
-<!--TOC: RemoveBlip-->
-
-**Context:** 🖥️ Client
-
+### Description
 Safely removes a blip and cleans it from the tracking system.
 
-**Syntax:** `Bridge.Utility.RemoveBlip(blip)`
+### Syntax
+```lua
+Bridge.Utility.RemoveBlip(blip)
+```
 
-**Parameters:**
-- `blip` (number) - Blip handle to remove
+### Parameters
+- **blip** (number): Blip handle to remove
 
-**Returns:**
-- (boolean) - True if blip was found and removed
+### Returns
+- (boolean): True if blip was found and removed
 
-**Example:**
+### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 
