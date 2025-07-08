@@ -165,6 +165,24 @@ body {
   align-items: center;
   justify-content: space-between;
   transition: background-color 0.2s ease;
+  position: relative;
+}
+
+.nav-section-header::after {
+  content: "▼";
+  position: absolute;
+  right: 1rem;
+  font-size: 0.7rem;
+  opacity: 0.6;
+  transition: transform 0.3s ease;
+}
+
+.nav-section.collapsed .nav-section-header::after {
+  transform: rotate(-90deg);
+}
+
+.nav-section-header:hover::after {
+  opacity: 1;
 }
 
 .nav-section-header:hover {

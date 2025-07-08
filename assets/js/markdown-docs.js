@@ -86,10 +86,7 @@ class CommunityBridgeDocumentation {
                 if (section) {
                     section.classList.toggle('collapsed');
                     section.classList.toggle('expanded');
-                    const arrow = header.querySelector('.nav-arrow');
-                    if (arrow) {
-                        arrow.textContent = section.classList.contains('expanded') ? '▼' : '▶';
-                    }
+                    // CSS handles the arrow rotation via ::after pseudo-element
                 }
             });
         });
@@ -104,10 +101,7 @@ class CommunityBridgeDocumentation {
                 if (subsection) {
                     subsection.classList.toggle('collapsed');
                     subsection.classList.toggle('expanded');
-                    const arrow = header.querySelector('.nav-arrow');
-                    if (arrow) {
-                        arrow.textContent = subsection.classList.contains('expanded') ? '▼' : '▶';
-                    }
+                    // CSS handles the arrow rotation via ::after pseudo-element
                 }
             });
         });
@@ -261,9 +255,8 @@ class CommunityBridgeDocumentation {
                     <div class="nav-section-header" data-category="${categoryName}">
                         <span class="nav-icon">${categoryData.icon || '📁'}</span>
                         <span class="nav-title">${categoryName}</span>
-                        <span class="nav-arrow">▼</span>
                     </div>
-                    <div class="nav-section-content">
+                    <div class="nav-items">
                         ${this.renderNavItems(categoryData.items || {})}
                     </div>
                 </div>
@@ -288,9 +281,8 @@ class CommunityBridgeDocumentation {
                         <div class="nav-subsection-header" data-subsection="${itemName}">
                             <span class="nav-icon">${itemData.icon || '📁'}</span>
                             <span class="nav-title">${itemName}</span>
-                            <span class="nav-arrow">▶</span>
                         </div>
-                        <div class="nav-subsection-content">
+                        <div class="nav-items">
                             ${this.renderNavItems(itemData.items)}
                         </div>
                     </div>
