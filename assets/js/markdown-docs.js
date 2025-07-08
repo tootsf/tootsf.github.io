@@ -18,12 +18,17 @@ class CommunityBridgeDocumentation {
         try {
             // Cleanup previous instance if exists
             this.cleanup();
-            
+
             this.setupTheme();
             this.setupBasicEventListeners();
             await this.loadModuleStructure();
             this.setupRouter();
-            this.loadInitialContent();
+            
+            // Only load default content if no hash is present
+            if (!window.location.hash) {
+                this.loadInitialContent();
+            }
+            
             console.log('✅ Initialization complete!');
         } catch (error) {
             console.error('❌ Initialization failed:', error);
@@ -96,11 +101,11 @@ class CommunityBridgeDocumentation {
         this.clickOutsideHandler = (event) => {
             const searchResults = document.querySelector('.search-results');
             const searchContainer = searchInput.closest('.search-container') || searchInput.parentElement;
-            
+
             // Check if click is outside search input and search results
             const isClickInsideSearch = searchContainer && searchContainer.contains(event.target);
             const isClickInsideResults = searchResults && searchResults.contains(event.target);
-            
+
             if (!isClickInsideSearch && !isClickInsideResults) {
                 this.hideSearchResults();
             }
@@ -447,17 +452,40 @@ class CommunityBridgeDocumentation {
 
     setupRouter() {
         window.addEventListener('hashchange', () => this.handleRouteChange());
+        
+        // Handle initial hash on page load
+        if (window.location.hash) {
+            this.handleRouteChange();
+        }
     }
 
     handleRouteChange() {
         const hash = window.location.hash.slice(1);
         if (hash) {
-            this.navigateToPath(hash);
+            // Decode URL encoding (e.g., %20 -> space)
+            const decodedHash = decodeURIComponent(hash);
+            
+            // Check if hash contains an anchor (using @ as separator)
+            if (decodedHash.includes('@')) {
+                const [path, anchor] = decodedHash.split('@');
+                this.navigateToFunction(path, anchor, false); // Don't update URL
+            } else {
+                this.navigateToPath(decodedHash, false); // Don't update URL since we're responding to URL change
+            }
         }
     }
 
-    async navigateToPath(path) {
+    async navigateToPath(path, updateUrl = true) {
         console.log('🎯 Navigating to:', path);
+        
+        // Update URL if needed (avoid infinite loops from hashchange events)
+        if (updateUrl) {
+            const newHash = `#${path}`;
+            if (window.location.hash !== newHash) {
+                window.location.hash = newHash;
+            }
+        }
+        
         const item = this.findNavigationItem(path);
         if (item) {
             await this.loadContent(path, item.type, item);
@@ -563,10 +591,13 @@ class CommunityBridgeDocumentation {
         const contentArea = document.getElementById('content-area');
         if (!contentArea) return;
 
-        // Parse functions from markdown
+        // Initialize marked.js with our configuration
+        this.initializeMarked();
+
+        // Parse functions from markdown first (before cleaning)
         const functions = this.parseFunctionsFromMarkdown(markdownData.content);
 
-        // Convert markdown to HTML (basic conversion)
+        // Convert markdown to HTML using marked.js
         let html = this.convertMarkdownToHTML(markdownData.content);
 
         // Add functions section if functions exist
@@ -576,31 +607,84 @@ class CommunityBridgeDocumentation {
         }
 
         // Set content
-        contentArea.innerHTML = html;
-
-        // Trigger syntax highlighting with highlight.js
+        contentArea.innerHTML = html;        // Apply syntax highlighting with highlight.js
         setTimeout(() => {
-            if (typeof hljs !== 'undefined') {
-                // Find all code blocks and highlight them
-                const codeBlocks = contentArea.querySelectorAll('pre code');
-                codeBlocks.forEach(block => {
-                    hljs.highlightElement(block);
-                });
-            }
+            contentArea.querySelectorAll('pre code').forEach(block => {
+                hljs.highlightElement(block);
+            });
+            
+            // Generate TOC after content is rendered and DOM is updated
+            this.updateTableOfContents(functions);
+            
+            // Setup copy buttons after everything is rendered
+            this.setupCopyLinkButtons();
         }, 50);
 
         // Update current module info
         this.currentModule = markdownData;
         this.currentModuleName = modulePath.split('/').pop();
+    }
 
-        // Generate and render TOC if needed
-        this.updateTableOfContents(functions);
+    initializeMarked() {
+        // Configure marked.js options
+        marked.setOptions({
+            highlight: function(code, lang) {
+                if (lang && hljs.getLanguage(lang)) {
+                    try {
+                        return hljs.highlight(code, { language: lang }).value;
+                    } catch (err) {}
+                }
+                return hljs.highlightAuto(code).value;
+            },
+            langPrefix: 'hljs language-',
+            breaks: false,
+            gfm: true,
+            tables: true,
+            sanitize: false,
+            smartLists: true,
+            smartypants: false
+        });
 
-        // Setup syntax highlighting
-        this.applySyntaxHighlighting();
+        // Custom renderer for better control
+        const renderer = new marked.Renderer();
 
-        // Setup copy buttons
-        this.setupCopyLinkButtons();
+        // Custom heading renderer with anchor support
+        renderer.heading = function(text, level) {
+            // Remove emojis and special chars for ID, but keep original text for display
+            const escapedText = text.toLowerCase()
+                .replace(/[\u{1F600}-\u{1F64F}]|[\u{1F300}-\u{1F5FF}]|[\u{1F680}-\u{1F6FF}]|[\u{1F700}-\u{1F77F}]|[\u{1F780}-\u{1F7FF}]|[\u{1F800}-\u{1F8FF}]|[\u{2600}-\u{26FF}]|[\u{2700}-\u{27BF}]/gu, '')
+                .replace(/[^\w]+/g, '-')
+                .replace(/^-+|-+$/g, ''); // Remove leading/trailing dashes
+
+            let className = '';
+
+            if (level === 4) {
+                className = ' class="section-header"';
+            }
+
+            return `<h${level}${className} id="${escapedText}">${text}</h${level}>`;
+        };
+
+        // Custom table renderer with our styling
+        renderer.table = function(header, body) {
+            return `<div class="table-container">
+                <table class="content-table">
+                    <thead>${header}</thead>
+                    <tbody>${body}</tbody>
+                </table>
+            </div>`;
+        };
+
+        // Custom code block renderer with copy button
+        renderer.code = function(code, lang) {
+            const language = lang || 'text';
+            return `<div class="code-block-container">
+                <button class="copy-button">Copy</button>
+                <pre><code class="hljs language-${language}">${code}</code></pre>
+            </div>`;
+        };
+
+        marked.use({ renderer });
     }
 
     parseFunctionsFromMarkdown(markdown) {
@@ -826,12 +910,25 @@ class CommunityBridgeDocumentation {
     }
 
     convertMarkdownToHTML(markdown) {
+        console.log('🔧 Converting markdown to HTML with marked.js...');
+
         // Remove function sections before rendering regular markdown content
         // Function sections will be rendered separately as cards
-        let cleanMarkdown = markdown;
+        let cleanMarkdown = this.removeFunctionSections(markdown);
 
+        // Remove META and TOC comments
+        cleanMarkdown = cleanMarkdown.replace(/<!--META[\s\S]*?-->/g, '');
+        cleanMarkdown = cleanMarkdown.replace(/<!--TOC:[\s\S]*?-->/g, '');
+
+        // Use marked.js to convert markdown to HTML
+        const html = marked.parse(cleanMarkdown);
+
+        console.log('✅ Markdown conversion complete');
+        return html;
+    }
+
+    removeFunctionSections(markdown) {
         // Remove function sections (## FunctionName (Side) ... until next non-function ## or end)
-        // Split by lines and filter out function sections
         const lines = markdown.split('\n');
         const cleanLines = [];
         let inFunctionSection = false;
@@ -858,70 +955,17 @@ class CommunityBridgeDocumentation {
             }
         }
 
-        cleanMarkdown = cleanLines.join('\n');
+        let cleanMarkdown = cleanLines.join('\n');
 
-        // Also remove any standalone old format headers that might have been missed
+        // Clean up any leftover function-related content
         cleanMarkdown = cleanMarkdown.replace(/^## (Client|Server|Shared) Functions\s*$/gm, '');
-        cleanMarkdown = cleanMarkdown.replace(/^### \w+\s*$/gm, '');  // Remove standalone ### headers outside functions
-
-        // More aggressive cleaning of leftover content
         cleanMarkdown = cleanMarkdown.replace(/^Context:.*$/gm, '');
         cleanMarkdown = cleanMarkdown.replace(/^Syntax:.*$/gm, '');
         cleanMarkdown = cleanMarkdown.replace(/^Parameters:.*$/gm, '');
         cleanMarkdown = cleanMarkdown.replace(/^Returns:.*$/gm, '');
         cleanMarkdown = cleanMarkdown.replace(/^Example:.*$/gm, '');
 
-        // Remove META comments
-        let html = cleanMarkdown.replace(/<!--META[\s\S]*?-->/g, '');
-
-        // Remove TOC comments
-        html = html.replace(/<!--TOC:[\s\S]*?-->/g, '');
-
-        // Convert headers
-        html = html.replace(/^### (.*$)/gim, '<h3>$1</h3>');
-        html = html.replace(/^## (.*$)/gim, '<h2>$1</h2>');
-        html = html.replace(/^# (.*$)/gim, '<h1>$1</h1>');
-
-        // Convert code blocks
-        html = html.replace(/```lua\n([\s\S]*?)\n```/g, '<div class="code-block-container"><button class="copy-button">Copy</button><pre><code class="lua">$1</code></pre></div>');
-        html = html.replace(/```(\w+)?\n([\s\S]*?)\n```/g, '<div class="code-block-container"><button class="copy-button">Copy</button><pre><code class="$1">$2</code></pre></div>');
-
-        // Convert inline code
-        html = html.replace(/`([^`]+)`/g, '<code>$1</code>');
-
-        // Convert bold
-        html = html.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
-
-        // Convert italic
-        html = html.replace(/\*(.*?)\*/g, '<em>$1</em>');
-
-        // Convert links
-        html = html.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank">$1</a>');
-
-        // Convert unordered lists
-        html = html.replace(/^- (.*$)/gim, '<li>$1</li>');
-        html = html.replace(/(<li>.*<\/li>)/s, '<ul>$1</ul>');
-
-        // Convert paragraphs
-        html = html.split('\n\n').map(p => {
-            p = p.trim();
-            if (!p) return '';
-            if (p.startsWith('<h') || p.startsWith('<div') || p.startsWith('<ul') || p.startsWith('<pre')) {
-                return p;
-            }
-            return `<p>${p}</p>`;
-        }).join('');
-
-        // Clean up
-        html = html.replace(/<p><\/p>/g, '');
-        html = html.replace(/<p>\s*<h/g, '<h');
-        html = html.replace(/<\/h([1-6])>\s*<\/p>/g, '</h$1>');
-        html = html.replace(/<p>\s*<div/g, '<div');
-        html = html.replace(/<\/div>\s*<\/p>/g, '</div>');
-        html = html.replace(/<p>\s*<ul/g, '<ul');
-        html = html.replace(/<\/ul>\s*<\/p>/g, '</ul>');
-
-        return html;
+        return cleanMarkdown;
     }
 
     renderFunction(func, side, moduleName = 'unknown') {
@@ -979,63 +1023,237 @@ class CommunityBridgeDocumentation {
 
         if (!tocContainer || !tocContent) return;
 
-        if (functions.length === 0) {
+        // Generate TOC from both content headers and functions
+        const tocItems = this.generateTocItems(functions);
+
+        if (tocItems.length === 0) {
             tocContainer.style.display = 'none';
             return;
         }
 
-        // Group functions by side (Client, Server, Shared)
-        const groupedFunctions = {
-            'Client': [],
-            'Server': [],
-            'Shared': []
-        };
-
-        functions.forEach(func => {
-            const side = func.side.charAt(0).toUpperCase() + func.side.slice(1);
-            if (groupedFunctions[side]) {
-                groupedFunctions[side].push(func);
-            }
-        });
-
-        // Generate categorized TOC HTML
-        let tocHtml = '';
-
-        for (const [category, categoryFunctions] of Object.entries(groupedFunctions)) {
-            if (categoryFunctions.length > 0) {
-                const categoryIcon = {
-                    'Client': '🖥️',
-                    'Server': '⚙️',
-                    'Shared': '🔄'
-                }[category];
-
-                tocHtml += `
-                    <div class="toc-category">
-                        <h4 class="toc-category-header">
-                            <span class="toc-category-icon">${categoryIcon}</span>
-                            ${category} Functions
-                            <span class="toc-count">(${categoryFunctions.length})</span>
-                        </h4>
-                        <ul class="toc-list toc-category-list">
-                            ${categoryFunctions.map(func => {
-                                const anchor = this.generateAnchor(func.name, func.side, this.currentModuleName);
-                                const displayName = func.fullName || func.name;
-                                return `<li><a href="#${anchor}" class="toc-link" data-side="${func.side}">${displayName}</a></li>`;
-                            }).join('')}
-                        </ul>
-                    </div>
-                `;
-            }
-        }
-
-        tocContent.innerHTML = tocHtml;
+        tocContent.innerHTML = tocItems;
         tocContainer.style.display = 'block';
 
         // Add click handlers
         this.addTocClickHandlers(tocContainer);
     }
 
+    generateTocItems(functions = []) {
+        let tocHtml = '';
+
+        // First, add content headers from the rendered HTML
+        const contentArea = document.getElementById('content-area');
+        if (contentArea) {
+            const headers = contentArea.querySelectorAll('h2, h3, h4');
+            const contentHeaders = [];
+
+            headers.forEach(header => {
+                // Skip the "Functions" header as we'll handle that separately
+                if (header.textContent.trim() === 'Functions') return;
+
+                const level = parseInt(header.tagName.charAt(1));
+                const text = header.textContent.trim();
+                const id = header.id || this.generateHeaderId(text);
+
+                // Ensure the header has an ID for linking
+                if (!header.id) {
+                    header.id = id;
+                }
+
+                contentHeaders.push({
+                    level: level,
+                    text: text, // Use original text with emojis
+                    id: id,
+                    element: header
+                });
+            });
+
+            // Generate hierarchical content TOC
+            if (contentHeaders.length > 0) {
+                const hierarchicalToc = this.buildHierarchicalToc(contentHeaders);
+
+                tocHtml += `
+                    <div class="toc-category">
+                        <h4 class="toc-category-header">
+                            <span class="toc-category-icon">📄</span>
+                            Content
+                            <span class="toc-count">(${contentHeaders.length})</span>
+                        </h4>
+                        <ul class="toc-list toc-category-list">
+                            ${hierarchicalToc}
+                        </ul>
+                    </div>
+                `;
+            }
+        }
+
+        // Then, add functions if they exist
+        if (functions.length > 0) {
+            // Group functions by side (Client, Server, Shared)
+            const groupedFunctions = {
+                'Client': [],
+                'Server': [],
+                'Shared': []
+            };
+
+            functions.forEach(func => {
+                const side = func.side.charAt(0).toUpperCase() + func.side.slice(1);
+                if (groupedFunctions[side]) {
+                    groupedFunctions[side].push(func);
+                }
+            });
+
+            // Generate functions TOC
+            for (const [category, categoryFunctions] of Object.entries(groupedFunctions)) {
+                if (categoryFunctions.length > 0) {
+                    const categoryIcon = {
+                        'Client': '🖥️',
+                        'Server': '⚙️',
+                        'Shared': '🔄'
+                    }[category];
+
+                    tocHtml += `
+                        <div class="toc-category">
+                            <h4 class="toc-category-header">
+                                <span class="toc-category-icon">${categoryIcon}</span>
+                                ${category} Functions
+                                <span class="toc-count">(${categoryFunctions.length})</span>
+                            </h4>
+                            <ul class="toc-list toc-category-list">
+                                ${categoryFunctions.map(func => {
+                                    const anchor = this.generateAnchor(func.name, func.side, this.currentModuleName);
+                                    const displayName = func.fullName || func.name;
+                                    return `<li><a href="#${anchor}" class="toc-link" data-side="${func.side}">${displayName}</a></li>`;
+                                }).join('')}
+                            </ul>
+                        </div>
+                    `;
+                }
+            }
+        }
+
+        return tocHtml;
+    }
+
+    buildHierarchicalToc(headers) {
+        let tocHtml = '';
+        let i = 0;
+
+        while (i < headers.length) {
+            const header = headers[i];
+
+            // Check if this is a main header (h2)
+            if (header.level === 2) {
+                // Look for children (h3, h4)
+                const children = [];
+                let j = i + 1;
+
+                while (j < headers.length && headers[j].level > 2) {
+                    if (headers[j].level <= header.level) break;
+                    children.push(headers[j]);
+                    j++;
+                }
+
+                // Create collapsible section if there are children
+                if (children.length > 0) {
+                    const childrenHtml = this.buildChildrenToc(children);
+                    tocHtml += `
+                        <li class="toc-collapsible">
+                            <div class="toc-header-with-toggle">
+                                <button class="toc-toggle collapsed" aria-expanded="false">▶</button>
+                                <a href="#${header.id}" class="toc-link main-header" data-level="${header.level}">${header.text}</a>
+                            </div>
+                            <ul class="toc-children collapsed">
+                                ${childrenHtml}
+                            </ul>
+                        </li>
+                    `;
+                } else {
+                    // Simple header without children
+                    tocHtml += `<li class="toc-no-toggle"><a href="#${header.id}" class="toc-link" data-level="${header.level}">${header.text}</a></li>`;
+                }
+
+                i = j; // Skip processed children
+            } else {
+                // Standalone header (shouldn't happen with proper structure, but handle it)
+                tocHtml += `<li><a href="#${header.id}" class="toc-link" data-level="${header.level}">${header.text}</a></li>`;
+                i++;
+            }
+        }
+
+        return tocHtml;
+    }
+
+    buildChildrenToc(children) {
+        let childrenHtml = '';
+        let i = 0;
+
+        while (i < children.length) {
+            const child = children[i];
+
+            // Check for nested children (h4 under h3)
+            if (child.level === 3) {
+                const nestedChildren = [];
+                let j = i + 1;
+
+                while (j < children.length && children[j].level > 3) {
+                    nestedChildren.push(children[j]);
+                    j++;
+                }
+
+                if (nestedChildren.length > 0) {
+                    const nestedHtml = nestedChildren.map(nested => {
+                        return `<li class="toc-nested"><a href="#${nested.id}" class="toc-link nested" data-level="${nested.level}">${nested.text}</a></li>`;
+                    }).join('');
+
+                    childrenHtml += `
+                        <li class="toc-collapsible">
+                            <div class="toc-header-with-toggle">
+                                <button class="toc-toggle collapsed" aria-expanded="false">▶</button>
+                                <a href="#${child.id}" class="toc-link sub-header" data-level="${child.level}">${child.text}</a>
+                            </div>
+                            <ul class="toc-children collapsed">
+                                ${nestedHtml}
+                            </ul>
+                        </li>
+                    `;
+                } else {
+                    childrenHtml += `<li class="toc-no-toggle"><a href="#${child.id}" class="toc-link" data-level="${child.level}">${child.text}</a></li>`;
+                }
+
+                i = j;
+            } else {
+                childrenHtml += `<li class="toc-no-toggle"><a href="#${child.id}" class="toc-link" data-level="${child.level}">${child.text}</a></li>`;
+                i++;
+            }
+        }
+
+        return childrenHtml;
+    }
+
+    cleanHeaderText(text) {
+        // Remove emojis and extra formatting from header text for TOC
+        return text.replace(/[\u{1F600}-\u{1F64F}]|[\u{1F300}-\u{1F5FF}]|[\u{1F680}-\u{1F6FF}]|[\u{1F700}-\u{1F77F}]|[\u{1F780}-\u{1F7FF}]|[\u{1F800}-\u{1F8FF}]|[\u{2600}-\u{26FF}]|[\u{2700}-\u{27BF}]/gu, '').trim();
+    }
+
+    generateHeaderId(text) {
+        // Remove emojis and special characters for ID generation, but preserve for display
+        return text.toLowerCase()
+            .replace(/[\u{1F600}-\u{1F64F}]|[\u{1F300}-\u{1F5FF}]|[\u{1F680}-\u{1F6FF}]|[\u{1F700}-\u{1F77F}]|[\u{1F780}-\u{1F7FF}]|[\u{1F800}-\u{1F8FF}]|[\u{2600}-\u{26FF}]|[\u{2700}-\u{27BF}]/gu, '') // Remove emojis for ID
+            .replace(/[^\w\s-]/g, '') // Remove special characters
+            .replace(/\s+/g, '-')      // Replace spaces with dashes
+            .replace(/-+/g, '-')       // Replace multiple dashes with single dash
+            .trim('-');                // Remove leading/trailing dashes
+    }
+
+    getHeaderIcon(text) {
+        // No contextual icons - just return empty string
+        // Let the original markdown emojis show through
+        return '';
+    }
+
     addTocClickHandlers(tocContainer) {
+        // Handle TOC link clicks for navigation
         tocContainer.querySelectorAll('.toc-link').forEach(link => {
             link.addEventListener('click', (e) => {
                 e.preventDefault();
@@ -1043,6 +1261,35 @@ class CommunityBridgeDocumentation {
                 const element = document.getElementById(anchorId);
                 if (element) {
                     this.scrollToElement(element);
+                }
+            });
+        });
+
+        // Handle TOC toggle buttons for collapse/expand
+        tocContainer.querySelectorAll('.toc-toggle').forEach(toggleBtn => {
+            toggleBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+
+                const isExpanded = toggleBtn.getAttribute('aria-expanded') === 'true';
+                const childrenContainer = toggleBtn.closest('.toc-collapsible').querySelector('.toc-children');
+
+                if (isExpanded) {
+                    // Collapse
+                    toggleBtn.setAttribute('aria-expanded', 'false');
+                    toggleBtn.classList.add('collapsed');
+                    toggleBtn.classList.remove('expanded');
+                    toggleBtn.textContent = '▶';
+                    childrenContainer.classList.add('collapsed');
+                    childrenContainer.classList.remove('expanded');
+                } else {
+                    // Expand
+                    toggleBtn.setAttribute('aria-expanded', 'true');
+                    toggleBtn.classList.remove('collapsed');
+                    toggleBtn.classList.add('expanded');
+                    toggleBtn.textContent = '▼';
+                    childrenContainer.classList.remove('collapsed');
+                    childrenContainer.classList.add('expanded');
                 }
             });
         });
@@ -1301,9 +1548,17 @@ class CommunityBridgeDocumentation {
         searchResults.style.display = 'block';
     }
 
-    async navigateToFunction(path, anchor) {
-        // Navigate to the module first
-        await this.navigateToPath(path);
+    async navigateToFunction(path, anchor, updateUrl = true) {
+        // Update URL if needed
+        if (updateUrl) {
+            const newHash = `#${path}@${anchor}`;
+            if (window.location.hash !== newHash) {
+                window.location.hash = newHash;
+            }
+        }
+        
+        // Navigate to the module first (don't update URL again)
+        await this.navigateToPath(path, false);
 
         // Wait a bit for content to load, then scroll to the function
         setTimeout(() => {
@@ -1335,54 +1590,94 @@ class CommunityBridgeDocumentation {
         }
     }
 
-    applySyntaxHighlighting() {
-        document.querySelectorAll('code.language-lua').forEach(codeElement => {
-            this.applyLuaSyntaxHighlighting(codeElement);
-        });
-    }
-
-    applyLuaSyntaxHighlighting(codeElement) {
-        let content = codeElement.textContent;
-
-        const keywords = ['local', 'function', 'end', 'if', 'then', 'else', 'elseif', 'for', 'while', 'do', 'repeat', 'until', 'return', 'break', 'true', 'false', 'nil'];
-        keywords.forEach(keyword => {
-            const regex = new RegExp(`\\b(${keyword})\\b`, 'g');
-            content = content.replace(regex, `<span class="keyword">$1</span>`);
-        });
-
-        content = content.replace(/"([^"]*?)"/g, '<span class="string">"$1"</span>');
-        content = content.replace(/'([^']*?)'/g, '<span class="string">\'$1\'</span>');
-        content = content.replace(/--.*$/gm, '<span class="comment">$&</span>');
-        content = content.replace(/\b\d+\.?\d*\b/g, '<span class="number">$&</span>');
-
-        codeElement.innerHTML = content;
-    }
-
     setupCopyLinkButtons() {
+        // Remove any existing event listeners to prevent duplicates
+        document.querySelectorAll('.copy-link-btn').forEach(btn => {
+            const newBtn = btn.cloneNode(true);
+            btn.parentNode.replaceChild(newBtn, btn);
+        });
+        
+        document.querySelectorAll('.copy-button').forEach(btn => {
+            const newBtn = btn.cloneNode(true);
+            btn.parentNode.replaceChild(newBtn, btn);
+        });
+
+        // Set up copy link buttons
         document.querySelectorAll('.copy-link-btn').forEach(btn => {
             btn.addEventListener('click', (e) => {
-                const anchor = e.currentTarget.getAttribute('data-anchor');
-                const url = `${window.location.origin}${window.location.pathname}#${anchor}`;
+                e.preventDefault();
+                const button = e.currentTarget;
+                const anchor = button.getAttribute('data-anchor');
+                
+                if (!anchor) {
+                    console.warn('No anchor found for copy link button');
+                    return;
+                }
+                
+                // Get current page path from the hash and combine with anchor using @ separator
+                const currentPath = window.location.hash.slice(1); // Remove the #
+                let basePath = currentPath;
+                
+                // If current path already has an anchor, remove it
+                if (currentPath.includes('@')) {
+                    basePath = currentPath.split('@')[0];
+                }
+                
+                const url = `${window.location.origin}${window.location.pathname}#${basePath}@${anchor}`;
 
-                if (navigator.clipboard) {
+                if (navigator.clipboard && button) {
                     navigator.clipboard.writeText(url).then(() => {
-                        e.currentTarget.textContent = '✅';
-                        setTimeout(() => e.currentTarget.textContent = '🔗', 2000);
+                        // Double check the button still exists
+                        if (button && button.textContent !== undefined) {
+                            const originalText = button.textContent;
+                            button.textContent = '✅';
+                            setTimeout(() => {
+                                if (button && button.textContent !== undefined) {
+                                    button.textContent = originalText || '🔗';
+                                }
+                            }, 2000);
+                        }
+                    }).catch((err) => {
+                        console.warn('Failed to copy link:', err);
                     });
+                } else {
+                    // Fallback for browsers without clipboard API
+                    console.warn('Clipboard API not available');
                 }
             });
         });
 
+        // Set up code copy buttons
         document.querySelectorAll('.copy-button').forEach(btn => {
             btn.addEventListener('click', (e) => {
-                const codeElement = e.currentTarget.nextElementSibling.querySelector('code');
+                e.preventDefault();
+                const button = e.currentTarget;
+                const codeElement = button.nextElementSibling?.querySelector('code');
+                
+                if (!codeElement) {
+                    console.warn('No code element found for copy button');
+                    return;
+                }
+                
                 const code = codeElement.textContent;
 
-                if (navigator.clipboard) {
+                if (navigator.clipboard && button && code) {
                     navigator.clipboard.writeText(code).then(() => {
-                        e.currentTarget.textContent = 'Copied!';
-                        setTimeout(() => e.currentTarget.textContent = 'Copy', 2000);
+                        // Double check the button still exists
+                        if (button && button.textContent !== undefined) {
+                            const originalText = button.textContent;
+                            button.textContent = 'Copied!';
+                            setTimeout(() => {
+                                if (button && button.textContent !== undefined) {
+                                    button.textContent = originalText || 'Copy';
+                                }
+                            }, 2000);
+                        }
+                    }).catch((err) => {
+                        console.warn('Failed to copy code:', err);
                     });
+                } else {
+                    console.warn('Clipboard API not available or missing elements');
                 }
             });
         });
