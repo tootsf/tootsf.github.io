@@ -70,6 +70,9 @@ local zoneId = Bridge.Target.AddBoxZone("shop_entrance", coords, {2.0, 2.0, 2.0}
     {
         label = "Enter Shop",
         icon = "fas fa-shopping-cart",
+        canInteract = function()
+            return true
+        end,
         onSelect = function()
             -- Open shop menu
         end
@@ -101,9 +104,11 @@ Bridge.Target.AddGlobalPlayer({
     {
         label = "Give Money",
         icon = "fas fa-dollar-sign",
+        canInteract = function(entity)
+            return true
+        end,
         onSelect = function(entity)
-            print("Selected player: " .. entity)
-            -- Add your give money logic here
+            TriggerServerEvent("example:Server:AddMoney")
         end,
         groups = {"police", "admin"}
     }
@@ -134,6 +139,9 @@ Bridge.Target.AddGlobalVehicle({
     {
         label = "Lock/Unlock Vehicle",
         icon = "fas fa-key",
+        canInteract = function(entity)
+            return true
+        end,
         onSelect = function(entity)
             -- Add your lock/unlock logic here
             print("Toggling vehicle lock for: " .. entity)
@@ -163,12 +171,15 @@ Bridge.Target.AddLocalEntity(entities, options)
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 
-local entity = GetClosestObjectOfType(coords, 5.0, GetHashKey("prop_atm_01"), false)
-Bridge.Target.AddLocalEntity(entity, {
+local closest = GetClosestObjectOfType(coords, 5.0, GetHashKey("prop_atm_01"), false)
+Bridge.Target.AddLocalEntity(closest, {
     {
         label = "Use ATM",
         icon = "fas fa-credit-card",
-        onSelect = function()
+        canInteract = function(entity)
+            return true
+        end,
+        onSelect = function(entity)
             -- Open ATM menu
         end
     }
@@ -200,6 +211,9 @@ Bridge.Target.AddModel(GetHashKey("prop_gas_pump_1a"), {
     {
         label = "Refuel Vehicle",
         icon = "fas fa-gas-pump",
+        canInteract = function(entity)
+            return true
+        end,
         onSelect = function(entity)
             -- Start refueling process
         end
@@ -236,6 +250,9 @@ local zoneId = Bridge.Target.AddSphereZone("atm_zone", coords, 1.5, 0.0, {
     {
         label = "Use ATM",
         icon = "fas fa-credit-card",
+        canInteract = function()
+            return true
+        end,
         onSelect = function()
             -- Open ATM interface
         end
