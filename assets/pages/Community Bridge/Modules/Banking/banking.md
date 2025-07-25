@@ -10,73 +10,102 @@ Banking and economy functions for managing player finances and transactions.
 
 ## Overview
 
-The Banking module provides comprehensive financial management functions for handling player money, bank accounts, and transactions in FiveM.
+The Banking module provides functions for interacting with player bank accounts, including querying balances and modifying account funds.
 
-## GetBalance (Client)
+## GetManagmentName
 
 ### Description
-Gets the player's current bank balance
+Gets the name of the management system being used.
 
 ### Syntax
 ```lua
-Bridge.Banking.GetBalance()
+Bridge.Banking.GetManagmentName()
 ```
 
 ### Returns
-- (number): The player's current bank balance
+- (string): The name of the management system (e.g., "fd_banking")
 
 ### Example
 ```lua
 local Bridge = exports["community_bridge"]:Bridge()
 
-local balance = Bridge.Bridge.Banking.GetBalance()
+local name = Bridge.Banking.GetManagmentName()
+print(name) -- "fd_banking"
 ```
 
-## WithdrawMoney (Client)
+## GetAccountMoney
 
 ### Description
-Withdraws money from the player's bank account
+Returns the balance of the specified account.
 
 ### Syntax
 ```lua
-Bridge.Banking.WithdrawMoney(amount)
+Bridge.Banking.GetAccountMoney(account)
 ```
 
 ### Parameters
-- **amount** (number): Amount to withdraw
+- **account** (string): The account identifier
 
 ### Returns
-- (boolean): Returns true if withdrawal was successful
+- (number): The account balance
 
 ### Example
 ```lua
 local Bridge = exports["community_bridge"]:Bridge()
 
-local success = Bridge.Bridge.Banking.WithdrawMoney(500)
+local balance = Bridge.Banking.GetAccountMoney("bank")
+print(balance)
 ```
 
-## TransferMoney (Server)
+## AddAccountMoney
 
 ### Description
-Transfers money between player accounts
+Adds money to the specified account.
 
 ### Syntax
 ```lua
-Bridge.Banking.TransferMoney(fromPlayer, toPlayer, amount)
+Bridge.Banking.AddAccountMoney(account, amount, reason)
 ```
 
 ### Parameters
-- **fromPlayer** (number): Source player ID
-- **toPlayer** (number): Target player ID
-- **amount** (number): Amount to transfer
+- **account** (string): The account identifier
+- **amount** (number): Amount to add
+- **reason** (string): Reason for the addition
 
 ### Returns
-- (boolean): Returns true if transfer was successful
+- (boolean): Returns true if the operation was successful
 
 ### Example
 ```lua
 local Bridge = exports["community_bridge"]:Bridge()
 
-local success = Bridge.Bridge.Banking.TransferMoney(1, 2, 1000)
+local success = Bridge.Banking.AddAccountMoney("bank", 500, "Salary")
+print(success)
+```
+
+## RemoveAccountMoney
+
+### Description
+Removes money from the specified account.
+
+### Syntax
+```lua
+Bridge.Banking.RemoveAccountMoney(account, amount, reason)
+```
+
+### Parameters
+- **account** (string): The account identifier
+- **amount** (number): Amount to remove
+- **reason** (string): Reason for the removal
+
+### Returns
+- (boolean): Returns true if the operation was successful
+
+### Example
+```lua
+local Bridge = exports["community_bridge"]:Bridge()
+
+local success = Bridge.Banking.RemoveAccountMoney("bank", 200, "Purchase")
+print(success)
 ```
 
