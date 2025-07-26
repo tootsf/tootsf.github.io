@@ -127,7 +127,7 @@ Bridge.Clothing.GetFullAppearanceData(src)
 local Bridge = exports["community_bridge"]:Bridge()
 
 -- Internal use - prefer GetAppearance() for most cases
-local fullData = Bridge.Bridge.Clothing.GetFullAppearanceData(source)
+local fullData = Bridge.Clothing.GetFullAppearanceData(source)
 ```
 
 ## SetAppearance (Server)

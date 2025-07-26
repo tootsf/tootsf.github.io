@@ -1,60 +1,60 @@
-# Managment 🏢
+# BossMenu 🏢
 
 <!--META
 nav: true
 toc: true
-description: The Management module provides functions for handling business and organization account management. It bridges various banking and management systems for business operations.
+description: The BossMenu module provides functions for handling business and organization boss menu management. It bridges various management systems for business operations.
 -->
 
-The Management module provides functions for handling business and organization account management. It bridges various banking and management systems for business operations.
+The BossMenu module provides functions for handling business and organization boss menu management. It bridges various management systems for business operations.
 
 ## Overview
 
-The Management module provides administrative tools and resource oversight functions for server management.
+The BossMenu module provides administrative tools and resource oversight functions for server management.
 
-## AddAccountMoney (Server)
+## GetResourceName (Server)
 
 ### Description
-Adds money to a specified business account with a reason for the transaction.
+Returns the name of the management resource being used by the BossMenu module.  
+In this implementation, it always returns `"esx_society"` if that resource is running.
 
 ### Syntax
 ```lua
-Bridge.Managment.AddAccountMoney(account, amount, reason)
+Bridge.BossMenu.GetResourceName()
 ```
 
-### Parameters
-- **account** (string): The account identifier/name
-- **amount** (number): Amount of money to add
-- **reason** (string): Reason for the transaction
-
 ### Returns
-- (boolean): True if money was added successfully
+- (string): The name of the management resource in use (e.g., `"esx_society"`)
 
 ### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 
-local success = Bridge.Managment.AddAccountMoney("mechanic_shop", 5000, "Vehicle repair payment")
-if success then
-    print("Payment added to mechanic shop account")
-else
-    print("Failed to add payment")
-end
+local resourceName = Bridge.BossMenu.GetResourceName()
+print("Using management resource: " .. resourceName)
 ```
 
-## GetAccountMoney (Server)
+## OpenBossMenu (Server)
 
 ### Description
-Retrieves the account details and balance for a specified business account.
+Registers a society (if not already registered) and triggers the client event to open the boss menu for the specified player, job, and job type.
 
 ### Syntax
 ```lua
-Bridge.Managment.GetAccountMoney(account)
+Bridge.BossMenu.OpenBossMenu(src, jobName, jobType)
 ```
 
 ### Parameters
-- **account** (string): The account identifier/name
+- **src** (number): The source/player ID to open the menu for.
+- **jobName** (string): The job identifier/name.
+- **jobType** (string): The type of job.
 
+### Example
+```lua
+local Bridge = exports['community_bridge']:Bridge()
+
+Bridge.BossMenu.OpenBossMenu(source, "mechanic", "public")
+```
 ### Returns
 - (table): Account details including balance information
 
@@ -67,55 +67,3 @@ if accountData.balance then
     print("Account balance: $" .. accountData.balance)
 end
 ```
-
-## GetManagmentName (Server)
-
-### Description
-Returns the name of the currently active management system.
-
-### Syntax
-```lua
-Bridge.Managment.GetManagmentName()
-```
-
-### Returns
-- (string): Name of the management system in use
-
-### Example
-```lua
-local Bridge = exports['community_bridge']:Bridge()
-
-local systemName = Bridge.Managment.GetManagmentName()
-print("Using management system: " .. systemName)
-```
-
-## RemoveAccountMoney (Server)
-
-### Description
-Removes money from a specified business account with a reason for the transaction.
-
-### Syntax
-```lua
-Bridge.Managment.RemoveAccountMoney(account, amount, reason)
-```
-
-### Parameters
-- **account** (string): The account identifier/name
-- **amount** (number): Amount of money to remove
-- **reason** (string): Reason for the transaction
-
-### Returns
-- (boolean): True if money was removed successfully
-
-### Example
-```lua
-local Bridge = exports['community_bridge']:Bridge()
-
-local success = Bridge.Managment.RemoveAccountMoney("mechanic_shop", 2000, "Equipment purchase")
-if success then
-    print("Money deducted from mechanic shop account")
-else
-    print("Failed to deduct money")
-end
-```
-

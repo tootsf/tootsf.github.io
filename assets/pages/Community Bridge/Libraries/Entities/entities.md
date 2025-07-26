@@ -12,21 +12,21 @@ The Entities library provides a comprehensive system for managing networked enti
 
 The Entities library provides entity management functions for creating, tracking, and manipulating game entities including peds, vehicles, and objects with lifecycle management.
 
-## Register (Client)
+## Create (Client)
 
 ### Description
 Registers an entity for proximity-based spawning and management. The entity will automatically spawn when players are within range and despawn when they leave.
 
 ### Syntax
 ```lua
-Bridge.ClientEntity.Register(entityData)
+Bridge.ClientEntity.Create(entityData)
 ```
 
 ### Parameters
 - **entityData** (table): Entity configuration with id, entityType, model, coords, rotation, and optional callbacks
 
 ### Returns
-- (string): Point system ID for the registered entity
+- (table): Point system data.
 
 ### Example
 ```lua
@@ -41,18 +41,18 @@ local npcData = {
     rotation = 180.0,
     spawnDistance = 25.0,
     OnSpawn = function(data)
-        print("Shop clerk spawned: " .. data.id)
+        print("Shop clerk spawned: ", data.id)
         -- Make the ped invincible
         SetEntityInvincible(data.spawned, true)
         SetBlockingOfNonTemporaryEvents(data.spawned, true)
     end,
     OnRemove = function(data)
-        print("Shop clerk despawned: " .. data.id)
+        print("Shop clerk despawned: ", data.id)
     end
 }
 
-local pointId = Bridge.ClientEntity.Register(npcData)
-print("Registered entity with point ID: " .. pointId)
+local pointData = Bridge.ClientEntity.Create(npcData)
+print("Created entity with point ID: ", pointData.id))
 ```
 
 ## Unregister (Client)

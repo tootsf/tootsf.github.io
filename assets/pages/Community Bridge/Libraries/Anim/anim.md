@@ -40,25 +40,6 @@ else
 end
 ```
 
-## Start (Client)
-
-### Description
-Starts the animation update loop that manages all active animations. This is called automatically when playing animations.
-
-### Syntax
-```lua
-Bridge.Anim.Start()
-```
-
-### Example
-```lua
-local Bridge = exports['community_bridge']:Bridge()
-
--- Usually called automatically, but can be called manually
-Bridge.Anim.Start()
-print("Animation update loop started")
-```
-
 ## Play (Client)
 
 ### Description

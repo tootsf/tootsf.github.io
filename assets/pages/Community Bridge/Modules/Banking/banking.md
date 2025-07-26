@@ -12,7 +12,7 @@ Banking and economy functions for managing player finances and transactions.
 
 The Banking module provides functions for interacting with player bank accounts, including querying balances and modifying account funds.
 
-## GetManagmentName
+## GetManagmentName (server)
 
 ### Description
 Gets the name of the management system being used.
@@ -33,7 +33,7 @@ local name = Bridge.Banking.GetManagmentName()
 print(name) -- "fd_banking"
 ```
 
-## GetAccountMoney
+## GetAccountMoney (server)
 
 ### Description
 Returns the balance of the specified account.
@@ -57,7 +57,7 @@ local balance = Bridge.Banking.GetAccountMoney("bank")
 print(balance)
 ```
 
-## AddAccountMoney
+## AddAccountMoney (server)
 
 ### Description
 Adds money to the specified account.
@@ -83,7 +83,7 @@ local success = Bridge.Banking.AddAccountMoney("bank", 500, "Salary")
 print(success)
 ```
 
-## RemoveAccountMoney
+## RemoveAccountMoney (server)
 
 ### Description
 Removes money from the specified account.

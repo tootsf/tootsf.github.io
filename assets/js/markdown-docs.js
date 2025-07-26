@@ -267,7 +267,7 @@ class CommunityBridgeDocumentation {
         const folderItems = {};
         const knownModules = {
             'Libraries': ['Anim', 'Batch', 'Cache', 'Callback', 'Cutscenes', 'DUI', 'Entities', 'Ids', 'ItemsBuilder', 'Logs', 'LootTable', 'Markers', 'Math', 'Particles', 'Placers', 'Point', 'Points', 'Raycast', 'Scaleform', 'Shells', 'SQL', 'StateBags', 'Table', 'Utility'],
-            'Modules': ['Banking', 'Clothing', 'Dialogue', 'Dispatch', 'Doorlock', 'Framework', 'Fuel', 'HelpText', 'Housing', 'Input', 'Inventory', 'Locales', 'Managment', 'Math', 'Menu', 'Notify', 'Phone', 'ProgressBar', 'Shops', 'Skills', 'Target', 'VehicleKey', 'Version', 'Weather']
+            'Modules': ['Banking', 'BossMenu', 'Clothing', 'Dialogue', 'Dispatch', 'Doorlock', 'Framework', 'Fuel', 'HelpText', 'Housing', 'Input', 'Inventory', 'Locales', 'Managment', 'Math', 'Menu', 'Notify', 'Phone', 'ProgressBar', 'Shops', 'Skills', 'Target', 'VehicleKey', 'Version', 'Weather']
         };
 
         if (knownModules[folderName]) {
@@ -310,36 +310,36 @@ class CommunityBridgeDocumentation {
 
         try {
             // Try to load toc.json first
-            try {
-                const tocResponse = await fetch(`./assets/pages/${folderName}/toc.json`);
-                if (tocResponse.ok) {
-                    const tocData = await tocResponse.json();
-                    for (const [fileName, fileData] of Object.entries(tocData)) {
-                        // Try to load the actual file to extract icon
-                        let icon = '📄'; // default
-                        try {
-                            const fileResponse = await fetch(`./assets/pages/${folderName}/${fileName}.md`);
-                            if (fileResponse.ok) {
-                                const content = await fileResponse.text();
-                                icon = this.extractIconFromMarkdown(content) || '📄';
-                            }
-                        } catch (e) {
-                            // Use default icon if file can't be loaded
-                        }
+            // try {
+            //     const tocResponse = await fetch(`./assets/pages/${folderName}/toc.json`);
+            //     if (tocResponse.ok) {
+            //         const tocData = await tocResponse.json();
+            //         for (const [fileName, fileData] of Object.entries(tocData)) {
+            //             // Try to load the actual file to extract icon
+            //             let icon = '📄'; // default
+            //             try {
+            //                 const fileResponse = await fetch(`./assets/pages/${folderName}/${fileName}.md`);
+            //                 if (fileResponse.ok) {
+            //                     const content = await fileResponse.text();
+            //                     icon = this.extractIconFromMarkdown(content) || '📄';
+            //                 }
+            //             } catch (e) {
+            //                 // Use default icon if file can't be loaded
+            //             }
 
-                        structure[folderName].items[fileName] = {
-                            path: `${folderName}/${fileName}`,
-                            type: 'markdown',
-                            name: fileData.name || this.formatTitle(fileName),
-                            icon: icon
-                        };
-                        console.log(`✅ Added from toc: ${fileName} with icon: ${icon}`);
-                    }
-                    return;
-                }
-            } catch (e) {
-                console.log(`No toc.json found for ${folderName}, discovering files...`);
-            }
+            //             structure[folderName].items[fileName] = {
+            //                 path: `${folderName}/${fileName}`,
+            //                 type: 'markdown',
+            //                 name: fileData.name || this.formatTitle(fileName),
+            //                 icon: icon
+            //             };
+            //             console.log(`✅ Added from toc: ${fileName} with icon: ${icon}`);
+            //         }
+            //         return;
+            //     }
+            // } catch (e) {
+            //     console.log(`No toc.json found for ${folderName}, discovering files...`);
+            // }
 
             // If no toc.json, discover markdown files directly
             const commonFiles = ['index', 'basic-usage', 'advanced'];

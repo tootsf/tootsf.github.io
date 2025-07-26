@@ -33,11 +33,10 @@ local Bridge = exports['community_bridge']:Bridge()
 -- Register a client callback
 Bridge.Callback.Register('getPlayerInfo', function()
     local ped = PlayerPedId()
-    return {
-        health = GetEntityHealth(ped),
-        coords = GetEntityCoords(ped),
-        model = GetEntityModel(ped)
-    }
+    local health = GetEntityHealth(ped),
+    local coords = GetEntityCoords(ped),
+    local model = GetEntityModel(ped)
+    return health, coords, model
 end)
 ```
 
@@ -89,13 +88,7 @@ Bridge.Callback.Trigger(name, ...)
 ### Example
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
-
--- Trigger with callback
-Bridge.Callback.Trigger('getUserMoney', function(money)
-    print('Player has $' .. money)
-end, GetPlayerServerId(PlayerId()))
-
--- Trigger with promise (await style)
+-- Trigger with promise
 local money = Bridge.Callback.Trigger('getUserMoney', GetPlayerServerId(PlayerId()))
 print('Player has $' .. money)
 ```
@@ -119,12 +112,9 @@ Bridge.Callback.Register(name, handler)
 local Bridge = exports['community_bridge']:Bridge()
 
 -- Register a server callback
-Bridge.Callback.Register('getUserMoney', function(source, targetId)
-    local player = Bridge.Framework.GetPlayer(targetId or source)
-    if player then
-        return player.PlayerData.money.cash
-    end
-    return 0
+Bridge.Callback.Register('getUserMoney', function(source, somedata)
+    if not somedata then return end
+    return Bridge.Framework.GetPlayerJob(source)
 end)
 ```
 
@@ -150,14 +140,9 @@ Bridge.Callback.Trigger(name, target, ...)
 ```lua
 local Bridge = exports['community_bridge']:Bridge()
 
--- Trigger on specific player with callback
-Bridge.Callback.Trigger('getPlayerInfo', function(playerInfo)
-    print('Player health: ' .. playerInfo.health)
-end, playerId)
-
 -- Trigger on multiple players
-local playerIds = {1, 2, 3}
-local playerInfo = Bridge.Callback.Trigger('getPlayerInfo', playerIds)
-print('Player info received')
+local someData = "derp"
+local money = Bridge.Callback.Trigger('getUseMoney', someData)
+print('money', money)
 ```
 
